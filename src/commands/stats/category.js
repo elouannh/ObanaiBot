@@ -28,10 +28,11 @@ class Category extends Command {
 
         let categories = fs.readdirSync("./src/elements/categories").map(e => require(`../../elements/categories/${e}`));
         if (!badges.includes("vip")) categories = categories.filter(cat => !cat.vip);
-        const categoriesDisplay = "";
+        const categoriesObject = {};
+        const emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"];
 
-        for (const category of categories) {
-            categoriesDisplay += `> Classe **${category.name}** | \`${}\``;
+        for (let i = 0; i < categories.length; i++) {
+            categoriesDisplay[emojis[i]] = categories[i];
         }
     }
 }
