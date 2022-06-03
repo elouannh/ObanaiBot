@@ -1,0 +1,17 @@
+{
+    "name": "Asakusa",
+    "emoji": "🐈",
+    "x": -9.5,
+    "y": -5,
+    "id": 10,
+    "Areas": [
+        {
+            "name": "X",
+            "biome": "blank_area",
+            "id": 0,
+            "default": true,
+            "accesses": []
+        }
+    ],
+    "accesses": [7, 9]
+}

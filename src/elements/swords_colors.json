@@ -1,0 +1,60 @@
+{
+    "get": [
+        {
+            "name": "Noir",
+            "symbolism": "sun"
+        },
+        {
+            "name": "Ambre",
+            "symbolism": "sound"
+        },
+        {
+            "name": "Bleu",
+            "symbolism": "water"
+        },
+        {
+            "name": "Gris",
+            "symbolism": "rock"
+        },
+        {
+            "name": "Vert",
+            "symbolism": "wind"
+        },
+        {
+            "name": "Indigo-Gris",
+            "symbolism": "beast"
+        },
+        {
+            "name": "Lavande",
+            "symbolism": "serpent"
+        },
+        {
+            "name": "Lavande-Bleu",
+            "symbolism": "insect"
+        },
+        {
+            "name": "Rose Clair",
+            "symbolism": "flower"
+        },
+        {
+            "name": "Rose",
+            "symbolism": "love"
+        },
+        {
+            "name": "Violet Clair",
+            "symbolism": "moon"
+        },
+        {
+            "name": "Rouge clair",
+            "symbolism": "flame"
+        },
+        {
+            "name": "Blanc",
+            "symbolism": "mist"
+        },
+        {
+            "name": "Jaune",
+            "symbolism": "thunder"
+        }
+    ]
+}

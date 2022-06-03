@@ -1,0 +1,8 @@
+{
+    "label": "warrior",
+    "name": "Grimoire du guerrier",
+    "equippable": true,
+    "expiration": 259200,
+    "benefits": ["stats_boost"],
+    "boost": 1.15
+}

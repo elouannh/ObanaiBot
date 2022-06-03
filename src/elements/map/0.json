@@ -1,0 +1,17 @@
+{
+    "name": "Mont Sagiri",
+    "emoji": "🗻",
+    "x": -8,
+    "y": 11,
+    "id": 0,
+    "Areas": [
+        {
+            "name": "Pied de la montagne",
+            "biome": "meadow",
+            "id": 0,
+            "default": true,
+            "accesses": []
+        }
+    ],
+    "accesses": [4]
+}

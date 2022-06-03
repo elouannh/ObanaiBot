@@ -1,0 +1,17 @@
+{
+    "name": "Déchiqueteur",
+    "label": "shredding",
+    "weapon": "shredding",
+    "vip": false,
+    "description": "",
+    "bonus": ["defense", "force"],
+    "breaths": ["beast"],
+    "weaponName": "Épées tailladées",
+    "rarityNames": [
+        "abîmées",
+        "simples",
+        "aiguisées",
+        "tranchantes",
+        "de Inosuke"
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "name": "Souffle de la Roche",
+    "emoji": "🧱",
+    "attack": {
+        "quick": [
+            "Premier Mouvement : Serpentinite - Tenaille Polarisée"
+        ],
+        "powerful": [
+            "Deuxième Mouvement : Fracasser la Voûte Céleste"
+        ],
+        "dodge_prepa": [
+            "Troisième Mouvement : Peau de Pierre"
+        ],
+        "defensive_prepa": [
+            "Quatrième Mouvement : Rhyolite - Conquête Rapide"
+        ],
+        "special": [
+            "Cinquième Mouvement : La Roue de Pierre de la Justice"
+        ]
+    },
+    "defense": {
+        "quick": [
+            "Troisième Mouvement : Peau de Pierre"
+        ],
+        "powerful": [
+            "Quatrième Mouvement : Rhyolite - Conquête Rapide"
+        ],
+        "counter_prepa": [
+            "Deuxième Mouvement : Fracasser la Voûte Céleste"
+        ]
+    }
+}

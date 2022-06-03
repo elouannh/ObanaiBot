@@ -1,0 +1,17 @@
+{
+    "name": "Ninja",
+    "label": "ninja",
+    "weapon": "twins",
+    "vip": false,
+    "description": "",
+    "bonus": ["speed", "defense"],
+    "breaths": ["sound"],
+    "weaponName": "Épées jumelles",
+    "rarityNames": [
+        "abîmées",
+        "simples",
+        "aiguisées",
+        "pointues",
+        "de Tengen"
+    ]
+}

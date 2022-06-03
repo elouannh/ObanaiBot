@@ -1,0 +1,33 @@
+{
+    "name": "Souffle de l'Insecte",
+    "emoji": "🦋",
+    "attack": {
+        "quick": [
+            "Danse des Papillons : Papillonnage"
+        ],
+        "powerful": [
+            "Danse de la Piqûre d'Abeille : Battement Véritable",
+            "Danse de la Libellule : Œil à Facettes Hexagonales"
+        ],
+        "dodge_prepa": [
+            "Danse des Papillons : Papillonnage"
+        ],
+        "defensive_prepa": [
+            "Danse des Papillons : Papillonnage"
+        ],
+        "special": [
+            "Danse du Myriapode : Zigzag Centipède"
+        ]
+    },
+    "defense": {
+        "quick": [
+            "Danse des Papillons : Papillonnage"
+        ],
+        "powerful": [
+            "Danse de la Libellule : Œil à Facettes Hexagonales"
+        ],
+        "counter_prepa": [
+            "Danse de la Libellule : Œil à Facettes Hexagonales"
+        ]
+    }
+}

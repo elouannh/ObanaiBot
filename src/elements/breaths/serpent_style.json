@@ -1,0 +1,32 @@
+{
+    "name": "Souffle du Serpent",
+    "emoji": "🐍",
+    "attack": {
+        "quick": [
+            "Premier Mouvement : Frappe du Serpent Recroquevillé"
+        ],
+        "powerful": [
+            "Deuxième Mouvement : Le Crochet Empoisonné du Petit Serpent"
+        ],
+        "dodge_prepa": [
+            "Quatrième Mouvement : Serpent Bicéphale"
+        ],
+        "defensive_prepa": [
+            "Troisième Mouvement : Constriction"
+        ],
+        "special": [
+            "Cinquième Mouvement : Ondulations du Serpent"
+        ]
+    },
+    "defense": {
+        "quick": [
+            "Quatrième Mouvement : Serpent Bicéphale"
+        ],
+        "powerful": [
+            "Troisième Mouvement : Constriction"
+        ],
+        "counter_prepa": [
+            "Deuxième Mouvement : Le Crochet Empoisonné du Petit Serpent"
+        ]
+    }
+}

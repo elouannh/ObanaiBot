@@ -1,0 +1,17 @@
+{
+    "name": "Lépidoptérologue",
+    "label": "butterfly",
+    "weapon": "poison",
+    "vip": false,
+    "description": "",
+    "bonus": ["speed", "agility"],
+    "breaths": ["insect"],
+    "weaponName": "Épée à pointe",
+    "rarityNames": [
+        "abîmée",
+        "simple",
+        "aiguisée",
+        "transperçante",
+        "de Shinobu"
+    ]
+}

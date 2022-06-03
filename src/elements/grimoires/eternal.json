@@ -1,0 +1,16 @@
+{
+    "label": "eternal",
+    "name": "Grimoire éternel",
+    "equippable": true,
+    "expiration": 315360000,
+    "benefits": [
+        "experience_gain", 
+        "yens_gain", 
+        "kasugai_crows_rarity_boost", 
+        "lootbox_rate_boost", 
+        "stats_boost",
+        "travelling_time",
+        "training_time"
+    ],
+    "boost": 1.10
+}

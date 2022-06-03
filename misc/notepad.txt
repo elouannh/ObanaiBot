@@ -1,0 +1,172 @@
+a) Les statistiques
+
+    Les joueurs ont 4 statistiques : la vitesse, la force, l'agilité et la défense.
+    ______________________________________________________________________________________________________________________________________________________
+    Nom       | Label     | Valeur par défaut | Diminutif | Utilité
+    ______________________________________________________________________________________________________________________________________________________
+    Agilité   | agility   | 0                 | Ag        | Définit la capacité à éviter les risques lors des combats
+    Défense   | defense   | 0                 | Df        | Définit la quantité de dégâts que peut enciasser le joueur
+    Force     | force     | 0                 | Fo        | Définit les dégâts moyens que le joueur peut faire subir
+    Vitesse   | speed     | 0                 | Vi        | Définit la vitesse du joueur et donc sa chance d'esquiver
+
+b) Les catégories
+
+    Les joueurs ont le choix entre 8 catégories:
+    ______________________________________________________________________________________________________________________________________________________
+    Nom                  | Label        | Arme            | Description
+    ______________________________________________________________________________________________________________________________________________________
+    Dompteur de lunes    | moon_tamer   | moon_katana     | Un pourfendeur ayant un katana ayant la capacité de se déformer avec des croissants de lune
+    Pourfendeur          | slayer       | katana          | Un pourfendeur ayant un katana basique.
+    Lépidoptérologue     | butterfly    | poison          | Un pourfendeur ayant un katana en forme de pointe.
+    Déchiqueteur         | shredding    | shredding       | Un pourfendeur ayant deux katana complètement amochés de façon à tout déchiqueter.
+    Cactus               | cactus       | spiked          | Un pourfendeur ayant un fléau à pointes et une hache reliés par une immense chaîne.
+    Charmeur de serpents | charmer      | torsion         | Un pourfendeur ayant un katana qui a la particularité de pouvoir se mouvoir comme un serpent.
+    Ninja                | ninja        | twins           | Un pourfendeur ayant deux lames liées à la façon d'un nunchaku.
+    Gymnaste             | gymnast      | whisk           | Un pourfendeur ayant une souplesse incroyable avec un katana ayant la capacité de se mouvoir tel un fouet.
+    ______________________________________________________________________________________________________________________________________________________
+                         | Bonus     | Souffles
+    ______________________________________________________________________________________________________________________________________________________
+    Dompteur de lunes    | +Df -Vi   | Lune
+    Pourfendeur          | +Fo -Ag   | Flamme, Fleur, Brume, Soleil, Foudre, Eau, Vent
+    Lépidoptérologue     | +Vi -Ag   | Insecte 
+    Déchiqueteur         | +Df -Fo   | Bête
+    Cactus               | +Fo -Vi   | Roche
+    Charmeur de serpents | +Ag -Df   | Serpent
+    Ninja                | +Vi -Df   | Son
+    Gymnaste             | +Ag -Fo   | Amour
+    ______________________________________________________________________________________________________________________________________________________
+
+    Les catégories se changent avec des Jetons de Maîtrise. Ces jetons sont obtenables lors d'événements ou en fouillant la carte. Ce n'est pas encore très net,
+    des détails restent à voir sur la façon de les obtenir.
+    Ces jetons permettent de changer/choisir une (nouvelle) catégorie.
+    Chaque catégorie donne accès à certains souffles, respectifs aux catégories.
+    Chaque catégorie s'améliore. De niveaux en niveau, les bonus qu'elles octroient augmentent.
+    Tout est calculé à ce que les bonus soient répartis de façon équilibrée.
+    Le niveau par défaut d'une catégorie est 1.
+    Les niveaux de catégories s'améliorent avec l'utilisation du souffle et donc le gain d'exp durant les combats.
+    Plus les niveaux de catégorie augmentent, plus le joueur débloque des raretés d'arme pour cette catégorie.
+
+c) Les armes
+
+    Les armes sont associées aux catégories. Une catégorie a une arme respective.
+    Lire les fichiers JSON pour les armes. 
+    Les armes peuvent changer de couleur en fonction d'un questionnaire qui pourra être rempli (a but uniquement de divertissement).
+    Les armes ont une rareté plus ou moins élevée. Elles définissent leur efficacité. Chaque rareté est associée à un nom.
+
+d) Les souffles
+
+    Les souffles sont associés aux catégories. Une catégorie a un ou des souffles respectif(s).
+    Lire les fichiers JSON pour les souffles.
+    Un souffle ne s'améliore pas, la catégorie si.
+
+e) L'exp
+
+    L'exp est l'expérience de jeu. Elle ne peut être que obtenable (on ne peut pas en perdre) et elle détermine le niveau du joueur.
+    Elle s'obtient de partout : c'est une marque d'activité sur le bot.
+
+f) Les combats 
+
+    Les combats sont une mécanique importante. Voici une description listée des combats :
+    - Les combats se font tour par tour.
+    - Le premier joueur qui descend en dessous ou qui égale 0 points de vie perd le combat.
+    - Un choix coûte une somme plus ou moins élevée d'énergie en fonction du coût. L'énergie se recharge petit à petit dans les combats.
+    - Fonctionnement d'un tour : 
+        J1 choisit une attaque tandis que J2 choisit une défense. Le tour s'inverse après. 
+        En cas de plusieurs joueurs dans une même partie : J1 choisit son adversaire dans l'équipe adverse.
+
+    Abréviations des statistiques uniquement pour le combat:
+    - Dégâts = Dm
+    - Encaissement = D
+    - Vitesse = V
+    - Agilité = A
+    - Points de vie = PV
+    - Pour les statistiques, voir le tableau associé
+    - Joueur 1 = J1
+    - Joueur 2 = J2
+    - LOW = environ 10%Ag, HIGH = environ 20%Ag
+
+    ATTAQUES
+    ______________________________________________________________________________________________________________________________________________________
+    Nom                   | Coût, Puissance | Effets   | Risques | % de risques
+    ______________________________________________________________________________________________________________________________________________________
+    Attaque rapide        | 0               | 10%Fo=Dm |    X    |       X
+    Attaque chargée       | 2               | 15%Fo=Dm | -5PV    | HIGH
+    Préparation d'esquive | 1               | +5%V     | -5%V    | LOW
+    Préparation défensive | 1               | +5%D     | -5%D    | LOW
+    Attaque spéciale      | 5               | 40%Fo=Dm | -10PV   | HIGH
+    ______________________________________________________________________________________________________________________________________________________
+
+    DÉFENSES
+    ______________________________________________________________________________________________________________________________________________________
+    Nom                   | Coût, Puissance | Effets   | Risques | % de risques
+    ______________________________________________________________________________________________________________________________________________________
+    Défense rapide        | 0               | 10%Df=D | X       | X
+    Défense chargée       | 2               | 15%Df=D | -5PV    | HIGH
+    Préparation de contre | 1               | +5%V    | -5%V    | LOW
+    ______________________________________________________________________________________________________________________________________________________
+
+g) L'inventaire
+
+    L'inventaire se compose de plusieurs compartiments.
+    L'arme, le Corbeau de liaison, Les matières premières, les Objets mystiques
+
+    CORBEAU DE LIAISON
+    ______________________________________________________________________________________________________________________________________________________
+    Nom              | Label   | Rareté | Bonus
+    ______________________________________________________________________________________________________________________________________________________
+    Corbeau simple   | simple  | 1      | X
+    ........évolué   | evolved | 2      | +% gain d'argent
+    ........arrogant | proud   | 3      | -% temps gagné durant les voyages
+    Moineau          | sparrow | 4      | -% de temps d'entraînement
+    Colombe          | dove    | 5      | +% gain d'exp
+    ______________________________________________________________________________________________________________________________________________________
+
+    MATIÈRES PREMIÈRES
+    ______________________________________________________________________________________________________________________________________________________
+    Nom                     | Prix/unité | Description
+    ______________________________________________________________________________________________________________________________________________________
+    Tamahagane              | 50         | Sert à la fabrication de sabre du soleil
+    Bois                    | 20         | Sert à la fabrication de sabre du soleil
+    Modèle d'arme du soleil | 1000       | Sert à changer la couleur de son sabre du soleil
+    Papier                  | 5          | Sert à la fabrication de grimoires
+    Cuire                   | 10         | Sert à la fabrication de grimoires
+    Grimoire                | 200        | Sert à la fabrication d'objets mystiques
+    Graines                 | 5          | Sert à nourrir le corbeau
+    Vers                    | 5          | Sert à nourrir le corbeau
+    ______________________________________________________________________________________________________________________________________________________
+
+    OBJETS MYSTIQUES
+    ______________________________________________________________________________________________________________________________________________________
+    Nom | Description
+    ______________________________________________________________________________________________________________________________________________________
+    Grimoire de Maîtrise     | Permet de changer de catégorie.
+    Grimoire du guerrier     | Boost les statistiques pendant un temps donné.
+    Grimoire de l'économiste | Augmente le gain de yens pendant un temps donné.     
+    Grimoire de l'aventurier | Augmente le gain d'expérience pendant un temps donné.
+    Grimoire du chanceux     | Augmente le butain dans les coffres.
+    Grimoire du fauconnier   | Augmente la rareté des corbeaux obtenus
+    ______________________________________________________________________________________________________________________________________________________
+
+h) Les escouades
+
+    Les escouades se forment lorsque le joueur le souhaite.
+    Une escouade se compose maximum de 6 personnes.
+    Une escouade se compose de 3 rangs:
+        Le chef d'escouade; il a les permissions les plus avancées sur l'escouade. Il peut changer la citation, l'emblême, accepter ou refuser des membres, supprimer l'escouade, promouvoir son bras droit.
+        Le bras droit d'escouade; il y en a qu'un seul par escouade. Il peut accepter ou refuser des membres.
+        Le meneur; il n'a pas de permission dans l'escouade, mais il est désigné comme étant le joueur le plus fort outre le chef et le bras droit. Son attribution est automatique. Il représente l'escouade pour tous les joueurs.
+        le membre; un membre de l'escouade lambda
+    Créer une escouade nécessite un rang particulier : il faut être Kanoto minimum et avoir un Grimoire spécial donné que par Kagaya Ubuyashiki en personne.
+    Lorsque des joueurs rejoignent une escouade, ils se retrouvent sur la même carte : celle du chef d'escouade. Cela signifie qu'ils peuvent se rencontrer pour intéragir entre eux.
+    Il est possible d'améliorer le niveau de son escouade en gagnant des batailles en escouade : des combats qui opposent les différents membres d'une escouade.
+
+i) La carte
+
+    La carte désigne la session du joueur dans laquelle il se trouve. Il y a une carte par escouade (donc tous les joueurs de la même escouade sont par défaut dans la même carte)
+    Il n'est pas possible de changer de carte à condition de quitter l'escouade.
+    Voici ce qu'on peut trouver dans la carte :
+    - Des coffres avec des éléments cachés dedans
+    - Des matières premières (bois dans les forêts par exemple, graines dans les plaines, tamahagane dans les montagnes...)
+    - Des marchands ambulants dans les zones urbaines comme la Ville du Train ou le Village du Marais
+    - Des casinons et des mini-jeux avec argent dans les grands quartiers comme Asakusa ou Yoshiwara
+    - Des alchimistes et des forgerons dans le Village des Forgerons

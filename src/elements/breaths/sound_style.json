@@ -1,0 +1,32 @@
+{
+    "name": "Souffle du Son",
+    "emoji": "✨",
+    "attack": {
+        "quick": [
+            "Premier Mouvement : Tonnerre"
+        ],
+        "powerful": [
+            "Quatrième Mouvement : Le Glas Mortel d'Avici"
+        ],
+        "dodge_prepa": [
+            "Premier Mouvement : Tonnerre"
+        ],
+        "defensive_prepa": [
+            "Quatrième Mouvement : Le Glas Mortel d'Avici"
+        ],
+        "special": [
+            "Cinquième Mouvement : Symphonie Stridente"
+        ]
+    },
+    "defense": {
+        "quick": [
+            "Premier Mouvement : Tonnerre"
+        ],
+        "powerful": [
+            "Quatrième Mouvement : Le Glas Mortel d'Avici"
+        ],
+        "counter_prepa": [
+            "Quatrième Mouvement : Le Glas Mortel d'Avici"
+        ]
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "name": "Mont Urusai",
+    "emoji": "⛰️",
+    "x": -6,
+    "y": 5,
+    "id": 1,
+    "Areas": [
+        {
+            "name": "Pied de la montagne",
+            "biome": "meadow",
+            "id": 0,
+            "default": true,
+            "accesses": []
+        }
+    ],
+    "accesses": [4, 2, 6]
+}

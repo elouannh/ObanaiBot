@@ -1,0 +1,24 @@
+{
+    "name": "Maison familiale",
+    "emoji": "🏡",
+    "x": -9,
+    "y": 8.5,
+    "id": 4,
+    "Areas": [
+        {
+            "name": "Jardin de front",
+            "biome": "meadow",
+            "id": 0,
+            "default": true,
+            "accesses": []
+        },
+        {
+            "name": "Dans la hutte",
+            "biome": "dwelling",
+            "id": 1,
+            "default": false,
+            "accesses": []
+        }
+    ],
+    "accesses": [0, 1]
+}

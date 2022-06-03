@@ -1,0 +1,17 @@
+{
+    "name": "Pourfendeur",
+    "label": "slayer",
+    "weapon": "katana",
+    "vip": false,
+    "description": "",
+    "bonus": ["force", "agility"],
+    "breaths": ["flame", "flower", "mist", "sun", "thunder", "water", "wind"],
+    "weaponName": "Épée",
+    "rarityNames": [
+        "abîmée",
+        "simple",
+        "aiguisée",
+        "découpante",
+        "de Tanjiro"
+    ]
+}

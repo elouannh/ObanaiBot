@@ -1,0 +1,9 @@
+{
+    "label": "leather",
+    "name": "Cuir",
+    "price": 10,
+    "size": 1,
+    "zones": ["meadow", "suburban_area"],
+    "rarity": 25,
+    "emoji": "🐄"
+}

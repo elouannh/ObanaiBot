@@ -1,0 +1,17 @@
+{
+    "name": "Village du marais",
+    "emoji": "🎀",
+    "x": -6.5,
+    "y": -4.5,
+    "id": 11,
+    "Areas": [
+        {
+            "name": "Entrée du village",
+            "biome": "blank_area",
+            "id": 0,
+            "default": true,
+            "accesses": []
+        }
+    ],
+    "accesses": [6]
+}

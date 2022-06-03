@@ -1,0 +1,9 @@
+{
+    "label": "grimoire",
+    "name": "Grimoire",
+    "price": 500,
+    "size": 10,
+    "zones": ["suburban_area"],
+    "rarity": 5,
+    "emoji": "📖"
+}

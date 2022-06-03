@@ -1,0 +1,17 @@
+{
+    "name": "Yoshiwara",
+    "emoji": "👘",
+    "x": 9.5,
+    "y": 2,
+    "id": 9,
+    "Areas": [
+        {
+            "name": "X",
+            "biome": "blank_area",
+            "id": 0,
+            "default": true,
+            "accesses": []
+        }
+    ],
+    "accesses": [8, 7, 10]
+}

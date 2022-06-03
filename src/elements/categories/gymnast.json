@@ -1,0 +1,17 @@
+{
+    "name": "Gymnaste",
+    "label": "gymnast",
+    "weapon": "whisk",
+    "vip": false,
+    "description": "",
+    "bonus": ["agility", "force"],
+    "breaths": ["love"],
+    "weaponName": "Épée en fouet",
+    "rarityNames": [
+        "abîmée",
+        "simple",
+        "aiguisée",
+        "tranchant",
+        "de Mitsuri"
+    ]
+}

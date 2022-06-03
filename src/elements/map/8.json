@@ -1,0 +1,17 @@
+{
+    "name": "Ville du train",
+    "emoji": "🚂",
+    "x": 10,
+    "y": 9,
+    "id": 8,
+    "Areas": [
+        {
+            "name": "X",
+            "biome": "blank_area",
+            "id": 0,
+            "default": true,
+            "accesses": []
+        }
+    ],
+    "accesses": [2, 9]
+}

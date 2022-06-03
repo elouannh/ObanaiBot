@@ -1,0 +1,32 @@
+{
+    "name": "Souffle de la Fleur",
+    "emoji": "🌸",
+    "attack": {
+        "quick": [
+            "Quatrième Mouvement : Hanagoromo Pourpre"
+        ],
+        "powerful": [
+            "Cinquième Mouvement : La Pivoine Futile"
+        ],
+        "dodge_prepa": [
+            "Sixième Mouvement : Tourbillon de Pêche"
+        ],
+        "defensive_prepa": [
+            "Deuxième Mouvement : Esprit du Prunier"
+        ],
+        "special": [
+            "Mouvement Final : Les Yeux du Lycoris"
+        ]
+    },
+    "defense": {
+        "quick": [
+            "Deuxième Mouvement : Esprit du Prunier"
+        ],
+        "powerful": [
+            "Sixième Mouvement : Tourbillon de Pêche"
+        ],
+        "counter_prepa": [
+            "Deuxième Mouvement : Esprit du Prunier"
+        ]
+    }
+}

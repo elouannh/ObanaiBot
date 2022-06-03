@@ -1,0 +1,35 @@
+{
+    "name": "Souffle de la Bête",
+    "emoji": "🐗",
+    "attack": {
+        "quick": [
+            "Premier Croc : Perforation",
+            "Troisième Croc : Déchiquetage"
+        ],
+        "powerful": [
+            "Quatrième Croc : Dilacération",
+            "Cinquième Croc : Mutilation furieuse"
+        ],
+        "dodge_prepa": [
+            "Neuvième Croc : Taillade Ondulante Divine"
+        ],
+        "defensive_prepa": [
+            "Septième Croc : Détection"
+        ],
+        "special": [
+            "Huitième Croc : Charge du Sanglier"
+        ]
+    },
+    "defense": {
+        "quick": [
+            "Deuxième Croc : Lacération",
+            "Sixième Croc : Morsure Irrégulière"
+        ],
+        "powerful": [
+            "Dixième Croc : Les Crocs Tournoyants"
+        ],
+        "counter_prepa": [
+            "La Frappe Lancée"
+        ]
+    }
+}

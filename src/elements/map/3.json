@@ -1,0 +1,17 @@
+{
+    "name": "Mont Natagumo",
+    "emoji": "🕷️",
+    "x": 1,
+    "y": 4,
+    "id": 3,
+    "Areas": [
+        {
+            "name": "Pied de la montagne",
+            "biome": "meadow",
+            "id": 0,
+            "default": true,
+            "accesses": []
+        }
+    ],
+    "accesses": [2, 5]
+}

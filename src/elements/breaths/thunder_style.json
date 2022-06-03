@@ -1,0 +1,35 @@
+{
+    "name": "Souffle de la Foudre",
+    "emoji": "⚡",
+    "attack": {
+        "quick": [
+            "Premier Mouvement : Frappe Foudroyante",
+            "Cinquième Mouvement : Éclair de Chaleur"
+        ],
+        "powerful": [
+            "Premier Mouvement : Frappe Foudroyante - Six Coups",
+            "Premier Mouvement : Frappe Foudroyante - Huit Coups"
+        ],
+        "dodge_prepa": [
+            "Premier Mouvement : Frappe Foudroyante - Vitesse Divine"
+        ],
+        "defensive_prepa": [
+            
+        ],
+        "special": [
+            "Septième Mouvements : Dieu du Feu Céleste"
+        ]
+    },
+    "defense": {
+        "quick": [
+            "Deuxième Mouvement : Éclair Foudroyant"
+        ],
+        "powerful": [
+            "Troisième Mouvement : Nuée d'Éclairs",
+            "Sixième Mouvement : Tonnerre et Foudre"
+        ],
+        "counter_prepa": [
+            "Quatrième Mouvement : Orage Lointain"
+        ]
+    }
+}

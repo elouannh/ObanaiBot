@@ -1,0 +1,38 @@
+{
+    "name": "Souffle de l'Eau",
+    "emoji": "🌊",
+    "attack": {
+        "quick": [
+            "Premier Mouvement : Entaille de l'Eau Calme",
+            "Deuxième Mouvement : La Roue d'Eau",
+            "Deuxième Mouvement : La Roue d'Eau - Variation horizontal"
+        ],
+        "powerful": [
+            "Troisième Mouvement : Danse des Courants",
+            "Quatrième Mouvement : La Marée Déferlante",
+            "Huitième mouvement : Impact de la Cascade"
+        ],
+        "dodge_prepa": [
+            "Cinquième mouvement : Averse Providentielle"
+        ],
+        "defensive_prepa": [
+            "Neuvième Mouvement : Embruns des Flots Déchaînés"
+        ],
+        "special": [
+            "Dixième Mouvement : Les Vicissitudes de la Vie"
+        ]
+    },
+    "defense": {
+        "quick": [
+            "Sixième Mouvement : Tourbillon",
+            "Septième mouvement : Goutte de Rosée Troublant l'Eau Dormante - En Crochet"
+        ],
+        "powerful": [
+            "Sixième et Troisième Mouvement Combinés : Tourbillon Dansant",
+            "Onzième mouvement : Accalmie"
+        ],
+        "counter_prepa": [
+            "Septième mouvement : Goutte de Rosée Troublant l'Eau Dormante"
+        ]
+    }
+}

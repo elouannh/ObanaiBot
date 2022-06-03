@@ -1,0 +1,32 @@
+{
+    "name": "Souffle de l'Amour",
+    "emoji": "💗",
+    "attack": {
+        "quick": [
+            "Deuxième Mouvement : Amour Anxiogène"
+        ],
+        "powerful": [
+            "Troisième Mouvement : Toilette de Chaton Mignon"
+        ],
+        "dodge_prepa": [
+            "Premier Mouvement : Les Frissons du Premier Amour"
+        ],
+        "defensive_prepa": [
+            "Premier Mouvement : Les Frissons du Premier Amour"
+        ],
+        "special": [
+            "Cinquième Mouvement : Attachement Hésitant - Ongles Mal Vernis"
+        ]
+    },
+    "defense": {
+        "quick": [
+            "Sixième Mouvement : Un Amour de Patte de Chaton"
+        ],
+        "powerful": [
+            "Sixième Mouvement : Un Amour de Patte de Chaton"
+        ],
+        "counter_prepa": [
+            "Premier Mouvement : Les Frissons du Premier Amour"
+        ]
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "name": "Souffle du Vent",
+    "emoji": "🌪",
+    "attack": {
+        "quick": [
+            "Premier Mouvement : Tourbillon de Poussière - Tranche"
+        ],
+        "powerful": [
+            "Deuxième Mouvement : Griffes de Vent Purificatrices",
+            "Septième Mouvement : Vent Puissant - Bourrasque de Tengu"
+        ],
+        "dodge_prepa": [
+            "Quatrième Mouvement : La Tempête de Poussière Levante"
+        ],
+        "defensive_prepa": [
+            "Huitième Mouvement : Frappe de la Première Bourrasque"
+        ],
+        "special": [
+            "Neuvième Mouvement : Typhon de Skanda"
+        ]
+    },
+    "defense": {
+        "quick": [
+            "Cinquième Mouvement : Tempête Hivernale"
+        ],
+        "powerful": [
+            "Troisième Mouvement : Arbre Ondulant dans la Brise Montagnarde"
+        ],
+        "counter_prepa": [
+            "Sixième Mouvement : La Rafale de Fumée Noire"
+        ]
+    }
+}

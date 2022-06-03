@@ -1,0 +1,32 @@
+{
+    "name": "Souffle de la Brume",
+    "emoji": "☁",
+    "attack": {
+        "quick": [
+            "Premier Mouvement : Nuages Bas et Brouillard Distant"
+        ],
+        "powerful": [
+            "Deuxième Mouvement : Brume Stratifiée"
+        ],
+        "dodge_prepa": [
+            "Cinquième Mouvement : Brume de Mer"
+        ],
+        "defensive_prepa": [
+            "Quatrième Mouvement : Coup de Sabre Advectif"
+        ],
+        "special": [
+            "Septième mouvement : Brouillard"
+        ]
+    },
+    "defense": {
+        "quick": [
+            "Cinquième Mouvement : Brume de Mer"
+        ],
+        "powerful": [
+            "Troisième Mouvement : Explosion Désembuante"
+        ],
+        "counter_prepa": [
+            "Sixième Mouvement : Brume au Clair de Lune"
+        ]
+    }
+}

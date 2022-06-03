@@ -1,0 +1,21 @@
+Inventaire
+
+    collect_k_items:  Collecter <items> <quantité>
+    collect_k_yens:   Collecter <quantité> yens
+    give_k_items:     Donner <items> <quantité> à <cible>
+    feed_crow:        Nourrir son corbeau
+    equip_grimoire:   Équiper grimoire <type>
+    forge_item:       Forger <arme>
+
+Profil
+
+    earn_xp:          Gagner <quantité> expérience
+
+Activité
+
+    travel_to:        Voyager vers <zone>
+    train_stat:       Lancer un entraînement
+
+Combats
+
+    kill_target:      Vaincre <cible>

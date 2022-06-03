@@ -1,0 +1,9 @@
+{
+    "label": "seed",
+    "name": "Graine",
+    "price": 5,
+    "size": 1,
+    "zones": ["meadow"],
+    "rarity": 70,
+    "emoji": "🌿"
+}

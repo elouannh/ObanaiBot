@@ -1,0 +1,17 @@
+{
+    "name": "QG des pourfendeurs",
+    "emoji": "🏯",
+    "x": 4,
+    "y": 8,
+    "id": 5,
+    "Areas": [
+        {
+            "name": "Cour",
+            "biome": "blank_area",
+            "id": 0,
+            "default": true,
+            "accesses": []
+        }
+    ],
+    "accesses": [2, 3]
+}

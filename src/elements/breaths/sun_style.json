@@ -1,0 +1,38 @@
+{
+    "name": "Souffle du Soleil",
+    "emoji": "🎴",
+    "attack": {
+        "quick": [
+            "Valse",
+            "Estoc Brillant du Soleil",
+            "Chaleur Ondulante"
+        ],
+        "powerful": [
+            "Valse Foudroyante",
+            "Halo Solaire Danse Draconique"
+        ],
+        "dodge_prepa": [
+            "Arc-en-Ciel Parhélique"
+        ],
+        "defensive_prepa": [
+            "Le Coucher de Soleil",
+            "Paradis Bleu"
+        ],
+        "special": [
+            "Treizième Mouvement"
+        ]
+    },
+    "defense": {
+        "quick": [
+            "Le Soleil qui Réduit les Os en Cendres"
+        ],
+        "powerful": [
+            "Miroir Brûlant Écarlate",
+            "Rai de Lumière"
+        ],
+        "counter_prepa": [
+            "Valse Enflammée",
+            "Char Enflammé"
+        ]
+    }
+}

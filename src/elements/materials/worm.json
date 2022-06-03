@@ -1,0 +1,9 @@
+{
+    "label": "worm",
+    "name": "Ver",
+    "price": 10,
+    "size": 1,
+    "zones": ["forest", "dark_forest", "meadow"],
+    "rarity": 30,
+    "emoji": "🪱"
+}

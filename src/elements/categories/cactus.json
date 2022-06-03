@@ -1,0 +1,17 @@
+{
+    "name": "Cactus",
+    "label": "cactus",
+    "weapon": "spiked",
+    "vip": false,
+    "description": "",
+    "bonus": ["force", "speed"],
+    "breaths": ["rock"],
+    "weaponName": "Fléau à pointe & Hache",
+    "rarityNames": [
+        "abîmés",
+        "simple",
+        "aiguisés",
+        "concasseurs",
+        "de Gyomei"
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "name": "Souffle de la Flamme",
+    "emoji": "🔥",
+    "attack": {
+        "quick": [
+            "Troisième Mouvement : Univers de Flammes",
+            "Deuxième Mouvement : Flammes du soleil ascendant"
+        ],
+        "powerful": [
+            "Cinquième Mouvement : Tigre de Flammes"
+        ],
+        "dodge_prepa": [
+            "Premier Mouvement : Mer de Flammes"
+        ],
+        "defensive_prepa": [
+            "Premier Mouvement : Mer de Flammes"
+        ],
+        "special": [
+            "Neuvième Mouvement : Purgatoire"
+        ]
+    },
+    "defense": {
+        "quick": [
+            "Quatrième Mouvement : La Vague Flamboyante"
+        ],
+        "powerful": [
+            "Cinquième Mouvement : Tigre de Flammes"
+        ],
+        "counter_prepa": [
+            "Premier Mouvement : Mer de Flammes"
+        ]
+    }
+}

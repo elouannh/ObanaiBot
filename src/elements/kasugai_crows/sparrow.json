@@ -1,0 +1,6 @@
+{
+    "label": "sparrow",
+    "name": "Moineau",
+    "rarity": 4,
+    "bonus": ["training_time"]
+}
