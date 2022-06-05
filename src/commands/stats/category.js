@@ -33,6 +33,7 @@ class Category extends Command {
 
         for (let i = 0; i < categories.length; i++) {
             categoriesDisplay[emojis[i]] = categories[i];
+            console.log("test");
         }
     }
 }
