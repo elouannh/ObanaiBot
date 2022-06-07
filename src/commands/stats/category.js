@@ -24,17 +24,13 @@ class Category extends Command {
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Vous avez déjà commencé votre aventure.", null, null, "error");
 
         const pDatas = await this.client.playerDb.get(this.message.author.id);
-        const badges = pDatas.badges;
+        const grades = pDatas.grades;
 
         let categories = fs.readdirSync("./src/elements/categories").map(e => require(`../../elements/categories/${e}`));
-        if (!badges.includes("vip")) categories = categories.filter(cat => !cat.vip);
-        const categoriesObject = {};
-        const emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"];
+        if (!grades.includes("vip")) categories = categories.filter(cat => !cat.vip);
 
-        for (let i = 0; i < categories.length; i++) {
-            categoriesDisplay[emojis[i]] = categories[i];
-            console.log("test");
-        }
+        const msg = await this.ctx.reply("Changement de categorie", `Entrez l'id de la catégorie à choisir.\n\n${categories.map(e => `\`id:${e.label}\` | ${e.name}`).join("\n")}\n\n↓ Entrez le nom`, null, null, "info");
+        const 
     }
 }
 
