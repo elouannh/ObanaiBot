@@ -12,6 +12,5 @@ client.requests = new Collection();
 // ................<string, Channel>
 client.lastChannel = new Collection();
 
-
 loadEvents(client);
 client.launch();

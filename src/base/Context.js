@@ -65,18 +65,15 @@ class Context {
         }
     }
 
-    async messageCollection(message = null, time = null, userr = undefined) {
+    async messageCollection(message = null, max = 1, time = null, userr = undefined) {
         if (message === null) message = this.command.message;
         if (time === null) time = 30_000;
 
-        for (const react of reacts) await message.react(react);
-
-        const filter = (reaction, user) => reacts.includes(reaction.emoji.name) && user.id === (userr ?? this.command.message.author.id);
-        const max = 1;
-        const choice = await message.awaitReactions({ filter, time, max }).catch(() => { return null; });
+        const filter = msg => msg.author.id === (userr ?? this.command.message.author.id);
+        const choice = await message.channel.awaitMessages({ filter, time, max }).catch(() => { return null; });
 
         if (choice) {
-            if (choice.first()) return choice.first()._emoji.name;
+            if (choice.first()) return choice.first().content;
             else return null;
         }
     }
