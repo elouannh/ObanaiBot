@@ -7,6 +7,13 @@ class Context {
         this.command = command;
     }
 
+    isResp(str, compareStr) {
+        const choices1 = ["y", "yes", "oui", "accept", "confirm"];
+        const choices2 = ["n", "no", "non", "refuse", "cancel"];
+
+        return [choices1, choices2][["y", "n"].indexOf(compareStr)].includes(str.toLowerCase());
+    }
+
     async trStr(str) {
         const l = await this.client.playerDb.getLang(this.command.message.author.id);
 
