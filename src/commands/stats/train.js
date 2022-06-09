@@ -1,5 +1,4 @@
 const Command = require("../../base/Command");
-const fs = require("fs");
 const convertDate = require("../../utils/convertDate");
 const calcPlayerLevel = require("../../elements/calcPlayerLevel");
 

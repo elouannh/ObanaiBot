@@ -33,7 +33,6 @@ class PlayerDb {
             },
             breath: "water",
             exp: 0,
-            squad: null,
             created: Date.now(),
             // grades : vip, tester, vip+
             grades: [],
@@ -108,6 +107,9 @@ class PlayerDb {
         p.aptitudes.defense = Math.ceil(p.aptitudes.defense);
         p.aptitudes.force = Math.ceil(p.aptitudes.force);
         p.aptitudes.speed = Math.ceil(p.aptitudes.speed);
+
+        p.squad = await this.client.squadDb.findUser(p.id);
+
         return p;
     }
 

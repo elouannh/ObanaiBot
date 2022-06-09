@@ -109,7 +109,6 @@ class SquadDb {
         const s = await this.get(owner);
 
         this.db.push(s.owner, user, "members");
-        this.client.playerDb.db.set(user, s.owner, "squad");
     }
 
     async isFull(owner) {
@@ -123,13 +122,22 @@ class SquadDb {
 
         const members = s.members.filter(m => m !== user);
         this.db.set(s.owner, members, "members");
-        this.client.playerDb.db.set(user, null, "squad");
     }
 
     async hasPlayer(owner, user) {
         const s = await this.get(owner);
 
         return s.members.includes(user);
+    }
+
+    async findUser(id) {
+        let correspondingSquad = null;
+
+        for (const squad of Array.from(this.db.values())) {
+            if (squad.members.includes(id)) correspondingSquad = squad;
+        }
+
+        return correspondingSquad;
     }
 
     async promote(owner, user) {
