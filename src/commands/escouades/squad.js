@@ -32,7 +32,7 @@ class Squad extends Command {
         const pDatas = await this.client.playerDb.get(user.id);
         if (pDatas.squad === null) return await this.ctx.reply("Aucune escouade.", "Aucune escouade n'a été trouvée pour ce joueur.", null, null, "info");
 
-        const mDatas = await this.client.squadDb.get(pDatas.squad);
+        const mDatas = pDatas.squad;
         const title = `Escouade de ${user.username}`;
         let squad = "";
 

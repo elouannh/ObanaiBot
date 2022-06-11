@@ -3,7 +3,6 @@ const Command = require("../../base/Command");
 async function alertQuest(client, type, datas, quest) {
 
     const questFile = require(`../../quests/${type}/${quest.id.split(":")[0]}.js`)(quest.step + 1);
-    console.log(questFile);
     if (questFile?.title === undefined) {
         const playerId = Number((datas.created / 1000).toFixed(0)).toString(20);
         const model = `**${client.users.cache.get(datas.id)?.username ?? `Joueur #${playerId}`}** a terminé une quête`;
@@ -25,8 +24,6 @@ async function alertQuest(client, type, datas, quest) {
             await cmd.ctx.reply("Félicitations !", string + ` Quête terminée:\n\n\`-   ${quest.title}   -\`\n*${quest.description}*`, "❗", "2f3136", null);
         }
         catch (err) {
-            console.log("Error when replying");
-            console.log(err);
             await client.playerDb.gainExp(datas.id, Math.floor(Math.random() * 150) + 100);
         }
     }
@@ -51,8 +48,7 @@ async function alertQuest(client, type, datas, quest) {
             client.questDb.db.push(datas.id, questFile, `${type}`);
         }
         catch (err) {
-            console.log("Error when replying");
-            console.log(err);
+            return;
         }
     }
 }

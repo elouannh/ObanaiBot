@@ -42,7 +42,6 @@ class Help extends Command {
                 let string = dat === "Commandes Globales" ? "Bienvenue sur la liste des commandes du bot ! Vous pouvez voir ci-dessous les différentes commandes rangées par catégories.\n\nSi vous cherchez de l'aide pour une commande, faites la commande `help <command>`.\n\nVous pouvez également rejoindre [**le serveur support**](https://discord.gg/8GDpnYvRrC) en cliquant [**ici**](https://discord.gg/8GDpnYvRrC).\n\n" : "";
                 let commands = 0;
                 for (const key of datas[dat]) {
-                    console.log(key);
                     const cmds = Object.values(content[key]).length;
                     commands += cmds;
                     string += `> **${emojis[key]} • ${key}** (**${cmds}** commandes)\nt`;

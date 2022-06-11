@@ -153,9 +153,6 @@ class InventoryDb {
 
         const newXp = p.kasugai_crow_exp + (quantities[foodType] ?? 1) * quantity;
         this.db.set(id, newXp, "kasugai_crow_exp");
-
-        console.log(calcCrowLevel(newXp));
-
     }
 }
 

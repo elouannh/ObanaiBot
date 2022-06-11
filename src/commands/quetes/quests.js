@@ -28,7 +28,6 @@ class Quests extends Command {
         if (qDatas.daily.length > 0) {
             quests += "> 📅 **Quêtes journalières**";
             for (const q of qDatas.daily) {
-                console.log(q);
                 quests += `\n\n${q.display()}`;
             }
         }

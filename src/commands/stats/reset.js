@@ -22,7 +22,7 @@ class Start extends Command {
         const pExists = await this.client.playerDb.started(this.message.author.id);
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Vous n'avez pas commencé votre aventure. Si vous désirez le faire, faites la commande start.", null, null, "error");
 
-        const msg = await this.ctx.reply("Voulez-vous vraiment supprimer votre aventure ?", "```diff\n- CE CHOIX EST DÉFINITIF, ET TOUTE PROGRESSION SERA PERDUE POUR TOUJOURS (c'est très long !)```\n\nRépondre avec `y` (yes) ou `n` (non).", "❗", null, "outline");
+        const msg = await this.ctx.reply("Voulez-vous vraiment supprimer votre aventure ?", "```diff\n- CE CHOIX EST DÉFINITIF, ET TOUTE PROGRESSION SERA PERDUE POUR TOUJOURS (c'est très long !)```\n\nRépondre avec `y` (oui) ou `n` (non).", "❗", null, "outline");
         const choice = await this.ctx.messageCollection(msg);
         if (this.ctx.isResp(choice, "y")) {
             await this.client.playerDb.deleteAdventure(this.message.author.id);

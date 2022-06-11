@@ -5,10 +5,10 @@ class SquadDelete extends Command {
     constructor() {
         super({
             adminOnly: false,
-            aliases: ["squad-delete", "sq-dl"],
+            aliases: ["squad-delete", "sqdl"],
             args: [],
             category: "Escouades",
-            cooldown: 10,
+            cooldown: 30,
             description: "Commande permettant de supprimer son escouade.",
             examples: ["squad-delete"],
             finishRequest: "ADVENTURE",
@@ -23,27 +23,26 @@ class SquadDelete extends Command {
         const pExists = await this.client.playerDb.started(this.message.author.id);
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
-        const pDatas = await this.client.playerDb.get(this.message.author.id);
-        if (pDatas.squad === null) return await this.ctx.reply("Vous n'avez pas d'escouade.", "Afin de supprimer une escouade, il faudrait déjà en posséder une.", null, null, "info");
-        if (pDatas.squad !== this.message.author.id) return await this.ctx.reply("Vous n'êtes pas chef.", "Pour supprimer une escouade, vous devez en être le chef !", null, null, "info");
+        const msg = await this.ctx.reply("Supprimer votre escouade.", "Souhaitez-vous vraiment supprimer votre escouade ? Les membres qui s'y trouvent seront aussi exclus.\n\n**__Requis :__**```diff\n- 30 jours d'ancienneté\n- Être le chef d'escouade\n- Avoir une escouade```\n\nRépondre avec `y` (oui) ou `n` (non).", "⛩️", null, "outline");
+        const choice = await this.ctx.messageCollection(msg);
 
-        const sDatas = await this.client.squadDb.get(pDatas.squad);
-        const timeLeft = Date.now() - sDatas.created;
-        const days = 0;
-        if (timeLeft < (days * 86_400_000)) return await this.ctx.reply("Escouade trop récente.", `Pour supprimer une escouade, celle-ci doit exister depuis au moins 30 jours. Vous pourrez la supprimer dans: **${convertDate((days * 86_400_000) - timeLeft, true).string}**.`, null, null, "info");
+        if (this.ctx.isResp(choice, "y")) {
+            const pDatas = await this.client.playerDb.get(this.message.author.id);
 
-        const msg = await this.ctx.reply("Supprimer votre escouade.", `Souhaitez-vous vraiment supprimer **${sDatas.name}** ? Les **${sDatas.members.length}** membres qui s'y trouvent seront aussi exclus.`, null, null, "info");
-        const choice = await this.ctx.reactionCollection(msg, ["❌", "✅"]);
+            if (pDatas.squad === null) return await this.ctx.reply("Oups...", "Vous ne possédez pas d'escouade.", null, null, "warning");
+            if (pDatas.squad.owner !== this.message.author.id) return await this.ctx.reply("Oups...", "Seul les chefs d'escouade peuvent les supprimer.", null, null, "warning");
+            const timeLeft = Date.now() - pDatas.squad.created;
+            const days = 0;
+            if (timeLeft < (days * 86_400_000)) return await this.ctx.reply("Oups...", `Pour supprimer une escouade, celle-ci doit exister depuis au moins 30 jours. Vous pourrez la supprimer dans: **${convertDate((days * 86_400_000) - timeLeft, true).string}**.`, null, null, "warning");
 
-        if (choice === "✅") {
-            await this.client.squadDb.deleteSquad(sDatas.owner);
-            return await this.ctx.reply("Escouade supprimée !", `Votre escouade **${sDatas.name}** a bien été supprimée !`, null, null, "success");
+            await this.client.squadDb.deleteSquad(pDatas.squad.owner);
+            return await this.ctx.reply("Adieu, petite escouade...", `Votre escouade **${pDatas.squad.name}** a bien été supprimée définitivement.`, "👋", null, "outline");
         }
-        else if (choice === "❌") {
-            return await this.ctx.reply("Supprimer une escouade.", "Vous avez décidé de ne pas supprimer votre escouade.", null, null, "info");
+        else if (this.ctx.isResp(choice, "n")) {
+            return await this.ctx.reply("Supprimer votre escouade.", "Vous avez décidé de ne pas supprimer votre escouade.", "⛩️", null, "outline");
         }
-        else if (choice === null) {
-            return await this.ctx.reply("Supprimer une escouade.", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+        else {
+            return await this.ctx.reply("Supprimer votre escouade.", "La commande n'a pas aboutie.", null, null, "timeout");
         }
 
     }

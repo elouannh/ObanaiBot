@@ -22,7 +22,7 @@ class Start extends Command {
         const pExists = await this.client.playerDb.started(this.message.author.id);
         if (pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Vous avez déjà commencé votre aventure. Si vous cherchez à la supprimer, faites la commande delete.", null, null, "error");
 
-        const msg = await this.ctx.reply("Voulez-vous vraiment commencer votre aventure ?", "Rejoignez-nous dès maintenant dans une folle aventure !\n\nRépondre avec `y` (yes) ou `n` (non).", "🥳", null, "outline");
+        const msg = await this.ctx.reply("Voulez-vous vraiment commencer votre aventure ?", "Rejoignez-nous dès maintenant dans une folle aventure !\n\nRépondre avec `y` (oui) ou `n` (non).", "🥳", null, "outline");
         const choice = await this.ctx.messageCollection(msg);
         if (this.ctx.isResp(choice, "y")) {
             await this.client.playerDb.create(this.message.author.id);

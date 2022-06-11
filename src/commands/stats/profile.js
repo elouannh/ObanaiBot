@@ -57,7 +57,7 @@ class Profile extends Command {
             profile += "\n\n> Escouade: **Pas d'escouade**";
         }
         else {
-        const sDatas = await this.client.squadDb.get(pDatas.squad, user.id);
+        const sDatas = pDatas.squad;
         profile += `\n\n> Escouade: **${sDatas.name}**`;
         }
 

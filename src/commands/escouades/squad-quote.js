@@ -27,7 +27,7 @@ class SquadQuote extends Command {
 
         const name = this.args.join(" ");
         let r = name.match(new RegExp("([a-zA-Z\\s]{1,}\\s?[0-9]{0,}\\D{0,}){0,}", "g"));
-        r = r?.join(" ")?.slice(0, 200).split(/ +/).join(" ");
+        r = r?.join(" ")?.slice(0, 400).split(/ +/).join(" ");
 
         if (r === undefined || r?.length < 10) return await this.ctx.reply("Nouvelle citation invalide.", "Votre citation doit contenir entre **10** et **200** caractères, et doit être de la forme suivante:```([a-zA-Z\\s]{1,}\\s?[0-9]{0,}\\D{0,}){0,}```\n```Exemples:\n- squad-quote Nous sommes les meilleurs !```", null, null, "error");
 

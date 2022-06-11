@@ -15,7 +15,6 @@ module.exports = client => {
                         const toAdd = newValue.exp - oldValue.exp;
                         const newAmount = hadBefore + toAdd;
                         const quests = qDatas[qKey].filter(q => q.id !== dq.id);
-                        console.log(quests);
 
                         if (newAmount >= dq.objective.quantity) {
                             client.questDb.db.set(key, quests, qKey);
