@@ -23,23 +23,20 @@ class SquadInvite extends Command {
         const pExists = await this.client.playerDb.started(this.message.author.id);
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
-        const pDatas = await this.client.playerDb.get(this.message.author.id);
-        if (pDatas.squad === null) return await this.ctx.reply("Aucune escouade.", "Aucune escouade n'a été trouvée pour ce joueur.", null, null, "info");
-
-        const sDatas = await this.client.squadDb.get(pDatas.squad);
-        if (sDatas.owner !== this.message.author.id) return await this.ctx.reply("Vous n'avez pas l'autorisation.", "Pour inviter quelqu'un dans votre escouade, vous devez être **Chef d'escouade**.", null, null, "info");
-
         const scan = new MemberScanning(this.message.guild, this.args.join(""));
         await scan.search();
         const user = await scan.selection(this);
 
         if (user === null) return;
-        if (user.id === this.message.author.id) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Vous ne pouvez pas vous inviter vous-même.", null, null, "error");
+        if (user.id === this.message.author.id) return await this.ctx.reply("Oups...", "Vous ne pouvez pas vous inviter vous-même.", null, null, "warning");
 
-        const msg = await this.ctx.reply("Oh, un nouveau membre ?", `**${user.username}**, voulez-vous rejoindre l'escouade **${sDatas.name}** ?`, null, null, "info");
-        const choice = await this.ctx.reactionCollection(msg, ["❌", "✅"], 30_000, user.id);
+        const msg = await this.ctx.reply("Inviter un nouveau membre.", `**${user.username}**, voulez-vous rejoindre l'escouade de **${this.message.author.username}** ?\n\n**__Requis :__**\`\`\`diff\n- Être le chef d'escouade\n- Avoir une escouade\n- Avoir un bras droit d'escouade\`\`\`\n\nRépondre avec \`y\` (oui) ou \`n\` (non).`, "⛩️", null, "outline");
+        const choice = await this.ctx.messageCollection(msg, 1, 30_000, user.id);
 
-        if (choice === "✅") {
+        if (this.ctx.isResp(choice, "y")) {
+            const pDatas = await this.client.playerDb.get(this.message.author.id);
+
+            if (pDatas.squad.owner !== this.message.author.id) return await this.ctx.reply("Vous n'avez pas l'autorisation.", "Pour inviter quelqu'un dans votre escouade, vous devez être **Chef d'escouade**.", null, null, "info");
             const uExists = await this.client.playerDb.started(user.id);
             if (!uExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
@@ -49,10 +46,10 @@ class SquadInvite extends Command {
             await this.client.squadDb.joinSquad(sDatas.owner, user.id);
             return await this.ctx.reply("Oh, un nouveau membre ?", "Le joueur a accepté de rejoindre l'escouade.", null, null, "success");
         }
-        else if (choice === "❌") {
+        else if (this.ctx.isResp(choice, "n")) {
             return await this.ctx.reply("Oh, un nouveau membre ?", "Le joueur a refusé de rejoindre l'escouade.", null, null, "info");
         }
-        else if (choice === null) {
+        else {
             return await this.ctx.reply("Oh, un nouveau membre ?", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
         }
     }
