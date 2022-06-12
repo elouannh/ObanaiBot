@@ -46,10 +46,10 @@ class SquadPromote extends Command {
             await this.client.squadDb.promote(pDatas.squad.owner, user.id);
             return await this.ctx.reply("Promotion d'un joueur de l'escouade.", "Le joueur a été promu bras droit de l'escouade.", "⛩️", null, "outline");
         }
-        else if (choice === "❌") {
+        else if (this.ctx.isResp(choice, "n")) {
             return await this.ctx.reply("Promotion d'un joueur de l'escouade.", "Le joueur n'a pas été promo bras droit de l'escouade.", "⛩️", null, "outline");
         }
-        else if (choice === null) {
+        else {
             return await this.ctx.reply("Promotion d'un joueur de l'escouade.", "La commande n'a pas aboutie.", null, null, "timeout");
         }
 

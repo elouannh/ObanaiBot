@@ -29,7 +29,7 @@ class SquadKick extends Command {
             const pDatas = await this.client.playerDb.get(this.message.author.id);
 
             if (pDatas.squad === null) return await this.ctx.reply("Oups...", "Vous ne possédez pas d'escouade.", null, null, "warning");
-            if (pDatas.squad.owner !== this.message.author.id) return await this.ctx.reply("Oups...", "Seul les chefs d'escouade peuvent les supprimer.", null, null, "warning");
+            if (pDatas.squad.owner !== this.message.author.id) return await this.ctx.reply("Oups...", "Seul les chefs d'escouade peuvent dégrader des membres.", null, null, "warning");
             if (pDatas.squad.right_hand === "") return await this.ctx.reply("Oups...", "Votre escouade ne possède pas de bras droit.", null, null, "warning");
 
             await this.client.squadDb.demote(pDatas.squad.owner);

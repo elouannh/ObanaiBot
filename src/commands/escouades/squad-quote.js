@@ -4,10 +4,10 @@ class SquadQuote extends Command {
     constructor() {
         super({
             adminOnly: false,
-            aliases: ["squad-quote", "sq-qt"],
+            aliases: ["squad-quote", "sqqt"],
             args: [["quote", "nouvelle citation pour l'escouade", true]],
             category: "Escouades",
-            cooldown: 10,
+            cooldown: 30,
             description: "Commande permettant de changer la citation de votre escouade.",
             examples: ["squad-quote Nous sommes les plus forts"],
             finishRequest: "ADVENTURE",
@@ -22,32 +22,28 @@ class SquadQuote extends Command {
         const pExists = await this.client.playerDb.started(this.message.author.id);
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
-        const pDatas = await this.client.playerDb.get(this.message.author.id);
-        if (pDatas.squad === null) return await this.ctx.reply("Aucune escouade.", "Aucune escouade n'a été trouvée pour ce joueur.", null, null, "info");
-
         const name = this.args.join(" ");
         let r = name.match(new RegExp("([a-zA-Z\\s]{1,}\\s?[0-9]{0,}\\D{0,}){0,}", "g"));
         r = r?.join(" ")?.slice(0, 400).split(/ +/).join(" ");
 
-        if (r === undefined || r?.length < 10) return await this.ctx.reply("Nouvelle citation invalide.", "Votre citation doit contenir entre **10** et **200** caractères, et doit être de la forme suivante:```([a-zA-Z\\s]{1,}\\s?[0-9]{0,}\\D{0,}){0,}```\n```Exemples:\n- squad-quote Nous sommes les meilleurs !```", null, null, "error");
+        if (r === undefined || r?.length < 10) return await this.ctx.reply("Nouvelle citation invalide.", "Votre citation doit contenir entre **10** et **200** caractères, et doit être de la forme suivante:```([a-zA-Z\\s]{1,}\\s?[0-9]{0,}\\D{0,}){0,}```\n```Exemples:\n- squad-quote Nous sommes les meilleurs !```", null, null, "warning");
 
-        const msg = await this.ctx.reply("Changement de citation.", `Souhaitez-vous changer la citation de votre escouade ?\nLa nouvelle citation sera: \`${r}\``, null, null, "info");
-        const choice = await this.ctx.reactionCollection(msg, ["❌", "✅"]);
-        if (choice === "✅") {
+        const msg = await this.ctx.reply("Changement de citation.", `Souhaitez-vous changer la citation de votre escouade ?\nLa nouvelle citation sera: \`${r}\`\n\n**__Requis :__**\`\`\`diff\n- Être chef ou bras droit d'escouade\n- Avoir une escouade\`\`\`\n\nRépondre avec \`y\` (oui) ou \`n\` (non).`, "⛩️", null, "outline");
+        const choice = await this.ctx.messageCollection(msg);
 
-            const p2Datas = await this.client.playerDb.get(this.message.author.id);
-            if (p2Datas.squad === null) return await this.ctx.reply("Aucune escouade.", "Aucune escouade n'a été trouvée pour ce joueur.", null, null, "info");
+        if (this.ctx.isResp(choice, "y")) {
+            const pDatas = await this.client.playerDb.get(this.message.author.id);
 
-            const sDatas = await this.client.squadDb.get(p2Datas.squad);
-            if (![sDatas.owner, sDatas.right_hand].includes(this.message.author.id)) return await this.ctx.reply("Vous n'avez pas l'autorisation.", "Pour changer la citation de votre escouade, vous devez être **Chef d'escouade** ou **Bras droit**.", null, null, "info");
+            if (pDatas.squad === null) return await this.ctx.reply("Oups...", "Vous ne possédez pas d'escouade.", "⛩️", null, "outline");
+            if (pDatas.squad.owner !== this.message.author.id && pDatas.squad.right_hand !== this.message.author.id) return await this.ctx.reply("Oups...", "Seul les chefs d'escouade et les bras droits peuvent changer les citations d'escouade.", null, null, "warning");
 
-            await this.client.squadDb.changeQuote(sDatas.owner, r);
-            return await this.ctx.reply("Changement de citation.", "La citation a bien été modifiée.", null, null, "success");
+            await this.client.squadDb.changeQuote(pDatas.squad.owner, r);
+            return await this.ctx.reply("Changement de citation.", "La citation a bien été modifiée.", "⛩️", null, "outline");
         }
-        else if (choice === "❌") {
-            return await this.ctx.reply("Changement de citation.", "La citation n'a donc pas été modifiée.", null, null, "info");
+        else if (this.ctx.isResp(choice, "n")) {
+            return await this.ctx.reply("Changement de citation.", "La citation n'a donc pas été modifiée.", "⛩️", null, "outline");
         }
-        else if (choice === null) {
+        else {
             return await this.ctx.reply("Changement de citation.", "La commande n'a pas aboutie.", null, null, "timeout");
         }
     }
