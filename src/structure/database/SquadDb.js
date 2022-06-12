@@ -81,10 +81,23 @@ class SquadDb {
     }
 
     async leaveSquad(owner, user) {
-        const s = await this.get(owner);
+        let s = await this.get(owner);
 
         const members = s.members.filter(m => m !== user);
         this.db.set(s.owner, members, "members");
+        s = await this.get(owner);
+
+        if (s.owner === user) {
+            if (s.right_hand !== "") {
+                this.db.set(s.right_hand, s);
+                this.db.set(s.right_hand, s.right_hand, "owner");
+                this.db.set(s.right_hand, "", "right_hand");
+            }
+            this.db.delete(s.owner);
+        }
+        if (s.right_hand === user) {
+            this.db.set(s.owner, "", "right_hand");
+        }
     }
 
     async hasPlayer(owner, user) {

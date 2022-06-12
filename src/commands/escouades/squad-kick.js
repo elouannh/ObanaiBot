@@ -19,11 +19,6 @@ class SquadKick extends Command {
         });
     }
 
-
-    /**
-     *
-     * VER?? SQUAD EXISTS
-     */
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
