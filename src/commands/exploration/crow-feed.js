@@ -72,7 +72,7 @@ class CrowFeed extends Command {
             return await this.ctx.reply("choix bouffe", "Vous avez décidé de ne pas donner à manger à votre corbeau.", null, null, "info");
         }
         else if (choice === null) {
-            return await this.ctx.reply("choix bouffe", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+            return await this.ctx.reply("choix bouffe", "La commande n'a pas aboutie.", null, null, "timeout");
         }
         const choiceDatas = datas[Object.keys(datas).filter(d => datas[d].dat.emoji === choice)];
         const emojis2 = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"];
@@ -86,7 +86,7 @@ class CrowFeed extends Command {
             return await this.ctx.reply("choix bouffe", "Vous avez décidé de ne pas donner à manger à votre corbeau.", null, null, "info");
         }
         else if (choice === null) {
-            return await this.ctx.reply("choix bouffe", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+            return await this.ctx.reply("choix bouffe", "La commande n'a pas aboutie.", null, null, "timeout");
         }
         const quantity = choiceDatas.scale?.at(finalEmojis.indexOf(choice2));
         await this.client.inventoryDb.feedCrow(this.message.author.id, choiceDatas.dat.label, quantity);

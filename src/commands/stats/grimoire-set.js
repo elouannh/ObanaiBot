@@ -42,7 +42,7 @@ class Grimoire extends Command {
         l.push("❌");
         const choice = await this.ctx.reactionCollection(msg, l);
 
-        if (choice === null) return await this.ctx.reply("Équiper votre grimoire.", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+        if (choice === null) return await this.ctx.reply("Équiper votre grimoire.", "La commande n'a pas aboutie.", null, null, "timeout");
         if (choice === "❌") return await this.ctx.reply("Équiper votre grimoire.", "Vous avez refusé d'équiper un grimoire.", null, null, "info");
         const grimDatas = grimoires.filter(g => g[1] === choice)?.at(0)?.at(0);
 
@@ -56,7 +56,7 @@ class Grimoire extends Command {
             return await this.ctx.reply("Vous n'équipez rien.", `Vous avez décidé de ne pas équiper **${grimDatas.name}**.`, null, null, "info");
         }
         else if (choice2 === null) {
-            return await this.ctx.reply("Équiper votre grimoire.", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+            return await this.ctx.reply("Équiper votre grimoire.", "La commande n'a pas aboutie.", null, null, "timeout");
         }
     }
 }

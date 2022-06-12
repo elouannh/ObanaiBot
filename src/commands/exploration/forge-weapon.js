@@ -51,7 +51,7 @@ class ForgeWeapon extends Command {
             return await this.ctx.reply("forger une arme", "Vous avez décidé de ne pas forger.", null, null, "info");
         }
         else if (choice === null) {
-            return await this.ctx.reply("forger une arme", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+            return await this.ctx.reply("forger une arme", "La commande n'a pas aboutie.", null, null, "timeout");
         }
         else if (choice === "✅") {
             const objects = {

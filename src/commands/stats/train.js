@@ -65,7 +65,7 @@ class Train extends Command {
         const choice = await this.ctx.reactionCollection(msg, goodMojs);
 
         if (choice === null) {
-            return await this.ctx.reply("Choix de votre entraînement.", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+            return await this.ctx.reply("Choix de votre entraînement.", "La commande n'a pas aboutie.", null, null, "timeout");
         }
         if (choice === "❌") {
             return await this.ctx.reply("Choix de votre entraînement.", "Vous décidez de ne pas vous entraîner.", null, null, "info");
@@ -82,7 +82,7 @@ class Train extends Command {
                 return await this.ctx.reply("Vous restez ici, finalement.", "Vous avez donc décidé de ne pas partir vous entrainer. Quel dommage !", null, null, "info");
             }
             else if (choice2 === null) {
-                return await this.ctx.reply("Choix de votre entrainement.", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+                return await this.ctx.reply("Choix de votre entrainement.", "La commande n'a pas aboutie.", null, null, "timeout");
             }
         }
     }

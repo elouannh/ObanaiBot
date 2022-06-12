@@ -49,7 +49,7 @@ class SquadPromote extends Command {
             return await this.ctx.reply("Où est le bras gauche ?", "Le joueur n'a pas été promu.", null, null, "info");
         }
         else if (choice === null) {
-            return await this.ctx.reply("Où est le bras gauche ?", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+            return await this.ctx.reply("Où est le bras gauche ?", "La commande n'a pas aboutie.", null, null, "timeout");
         }
 
     }

@@ -34,7 +34,7 @@ class Prefix extends Command {
                 return await this.ctx.reply("Changement de préfixe.", "Le préfixe n'a donc pas été modifié.", null, null, "info");
             }
             else if (choice === null) {
-                return await this.ctx.reply("Changement de préfixe.", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+                return await this.ctx.reply("Changement de préfixe.", "La commande n'a pas aboutie.", null, null, "timeout");
             }
         }
         else {

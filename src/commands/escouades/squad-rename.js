@@ -49,7 +49,7 @@ class SquadRename extends Command {
             return await this.ctx.reply("Changement de nom.", "Le nom n'a donc pas été modifié.", null, null, "info");
         }
         else if (choice === null) {
-            return await this.ctx.reply("Changement de nom.", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+            return await this.ctx.reply("Changement de nom.", "La commande n'a pas aboutie.", null, null, "timeout");
         }
     }
 }

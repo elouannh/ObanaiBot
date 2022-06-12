@@ -39,7 +39,7 @@ class Grimoire extends Command {
             return await this.ctx.reply("Vous n'équipez rien.", `Vous avez décidé de ne pas retirer **${grimDatas.name}**.`, null, null, "info");
         }
         else if (choice === null) {
-            return await this.ctx.reply("Équiper votre grimoire.", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+            return await this.ctx.reply("Équiper votre grimoire.", "La commande n'a pas aboutie.", null, null, "timeout");
         }
     }
 }

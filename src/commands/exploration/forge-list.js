@@ -54,7 +54,7 @@ class ForgeList extends Command {
             return await this.ctx.reply("récupérer objets en forge", "Vous avez décidé de ne pas récupérer vos objets en forge.", null, null, "info");
         }
         else if (choice === null) {
-            return await this.ctx.reply("récupérer objets en forge", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+            return await this.ctx.reply("récupérer objets en forge", "La commande n'a pas aboutie.", null, null, "timeout");
         }
         else if (choice === "🛄") {
             await this.ctx.reply("récupérer objets en forge", "Vous récupérez donc les objets en forge.", null, null, "timeout");

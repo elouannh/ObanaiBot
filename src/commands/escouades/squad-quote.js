@@ -48,7 +48,7 @@ class SquadQuote extends Command {
             return await this.ctx.reply("Changement de citation.", "La citation n'a donc pas été modifiée.", null, null, "info");
         }
         else if (choice === null) {
-            return await this.ctx.reply("Changement de citation.", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+            return await this.ctx.reply("Changement de citation.", "La commande n'a pas aboutie.", null, null, "timeout");
         }
     }
 }

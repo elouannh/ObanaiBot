@@ -65,7 +65,7 @@ class TravelZone extends Command {
         const choice = await this.ctx.reactionCollection(msg, l);
 
         if (choice === null) {
-            return await this.ctx.reply("Choix de votre destination.", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+            return await this.ctx.reply("Choix de votre destination.", "La commande n'a pas aboutie.", null, null, "timeout");
         }
         else if (choice === "❌") {
             return await this.ctx.reply("Choix de votre destination.", "Vous avez décidé de ne pas voyager.", null, null, "info");
@@ -84,7 +84,7 @@ class TravelZone extends Command {
                 return await this.ctx.reply("Vous restez ici, finalement.", "Vous avez donc décidé de ne pas partir en voyage. Quel dommage !", null, null, "info");
             }
             else if (choice2 === null) {
-                return await this.ctx.reply("Choix de votre destination.", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+                return await this.ctx.reply("Choix de votre destination.", "La commande n'a pas aboutie.", null, null, "timeout");
             }
         }
     }

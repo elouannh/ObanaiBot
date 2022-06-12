@@ -11,7 +11,7 @@ class Context {
         const choices1 = ["y", "yes", "oui", "accept", "confirm"];
         const choices2 = ["n", "no", "non", "refuse", "cancel"];
 
-        return [choices1, choices2][["y", "n"].indexOf(compareStr)].includes(str.toLowerCase());
+        return [choices1, choices2][["y", "n"].indexOf(compareStr)].includes(str?.toLowerCase() ?? "chèvre");
     }
 
     async trStr(str) {

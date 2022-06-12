@@ -69,7 +69,7 @@ class Give extends Command {
             return await this.ctx.reply("Interaction: don d'objets", "Vous avez décidé de ne pas interagir.", null, null, "info");
         }
         else if (choice === null) {
-            return await this.ctx.reply("Interaction: don d'objets", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+            return await this.ctx.reply("Interaction: don d'objets", "La commande n'a pas aboutie.", null, null, "timeout");
         }
 
         const q = choices[choice];
@@ -82,7 +82,7 @@ class Give extends Command {
             return await this.ctx.reply("Interaction: don d'objets", "Vous avez décidé de ne pas interagir.", null, null, "info");
         }
         else if (choice2 === null) {
-            return await this.ctx.reply("Interaction: don d'objets", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+            return await this.ctx.reply("Interaction: don d'objets", "La commande n'a pas aboutie.", null, null, "timeout");
         }
         else if (choice2 === "✅") {
             const hadBefore = q[0].objective.got;

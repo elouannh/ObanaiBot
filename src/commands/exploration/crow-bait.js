@@ -86,7 +86,7 @@ class CrowBait extends Command {
             return await this.ctx.reply("Appât d'oiseaux", "Vous avez décidé de ne pas récupérer l'oiseau.", null, null, "info");
         }
         else if (choice === null) {
-            return await this.ctx.reply("Appât d'oiseaux", "Vous avez mis trop de temps à répondre, la commande a été annulée.", null, null, "timeout");
+            return await this.ctx.reply("Appât d'oiseaux", "La commande n'a pas aboutie.", null, null, "timeout");
         }
         else if (choice === "✅") {
             this.client.inventoryDb.changeCrow(this.message.author.id, kasugai.label);
