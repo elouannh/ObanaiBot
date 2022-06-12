@@ -30,7 +30,7 @@ class Squad extends Command {
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
         const pDatas = await this.client.playerDb.get(user.id);
-        if (pDatas.squad === null) return await this.ctx.reply("Aucune escouade.", "Aucune escouade n'a été trouvée pour ce joueur.", null, null, "info");
+        if (pDatas.squad === null) return await this.ctx.reply("Oups...", "Aucune escouade n'a été trouvée pour ce joueur.", null, null, "warning");
 
         const mDatas = pDatas.squad;
         const title = `Escouade de ${user.username}`;
@@ -57,7 +57,7 @@ class Squad extends Command {
         squad += `\n\n> Membres: **${mDatas.members.length}**/8\n`;
         squad += `\`\`\`${members.map(e => e[1][0]).join("\n")}\`\`\``;
 
-        return await this.ctx.reply(title, squad, "⛩️", "2f3136", null);
+        return await this.ctx.reply(title, squad, "⛩️", null, "outline");
     }
 }
 

@@ -49,7 +49,7 @@ class Help extends Command {
                         string += "*Cette catégorie de commande est réservée.*";
                     }
                     else {
-                        string += `${Object.values(content[key]).map(command => `\`${command.name}\``).join(" **•** ")}`;
+                        string += `${Object.values(content[key]).map(command => `\`${command.name}\` : ${command.description}`).join("\n")}`;
                     }
                     string += "\n\n";
                 }

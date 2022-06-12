@@ -41,31 +41,39 @@ class MemberScanning {
             if (add) results.push({ str, user: member.user });
         }
 
+        if (results.length === 0 && this.args.length >= "539842701592494111".length) {
+
+            for (const member of members.map(e => e)) {
+                if (this.args.includes(member.user.id)) {
+                    results.push({ str:`**${member.user.username}**`, user: member.user });
+                }
+            }
+        }
+
         this.results = results;
         return results;
     }
 
     async selection(cmd) {
         let u = null;
+        console.log(this.results);
         if (this.results === "self") return cmd.message.author;
-        if (this.results.length === 0) await cmd.ctx.reply("Joueur introuvable.", "Aucun résultat n'a été trouvé.", null, null, "error");
+        if (this.results.length === 0) await cmd.ctx.reply("Joueur introuvable.", "Aucun résultat n'a été trouvé.", null, null, "warning");
         if (this.results.length > 10) await cmd.ctx.reply("Trop de joueurs.", `Le nombre de joueurs trouvés (**${this.results.length}**/10) est trop grand pour la recherche \`${this.args}\`. Veuillez réessayer.`, null, null, "error");
         if (this.results.length === 1) return this.results[0].user;
         if (this.results.length > 1 && this.results.length <= 10) {
-            const emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"];
             let str = "";
             const r = {};
 
-            const limit = this.results.length < emojis.length ? this.results.length : emojis.length;
-            for (let i = 0; i < limit; i++) {
-                str += `\`${emojis.at(i)}\` • ${this.results.at(i).str}\n`;
-                r[emojis.at(i)] = this.results.at(i);
+            for (let i = 0; i < this.results.length; i++) {
+                str += `\`${i}\` • ${this.results.at(i).str}\n`;
+                r[String(i)] = this.results.at(i);
             }
 
-            const msg = await cmd.ctx.reply("Plusieurs joueurs ont été trouvés.", `Veuillez sélectionner le joueur que vous voulez avec la réaction.\n\n${str}`, null, null, "info");
-            const choice = await cmd.ctx.reactionCollection(msg, emojis.slice(0, this.results.length));
+            const msg = await cmd.ctx.reply("Plusieurs joueurs ont été trouvés.", `Veuillez sélectionner le joueur que vous voulez en envoyant le bon numéro.\n\n${str}`, null, null, "info");
+            const choice = await cmd.ctx.messageCollection(msg);
 
-            u = choice === null ? null : r[choice].user;
+            u = (isNaN(Number(choice)) ? null : (Number(choice) >= 0 && Number(choice) < 10 ? r[choice].user : null));
         }
         return u;
     }
