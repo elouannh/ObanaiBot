@@ -56,7 +56,6 @@ class MemberScanning {
 
     async selection(cmd) {
         let u = null;
-        console.log(this.results);
         if (this.results === "self") return cmd.message.author;
         if (this.results.length === 0) await cmd.ctx.reply("Joueur introuvable.", "Aucun résultat n'a été trouvé.", null, null, "warning");
         if (this.results.length > 10) await cmd.ctx.reply("Trop de joueurs.", `Le nombre de joueurs trouvés (**${this.results.length}**/10) est trop grand pour la recherche \`${this.args}\`. Veuillez réessayer.`, null, null, "error");

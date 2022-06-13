@@ -60,8 +60,9 @@ class ForgeList extends Command {
             await this.ctx.reply("récupérer objets en forge", "Vous récupérez donc les objets en forge.", null, null, "timeout");
 
             for (const item of Object.values(items)) {
+                console.log(item);
                 const itemQuantity = `${item.itemCat}s` in iDatas ? (item.itemLabel in iDatas[`${item.itemCat}s`] ? iDatas[`${item.itemCat}s`][item.itemLabel] : []) : [];
-                itemQuantity.push({ rarity: item.itemRarity, name: item.name, datas: item.itemDatas });
+                itemQuantity.push({ rarity: item.itemRarity, name: item.itemName, datas: item.itemDatas });
                 await this.client.inventoryDb.db.set(this.message.author.id, itemQuantity, `${item}s`);
             }
         }

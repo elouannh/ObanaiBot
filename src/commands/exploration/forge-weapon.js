@@ -74,6 +74,7 @@ class ForgeWeapon extends Command {
                 rarity: rarity,
                 datas: {
                     name: `${itemFile.weaponName} ${itemFile.rarityNames[rarity]}`,
+                    weapon: `${itemFile.weapon}`,
                 },
             };
             await this.client.activityDb.forgeItem(this.message.author.id, itemDat);

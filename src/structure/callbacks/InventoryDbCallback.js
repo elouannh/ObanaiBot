@@ -28,7 +28,7 @@ module.exports = client => {
                     }
                 }
 
-                if (Object.keys(newValue?.materials) < Object.keys(oldValue?.materials)) {
+                if (Object.keys(newValue?.materials ?? {}) < Object.keys(oldValue?.materials ?? {})) {
                     if (dq.objective.type === "collect_k_items") {
                         const hadBefore = dq.objective.got;
                         const toAdd = newValue[dq.objective.itemCategory][dq.objective.item] - oldValue[dq.objective.itemCategory][dq.objective.item];

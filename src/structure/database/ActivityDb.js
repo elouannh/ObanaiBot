@@ -160,8 +160,8 @@ class ActivityDb {
             duration: 7_200_000 * item.rarity,
             itemCat: item.type,
             itemRarity: item.rarity,
-            itemName: item.name,
-            itemLabel: item.label,
+            itemName: item.datas.name,
+            itemLabel: item.datas.weapon,
             itemDatas: item.datas,
         };
 
