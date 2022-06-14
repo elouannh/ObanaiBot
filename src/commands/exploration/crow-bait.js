@@ -42,7 +42,7 @@ class CrowBait extends Command {
                 }
             }
             if (goodZones.length > 0) cantBait += `\n\n**Zones conseillées à proximité:**\n${goodZones.map((e, i) => `**${i + 1}**. ${e}`).join("\n")}`;
-            return await this.ctx.reply("Appât d'oiseaux", cantBait, null, null, "info");
+            return await this.ctx.reply("Appâtage d'oiseaux.", cantBait, "🐦", null, "outline");
         }
 
         const iDatas = await this.client.inventoryDb.get(this.message.author.id);
@@ -50,14 +50,14 @@ class CrowBait extends Command {
         const seeds = "materials" in iDatas ? ("seed" in iDatas.materials ? iDatas.materials.seed : 0) : 0;
         const worms = "materials" in iDatas ? ("worm" in iDatas.materials ? iDatas.materials.worm : 0) : 0;
 
-        if (seeds < 100) return await this.ctx.reply("Appât d'oiseaux", `Vous n'avez pas assez de graines.\n**Graines requises: ${seeds}/100**`, null, null, "error");
-        if (worms < 10) return await this.ctx.reply("Appât d'oiseaux", `Vous n'avez pas assez de vers de terre.\n**Vers requis: ${worms}/10**`, null, null, "error");
+        if (seeds < 100) return await this.ctx.reply("Oups...", `Vous n'avez pas assez de graines.\n**Graines requises: ${seeds}/100**`, null, null, "warning");
+        if (worms < 10) return await this.ctx.reply("Oups...", `Vous n'avez pas assez de vers de terre.\n**Vers requis: ${worms}/10**`, null, null, "warning");
 
-        await this.ctx.reply("Appât d'oiseaux", "Vous tentez d'appâter des oiseaux aux alentours...", null, null, "info");
+        await this.ctx.reply("Appâtage d'oiseaux.", "Vous tentez d'appâter des oiseaux aux alentours... Voyons voir...", "🐦", null, "outline");
         this.client.inventoryDb.db.set(this.message.author.id, seeds - 100, "materials.seed");
         this.client.inventoryDb.db.set(this.message.author.id, worms - 10, "materials.worm");
 
-        const birdFound = Math.floor(Math.random() * 100) > 80;
+        const birdFound = Math.floor(Math.random() * 100) > 50;
         if (!birdFound) {
             const resp = [
                 "Après quelques minutes, un oiseau pointa son bec. Cependant, il avait l'air bien trop frêle pour servir de corbeau messager...",
@@ -65,7 +65,7 @@ class CrowBait extends Command {
                 "Après quelques minutes, des rongeurs commencent à venir grignoter votre appât. Ce n'est pas vraiment l'animal que vous souhaitiez rencontrer...",
             ];
 
-            return await this.ctx.reply("Appât d'oiseaux", resp[Math.floor(Math.random() * resp.length)], null, null, "info");
+            return await this.ctx.reply("Appâtage d'oiseaux.", resp[Math.floor(Math.random() * resp.length)], "🐦", null, "error");
         }
 
         function luck(count = 0) {
@@ -79,18 +79,18 @@ class CrowBait extends Command {
 
         const [actualCrow, actualCrowLevel] = [iDatas.kasugai_crow === null ? null : require(`../../elements/kasugai_crows/${iDatas.kasugai_crow}`), calcCrowLevel(iDatas.kasugai_crow_exp)];
         const supStr = `${actualCrow === null ? "Voulez-vous le récupérer et en faire votre oiseau ?" : `Vous avez déjà **${actualCrow.name}**, niveau **${actualCrowLevel.level} (${actualCrowLevel.exp} exp)**, voulez-vous le remplacer ? Toute progression en niveaux de corbeau sera perdue.`}`;
-        const msg = await this.ctx.reply("Oh, un oiseau est apparu !", `L'oiseau suivant s'est fait avoir par votre appât: **${kasugai.name}**\n\n${supStr}`, null, null, "info");
-        const choice = await this.ctx.reactionCollection(msg, ["❌", "✅"]);
+        const msg = await this.ctx.reply("Appâtage d'oiseaux.", `L'oiseau suivant s'est fait avoir par votre appât: **${kasugai.name}**\n\n${supStr}\n\nRépondre avec \`y\` (oui) ou \`n\` (non).`, null, null, "info");
+        const choice = await this.ctx.messageCollection(msg);
 
-        if (choice === "❌") {
-            return await this.ctx.reply("Appât d'oiseaux", "Vous avez décidé de ne pas récupérer l'oiseau.", null, null, "info");
-        }
-        else if (choice === null) {
-            return await this.ctx.reply("Appât d'oiseaux", "La commande n'a pas aboutie.", null, null, "timeout");
-        }
-        else if (choice === "✅") {
+        if (this.ctx.isResp(choice, "y")) {
             this.client.inventoryDb.changeCrow(this.message.author.id, kasugai.label);
-            return await this.ctx.reply("Appât d'oiseaux", `Vous avez donc apprivoisé **${kasugai.name}** !`, null, null, "info");
+            return await this.ctx.reply("Appâtage d'oiseaux.", `Vous avez donc apprivoisé **${kasugai.name}** !`, "🐦", null, "outline");
+        }
+        else if (this.ctx.isResp(choice, "n")) {
+            return await this.ctx.reply("Appâtage d'oiseaux.", "Vous avez décidé de ne pas récupérer l'oiseau.", "🐦", null, "outline");
+        }
+        else {
+            return await this.ctx.reply("Appâtage d'oiseaux.", "La commande n'a pas aboutie.", null, null, "timeout");
         }
     }
 }
