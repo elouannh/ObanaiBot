@@ -50,6 +50,11 @@ class InventoryDb {
             }
         }
 
+        if (p.kasugai_crow_exp >= 33251) {
+            this.db.set(id, 33251, "kasugai_crow_exp");
+            p.kasugai_crow_exp = 33251;
+        }
+
         return this.db.get(id);
     }
 

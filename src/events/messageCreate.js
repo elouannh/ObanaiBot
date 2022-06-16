@@ -27,6 +27,8 @@ module.exports = {
             const clientPermissionsReady = await cmd.clientPermissionsReady(client, message);
             if (!clientPermissionsReady) return;
 
+            if (cmd.infos.ownerOnly && !client.config.owners.includes(message.author.id)) return;
+
             if (await client.commandManager.isOverloaded()) return message.channel.send("Le bot est actuellement surchargé, veuillez réessayer plus tard.");
 
             client.lastChannel.set(message.author.id, message.channel);
@@ -37,7 +39,7 @@ module.exports = {
         else if (message.content.startsWith(`<@${client.user.id}>`)) {
             cmd = new Command();
             cmd.init(client, message, args);
-            await cmd.ctx.reply("Bonjour !", `Je suis Dapan. Mon préfixe sur ce serveur est \`${guildPrefix.prefix}\`. Tu peux voir la liste de mes commandes en faisant \`${guildPrefix.prefix}help\`.`, null, null, "info");
+            await cmd.ctx.reply("Bonjour !", `Je suis Obanai. Mon préfixe sur ce serveur est \`${guildPrefix.prefix}\`. Tu peux voir la liste de mes commandes en faisant \`${guildPrefix.prefix}help\`.`, null, null, "info");
         }
     },
 };

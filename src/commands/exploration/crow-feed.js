@@ -25,7 +25,7 @@ class CrowFeed extends Command {
 
         const iDatas = await this.client.inventoryDb.get(this.message.author.id);
         if (iDatas.kasugai_crow === null) return await this.ctx.reply("Nourrir votre corbeau", "Vous n'avez pas de corbeau à nourrir !", null, null, "error");
-        if (calcCrowLevel(iDatas.kasugai_crow_exp).level === 15) return await this.ctx.reply("Nourrir votre corbeau", "Votre corbeau a atteint le niveau max possible ! (15)", null, null, "error");
+        if (iDatas.kasugai_crow_exp >= 33251) return await this.ctx.reply("Nourrir votre corbeau", "Votre corbeau a atteint le niveau max possible ! (15)", null, null, "error");
 
         const seeds = "materials" in iDatas ? ("seed" in iDatas.materials ? iDatas.materials.seed : 0) : 0;
         const worms = "materials" in iDatas ? ("worm" in iDatas.materials ? iDatas.materials.worm : 0) : 0;
@@ -33,7 +33,7 @@ class CrowFeed extends Command {
         const scales = {};
 
         function maxScale(i, elt, scale = 0) {
-            if (i >= Math.pow(10, scale) && scale < 5) {
+            if (i >= Math.pow(10, scale) && scale < 4) {
                 elt in scales ? scales[elt].push(`${Math.pow(10, scale)}`) : scales[elt] = [`${Math.pow(10, scale)}`];
                 return maxScale(i, elt, scale + 1);
             }

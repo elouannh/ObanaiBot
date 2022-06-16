@@ -19,8 +19,6 @@ class Eval extends Command {
     }
 
     async run() {
-        if (this.message.author.id !== "539842701592494111") return;
-
         const clean = text => {
             if (typeof text === "string") return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
             else return text;

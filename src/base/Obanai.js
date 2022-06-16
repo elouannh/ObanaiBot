@@ -10,7 +10,7 @@ const { InternalServerManager } = require("../structure/database/InternalServerM
 const CommandManager = require("./CommandManager");
 const config = require("../config.json");
 
-class Dapan extends Client {
+class Obanai extends Client {
     constructor(token) {
         super({
             intents: 1795,
@@ -51,4 +51,4 @@ class Dapan extends Client {
     }
 }
 
-module.exports = Dapan;
+module.exports = Obanai;

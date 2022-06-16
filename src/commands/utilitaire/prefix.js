@@ -38,7 +38,7 @@ class Prefix extends Command {
             }
         }
         else {
-            return await this.ctx.reply("Bonjour !", `Je suis Dapan. Mon préfixe sur ce serveur est \`${guildPrefix.prefix}\`. Tu peux voir la liste de mes commandes en faisant \`${guildPrefix.prefix}help\`.`, null, null, "info");
+            return await this.ctx.reply("Bonjour !", `Je suis Obanai. Mon préfixe sur ce serveur est \`${guildPrefix.prefix}\`. Tu peux voir la liste de mes commandes en faisant \`${guildPrefix.prefix}help\`.`, null, null, "info");
         }
     }
 }

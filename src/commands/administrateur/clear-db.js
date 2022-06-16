@@ -19,8 +19,6 @@ class ClearDb extends Command {
     }
 
     async run() {
-        if (this.message.author.id !== "539842701592494111") return;
-
         if (this.args.includes("player") || this.args.includes("all")) this.client.playerDb.db.clear();
         if (this.args.includes("activity") || this.args.includes("all")) this.client.activityDb.db.clear();
         if (this.args.includes("inventory") || this.args.includes("all")) this.client.inventoryDb.db.clear();
