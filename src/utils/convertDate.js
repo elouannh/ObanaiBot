@@ -51,7 +51,7 @@ module.exports = (milisecs, short = false) => {
         if (datas.secs > 0) datas.string += `${datas.secs}sec`;
     }
 
-    if (datas.string.length === 0) datas.string = "1 sec";
+    if (datas.string.length === 0) datas.string = "terminé(e)";
 
     return datas;
 };

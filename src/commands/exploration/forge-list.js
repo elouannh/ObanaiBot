@@ -8,8 +8,8 @@ class ForgeList extends Command {
             aliases: ["forge-list", "fl"],
             args: [],
             category: "Exploration",
-            cooldown: 5,
-            description: "Commande permettant de voir les objets en train de se faire forger.",
+            cooldown: 10,
+            description: "Commande permettant de voir les objets en train d'être forgé.",
             examples: ["forge-list"],
             finishRequest: "ADVENTURE",
             name: "forge-list",
@@ -24,48 +24,31 @@ class ForgeList extends Command {
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
         const aDatas = await this.client.activityDb.get(this.message.author.id);
-        const iDatas = await this.client.playerDb.get(this.message.author.id);
 
         let activity = "";
-        activity += "**Objets en forge**";
         const items = {};
+        const dates = {};
 
         for (const i in aDatas.isForging) {
             if (aDatas.isForging[i]) {
                 const dat = aDatas.forging[i];
                 items[i] = dat;
-                let str = `\`${Number(i) + 1}: Emplacement occupé\``;
-                if (dat.itemCat === "weapon") str += `\nFabrication d'une arme:\n${dat.itemDatas.name} (rareté **${dat.itemRarity}**)`;
-                if (dat.itemCat === "tool") str += `\nFabrication d'un outil:\n${dat.itemDatas.name} (rareté **${dat.itemRarity}**)`;
-                str += `\n> **Fin dans: ${convertDate((dat.start + dat.duration) - Date.now()).string}**`;
+                let str = `**${Number(i) + 1}.** `;
+                if (dat.itemCat === "weapon") str += `Fabrication d'une arme: **${dat.itemDatas.name}** (rareté **${dat.itemRarity}**)`;
+                if (dat.itemCat === "tool") str += `Fabrication d'un outil: **${dat.itemDatas.name}** (rareté **${dat.itemRarity}**)`;
+                str += `\n> *Fin dans: ${convertDate((dat.start + dat.duration) - Date.now()).string}*`;
+                if ((dat.start + dat.duration) - Date.now() <= 0) dates[i] = true;
+                else dates[i] = false;
                 activity += `\n\n${str}`;
             }
-            else {
-                const str = `\`${Number(i) + 1}: Emplacement libre\``;
-                activity += `\n\n${str}`;
-            }
         }
 
-        const msg = await this.ctx.reply("forge", activity, null, null, "info");
-        if (Object.entries(items).length === 0) return;
-        const choice = await this.ctx.reactionCollection(msg, ["🛄", "❌"]);
+        if (Object.values(dates).includes(true)) activity += "\n\nCertains objets sont prêts à la récupération ! Vous pouvez obtenir le produit de forge avec la commande !forge-collect.";
 
-        if (choice === "❌") {
-            return await this.ctx.reply("récupérer objets en forge", "Vous avez décidé de ne pas récupérer vos objets en forge.", null, null, "info");
-        }
-        else if (choice === null) {
-            return await this.ctx.reply("récupérer objets en forge", "La commande n'a pas aboutie.", null, null, "timeout");
-        }
-        else if (choice === "🛄") {
-            await this.ctx.reply("récupérer objets en forge", "Vous récupérez donc les objets en forge.", null, null, "timeout");
+        if (Object.entries(items).length === 0) activity = "Aucun objet n'est en train d'être forgé.";
+        if (Object.entries(items).length !== 3) activity += `\n\n... ${3 - Object.entries(items).length} emplacements libres restant.`;
 
-            for (const item of Object.values(items)) {
-                console.log(item);
-                const itemQuantity = `${item.itemCat}s` in iDatas ? (item.itemLabel in iDatas[`${item.itemCat}s`] ? iDatas[`${item.itemCat}s`][item.itemLabel] : []) : [];
-                itemQuantity.push({ rarity: item.itemRarity, name: item.itemName, datas: item.itemDatas });
-                await this.client.inventoryDb.db.set(this.message.author.id, itemQuantity, `${item}s`);
-            }
-        }
+        await this.ctx.reply("forge", activity, null, null, "info");
     }
 }
 
