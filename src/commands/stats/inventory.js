@@ -44,7 +44,7 @@ class Inventory extends Command {
             "experience_gain": "+[b]%⭐",
             "yens_gain": "+[b]%💰",
             "kasugai_crows_rarity_boost": "+[b]%🐦 rareté",
-            "lootbox_rate_boost": "+[b]%🧰 rareté",
+            "loot_rate_boost": "+[b]%🧰 rareté",
             "stats_boost": "+[b]%👑 stats",
             "travelling_time": "-[b]%🕣 voyage",
             "training_time": "-[b]%🕣 entrainement",

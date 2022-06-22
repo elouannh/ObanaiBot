@@ -3,6 +3,6 @@
     "name": "Grimoire du chanceux",
     "equippable": true,
     "expiration": 259200,
-    "benefits": ["lootbox_rate_boost"],
+    "benefits": ["loot_rate_boost"],
     "boost": 2
 }

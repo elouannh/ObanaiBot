@@ -45,7 +45,7 @@ class Map extends Command {
         infos += `\n**\`\`\`${map.Regions.filter(r => r.accesses.includes(loc.id)).map(r => `- ${r.name}`).join("\n")}\`\`\`**`;
         infos += `\n**Autres zones de région:** ${loc.Areas.filter(a => a.id !== zone.id).length > 0 ? loc.Areas.filter(a => a.id !== zone.id).map(r => `**${r.name}**`).join(", ") : "Aucune autre zone."}`;
 
-        return await this.ctx.reply(title, infos, "🗺️", "2f3136", null);
+        return await this.ctx.reply(title, infos, "🗺️", null, "outline");
     }
 }
 

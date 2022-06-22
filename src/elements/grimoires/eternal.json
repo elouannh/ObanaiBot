@@ -7,7 +7,7 @@
         "experience_gain", 
         "yens_gain", 
         "kasugai_crows_rarity_boost", 
-        "lootbox_rate_boost", 
+        "loot_rate_boost", 
         "stats_boost",
         "travelling_time",
         "training_time"

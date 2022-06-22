@@ -8,7 +8,7 @@ class ForgeWeapon extends Command {
             aliases: ["forge-weapon", "fw"],
             args: [],
             category: "Exploration",
-            cooldown: 5,
+            cooldown: 30,
             description: "Commande permettant de forger des armes.",
             examples: ["forge-weapon"],
             finishRequest: "ADVENTURE",
@@ -23,8 +23,8 @@ class ForgeWeapon extends Command {
         const pExists = await this.client.playerDb.started(this.message.author.id);
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
-        function luck(count = 0) {
-            if ((Math.random() * 100) < (100 / (count + 1)) && count < 5) return luck(count + 1);
+        function luck(count = 0, x) {
+            if ((Math.random() * 100) < (100 / ((count + 1) / x)) && count < 5) return luck(count + 1);
             return count;
         }
 
@@ -39,21 +39,24 @@ class ForgeWeapon extends Command {
             }
         }
 
-        if (Object.entries(items).length >= 3) return await this.ctx.reply("forger des armes", "vous avez atteint le nombre d'items maximum possible en forge.", null, null, "error");
+        if (Object.entries(items).length >= 3) return await this.ctx.reply("Oups...", "Vous avez atteint le nombre d'items maximum possible en forge. (3)", null, null, "warning");
         const weaponModels = "materials" in iDatas ? ("weapon_model" in iDatas.materials ? iDatas.materials["weapon_model"] : 0) : 0;
         const tamahagane = "materials" in iDatas ? ("tamahagane" in iDatas.materials ? iDatas.materials["weapon_model"] : 0) : 0;
         const woodLogs = "materials" in iDatas ? ("wood" in iDatas.materials ? iDatas.materials["weapon_model"] : 0) : 0;
         const yens = iDatas.yens ?? 0;
 
-        const msg = await this.ctx.reply("voulez vous forger une arme", "souhaitez-vous vraiment forger une arme ? Cela compte 20 planches, 1 modèle d'arme, 100 tamahagane et 100 000 yens.", null, null, "info");
-        const choice = await this.ctx.reactionCollection(msg, ["✅", "❌"]);
-        if (choice === "❌") {
-            return await this.ctx.reply("forger une arme", "Vous avez décidé de ne pas forger.", null, null, "info");
-        }
-        else if (choice === null) {
-            return await this.ctx.reply("forger une arme", "La commande n'a pas aboutie.", null, null, "timeout");
-        }
-        else if (choice === "✅") {
+        const msg = await this.ctx.reply(
+            "Forger une arme.",
+            "Souhaitez-vous vraiment forger une arme ? Vous aurez une arme de rareté aléatoire. (PS: vos chances sont accrues si vous vous trouvez au **Village des forgerons**)\n\n"
+            +
+            "__Matériaux :__\n```diff\n- x1 Modèle d'arme\n- x100 Tamahagane\n- x20 Bois\n- 100'000 ¥```\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "🗡️",
+            null,
+            "outline",
+        );
+        const choice = await this.ctx.messageCollection(msg);
+
+        if (this.ctx.isResp(choice, "y")) {
             const objects = {
                 "weapon_model": [weaponModels, 1],
                 "tamahagane": [tamahagane, 100],
@@ -65,9 +68,16 @@ class ForgeWeapon extends Command {
                 const i = objects[item];
                 if (i[0] < i[1]) missing[item] = [i[0], i[1], i[1] - i[0]];
             }
-            if (Object.values(missing).length !== 0) return await this.ctx.reply("forger une arme", "Vous n'avez pas les éléments nécessaires.", null, null, "timeout");
-            await this.ctx.reply("forger une arme", "Vous forgez donc une arme.", null, null, "timeout");
-            const rarity = luck();
+            if (Object.values(missing).length !== 0) return await this.ctx.reply("Oups...", "Vous n'avez pas les éléments nécessaires.", null, null, "warning");
+            await this.ctx.reply(
+                "Forger une arme.", `Vous forgez donc une arme !\n\n__Détails de l'arme:__\n**Temps de forge** : ${convertDate(7_200_000 * rarity).string}**\n`
+                +
+                `**Rareté** : ${rarity}\n*Plus d'informations avec la commande !forge-list.*`,
+                null,
+                null,
+                "timeout",
+            );
+            const rarity = luck(1);
             const itemFile = require(`../../elements/categories/${pDatas.category}.json`);
             const itemDat = {
                 type: "weapon",
@@ -78,6 +88,12 @@ class ForgeWeapon extends Command {
                 },
             };
             await this.client.activityDb.forgeItem(this.message.author.id, itemDat);
+        }
+        else if (this.ctx.isResp(choice, "n")) {
+            return await this.ctx.reply("Forger une arme.", "Vous avez décidé de ne pas forger.", "🗡️", null, "outline");
+        }
+        else {
+            return await this.ctx.reply("Forger une arme.", "La commande n'a pas aboutie.", null, null, "timeout");
         }
     }
 }
