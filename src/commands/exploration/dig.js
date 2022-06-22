@@ -10,7 +10,7 @@ class Dig extends Command {
             aliases: ["dig"],
             args: [],
             category: "Exploration",
-            cooldown: 5,
+            cooldown: 15,
             description: "Commande permettant de fouiller la zone où vous vous trouver afin de récolter quelques items.",
             examples: ["dig"],
             finishRequest: "ADVENTURE",
@@ -62,15 +62,15 @@ class Dig extends Command {
 
             let finalStr = "";
             if (Object.values(itemsGot).length === 0) {
-                finalStr = "Cette fouille n'aurai pas été fructueuse, vous n'avez rien obtenu. Terrible malchance !";
+                finalStr = "Cette fouille n'aura pas été fructueuse, vous n'avez rien obtenu. Terrible malchance !";
             }
             else {
                 finalStr += "Vous avez obtenu des objets ! Jetez un œil:\n";
                 const iDatas = await this.client.inventoryDb.get(this.message.author.id);
 
                 for (const item in itemsGot) {
-                    const i = zoneItems.filter(i_ => i_.label === item)?.at(0) ?? "Item";
-                    finalStr += `\n**${i.name}(s)**: \`x${itemsGot[item]}\``;
+                    const i = zoneItems.filter(i_ => i_.label === item)?.at(0) ?? { name: "Item", emoji: "⬛" };
+                    finalStr += `\n${i.emoji} **${i.name}(s)**: \`x${itemsGot[item]}\``;
 
                     const hadBefore = "materials" in iDatas ? (item in iDatas.materials ? iDatas.materials[item] : 0) : 0;
                     this.client.inventoryDb.db.ensure(this.message.author.id, this.client.inventoryDb.model(this.message.author.i));
@@ -83,10 +83,10 @@ class Dig extends Command {
             }
 
             await this.client.playerDb.gainExp(this.message.author.id, Math.floor(Math.random() * 150) + 100, this);
-            return await this.ctx.reply("Fouiller la zone", finalStr, null, null, finalStr.endsWith("Terrible malchance !") ? "outline" : "success");
+            return await this.ctx.reply("Fouiller la zone.", finalStr, "🔎", null, "outline");
         }
         else {
-            return await this.ctx.reply("Fouiller la zone", `Il semblerait que vous ayez déjà fouillé cette zone. Revenez dans **${convertDate(7_200_000 - timeSpent, false).string}** à cet emplacement.`, null, null, "info");
+            return await this.ctx.reply("Fouiller la zone.", `Il semblerait que vous ayez déjà fouillé cette zone. Revenez dans **${convertDate(7_200_000 - timeSpent, false).string}** à cet emplacement.`, "🔎", null, "error");
         }
     }
 }
