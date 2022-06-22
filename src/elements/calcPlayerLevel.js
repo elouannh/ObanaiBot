@@ -8,7 +8,7 @@ module.exports = exp => {
         reached: 500,
     };
 
-    while (datas.tempExp > ((datas.nextLevel + 1) * 350)) {
+    while (datas.tempExp >= ((datas.nextLevel + 1) * 350)) {
         datas.level++;
         datas.tempExp -= ((datas.nextLevel + 1) * 350);
         datas.nextLevel++;

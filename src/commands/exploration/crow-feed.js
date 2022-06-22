@@ -24,73 +24,44 @@ class CrowFeed extends Command {
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
         const iDatas = await this.client.inventoryDb.get(this.message.author.id);
-        if (iDatas.kasugai_crow === null) return await this.ctx.reply("Nourrir votre corbeau", "Vous n'avez pas de corbeau à nourrir !", null, null, "error");
-        if (iDatas.kasugai_crow_exp >= 33251) return await this.ctx.reply("Nourrir votre corbeau", "Votre corbeau a atteint le niveau max possible ! (15)", null, null, "error");
+        if (iDatas.kasugai_crow === null) return await this.ctx.reply("Oups...", "Vous n'avez pas de oiseau à nourrir !", null, null, "warning");
+        if (iDatas.kasugai_crow_exp >= 33250) return await this.ctx.reply("Oups...", "Votre oiseau a atteint le niveau max possible ! (15)", null, null, "warning");
 
         const seeds = "materials" in iDatas ? ("seed" in iDatas.materials ? iDatas.materials.seed : 0) : 0;
         const worms = "materials" in iDatas ? ("worm" in iDatas.materials ? iDatas.materials.worm : 0) : 0;
 
-        const scales = {};
+        const msg = await this.ctx.reply("Nourrir votre oiseau.", `**Quantités de nourriture:**\n• \`[seed]\` Graine(s): x**${seeds}**\n• \`[worm]\` Ver(s) de terre: x**${worms}**\n\nVeuillez sélectionner le type de nourriture ainsi que sa quantité ci-dessous.\n\`\`\`Exemple:\n!crow-feed\nseed 45\`\`\`\n*PS: un ver de terre augmente de 10XP, tandis qu'une graine augmente de 1XP.*`, "🐦", null, "outline");
+        const choice = await this.ctx.messageCollection(msg);
 
-        function maxScale(i, elt, scale = 0) {
-            if (i >= Math.pow(10, scale) && scale < 4) {
-                elt in scales ? scales[elt].push(`${Math.pow(10, scale)}`) : scales[elt] = [`${Math.pow(10, scale)}`];
-                return maxScale(i, elt, scale + 1);
-            }
-            return Math.pow(10, scale);
-        }
-        maxScale(seeds, "seed");
-        maxScale(worms, "worm");
+        const resp = choice.split(/ +/);
+        const [type, quantity] = resp;
 
-        const datas = {
-            "worm": {
-                "quantity": worms,
-                "scale": scales["worm"],
-                "dat": require("../../elements/materials/worm.json"),
-            },
-            "seed": {
-                "quantity": seeds,
-                "scale": scales["seed"],
-                "dat": require("../../elements/materials/seed.json"),
-            },
-        };
+        const str = "La syntaxe saisie est erronée. Veuillez réessayer sous ce modèle:\n```[vous]: !crow-feed\n[Obanai]: <embed>\n[vous]: <item> <quantity>\n\nExemple:\n[vous]: !crow-feed\n[Obanai]: <embed>\n[vous]: seed 50```";
 
-        datas.worm["str"] = `${datas.worm.dat.emoji} **${datas.worm.dat.name}**`;
-        datas.seed["str"] = `${datas.seed.dat.emoji} **${datas.seed.dat.name}**`;
+        if (
+            type?.length === undefined ? true : !["seed", "worm"].includes(type)
+            ||
+            quantity?.length === undefined ? true : isNaN(Number(quantity))
+        ) return await this.ctx.reply("Oups...", str, null, null, "warning");
 
-        function foodDisplay(type) {
-            return `${datas[type].quantity > 0 ? `${datas[type].str} (**${datas[type].quantity}**)` : `~~${datas[type].str} (**${datas[type].quantity}**)~~`}`;
+        if (quantity > (type === "seeds" ? seeds : worms)) {
+            return await this.ctx.reply("Oups...", "Vous n'avez pas autant d'éléments dans votre inventaire !", null, null, "warning");
         }
 
-        const emojis = Object.keys(datas).filter(d => datas[d].quantity > 0).map(d => datas[d].dat.emoji);
-        emojis.push("❌");
+        const actualExp = iDatas.kasugai_crow_exp;
+        const limit = [Math.floor((33250 - actualExp)), Math.floor((33250 - actualExp) / 10)];
 
-        const msg = await this.ctx.reply("choix", `${["seed", "worm"].map(e => foodDisplay(e)).join("\n")}`, null, null, "info");
-        const choice = await this.ctx.reactionCollection(msg, emojis);
+        if (quantity > limit[type === "seed" ? 0 : 1]) {
+            const str2 = `La quantité d'XP générée est supérieure à la quantité maximale autorisé. Plus d'informations:\nMax: \`[seed]\` x**${limit[0]}** | \`[worm]\` x**${limit[1]}**`;
+            return await this.ctx.reply("Oups...", str2, null, null, "warning");
+        }
 
-        if (choice === "❌") {
-            return await this.ctx.reply("choix bouffe", "Vous avez décidé de ne pas donner à manger à votre corbeau.", null, null, "info");
-        }
-        else if (choice === null) {
-            return await this.ctx.reply("choix bouffe", "La commande n'a pas aboutie.", null, null, "timeout");
-        }
-        const choiceDatas = datas[Object.keys(datas).filter(d => datas[d].dat.emoji === choice)];
-        const emojis2 = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"];
-        const finalEmojis = choiceDatas.scale.map((e, i) => emojis2[i]);
-        finalEmojis.push("❌");
+        const expQuantity = quantity * (type === "seed" ? 1 : 10);
 
-        const msg2 = await this.ctx.reply("choix quantité", `${choiceDatas.scale.map((e, i) => `${emojis2[i]} - x**${e}**`).join("\n")}`, null, null, "info");
-        const choice2 = await this.ctx.reactionCollection(msg2, finalEmojis);
-
-        if (choice === "❌") {
-            return await this.ctx.reply("choix bouffe", "Vous avez décidé de ne pas donner à manger à votre corbeau.", null, null, "info");
-        }
-        else if (choice === null) {
-            return await this.ctx.reply("choix bouffe", "La commande n'a pas aboutie.", null, null, "timeout");
-        }
-        const quantity = choiceDatas.scale?.at(finalEmojis.indexOf(choice2));
-        await this.client.inventoryDb.feedCrow(this.message.author.id, choiceDatas.dat.label, quantity);
-        return await this.ctx.reply("nourrir corbeau", `vous avez bien nourri votre corbeau et vous avez dépensé ${choiceDatas.dat.name} x**${quantity}**`, null, null, "info");
+        await this.client.inventoryDb.feedCrow(this.message.author.id, type, quantity);
+        await this.client.inventoryDb.db.set(this.message.author.id, (type === "seed" ? seeds : worms) - quantity, `materials.${type}`);
+        const crowLevel = calcCrowLevel(actualExp + expQuantity);
+        return await this.ctx.reply("Nourrir votre oiseau.", `Vous nourrisez votre oiseau, et il gagne **${quantity}** XP.\n\n> Niveau de corbeau: **${crowLevel.level}**`, "🐦", null, "outline");
     }
 }
 

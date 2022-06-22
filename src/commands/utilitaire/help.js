@@ -45,7 +45,7 @@ class Help extends Command {
                     const cmds = Object.values(content[key]).length;
                     commands += cmds;
                     string += `> **${emojis[key]} • ${key}** (**${cmds}** commandes)\nt`;
-                    if (key === "Administrateur" && !this.client.config.admins.includes(this.message.author.id)) {
+                    if (key === "Administrateur" && !this.client.config.owners.includes(this.message.author.id)) {
                         string += "*Cette catégorie de commande est réservée.*";
                     }
                     else {
