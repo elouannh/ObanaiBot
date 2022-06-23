@@ -52,10 +52,10 @@ class Category extends Command {
             await this.client.inventoryDb.changeCategory(this.message.author.id, cat.label);
             return await this.ctx.reply("Changement de catégorie.", `Vous avez bien changé de catégorie, vous voilà désormais dans la catégorie **${cat.name}**.`, "👑", null, "outline");
         }
-        else if (choice === "cancel") {
+        else if (this.ctx.isResp(choice, "n")) {
             return await this.ctx.reply("Changement de catégorie.", "Vous avez décidé de ne pas changer de catégorie", "👑", null, "outline");
         }
-        if (choice === null) {
+        else {
             return await this.ctx.reply("Changement de catégorie.", "Il semblerait que vous soyez afk, ou bien que vous n'ayez pas répondu comme il faut.", null, null, "timeout");
         }
     }
