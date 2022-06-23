@@ -6,10 +6,10 @@ class TravelZone extends Command {
     constructor() {
         super({
             adminOnly: false,
-            aliases: ["travel-zone", "tr-zone"],
+            aliases: ["travel-zone", "tz"],
             args: [],
             category: "Exploration",
-            cooldown: 10,
+            cooldown: 30,
             description: "Commande permettant de voyager d'une zone à l'autre dans votre région.",
             examples: ["travel-zone"],
             finishRequest: "ADVENTURE",
@@ -31,61 +31,67 @@ class TravelZone extends Command {
             if (timeLeft > 0) {
                 const loc = map.Regions.filter(r => r.id === Number(aDatas.travelling.destination.split("_")[0]))?.at(0);
                 const destName = `${loc.name} - ${loc.Areas.filter(ar => ar.default).at(0).name}`;
-                return await this.ctx.reply("Vous voyagez déjà.", `Il semblerait que vous êtes déjà en train de voyager ! Voici plus d'informations :\n\`\`\`Destination: ${destName}\nTemps restant: ${convertDate(timeLeft).string}\`\`\``, null, null, "outline");
+                return await this.ctx.reply(
+                    "Voyage entre les zones.",
+                    "Il semblerait que vous êtes déjà en train de voyager ! Voici plus d'informations :\n"
+                    +
+                    `\`\`\`Destination: ${destName}\nTemps restant: ${convertDate(timeLeft).string}\`\`\``,
+                    null,
+                    null,
+                    "outline",
+                );
             }
             else {
                 const loc = map.Regions.filter(r => r.id === Number(aDatas.travelling.destination.split("_")[0]))?.at(0);
                 const destName = `${loc.name} - ${loc.Areas.filter(ar => ar.default).at(0).name}`;
                 await this.client.activityDb.endOfTrip(this.message.author.id);
                 await this.client.playerDb.gainExp(this.message.author.id, Math.floor(Math.random() * 150) + 100, this);
-                return await this.ctx.reply("Bienvenue à destination !", `Vous voilà arrivé à: **${destName}**. Passez un bon séjour !`, null, null, "success");
+                return await this.ctx.reply("Voyage (intrarégional).", `Vous voilà arrivé à: **${destName}**. Passez un bon séjour !`, "🗺️", null, "outline");
             }
         }
         const mDatas = await this.client.mapDb.get(this.message.author.id);
         const loc = map.Regions.filter(r => r.id === mDatas.region)?.at(0);
 
-        const emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"];
-
         const zones = loc.Areas.filter(a => a.id !== mDatas.area);
         const r = {};
         let str = "";
 
-        const limit = zones.length < emojis.length ? zones.length : emojis.length;
-        for (let i = 0; i < limit; i++) {
+        for (let i = 0; i < zones.length; i++) {
             const zo = zones.at(i);
 
             const dis = await this.client.activityDb.travellingTime(this.message.author.id, Math.ceil(10));
-            str += `\`${emojis.at(i)}\` • ${zo.name} | 🕣 ${convertDate(dis, true).string}\n`;
+            str += `\`${i + 1}\` • ${zo.name} | 🕣 ${convertDate(dis, true).string}\n`;
             zo["distance"] = dis;
-            r[emojis.at(i)] = zo;
+            r[String(i)] = zo;
         }
-        const l = emojis.slice(0, zones.length);
-        l.push("❌");
-        const msg = await this.ctx.reply("Choix de votre destination.", str, null, null, "info");
-        const choice = await this.ctx.reactionCollection(msg, l);
 
-        if (choice === null) {
-            return await this.ctx.reply("Choix de votre destination.", "La commande n'a pas aboutie.", null, null, "timeout");
-        }
-        else if (choice === "❌") {
-            return await this.ctx.reply("Choix de votre destination.", "Vous avez décidé de ne pas voyager.", null, null, "info");
-        }
-        else {
+        str += "\n\nLorsque vous répondrez à cette question, vous partirez directement en voyage !\n\nRépondre avec le numéro correspondant à votre choix de destination.";
+        str += "Répondre `n` (non) pour annuler.";
+
+        const msg = await this.ctx.reply("Voyage (intrarégional).", str, "🧳", null, "outline");
+        const choice = await this.ctx.messageCollection(msg);
+
+        if (this.ctx.isResp(choice, "y")) {
+
+            if (!Object.keys(r).includes(choice)) return await this.ctx.reply("Voyage (intrarégional).", "La commande n'a pas aboutie.", null, null, "timeout");
+
             const zo = r[choice];
             const destName = `${loc.name} - ${zo.name}`;
             const destCode = `${loc.id}_${zo.id}`;
-            const msg2 = await this.ctx.reply("Choix de votre destination.", `Voulez-vous vraiment partir en direction de: **${destName}** ?`, null, null, "info");
-            const choice2 = await this.ctx.reactionCollection(msg2, ["❌", "✅"]);
-            if (choice2 === "✅") {
-                await this.client.activityDb.travels(this.message.author.id, zo.distance, destCode);
-                return await this.ctx.reply("Faites bonne route !", `Vous voilà parti à l'aventure dans la zone de **${destName}** !`, null, null, "success");
-            }
-            else if (choice2 === "❌") {
-                return await this.ctx.reply("Vous restez ici, finalement.", "Vous avez donc décidé de ne pas partir en voyage. Quel dommage !", null, null, "info");
-            }
-            else if (choice2 === null) {
-                return await this.ctx.reply("Choix de votre destination.", "La commande n'a pas aboutie.", null, null, "timeout");
-            }
+            await this.client.activityDb.travels(this.message.author.id, zo.distance, destCode);
+            return await this.ctx.reply(
+                "Voyage (intrarégional).",
+                `Vous voilà parti à l'aventure dans la zone de **${destName}** !` + "Faites la commande !travel ou !travel-zone pour voir dans combien de temps vous arrivez.",
+                null,
+                null,
+                "success",
+            );
+        }
+        else if (this.ctx.isResp(choice, "n")) {
+            return await this.ctx.reply("Voyage (intrarégional).", "Vous avez décidé de ne pas voyager.", null, null, "info");
+        }
+        else {
+            return await this.ctx.reply("Voyage (intrarégional).", "La commande n'a pas aboutie.", null, null, "timeout");
         }
     }
 }
