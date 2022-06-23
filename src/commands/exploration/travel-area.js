@@ -67,7 +67,11 @@ class TravelArea extends Command {
             reg["distance"] = dis;
             r[String(i)] = reg;
         }
-        const msg = await this.ctx.reply("Choix de votre destination.", str, null, null, "info");
+
+        str += "\nLorsque vous répondrez à ce message, vous partirez directement en voyage !\n\nRépondre avec le numéro correspondant à votre choix de destination.";
+        str += "Répondre `n` (non) pour annuler.";
+
+        const msg = await this.ctx.reply("Voyage.", str, "🧳", null, "outline");
         const choice = await this.ctx.messageCollection(msg);
 
         if (Object.keys(r).includes(choice)) {
@@ -77,7 +81,7 @@ class TravelArea extends Command {
             const destCode = `${reg.id}_${reg.Areas.filter(ar => ar.default).at(0).id}`;
             await this.client.activityDb.travels(this.message.author.id, reg.distance, destCode);
             return await this.ctx.reply(
-                "Voyage (intrarégional).",
+                "Voyage.",
                 `Vous voilà parti à l'aventure dans la zone de **${destName}** !` + " Faites la commande !travel ou !travel-zone pour voir dans combien de temps vous arrivez.",
                 "🧳",
                 null,
