@@ -9,7 +9,7 @@ class TravelZone extends Command {
             aliases: ["travel-zone", "tz"],
             args: [],
             category: "Exploration",
-            cooldown: 30,
+            cooldown: 15,
             description: "Commande permettant de voyager d'une zone à l'autre dans votre région.",
             examples: ["travel-zone"],
             finishRequest: "ADVENTURE",
@@ -62,18 +62,16 @@ class TravelZone extends Command {
             const dis = await this.client.activityDb.travellingTime(this.message.author.id, Math.ceil(10));
             str += `\`${i + 1}\` • ${zo.name} | 🕣 ${convertDate(dis, true).string}\n`;
             zo["distance"] = dis;
-            r[String(i)] = zo;
+            r[String(i + 1)] = zo;
         }
 
-        str += "\n\nLorsque vous répondrez à cette question, vous partirez directement en voyage !\n\nRépondre avec le numéro correspondant à votre choix de destination.";
+        str += "\nLorsque vous répondrez à ce message, vous partirez directement en voyage !\n\nRépondre avec le numéro correspondant à votre choix de destination.";
         str += "Répondre `n` (non) pour annuler.";
 
         const msg = await this.ctx.reply("Voyage (intrarégional).", str, "🧳", null, "outline");
         const choice = await this.ctx.messageCollection(msg);
 
-        if (this.ctx.isResp(choice, "y")) {
-
-            if (!Object.keys(r).includes(choice)) return await this.ctx.reply("Voyage (intrarégional).", "La commande n'a pas aboutie.", null, null, "timeout");
+        if (Object.keys(r).includes(choice)) {
 
             const zo = r[choice];
             const destName = `${loc.name} - ${zo.name}`;
@@ -81,10 +79,10 @@ class TravelZone extends Command {
             await this.client.activityDb.travels(this.message.author.id, zo.distance, destCode);
             return await this.ctx.reply(
                 "Voyage (intrarégional).",
-                `Vous voilà parti à l'aventure dans la zone de **${destName}** !` + "Faites la commande !travel ou !travel-zone pour voir dans combien de temps vous arrivez.",
+                `Vous voilà parti à l'aventure dans la zone de **${destName}** !` + " Faites la commande !travel ou !travel-zone pour voir dans combien de temps vous arrivez.",
+                "🧳",
                 null,
-                null,
-                "success",
+                "outline",
             );
         }
         else if (this.ctx.isResp(choice, "n")) {
