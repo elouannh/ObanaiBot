@@ -4,7 +4,7 @@ class EarnXp {
         this.quantity = quantity;
         this.got = 0;
         this.display = function() {
-            return `Gagner de l'expérience: **${this.got}**/${this.quantity}`;
+            return `Gagner de l'expérience: **\`${this.got}\`**\`/${this.quantity}\``;
         };
     }
 }

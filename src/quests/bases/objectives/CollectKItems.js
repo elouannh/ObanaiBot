@@ -7,7 +7,7 @@ class CollectKItems {
         this.quantity = quantity;
         this.got = 0;
         this.display = function() {
-            return `Collecter ${this.itemName}: **${this.got}**/${this.quantity}`;
+            return `Collecter ${this.itemName}: **\`${this.got}\`**\`/${this.quantity}\``;
         };
     }
 }

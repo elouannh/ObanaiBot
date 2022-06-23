@@ -47,44 +47,37 @@ class Give extends Command {
             }
         }
 
-        const emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"];
         let questToGive = "";
         if (quests.region.length > 0) questToGive += `> **🌍 Quêtes de régions**\n\n${quests.region.map(q => q[0].display()).join("\n\n")}`;
-        if (quests.area.length > 0) questToGive += `\n\n> **🗺️ Quêtes de zone**\n\n${quests.area.slice(0, 10).map((q, i) => `${emojis[i]}┆` + q[0].display()).join("\n\n")}${quests.area.length > 10 ? `\n...(${quests.area.length - 10} autres)` : ""}`;
-        else questToGive += "\n\nVous n'avez aucune quête avec laquelle interagir.";
+        if (quests.area.length > 0) {
+            questToGive += `\n\n> **🗺️ Quêtes de zone**\n\n${
+                quests.area.slice(0, 10).map((q, i) => `**${i + 1}.**┆` + q[0].display()).join("\n\n")}${quests.area.length > 10 ? `\n...(${quests.area.length - 10} autres)` : ""
+            }`;
+        }
+        else {
+            questToGive += "\n\nVous n'avez aucune quête avec laquelle interagir.";
+        }
 
-        const msg = await this.ctx.reply("Interaction: don d'objets", questToGive, null, null, "info");
+        if (!questToGive.endsWith("interagir.")) {
+            questToGive += "\n\nLorsque vous répondrez à ce message, vous donnerez automatiquement les ressources nécessaires si possible.";
+            questToGive += "\n\nRépondre avec le numéro correspondant à votre choix de quête.";
+            questToGive += "Répondre `n` (non) pour annuler.";
+        }
+
+        const msg = await this.ctx.reply("Interaction: don d'objets.", questToGive, "🧩", null, "outline");
         if (questToGive.endsWith("interagir.")) return;
 
         const choices = {};
 
-        for (const i in emojis.slice(0, quests.area.length)) {
-            choices[emojis[i]] = quests.area[i];
+        for (const i in quests.area.length) {
+            choices[String(i + 1)] = quests.area[i];
         }
-        const reacts = Object.keys(choices);
-        reacts.push("❌");
-        const choice = await this.ctx.reactionCollection(msg, reacts);
+        const choice = await this.ctx.messageCollection(msg);
 
-        if (choice === "❌") {
-            return await this.ctx.reply("Interaction: don d'objets", "Vous avez décidé de ne pas interagir.", null, null, "info");
-        }
-        else if (choice === null) {
-            return await this.ctx.reply("Interaction: don d'objets", "La commande n'a pas aboutie.", null, null, "timeout");
-        }
+        if (Object.keys(choices).includes(choice)) {
+            const q = choices[choice];
+            const iDatas = await this.client.inventoryDb.get(this.message.author.id);
 
-        const q = choices[choice];
-        const iDatas = await this.client.inventoryDb.get(this.message.author.id);
-
-        const msg2 = await this.ctx.reply("Interaction: don d'objets", `Voulez-vous compléter l'objectif:\n${q[0].display()}`, null, null, "info");
-        const choice2 = await this.ctx.reactionCollection(msg2, ["❌", "✅"]);
-
-        if (choice2 === "❌") {
-            return await this.ctx.reply("Interaction: don d'objets", "Vous avez décidé de ne pas interagir.", null, null, "info");
-        }
-        else if (choice2 === null) {
-            return await this.ctx.reply("Interaction: don d'objets", "La commande n'a pas aboutie.", null, null, "timeout");
-        }
-        else if (choice2 === "✅") {
             const hadBefore = q[0].objective.got;
             this.client.inventoryDb.db.ensure(this.message.author.id, this.client.inventoryDb.model(this.message.author.i));
             this.client.inventoryDb.db.ensure(this.message.author.id, 0, `${q[0].objective.itemCategory}.${q[0].objective.item}`);
@@ -106,6 +99,12 @@ class Give extends Command {
                 this.client.inventoryDb.db.math(this.message.author.id, "-", toAdd, `${q[0].objective.itemCategory}.${q[0].objective.item}`);
                 this.client.questDb.db.set(this.message.author.id, newQuests, q[1]);
             }
+        }
+        else if (this.ctx.isResp(choice, "n")) {
+            return await this.ctx.reply("Interaction: don d'objets.", "Vous avez décidé de ne pas interagir.", "🧩", null, "outline");
+        }
+        else {
+            return await this.ctx.reply("Interaction: don d'objets.", "La commande n'a pas aboutie.", null, null, "timeout");
         }
     }
 }

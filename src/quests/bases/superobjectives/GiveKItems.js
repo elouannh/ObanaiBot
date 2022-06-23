@@ -15,7 +15,7 @@ class GiveKItems {
         this.loc = map.Regions.filter(r => r.id === this.region)?.at(0);
         this.getLoc = `${this.loc.name}, ${this.loc.Areas.filter(a => a.id === this.area)?.at(0).name}`;
         this.display = function() {
-            return `Donner **${this.itemName}** à **${this.target}** (**${this.got}**/${this.quantity}) (${this.getLoc})`;
+            return `Donner **${this.itemName}** à **${this.target}** (**\`${this.got}\`**\`/${this.quantity}\`) (${this.getLoc})`;
         };
     }
 }

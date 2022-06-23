@@ -4,7 +4,7 @@ class FeedCrow {
         this.quantity = quantity;
         this.fed = 0;
         this.display = function() {
-            return `Nourrir votre corbeau: **${this.fed}**/${this.quantity}`;
+            return `Nourrir votre corbeau: **\`${this.fed}\`**\`/${this.quantity}\``;
         };
     }
 }
