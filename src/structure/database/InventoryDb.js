@@ -159,6 +159,13 @@ class InventoryDb {
         const newXp = p.kasugai_crow_exp + (quantities[foodType] ?? 1) * quantity;
         this.db.set(id, newXp, "kasugai_crow_exp");
     }
+
+    async changeCategory(id, label) {
+        const p = await this.get(id);
+
+        this.client.playerDb.db.set(id, label, "category");
+        this.db.set(id, p.grimoires.mastery - 1, "grimoires.mastery");
+    }
 }
 
 module.exports = { InventoryDb };

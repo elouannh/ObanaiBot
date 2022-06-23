@@ -46,9 +46,9 @@ class Quests extends Command {
             }
         }
 
-        if (quests.length < 1) quests = "**Vous n'avez aucune quête.**";
+        if (quests.length < 1) quests = "Vous n'avez aucune quête.";
 
-        return await this.ctx.reply("Liste des quêtes", quests, "📜", "2f3136", null);
+        return await this.ctx.reply("Liste des quêtes", quests, "📜", null, "outline");
     }
 }
 
