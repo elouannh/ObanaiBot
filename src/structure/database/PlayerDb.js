@@ -101,7 +101,7 @@ class PlayerDb {
 
         const cat = require(`../../elements/categories/${p.category}`);
         p.aptitudes[cat.bonus[0]] *= 1 + p.categoryLevel / 20;
-        p.aptitudes[cat.bonus[1]] *= 1 - p.categoryLevel / 20;
+        p.aptitudes[cat.bonus[1]] *= 1 - p.categoryLevel / 50;
 
         p.aptitudes.agility = Math.ceil(p.aptitudes.agility);
         p.aptitudes.defense = Math.ceil(p.aptitudes.defense);

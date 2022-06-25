@@ -50,7 +50,7 @@ class Profile extends Command {
 
         profile += `\n\n> Catégorie: **${category.name}** | niveau **${pDatas.categoryLevel}**`;
         profile += `\nEffets: ${
-            category.bonus.map((e, i) => `${emojis[e]}**${Math.round(Math.sqrt((((i === 0 ? 1 : -1) + pDatas.categoryLevel / 20) * 100) ** 2))}%**`).join(" | ")
+            category.bonus.map((e, i) => `${emojis[e]}**${Math.round(Math.sqrt((((i === 0 ? 1 : -1) + pDatas.categoryLevel / (i === 0 ? 20 : 50)) * 100) ** 2))}%**`).join(" | ")
         }`;
         profile += `\nArme: **${weapon}** | Rareté: ${"💎".repeat(pDatas.weapon.rarity)}${"⚫".repeat(5 - pDatas.weapon.rarity)}`;
 

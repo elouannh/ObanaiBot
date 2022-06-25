@@ -89,7 +89,7 @@ class TravelArea extends Command {
             );
         }
         else if (this.ctx.isResp(choice, "n")) {
-            return await this.ctx.reply("Voyage.", "Vous avez décidé de ne pas voyager.", null, null, "info");
+            return await this.ctx.reply("Voyage.", "Vous avez décidé de ne pas voyager.", "🧳", null, "outline");
         }
         else {
             return await this.ctx.reply("Voyage.", "La commande n'a pas aboutie.", null, null, "timeout");
