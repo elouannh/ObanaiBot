@@ -58,7 +58,15 @@ class MemberScanning {
         let u = null;
         if (this.results === "self") return cmd.message.author;
         if (this.results.length === 0) await cmd.ctx.reply("Joueur introuvable.", "Aucun résultat n'a été trouvé.", null, null, "warning");
-        if (this.results.length > 10) await cmd.ctx.reply("Trop de joueurs.", `Le nombre de joueurs trouvés (**${this.results.length}**/10) est trop grand pour la recherche \`${this.args}\`. Veuillez réessayer.`, null, null, "error");
+        if (this.results.length > 10) {
+            await cmd.ctx.reply(
+                "Trop de joueurs.",
+                `Le nombre de joueurs trouvés (**${this.results.length}**/10) est trop grand pour la recherche \`${this.args}\`. Veuillez réessayer.`,
+                null,
+                null,
+                "error",
+            );
+        }
         if (this.results.length === 1) return this.results[0].user;
         if (this.results.length > 1 && this.results.length <= 10) {
             let str = "";
@@ -69,7 +77,13 @@ class MemberScanning {
                 r[String(i)] = this.results.at(i);
             }
 
-            const msg = await cmd.ctx.reply("Plusieurs joueurs ont été trouvés.", `Veuillez sélectionner le joueur que vous voulez en envoyant le bon numéro.\n\n${str}`, null, null, "info");
+            const msg = await cmd.ctx.reply(
+                "Plusieurs joueurs ont été trouvés.",
+                `Veuillez sélectionner le joueur que vous voulez en envoyant le bon numéro.\n\n${str}`,
+                null,
+                null,
+                "info",
+            );
             const choice = await cmd.ctx.messageCollection(msg);
 
             u = (isNaN(Number(choice)) ? null : (Number(choice) >= 0 && Number(choice) < 10 ? r[choice].user : null));

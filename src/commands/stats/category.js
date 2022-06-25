@@ -90,11 +90,23 @@ class Category extends Command {
 
             if (cat.label === pDatas.category && breath === pDatas.breath) {
                 await this.client.inventoryDb.upgradeCategory(this.message.author.id, pDatas.categoryLevel);
-                return await this.ctx.reply("Changement/amélioration de catégorie.", `Vous avez amélioré votre catégorie. Elle passe au niveau **${pDatas.categoryLevel + 1}**`, "👑", null, "outline");
+                return await this.ctx.reply(
+                    "Changement/amélioration de catégorie.",
+                    `Vous avez amélioré votre catégorie. Elle passe au niveau **${pDatas.categoryLevel + 1}**`,
+                    "👑",
+                    null,
+                    "outline",
+                );
             }
             else {
                 await this.client.inventoryDb.changeCategory(this.message.author.id, cat.label, breath);
-                return await this.ctx.reply("Changement/amélioration de catégorie.", `Vous avez bien changé de catégorie, vous voilà désormais dans la catégorie **${cat.name}**.`, "👑", null, "outline");
+                return await this.ctx.reply(
+                    "Changement/amélioration de catégorie.",
+                    `Vous avez bien changé de catégorie, vous voilà désormais dans la catégorie **${cat.name}**.`,
+                    "👑",
+                    null,
+                    "outline",
+                );
             }
 
         }

@@ -39,7 +39,13 @@ class Help extends Command {
                 "Commandes du RPG Demon Slayer": ["Escouades", "Exploration", "Quêtes", "Stats"],
             };
             for (const dat in datas) {
-                let string = dat === "Commandes Globales" ? "Bienvenue sur la liste des commandes du bot ! Vous pouvez voir ci-dessous les différentes commandes rangées par catégories.\n\nSi vous cherchez de l'aide pour une commande, faites la commande `help <command>`.\n\nVous pouvez également rejoindre [**le serveur support**](https://discord.gg/8GDpnYvRrC) en cliquant [**ici**](https://discord.gg/8GDpnYvRrC).\n\n" : "";
+                let string = dat === "Commandes Globales" ?
+                             "Bienvenue sur la liste des commandes du bot ! Vous pouvez voir ci-dessous les différentes commandes rangées "
+                             +
+                             "par catégories.\n\nSi vous cherchez de l'aide pour une commande, faites la commande `help <command>`.\n\n"
+                             +
+                             "Vous pouvez également rejoindre [**le serveur support**](https://discord.gg/8GDpnYvRrC) en cliquant [**ici**](https://discord.gg/8GDpnYvRrC).\n\n"
+                             : "";
                 let commands = 0;
                 for (const key of datas[dat]) {
                     const cmds = Object.values(content[key]).length;

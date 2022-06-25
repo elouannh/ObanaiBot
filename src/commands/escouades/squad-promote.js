@@ -30,14 +30,24 @@ class SquadPromote extends Command {
         if (user === null) return;
         if (user.id === this.message.author.id) return await this.ctx.reply("Oups...", "Vous ne pouvez pas vous inviter vous-même.", null, null, "warning");
 
-        const msg = await this.ctx.reply("Promotion d'un joueur de l'escouade.", `Souhaitez-vous vraiment promouvoir **${user.username}** au rang de bras droit ?\n\n**__Requis :__**\`\`\`diff\n- Être chef d'escouade\n- Avoir une escouade\`\`\`\n\nRépondre avec \`y\` (oui) ou \`n\` (non).`, "⛩️", null, "outline");
+        const msg = await this.ctx.reply(
+            "Promotion d'un joueur de l'escouade.",
+            `Souhaitez-vous vraiment promouvoir **${user.username}** au rang de bras droit ?`
+            +
+            "\n\n**__Requis :__**```diff\n- Être chef d'escouade\n- Avoir une escouade```\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "⛩️",
+            null,
+            "outline",
+        );
         const choice = await this.ctx.messageCollection(msg);
 
         if (this.ctx.isResp(choice, "y")) {
             const pDatas = await this.client.playerDb.get(this.message.author.id);
 
             if (pDatas.squad === null) return await this.ctx.reply("Oups...", "Vous ne possédez pas d'escouade.", null, null, "warning");
-            if (pDatas.squad.owner !== this.message.author.id) return await this.ctx.reply("Oups...", "Seul les chefs d'escouade peuvent promouvoir des gens.", null, null, "warning");
+            if (pDatas.squad.owner !== this.message.author.id) {
+                return await this.ctx.reply("Oups...", "Seul les chefs d'escouade peuvent promouvoir des gens.", null, null, "warning");
+            }
             const uExists = await this.client.playerDb.started(user.id);
             if (!uExists) return await this.ctx.reply("Oups...", "Le profil du joueur à promouvoir est introuvable.", null, null, "warning");
             if (!pDatas.squad.members.includes(user.id)) return await this.ctx.reply("Oups...", "Ce joueur ne se trouve pas dans votre escouade.", null, null, "warning");

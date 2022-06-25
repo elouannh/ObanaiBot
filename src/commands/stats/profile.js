@@ -45,10 +45,13 @@ class Profile extends Command {
         const percent = Math.floor(playerLevel.tempExp * 20 / playerLevel.required);
         profile += `> Niveau: **${playerLevel.level}** \`[${"#".repeat(percent)}${"-".repeat(20 - percent)}]\` > **${playerLevel.nextLevel}**`;
 
-        profile += `\n\n> Aptitudes\nt🤸‍♂️**${pDatas.aptitudes.agility}** (lvl. ${pDatas.stats.agility}) - 🛡️**${pDatas.aptitudes.defense}** (lvl. ${pDatas.stats.defense}) - 👊**${pDatas.aptitudes.force}** (lvl. ${pDatas.stats.force}) - ⚡**${pDatas.aptitudes.speed}** (lvl. ${pDatas.stats.speed})`;
+        profile += `\n\n> Aptitudes\nt🤸‍♂️**${pDatas.aptitudes.agility}** (lvl. ${pDatas.stats.agility}) - 🛡️**${pDatas.aptitudes.defense}** (lvl. ${pDatas.stats.defense}) - `;
+        profile += `👊**${pDatas.aptitudes.force}** (lvl. ${pDatas.stats.force}) - ⚡**${pDatas.aptitudes.speed}** (lvl. ${pDatas.stats.speed})`;
 
         profile += `\n\n> Catégorie: **${category.name}** | niveau **${pDatas.categoryLevel}**`;
-        profile += `\nEffets: ${category.bonus.map((e, i) => `${emojis[e]}**${Math.round(Math.sqrt((((i === 0 ? 1 : -1) + pDatas.categoryLevel / 20) * 100) ** 2))}%**`).join(" | ")}`;
+        profile += `\nEffets: ${
+            category.bonus.map((e, i) => `${emojis[e]}**${Math.round(Math.sqrt((((i === 0 ? 1 : -1) + pDatas.categoryLevel / 20) * 100) ** 2))}%**`).join(" | ")
+        }`;
         profile += `\nArme: **${weapon}** | Rareté: ${"💎".repeat(pDatas.weapon.rarity)}${"⚫".repeat(5 - pDatas.weapon.rarity)}`;
 
         profile += `\n\n> Souffle: ${breath.emoji}**${breath.name}**`;

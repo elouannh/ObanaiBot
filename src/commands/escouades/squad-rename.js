@@ -1,5 +1,4 @@
 const Command = require("../../base/Command");
-const MemberScanning = require("../../structure/tools/MemberScanning");
 
 class SquadRename extends Command {
     constructor() {
@@ -27,16 +26,36 @@ class SquadRename extends Command {
         let r = name.match(new RegExp("[a-zA-Z\\s]{1,}\\s?[0-9]{0,}", "g"));
         r = r?.at(0)?.slice(0, 40);
 
-        if (r === undefined || r?.length < 10) return await this.ctx.reply("Nouveau nom invalide.", "Votre nom doit contenir entre **10** et **40** caractères, et doit être de la forme suivante:```[a-zA-Z\\s]{1,}\\s?[0-9]{0,}```\n```Exemples:\n- squad-rename Escouade des bg```", null, null, "warning");
+        if (r === undefined || r?.length < 10) {
+            return await this.ctx.reply(
+                "Nouveau nom invalide.",
+                "Votre nom doit contenir entre **10** et **40** caractères, et doit être de la forme suivante:"
+                +
+                "\n```[a-zA-Z\\s]{1,}\\s?[0-9]{0,}```\n```Exemples:\n- squad-rename Escouade des bg```",
+                null,
+                null,
+                "warning",
+            );
+        }
 
-        const msg = await this.ctx.reply("Changement de nom.", `Souhaitez-vous changer le nom de votre escouade ?\nLe nouveau nom sera: \`${r}\`\n\n**__Requis :__**\`\`\`diff\n- Être chef ou bras droit d'escouade\n- Avoir une escouade\`\`\`\n\nRépondre avec \`y\` (oui) ou \`n\` (non).`, "⛩️", null, "outline");
+        const msg = await this.ctx.reply(
+            "Changement de nom.",
+            "Souhaitez-vous changer le nom de votre escouade ?\nLe nouveau nom sera: "
+            +
+            `\`${r}\`\n\n**__Requis :__**\`\`\`diff\n- Être chef ou bras droit d'escouade\n- Avoir une escouade\`\`\`\n\nRépondre avec \`y\` (oui) ou \`n\` (non).`,
+            "⛩️",
+            null,
+            "outline",
+        );
         const choice = await this.ctx.messageCollection(msg);
 
         if (this.ctx.isResp(choice, "y")) {
             const pDatas = await this.client.playerDb.get(this.message.author.id);
 
             if (pDatas.squad === null) return await this.ctx.reply("Oups...", "Vous ne possédez pas d'escouade.", "⛩️", null, "outline");
-            if (pDatas.squad.owner !== this.message.author.id && pDatas.squad.right_hand !== this.message.author.id) return await this.ctx.reply("Oups...", "Seul les chefs d'escouade et les bras droits peuvent changer le nom d'escouade.", null, null, "warning");
+            if (pDatas.squad.owner !== this.message.author.id && pDatas.squad.right_hand !== this.message.author.id) {
+                return await this.ctx.reply("Oups...", "Seul les chefs d'escouade et les bras droits peuvent changer le nom d'escouade.", null, null, "warning");
+            }
 
             await this.client.squadDb.rename(pDatas.squad.owner, r);
             return await this.ctx.reply("Changement de nom.", "Le nom a bien été modifié.", "⛩️", null, "outline");

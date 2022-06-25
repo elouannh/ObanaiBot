@@ -47,9 +47,9 @@ class ForgeWeapon extends Command {
 
         const msg = await this.ctx.reply(
             "Forger une arme.",
-            "Souhaitez-vous vraiment forger une arme ? Vous aurez une arme de rareté aléatoire. (PS: vos chances sont accrues si vous vous trouvez au **Village des forgerons**)\n\n"
+            "Souhaitez-vous vraiment forger une arme ? Vous aurez une arme de rareté aléatoire. (PS: vos chances sont accrues si vous vous trouvez au **Village des forgerons**)\n"
             +
-            "__Matériaux :__\n```diff\n- x1 Modèle d'arme\n- x100 Tamahagane\n- x20 Bois\n- 100'000 ¥```\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "\n__Matériaux :__\n```diff\n- x1 Modèle d'arme\n- x100 Tamahagane\n- x20 Bois\n- 100'000 ¥```\n\nRépondre avec `y` (oui) ou `n` (non).",
             "🗡️",
             null,
             "outline",

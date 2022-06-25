@@ -22,7 +22,15 @@ class SquadKick extends Command {
         const pExists = await this.client.playerDb.started(this.message.author.id);
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
-        const msg = await this.ctx.reply("Dégrader votre bras droit.", "Souhaitez-vous vraiment dégrader votre bras droit de l'escouade ?\n\n**__Requis :__**```diff\n- Être le chef d'escouade\n- Avoir une escouade\n- Avoir un bras droit d'escouade```\n\nRépondre avec `y` (oui) ou `n` (non).", "⛩️", null, "outline");
+        const msg = await this.ctx.reply(
+            "Dégrader votre bras droit.",
+            "Souhaitez-vous vraiment dégrader votre bras droit de l'escouade ?"
+            +
+            "\n\n**__Requis :__**```diff\n- Être le chef d'escouade\n- Avoir une escouade\n- Avoir un bras droit d'escouade```\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "⛩️",
+            null,
+            "outline",
+        );
         const choice = await this.ctx.messageCollection(msg);
 
         if (this.ctx.isResp(choice, "y")) {

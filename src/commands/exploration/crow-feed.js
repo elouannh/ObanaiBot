@@ -30,13 +30,24 @@ class CrowFeed extends Command {
         const seeds = "materials" in iDatas ? ("seed" in iDatas.materials ? iDatas.materials.seed : 0) : 0;
         const worms = "materials" in iDatas ? ("worm" in iDatas.materials ? iDatas.materials.worm : 0) : 0;
 
-        const msg = await this.ctx.reply("Nourrir votre oiseau.", `**Quantités de nourriture:**\n• \`[seed]\` Graine(s): x**${seeds}**\n• \`[worm]\` Ver(s) de terre: x**${worms}**\n\nVeuillez sélectionner le type de nourriture ainsi que sa quantité ci-dessous.\n\`\`\`Exemple:\n!crow-feed\nseed 45\`\`\`\n*PS: un ver de terre augmente de 10XP, tandis qu'une graine augmente de 1XP.*`, "🐦", null, "outline");
+        const msg = await this.ctx.reply(
+            "Nourrir votre oiseau.",
+            `**Quantités de nourriture:**\n• \`[seed]\` Graine(s): x**${seeds}**\n• \`[worm]\` Ver(s) de terre: x**${worms}**\n\nVeuillez sélectionner le type de nourriture `
+            +
+            "ainsi que sa quantité ci-dessous.\n```Exemple:\n!crow-feed\nseed 45```\n*PS: un ver de terre augmente de 10XP, tandis qu'une graine augmente de 1XP.*",
+            "🐦",
+            null,
+            "outline",
+        );
         const choice = await this.ctx.messageCollection(msg);
 
         const resp = choice.split(/ +/);
         const [type, quantity] = resp;
 
-        const str = "La syntaxe saisie est erronée. Veuillez réessayer sous ce modèle:\n```[vous]: !crow-feed\n[Obanai]: <embed>\n[vous]: <item> <quantity>\n\nExemple:\n[vous]: !crow-feed\n[Obanai]: <embed>\n[vous]: seed 50```";
+        const str = "La syntaxe saisie est erronée. Veuillez réessayer sous ce modèle:\n```[vous]: !crow-feed\n[Obanai]: <embed>\n"
+                    +
+                    "[vous]: <item> <quantity>\n\nExemple:\n[vous]: !crow-feed\n[Obanai]: <embed>\n[vous]: seed 50```";
+
 
         if (
             type?.length === undefined ? true : !["seed", "worm"].includes(type)
@@ -52,7 +63,9 @@ class CrowFeed extends Command {
         const limit = [Math.floor((33250 - actualExp)), Math.floor((33250 - actualExp) / 10)];
 
         if (quantity > limit[type === "seed" ? 0 : 1]) {
-            const str2 = `La quantité d'XP générée est supérieure à la quantité maximale autorisé. Plus d'informations:\nMax: \`[seed]\` x**${limit[0]}** | \`[worm]\` x**${limit[1]}**`;
+            const str2 = "La quantité d'XP générée est supérieure à la quantité maximale autorisé. "
+                         +
+                         `Plus d'informations:\nMax: \`[seed]\` x**${limit[0]}** | \`[worm]\` x**${limit[1]}**`;
             return await this.ctx.reply("Oups...", str2, null, null, "warning");
         }
 
@@ -61,7 +74,13 @@ class CrowFeed extends Command {
         await this.client.inventoryDb.feedCrow(this.message.author.id, type, quantity);
         await this.client.inventoryDb.db.set(this.message.author.id, (type === "seed" ? seeds : worms) - quantity, `materials.${type}`);
         const crowLevel = calcCrowLevel(actualExp + expQuantity);
-        return await this.ctx.reply("Nourrir votre oiseau.", `Vous nourrisez votre oiseau, et il gagne **${quantity}** XP.\n\n> Niveau de corbeau: **${crowLevel.level}**`, "🐦", null, "outline");
+        return await this.ctx.reply(
+            "Nourrir votre oiseau.",
+            `Vous nourrisez votre oiseau, et il gagne **${quantity}** XP.\n\n> Niveau de corbeau: **${crowLevel.level}**`,
+            "🐦",
+            null,
+            "outline",
+        );
     }
 }
 

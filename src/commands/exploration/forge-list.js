@@ -43,12 +43,16 @@ class ForgeList extends Command {
             }
         }
 
-        if (Object.values(dates).includes(true)) activity += "\n\nCertains objets sont prêts à la récupération ! Vous pouvez obtenir le produit de forge avec la commande !forge-collect.";
+        if (Object.values(dates).includes(true)) {
+            activity += "\n\nCertains objets sont prêts à la récupération ! "
+                        +
+                        "Vous pouvez obtenir le produit de forge avec la commande !forge-collect.";
+        }
 
         if (Object.entries(items).length === 0) activity = "Aucun objet n'est en train d'être forgé.";
         if (Object.entries(items).length !== 3) activity += `\n\n... ${3 - Object.entries(items).length} emplacements libres restant.`;
 
-        await this.ctx.reply("forge", activity, null, null, "info");
+        await this.ctx.reply("Forge.", activity, "⚒️", null, "outline");
     }
 }
 

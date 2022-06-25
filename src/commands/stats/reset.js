@@ -20,9 +20,15 @@ class Start extends Command {
 
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Vous n'avez pas commencé votre aventure. Si vous désirez le faire, faites la commande start.", null, null, "error");
+        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
-        const msg = await this.ctx.reply("Voulez-vous vraiment supprimer votre aventure ?", "```diff\n- CE CHOIX EST DÉFINITIF, ET TOUTE PROGRESSION SERA PERDUE POUR TOUJOURS (c'est très long !)```\n\nRépondre avec `y` (oui) ou `n` (non).", "❗", null, "outline");
+        const msg = await this.ctx.reply(
+            "Voulez-vous vraiment supprimer votre aventure ?",
+            "```diff\n- CE CHOIX EST DÉFINITIF, ET TOUTE PROGRESSION SERA PERDUE POUR TOUJOURS (c'est très long !)```\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "❗",
+            null,
+            "outline",
+        );
         const choice = await this.ctx.messageCollection(msg);
         if (this.ctx.isResp(choice, "y")) {
             await this.client.playerDb.deleteAdventure(this.message.author.id);
@@ -32,7 +38,13 @@ class Start extends Command {
             return await this.ctx.reply("J'espère bientôt vous revoir !", "N'hésitez pas à venir me voir lorsque vous souhaitez supprimer votre aventure.", "👋", null, "outline");
         }
         else {
-            return await this.ctx.reply("Supprimer votre aventure.", "La commande n'a pas aboutie. Soit vous avez mis trop de temps à répondre, soit vous n'avez pas répondu comme convenu.", null, null, "timeout");
+            return await this.ctx.reply(
+                "Supprimer votre aventure.",
+                "La commande n'a pas aboutie. Soit vous avez mis trop de temps à répondre, soit vous n'avez pas répondu comme convenu.",
+                null,
+                null,
+                "timeout",
+            );
         }
     }
 }

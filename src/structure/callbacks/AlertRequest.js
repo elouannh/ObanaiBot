@@ -44,7 +44,15 @@ async function alertQuest(client, type, datas, quest) {
                     channel: client.lastChannel.get(datas.id),
                 },
             []);
-            await cmd.ctx.reply("Étape de quête terminée !", string + ` Quête terminée:\n\n\`-   ${quest.title}   -\`\n*${quest.description}*\n\n**Passage à la quête:**\n\n\`-   ${questFile.title}   -\`\n*${questFile.description}*`, "❗", "2f3136", null);
+            await cmd.ctx.reply(
+                "Étape de quête terminée !",
+                string
+                +
+                ` Quête terminée:\n\n\`-   ${quest.title}   -\`\n*${quest.description}*\n\n**Passage à la quête:**\n\n\`-   ${questFile.title}   -\`\n*${questFile.description}*`,
+                "❗",
+                null,
+                "outline",
+            );
             client.questDb.db.push(datas.id, questFile, `${type}`);
         }
         catch (err) {

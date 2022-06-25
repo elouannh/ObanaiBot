@@ -1,4 +1,4 @@
-const { Collection, PermissionsBitField, BitField } = require("discord.js");
+const { Collection, PermissionsBitField } = require("discord.js");
 const convertDate = require("../utils/convertDate");
 const Context = require("./Context");
 const fs = require("fs");
@@ -54,7 +54,9 @@ class Command {
         let ready = true;
         // ...............................................................................<string, Date>
         if (!this.client.cooldowns.has(this.infos.name)) this.client.cooldowns.set(this.infos.name, new Collection());
-        if (!this.client.cooldowns.get(this.infos.name).has(this.message.author.id)) this.client.cooldowns.get(this.infos.name).set(this.message.author.id, Date.now() - this.infos.cooldown * 1000);
+        if (!this.client.cooldowns.get(this.infos.name).has(this.message.author.id)) {
+            this.client.cooldowns.get(this.infos.name).set(this.message.author.id, Date.now() - this.infos.cooldown * 1000);
+        }
 
         const lastRun = this.client.cooldowns.get(this.infos.name).get(this.message.author.id);
         const tStamp = Date.now();
@@ -62,7 +64,13 @@ class Command {
 
         if (tStamp < readyForRun) {
             ready = false;
-            await this.ctx.reply("Veuillez patienter.", `Merci d'attendre \`${convertDate(readyForRun - tStamp, true).string}\` avant de pouvoir refaire cette commande.`, null, null, "timeout");
+            await this.ctx.reply(
+                "Veuillez patienter.",
+                `Merci d'attendre \`${convertDate(readyForRun - tStamp, true).string}\` avant de pouvoir refaire cette commande.`,
+                null,
+                null,
+                "timeout",
+            );
         }
         else {
             this.client.cooldowns.get(this.infos.name).delete(this.message.author.id);
@@ -95,7 +103,13 @@ class Command {
 
         if (notFinished.length > 0) {
             ready = false;
-            await this.ctx.reply("Une erreur est survenue.", `Vous n'avez pas fini de répondre aux requêtes suivantes :\nt${notFinished.map(req => `[\`${req.req}\`](${req.src})`)}`, null, null, "warning");
+            await this.ctx.reply(
+                "Une erreur est survenue.",
+                `Vous n'avez pas fini de répondre aux requêtes suivantes :\nt${notFinished.map(req => `[\`${req.req}\`](${req.src})`)}`,
+                null,
+                null,
+                "warning",
+            );
         }
 
         return ready;
@@ -110,7 +124,15 @@ class Command {
 
         if (!hasPerms) {
             const missingPermissions = requiredPermissions.filter(p => !userPermissions.includes(p));
-            await this.ctx.reply("Vous n'avez pas les permissions.", `L'exécution de cette commande require des permissions, et il semblerait que vous ne les ayez pas.\nPermissions nécessaires:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``, null, null, "warning");
+            await this.ctx.reply(
+                "Vous n'avez pas les permissions.",
+                "L'exécution de cette commande require des permissions, et il semblerait que vous ne les ayez pas."
+                +
+                `\nPermissions nécessaires:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
+                null,
+                null,
+                "warning",
+            );
         }
         return hasPerms;
     }
@@ -124,8 +146,17 @@ class Command {
 
         if (!hasPerms) {
             const missingPermissions = clientBitfield.filter(p => !clientPermissions.includes(p));
-            if (clientMember.has(2048n)) await this.ctx.reply("Je n'ai pas les permissions.", `L'exécution de cette commande require des permissions, et il semblerait que je ne les ai pas.\nPermissions nécessaires:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``, null, null, "error");
-            else if (clientMember.has(64n)) ["❌", "🇵", "🇪", "🇷", "🇲"].forEach(async p => await this.message.react(p));
+            if (clientMember.has(2048n)) {
+                await this.ctx.reply(
+                    "Je n'ai pas les permissions.",
+                    "L'exécution de cette commande require des permissions, et il semblerait que je ne les ai pas."
+                    +
+                    `\nPermissions nécessaires:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
+                    null,
+                    null,
+                    "error",
+                );
+            }
         }
         return hasPerms;
     }

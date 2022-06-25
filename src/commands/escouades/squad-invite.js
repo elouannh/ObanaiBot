@@ -30,18 +30,32 @@ class SquadInvite extends Command {
         if (user === null) return;
         if (user.id === this.message.author.id) return await this.ctx.reply("Oups...", "Vous ne pouvez pas vous inviter vous-même.", null, null, "warning");
 
-        const msg = await this.ctx.reply("Inviter un nouveau membre.", `**${user.username}**, voulez-vous rejoindre l'escouade de **${this.message.author.username}** ?\n\n**__Requis :__**\`\`\`diff\n- Ne pas avoir d'escouade\`\`\`\n\nRépondre avec \`y\` (oui) ou \`n\` (non).`, "⛩️", null, "outline");
+        const msg = await this.ctx.reply(
+            "Inviter un nouveau membre.",
+            `**${user.username}**, voulez-vous rejoindre l'escouade de **${this.message.author.username}** ?`
+            +
+            "\n\n**__Requis :__**```diff\n- Ne pas avoir d'escouade```\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "⛩️",
+            null,
+            "outline",
+        );
         const choice = await this.ctx.messageCollection(msg, 1, 30_000, user.id);
 
         if (this.ctx.isResp(choice, "y")) {
             const pDatas = await this.client.playerDb.get(this.message.author.id);
 
             if (pDatas.squad === null) return await this.ctx.reply("Oups...", "Vous ne possédez pas d'escouade.", null, null, "warning");
-            if (pDatas.squad.owner !== this.message.author.id) return await this.ctx.reply("Oups...", "Seul les chefs d'escouade peuvent inviter des joueurs à vous rejoindre.", null, null, "warning");
+            if (pDatas.squad.owner !== this.message.author.id) {
+                return await this.ctx.reply("Oups...", "Seul les chefs d'escouade peuvent inviter des joueurs à vous rejoindre.", null, null, "warning");
+            }
             const uExists = await this.client.playerDb.started(user.id);
             if (!uExists) return await this.ctx.reply("Oups...", "Le profil du joueur souhaitant rejoindre est introuvable.", null, null, "warning");
-            if (await this.client.squadDb.isFull(pDatas.squad.owner)) return await this.ctx.reply("Oups...", "Cette escouade contient déjà le nombre maximum de joueurs. (8)", null, null, "warning");
-            if (await this.client.playerDb.hasSquad(user.id)) return await this.ctx.reply("Oups...", "Ce joueur possède déjà une escouade, il est donc impossible de l'inviter dans la votre.", null, null, "warning");
+            if (await this.client.squadDb.isFull(pDatas.squad.owner)) {
+                return await this.ctx.reply("Oups...", "Cette escouade contient déjà le nombre maximum de joueurs. (8)", null, null, "warning");
+            }
+            if (await this.client.playerDb.hasSquad(user.id)) {
+                return await this.ctx.reply("Oups...", "Ce joueur possède déjà une escouade, il est donc impossible de l'inviter dans la votre.", null, null, "warning");
+            }
 
             await this.client.squadDb.joinSquad(pDatas.squad.owner, user.id);
             return await this.ctx.reply("Inviter un nouveau membre.", "Le joueur a accepté de rejoindre l'escouade. Bienvenue à lui !", "⛩️", null, "outline");

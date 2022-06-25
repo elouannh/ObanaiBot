@@ -23,8 +23,22 @@ class Prefix extends Command {
         if (this.args.length > 0) {
             const isValid = await this.client.guildDb.validPrefix(this.args.join(""));
 
-            if (isValid === null) return await this.ctx.reply("Nouveau préfixe invalide.", "Votre préfixe doit être de la forme suivante:```[a-z]{0,1}?[!?.:;,]```\n```Exemples:\n- prefix d?```", null, null, "error");
-            const msg = await this.ctx.reply("Changement de préfixe.", `Souhaitez-vous changer le préfixe de votre serveur ?\nLe nouveau préfixe utilisé sera \`${isValid}\``, null, null, "info");
+            if (isValid === null) {
+                return await this.ctx.reply(
+                    "Nouveau préfixe invalide.",
+                    "Votre préfixe doit être de la forme suivante:```[a-z]{0,1}?[!?.:;,]```\n```Exemples:\n- prefix d?```",
+                    null,
+                    null,
+                    "error",
+                );
+            }
+            const msg = await this.ctx.reply(
+                "Changement de préfixe.",
+                `Souhaitez-vous changer le préfixe de votre serveur ?\nLe nouveau préfixe utilisé sera \`${isValid}\``,
+                null,
+                null,
+                "info",
+            );
             const choice = await this.ctx.reactionCollection(msg, ["❌", "✅"]);
             if (choice === "✅") {
                 await this.client.guildDb.changePrefix(this.message.guild.id, isValid);
@@ -38,7 +52,13 @@ class Prefix extends Command {
             }
         }
         else {
-            return await this.ctx.reply("Bonjour !", `Je suis Obanai. Mon préfixe sur ce serveur est \`${guildPrefix.prefix}\`. Tu peux voir la liste de mes commandes en faisant \`${guildPrefix.prefix}help\`.`, null, null, "info");
+            return await this.ctx.reply(
+                "Bonjour !",
+                `Je suis Obanai. Mon préfixe sur ce serveur est \`${guildPrefix.prefix}\`. Tu peux voir la liste de mes commandes en faisant \`${guildPrefix.prefix}help\`.`,
+                null,
+                null,
+                "info",
+            );
         }
     }
 }

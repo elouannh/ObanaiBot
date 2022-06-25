@@ -86,7 +86,13 @@ class Dig extends Command {
             return await this.ctx.reply("Fouiller la zone.", finalStr, "🔎", null, "outline");
         }
         else {
-            return await this.ctx.reply("Fouiller la zone.", `Il semblerait que vous ayez déjà fouillé cette zone. Revenez dans **${convertDate(7_200_000 - timeSpent, false).string}** à cet emplacement.`, "🔎", null, "error");
+            return await this.ctx.reply(
+                "Fouiller la zone.",
+                `Il semblerait que vous ayez déjà fouillé cette zone. Revenez dans **${convertDate(7_200_000 - timeSpent, false).string}** à cet emplacement.`,
+                "🔎",
+                null,
+                "error",
+            );
         }
     }
 }

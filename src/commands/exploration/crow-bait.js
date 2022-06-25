@@ -77,9 +77,23 @@ class CrowBait extends Command {
         const kasugais = fs.readdirSync("./src/elements/kasugai_crows").map(e => require(`../../elements/kasugai_crows/${e}`)).filter(e => e.rarity === rarity);
         const kasugai = kasugais[Math.floor(Math.random() * kasugais.length)];
 
-        const [actualCrow, actualCrowLevel] = [iDatas.kasugai_crow === null ? null : require(`../../elements/kasugai_crows/${iDatas.kasugai_crow}`), calcCrowLevel(iDatas.kasugai_crow_exp)];
-        const supStr = `${actualCrow === null ? "Voulez-vous le récupérer et en faire votre oiseau ?" : `Vous avez déjà **${actualCrow.name}** (Rareté: ${"💎".repeat(actualCrow.rarity)}${"⚫".repeat(5 - actualCrow.rarity)}), niveau **${actualCrowLevel.level} (${actualCrowLevel.exp} exp)**, voulez-vous le remplacer ? Toute progression en niveaux de corbeau sera perdue.`}`;
-        const msg = await this.ctx.reply("Appâtage d'oiseaux.", `L'oiseau suivant s'est fait avoir par votre appât: **${kasugai.name}** (Rareté: ${"💎".repeat(kasugai.rarity)}${"⚫".repeat(5 - kasugai.rarity)})\n\n${supStr}\n\nRépondre avec \`y\` (oui) ou \`n\` (non).`, "🐦", null, "outline");
+        const [actualCrow, actualCrowLevel] = [
+            iDatas.kasugai_crow === null ? null : require(`../../elements/kasugai_crows/${iDatas.kasugai_crow}`), calcCrowLevel(iDatas.kasugai_crow_exp),
+        ];
+        const supStr = `${
+            actualCrow === null ? "Voulez-vous le récupérer et en faire votre oiseau ?"
+            : `Vous avez déjà **${actualCrow.name}** (Rareté: ${"💎".repeat(actualCrow.rarity)}${"⚫".repeat(5 - actualCrow.rarity)}), niveau **${actualCrowLevel.level} `
+              +
+              `(${actualCrowLevel.exp} exp)**, voulez-vous le remplacer ? Toute progression en niveaux de corbeau sera perdue.`}`;
+        const msg = await this.ctx.reply(
+            "Appâtage d'oiseaux.",
+            `L'oiseau suivant s'est fait avoir par votre appât: **${kasugai.name}** `
+            +
+            `(Rareté: ${"💎".repeat(kasugai.rarity)}${"⚫".repeat(5 - kasugai.rarity)})\n\n${supStr}\n\nRépondre avec \`y\` (oui) ou \`n\` (non).`,
+            "🐦",
+            null,
+            "outline",
+        );
         const choice = await this.ctx.messageCollection(msg);
 
         if (this.ctx.isResp(choice, "y")) {

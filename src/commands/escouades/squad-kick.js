@@ -30,7 +30,15 @@ class SquadKick extends Command {
         if (user === null) return;
         if (user.id === this.message.author.id) return await this.ctx.reply("Oups...", "Vous ne pouvez pas vous inviter vous-même.", null, null, "warning");
 
-        const msg = await this.ctx.reply("Exclusion d'un joueur de l'escouade.", `Souhaitez-vous vraiment exclure **${user.username}** de votre escouade ?\n\n**__Requis :__**\`\`\`diff\n- Être chef d'escouade\n- Avoir une escouade\`\`\`\n\nRépondre avec \`y\` (oui) ou \`n\` (non).`, "⛩️", null, "outline");
+        const msg = await this.ctx.reply(
+            "Exclusion d'un joueur de l'escouade.",
+            `Souhaitez-vous vraiment exclure **${user.username}** de votre escouade ?`
+            +
+            "\n\n**__Requis :__**```diff\n- Être chef d'escouade\n- Avoir une escouade```\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "⛩️",
+            null,
+            "outline",
+        );
         const choice = await this.ctx.messageCollection(msg);
 
         if (this.ctx.isResp(choice, "y")) {

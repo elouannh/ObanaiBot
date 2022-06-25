@@ -32,14 +32,28 @@ class Train extends Command {
         if (aDatas.isTraining) {
             const timeLeft = aDatas.training.start + aDatas.training.duration - Date.now();
             if (timeLeft > 0) {
-                return await this.ctx.reply("Vous vous entraînez déjà.", `Il semblerait que vous êtes déjà en train de vous entraîner ! Voici plus d'informations :\n\`\`\`Aptitude: ${emojis[aDatas.training.aptitude]}${values[aDatas.training.aptitude]}\nTemps restant: ${convertDate(timeLeft).string}\`\`\``, null, null, "outline");
+                return await this.ctx.reply(
+                    "Vous vous entraînez déjà.",
+                    "Il semblerait que vous êtes déjà en train de vous entraîner ! Voici plus d'informations :"
+                    +
+                    `\n\`\`\`Aptitude: ${emojis[aDatas.training.aptitude]}${values[aDatas.training.aptitude]}\nTemps restant: ${convertDate(timeLeft).string}\`\`\``,
+                    null,
+                    null,
+                    "outline",
+                );
             }
             else {
                 const pDatas = await this.client.playerDb.get(this.message.author.id);
                 const apt = pDatas.stats[aDatas.training.aptitude];
                 await this.client.activityDb.endOfTrain(this.message.author.id);
                 await this.client.playerDb.gainExp(this.message.author.id, Math.floor(Math.random() * 150) + 100, this);
-                return await this.ctx.reply("Votre entraînement est terminé !", `Votre aptitude \`${aDatas.training.aptitude}\` monte ! Passage de niveau **${apt}** > **${apt + 1}**`, null, null, "success");
+                return await this.ctx.reply(
+                    "Votre entraînement est terminé !",
+                    `Votre aptitude \`${aDatas.training.aptitude}\` monte ! Passage de niveau **${apt}** > **${apt + 1}**`,
+                    null,
+                    null,
+                    "success",
+                );
             }
         }
         const pDatas = await this.client.playerDb.get(this.message.author.id);
@@ -58,7 +72,15 @@ class Train extends Command {
                 goodMojs.push(emojis[key]);
             }
         }
-        if (goodMojs.length === 0) return await this.ctx.reply("Impossible de vous entraîner.", "Il semblerait que vous n'ayez pas assez d'expérience pour continuer de vous entraîner. Continuez de progresser !", null, null, "info");
+        if (goodMojs.length === 0) {
+            return await this.ctx.reply(
+                "Impossible de vous entraîner.",
+                "Il semblerait que vous n'ayez pas assez d'expérience pour continuer de vous entraîner. Continuez de progresser !",
+                null,
+                null,
+                "info",
+            );
+        }
 
         goodMojs.push("❌");
         const msg = await this.ctx.reply("Lancer un entrainement.", str, null, null, "info");
@@ -72,7 +94,15 @@ class Train extends Command {
         }
         else {
             const finalChoice = Object.keys(emojis).filter(e => emojis[e] === choice)?.at(0);
-            const msg2 = await this.ctx.reply("Partir en entraînement !", `Souhaitez vous vraiment vous entraîner ? Vous ne pourrez pas revenir en arrière !\nVotre aptitude **${values[finalChoice]}** montera au niveau **${pDatas.stats[finalChoice] + 1}**`, null, null, "info");
+            const msg2 = await this.ctx.reply(
+                "Partir en entraînement !",
+                "Souhaitez vous vraiment vous entraîner ? Vous ne pourrez pas revenir en arrière !"
+                +
+                `\nVotre aptitude **${values[finalChoice]}** montera au niveau **${pDatas.stats[finalChoice] + 1}**`,
+                null,
+                null,
+                "info",
+            );
             const choice2 = await this.ctx.reactionCollection(msg2, ["❌", "✅"]);
             if (choice2 === "✅") {
                 await this.client.activityDb.trains(this.message.author.id, finalChoice, times[finalChoice]);
