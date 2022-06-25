@@ -1,5 +1,6 @@
 {
     "name": "Souffle de la Lune",
+    "id": "moon",
     "emoji": "🌙",
     "attack": {
         "quick": [

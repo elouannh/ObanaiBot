@@ -5,7 +5,7 @@
     "vip": false,
     "description": "",
     "bonus": ["force", "speed"],
-    "breaths": ["rock"],
+    "breaths": ["stone"],
     "weaponName": "Fléau à pointe & Hache",
     "rarityNames": [
         "abîmés",

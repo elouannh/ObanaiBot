@@ -1,5 +1,6 @@
 {
     "name": "Souffle de la Flamme",
+    "id": "flame",
     "emoji": "🔥",
     "attack": {
         "quick": [

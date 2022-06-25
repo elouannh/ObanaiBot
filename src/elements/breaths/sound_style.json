@@ -1,5 +1,6 @@
 {
     "name": "Souffle du Son",
+    "id": "sound",
     "emoji": "✨",
     "attack": {
         "quick": [

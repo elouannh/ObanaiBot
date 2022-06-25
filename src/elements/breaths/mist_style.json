@@ -1,5 +1,6 @@
 {
     "name": "Souffle de la Brume",
+    "id": "mist",
     "emoji": "☁",
     "attack": {
         "quick": [

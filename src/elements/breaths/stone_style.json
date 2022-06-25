@@ -1,5 +1,6 @@
 {
     "name": "Souffle de la Roche",
+    "id": "stone",
     "emoji": "🧱",
     "attack": {
         "quick": [

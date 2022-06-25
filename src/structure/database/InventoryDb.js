@@ -160,10 +160,19 @@ class InventoryDb {
         this.db.set(id, newXp, "kasugai_crow_exp");
     }
 
-    async changeCategory(id, label) {
+    async changeCategory(id, label, breath) {
         const p = await this.get(id);
 
         this.client.playerDb.db.set(id, label, "category");
+        this.client.playerDb.db.set(id, 1, "categoryLevel");
+        this.client.playerDb.db.set(id, breath, "breath");
+        this.db.set(id, p.grimoires.mastery - 1, "grimoires.mastery");
+    }
+
+    async upgradeCategory(id, catLevel) {
+        const p = await this.get(id);
+
+        this.client.playerDb.db.set(id, catLevel + 1, "categoryLevel");
         this.db.set(id, p.grimoires.mastery - 1, "grimoires.mastery");
     }
 }

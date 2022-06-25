@@ -1,5 +1,6 @@
 {
     "name": "Souffle de l'Insecte",
+    "id": "insect",
     "emoji": "🦋",
     "attack": {
         "quick": [

@@ -1,5 +1,6 @@
 {
     "name": "Souffle du Serpent",
+    "id": "serpent",
     "emoji": "🐍",
     "attack": {
         "quick": [

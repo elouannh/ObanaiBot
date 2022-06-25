@@ -4,10 +4,10 @@ class Grimoire extends Command {
     constructor() {
         super({
             adminOnly: false,
-            aliases: ["grimoire-unset", "grim-unset"],
+            aliases: ["grimoire-unset", "gu"],
             args: [],
             category: "Stats",
-            cooldown: 5,
+            cooldown: 15,
             description: "Commande permettant de retirer son grimoire.",
             examples: ["grimoire-unset"],
             finishRequest: "ADVENTURE",
@@ -22,24 +22,32 @@ class Grimoire extends Command {
         const pExists = await this.client.playerDb.started(this.message.author.id);
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
-        const pDatas = await this.client.inventoryDb.get(this.message.author.id);
-        if (pDatas.active_grimoire === null) return await this.ctx.reply("Je ne peux pas retirer votre grimoire.", "Il semblerait qu'il n'y ait pas de grimoire actif sur votre inventaire.", null, null, "info");
+        const msg = await this.ctx.reply(
+            "Retirer un grimoire.",
+            "Voulez-vous retirer votre grimoire actif ? Les effets appliqués dessus disparaitront. Vous gagnerez quelques yens de compensation."
+            +
+            "\n\nSi il s'agit d'un grimoire éternel, il reviendra juste dans votre inventaire.\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "📖",
+            null,
+            "outline",
+        );
+        const choice = await this.ctx.messageCollection(msg);
 
-        const grimDatas = require(`../../elements/grimoires/${pDatas.active_grimoire}.json`);
+        if (this.ctx.isResp(choice, "y")) {
+            const pDatas = await this.client.inventoryDb.get(this.message.author.id);
+            if (pDatas.active_grimoire === null) {
+                return await this.ctx.reply("Oups...", "Il semblerait qu'il n'y ait pas de grimoire actif sur votre inventaire.", null, null, "warning");
+            }
 
-        let str = `Vous êtes sur le point de retirer **${grimDatas.name}** ! Retirer un grimoire le rend inutilisable ! Vous toucherez donc quelques yens en fonction de son temps restant d'utilisation en compensation.`;
-        if (pDatas.active_grimoire === "eternal") str = `Vous allez retirer **${grimDatas.name}**. Ce grimoire est intemporel, et donc vous pourrez le rééquiper quand vous le souhaiterez.`;
-        const msg = await this.ctx.reply("Retirer votre grimoire.", str, null, null, "info");
-        const choice = await this.ctx.reactionCollection(msg, ["❌", "✅"]);
-        if (choice === "✅") {
+            const grimDatas = require(`../../elements/grimoires/${pDatas.active_grimoire}.json`);
             await this.client.inventoryDb.unequipGrimoire(this.message.author.id, this);
-            return await this.ctx.reply("Votre grimoire a bien été retiré !", `Vous avez donc retiré **${grimDatas.name}**.`, null, null, "success");
+            return await this.ctx.reply("Retirer un grimoire.", `Vous avez donc retiré **${grimDatas.name}**.`, "📖", null, "outline");
         }
-        else if (choice === "❌") {
-            return await this.ctx.reply("Vous n'équipez rien.", `Vous avez décidé de ne pas retirer **${grimDatas.name}**.`, null, null, "info");
+        else if (this.ctx.isResp(choice, "n")) {
+            return await this.ctx.reply("Retirer un grimoire.", "Vous avez donc décidé de ne pas retirer votre grimoire.", "📖", null, "outline");
         }
-        else if (choice === null) {
-            return await this.ctx.reply("Équiper votre grimoire.", "La commande n'a pas aboutie.", null, null, "timeout");
+        else {
+            return await this.ctx.reply("Retirer un grimoire.", "La commande n'a pas aboutie.", null, null, "timeout");
         }
     }
 }

@@ -1,5 +1,6 @@
 {
     "name": "Souffle de l'Eau",
+    "id": "water",
     "emoji": "🌊",
     "attack": {
         "quick": [

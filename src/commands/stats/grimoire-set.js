@@ -4,10 +4,10 @@ class Grimoire extends Command {
     constructor() {
         super({
             adminOnly: false,
-            aliases: ["grimoire-set", "grim-set"],
+            aliases: ["grimoire-set", "gs"],
             args: [],
             category: "Stats",
-            cooldown: 5,
+            cooldown: 15,
             description: "Commande permettant d'équiper un grimoire.",
             examples: ["grimoire-set"],
             finishRequest: "ADVENTURE",
@@ -22,9 +22,17 @@ class Grimoire extends Command {
         const pExists = await this.client.playerDb.started(this.message.author.id);
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
-        const pDatas = await this.client.inventoryDb.get(this.message.author.id);
+        let pDatas = await this.client.inventoryDb.get(this.message.author.id);
 
-        if (pDatas.active_grimoire !== null) return await this.ctx.reply("Je ne peux pas équiper votre grimoire.", "Il semblerait qu'il y ait déjà un grimoire actif sur votre inventaire. Commencez par le retirer !", null, null, "info");
+        if (pDatas.active_grimoire !== null) {
+            return await this.ctx.reply(
+                "Oups...",
+                "Il semblerait qu'il y ait déjà un grimoire actif sur votre inventaire. Commencez par le retirer !",
+                "📖",
+                null,
+                "outline",
+            );
+        }
 
         const emojis = {
             "adventurer": "🗺️",
@@ -35,28 +43,39 @@ class Grimoire extends Command {
             "warrior": "🔥",
         };
 
-        const grimoires = Object.entries(pDatas.grimoires).filter(g => g[1] > 0).filter(g => g[0] !== "mastery").map(e => [require(`../../elements/grimoires/${e[0]}.json`), emojis[e[0]], e[1]]);
-        const str = `${grimoires.map(g => `${g[1]} **• ${g[0].name}** (\`x${g[2]}\`)`).join("\n")}`;
-        const msg = await this.ctx.reply("Choix du grimoire à équiper.", str, null, null, "info");
-        const l = grimoires.map(e => e[1]);
-        l.push("❌");
-        const choice = await this.ctx.reactionCollection(msg, l);
+        const grimoires = Object.entries(pDatas.grimoires).filter(g => g[1] > 0).filter(g => g[0] !== "mastery")
+                          .map(e => [require(`../../elements/grimoires/${e[0]}.json`), emojis[e[0]], e[1]]);
+        let str = `${grimoires.map(g => `${g[1]} **• \`id:${g[0].label}\` ${g[0].name}** (\`x${g[2]}\`)`).join("\n")}`;
 
-        if (choice === null) return await this.ctx.reply("Équiper votre grimoire.", "La commande n'a pas aboutie.", null, null, "timeout");
-        if (choice === "❌") return await this.ctx.reply("Équiper votre grimoire.", "Vous avez refusé d'équiper un grimoire.", null, null, "info");
-        const grimDatas = grimoires.filter(g => g[1] === choice)?.at(0)?.at(0);
+        str += "\n\nRépondez au message ci-dessous avec l'id correspondant de votre grimoire. Répondez avec `n` (non) pour annuler. ";
+        str += "Une fois que vous répondrez, votre grimoire sera automatiquement mis en place.";
 
-        const msg2 = await this.ctx.reply("Équiper votre grimoire.", `Vous êtes sur le point d'équiper **${grimDatas.name}** ! Cette action est irréversible, et vous ne pourrez pas être remboursé intégralement. Êtes vous sûr ?`, null, null, "info");
-        const choice2 = await this.ctx.reactionCollection(msg2, ["❌", "✅"]);
-        if (choice2 === "✅") {
+        const msg = await this.ctx.reply("Équiper un grimoire.", str, "📖", null, "outline");
+        const choice = await this.ctx.messageCollection(msg);
+
+        if (Object.keys(emojis).includes(choice)) {
+            pDatas = await this.client.inventoryDb.get(this.message.author.id);
+
+            if (pDatas.active_grimoire !== null) {
+                return await this.ctx.reply(
+                    "Oups...",
+                    "Il semblerait qu'il y ait déjà un grimoire actif sur votre inventaire. Commencez par le retirer !",
+                    "📖",
+                    null,
+                    "outline",
+                );
+            }
+
+            const grimDatas = grimoires.filter(g => g[0].label === choice)?.at(0)?.at(0);
             await this.client.inventoryDb.equipGrimoire(this.message.author.id, grimDatas.label);
-            return await this.ctx.reply("Votre grimoire a bien été équipé !", `Vous avez donc équipé **${grimDatas.name}**.`, null, null, "success");
+            return await this.ctx.reply("Équiper un grimoire.", `Vous avez donc équipé **${grimDatas.name}**.`, "📖", null, "outline");
         }
-        else if (choice2 === "❌") {
-            return await this.ctx.reply("Vous n'équipez rien.", `Vous avez décidé de ne pas équiper **${grimDatas.name}**.`, null, null, "info");
+        else if (this.ctx.isResp(choice, "n")) {
+            const grimDatas = grimoires.filter(g => g[1] === choice)?.at(0)?.at(0);
+            return await this.ctx.reply("Équiper un grimoire.", `Vous avez décidé de ne pas équiper **${grimDatas.name}**.`, "📖", null, "outline");
         }
-        else if (choice2 === null) {
-            return await this.ctx.reply("Équiper votre grimoire.", "La commande n'a pas aboutie.", null, null, "timeout");
+        else {
+            return await this.ctx.reply("Équiper un grimoire.", "La commande n'a pas aboutie.", null, null, "timeout");
         }
     }
 }
