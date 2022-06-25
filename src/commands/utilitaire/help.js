@@ -4,10 +4,10 @@ class Help extends Command {
     constructor() {
         super({
             adminOnly: false,
-            aliases: ["help", "aide"],
+            aliases: ["help"],
             args: [["command", "nom de la commande", false]],
             category: "Utilitaire",
-            cooldown: 0,
+            cooldown: 10,
             description: "Commande permet de voir la liste des autres commandes.",
             examples: ["help", "help prefix"],
             finishRequest: [],

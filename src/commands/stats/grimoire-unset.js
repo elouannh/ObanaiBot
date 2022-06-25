@@ -1,6 +1,6 @@
 const Command = require("../../base/Command");
 
-class Grimoire extends Command {
+class GrimoireUnset extends Command {
     constructor() {
         super({
             adminOnly: false,
@@ -52,4 +52,4 @@ class Grimoire extends Command {
     }
 }
 
-module.exports = new Grimoire();
+module.exports = new GrimoireUnset();

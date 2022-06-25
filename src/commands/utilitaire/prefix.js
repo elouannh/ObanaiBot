@@ -4,7 +4,7 @@ class Prefix extends Command {
     constructor() {
         super({
             adminOnly: false,
-            aliases: ["prefix", "prefixe"],
+            aliases: ["prefix"],
             args: [["prefix", "nouveau préfixe à configurer", false]],
             category: "Utilitaire",
             cooldown: 0,

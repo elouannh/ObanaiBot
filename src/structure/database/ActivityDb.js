@@ -162,7 +162,6 @@ class ActivityDb {
             itemRarity: item.rarity,
             itemName: item.datas.name,
             itemLabel: item.datas.weapon,
-            itemDatas: item.datas,
         };
 
         this.db.set(id, forgingDatas, "forging");

@@ -77,8 +77,6 @@ class Category extends Command {
                 else {
                     good = false;
                 }
-
-                console.log(breaths);
             }
 
             if (!good) return await this.ctx.reply("Changement/amélioration de catégorie.", "La commande n'a pas aboutie.", null, null, "timeout");
@@ -89,7 +87,7 @@ class Category extends Command {
             if (masteries <= 0) return await this.ctx.reply("Oups...", "Vous n'avez pas de **Grimoire de maîtrise** en stock.", null, null, "warning");
 
             if (cat.label === pDatas.category && breath === pDatas.breath) {
-                await this.client.inventoryDb.upgradeCategory(this.message.author.id, pDatas.categoryLevel);
+                await this.client.playerDb.upgradeCategory(this.message.author.id, pDatas.categoryLevel);
                 return await this.ctx.reply(
                     "Changement/amélioration de catégorie.",
                     `Vous avez amélioré votre catégorie. Elle passe au niveau **${pDatas.categoryLevel + 1}**`,
@@ -99,7 +97,7 @@ class Category extends Command {
                 );
             }
             else {
-                await this.client.inventoryDb.changeCategory(this.message.author.id, cat.label, breath);
+                await this.client.playerDb.changeCategory(this.message.author.id, cat.label, breath);
                 return await this.ctx.reply(
                     "Changement/amélioration de catégorie.",
                     `Vous avez bien changé de catégorie, vous voilà désormais dans la catégorie **${cat.name}**.`,

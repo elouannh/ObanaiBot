@@ -1,6 +1,6 @@
 const Command = require("../../base/Command");
 
-class Start extends Command {
+class Reset extends Command {
     constructor() {
         super({
             adminOnly: false,
@@ -49,4 +49,4 @@ class Start extends Command {
     }
 }
 
-module.exports = new Start();
+module.exports = new Reset();

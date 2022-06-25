@@ -30,6 +30,7 @@ class PlayerDb {
             weapon: {
                 rarity: 1,
                 name:  `${require("../../elements/categories/slayer.json").weaponName} ${require("../../elements/categories/slayer.json").rarityNames[0]}`,
+                label:  `${require("../../elements/categories/slayer.json").weapon}`,
             },
             breath: "water",
             exp: 0,
@@ -172,6 +173,22 @@ class PlayerDb {
 
     async hasSquad(id) {
         return (await this.get(id)).squad !== null;
+    }
+
+    async changeCategory(id, label, breath) {
+        const p = await this.client.inventoryDb.get(id);
+
+        this.db.set(id, label, "category");
+        this.db.set(id, 1, "categoryLevel");
+        this.db.set(id, breath, "breath");
+        this.client.inventoryDb.db.set(id, p.grimoires.mastery - 1, "grimoires.mastery");
+    }
+
+    async upgradeCategory(id, catLevel) {
+        const p = await this.client.inventoryDb.get(id);
+
+        this.db.set(id, catLevel + 1, "categoryLevel");
+        this.client.inventoryDb.db.set(id, p.grimoires.mastery - 1, "grimoires.mastery");
     }
 }
 

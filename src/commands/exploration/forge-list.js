@@ -34,8 +34,8 @@ class ForgeList extends Command {
                 const dat = aDatas.forging[i];
                 items[i] = dat;
                 let str = `**${Number(i) + 1}.** `;
-                if (dat.itemCat === "weapon") str += `Fabrication d'une arme: **${dat.itemDatas.name}** (rareté **${dat.itemRarity}**)`;
-                if (dat.itemCat === "tool") str += `Fabrication d'un outil: **${dat.itemDatas.name}** (rareté **${dat.itemRarity}**)`;
+                if (dat.itemCat === "weapon") str += `Fabrication d'une arme: **${dat.itemName}** (rareté **${dat.itemRarity}**)`;
+                if (dat.itemCat === "tool") str += `Fabrication d'un outil: **${dat.itemName}** (rareté **${dat.itemRarity}**)`;
                 str += `\n> *Fin dans: ${convertDate((dat.start + dat.duration) - Date.now()).string}*`;
                 if ((dat.start + dat.duration) - Date.now() <= 0) dates[i] = true;
                 else dates[i] = false;
