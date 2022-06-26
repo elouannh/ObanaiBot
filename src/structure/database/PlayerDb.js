@@ -136,7 +136,7 @@ class PlayerDb {
         return this.db.has(id) && (await this.get(id)).started;
     }
 
-    async gainExp(id, exp, cmd = null) {
+    async earnExp(id, exp, cmd = null) {
         const p = await this.get(id);
         const i = await this.client.inventoryDb.get(id);
 

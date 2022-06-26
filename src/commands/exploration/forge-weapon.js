@@ -23,8 +23,8 @@ class ForgeWeapon extends Command {
         const pExists = await this.client.playerDb.started(this.message.author.id);
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
-        function luck(count = 0, x) {
-            if ((Math.random() * 100) < (100 / ((count + 1) / x)) && count < 5) return luck(count + 1);
+        function luck(x, count = 0) {
+            if ((Math.random() * 100) < (100 / ((count + 1) / x)) && count < 5) return luck(x, count + 1);
             return count;
         }
 
@@ -69,21 +69,21 @@ class ForgeWeapon extends Command {
                 if (i[0] < i[1]) missing[item] = [i[0], i[1], i[1] - i[0]];
             }
             if (Object.values(missing).length !== 0) return await this.ctx.reply("Oups...", "Vous n'avez pas les éléments nécessaires.", null, null, "warning");
+            const rarity = luck((this.client.mapDb.db.get(this.message.author.id).region === 7 ? 3 : 1));
             await this.ctx.reply(
-                "Forger une arme.", `Vous forgez donc une arme !\n\n__Détails de l'arme:__\n**Temps de forge** : ${convertDate(7_200_000 * rarity).string}**\n`
+                "Forger une arme.", `Vous forgez donc une arme !\n\n**Détails de l'arme:**\nTemps de forge: **${convertDate(7_200_000 * rarity).string}**\n`
                 +
-                `**Rareté** : ${rarity}\n*Plus d'informations avec la commande !forge-list.*`,
+                `Rareté: **${rarity}**\n*Plus d'informations avec la commande !forge-list.*`,
+                "🗡️",
                 null,
-                null,
-                "timeout",
+                "outline",
             );
-            const rarity = luck(1);
             const itemFile = require(`../../elements/categories/${pDatas.category}.json`);
             const itemDat = {
                 type: "weapon",
                 rarity: rarity,
                 datas: {
-                    name: `${itemFile.weaponName} ${itemFile.rarityNames[rarity]}`,
+                    name: `${itemFile.weaponName} ${itemFile.rarityNames[rarity - 1]}`,
                     weapon: `${itemFile.weapon}`,
                 },
             };

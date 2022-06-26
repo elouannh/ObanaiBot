@@ -82,7 +82,7 @@ class Dig extends Command {
                 this.client.mapDb.db.set(this.message.author.id, Date.now(), `exploration.${loc.id}_${area.id}.lastDig`);
             }
 
-            await this.client.playerDb.gainExp(this.message.author.id, Math.floor(Math.random() * 150) + 100, this);
+            await this.client.playerDb.earnExp(this.message.author.id, Math.floor(Math.random() * 150) + 100, this);
             return await this.ctx.reply("Fouiller la zone.", finalStr, "🔎", null, "outline");
         }
         else {

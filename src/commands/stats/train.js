@@ -46,7 +46,7 @@ class Train extends Command {
                 const pDatas = await this.client.playerDb.get(this.message.author.id);
                 const apt = pDatas.stats[aDatas.training.aptitude];
                 await this.client.activityDb.endOfTrain(this.message.author.id);
-                await this.client.playerDb.gainExp(this.message.author.id, Math.floor(Math.random() * 150) + 100, this);
+                await this.client.playerDb.earnExp(this.message.author.id, Math.floor(Math.random() * 150) + 100, this);
                 return await this.ctx.reply(
                     "S'entraîner.",
                     `Votre aptitude \`${aDatas.training.aptitude}\` monte ! Passage de niveau **${apt}** > **${apt + 1}**`,

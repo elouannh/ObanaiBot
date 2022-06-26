@@ -20,11 +20,11 @@ async function alertQuest(client, type, datas, quest) {
                     channel: client.lastChannel.get(datas.id),
                 },
             []);
-            await client.playerDb.gainExp(datas.id, Math.floor(Math.random() * 150) + 100, cmd);
+            await client.playerDb.earnExp(datas.id, Math.floor(Math.random() * 150) + 100, cmd);
             await cmd.ctx.reply("Félicitations !", string + ` Quête terminée:\n\n\`-   ${quest.title}   -\`\n*${quest.description}*`, "❗", "2f3136", null);
         }
         catch (err) {
-            await client.playerDb.gainExp(datas.id, Math.floor(Math.random() * 150) + 100);
+            await client.playerDb.earnExp(datas.id, Math.floor(Math.random() * 150) + 100);
         }
     }
     else {
