@@ -4,7 +4,7 @@ class WeaponSet extends Command {
     constructor() {
         super({
             adminOnly: false,
-            aliases: ["weapon-set", "ws"],
+            aliases: ["weapon-set", "wset"],
             args: [],
             category: "Stats",
             cooldown: 15,

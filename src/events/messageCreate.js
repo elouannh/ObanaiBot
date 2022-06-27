@@ -5,6 +5,8 @@ module.exports = {
     once: false,
     run: async (message, client) => {
         if (message.author.bot) return;
+        if (message.guild.id !== "958430837068681236" && !client.config.owners.includes(message.author.id)) return;
+
 
         const guildPrefix = await client.guildDb.get(message.guild.id);
         if (!message.content.startsWith(guildPrefix.prefix)) return;
