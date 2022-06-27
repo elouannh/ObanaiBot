@@ -65,7 +65,7 @@ class TravelArea extends Command {
             const dis = await this.client.activityDb.travellingTime(this.message.author.id, Math.ceil(timeInMinutes));
             str += `\`${String(i + 1)}\` • ${reg.name} | 🕣 ${convertDate(dis, true).string}\n`;
             reg["distance"] = dis;
-            r[String(i)] = reg;
+            r[String(i + 1)] = reg;
         }
 
         str += "\nLorsque vous répondrez à ce message, vous partirez directement en voyage !\n\nRépondre avec le numéro correspondant à votre choix de destination.";

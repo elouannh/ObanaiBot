@@ -181,6 +181,11 @@ class PlayerDb {
         this.db.set(id, label, "category");
         this.db.set(id, 1, "categoryLevel");
         this.db.set(id, breath, "breath");
+        this.db.set(id, {
+            rarity: 1,
+            name:  `${require(`../../elements/categories/${label}.json`).weaponName} ${require(`../../elements/categories/${label}.json`).rarityNames[0]}`,
+            label:  `${require(`../../elements/categories/${label}.json`).weapon}`,
+        }, "weapon");
         this.client.inventoryDb.db.set(id, p.grimoires.mastery - 1, "grimoires.mastery");
     }
 

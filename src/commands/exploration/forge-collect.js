@@ -24,10 +24,10 @@ class ForgeCollect extends Command {
 
         const aDatas = await this.client.activityDb.get(this.message.author.id);
         const iDatas = await this.client.inventoryDb.get(this.message.author.id);
+        const existingWeapons = "weapons" in iDatas ? iDatas.weapons : [];
 
         const items = {};
         const dates = {};
-
 
         for (const i in aDatas.isForging) {
             if (aDatas.isForging[i]) {
@@ -38,13 +38,13 @@ class ForgeCollect extends Command {
             }
         }
 
+        if ((Object.values(dates).filter(d => d === true).length + existingWeapons.length) > 10) return await this.ctx.reply("Oups...", "Vous ne pouvez pas récupérer les objets qui sont forgés. Votre inventaire d'arme est plein. Veuillez vendre des armes avec la commande !weapon-sell.", null, null, "warning");
+
         if (Object.values(dates).includes(true)) {
             let collected = "\n\nVoici les objets récupérés:\n```diff";
             let i = 0;
             const newIsForging = aDatas.isForging;
             const newForging = aDatas.forging;
-            const existingWeapons = "weapons" in iDatas ? iDatas.weapons : [];
-            const existingTools = "tools" in iDatas ? iDatas.tools : [];
             console.log(newForging, newIsForging);
 
             for (const elt of Object.values(items)) {
@@ -55,8 +55,7 @@ class ForgeCollect extends Command {
                         label: elt.itemLabel,
                     };
 
-                    if (elt.itemCat === "weapon") existingWeapons.push(d);
-                    if (elt.itemCat === "tool") existingTools.push(d);
+                    existingWeapons.push(d);
 
                     newIsForging[i] = false;
                     newForging[i] = null;
@@ -65,9 +64,6 @@ class ForgeCollect extends Command {
                 i++;
             }
 
-            console.log(newForging, newIsForging);
-
-            await this.client.inventoryDb.db.set(this.message.author.id, existingTools, "tools");
             await this.client.inventoryDb.db.set(this.message.author.id, existingWeapons, "weapons");
             collected += "```";
             await this.client.activityDb.db.set(this.message.author.id, newIsForging, "isForging");
