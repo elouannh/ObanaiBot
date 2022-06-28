@@ -32,14 +32,6 @@ class Inventory extends Command {
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
         const pDatas = await this.client.inventoryDb.get(user.id);
-        const crowLevel = calcCrowLevel(pDatas.kasugai_crow_exp);
-        const boost = crowLevel.level;
-        const crows_boost = {
-            "experience_gain": `+${boost * 5}%⭐`,
-            "yens_gain": `+${boost * 5}%💰`,
-            "travelling_time": `-${boost * 5}%🕣 voyage`,
-            "training_time": `-${boost * 5}%🕣 entrainement`,
-        };
         const grims_boost = {
             "experience_gain": "+[b]%⭐",
             "yens_gain": "+[b]%💰",
@@ -52,20 +44,9 @@ class Inventory extends Command {
         const title = `Inventaire de ${user.username}`;
         let inventory = "";
 
-        const crow = pDatas.kasugai_crow === null ? null : require(`../../elements/kasugai_crows/${pDatas.kasugai_crow}.json`);
         const grim = pDatas.active_grimoire === null ? null : require(`../../elements/grimoires/${pDatas.active_grimoire}.json`);
 
         inventory += `> Porte-feuille: **${pDatas.yens}¥**`;
-
-        if (crow !== null) {
-            inventory += `\n\n> Corbeau de liaison: **${crow.name}** | Rareté: ${"💎".repeat(crow.rarity)}${"⚫".repeat(5 - crow.rarity)}`;
-            inventory += `\nEffets: ${crow.bonus.length > 0 ? `**${crow.bonus.map(e => crows_boost[e]).join(" | ")}**` : "Aucun effet."}`;
-            const percent = Math.floor(crowLevel.tempExp * 20 / crowLevel.required);
-            inventory += `\nNiveau: **${crowLevel.level}** \`[${"#".repeat(percent)}${"-".repeat(20 - percent)}]\` > **${crowLevel.nextLevel}**`;
-        }
-        else {
-            inventory += "\n\n> Corbeau de liaison: **Pas de corbeau de liaison**";
-        }
 
         if (grim !== null) {
             const timeLeft = (grim.expiration * 1000) - (Date.now() - pDatas.active_grimoire_since);
