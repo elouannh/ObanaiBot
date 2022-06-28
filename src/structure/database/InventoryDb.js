@@ -17,6 +17,11 @@ class InventoryDb {
             active_grimoire_since: 0,
             grimoires: {},
             materials: {},
+            weapon: {
+                rarity: 1,
+                name:  `${require("../../elements/categories/slayer.json").weaponName} ${require("../../elements/categories/slayer.json").rarityNames[0]}`,
+                label:  `${require("../../elements/categories/slayer.json").weapon}`,
+            },
             weapons: [],
         };
 
@@ -175,7 +180,7 @@ class InventoryDb {
         }
 
         this.db.set(id, newArray, "weapons");
-        this.client.playerDb.db.set(id, weapon, "weapon");
+        this.db.set(id, weapon, "weapon");
     }
 
     async sellWeapon(id, weapon) {

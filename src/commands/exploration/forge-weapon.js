@@ -41,8 +41,8 @@ class ForgeWeapon extends Command {
 
         if (Object.entries(items).length >= 3) return await this.ctx.reply("Oups...", "Vous avez atteint le nombre d'items maximum possible en forge. (3)", null, null, "warning");
         const weaponModels = "materials" in iDatas ? ("weapon_model" in iDatas.materials ? iDatas.materials["weapon_model"] : 0) : 0;
-        const tamahagane = "materials" in iDatas ? ("tamahagane" in iDatas.materials ? iDatas.materials["weapon_model"] : 0) : 0;
-        const woodLogs = "materials" in iDatas ? ("wood" in iDatas.materials ? iDatas.materials["weapon_model"] : 0) : 0;
+        const tamahagane = "materials" in iDatas ? ("tamahagane" in iDatas.materials ? iDatas.materials["tamahagane"] : 0) : 0;
+        const woodLogs = "materials" in iDatas ? ("wood" in iDatas.materials ? iDatas.materials["wood"] : 0) : 0;
         const yens = iDatas.yens ?? 0;
 
         const msg = await this.ctx.reply(

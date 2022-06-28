@@ -87,6 +87,8 @@ class Category extends Command {
             if (masteries <= 0) return await this.ctx.reply("Oups...", "Vous n'avez pas de **Grimoire de maîtrise** en stock.", null, null, "warning");
 
             if (cat.label === pDatas.category && breath === pDatas.breath) {
+                if (pDatas.categoryLevel === 14) return await this.ctx.reply("Oups...", "Votre catégorie est déjà au niveau maximum.", null, null, "warning");
+
                 await this.client.playerDb.upgradeCategory(this.message.author.id, pDatas.categoryLevel);
                 return await this.ctx.reply(
                     "Changement/amélioration de catégorie.",

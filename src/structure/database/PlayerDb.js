@@ -13,7 +13,7 @@ class PlayerDb {
         // obligatoire
         id,
         // optionnel
-        category, weapon, breath, squad, map,
+        category, breath, squad, map,
     ) {
         const datas = {
             started: false,
@@ -27,24 +27,15 @@ class PlayerDb {
             },
             category: "slayer",
             categoryLevel: 1,
-            weapon: {
-                rarity: 1,
-                name:  `${require("../../elements/categories/slayer.json").weaponName} ${require("../../elements/categories/slayer.json").rarityNames[0]}`,
-                label:  `${require("../../elements/categories/slayer.json").weapon}`,
-            },
             breath: "water",
             exp: 0,
             created: Date.now(),
             // grades : vip, tester, vip+
             grades: [],
+            badges: [],
         };
 
         if (category !== null) datas.category = category;
-        if (weapon !== null) {
-            if (weapon.color !== null) datas.weapon.color = weapon.color;
-            if (weapon.name !== null) datas.weapon.name = weapon.name;
-            if (weapon.rarity !== null) datas.weapon.rarity = weapon.rarity;
-        }
         if (breath !== null) datas.breath = breath;
         if (squad !== null) datas.squad = squad;
         if (map !== null) datas.map = map;
@@ -52,8 +43,8 @@ class PlayerDb {
         return datas;
     }
 
-    async create(id, category = null, weapon = null, breath = null, squad = null, map = null) {
-        const p = this.model(id, category, weapon, breath, squad, map);
+    async create(id) {
+        const p = this.model(id);
         this.db.set(id, p);
         this.db.set(id, true, "started");
 
@@ -181,7 +172,7 @@ class PlayerDb {
         this.db.set(id, label, "category");
         this.db.set(id, 1, "categoryLevel");
         this.db.set(id, breath, "breath");
-        this.db.set(id, {
+        this.client.inventoryDb.db.set(id, {
             rarity: 1,
             name:  `${require(`../../elements/categories/${label}.json`).weaponName} ${require(`../../elements/categories/${label}.json`).rarityNames[0]}`,
             label:  `${require(`../../elements/categories/${label}.json`).weapon}`,

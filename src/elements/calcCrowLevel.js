@@ -5,7 +5,7 @@ module.exports = exp => {
         exp: exp,
         tempExp: exp,
         required: 500,
-        reached: 500,
+        toReach: 500,
     };
 
     while (datas.tempExp >= ((datas.nextLevel + 1) * 250)) {
@@ -15,7 +15,7 @@ module.exports = exp => {
     }
 
     datas.required = ((datas.nextLevel + 1) * 250);
-    datas.reached = ((datas.nextLevel + 1) * 250) - datas.tempExp;
+    datas.toReach = datas.required - datas.tempExp;
 
     return datas;
 };

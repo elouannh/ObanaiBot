@@ -39,7 +39,7 @@ class WeaponSet extends Command {
             );
         }
 
-        const actualWeapon = pDatas.weapon;
+        const actualWeapon = iDatas.weapon;
         let weaponToSet = goodWeapons?.at(0);
         let isGood = true;
 
