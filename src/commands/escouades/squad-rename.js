@@ -42,7 +42,7 @@ class SquadRename extends Command {
             "Changement de nom.",
             "Souhaitez-vous changer le nom de votre escouade ?\nLe nouveau nom sera: "
             +
-            `\`${r}\`\n\n**__Requis :__**\`\`\`diff\n- Être chef ou bras droit d'escouade\n- Avoir une escouade\`\`\`\n\nRépondre avec \`y\` (oui) ou \`n\` (non).`,
+            `\`${r}\`\n\nRépondre avec \`y\` (oui) ou \`n\` (non).`,
             "⛩️",
             null,
             "outline",

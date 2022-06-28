@@ -24,7 +24,7 @@ class ForgeWeapon extends Command {
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
         function luck(x, count = 0) {
-            if ((Math.random() * 100) < (100 / ((count + 1) / x)) && count < 5) return luck(x, count + 1);
+            if (((Math.random() * 100) / x) < (100 / (count + 1)) && count < 5) return luck(x, count + 1);
             return count;
         }
 
@@ -61,7 +61,7 @@ class ForgeWeapon extends Command {
                 "weapon_model": [weaponModels, 1],
                 "tamahagane": [tamahagane, 100],
                 "wood": [woodLogs, 20],
-                "yens": [yens, 100000],
+                "yens": [yens, 50000],
             };
             const missing = {};
             for (const item in objects) {

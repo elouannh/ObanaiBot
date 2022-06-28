@@ -6,11 +6,18 @@
     "id": 9,
     "Areas": [
         {
-            "name": "X",
-            "biome": "blank_area",
+            "name": "Ruelle principale",
+            "biome": "suburban_area",
             "id": 0,
             "default": true,
             "accesses": []
+        },
+        {
+            "name": "Chez Franky",
+            "biome": "suburban_area",
+            "id": 0,
+            "default": true,
+            "accesses": [0]
         }
     ],
     "accesses": [8, 7, 10]

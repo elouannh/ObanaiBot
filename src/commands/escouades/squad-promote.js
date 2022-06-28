@@ -34,7 +34,7 @@ class SquadPromote extends Command {
             "Promotion d'un joueur de l'escouade.",
             `Souhaitez-vous vraiment promouvoir **${user.username}** au rang de bras droit ?`
             +
-            "\n\n**__Requis :__**```diff\n- Être chef d'escouade\n- Avoir une escouade```\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "\n\nRépondre avec `y` (oui) ou `n` (non).",
             "⛩️",
             null,
             "outline",

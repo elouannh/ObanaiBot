@@ -26,7 +26,7 @@ class SquadKick extends Command {
             "Dégrader votre bras droit.",
             "Souhaitez-vous vraiment dégrader votre bras droit de l'escouade ?"
             +
-            "\n\n**__Requis :__**```diff\n- Être le chef d'escouade\n- Avoir une escouade\n- Avoir un bras droit d'escouade```\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "\n\nRépondre avec `y` (oui) ou `n` (non).",
             "⛩️",
             null,
             "outline",

@@ -26,6 +26,7 @@ class Dig extends Command {
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
         const mDatas = await this.client.mapDb.get(this.message.author.id);
+        let iDatas = await this.client.inventoryDb.get(this.message.author.id);
         const loc = map.Regions.filter(r => r.id === mDatas.region)?.at(0);
         const area = loc.Areas.filter(a => a.id === mDatas.area)?.at(0);
 
@@ -38,15 +39,22 @@ class Dig extends Command {
 
             const itemsGot = {};
             for (const obj of zoneItems) {
+                let luck = 1;
+
+                if (iDatas.active_grimoire !== null) {
+                    const grim = iDatas.acirequire(`../../elements/grimoires/${iDatas.active_grimoire}.json`);
+                    if (grim.benefits.includes("loot_rate_boost")) luck += (grim.boost - 1);
+                }
+
                 const rate = Math.random() * 100;
-                const gotItem = rate <= obj.rarity;
+                const gotItem = (rate / luck) <= obj.rarity;
 
                 if (gotItem) {
                     let quantity = 1;
                     let digAgain = true;
 
                     while (digAgain) {
-                        const gotAnother = (Math.random() * 100) <= (obj.rarity * 2 / quantity);
+                        const gotAnother = ((Math.random() * 100) / luck) <= (obj.rarity * 2 / quantity);
 
                         if (gotAnother) {
                             quantity += Math.ceil(obj.rarity);
@@ -66,7 +74,7 @@ class Dig extends Command {
             }
             else {
                 finalStr += "Vous avez obtenu des objets ! Jetez un œil:\n";
-                const iDatas = await this.client.inventoryDb.get(this.message.author.id);
+                iDatas = await this.client.inventoryDb.get(this.message.author.id);
 
                 for (const item in itemsGot) {
                     const i = zoneItems.filter(i_ => i_.label === item)?.at(0) ?? { name: "Item", emoji: "⬛" };

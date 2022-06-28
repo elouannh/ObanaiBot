@@ -34,7 +34,7 @@ class SquadInvite extends Command {
             "Inviter un nouveau membre.",
             `**${user.username}**, voulez-vous rejoindre l'escouade de **${this.message.author.username}** ?`
             +
-            "\n\n**__Requis :__**```diff\n- Ne pas avoir d'escouade```\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "\n\nRépondre avec `y` (oui) ou `n` (non).",
             "⛩️",
             null,
             "outline",

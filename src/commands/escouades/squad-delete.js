@@ -27,7 +27,7 @@ class SquadDelete extends Command {
             "Supprimer votre escouade.",
             "Souhaitez-vous vraiment supprimer votre escouade ? Les membres qui s'y trouvent seront aussi exclus."
             +
-            "\n\n**__Requis :__**```diff\n- 30 jours d'ancienneté\n- Être le chef d'escouade\n- Avoir une escouade```\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "\n\nRépondre avec `y` (oui) ou `n` (non).",
             "⛩️",
             null,
             "outline",

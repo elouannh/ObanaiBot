@@ -69,7 +69,7 @@ class TravelArea extends Command {
         }
 
         str += "\nLorsque vous répondrez à ce message, vous partirez directement en voyage !\n\nRépondre avec le numéro correspondant à votre choix de destination.";
-        str += "Répondre `n` (non) pour annuler.";
+        str += " Répondre `n` (non) pour annuler.";
 
         const msg = await this.ctx.reply("Voyage.", str, "🧳", null, "outline");
         const choice = await this.ctx.messageCollection(msg);
@@ -82,7 +82,7 @@ class TravelArea extends Command {
             await this.client.activityDb.travels(this.message.author.id, reg.distance, destCode);
             return await this.ctx.reply(
                 "Voyage.",
-                `Vous voilà parti à l'aventure dans la zone de **${destName}** !` + " Faites la commande !travel ou !travel-zone pour voir dans combien de temps vous arrivez.",
+                `Vous voilà parti à l'aventure dans la zone de **${destName}** !` + " Faites la commande !travel-area ou !travel-zone pour voir dans combien de temps vous arrivez.",
                 "🧳",
                 null,
                 "outline",

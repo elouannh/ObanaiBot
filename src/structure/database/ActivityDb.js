@@ -105,8 +105,8 @@ class ActivityDb {
             }
         }
 
-        time *= 180;
-        time *= 1000;
+        time *= 45;
+        time *= 100000;
         time *= Number(coeff.toFixed(2));
 
         time = Math.ceil(time);

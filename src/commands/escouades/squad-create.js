@@ -28,7 +28,7 @@ class SquadCreate extends Command {
             "Créer votre escouade.",
             "Souhaitez-vous vraiment créer une escouade ?"
             +
-            "\n\n**__Requis :__**```diff\n- 10.000 ¥\n- Niveau 20 requis\n- Ne pas avoir d'escouade```\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "\n\nRépondre avec `y` (oui) ou `n` (non).",
             "⛩️",
             null,
             "outline",

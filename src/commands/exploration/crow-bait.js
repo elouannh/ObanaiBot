@@ -68,12 +68,19 @@ class CrowBait extends Command {
             return await this.ctx.reply("Appâtage d'oiseaux.", resp[Math.floor(Math.random() * resp.length)], "🐦", null, "error");
         }
 
-        function luck(count = 0) {
-            if ((Math.random() * 100) < (100 / (count + 1)) && count < 5) return luck(count + 1);
+        function luck(x = 1, count = 0) {
+            if (((Math.random() * 100) / x) < (100 / (count + 1)) && count < 5) return luck(x, count + 1);
             return count;
         }
 
-        const rarity = luck();
+        let y = 1;
+
+        if (iDatas.active_grimoire !== null) {
+            const grim = iDatas.acirequire(`../../elements/grimoires/${iDatas.active_grimoire}.json`);
+            if (grim.benefits.includes("kasugai_crows_rarity_boost")) y += (grim.boost - 1);
+        }
+
+        const rarity = luck(y);
         const kasugais = fs.readdirSync("./src/elements/kasugai_crows").map(e => require(`../../elements/kasugai_crows/${e}`)).filter(e => e.rarity === rarity);
         const kasugai = kasugais[Math.floor(Math.random() * kasugais.length)];
 

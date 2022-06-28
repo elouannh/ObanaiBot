@@ -34,7 +34,7 @@ class SquadKick extends Command {
             "Exclusion d'un joueur de l'escouade.",
             `Souhaitez-vous vraiment exclure **${user.username}** de votre escouade ?`
             +
-            "\n\n**__Requis :__**```diff\n- Être chef d'escouade\n- Avoir une escouade```\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "\n\nRépondre avec `y` (oui) ou `n` (non).",
             "⛩️",
             null,
             "outline",

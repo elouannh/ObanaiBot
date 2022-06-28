@@ -24,9 +24,9 @@ class SquadLeave extends Command {
 
         const msg = await this.ctx.reply(
             "Quitter votre escouade.",
-            "Souhaitez-vous vraiment quitter l'escouade ?\n\n**__Requis :__**"
+            "Souhaitez-vous vraiment quitter l'escouade ?"
             +
-            "```diff\n- Avoir une escouade\n- Si vous êtes chef d'escouade, avoir un bras droit d'escouade qui vous remplacera```\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "\n\nRépondre avec `y` (oui) ou `n` (non).",
             "⛩️",
             null,
             "outline",

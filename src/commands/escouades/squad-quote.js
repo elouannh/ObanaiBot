@@ -41,7 +41,7 @@ class SquadQuote extends Command {
             "Changement de citation.",
             "Souhaitez-vous changer la citation de votre escouade ?\nLa nouvelle citation sera: "
             +
-            `\`${r}\`\n\n**__Requis :__**\`\`\`diff\n- Être chef ou bras droit d'escouade\n- Avoir une escouade\`\`\`\n\nRépondre avec \`y\` (oui) ou \`n\` (non).`,
+            `\`${r}\`\n\nRépondre avec \`y\` (oui) ou \`n\` (non).`,
             "⛩️",
             null,
             "outline",
