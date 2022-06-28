@@ -159,23 +159,39 @@ class InventoryDb {
         this.db.set(id, newXp, "kasugai_crow_exp");
     }
 
+    sameObject(a, b) {
+        return a.rarity === b.rarity && a.name === b.name && a.label === b.label;
+    }
+
     async changeWeapon(id, weapon) {
         const p = await this.client.playerDb.get(id);
         const i = await this.get(id);
 
-        function sameObject(a, b) {
-            return a.rarity === b.rarity && a.name === b.name && a.label === b.label;
-        }
-
         const newArray = [p.weapon];
-        const count = i.weapons.filter(elt => sameObject(elt, weapon)).length - 1;
+        const count = i.weapons.filter(elt => this.sameObject(elt, weapon)).length - 1;
         for (const elt of i.weapons) {
-            if (sameObject(elt, weapon) && newArray.filter(e => sameObject(e, weapon)).length < count) newArray.push(elt);
+            if (this.sameObject(elt, weapon) && newArray.filter(e => this.sameObject(e, weapon)).length < count) newArray.push(elt);
             else newArray.push(elt);
         }
 
         this.db.set(id, newArray, "weapons");
         this.client.playerDb.db.set(id, weapon, "weapon");
+    }
+
+    async sellWeapon(id, weapon) {
+        const i = await this.get(id);
+
+        const newArray = [];
+        const count = i.weapons.filter(elt => this.sameObject(elt, weapon)).length - 1;
+        for (const elt of i.weapons) {
+            if (this.sameObject(elt, weapon) && newArray.filter(e => this.sameObject(e, weapon)).length < count) newArray.push(elt);
+            else newArray.push(elt);
+        }
+
+        this.db.set(id, newArray, "weapons");
+        const amount = Math.pow(10, weapon.rarity) / 2;
+        const yensEarned = await this.earnYens(id, amount);
+        this.db.math(id, "+", yensEarned, "yens");
     }
 
 }

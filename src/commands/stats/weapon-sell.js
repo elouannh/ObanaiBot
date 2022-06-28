@@ -23,15 +23,17 @@ class WeaponSell extends Command {
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
         const iDatas = await this.client.inventoryDb.get(this.message.author.id);
-        const weapons = "weapons" in iDatas ? iDatas.weapons : [];
+        let weapons = "weapons" in iDatas ? iDatas.weapons : [];
 
         if (weapons.length === 0) return await this.ctx.reply("Oups...", "Il semblerait que vous n'ayez aucune arme en stock.", null, null, "warning");
+
+        weapons = weapons.sort((a, b) => b.rarity - a.rarity);
 
         let weaponToSell = weapons?.at(0);
         let isGood = true;
 
         const msg = await this.ctx.reply(
-            "Changement d'arme.",
+            "Vente d'arme.",
             `Vous possédez plusieurs armes.\n\n${weapons.map((e, i) => `**${i + 1}** | \`rareté: ${e.rarity}\` | ${e.name}`).join("\n")}`
             +
             "\n\nRépondez avec le numéro correspondant à l'arme que vous souhaitez vendre. Répondre avec `n` (non) pour annuler.",
@@ -47,8 +49,8 @@ class WeaponSell extends Command {
         else if (this.ctx.isResp(choice, "n")) {
             isGood = false;
             return await this.ctx.reply(
-                "Changement d'arme.",
-                "Vous avez décidé de ne pas changer d'arme.",
+                "Vente d'arme.",
+                "Vous avez décidé de ne pas vendre d'arme.",
                 "🗡️",
                 null,
                 "outline",
@@ -56,12 +58,49 @@ class WeaponSell extends Command {
         }
         else {
             isGood = false;
-            return await this.ctx.reply("Changement d'arme.", "La commande n'a pas aboutie.", null, null, "timeout");
+            return await this.ctx.reply("Vente d'arme.", "La commande n'a pas aboutie.", null, null, "timeout");
         }
 
         if (!isGood) return;
 
-        const price = Math.pow(10, weaponToSell.rarity) / 2;
+        const price = await this.client.inventoryDb.earnYens(this.message.author.id, Math.pow(10, weaponToSell.rarity) / 2);
+
+        const msg2 = await this.ctx.reply(
+            "Vente d'arme.",
+            "Êtes-vous sûr de vouloir vendre cette arme ?"
+            +
+            ` Vous gagnerez **${price} ¥**.`
+            +
+            "\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "🗡️",
+            null,
+            "outline",
+        );
+
+        const choice2 = await this.ctx.messageCollection(msg2);
+
+        if (this.ctx.isResp(choice2, "y")) {
+            await this.client.inventoryDb.sellWeapon(this.message.author.id, weaponToSell);
+            return await this.ctx.reply(
+                "Vente d'arme.",
+                "L'arme a bien été vendue.",
+                "🗡️",
+                null,
+                "outline",
+            );
+        }
+        else if (this.ctx.isResp(choice2, "n")) {
+            return await this.ctx.reply(
+                "Vente d'arme.",
+                "Vous avez décidé de ne pas vendre d'arme.",
+                "🗡️",
+                null,
+                "outline",
+            );
+        }
+        else {
+            return await this.ctx.reply("Vente d'arme.", "La commande n'a pas aboutie.", null, null, "timeout");
+        }
     }
 }
 
