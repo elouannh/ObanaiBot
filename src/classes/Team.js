@@ -1,7 +1,8 @@
 class Team {
-    constructor(players, id) {
+    constructor(players, id, nid) {
         this.players = players;
         this.id = id;
+        this.nid = nid;
     }
 
     async init(arena) {
@@ -22,6 +23,10 @@ class Team {
 
     hurtPlayer(number, amount) {
         this.players[number].pv -= amount;
+    }
+
+    removeStamina(number, amount) {
+        this.players[number].stamina -= amount;
     }
 }
 

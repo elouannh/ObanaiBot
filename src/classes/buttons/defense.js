@@ -22,12 +22,6 @@ module.exports = player => {
         ],
         [
             {
-                customId: "target_change",
-                label: "Changer de cible",
-                style: "primary",
-                disabled: false,
-            },
-            {
                 customId: "forfeit",
                 label: "Abandonner",
                 style: "primary",

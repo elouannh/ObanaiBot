@@ -1,4 +1,4 @@
-module.exports = player => {
+module.exports = (player, canChangeTarger) => {
     return [
         [
             {
@@ -31,7 +31,7 @@ module.exports = player => {
                 customId: "target_change",
                 label: "Changer de cible",
                 style: "primary",
-                disabled: false,
+                disabled: canChangeTarger,
             },
             {
                 customId: "forfeit",
