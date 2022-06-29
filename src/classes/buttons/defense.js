@@ -14,8 +14,8 @@ module.exports = player => {
                 disabled: player.stamina < 2,
             },
             {
-                customId: "dodge_preparation",
-                label: "Préparation esquive",
+                customId: "counter_preparation",
+                label: "Préparation contre",
                 style: "primary",
                 disabled: player.stamina < 1,
             },

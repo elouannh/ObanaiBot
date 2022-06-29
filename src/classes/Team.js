@@ -19,6 +19,10 @@ class Team {
     getPlayer(number) {
         return this.players[Object.values(this.players).filter(e => e.number === number)?.at(0).number];
     }
+
+    hurtPlayer(number, amount) {
+        this.players[number].pv -= amount;
+    }
 }
 
 module.exports = Team;
