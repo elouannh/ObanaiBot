@@ -21,6 +21,7 @@ class Arena {
         };
 
         this.deaths = [];
+        this.fightLog = [];
     }
 
     async init() {
@@ -104,9 +105,16 @@ class Arena {
         }
     }
 
+    get getLog() {
+        console.log(this.fightLog);
+        return this.fightLog.length === 0 ? "Aucune information de combat." : this.fightLog[this.fightLog.length - 1];
+    }
+
     async atkPlayer(playerAttacking, playerDefending, defendingTeam) {
         const atk = await this.cmd.ctx.buttonRequest(
             `${playerAttacking.name}, choisisez votre attaque.`,
+            `\`\`\`${this.getLog}\`\`\`\n\n`
+            +
             `vos pv: ${playerAttacking.pv}/100 | endurance: ${playerAttacking.stamina}/10`
             +
             `\npv de ${playerDefending.name}: ${playerDefending.pv}/100 | endurance: ${playerDefending.stamina}/10`,
@@ -124,6 +132,8 @@ class Arena {
     async defPlayer(playerDefending, playerAttacking) {
         const def = await this.cmd.ctx.buttonRequest(
             `${playerDefending.name}, choisisez votre défense.`,
+            `\`\`\`${this.getLog}\`\`\`\n\n`
+            +
             `vos pv: ${playerDefending.pv}/100 | endurance: ${playerDefending.stamina}/10`
             +
             `\npv de ${playerAttacking.name}: ${playerAttacking.pv}/100 | endurance: ${playerAttacking.stamina}/10`,
@@ -201,21 +211,21 @@ class Arena {
         let dodgeCounterRate = 10;
         let counterRate = 5;
 
-        let attackMvt = playerAttacking.datas.breath.attack[atk];
-        let defenseMvt = playerAttacking.datas.breath.defense[atk];
+        const attackMvt = playerAttacking.datas.breath.attack[atk];
+        const defenseMvt = playerAttacking.datas.breath.defense[atk];
 
-        const sentence = [
-            "**{aname}** utilise {abreath}, {amvt} ! **{dname}** répond avec {dbreath}, {dmvt}",
-            "**{dname}** commence à parer avec {dbreath}, {dmvt}, tandis que **{aname}** utilise {abreath}, {amvt} !",
-            "Le choc entre le {amvt} du {abreath} de {aname} contre le {dmvt} du {dbreath} de {dname} !",
+        let sentence = [
+            "{aname} utilise <{abreath}>, <{amvt}> ! {dname} répond avec <{dbreath}>, <{dmvt}>",
+            "{dname} commence à parer avec <{dbreath}>, >{dmvt}<, tandis que {aname} utilise <{abreath}>, <{amvt}> !",
+            "Le choc entre le <{amvt}> du <{abreath}> de {aname} contre le <{dmvt}> du <{dbreath}> de {dname} !",
         ][Math.floor(Math.random() * 3)];
 
-        sentence.replace("{aname}", playerAttacking.name);
-        sentence.replace("{dname}", playerDefending.name);
-        sentence.replace("{amvt}", attackMvt[Math.floor(Math.random() * attackMvt.length)]);
-        sentence.replace("{dmvt}", defenseMvt[Math.floor(Math.random() * defenseMvt.length)]);
-        sentence.replace("{abreath}", playerAttacking.datas.breath.name);
-        sentence.replace("{dbreath}", playerDefending.datas.breath.name);
+        sentence = sentence.replace("{aname}", playerAttacking.name);
+        sentence = sentence.replace("{dname}", playerDefending.name);
+        sentence = sentence.replace("{amvt}", attackMvt[Math.floor(Math.random() * attackMvt.length)]);
+        sentence = sentence.replace("{dmvt}", defenseMvt[Math.floor(Math.random() * defenseMvt.length)]);
+        sentence = sentence.replace("{abreath}", `${playerAttacking.datas.breath.emoji} ${playerAttacking.datas.breath.name}`);
+        sentence = sentence.replace("{dbreath}", `${playerDefending.datas.breath.emoji} ${playerDefending.datas.breath.name}`);
 
         str += sentence;
 
@@ -258,11 +268,11 @@ class Arena {
         if (finalHazardRate || finalHazardRate2) {
             if (finalHazardRate) {
                 this.teams[playerAttacking.team.id].hurtPlayer(playerAttacking.number, 5);
-                str += `> **${playerAttacking.name}** se blesse en voulant attaquer... il perd \`-5❤️\` !`;
+                str += `\n💠 ${playerAttacking.name} se blesse en voulant attaquer... il perd -3❤️ !`;
             }
             if (finalHazardRate2) {
                 this.teams[playerDefending.team.id].hurtPlayer(playerDefending.number, 5);
-                str += `> **${playerAttacking.name}** se blesse en voulant défendre... il perd \`-5❤️\` !`;
+                str += `\n💠 ${playerAttacking.name} se blesse en voulant défendre... il perd -3❤️ !`;
             }
         }
         else {
@@ -271,18 +281,25 @@ class Arena {
 
             if (Math.floor(Math.random() * 100) < finalCounterRate) {
                 this.teams[playerAttacking.team.id].hurtPlayer(playerAttacking.number, 5);
+                str += `\n💠 ${playerAttacking.name} se fait contrer par ${playerDefending.name} en voulant attaquer... il perd -5❤️ !`;
             }
             else {
                 const dodged = Math.floor(Math.random() * 100) <= (playerDefending.datas.aptitudes.speed / playerAttacking.datas.aptitudes.speed);
 
                 if (!dodged) {
-                    let finalDamages = Math.ceil((dmg - collection) * (Math.floor(Math.random() + 0.5) / 10 + 1));
+                    let finalDamages = Math.ceil((dmg - collection) * (Math.floor(Math.random() + 0.5) / 10 + 1) * 10);
                     if (finalDamages < 0) finalDamages = 0;
 
-                    this.teams[playerAttacking.team.id].hurtPlayer(playerAttacking.number, 5);
+                    this.teams[playerAttacking.team.id].hurtPlayer(playerAttacking.number, finalDamages);
+                    str += `\n💠 ${playerAttacking.name} inflige de lourds dégâts à ${playerDefending.name}... il inflige -${finalDamages}❤️ !`;
+                }
+                else {
+                    str += `\n💠 ${playerAttacking.name} se fait esqsuiver par ${playerDefending.name} en voulant attaquer !`;
                 }
             }
         }
+
+        this.fightLog.push(str);
     }
 
     staminaManager(atk, def, playerAttacking, playerDefending) {
