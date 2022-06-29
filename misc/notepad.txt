@@ -92,7 +92,6 @@ f) Les combats
     Attaque rapide        | 0               | 10%Fo=Dm |    X    |       X
     Attaque chargée       | 2               | 15%Fo=Dm | -5PV    | HIGH
     Préparation d'esquive | 1               | +5%V     | -5%V    | LOW
-    Préparation défensive | 1               | +5%D     | -5%D    | LOW
     Attaque spéciale      | 5               | 40%Fo=Dm | -10PV   | HIGH
     ______________________________________________________________________________________________________________________________________________________
 

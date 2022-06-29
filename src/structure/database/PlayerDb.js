@@ -13,7 +13,7 @@ class PlayerDb {
         // obligatoire
         id,
         // optionnel
-        category, breath, squad, map,
+        category, breath, squad,
     ) {
         const datas = {
             started: false,
@@ -38,7 +38,6 @@ class PlayerDb {
         if (category !== null) datas.category = category;
         if (breath !== null) datas.breath = breath;
         if (squad !== null) datas.squad = squad;
-        if (map !== null) datas.map = map;
 
         return datas;
     }
@@ -52,14 +51,14 @@ class PlayerDb {
     }
 
     async ensure(id) {
-        const p = this.model(id, null, null, null, null, null);
+        const p = this.model(id, null, null, null);
         this.db.ensure(id, p);
 
         return this.db.get(id);
     }
 
     async get(id) {
-        this.ensure(id, null, null, null, null, null);
+        this.ensure(id, null, null, null);
         const p = await this.db.get(id);
         const i = await this.client.inventoryDb.get(id);
 

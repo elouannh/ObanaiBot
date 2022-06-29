@@ -53,7 +53,6 @@ class ForgeCollect extends Command {
             let i = 0;
             const newIsForging = aDatas.isForging;
             const newForging = aDatas.forging;
-            console.log(newForging, newIsForging);
 
             for (const elt of Object.values(items)) {
                 if ((elt.start + elt.duration) - Date.now() <= 0) {

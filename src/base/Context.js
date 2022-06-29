@@ -1,5 +1,7 @@
 const SuperEmbed = require("./SuperEmbed");
 const translate = require("translate");
+const SuperRow = require("./SuperRow");
+const SuperButton = require("./SuperButton");
 
 class Context {
     constructor(client, command) {
@@ -83,6 +85,55 @@ class Context {
             if (choice.first()) return choice.first().content;
             else return null;
         }
+    }
+
+    async buttonRequest(title, description, emoji, color, style, rows, time = null, userr = undefined) {
+        // MESSAGE PART --------------------------------------------------------------------------------------------------------------------------
+        await this.command.message.channel.sendTyping();
+        const tit = await this.trStr(title);
+        const desc = await this.trStr(description);
+
+        const reponse = new SuperEmbed()
+            .setAuthor(this.command.message.author)
+            .setTitle(tit)
+            .setDescription(desc);
+
+        if (style !== null) {
+            reponse.setStyle(style);
+        }
+        if (emoji !== null || color !== null) {
+            if (emoji !== null) reponse.setEmoji(emoji);
+            if (color !== null) reponse.setColor(color.replace("#", ""));
+        }
+
+        // ROW PART ------------------------------------------------------------------------------------------------------------------------------
+        const compos = [];
+        for (const row of rows) {
+            const cache = new SuperRow(1);
+            for (const but of row) {
+                cache.addComponent(
+                    new SuperButton().setCustomId(but.customId).setDisabled(but.disabled).setEmoji(but.emoji).setLabel(but.label).setStyle(but.style).setUrl(but.url).datas,
+                );
+            }
+            compos.push(cache.datas);
+        }
+
+        const msg = await this.command.message.channel.send({ embeds: [reponse.embed], components: compos });
+
+        if (time === null) time = 30_000;
+
+        const filter = interaction => interaction.user.id === (userr ?? this.command.message.author.id);
+        const way = await msg.awaitMessageComponent({ filter, time })
+            .catch(() => { return null; });
+
+        try {
+            if (way.message.deletable) {
+                way.message.delete();
+            }
+        }
+        catch (err) { null; }
+
+        return way;
     }
 
 }
