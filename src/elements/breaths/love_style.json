@@ -9,13 +9,10 @@
         "powerful": [
             "Troisième Mouvement : Toilette de Chaton Mignon"
         ],
-        "dodge_prepa": [
+        "dodge_preparation": [
             "Premier Mouvement : Les Frissons du Premier Amour"
         ],
-        "defensive_prepa": [
-            "Premier Mouvement : Les Frissons du Premier Amour"
-        ],
-        "special": [
+        "special_attack": [
             "Cinquième Mouvement : Attachement Hésitant - Ongles Mal Vernis"
         ]
     },
@@ -26,7 +23,7 @@
         "powerful": [
             "Sixième Mouvement : Un Amour de Patte de Chaton"
         ],
-        "counter_prepa": [
+        "counter_preparation": [
             "Premier Mouvement : Les Frissons du Premier Amour"
         ]
     }

@@ -19,6 +19,8 @@ class Arena {
                 "2": "0",
             },
         };
+
+        this.deaths = [];
     }
 
     async init() {
@@ -88,7 +90,7 @@ class Arena {
             await this.cmd.ctx.reply(`${player.name} veut déclarer forfait.`, "Il quitte l'arène de combat.", "🍃", null, "error");
 
             const newPlayers = {};
-            for (const p of Object.entries(userTeam.players)) newPlayers[p[0]] = p[1];
+            for (const p of Object.entries(userTeam.players).filter(pl => pl[1].number !== player.number)) newPlayers[p[0]] = p[1];
             this.teams[player.team.id].players = newPlayers;
 
             Object.entries(this.teams[player.team.nid]).forEach(p => {
@@ -136,7 +138,31 @@ class Arena {
         return def === null ? def : def.customId;
     }
 
+    async checkDeath() {
+        let str = "";
+        for (const team of Object.entries(this.teams)) {
+            const teamDeath = [];
+            const newPlayers = [];
+            for (const p of Object.entries(team[1].players)) {
+                if (p[1].pv <= 0) {
+                    if (teamDeath.length === 0) teamDeath.push(`\n**Équipe ${team[0]}**\n`);
+                    teamDeath.push(`Mort de **${p[1].name}** !`);
+                }
+                else {
+                    newPlayers[p[0]] = p[1];
+                }
+            }
+            str += teamDeath.join("\n");
+            this.teams[team[0]].players = newPlayers;
+        }
+
+        return str;
+    }
+
     async begin() {
+        const deaths = await this.checkDeath();
+        if (deaths.length > 0) this.deaths.push(deaths);
+
         const attackingTeam = this.teams[this.cache.teamPlaying];
         const defendingTeam = this.teams[attackingTeam.nid];
 
@@ -166,6 +192,7 @@ class Arena {
     }
 
     damageManager(atk, def, playerAttacking, playerDefending) {
+        let str = "";
         this.staminaManager(atk, def, playerAttacking, playerDefending);
 
         let dmg = 0;
@@ -174,11 +201,29 @@ class Arena {
         let dodgeCounterRate = 10;
         let counterRate = 5;
 
+        let attackMvt = playerAttacking.datas.breath.attack[atk];
+        let defenseMvt = playerAttacking.datas.breath.defense[atk];
+
+        const sentence = [
+            "**{aname}** utilise {abreath}, {amvt} ! **{dname}** répond avec {dbreath}, {dmvt}",
+            "**{dname}** commence à parer avec {dbreath}, {dmvt}, tandis que **{aname}** utilise {abreath}, {amvt} !",
+            "Le choc entre le {amvt} du {abreath} de {aname} contre le {dmvt} du {dbreath} de {dname} !",
+        ][Math.floor(Math.random() * 3)];
+
+        sentence.replace("{aname}", playerAttacking.name);
+        sentence.replace("{dname}", playerDefending.name);
+        sentence.replace("{amvt}", attackMvt[Math.floor(Math.random() * attackMvt.length)]);
+        sentence.replace("{dmvt}", defenseMvt[Math.floor(Math.random() * defenseMvt.length)]);
+        sentence.replace("{abreath}", playerAttacking.datas.breath.name);
+        sentence.replace("{dbreath}", playerDefending.datas.breath.name);
+
+        str += sentence;
+
         switch (atk) {
-            case "fast":
+            case "quick":
                 dmg = playerAttacking.datas.aptitudes.force * 0.25;
                 break;
-            case "charged":
+            case "powerful":
                 dmg = playerAttacking.datas.aptitudes.force * 0.5;
                 hazardRate += 20;
                 break;
@@ -194,10 +239,10 @@ class Arena {
         let collection = 0;
 
         switch (def) {
-            case "fast":
+            case "quick":
                 collection = playerDefending.datas.aptitudes.defense * 0.25;
                 break;
-            case "charged":
+            case "powerful":
                 collection = playerDefending.datas.aptitudes.defense * 0.5;
                 hazardRate2 += 20;
                 break;
@@ -211,8 +256,14 @@ class Arena {
         const finalHazardRate2 = Math.floor(Math.random() * 100) < (hazardRate2 / (playerDefending.datas.aptitudes.agility * 0.1));
 
         if (finalHazardRate || finalHazardRate2) {
-            if (finalHazardRate) this.teams[playerAttacking.team.id].hurtPlayer(playerAttacking.number, 5);
-            if (finalHazardRate2) this.teams[playerDefending.team.id].hurtPlayer(playerDefending.number, 5);
+            if (finalHazardRate) {
+                this.teams[playerAttacking.team.id].hurtPlayer(playerAttacking.number, 5);
+                str += `> **${playerAttacking.name}** se blesse en voulant attaquer... il perd \`-5❤️\` !`;
+            }
+            if (finalHazardRate2) {
+                this.teams[playerDefending.team.id].hurtPlayer(playerDefending.number, 5);
+                str += `> **${playerAttacking.name}** se blesse en voulant défendre... il perd \`-5❤️\` !`;
+            }
         }
         else {
             let finalCounterRate = Math.ceil(dodgeCounterRate - counterRate);
@@ -236,8 +287,8 @@ class Arena {
 
     staminaManager(atk, def, playerAttacking, playerDefending) {
         const cost = {
-            "fast": 0,
-            "charged": 2,
+            "quick": 0,
+            "powerful": 2,
             "dodge_preparation": 1,
             "special_attack": 5,
             "counter_preparation": 1,

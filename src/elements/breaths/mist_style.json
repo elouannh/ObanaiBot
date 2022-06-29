@@ -9,13 +9,10 @@
         "powerful": [
             "Deuxième Mouvement : Brume Stratifiée"
         ],
-        "dodge_prepa": [
+        "dodge_preparation": [
             "Cinquième Mouvement : Brume de Mer"
         ],
-        "defensive_prepa": [
-            "Quatrième Mouvement : Coup de Sabre Advectif"
-        ],
-        "special": [
+        "special_attack": [
             "Septième mouvement : Brouillard"
         ]
     },
@@ -26,7 +23,7 @@
         "powerful": [
             "Troisième Mouvement : Explosion Désembuante"
         ],
-        "counter_prepa": [
+        "counter_preparation": [
             "Sixième Mouvement : Brume au Clair de Lune"
         ]
     }

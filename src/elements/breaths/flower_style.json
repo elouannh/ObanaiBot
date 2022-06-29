@@ -9,13 +9,10 @@
         "powerful": [
             "Cinquième Mouvement : La Pivoine Futile"
         ],
-        "dodge_prepa": [
+        "dodge_preparation": [
             "Sixième Mouvement : Tourbillon de Pêche"
         ],
-        "defensive_prepa": [
-            "Deuxième Mouvement : Esprit du Prunier"
-        ],
-        "special": [
+        "special_attack": [
             "Mouvement Final : Les Yeux du Lycoris"
         ]
     },
@@ -26,7 +23,7 @@
         "powerful": [
             "Sixième Mouvement : Tourbillon de Pêche"
         ],
-        "counter_prepa": [
+        "counter_preparation": [
             "Deuxième Mouvement : Esprit du Prunier"
         ]
     }

@@ -9,13 +9,10 @@
         "powerful": [
             "Quatrième Mouvement : Le Glas Mortel d'Avici"
         ],
-        "dodge_prepa": [
+        "dodge_preparation": [
             "Premier Mouvement : Tonnerre"
         ],
-        "defensive_prepa": [
-            "Quatrième Mouvement : Le Glas Mortel d'Avici"
-        ],
-        "special": [
+        "special_attack": [
             "Cinquième Mouvement : Symphonie Stridente"
         ]
     },
@@ -26,7 +23,7 @@
         "powerful": [
             "Quatrième Mouvement : Le Glas Mortel d'Avici"
         ],
-        "counter_prepa": [
+        "counter_preparation": [
             "Quatrième Mouvement : Le Glas Mortel d'Avici"
         ]
     }

@@ -10,13 +10,10 @@
             "Deuxième Mouvement : Griffes de Vent Purificatrices",
             "Septième Mouvement : Vent Puissant - Bourrasque de Tengu"
         ],
-        "dodge_prepa": [
+        "dodge_preparation": [
             "Quatrième Mouvement : La Tempête de Poussière Levante"
         ],
-        "defensive_prepa": [
-            "Huitième Mouvement : Frappe de la Première Bourrasque"
-        ],
-        "special": [
+        "special_attack": [
             "Neuvième Mouvement : Typhon de Skanda"
         ]
     },
@@ -27,7 +24,7 @@
         "powerful": [
             "Troisième Mouvement : Arbre Ondulant dans la Brise Montagnarde"
         ],
-        "counter_prepa": [
+        "counter_preparation": [
             "Sixième Mouvement : La Rafale de Fumée Noire"
         ]
     }

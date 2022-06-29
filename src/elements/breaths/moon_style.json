@@ -12,13 +12,10 @@
             "Quatorzième Mouvement : Le Croissant de Lune de Tenman",
             "Sixième Mouvement : La Lune Solitaire dans l'Obscurité Éternelle - L'Avici"
         ],
-        "dodge_prepa": [
+        "dodge_preparation": [
             "Neuvième Mouvement : Lune Décroissante - Le Cycle Perpétuel"
         ],
-        "defensive_prepa": [
-            "Deuxième Mouvement : Fleur de Nacre au Clair de Lune"
-        ],
-        "special": [
+        "special_attack": [
             "Seizième Mouvement : Arc-en-Ciel Lunaire - Fragments Sélénites"
         ]
     },
@@ -29,7 +26,7 @@
         "powerful": [
             "Dixième Mouvement : Frappe du Cycle Transperçant - La Lune de Lierre"
         ],
-        "counter_prepa": [
+        "counter_preparation": [
             "Cinquième Mouvement : Vortex Maudit de la Lune Spectrale"
         ]
     }

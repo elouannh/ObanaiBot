@@ -9,13 +9,10 @@
         "powerful": [
             "Deuxième Mouvement : Le Crochet Empoisonné du Petit Serpent"
         ],
-        "dodge_prepa": [
+        "dodge_preparation": [
             "Quatrième Mouvement : Serpent Bicéphale"
         ],
-        "defensive_prepa": [
-            "Troisième Mouvement : Constriction"
-        ],
-        "special": [
+        "special_attack": [
             "Cinquième Mouvement : Ondulations du Serpent"
         ]
     },
@@ -26,7 +23,7 @@
         "powerful": [
             "Troisième Mouvement : Constriction"
         ],
-        "counter_prepa": [
+        "counter_preparation": [
             "Deuxième Mouvement : Le Crochet Empoisonné du Petit Serpent"
         ]
     }

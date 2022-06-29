@@ -2,13 +2,13 @@ module.exports = player => {
     return [
         [
             {
-                customId: "fast",
+                customId: "quick",
                 label: "Défense rapide",
                 style: "primary",
                 disabled: false,
             },
             {
-                customId: "charged",
+                customId: "powerful",
                 label: "Défense chargée",
                 style: "primary",
                 disabled: player.stamina < 2,

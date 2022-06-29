@@ -10,13 +10,10 @@
             "Danse de la Piqûre d'Abeille : Battement Véritable",
             "Danse de la Libellule : Œil à Facettes Hexagonales"
         ],
-        "dodge_prepa": [
+        "dodge_preparation": [
             "Danse des Papillons : Papillonnage"
         ],
-        "defensive_prepa": [
-            "Danse des Papillons : Papillonnage"
-        ],
-        "special": [
+        "special_attack": [
             "Danse du Myriapode : Zigzag Centipède"
         ]
     },
@@ -27,7 +24,7 @@
         "powerful": [
             "Danse de la Libellule : Œil à Facettes Hexagonales"
         ],
-        "counter_prepa": [
+        "counter_preparation": [
             "Danse de la Libellule : Œil à Facettes Hexagonales"
         ]
     }

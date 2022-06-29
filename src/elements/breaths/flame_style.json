@@ -10,13 +10,10 @@
         "powerful": [
             "Cinquième Mouvement : Tigre de Flammes"
         ],
-        "dodge_prepa": [
+        "dodge_preparation": [
             "Premier Mouvement : Mer de Flammes"
         ],
-        "defensive_prepa": [
-            "Premier Mouvement : Mer de Flammes"
-        ],
-        "special": [
+        "special_attack": [
             "Neuvième Mouvement : Purgatoire"
         ]
     },
@@ -27,7 +24,7 @@
         "powerful": [
             "Cinquième Mouvement : Tigre de Flammes"
         ],
-        "counter_prepa": [
+        "counter_preparation": [
             "Premier Mouvement : Mer de Flammes"
         ]
     }

@@ -9,13 +9,10 @@
         "powerful": [
             "Deuxième Mouvement : Fracasser la Voûte Céleste"
         ],
-        "dodge_prepa": [
+        "dodge_preparation": [
             "Troisième Mouvement : Peau de Pierre"
         ],
-        "defensive_prepa": [
-            "Quatrième Mouvement : Rhyolite - Conquête Rapide"
-        ],
-        "special": [
+        "special_attack": [
             "Cinquième Mouvement : La Roue de Pierre de la Justice"
         ]
     },
@@ -26,7 +23,7 @@
         "powerful": [
             "Quatrième Mouvement : Rhyolite - Conquête Rapide"
         ],
-        "counter_prepa": [
+        "counter_preparation": [
             "Deuxième Mouvement : Fracasser la Voûte Céleste"
         ]
     }

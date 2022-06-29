@@ -2,13 +2,13 @@ module.exports = (player, canChangeTarger) => {
     return [
         [
             {
-                customId: "fast",
+                customId: "quick",
                 label: "Attaque rapide",
                 style: "primary",
                 disabled: false,
             },
             {
-                customId: "charged",
+                customId: "powerful",
                 label: "Attaque chargée",
                 style: "primary",
                 disabled: player.stamina < 2,

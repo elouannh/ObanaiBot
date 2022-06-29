@@ -12,14 +12,10 @@
             "Valse Foudroyante",
             "Halo Solaire Danse Draconique"
         ],
-        "dodge_prepa": [
+        "dodge_preparation": [
             "Arc-en-Ciel Parhélique"
         ],
-        "defensive_prepa": [
-            "Le Coucher de Soleil",
-            "Paradis Bleu"
-        ],
-        "special": [
+        "special_attack": [
             "Treizième Mouvement"
         ]
     },
@@ -31,7 +27,7 @@
             "Miroir Brûlant Écarlate",
             "Rai de Lumière"
         ],
-        "counter_prepa": [
+        "counter_preparation": [
             "Valse Enflammée",
             "Char Enflammé"
         ]

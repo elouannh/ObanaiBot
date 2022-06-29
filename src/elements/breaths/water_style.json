@@ -13,13 +13,10 @@
             "Quatrième Mouvement : La Marée Déferlante",
             "Huitième mouvement : Impact de la Cascade"
         ],
-        "dodge_prepa": [
+        "dodge_preparation": [
             "Cinquième mouvement : Averse Providentielle"
         ],
-        "defensive_prepa": [
-            "Neuvième Mouvement : Embruns des Flots Déchaînés"
-        ],
-        "special": [
+        "special_attack": [
             "Dixième Mouvement : Les Vicissitudes de la Vie"
         ]
     },
@@ -32,7 +29,7 @@
             "Sixième et Troisième Mouvement Combinés : Tourbillon Dansant",
             "Onzième mouvement : Accalmie"
         ],
-        "counter_prepa": [
+        "counter_preparation": [
             "Septième mouvement : Goutte de Rosée Troublant l'Eau Dormante"
         ]
     }
