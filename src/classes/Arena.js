@@ -102,14 +102,8 @@ class Arena {
         }
     }
 
-    async begin() {
-        const attackingTeam = this.teams[this.cache.teamPlaying];
-        const defendingTeam = this.teams[attackingTeam.nid];
-
-        const playerAttacking = attackingTeam.getPlayer(this.cache.playing);
-        const playerDefending = defendingTeam.getPlayer(playerAttacking.target);
-
-        let atk = await this.cmd.ctx.buttonRequest(
+    async atkPlayer(playerAttacking, playerDefending, defendingTeam) {
+        const atk = await this.cmd.ctx.buttonRequest(
             `${playerAttacking.name}, choisisez votre attaque.`,
             `vos pv: ${playerAttacking.pv}/100 | endurance: ${playerAttacking.stamina}/10`
             +
@@ -122,18 +116,11 @@ class Arena {
             playerAttacking.id,
         );
 
-        atk = atk.customId;
+        return atk === null ? atk : atk.customId;
+    }
 
-        if (["target_change", "forfeit"].includes(atk)) {
-            switch (atk) {
-                case "target_change":
-                    return await this.targetChoice(playerAttacking);
-                case "forfeit":
-                    return await this.forfeit(playerAttacking);
-            }
-        }
-
-        let def = await this.cmd.ctx.buttonRequest(
+    async defPlayer(playerDefending, playerAttacking) {
+        const def = await this.cmd.ctx.buttonRequest(
             `${playerDefending.name}, choisisez votre défense.`,
             `vos pv: ${playerDefending.pv}/100 | endurance: ${playerDefending.stamina}/10`
             +
@@ -146,16 +133,35 @@ class Arena {
             playerDefending.id,
         );
 
-        if (atk === null || def === null) return await this.stop();
+        return def === null ? def : def.customId;
+    }
 
-        def = def.customId;
+    async begin() {
+        const attackingTeam = this.teams[this.cache.teamPlaying];
+        const defendingTeam = this.teams[attackingTeam.nid];
 
+        const playerAttacking = attackingTeam.getPlayer(this.cache.playing);
+        const playerDefending = defendingTeam.getPlayer(playerAttacking.target);
+
+        let atk = null;
+        let def = null;
+        if (playerAttacking.entityType === "player") atk = await this.atkPlayer(playerAttacking, playerDefending, defendingTeam);
+        if (playerDefending.entityType === "player") def = await this.defPlayer(playerDefending, playerAttacking);
+
+        if (["target_change", "forfeit"].includes(atk)) {
+            switch (atk) {
+                case "target_change":
+                    return await this.targetChoice(playerAttacking);
+                case "forfeit":
+                    return await this.forfeit(playerAttacking);
+            }
+        }
         if (def === "forfeit") return await this.forfeit(playerDefending);
+        if (atk === null || def === null) return await this.stop();
 
         this.damageManager(atk, def, playerAttacking, playerDefending);
 
-        await this.rotate();
-
+        this.rotate();
         await this.begin();
     }
 

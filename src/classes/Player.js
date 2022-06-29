@@ -4,9 +4,9 @@ class Player {
         this.name = name;
         this.stamina = 10;
         this.pv = 100;
-        this.power = 0.5;
         this.number = "0";
         this.target = "0";
+        this.entityType = "player";
     }
 
     async merge(team) {
