@@ -31,7 +31,7 @@ class Start extends Command {
         );
         const choice = await this.ctx.messageCollection(msg);
         if (this.ctx.isResp(choice, "y")) {
-            await this.client.playerDb.create(this.message.author.id);
+            await this.client.playerDb.createAdventure(this.message.author.id);
             return await this.ctx.reply(
                 "Bienvenue jeune joueur !",
                 "Vous êtes désormais un joueur Obanai. Vous pouvez voir la liste des commandes à tout moment avec la commande help.",

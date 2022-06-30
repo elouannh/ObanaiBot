@@ -9,12 +9,7 @@ class PlayerDb {
         this.db = new Enmap({ name: "playerDb" });
     }
 
-    model(
-        // obligatoire
-        id,
-        // optionnel
-        category, breath, squad,
-    ) {
+    model(id) {
         const datas = {
             started: false,
             id: id,
@@ -30,36 +25,20 @@ class PlayerDb {
             breath: "water",
             exp: 0,
             created: Date.now(),
-            // grades : vip, tester, vip+
-            grades: [],
-            badges: [],
         };
-
-        if (category !== null) datas.category = category;
-        if (breath !== null) datas.breath = breath;
-        if (squad !== null) datas.squad = squad;
 
         return datas;
     }
 
-    async create(id) {
-        const p = this.model(id);
-        this.db.set(id, p);
-        this.db.set(id, true, "started");
-
-        return this.db.get(id);
-    }
-
     async ensure(id) {
-        const p = this.model(id, null, null, null);
+        const p = this.model(id);
         this.db.ensure(id, p);
 
         return this.db.get(id);
     }
 
     async get(id) {
-        this.ensure(id, null, null, null);
-        const p = await this.db.get(id);
+        const p = await this.ensure(id);
         const i = await this.client.inventoryDb.get(id);
 
 
@@ -104,8 +83,17 @@ class PlayerDb {
         return p;
     }
 
+    async createAdventure(id) {
+        await this.client.activityDb.ensure(id);
+        await this.client.inventoryDb.ensure(id);
+        await this.client.mapDb.ensure(id);
+        await this.ensure(id);
+        await this.client.questDb.ensure(id);
+        await this.client.externalServerDb.ensure(id);
+    }
+
     async deleteAdventure(id) {
-        const p = this.model(id, null, null, null, null, null);
+        const p = this.model(id);
         this.db.set(id, p);
         this.db.set(id, false, "started");
 
@@ -113,7 +101,7 @@ class PlayerDb {
     }
 
     async changeLang(id, lang) {
-        const p = this.model(id, null, null, null, null, null);
+        const p = this.model(id);
         this.db.ensure(id, p);
         await this.db.set(id, lang, "lang");
     }

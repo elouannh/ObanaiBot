@@ -10,12 +10,14 @@ class InventoryDb {
     model(id) {
         const datas = {
             id: id,
-            yens: 0,
+            yens: 1000,
             kasugai_crow: null,
             kasugai_crow_exp: 0,
             active_grimoire: null,
             active_grimoire_since: 0,
-            grimoires: {},
+            grimoires: {
+                "mastery": 1,
+            },
             materials: {},
             weapon: {
                 rarity: 1,
@@ -28,13 +30,6 @@ class InventoryDb {
         return datas;
     }
 
-    async create(id) {
-        const p = this.model(id);
-        this.db.set(id, p);
-
-        return this.db.get(id);
-    }
-
     async ensure(id) {
         const p = this.model(id);
         this.db.ensure(id, p);
@@ -43,8 +38,7 @@ class InventoryDb {
     }
 
     async get(id) {
-        this.ensure(id);
-        const p = this.db.get(id);
+        const p = await this.ensure(id);
 
         for (const mat in p.materials) {
             const q = mat in p.materials ? p.materials[mat] : 0;

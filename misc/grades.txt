@@ -1,0 +1,22 @@
+----- normal:
+
+x1 mastery grimoire
+1000 yens
+
+----- vip:
+
+x2 mastery grimoire
+x1 eternal grimoire
+50'000 yens
+force/defense/speed/agility level 3
+
+----- tester:
+
+tester's commands
+
+----- vip+:
+
+x2 mastery grimoire
+x1 eternal grimoire
+100'000 yens
+force/defense/speed/agility level 6

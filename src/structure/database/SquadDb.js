@@ -30,13 +30,6 @@ class SquadDb {
         return datas;
     }
 
-    async create(owner, right_hand = null, name = null, quote = null) {
-        const p = this.model(owner, right_hand, name, quote);
-        this.db.set(owner, p);
-
-        return this.db.get(owner);
-    }
-
     async ensure(owner) {
         const p = this.model(owner, null, null, null);
         this.db.ensure(owner, p);
@@ -45,7 +38,7 @@ class SquadDb {
     }
 
     async get(owner) {
-        const s = this.db.get(owner);
+        const s = await this.ensure(owner);
 
         if (s === null || s === undefined) return null;
 

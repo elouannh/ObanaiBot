@@ -7,6 +7,7 @@ const { ActivityDb } = require("../structure/database/ActivityDb");
 const { MapDb } = require("../structure/database/MapDb");
 const { QuestDb } = require("../structure/database/QuestDb");
 const { InternalServerManager } = require("../structure/database/InternalServerManager");
+const { ExternalServerDb } = require("../structure/database/ExternalServerDb");
 const CommandManager = require("./CommandManager");
 const config = require("../config.json");
 
@@ -31,6 +32,7 @@ class Obanai extends Client {
         this.guildDb = new GuildDb(this);
         this.mapDb = new MapDb(this);
         this.questDb = new QuestDb(this);
+        this.externalServerDb = new ExternalServerDb(this);
 
         const PlayerDbCallback = require("../structure/callbacks/PlayerDbCallback")(this);
         const InventoryDbCallback = require("../structure/callbacks/InventoryDbCallback")(this);

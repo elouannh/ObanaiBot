@@ -17,13 +17,6 @@ class MapDb {
         return datas;
     }
 
-    async create(id) {
-        const p = this.model(id);
-        this.db.set(id, p);
-
-        return this.db.get(id);
-    }
-
     async ensure(id) {
         const p = this.model(id);
         this.db.ensure(id, p);
