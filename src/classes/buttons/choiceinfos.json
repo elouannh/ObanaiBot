@@ -1,16 +1,16 @@
 {
     "attack": [
-        "👊 • *Attaque rapide* ||`= Dmg=50%Force-Enc / +1⚡`||",
-        "💥 • *Attaque chargée* ||`= Dmg=75%Force-Enc / -2⚡ / +10%FailRate`||",
-        "❄️ • *Esquiver contre* ||`= Dmg=0%Force-Enc / -1⚡ / +10%DodgeCounterRate`||",
-        "💀 • *Attaque spéciale* ||`= Dmg=100%Force-Enc / -5⚡ / +20%FailRate`||",
+        "👊 • *Attaque rapide* ||`= Dmg=50%Force-Enc • +1⚡`||",
+        "💥 • *Attaque chargée* ||`= Dmg=75%Force-Enc • -2⚡ • +10%FailRate`||",
+        "❄️ • *Esquiver contre* ||`= Dmg=60%Force-Enc • -1⚡ • +15%DodgeCounterRate`||",
+        "💀 • *Attaque spéciale* ||`= Dmg=100%Force-Enc • -5⚡ • +20%FailRate`||",
         "\n🎯 • *Changer de cible*",
         "🧽 • *Abandonner*"
     ],
     "defense": [
-        "🛡️ • *Défense rapide* ||`= Enc=40%Def / +1⚡`||",
-        "💥 • *Défense chargée* ||`= Enc=60%Def / -2⚡ / +10%FailRate`||",
-        "☄️ • *Contrer* ||`= Enc=0%Def / -1⚡ / +50%CounterRate / +10%FailRate`||",
+        "🛡️ • *Défense rapide* ||`= Enc=40%Def • +1⚡`||",
+        "💥 • *Défense chargée* ||`= Enc=60%Def • -2⚡ • +10%FailRate`||",
+        "☄️ • *Contrer* ||`= Enc=0%Def • Dmg=100%DmgReçus • -1⚡ • +50%CounterRate • +10%FailRate`||",
         "\n🧽 • *Abandonner*"
     ]
 }

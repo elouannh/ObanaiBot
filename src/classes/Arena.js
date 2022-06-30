@@ -298,7 +298,8 @@ class Arena {
                 hazardRate += 10;
                 break;
             case "dodge_preparation":
-                dodgeCounterRate += 10;
+                dmg = playerAttacking.datas.aptitudes.force * 0.60;
+                dodgeCounterRate += 15;
                 break;
             case "special_attack":
                 dmg = playerAttacking.datas.aptitudes.force * 1;
@@ -338,17 +339,17 @@ class Arena {
         }
         else {
             let finalCounterRate = Math.ceil(dodgeCounterRate - counterRate);
+            let finalDamages = Math.ceil((dmg - collection) * (Math.floor(Math.random() + 0.5) / 10 + 1) * 1.5);
             if (finalCounterRate < 0) finalCounterRate = -1;
 
             if (Math.floor(Math.random() * 100) < finalCounterRate) {
-                this.teams[playerAttacking.team.id].hurtPlayer(playerAttacking.number, 5);
-                str += `\n\n» ${playerAttacking.name} se fait contrer par ${playerDefending.name} en voulant attaquer... il perd -5❤️ !`;
+                this.teams[playerAttacking.team.id].hurtPlayer(playerAttacking.number, finalDamages);
+                str += `\n\n» ${playerAttacking.name} se fait contrer par ${playerDefending.name} en voulant attaquer... il perd -${finalDamages}❤️ !`;
             }
             else {
                 const dodged = Math.floor(Math.random() * 100) <= (playerDefending.datas.aptitudes.speed / playerAttacking.datas.aptitudes.speed);
 
                 if (!dodged) {
-                    let finalDamages = Math.ceil((dmg - collection) * (Math.floor(Math.random() + 0.5) / 10 + 1) * 1.5);
                     if (finalDamages < 0) finalDamages = 0;
 
                     this.teams[playerDefending.team.id].hurtPlayer(playerDefending.number, finalDamages);
