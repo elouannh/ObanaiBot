@@ -268,7 +268,7 @@ class Arena {
         let hazardRate = 5;
         let hazardRate2 = 5;
         let dodgeCounterRate = 10;
-        let counterRate = 5;
+        let counterRate = playerDefending.counterRate + 5;
 
         const attackMvt = playerAttacking.datas.breath.attack[atk];
         const defenseMvt = playerDefending.datas.breath.defense[def];
@@ -287,22 +287,24 @@ class Arena {
         sentence = sentence.replace("{dbreath}", `${playerDefending.datas.breath.emoji} ${playerDefending.datas.breath.name}`);
 
         str += sentence;
+        const force = Math.ceil(playerAttacking.datas.stats.force / 3) * 10;
+        const defense = Math.ceil(playerDefending.datas.stats.defense / 3) * 10;
 
         switch (atk) {
             case "quick":
-                dmg = playerAttacking.datas.aptitudes.force * 0.5;
+                dmg = force * 0.5;
                 this.teams[playerAttacking.team.id].addStamina(playerAttacking.number, 1);
                 break;
             case "powerful":
-                dmg = playerAttacking.datas.aptitudes.force * 0.75;
+                dmg = force * 0.75;
                 hazardRate += 10;
                 break;
             case "dodge_preparation":
-                dmg = playerAttacking.datas.aptitudes.force * 0.60;
+                dmg = force * 0.60;
                 dodgeCounterRate += 15;
                 break;
             case "special_attack":
-                dmg = playerAttacking.datas.aptitudes.force * 1;
+                dmg = force * 1;
                 hazardRate += 20;
                 break;
         }
@@ -311,16 +313,16 @@ class Arena {
 
         switch (def) {
             case "quick":
-                collection = playerDefending.datas.aptitudes.defense * 0.4;
+                collection = defense * 0.4;
                 this.teams[playerDefending.team.id].addStamina(playerDefending.number, 1);
                 break;
             case "powerful":
-                collection = playerDefending.datas.aptitudes.defense * 0.6;
+                collection = defense * 0.6;
                 hazardRate2 += 10;
                 break;
             case "counter_preparation":
                 hazardRate2 += 10;
-                counterRate += 50;
+                counterRate += 30;
                 break;
         }
 
@@ -329,24 +331,26 @@ class Arena {
 
         if (finalHazardRate || finalHazardRate2) {
             if (finalHazardRate) {
-                this.teams[playerAttacking.team.id].hurtPlayer(playerAttacking.number, 5);
+                this.teams[playerAttacking.team.id].hurtPlayer(playerAttacking.number, 3);
                 str += `\n\n» ${playerAttacking.name} se blesse en voulant attaquer... il perd -3❤️ !`;
             }
             if (finalHazardRate2) {
-                this.teams[playerDefending.team.id].hurtPlayer(playerDefending.number, 5);
-                str += `\n\n» ${playerAttacking.name} se blesse en voulant défendre... il perd -3❤️ !`;
+                this.teams[playerDefending.team.id].hurtPlayer(playerDefending.number, 3);
+                str += `\n\n» ${playerDefending.name} se blesse en voulant défendre... il perd -3❤️ !`;
             }
         }
         else {
-            let finalCounterRate = Math.ceil(dodgeCounterRate - counterRate);
             let finalDamages = Math.ceil((dmg - collection) * (Math.floor(Math.random() + 0.5) / 10 + 1) * 1.5);
-            if (finalCounterRate < 0) finalCounterRate = -1;
+            let finalCounterRate = Math.ceil(counterRate - dodgeCounterRate);
+            if (finalCounterRate < 0) finalCounterRate = 0;
 
             if (Math.floor(Math.random() * 100) < finalCounterRate) {
                 this.teams[playerAttacking.team.id].hurtPlayer(playerAttacking.number, finalDamages);
                 str += `\n\n» ${playerAttacking.name} se fait contrer par ${playerDefending.name} en voulant attaquer... il perd -${finalDamages}❤️ !`;
+                this.teams[playerDefending.team.id].players[playerDefending.number].counterRate = 5;
             }
             else {
+                this.teams[playerDefending.team.id].players[playerDefending.number].counterRate = counterRate;
                 const dodged = Math.floor(Math.random() * 100) <= (playerDefending.datas.aptitudes.speed / playerAttacking.datas.aptitudes.speed);
 
                 if (!dodged) {
@@ -360,6 +364,8 @@ class Arena {
                 }
             }
         }
+
+        console.log(counterRate);
 
         this.fightLog.push(str);
     }

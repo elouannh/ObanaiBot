@@ -8,6 +8,7 @@ class Player {
         this.number = "0";
         this.target = "0";
         this.entityType = "player";
+        this.counterRate = 5;
     }
 
     async merge(team) {
