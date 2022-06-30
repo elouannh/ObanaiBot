@@ -50,6 +50,7 @@ class Fight extends Command {
         teams["1"] = teams["1"].splice(0, 4);
         teams["2"] = teams["2"].splice(0, 4);
 
+        const teamsStr = `${Object.entries(teams).map(t => `Équipe **${t[0]}**: ${t[1].map(p => `\`${p.username}\``).join(" / ")}`).join("\n")}`;
         if (teams["1"].length === 1 && teams["2"].length === 0) {
             return await this.ctx.reply(
                 "Arène - Équipes",
@@ -61,8 +62,6 @@ class Fight extends Command {
                 "outline",
             );
         }
-
-        const teamsStr = `${Object.entries(teams).map(t => `Équipe **${t[0]}**: ${t[1].map(p => `\`${p.username}\``).join(" / ")}`).join("\n")}`;
         const msg = await this.ctx.reply(
             "Arène - Équipes",
             teamsStr

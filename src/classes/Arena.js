@@ -214,7 +214,7 @@ class Arena {
         const deaths = await this.checkDeath();
         if (deaths.length > 0) {
             this.deaths.push(deaths);
-            await this.cmd.ctx.reply("Malheur !", this.deaths[this.deaths.length - 1], "error", null, "error", false);
+            await this.cmd.ctx.reply("Malheur !", this.deaths[this.deaths.length - 1], "☠️", null, "error");
         }
 
         let hasWinner = false;
@@ -364,8 +364,6 @@ class Arena {
                 }
             }
         }
-
-        console.log(counterRate);
 
         this.fightLog.push(str);
     }
