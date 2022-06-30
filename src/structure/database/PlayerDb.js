@@ -33,6 +33,11 @@ class PlayerDb {
     async ensure(id) {
         const p = this.model(id);
         this.db.ensure(id, p);
+        await this.client.activityDb.ensure(id);
+        await this.client.inventoryDb.ensure(id);
+        await this.client.mapDb.ensure(id);
+        await this.client.questDb.ensure(id);
+        await this.client.externalServerDb.ensure(id);
 
         return this.db.get(id);
     }
@@ -90,6 +95,8 @@ class PlayerDb {
         await this.ensure(id);
         await this.client.questDb.ensure(id);
         await this.client.externalServerDb.ensure(id);
+
+        this.db.set(id, true, "started");
     }
 
     async deleteAdventure(id) {

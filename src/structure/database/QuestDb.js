@@ -13,6 +13,10 @@ class QuestDb {
             daily: [],
             slayer: [],
             world: [],
+            storyProgress: {
+                "chapter": 1,
+                "step": 1,
+            },
         };
 
         return datas;

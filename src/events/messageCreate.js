@@ -8,7 +8,6 @@ module.exports = {
         if (message.guild.id !== "958430837068681236" && !client.config.owners.includes(message.author.id)) return;
 
         const guildPrefix = await client.guildDb.get(message.guild.id);
-        if (!message.content.startsWith(guildPrefix.prefix)) return;
 
         const args = message.content.replace(guildPrefix.prefix, "").split(/ +/);
         const commandName = args.shift();

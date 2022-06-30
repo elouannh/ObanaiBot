@@ -31,7 +31,7 @@ class SquadDb {
     }
 
     async ensure(owner) {
-        const p = this.model(owner, null, null, null);
+        const p = this.model(owner);
         this.db.ensure(owner, p);
 
         return this.db.get(owner);
@@ -106,7 +106,7 @@ class SquadDb {
             if (squad.members.includes(id)) correspondingSquad = squad.owner;
         }
 
-        correspondingSquad = await this.get(correspondingSquad);
+        if (correspondingSquad !== null) correspondingSquad = await this.get(correspondingSquad);
 
         return correspondingSquad;
     }

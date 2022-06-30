@@ -1,4 +1,4 @@
-const alertQuest = require("./AlertRequest");
+const UpdateQuest = require("./UpdateQuest");
 
 module.exports = client => {
 
@@ -16,11 +16,7 @@ module.exports = client => {
                         const newAmount = hadBefore + toAdd;
                         const quests = qDatas[qKey].filter(q => q.id !== dq.id);
 
-                        if (newAmount >= dq.objective.quantity) {
-                            client.questDb.db.set(key, quests, qKey);
-                            await alertQuest(client, qKey, newValue, dq);
-                        }
-                        else {
+                        if (!(await UpdateQuest(quests, qKey, dq, client, key, newValue, newAmount >= dq.objective.quantity))) {
                             const newQ = dq;
                             newQ.objective.got = newAmount;
                             quests.push(newQ);
@@ -33,11 +29,8 @@ module.exports = client => {
                 for (const subKey in oldValue.stats) {
                     if (newValue?.stats[subKey] > oldValue.stats[subKey]) {
                         if (dq.objective.type === "train_stat") {
-                            if (dq.objective.stat === subKey) {
-                                const quests = qDatas[qKey].filter(q => q.id !== dq.id);
-                                client.questDb.db.set(key, quests, qKey);
-                                await alertQuest(client, qKey, newValue, dq);
-                            }
+                            const quests = qDatas[qKey].filter(q => q.id !== dq.id);
+                            await UpdateQuest(quests, qKey, dq, client, key, newValue, dq.objective.stat === subKey);
                         }
                     }
                 }

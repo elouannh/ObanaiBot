@@ -1,4 +1,4 @@
-const alertQuest = require("./AlertRequest");
+const UpdateQuest = require("./UpdateQuest");
 
 module.exports = client => {
 
@@ -11,21 +11,10 @@ module.exports = client => {
 
         for (const qKey of ["daily", "slayer", "world"]) {
             for (const dq of qDatas[qKey]) {
-
-
                 if (hasChangement(oldValue, newValue)) {
                     if (dq.objective.type === "voyage_to") {
                         const quests = qDatas[qKey].filter(q => q.id !== dq.id);
-
-                        if (dq.objective.region === newValue.region && dq.objective.area === newValue.area) {
-                            client.questDb.db.set(key, quests, qKey);
-                            await alertQuest(client, qKey, newValue, dq);
-                        }
-                        else {
-                            const newQ = dq;
-                            quests.push(newQ);
-                            client.questDb.db.set(key, quests, qKey);
-                        }
+                        await UpdateQuest(quests, qKey, dq, client, key, newValue, dq.objective.region === newValue.region && dq.objective.area === newValue.area);
                     }
                 }
 
