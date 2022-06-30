@@ -3,28 +3,28 @@ module.exports = player => {
         [
             {
                 customId: "quick",
-                label: "Défense rapide",
-                style: "primary",
+                emoji: "🛡️",
+                style: "secondary",
                 disabled: false,
             },
             {
                 customId: "powerful",
-                label: "Défense chargée",
-                style: "primary",
+                emoji: "💥",
+                style: "secondary",
                 disabled: player.stamina < 2,
             },
             {
                 customId: "counter_preparation",
-                label: "Préparation contre",
-                style: "primary",
+                emoji: "☄️",
+                style: "secondary",
                 disabled: player.stamina < 1,
             },
         ],
         [
             {
                 customId: "forfeit",
-                label: "Abandonner",
-                style: "primary",
+                emoji: "🧽",
+                style: "danger",
                 disabled: false,
             },
         ],

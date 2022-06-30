@@ -1,7 +1,8 @@
 class Player {
-    constructor(id, name) {
+    constructor(id, name, user) {
         this.id = id;
         this.name = name;
+        this.user = user;
         this.stamina = 10;
         this.pv = 100;
         this.number = "0";

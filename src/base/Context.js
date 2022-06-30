@@ -37,16 +37,17 @@ class Context {
         return c.join("\n");
     }
 
-    async reply(title, description, emoji, color, style) {
+    async reply(title, description, emoji, color, style, displayName = true) {
 
         await this.command.message.channel.sendTyping();
         const tit = await this.trStr(title);
         const desc = await this.trStr(description);
 
         const reponse = new SuperEmbed()
-            .setAuthor(this.command.message.author)
             .setTitle(tit)
             .setDescription(desc);
+
+        if (displayName) reponse.setAuthor(this.command.message.author);
 
         if (style !== null) {
             reponse.setStyle(style);
@@ -87,14 +88,14 @@ class Context {
         }
     }
 
-    async buttonRequest(title, description, emoji, color, style, rows, time = null, userr = undefined) {
+    async buttonRequest(author, title, description, emoji, color, style, rows, time = null, userr = undefined) {
         // MESSAGE PART --------------------------------------------------------------------------------------------------------------------------
         await this.command.message.channel.sendTyping();
         const tit = await this.trStr(title);
         const desc = await this.trStr(description);
 
         const reponse = new SuperEmbed()
-            .setAuthor(this.command.message.author)
+            .setAuthor(author)
             .setTitle(tit)
             .setDescription(desc);
 
@@ -118,7 +119,7 @@ class Context {
             compos.push(cache.datas);
         }
 
-        const msg = await this.command.message.channel.send({ embeds: [reponse.embed], components: compos });
+        const msg = await this.command.message.channel.send({ content: `<@${author.id}>`, embeds: [reponse.embed], components: compos });
 
         if (time === null) time = 30_000;
 

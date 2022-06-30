@@ -28,6 +28,10 @@ class Team {
     removeStamina(number, amount) {
         this.players[number].stamina -= amount;
     }
+
+    addStamina(number, amount) {
+        if (this.players[number].stamina < 10) this.players[number].stamina += amount;
+    }
 }
 
 module.exports = Team;

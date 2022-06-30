@@ -105,7 +105,7 @@ class ActivityDb {
             }
         }
 
-        time *= 45;
+        time *= 3;
         time *= 100000;
         time *= Number(coeff.toFixed(2));
 

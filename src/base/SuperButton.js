@@ -32,7 +32,7 @@ class SuperButton {
     }
 
     setEmoji(emoji) {
-        this.datas["emoji"] = emoji;
+        this.datas["emoji"] = { name: emoji };
 
         return this;
     }

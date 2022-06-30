@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 const Team = require("./Team");
 
 class Arena {
@@ -10,6 +11,10 @@ class Arena {
         this.teams = {
             "1": new Team(team1, "1", "2"),
             "2": new Team(team2, "2", "1"),
+        };
+        this.turn = {
+            number: 1,
+            phase: "Phase d'Attaque",
         };
         this.cache = {
             teamPlaying: "1",
@@ -30,7 +35,7 @@ class Arena {
     }
 
     async stop() {
-        return this.cmd.ctx.reply("Oups...", "Le combat a été interrompu.", null, null, "warning");
+        return this.cmd.ctx.reply("Oups...", "Le combat a été interrompu.", null, null, "warning", false);
     }
 
     rotate() {
@@ -49,12 +54,13 @@ class Arena {
         const opponentTeam = this.teams[player.team.id];
         const msg = await this.cmd.ctx.reply(
             `${player.name} change sa cible !`,
-            `**Pourfendeurs adverses**\n\n${Object.entries(opponentTeam.players).map(e => `**${e[0]}** • ${e[1].name} **${e[1].pv}**/100`).join("\n")}`
+            `**Adversaires**\n\n${Object.entries(opponentTeam.players).map(e => `**${e[0]}** • ${e[1].name} **${e[1].pv}**/100`).join("\n")}`
             +
-            "\n\nRenvoyez le numéro correspondant au pourfendeur que vous souhaitez cibler. Répondez `n` (non) pour garder votre cible.",
+            "\n\nRenvoyez le numéro correspondant à l'ennemi que vous souhaitez cibler. Répondez `n` (non) pour garder votre cible.",
             "🎯",
             null,
             "outline",
+            false,
         );
         const choice = await this.cmd.ctx.messageCollection(msg, 1, 30_000, player.id);
 
@@ -68,6 +74,7 @@ class Arena {
                 "🎯",
                 null,
                 "outline",
+                false,
             );
         }
 
@@ -84,11 +91,12 @@ class Arena {
             "🍃",
             null,
             "outline",
+            false,
         );
         const choice = await this.cmd.ctx.messageCollection(msg, 1, 30_000, player.id);
 
         if (this.cmd.ctx.isResp(choice, "y")) {
-            await this.cmd.ctx.reply(`${player.name} veut déclarer forfait.`, "Il quitte l'arène de combat.", "🍃", null, "error");
+            await this.cmd.ctx.reply(`${player.name} veut déclarer forfait.`, "Il quitte l'arène de combat.", "🍃", null, "error", false);
 
             const newPlayers = {};
             for (const p of Object.entries(userTeam.players).filter(pl => pl[1].number !== player.number)) newPlayers[p[0]] = p[1];
@@ -97,27 +105,46 @@ class Arena {
             Object.entries(this.teams[player.team.nid]).forEach(p => {
                 if (p[1].target === player.number) p[1].target = Object.keys(this.teams[player.team.id].players)[0];
             });
+
+            // WINNER PART CHECK
+
+            let hasWinner = false;
+            for (const t of Object.entries(this.teams)) {
+                if (Object.keys(t[1].players).length === 0) hasWinner = t[1].nid;
+            }
+
+            if (typeof hasWinner === "string") {
+                hasWinner = this.teams[hasWinner];
+                await this.winDisplay(hasWinner);
+
+                return;
+            }
+
         }
         else {
-            await this.cmd.ctx.reply(`${player.name} veut déclarer forfait.`, "Mais il décide de ne pas déclarer forfait.", "🍃", null, "outline");
+            await this.cmd.ctx.reply(`${player.name} veut déclarer forfait.`, "Mais il décide de ne pas déclarer forfait.", "🍃", null, "outline", false);
 
             await this.begin();
         }
     }
 
     get getLog() {
-        console.log(this.fightLog);
         return this.fightLog.length === 0 ? "Aucune information de combat." : this.fightLog[this.fightLog.length - 1];
     }
 
     async atkPlayer(playerAttacking, playerDefending, defendingTeam) {
         const atk = await this.cmd.ctx.buttonRequest(
+            playerAttacking.user,
             `${playerAttacking.name}, choisisez votre attaque.`,
-            `\`\`\`${this.getLog}\`\`\`\n\n`
+            `\`\`\`diff\n+ Tour ${this.turn.number} - ${this.turn.phase}\`\`\`\n\`\`\`xl\n${this.getLog}\`\`\`\n\n`
             +
-            `vos pv: ${playerAttacking.pv}/100 | endurance: ${playerAttacking.stamina}/10`
+            `————— **Stats** —————————————\n**${playerAttacking.name}**: ❤️**\`${playerAttacking.pv}\`**\`/100\` • ⚡**\`${playerAttacking.stamina}\`**\`/10\``
             +
-            `\npv de ${playerDefending.name}: ${playerDefending.pv}/100 | endurance: ${playerDefending.stamina}/10`,
+            `\n\n(🎯) **${playerDefending.name}**: ❤️**\`${playerDefending.pv}\`**\`/100\` • ⚡**\`${playerDefending.stamina}\`**\`/10\``
+            +
+            "\n\n————— **Choix** —————————————\n"
+            +
+            require("./buttons/choiceinfos.json").attack.join("\n"),
             "🥊",
             null,
             "outline",
@@ -131,13 +158,18 @@ class Arena {
 
     async defPlayer(playerDefending, playerAttacking) {
         const def = await this.cmd.ctx.buttonRequest(
+            playerDefending.user,
             `${playerDefending.name}, choisisez votre défense.`,
-            `\`\`\`${this.getLog}\`\`\`\n\n`
+            `\`\`\`diff\n- Tour ${this.turn.number} - ${this.turn.phase}\`\`\`\`\`\`xl\n${this.getLog}\`\`\`\n\n`
             +
-            `vos pv: ${playerDefending.pv}/100 | endurance: ${playerDefending.stamina}/10`
+            `————— **Stats** —————————————\n**${playerDefending.name}**: ❤️**\`${playerDefending.pv}\`**\`/100\` • ⚡**\`${playerDefending.stamina}\`**\`/10\``
             +
-            `\npv de ${playerAttacking.name}: ${playerAttacking.pv}/100 | endurance: ${playerAttacking.stamina}/10`,
-            "🥊",
+            `\n\n(🗡️) **${playerAttacking.name}**: ❤️**\`${playerAttacking.pv}\`**\`/100\` • ⚡**\`${playerAttacking.stamina}\`**\`/10\``
+            +
+            "\n\n————— **Choix** —————————————\n"
+            +
+            require("./buttons/choiceinfos.json").defense.join("\n"),
+            "🛡️",
             null,
             "outline",
             require("./buttons/defense")(playerDefending),
@@ -169,9 +201,37 @@ class Arena {
         return str;
     }
 
+    async winDisplay(hasWinner) {
+        await this.cmd.ctx.reply(
+            "Arène terminée !",
+            `L'équipe **${hasWinner.id}** sort vainqueur ! Les combattants qui ont survécu sont :`
+            +
+            Object.entries(hasWinner.players).map(e => `\`${e[1].name}\``).join(" / "),
+            "🏆",
+            null,
+            "warning",
+            false,
+        );
+    }
+
     async begin() {
         const deaths = await this.checkDeath();
-        if (deaths.length > 0) this.deaths.push(deaths);
+        if (deaths.length > 0) {
+            this.deaths.push(deaths);
+            await this.cmd.ctx.reply("Malheur !", this.deaths[this.deaths.length - 1], "error", null, "error", false);
+        }
+
+        let hasWinner = false;
+        for (const t of Object.entries(this.teams)) {
+            if (Object.keys(t[1].players).length === 0) hasWinner = t[1].nid;
+        }
+
+        if (typeof hasWinner === "string") {
+            hasWinner = this.teams[hasWinner];
+            await this.winDisplay(hasWinner);
+
+            return;
+        }
 
         const attackingTeam = this.teams[this.cache.teamPlaying];
         const defendingTeam = this.teams[attackingTeam.nid];
@@ -180,9 +240,8 @@ class Arena {
         const playerDefending = defendingTeam.getPlayer(playerAttacking.target);
 
         let atk = null;
-        let def = null;
+        this.turn.phase = "Phase d'Attaque";
         if (playerAttacking.entityType === "player") atk = await this.atkPlayer(playerAttacking, playerDefending, defendingTeam);
-        if (playerDefending.entityType === "player") def = await this.defPlayer(playerDefending, playerAttacking);
 
         if (["target_change", "forfeit"].includes(atk)) {
             switch (atk) {
@@ -191,7 +250,15 @@ class Arena {
                 case "forfeit":
                     return await this.forfeit(playerAttacking);
             }
+            return;
         }
+
+        let def = null;
+        this.turn.phase = "Phase de Défense";
+        if (playerDefending.entityType === "player") def = await this.defPlayer(playerDefending, playerAttacking);
+
+        this.turn.number++;
+
         if (def === "forfeit") return await this.forfeit(playerDefending);
         if (atk === null || def === null) return await this.stop();
 
@@ -212,12 +279,12 @@ class Arena {
         let counterRate = 5;
 
         const attackMvt = playerAttacking.datas.breath.attack[atk];
-        const defenseMvt = playerAttacking.datas.breath.defense[atk];
+        const defenseMvt = playerDefending.datas.breath.defense[def];
 
         let sentence = [
-            "{aname} utilise <{abreath}>, <{amvt}> ! {dname} répond avec <{dbreath}>, <{dmvt}>",
-            "{dname} commence à parer avec <{dbreath}>, >{dmvt}<, tandis que {aname} utilise <{abreath}>, <{amvt}> !",
-            "Le choc entre le <{amvt}> du <{abreath}> de {aname} contre le <{dmvt}> du <{dbreath}> de {dname} !",
+            '{aname} utilise "{abreath}, {amvt}" ! {dname} répond avec "{dbreath}, {dmvt}"',
+            '{dname} commence à parer avec "{dbreath}", "{dmvt}", tandis que {aname} utilise "{abreath}", "{amvt}" !',
+            'Le choc entre le "{amvt}" du "{abreath}" de {aname} contre le "{dmvt}" du "{dbreath}" de {dname} !',
         ][Math.floor(Math.random() * 3)];
 
         sentence = sentence.replace("{aname}", playerAttacking.name);
@@ -231,17 +298,18 @@ class Arena {
 
         switch (atk) {
             case "quick":
-                dmg = playerAttacking.datas.aptitudes.force * 0.25;
+                dmg = playerAttacking.datas.aptitudes.force * 0.5;
+                this.teams[playerAttacking.team.id].addStamina(playerAttacking.number, 1);
                 break;
             case "powerful":
-                dmg = playerAttacking.datas.aptitudes.force * 0.5;
-                hazardRate += 20;
+                dmg = playerAttacking.datas.aptitudes.force * 0.75;
+                hazardRate += 10;
                 break;
             case "dodge_preparation":
                 dodgeCounterRate += 10;
                 break;
             case "special_attack":
-                dmg = playerAttacking.datas.aptitudes.force * 0.8;
+                dmg = playerAttacking.datas.aptitudes.force * 1;
                 hazardRate += 20;
                 break;
         }
@@ -250,29 +318,30 @@ class Arena {
 
         switch (def) {
             case "quick":
-                collection = playerDefending.datas.aptitudes.defense * 0.25;
+                collection = playerDefending.datas.aptitudes.defense * 0.4;
+                this.teams[playerDefending.team.id].addStamina(playerDefending.number, 1);
                 break;
             case "powerful":
-                collection = playerDefending.datas.aptitudes.defense * 0.5;
-                hazardRate2 += 20;
+                collection = playerDefending.datas.aptitudes.defense * 0.6;
+                hazardRate2 += 10;
                 break;
             case "counter_preparation":
                 hazardRate2 += 10;
-                counterRate += 10;
+                counterRate += 50;
                 break;
         }
 
-        const finalHazardRate = Math.floor(Math.random() * 100) < (hazardRate / (playerAttacking.datas.aptitudes.agility * 0.1));
-        const finalHazardRate2 = Math.floor(Math.random() * 100) < (hazardRate2 / (playerDefending.datas.aptitudes.agility * 0.1));
+        const finalHazardRate = Math.floor(Math.random() * 100) < (hazardRate / (playerAttacking.datas.aptitudes.agility * 0.5));
+        const finalHazardRate2 = Math.floor(Math.random() * 100) < (hazardRate2 / (playerDefending.datas.aptitudes.agility * 0.5));
 
         if (finalHazardRate || finalHazardRate2) {
             if (finalHazardRate) {
                 this.teams[playerAttacking.team.id].hurtPlayer(playerAttacking.number, 5);
-                str += `\n💠 ${playerAttacking.name} se blesse en voulant attaquer... il perd -3❤️ !`;
+                str += `\n\n» ${playerAttacking.name} se blesse en voulant attaquer... il perd -3❤️ !`;
             }
             if (finalHazardRate2) {
                 this.teams[playerDefending.team.id].hurtPlayer(playerDefending.number, 5);
-                str += `\n💠 ${playerAttacking.name} se blesse en voulant défendre... il perd -3❤️ !`;
+                str += `\n\n» ${playerAttacking.name} se blesse en voulant défendre... il perd -3❤️ !`;
             }
         }
         else {
@@ -281,20 +350,20 @@ class Arena {
 
             if (Math.floor(Math.random() * 100) < finalCounterRate) {
                 this.teams[playerAttacking.team.id].hurtPlayer(playerAttacking.number, 5);
-                str += `\n💠 ${playerAttacking.name} se fait contrer par ${playerDefending.name} en voulant attaquer... il perd -5❤️ !`;
+                str += `\n\n» ${playerAttacking.name} se fait contrer par ${playerDefending.name} en voulant attaquer... il perd -5❤️ !`;
             }
             else {
                 const dodged = Math.floor(Math.random() * 100) <= (playerDefending.datas.aptitudes.speed / playerAttacking.datas.aptitudes.speed);
 
                 if (!dodged) {
-                    let finalDamages = Math.ceil((dmg - collection) * (Math.floor(Math.random() + 0.5) / 10 + 1) * 10);
+                    let finalDamages = Math.ceil((dmg - collection) * (Math.floor(Math.random() + 0.5) / 10 + 1) * 1.5);
                     if (finalDamages < 0) finalDamages = 0;
 
-                    this.teams[playerAttacking.team.id].hurtPlayer(playerAttacking.number, finalDamages);
-                    str += `\n💠 ${playerAttacking.name} inflige de lourds dégâts à ${playerDefending.name}... il inflige -${finalDamages}❤️ !`;
+                    this.teams[playerDefending.team.id].hurtPlayer(playerDefending.number, finalDamages);
+                    str += `\n\n» ${playerAttacking.name} inflige de lourds dégâts à ${playerDefending.name}... il inflige -${finalDamages}❤️ !`;
                 }
                 else {
-                    str += `\n💠 ${playerAttacking.name} se fait esqsuiver par ${playerDefending.name} en voulant attaquer !`;
+                    str += `\n\n» ${playerAttacking.name} se fait esqsuiver par ${playerDefending.name} en voulant attaquer !`;
                 }
             }
         }

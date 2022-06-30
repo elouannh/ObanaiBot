@@ -37,10 +37,10 @@ class Fight extends Command {
         const arena = new Arena(
             this,
             [
-                new Player(this.message.author.id, this.message.author.username),
+                new Player(this.message.author.id, this.message.author.username, this.message.author),
             ],
             [
-                new Player(user.id, user.username),
+                new Player(user.id, user.username, user),
             ],
         );
 
