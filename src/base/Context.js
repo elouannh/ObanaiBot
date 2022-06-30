@@ -137,6 +137,20 @@ class Context {
         return way;
     }
 
+    async multipleMessageCollection(message = null, time = null, users = null) {
+        if (message === null) message = this.command.message;
+        if (time === null) time = 60_000;
+
+        const filter = msg => (this.isResp(msg.content, "y") || this.isResp(msg.content, "n")) && users.includes(msg.author.id);
+        const max = users.length;
+        const choice = await message.channel.awaitMessages({ filter, time, max }).catch(() => { return null; });
+
+        if (choice) {
+            if (choice) return choice;
+            else return null;
+        }
+    }
+
 }
 
 module.exports = Context;

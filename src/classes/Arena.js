@@ -39,19 +39,25 @@ class Arena {
     }
 
     rotate() {
-        const teamWillPlay = this.teams[this.teams[this.cache.teamPlaying].nid];
-        this.cache.teamPlaying = teamWillPlay.id;
+        const actualTeam = this.teams[this.cache.teamPlaying];
+        const opponentTeam = this.teams[actualTeam.nid];
 
-        if (Number(this.cache.playing) === Number(Object.keys(teamWillPlay.players).at(-1))) {
-            this.cache.playing = "0";
+        for (const team of [actualTeam, opponentTeam]) {
+            const actualPlayerFocused = Object.keys(team.players).indexOf(this.cache.lastPlayers);
+            const lengthMax = Object.keys(team.players).length;
+
+            if (lengthMax > 1) {
+                if ((actualPlayerFocused + 1) === lengthMax) this.cache.lastPlayers[team.id] = Object.keys(team.players)?.at(0);
+                else this.cache.lastPlayers[team.id] = Object.keys(team.players)?.at(actualPlayerFocused + 1);
+            }
         }
-        else {
-            this.cache.playing = String(Number(this.cache.playing) + 1);
-        }
+
+        this.cache.teamPlaying = opponentTeam.id;
+        this.cache.playing = this.cache.lastPlayers[opponentTeam.id];
     }
 
     async targetChoice(player) {
-        const opponentTeam = this.teams[player.team.id];
+        const opponentTeam = this.teams[player.team.nid];
         const msg = await this.cmd.ctx.reply(
             `${player.name} change sa cible !`,
             `**Adversaires**\n\n${Object.entries(opponentTeam.players).map(e => `**${e[0]}** • ${e[1].name} **${e[1].pv}**/100`).join("\n")}`
@@ -81,8 +87,20 @@ class Arena {
         await this.begin();
     }
 
-    async forfeit(player) {
+    removePlayer(player) {
         const userTeam = this.teams[player.team.id];
+        const newPlayers = {};
+        for (const p of Object.entries(userTeam.players).filter(pl => pl[1].number !== player.number)) newPlayers[p[0]] = p[1];
+        this.teams[player.team.id].players = newPlayers;
+
+        Object.entries(this.teams[userTeam.nid].players).forEach(p => {
+            if (this.teams[p[1].team.id].players[p[0]].target === player.number) {
+                this.teams[p[1].team.id].players[p[0]].target = Object.keys(this.teams[userTeam.id].players).at(0);
+            }
+        });
+    }
+
+    async forfeit(player) {
         const msg = await this.cmd.ctx.reply(
             `${player.name} veut déclarer forfait.`,
             "Cette décision est irréversible. Souhaitez-vous vraiment abandonner ?"
@@ -98,28 +116,10 @@ class Arena {
         if (this.cmd.ctx.isResp(choice, "y")) {
             await this.cmd.ctx.reply(`${player.name} veut déclarer forfait.`, "Il quitte l'arène de combat.", "🍃", null, "error", false);
 
-            const newPlayers = {};
-            for (const p of Object.entries(userTeam.players).filter(pl => pl[1].number !== player.number)) newPlayers[p[0]] = p[1];
-            this.teams[player.team.id].players = newPlayers;
+            this.removePlayer(player);
+            this.rotate();
 
-            Object.entries(this.teams[player.team.nid]).forEach(p => {
-                if (p[1].target === player.number) p[1].target = Object.keys(this.teams[player.team.id].players)[0];
-            });
-
-            // WINNER PART CHECK
-
-            let hasWinner = false;
-            for (const t of Object.entries(this.teams)) {
-                if (Object.keys(t[1].players).length === 0) hasWinner = t[1].nid;
-            }
-
-            if (typeof hasWinner === "string") {
-                hasWinner = this.teams[hasWinner];
-                await this.winDisplay(hasWinner);
-
-                return;
-            }
-
+            await this.begin();
         }
         else {
             await this.cmd.ctx.reply(`${player.name} veut déclarer forfait.`, "Mais il décide de ne pas déclarer forfait.", "🍃", null, "outline", false);
@@ -184,18 +184,14 @@ class Arena {
         let str = "";
         for (const team of Object.entries(this.teams)) {
             const teamDeath = [];
-            const newPlayers = [];
             for (const p of Object.entries(team[1].players)) {
                 if (p[1].pv <= 0) {
                     if (teamDeath.length === 0) teamDeath.push(`\n**Équipe ${team[0]}**\n`);
                     teamDeath.push(`Mort de **${p[1].name}** !`);
-                }
-                else {
-                    newPlayers[p[0]] = p[1];
+                    this.removePlayer(p[1]);
                 }
             }
             str += teamDeath.join("\n");
-            this.teams[team[0]].players = newPlayers;
         }
 
         return str;
@@ -222,14 +218,10 @@ class Arena {
         }
 
         let hasWinner = false;
-        for (const t of Object.entries(this.teams)) {
-            if (Object.keys(t[1].players).length === 0) hasWinner = t[1].nid;
-        }
-
+        for (const t of Object.entries(this.teams)) if (Object.keys(t[1].players).length === 0) hasWinner = t[1].nid;
         if (typeof hasWinner === "string") {
             hasWinner = this.teams[hasWinner];
             await this.winDisplay(hasWinner);
-
             return;
         }
 
