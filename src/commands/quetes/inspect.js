@@ -34,7 +34,7 @@ class Inspect extends Command {
         };
 
         for (const qKey of ["daily", "slayer", "world"]) {
-            for (const q of qDatas[qKey].filter(quest => quest.objective.type === "talk")) {
+            for (const q of qDatas[qKey].filter(quest => quest.objective.type === "inspect_zone")) {
                 if (q.objective.region === loc.id) {
                     if (q.objective.area === zone.id) quests.area.push([q, qKey]);
                 }
@@ -67,10 +67,15 @@ class Inspect extends Command {
 
         for (const qKey of ["daily", "slayer", "world"]) {
             for (const q of quests.area.filter(e => e[1] === qKey)) {
-                this.client.db.math(this.message.author.id, "+", q[0].objective.quantity, `${q[0].objective.itemCategory}.${q[0].objective.item}`);
-                const mat = q[0].objective.itemCategory in added ?
+                const iDatas = await this.client.inventoryDb.get(this.message.author.id);
+
+                const mat1 = q[0].objective.itemCategory in iDatas ?
+                            (q[0].objective.item in iDatas[q[0].objective.itemCategory] ? iDatas[q[0].objective.itemCategory][q[0].objective.item] : 0) : 0;
+                const mat2 = q[0].objective.itemCategory in added ?
                             (q[0].objective.item in added[q[0].objective.itemCategory] ? added[q[0].objective.itemCategory][q[0].objective.item] : 0) : 0;
-                added[q[0].objective.itemCategory][q[0].objective.item] = mat + q[0].objective.quantity;
+
+                this.client.inventoryDb.db.set(this.message.author.id, q[0].objective.quantity + mat1, `${q[0].objective.itemCategory}.${q[0].objective.item}`);
+                added[q[0].objective.itemCategory][q[0].objective.item] = mat2 + q[0].objective.quantity;
 
                 const newValue = await this.client.questDb.get(this.message.author.id);
                 const newQuests = qDatas[qKey].filter(Q => Q.id !== q[0].id);
