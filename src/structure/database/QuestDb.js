@@ -9,13 +9,13 @@ class QuestDb {
     model(id) {
         const datas = {
             id: id,
-            active: null,
             daily: [],
             slayer: [],
             world: [],
             storyProgress: {
-                "chapter": 1,
-                "step": 1,
+                "chapter": 0,
+                "quest": 1,
+                "step": 0,
             },
         };
 

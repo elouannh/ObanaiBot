@@ -35,7 +35,7 @@ class Fight extends Command {
             adminOnly: false,
             aliases: ["fight", "f"],
             args: [["player", "joueurs que vous souhaitez affronter.", false]],
-            category: "Stats",
+            category: "Combats",
             cooldown: 5,
             description: "Commande permettant de se battre contre un pourfendeur.",
             examples: ["fight @pandawou"],

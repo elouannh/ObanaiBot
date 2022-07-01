@@ -28,6 +28,7 @@ class Help extends Command {
             }
             const emojis = {
                 "Administrateur": "⚠️",
+                "Combats": "🏟️",
                 "Escouades": "⛩️",
                 "Exploration": "🗺️",
                 "Quêtes": "❗",
@@ -36,7 +37,7 @@ class Help extends Command {
             };
             const datas = {
                 "Commandes Globales": ["Administrateur", "Utilitaire"],
-                "Commandes du RPG Demon Slayer": ["Escouades", "Exploration", "Quêtes", "Stats"],
+                "Commandes du RPG Demon Slayer": ["Combats", "Escouades", "Exploration", "Quêtes", "Stats"],
             };
             for (const dat in datas) {
                 let string = dat === "Commandes Globales" ?

@@ -3,6 +3,11 @@ const Command = require("../../base/Command");
 async function alertQuest(client, type, datas, quest) {
 
     const questFile = require(`../../quests/${type}/${quest.id.split(":")[0]}.js`)(quest.step + 1);
+    if (quest.type === "slayer") {
+        client.questDb.db.set(datas.id, quest.chapter, "storyProgress.chapter");
+        client.questDb.db.set(datas.id, quest.quest, "storyProgress.quest");
+        client.questDb.db.set(datas.id, quest.step, "storyProgress.step");
+    }
     if (questFile?.title === undefined) {
         const playerId = Number((datas.created / 1000).toFixed(0)).toString(20);
         const model = `**${client.users.cache.get(datas.id)?.username ?? `Joueur #${playerId}`}** a terminé une quête`;

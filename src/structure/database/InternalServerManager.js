@@ -18,6 +18,9 @@ class InternalServerManager {
                 lastRefresh: Date.now() - this.day,
                 cache: [],
             },
+            slayerQuests: {
+                cache: [],
+            },
         };
 
         return datas;
@@ -30,6 +33,42 @@ class InternalServerManager {
 
     async launch() {
         // PARTIE OU ON VA GENERER LES QUETES DE TOUT LE MONDE TOUS LES JOURS
+        async function refreshStoryQuest(t) {
+            const questSuit = [];
+            for (const folder of fs.readdirSync("./src/quests/slayer/")) {
+                for (const file of fs.readdirSync(`./src/quests/slayer/${folder}/`).map(e => e.replace(".js", ""))) {
+                    questSuit.push(`${folder.replace("chapter", "")}_${file.replace("quest", "")}`);
+                }
+            }
+
+            console.log(questSuit);
+
+            for (const p of t.client.playerDb.db.array()) {
+                const player = await t.client.questDb.get(p.id);
+                console.log(player.storyProgress);
+
+                if (player.slayer.length === 0) {
+                    if (player.storyProgress.chapter === 0) {
+                        const quest = require("../../quests/slayer/chapter1/quest1.js")(0);
+                        t.client.questDb.db.push(player.id, quest, "slayer");
+                        t.client.questDb.db.set(player.id, 1, "storyProgress.chapter");
+                    }
+                    else {
+                        const advancement = `${player.storyProgress.chapter}_${player.storyProgress.quest}`;
+                        const nextQuest = questSuit[questSuit.indexOf(advancement) + 1];
+
+                        if (nextQuest !== undefined) {
+                            const quest = require(`../../quests/slayer/chapter${nextQuest.split("_")[0]}/quest${nextQuest.split("_")[1]}.js`)(0);
+                            t.client.questDb.db.push(player.id, quest, "slayer");
+                        }
+                    }
+                }
+
+            }
+        }
+
+        setInterval(async () => await refreshStoryQuest(this), 5_000);
+
         const lastRefresh = this.datas.dailyQuests.lastRefresh;
         const timeSpent = Date.now() - lastRefresh;
         const startDelay = this.day - timeSpent;
