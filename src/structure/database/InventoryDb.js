@@ -19,6 +19,7 @@ class InventoryDb {
                 "mastery": 1,
             },
             materials: {},
+            questItems: {},
             weapon: {
                 rarity: 1,
                 name:  `${require("../../elements/categories/slayer.json").weaponName} ${require("../../elements/categories/slayer.json").rarityNames[0]}`,

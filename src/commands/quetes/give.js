@@ -59,7 +59,7 @@ class Give extends Command {
         }
 
         if (!questToGive.endsWith("interagir.")) {
-            questToGive += "\n\nLorsque vous répondrez à ce message, vous donnerez automatiquement les ressources nécessaires si possible.";
+            questToGive += "\n\n\n\nLorsque vous répondrez à ce message, vous donnerez automatiquement les ressources nécessaires si possible.";
             questToGive += "\n\nRépondre avec le numéro correspondant à votre choix de quête.";
             questToGive += "Répondre `n` (non) pour annuler.";
         }
@@ -69,7 +69,7 @@ class Give extends Command {
 
         const choices = {};
 
-        for (const i in quests.area.length) {
+        for (const i in quests.area) {
             choices[String(i + 1)] = quests.area[i];
         }
         const choice = await this.ctx.messageCollection(msg);

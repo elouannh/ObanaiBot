@@ -24,10 +24,10 @@ class Category extends Command {
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Vous avez déjà commencé votre aventure.", null, null, "error");
 
         const pDatas = await this.client.playerDb.get(this.message.author.id);
-        const grades = pDatas.grades;
+        const eDatas = await this.client.externalServerDb.get(this.message.author.id);
 
         let categories = fs.readdirSync("./src/elements/categories").map(e => require(`../../elements/categories/${e}`));
-        if (!grades.includes("vip")) categories = categories.filter(cat => !cat.vip);
+        if (!eDatas.grades.includes("vip")) categories = categories.filter(cat => !cat.vip);
 
         const msg = await this.ctx.reply(
             "Changement/amélioration de catégorie.",
