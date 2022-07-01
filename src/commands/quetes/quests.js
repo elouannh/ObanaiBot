@@ -35,7 +35,6 @@ class Quests extends Command {
         if (qDatas.slayer.length > 0) {
             quests += `${quests.length > 1 ? "\n\n" : ""}> 🥋 **Quêtes de pourfendeur**`;
             for (const q of qDatas.slayer) {
-                console.log(q);
                 quests += `\n\n${q.display()}`;
             }
         }

@@ -19,7 +19,10 @@ class InternalServerManager {
                 cache: [],
             },
             slayerQuests: {
-                cache: [],
+                caches: {
+                    "1": [],
+                    "2": [],
+                },
             },
         };
 
@@ -41,21 +44,42 @@ class InternalServerManager {
                 }
             }
 
-            console.log(questSuit);
-
             for (const p of t.client.playerDb.db.array()) {
-                const player = await t.client.questDb.get(p.id);
-                console.log(player.storyProgress);
+                let player = await t.client.questDb.get(p.id);
+
 
                 if (player.slayer.length === 0) {
                     if (player.storyProgress.chapter === 0) {
                         const quest = require("../../quests/slayer/chapter1/quest1.js")(0);
                         t.client.questDb.db.push(player.id, quest, "slayer");
                         t.client.questDb.db.set(player.id, 1, "storyProgress.chapter");
+                        player = await t.client.questDb.get(p.id);
                     }
-                    else {
+
+                    if (
+                        !t.datas.slayerQuests.caches["1"].includes(player.id)
+                        &&
+                        !t.datas.slayerQuests.caches["2"].includes(player.id)
+                    ) {
+                        await t.db.push("internalServer", player.id, "slayerQuests.caches.1");
+                    }
+
+                    else if (
+                        t.datas.slayerQuests.caches["1"].includes(player.id)
+                        &&
+                        !t.datas.slayerQuests.caches["2"].includes(player.id)
+                    ) {
+                        await t.db.push("internalServer", player.id, "slayerQuests.caches.2");
+                        await t.db.remove("internalServer", player.id, "slayerQuests.caches.1");
+                    }
+
+                    else if (
+                        t.datas.slayerQuests.caches["2"].includes(player.id)
+                    ) {
+                        await t.db.remove("internalServer", player.id, "slayerQuests.caches.2");
                         const advancement = `${player.storyProgress.chapter}_${player.storyProgress.quest}`;
                         const nextQuest = questSuit[questSuit.indexOf(advancement) + 1];
+
 
                         if (nextQuest !== undefined) {
                             const quest = require(`../../quests/slayer/chapter${nextQuest.split("_")[0]}/quest${nextQuest.split("_")[1]}.js`)(0);
@@ -63,11 +87,20 @@ class InternalServerManager {
                         }
                     }
                 }
-
+                else if (
+                    t.datas.slayerQuests.caches["1"].includes(player.id)
+                ) {
+                    await t.db.remove("internalServer", player.id, "slayerQuests.caches.1");
+                }
+                else if (
+                    t.datas.slayerQuests.caches["2"].includes(player.id)
+                ) {
+                    await t.db.remove("internalServer", player.id, "slayerQuests.caches.2");
+                }
             }
         }
 
-        setInterval(async () => await refreshStoryQuest(this), 5_000);
+        setInterval(async () => await refreshStoryQuest(this), 2_000);
 
         const lastRefresh = this.datas.dailyQuests.lastRefresh;
         const timeSpent = Date.now() - lastRefresh;
