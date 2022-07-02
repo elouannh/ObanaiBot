@@ -33,7 +33,7 @@ class Dig extends Command {
         const lastDig = mDatas.exploration[`${loc.id}_${area.id}`]?.lastDig ?? null;
         const timeSpent = Date.now() - (lastDig ?? 0);
 
-        if (lastDig === null || timeSpent > 7_200_000_000) {
+        if (lastDig === null || timeSpent > 7_200_000) {
             const items = fs.readdirSync("./src/elements/materials").map(item => require(`../../elements/materials/${item}`));
             const areaItems = items.filter(item => item.areas.includes(area.biome));
 
