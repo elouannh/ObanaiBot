@@ -59,7 +59,7 @@ class TravelArea extends Command {
         for (let i = 0; i < areas.length; i++) {
             const zo = areas.at(i);
 
-            const dis = await this.client.activityDb.travellingTime(this.message.author.id, Math.ceil(0));
+            const dis = await this.client.activityDb.travellingTime(this.message.author.id, Math.ceil(2));
             str += `\`${i + 1}\` • ${zo.name} | 🕣 ${convertDate(dis, true).string}\n`;
             zo["distance"] = dis;
             r[String(i + 1)] = zo;
