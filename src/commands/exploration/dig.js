@@ -35,10 +35,10 @@ class Dig extends Command {
 
         if (lastDig === null || timeSpent > 7_200_000) {
             const items = fs.readdirSync("./src/elements/materials").map(item => require(`../../elements/materials/${item}`));
-            const zoneItems = items.filter(item => item.zones.includes(area.biome));
+            const areaItems = items.filter(item => item.areas.includes(area.biome));
 
             const itemsGot = {};
-            for (const obj of zoneItems) {
+            for (const obj of areaItems) {
                 let luck = 1;
 
                 if (iDatas.active_grimoire !== null) {
@@ -77,7 +77,7 @@ class Dig extends Command {
                 iDatas = await this.client.inventoryDb.get(this.message.author.id);
 
                 for (const item in itemsGot) {
-                    const i = zoneItems.filter(i_ => i_.label === item)?.at(0) ?? { name: "Item", emoji: "⬛" };
+                    const i = areaItems.filter(i_ => i_.label === item)?.at(0) ?? { name: "Item", emoji: "⬛" };
                     finalStr += `\n${i.emoji} **${i.name}(s)**: \`x${itemsGot[item]}\``;
 
                     const hadBefore = "materials" in iDatas ? (item in iDatas.materials ? iDatas.materials[item] : 0) : 0;

@@ -14,6 +14,7 @@ module.exports = {
         let cmd = client.commandManager.getCommand(commandName);
 
         if (cmd !== 0) {
+            cmd = new cmd();
             cmd.init(client, message, args);
 
             const cooldownReady = await cmd.cooldownReady(client, message, true);

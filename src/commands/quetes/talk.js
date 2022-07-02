@@ -26,7 +26,7 @@ class Talk extends Command {
 
         const mDatas = await this.client.mapDb.get(this.message.author.id);
         const loc = map.Regions.filter(r => r.id === mDatas.region)?.at(0);
-        const zone = loc.Areas.filter(a => a.id === mDatas.area)?.at(0);
+        const area = loc.Areas.filter(a => a.id === mDatas.area)?.at(0);
         const qDatas = await this.client.questDb.get(this.message.author.id);
 
         const quests = {
@@ -37,7 +37,7 @@ class Talk extends Command {
         for (const qKey of ["daily", "slayer", "world"]) {
             for (const q of qDatas[qKey].filter(quest => quest.objective.type === "talk")) {
                 if (q.objective.region === loc.id) {
-                    if (q.objective.area === zone.id) {
+                    if (q.objective.area === area.id) {
                         quests.area.push([q, qKey]);
                     }
                     else {

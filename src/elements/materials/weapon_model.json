@@ -3,7 +3,7 @@
     "name": "Modèle d'arme",
     "price": 1000,
     "size": 1,
-    "zones": ["suburban_area", "dwelling"],
+    "areas": ["suburban_area", "dwelling"],
     "rarity": 2.5,
     "emoji": "📐"
 }

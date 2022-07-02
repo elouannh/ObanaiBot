@@ -17,7 +17,7 @@ class CommandManager {
 
             for (const file of files) {
                 const command = require(`../commands/${folder}/${file}`);
-                this.commands.set(command.infos.name, command);
+                this.commands.set(new (command)().infos.name, command);
             }
         });
     }
@@ -25,7 +25,7 @@ class CommandManager {
     getCommand(name) {
         if (this.commands.has(name)) { return this.commands.get(name); }
         else {
-            const validCommands = this.commands.filter(c => c.infos.aliases && c.infos.aliases.includes(name));
+            const validCommands = this.commands.filter(c => new c().infos.aliases && new c().infos.aliases.includes(name));
             if (validCommands.map(e => e).length) return validCommands.first();
             return 0;
         }

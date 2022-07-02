@@ -3,7 +3,7 @@
     "name": "Graine",
     "price": 5,
     "size": 1,
-    "zones": ["meadow"],
+    "areas": ["meadow"],
     "rarity": 70,
     "emoji": "🌿"
 }

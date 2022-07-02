@@ -3,7 +3,7 @@
     "name": "Bois",
     "price": 20,
     "size": 1,
-    "zones": ["forest", "dark_forest"],
+    "areas": ["forest", "dark_forest"],
     "rarity": 50,
     "emoji": "🪵"
 }

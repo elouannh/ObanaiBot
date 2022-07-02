@@ -26,7 +26,7 @@ class Give extends Command {
 
         const mDatas = await this.client.mapDb.get(this.message.author.id);
         const loc = map.Regions.filter(r => r.id === mDatas.region)?.at(0);
-        const zone = loc.Areas.filter(a => a.id === mDatas.area)?.at(0);
+        const area = loc.Areas.filter(a => a.id === mDatas.area)?.at(0);
         const qDatas = await this.client.questDb.get(this.message.author.id);
 
         const quests = {
@@ -37,7 +37,7 @@ class Give extends Command {
         for (const qKey of ["daily", "slayer", "world"]) {
             for (const q of qDatas[qKey].filter(quest => quest.objective.type === "give_k_items")) {
                 if (q.objective.region === loc.id) {
-                    if (q.objective.area === zone.id) {
+                    if (q.objective.area === area.id) {
                         quests.area.push([q, qKey]);
                     }
                     else {
@@ -70,8 +70,9 @@ class Give extends Command {
         const choices = {};
 
         for (const i in quests.area) {
-            choices[String(i + 1)] = quests.area[i];
+            choices[String(Number(i) + 1)] = quests.area[i];
         }
+
         const choice = await this.ctx.messageCollection(msg);
 
         if (Object.keys(choices).includes(choice)) {

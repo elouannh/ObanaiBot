@@ -1,6 +1,6 @@
 const SlayerQuest = require("../../bases/SlayerQuest");
 const VoyageTo = require("../../bases/objectives/VoyageTo");
-const InspectZone = require("../../bases/superobjectives/InspectZone");
+const InspectArea = require("../../bases/superobjectives/InspectArea");
 const CollectKItems = require("../../bases/objectives/CollectKItems");
 const GiveKItems = require("../../bases/superobjectives/GiveKItems");
 const Talk = require("../../bases/superobjectives/Talk");
@@ -31,7 +31,7 @@ module.exports = step => {
         new SlayerQuest(
             "Minh, Pierre et Hime - Un inconnu (2)",
             "Vous voilà dans la forêt où le corps sans vie bougeait, inspectez les environs.",
-            new InspectZone(
+            new InspectArea(
                 "*Un homme torse nu, couvert de blessure dont le bras manque se trouve sur le sol. Vous décidez de le prendre et de l'emmener à votre hutte.*",
                 "pierre_body",
                 "Corps d'un homme blessé",
@@ -111,7 +111,7 @@ module.exports = step => {
         new SlayerQuest(
             "Minh, Pierre et Hime - Hime ? Où es-tu passée ?...",
             "Hime a disparu. Pierre est mort. Il ne vous reste qu'une chose, partir à sa recherche. Trouvez d'abord des indices.",
-            new InspectZone("*Vous trouverez sur le sol un peu de sang et des cheveux blancs d'Hime. Vous les prenez avec vous.*", "hime_hair", "Cheveux d'Hime", "questItems", 3, 4, 1),
+            new InspectArea("*Vous trouverez sur le sol un peu de sang et des cheveux blancs d'Hime. Vous les prenez avec vous.*", "hime_hair", "Cheveux d'Hime", "questItems", 3, 4, 1),
             "chapter1/quest1:10",
             1,
             1,

@@ -19,10 +19,11 @@ class Help extends Command {
     }
 
     async run() {
-        const cmd = this.client.commandManager.getCommand(this.args[0]);
+        let cmd = this.client.commandManager.getCommand(this.args[0]);
         if (this.args.length === 0 || cmd === 0) {
             const content = {};
-            for (const command of this.client.commandManager.commands.map(e => e)) {
+            for (let command of this.client.commandManager.commands.map(e => e)) {
+                command = new command();
                 if (typeof content[command.infos.category] === "object") content[command.infos.category].push(command.infos);
                 else content[command.infos.category] = [command.infos];
             }
@@ -67,6 +68,7 @@ class Help extends Command {
         }
         else if (cmd !== 0) {
             let string = "";
+            cmd = new cmd();
             const i = cmd.infos;
             string += `*${i.description}*\n\ntSyntaxe: \`${i.syntax}\` | Aliases: \`${i.aliases.join(", ")}\`\n`;
             if (i.args.length > 0) string += `\`\`\`diff\nArgs:\n${i.args.map(e => `- ${e[0]} : ${e[1]} | ${e[2] === true ? "Obligatoire" : "Optionnel"}`).join("\n")}\`\`\``;

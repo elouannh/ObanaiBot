@@ -1,8 +1,8 @@
 const map = require("../../../elements/map.js");
 
-class InspectZone {
+class InspectArea {
     constructor(text, item, itemName, itemCategory, quantity, region, area) {
-        this.type = "inspect_zone";
+        this.type = "inspect_area";
         this.texte = text;
         this.region = region;
         this.area = area;
@@ -18,4 +18,4 @@ class InspectZone {
     }
 }
 
-module.exports = InspectZone;
+module.exports = InspectArea;

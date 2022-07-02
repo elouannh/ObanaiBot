@@ -27,21 +27,21 @@ class CrowBait extends Command {
 
         const mDatas = await this.client.mapDb.get(this.message.author.id);
         const loc = map.Regions.filter(r => r.id === mDatas.region)?.at(0);
-        const zone = loc.Areas.filter(a => a.id === mDatas.area)?.at(0);
+        const area = loc.Areas.filter(a => a.id === mDatas.area)?.at(0);
 
 
-        if (!["meadow", "forest", "dark_forest"].includes(zone.biome)) {
+        if (!["meadow", "forest", "dark_forest"].includes(area.biome)) {
             let cantBait = "Vous ne vous trouvez pas dans une zone où des oiseaux se trouvent.";
-            const goodZones = [];
+            const goodAreas = [];
             for (const z of map.Regions.filter(r => r.accesses.includes(loc.id))) {
                 const tempoString = [];
                 for (const a of z.Areas.filter(at => ["meadow", "forest", "dark_forest"].includes(at.biome))) tempoString.push(`${a.name}`);
 
                 if (tempoString.length > 0) {
-                    goodZones.push(`${z.emoji} **${z.name}** - ${tempoString.join(", ")}`);
+                    goodAreas.push(`${z.emoji} **${z.name}** - ${tempoString.join(", ")}`);
                 }
             }
-            if (goodZones.length > 0) cantBait += `\n\n**Zones conseillées à proximité:**\n${goodZones.map((e, i) => `**${i + 1}**. ${e}`).join("\n")}`;
+            if (goodAreas.length > 0) cantBait += `\n\n**Zones conseillées à proximité:**\n${goodAreas.map((e, i) => `**${i + 1}**. ${e}`).join("\n")}`;
             return await this.ctx.reply("Appâtage d'oiseaux.", cantBait, "🐦", null, "outline");
         }
 

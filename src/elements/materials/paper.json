@@ -3,7 +3,7 @@
     "name": "Papier",
     "price": 5,
     "size": 1,
-    "zones": ["dwelling"],
+    "areas": ["dwelling"],
     "rarity": 30,
     "emoji": "📃"
 }

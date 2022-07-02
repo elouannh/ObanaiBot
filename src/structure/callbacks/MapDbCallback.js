@@ -11,11 +11,8 @@ module.exports = client => {
 
         for (const qKey of ["daily", "slayer", "world"]) {
             for (const dq of qDatas[qKey]) {
-                console.log("test 1");
                 if (hasChangement(oldValue, newValue)) {
-                    console.log("test 2");
                     if (dq.objective.type === "voyage_to") {
-                        console.log("test 3");
                         const quests = qDatas[qKey].filter(q => q.id !== dq.id);
                         await UpdateQuest(quests, qKey, dq, client, key, newValue, dq.objective.region === newValue.region && dq.objective.area === newValue.area);
                     }
