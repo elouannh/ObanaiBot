@@ -5,15 +5,35 @@ module.exports = {
     once: false,
     run: async (message, client) => {
         if (message.author.bot) return;
-        if (message.guild.id !== "958430837068681236" && !client.config.owners.includes(message.author.id)) return;
+        if (
+            client.AVAILABLE.get("_") === "owner"
+            &&
+            message.guild.id !== "958430837068681236"
+            &&
+            !client.config.owners.includes(message.author.id)
+        ) return;
 
         const guildPrefix = await client.guildDb.get(message.guild.id);
 
-        const args = message.content.replace(guildPrefix.prefix, "").split(/ +/);
-        const commandName = args.shift();
-        let cmd = client.commandManager.getCommand(commandName);
+        if (message.content.startsWith(`<@${client.user.id}>`)) {
+            const cmd = new Command();
+            const args = message.content.split(/ +/);
+            cmd.init(client, message, args);
+            await cmd.ctx.reply(
+                "Bonjour !",
+                `Je suis Obanai. Mon préfixe sur ce serveur est \`${guildPrefix.prefix}\`. Tu peux voir la liste de mes commandes en faisant \`${guildPrefix.prefix}help\`.`,
+                null,
+                null,
+                "info",
+            );
+        }
+        else {
+            if (!message.content.startsWith(guildPrefix.prefix)) return;
 
-        if (cmd !== 0) {
+            const args = message.content.replace(guildPrefix.prefix, "").split(/ +/);
+            const commandName = args.shift();
+            let cmd = client.commandManager.getCommand(commandName);
+
             cmd = new cmd();
             cmd.init(client, message, args);
 
@@ -40,16 +60,6 @@ module.exports = {
             await cmd.run();
             client.requests.get(message.author.id).delete(message.id);
         }
-        else if (message.content.startsWith(`<@${client.user.id}>`)) {
-            cmd = new Command();
-            cmd.init(client, message, args);
-            await cmd.ctx.reply(
-                "Bonjour !",
-                `Je suis Obanai. Mon préfixe sur ce serveur est \`${guildPrefix.prefix}\`. Tu peux voir la liste de mes commandes en faisant \`${guildPrefix.prefix}help\`.`,
-                null,
-                null,
-                "info",
-            );
-        }
+
     },
 };

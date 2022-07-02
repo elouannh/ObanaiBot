@@ -68,10 +68,10 @@ class PlayerDb {
         };
 
         p.stats = {
-            agility: p.stats.agility,
-            defense: p.stats.defense,
-            force: p.stats.force,
-            speed: p.stats.speed,
+            agility: Math.floor(p.stats.agility),
+            defense: Math.floor(p.stats.defense),
+            force: Math.floor(p.stats.force),
+            speed: Math.floor(p.stats.speed),
         };
 
         const cat = require(`../../elements/categories/${p.category}`);

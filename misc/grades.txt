@@ -5,10 +5,10 @@ x1 mastery grimoire
 
 ----- vip:
 
-x2 mastery grimoire
-x1 eternal grimoire
-50'000 yens
-force/defense/speed/agility level 3
++1 mastery grimoire
++1 eternal grimoire
++50'000 yens
+force/defense/speed/agility +level 2
 
 ----- tester:
 
@@ -16,7 +16,7 @@ tester's commands
 
 ----- vip+:
 
-x2 mastery grimoire
-x1 eternal grimoire
-100'000 yens
-force/defense/speed/agility level 6
+catégorie moon_tamer
++1 mastery grimoire
++100'000 yens
+force/defense/speed/agility +level 5

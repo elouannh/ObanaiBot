@@ -76,7 +76,7 @@ class CrowFeed extends Command {
         const crowLevel = calcCrowLevel(actualExp + expQuantity);
         return await this.ctx.reply(
             "Nourrir votre oiseau.",
-            `Vous nourrisez votre oiseau, et il gagne **${quantity}** XP.\n\n> Niveau de corbeau: **${crowLevel.level}**`,
+            `Vous nourrisez votre oiseau, et il gagne **${expQuantity}** XP.\n\n> Niveau de corbeau: **${crowLevel.level}**`,
             "🐦",
             null,
             "outline",

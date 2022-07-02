@@ -34,7 +34,7 @@ class Inventory extends Command {
         const title = `Inventaire de ${user.username}`;
         let inventory = "";
 
-        inventory += `Yens: **${intRender(pDatas.yens)}¥**\n`;
+        inventory += `Yens: **${intRender(pDatas.yens, " ")}¥**\n`;
 
         let st = "";
         if (Object.values(pDatas.materials).length > 0) {

@@ -75,7 +75,7 @@ module.exports = step => {
         new SlayerQuest(
             "Minh, Pierre et Hime - Explications",
             "Le jeune homme anciennement inconscient semble rétabli, et vous avez une discussion à entretenir avec lui et Hime.",
-            new Talk(pnj2.name, pnj2.id, texts["6"].join("\n"), 4, 1),
+            new Talk(pnj2.name, pnj2.id, texts["6"].join("\n\n"), 4, 1),
             "chapter1/quest1:6",
             1,
             1,
@@ -102,7 +102,7 @@ module.exports = step => {
         new SlayerQuest(
             "Minh, Pierre et Hime - Destruction !!",
             "La hutte étant détruite, Hime disparue... Tout ce qu'il vous reste à faire, c'est demander des explications à Pierre !",
-            new Talk(pnj3.name, pnj3.id, texts["9"].join("\n"), 4, 1),
+            new Talk(pnj3.name, pnj3.id, texts["9"].join("\n\n"), 4, 1),
             "chapter1/quest1:9",
             1,
             1,

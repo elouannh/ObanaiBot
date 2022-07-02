@@ -34,16 +34,16 @@ class Fight extends Command {
         super({
             adminOnly: false,
             aliases: ["fight", "f"],
-            args: [["player", "joueurs que vous souhaitez affronter.", false]],
+            args: [["players", "joueurs que vous souhaitez affronter/avoir dans votre équipe.", true]],
             category: "Combats",
-            cooldown: 5,
-            description: "Commande permettant de se battre contre un pourfendeur.",
-            examples: ["fight @pandawou"],
+            cooldown: 30,
+            description: "se battre contre un pourfendeur ou des pourfendeurs. (en équipe ou non)",
+            examples: ["fight @pandawou", "fight @pandawou && @myrly"],
             finishRequest: "ADVENTURE",
             name: "fight",
             ownerOnly: false,
             permissions: 0,
-            syntax: "fight <?player>",
+            syntax: "fight <?players>",
         });
     }
 

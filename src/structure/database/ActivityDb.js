@@ -56,7 +56,8 @@ class ActivityDb {
         this.db.set(id, 0, "training.start");
         this.db.set(id, 0, "training.duration");
         this.db.set(id, null, "training.aptitude");
-        this.client.playerDb.db.inc(id, `stats.${a.training.aptitude}`);
+        const lastLevel = await this.client.playerDb.db.get(id).stats[a.training.aptitude];
+        this.client.playerDb.db.set(id, Math.floor(lastLevel + 1), `stats.${a.training.aptitude}`);
     }
 
     async travels(id, distance, destination) {

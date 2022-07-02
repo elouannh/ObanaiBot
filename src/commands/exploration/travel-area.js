@@ -30,7 +30,7 @@ class TravelArea extends Command {
             const timeLeft = aDatas.travelling.start + aDatas.travelling.duration - Date.now();
             if (timeLeft > 0) {
                 const loc = map.Regions.filter(r => r.id === Number(aDatas.travelling.destination.split("_")[0]))?.at(0);
-                const destName = `${loc.name} - ${loc.Areas.filter(ar => ar.default).at(0).name}`;
+                const destName = `${loc.name} - ${loc.Areas.filter(ar => ar.id === Number(aDatas.travelling.destination.split("_")[1])).at(0).name}`;
                 return await this.ctx.reply(
                     "Voyage (intrarégional).",
                     "Il semblerait que vous êtes déjà en train de voyager ! Voici plus d'informations :\n"
@@ -43,7 +43,7 @@ class TravelArea extends Command {
             }
             else {
                 const loc = map.Regions.filter(r => r.id === Number(aDatas.travelling.destination.split("_")[0]))?.at(0);
-                const destName = `${loc.name} - ${loc.Areas.filter(ar => ar.default).at(0).name}`;
+                const destName = `${loc.name} - ${loc.Areas.filter(ar => ar.id === Number(aDatas.travelling.destination.split("_")[1])).at(0).name}`;
                 await this.client.activityDb.endOfTrip(this.message.author.id);
                 await this.client.playerDb.earnExp(this.message.author.id, Math.floor(Math.random() * 150) + 100, this);
                 return await this.ctx.reply("Voyage (intrarégional).", `Vous voilà arrivé à: **${destName}**. Passez un bon séjour !`, "🗺️", null, "outline");
@@ -59,7 +59,7 @@ class TravelArea extends Command {
         for (let i = 0; i < areas.length; i++) {
             const zo = areas.at(i);
 
-            const dis = await this.client.activityDb.travellingTime(this.message.author.id, Math.ceil(3));
+            const dis = await this.client.activityDb.travellingTime(this.message.author.id, Math.ceil(2));
             str += `\`${i + 1}\` • ${zo.name} | 🕣 ${convertDate(dis, true).string}\n`;
             zo["distance"] = dis;
             r[String(i + 1)] = zo;

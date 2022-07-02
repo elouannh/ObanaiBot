@@ -1,12 +1,12 @@
 const DailyQuest = require("../bases/DailyQuest");
-const VoyageTo = require("../bases/objectives/VoyageTo");
+const CollectKItems = require("../bases/objectives/CollectKItems");
 
 module.exports = step => {
     const q = [
         new DailyQuest(
-            "Que vous progressez vite ! (Part. 2)",
-            "Mmh, bite !",
-            new VoyageTo(0, 0, "test"),
+            "Vous aimez le jardinage ?",
+            "J'ai entendu dire que vous aviez développé une passion pour le jardinage. Je vous assure. Montrez-moi ça !",
+            new CollectKItems(50, "seed", "Graine", "materials"),
             "dq1:0",
             0,
         ),
