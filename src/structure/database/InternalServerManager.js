@@ -79,11 +79,24 @@ class InternalServerManager {
                         await t.db.remove("internalServer", player.id, "slayerQuests.caches.2");
                         const advancement = `${player.storyProgress.chapter}_${player.storyProgress.quest}`;
                         const nextQuest = questSuit[questSuit.indexOf(advancement) + 1];
-
+                        const probablyTheSame = questSuit[questSuit.indexOf(advancement)];
 
                         if (nextQuest !== undefined) {
-                            const quest = require(`../../quests/slayer/chapter${nextQuest.split("_")[0]}/quest${nextQuest.split("_")[1]}.js`)(0);
+                            const cs = [`${player.storyProgress.chapter}`, `${nextQuest.split("_")[0]}`];
+                            const qs = [`${player.storyProgress.quest}`, `${nextQuest.split("_")[1]}`];
+                            const sameQuest = (cs[0] === cs[1]) && (qs[0] === qs[1]);
+                            const quest = require(`../../quests/slayer/chapter${nextQuest.split("_")[0]}/quest${nextQuest.split("_")[1]}.js`)(sameQuest === true ? player.storyProgress.step : 0);
                             t.client.questDb.db.push(player.id, quest, "slayer");
+                        }
+                        else {
+                            const cs = [`${player.storyProgress.chapter}`, `${probablyTheSame.split("_")[0]}`];
+                            const qs = [`${player.storyProgress.quest}`, `${probablyTheSame.split("_")[1]}`];
+                            const sameQuest = (cs[0] === cs[1]) && (qs[0] === qs[1]);
+
+                            if (sameQuest) {
+                                const quest = require(`../../quests/slayer/chapter${probablyTheSame.split("_")[0]}/quest${probablyTheSame.split("_")[1]}.js`)(sameQuest === true ? player.storyProgress.step + 1 : 0);
+                                t.client.questDb.db.push(player.id, quest, "slayer");
+                            }
                         }
                     }
                 }
@@ -100,7 +113,7 @@ class InternalServerManager {
             }
         }
 
-        setInterval(async () => await refreshStoryQuest(this), 2_000);
+        setInterval(async () => await refreshStoryQuest(this), 300_000);
 
         const lastRefresh = this.datas.dailyQuests.lastRefresh;
         const timeSpent = Date.now() - lastRefresh;

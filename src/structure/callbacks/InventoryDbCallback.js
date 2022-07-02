@@ -24,23 +24,6 @@ module.exports = client => {
                     }
                 }
 
-                if (Object.keys(newValue?.materials ?? {}) < Object.keys(oldValue?.materials ?? {})) {
-                    if (dq.objective.type === "collect_k_items") {
-                        const hadBefore = dq.objective.got;
-                        const toAdd = newValue[dq.objective.itemCategory][dq.objective.item] - oldValue[dq.objective.itemCategory][dq.objective.item];
-                        const newAmount = hadBefore + toAdd;
-                        const quests = qDatas[qKey].filter(q => q.id !== dq.id);
-
-                        if (!(await UpdateQuest(quests, qKey, dq, client, key, newValue, newAmount >= dq.objective.quantity))) {
-                            const newQ = dq;
-                            newQ.objective.got = newAmount;
-                            quests.push(newQ);
-                            client.questDb.db.set(key, quests, qKey);
-                        }
-                    }
-                }
-
-
                 if (oldValue?.active_grimoire === null && newValue?.active_grimoire !== null) {
                     if (dq.objective.type === "equip_grimoire") {
                         const quests = qDatas[qKey].filter(q => q.id !== dq.id);
@@ -65,6 +48,22 @@ module.exports = client => {
                     }
                 }
 
+                if (dq.objective.type === "collect_k_items") {
+                    const hadBefore = dq.objective.got;
+                    const source = dq.objective.itemCategory;
+                    const item = dq.objective.item;
+                    const newv = source in newValue ? (item in newValue[source] ? newValue[source][item] : 0) : 0;
+                    const toAdd = newv - oldValue[source][item];
+                    const newAmount = hadBefore + toAdd;
+                    const quests = qDatas[qKey].filter(q => q.id !== dq.id);
+
+                    if (!(await UpdateQuest(quests, qKey, dq, client, key, newValue, newAmount >= dq.objective.quantity))) {
+                        const newQ = dq;
+                        newQ.objective.got = newAmount;
+                        quests.push(newQ);
+                        client.questDb.db.set(key, quests, qKey);
+                    }
+                }
 
             }
         }
