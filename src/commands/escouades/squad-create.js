@@ -71,4 +71,4 @@ class SquadCreate extends Command {
     }
 }
 
-module.exports = new SquadCreate();
+module.exports = SquadCreate;

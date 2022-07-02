@@ -61,4 +61,4 @@ class Squad extends Command {
     }
 }
 
-module.exports = new Squad();
+module.exports = Squad;

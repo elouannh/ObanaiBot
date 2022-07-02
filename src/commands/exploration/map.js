@@ -51,4 +51,4 @@ class Map extends Command {
     }
 }
 
-module.exports = new Map();
+module.exports = Map;

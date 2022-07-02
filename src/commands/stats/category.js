@@ -62,7 +62,7 @@ class Category extends Command {
                     "Changement/amélioration de catégorie.",
                     "Plusieurs souffles existent dans votre catégorie. Lequel souhaitez-vous prendre ?\n\n"
                     +
-                    `${breaths.map(e => require(`../../elements/breaths/${e}.json`)).map(e => `${e.emoji} \`id:${e.id}\` | ${e.name}`).join("\n")}`
+                    `${breaths.map(e => require(`../../elements/breaths/${e}_style.json`)).map(e => `${e.emoji} \`id:${e.id}\` | ${e.name}`).join("\n")}`
                     +
                     "\n\nRépondez ci-dessous avec l'id. Répondez avec `n` (non) pour annuler.",
                     "👑",
@@ -119,4 +119,4 @@ class Category extends Command {
     }
 }
 
-module.exports = new Category();
+module.exports = Category;

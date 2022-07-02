@@ -69,4 +69,4 @@ class SquadRename extends Command {
     }
 }
 
-module.exports = new SquadRename();
+module.exports = SquadRename;

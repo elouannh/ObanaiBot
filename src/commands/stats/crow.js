@@ -61,4 +61,4 @@ class Crow extends Command {
     }
 }
 
-module.exports = new Crow();
+module.exports = Crow;

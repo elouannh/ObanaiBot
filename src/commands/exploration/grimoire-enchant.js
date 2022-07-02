@@ -65,4 +65,4 @@ class GrimoireEnchant extends Command {
     }
 }
 
-module.exports = new GrimoireEnchant();
+module.exports = GrimoireEnchant;

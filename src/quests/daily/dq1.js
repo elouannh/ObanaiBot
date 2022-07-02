@@ -1,12 +1,12 @@
 const DailyQuest = require("../bases/DailyQuest");
-const InspectZone = require("../bases/superobjectives/InspectZone");
+const VoyageTo = require("../bases/objectives/VoyageTo");
 
 module.exports = step => {
     const q = [
         new DailyQuest(
             "Que vous progressez vite ! (Part. 2)",
             "Mmh, bite !",
-            new InspectZone("gugus", "4", "skullHead", "Grimoire", "questItems", 1, 4, 0),
+            new VoyageTo(0, 0, "test"),
             "dq1:0",
             0,
         ),

@@ -17,7 +17,21 @@
             "biome": "dwelling",
             "id": 1,
             "default": false,
-            "accesses": []
+            "accesses": [0]
+        },
+        {
+            "name": "Champs",
+            "biome": "meadow",
+            "id": 2,
+            "default": false,
+            "accesses": [0]
+        },
+        {
+            "name": "Forêt",
+            "biome": "forest",
+            "id": 3,
+            "default": false,
+            "accesses": [2]
         }
     ],
     "accesses": [0, 1]

@@ -117,4 +117,4 @@ class WeaponSet extends Command {
     }
 }
 
-module.exports = new WeaponSet();
+module.exports = WeaponSet;

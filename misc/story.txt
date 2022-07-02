@@ -2,26 +2,26 @@ CHAPITRE 1 -- MINH
 
 quête 1 -- Minh, Pierre et Hime
 
-1.X se rendre dans maison familiale - champs
-2.X se rendre dans maison familiale - forêt
+1. se rendre dans maison familiale - champs
+2. se rendre dans maison familiale - forêt
 3. inspecter la zone
-4.X se rendre dans maison familiale - dans la hutte
-5.X donner le corps à hime
-6.X récolter 50 graines dans maison familiale - champs
-7.X parler à Hime
-8.X se rendre dans maison familiale - forêt
-9.X se rendre dans maison familiale - hutte
-10.X Parler à pierre
+4. se rendre dans maison familiale - dans la hutte
+5. donner le corps à hime
+6. récolter 50 graines dans maison familiale - champs
+7. parler à Hime
+8. se rendre dans maison familiale - forêt
+9. se rendre dans maison familiale - hutte
+10. Parler à pierre
 11. inspecter la zone
 
 quête 2 -- la taverne de brook
 
-1.X se rendre dans quartier yoshiwara - taverne de brook
-2.X parler à l'un deux afin d'écouter leur conversation
-3.X se rendre dans le quartier yoshiwara - rue principale
+1. se rendre dans quartier yoshiwara - taverne de brook
+2. parler à l'un deu afin d'écouter leur conversation
+3. se rendre dans le quartier yoshiwara - rue principale
 
 quête 3 -- Franky le vioc
 
-1.X se rendre à quartier yoshiwara - ruelle secondaire
-2.X parler à franky le vioc
-3.X se rendre à quartier yoshiwara - ruelle secondaire
+1. se rendre à quartier yoshiwara - ruelle secondaire
+2. parler à franky le vioc
+3. se rendre à quartier yoshiwara - ruelle secondaire

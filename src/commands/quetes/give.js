@@ -109,4 +109,4 @@ class Give extends Command {
     }
 }
 
-module.exports = new Give();
+module.exports = Give;

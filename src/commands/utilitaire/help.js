@@ -80,4 +80,4 @@ class Help extends Command {
     }
 }
 
-module.exports = new Help();
+module.exports = Help;

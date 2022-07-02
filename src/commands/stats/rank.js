@@ -43,4 +43,4 @@ class Rank extends Command {
     }
 }
 
-module.exports = new Rank();
+module.exports = Rank;

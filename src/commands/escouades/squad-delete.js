@@ -66,4 +66,4 @@ class SquadDelete extends Command {
     }
 }
 
-module.exports = new SquadDelete();
+module.exports = SquadDelete;

@@ -68,4 +68,4 @@ class Grimoires extends Command {
     }
 }
 
-module.exports = new Grimoires();
+module.exports = Grimoires;

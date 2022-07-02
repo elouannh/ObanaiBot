@@ -55,4 +55,4 @@ class Start extends Command {
     }
 }
 
-module.exports = new Start();
+module.exports = Start;

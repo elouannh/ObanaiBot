@@ -151,4 +151,4 @@ class Fight extends Command {
     }
 }
 
-module.exports = new Fight();
+module.exports = Fight;

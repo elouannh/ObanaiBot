@@ -51,4 +51,4 @@ class Inventory extends Command {
     }
 }
 
-module.exports = new Inventory();
+module.exports = Inventory;

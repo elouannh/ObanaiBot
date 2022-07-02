@@ -52,4 +52,4 @@ class GrimoireUnset extends Command {
     }
 }
 
-module.exports = new GrimoireUnset();
+module.exports = GrimoireUnset;

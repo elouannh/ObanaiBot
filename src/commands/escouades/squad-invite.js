@@ -104,4 +104,4 @@ class SquadInvite extends Command {
     }
 }
 
-module.exports = new SquadInvite();
+module.exports = SquadInvite;

@@ -1,10 +1,9 @@
 const map = require("../../../elements/map.js");
 
 class InspectZone {
-    constructor(target, targetId, item, itemName, itemCategory, quantity, region, area) {
+    constructor(text, item, itemName, itemCategory, quantity, region, area) {
         this.type = "inspect_zone";
-        this.target = target;
-        this.targetId = targetId;
+        this.texte = text;
         this.region = region;
         this.area = area;
         this.item = item;

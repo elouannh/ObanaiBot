@@ -55,4 +55,4 @@ class ForgeList extends Command {
     }
 }
 
-module.exports = new ForgeList();
+module.exports = ForgeList;

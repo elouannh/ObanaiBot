@@ -28,4 +28,4 @@ class ClearDb extends Command {
     }
 }
 
-module.exports = new ClearDb();
+module.exports = ClearDb;

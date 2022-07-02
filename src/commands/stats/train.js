@@ -102,4 +102,4 @@ class Train extends Command {
     }
 }
 
-module.exports = new Train();
+module.exports = Train;

@@ -104,4 +104,4 @@ class WeaponSell extends Command {
     }
 }
 
-module.exports = new WeaponSell();
+module.exports = WeaponSell;

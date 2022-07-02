@@ -60,4 +60,4 @@ class SquadLeave extends Command {
     }
 }
 
-module.exports = new SquadLeave();
+module.exports = SquadLeave;

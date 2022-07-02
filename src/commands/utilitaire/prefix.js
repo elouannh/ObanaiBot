@@ -63,4 +63,4 @@ class Prefix extends Command {
     }
 }
 
-module.exports = new Prefix();
+module.exports = Prefix;

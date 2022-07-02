@@ -59,7 +59,7 @@ class TravelZone extends Command {
         for (let i = 0; i < zones.length; i++) {
             const zo = zones.at(i);
 
-            const dis = await this.client.activityDb.travellingTime(this.message.author.id, Math.ceil(10));
+            const dis = await this.client.activityDb.travellingTime(this.message.author.id, Math.ceil(0));
             str += `\`${i + 1}\` • ${zo.name} | 🕣 ${convertDate(dis, true).string}\n`;
             zo["distance"] = dis;
             r[String(i + 1)] = zo;
@@ -94,4 +94,4 @@ class TravelZone extends Command {
     }
 }
 
-module.exports = new TravelZone();
+module.exports = TravelZone;

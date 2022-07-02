@@ -42,4 +42,4 @@ class Lang extends Command {
     }
 }
 
-module.exports = new Lang();
+module.exports = Lang;

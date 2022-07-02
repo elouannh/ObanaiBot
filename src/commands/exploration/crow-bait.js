@@ -116,4 +116,4 @@ class CrowBait extends Command {
     }
 }
 
-module.exports = new CrowBait();
+module.exports = CrowBait;

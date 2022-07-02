@@ -84,4 +84,4 @@ class CrowFeed extends Command {
     }
 }
 
-module.exports = new CrowFeed();
+module.exports = CrowFeed;

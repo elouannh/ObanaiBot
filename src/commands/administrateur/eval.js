@@ -48,4 +48,4 @@ class Eval extends Command {
     }
 }
 
-module.exports = new Eval();
+module.exports = Eval;

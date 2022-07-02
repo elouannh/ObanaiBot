@@ -66,4 +66,4 @@ class SquadPromote extends Command {
     }
 }
 
-module.exports = new SquadPromote();
+module.exports = SquadPromote;

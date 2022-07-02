@@ -68,4 +68,4 @@ class SquadQuote extends Command {
     }
 }
 
-module.exports = new SquadQuote();
+module.exports = SquadQuote;

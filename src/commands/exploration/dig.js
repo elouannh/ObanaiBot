@@ -105,4 +105,4 @@ class Dig extends Command {
     }
 }
 
-module.exports = new Dig();
+module.exports = Dig;

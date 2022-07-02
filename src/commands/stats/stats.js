@@ -52,4 +52,4 @@ class Stats extends Command {
     }
 }
 
-module.exports = new Stats();
+module.exports = Stats;

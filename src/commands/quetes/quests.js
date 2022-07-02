@@ -52,4 +52,4 @@ class Quests extends Command {
     }
 }
 
-module.exports = new Quests();
+module.exports = Quests;

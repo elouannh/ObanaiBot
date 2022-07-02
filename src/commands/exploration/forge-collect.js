@@ -84,4 +84,4 @@ class ForgeCollect extends Command {
     }
 }
 
-module.exports = new ForgeCollect();
+module.exports = ForgeCollect;

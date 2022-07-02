@@ -98,4 +98,4 @@ class Inspect extends Command {
     }
 }
 
-module.exports = new Inspect();
+module.exports = Inspect;

@@ -80,4 +80,4 @@ class GrimoireSet extends Command {
     }
 }
 
-module.exports = new GrimoireSet();
+module.exports = GrimoireSet;

@@ -63,4 +63,4 @@ class SquadKick extends Command {
     }
 }
 
-module.exports = new SquadKick();
+module.exports = SquadKick;

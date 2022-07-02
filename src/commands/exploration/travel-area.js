@@ -97,4 +97,4 @@ class TravelArea extends Command {
     }
 }
 
-module.exports = new TravelArea();
+module.exports = TravelArea;

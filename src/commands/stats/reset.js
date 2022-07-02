@@ -49,4 +49,4 @@ class Reset extends Command {
     }
 }
 
-module.exports = new Reset();
+module.exports = Reset;

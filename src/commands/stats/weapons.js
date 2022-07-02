@@ -40,4 +40,4 @@ class Weapons extends Command {
     }
 }
 
-module.exports = new Weapons();
+module.exports = Weapons;

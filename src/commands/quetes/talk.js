@@ -93,4 +93,4 @@ class Talk extends Command {
     }
 }
 
-module.exports = new Talk();
+module.exports = Talk;

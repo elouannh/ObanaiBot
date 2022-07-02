@@ -98,4 +98,4 @@ class ForgeWeapon extends Command {
     }
 }
 
-module.exports = new ForgeWeapon();
+module.exports = ForgeWeapon;
