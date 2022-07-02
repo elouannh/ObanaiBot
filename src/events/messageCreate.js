@@ -34,6 +34,8 @@ module.exports = {
             const commandName = args.shift();
             let cmd = client.commandManager.getCommand(commandName);
 
+            if (cmd === 0) return;
+
             cmd = new cmd();
             cmd.init(client, message, args);
 
