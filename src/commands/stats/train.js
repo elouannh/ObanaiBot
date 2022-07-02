@@ -63,7 +63,7 @@ class Train extends Command {
         for (const key in emojis) {
             str += `\n\n${emojis[key]} | \`id:${key}\` **${values[key]}**`;
             if (userLevel < pDatas.stats[key]) {
-                str += "Niveau max atteint. Pour continuer à progresser, gagnez en XP.";
+                str += " | Niveau max atteint. Pour continuer à progresser, gagnez en XP.";
             }
             else {
                 times[key] = await this.client.activityDb.trainingTime(this.message.author.id, ((15 + (pDatas.stats[key] * 15))));
@@ -88,7 +88,7 @@ class Train extends Command {
         const msg = await this.ctx.reply("S'entraîner.", str, "🤜", null, "outline");
         const choice = await this.ctx.messageCollection(msg);
 
-        if (Object.keys(emojis).includes(choice)) {
+        if (Object.keys(times).includes(choice)) {
             const finalChoice = Object.keys(emojis).filter(e => e === choice)?.at(0);
             await this.client.activityDb.trains(this.message.author.id, finalChoice, times[finalChoice]);
             return await this.ctx.reply("S'entraîner.", `Vous voilà parti à l'entraînement ! Revenez dans **${convertDate(times[choice], true).string}**.`, "🤜", null, "outline");

@@ -117,6 +117,9 @@ class Fight extends Command {
 
         const mapArray = response.map(e => Object.assign({ author: "", resp: "" }, { author: e.author, resp: e.content }));
         if (mapArray.map(e => e.author).length !== new Set(mapArray.map(e => e.author)).size) {
+            for (const p of teams["1"].concat(teams["2"]).filter(e => e.id !== this.message.author.id)) {
+                this.client.requests.get(p.id).delete(this.message.id);
+            }
             return await this.ctx.reply(
                 "Arène - Équipes",
                 "Des joueurs ont répondu plusieurs fois.",
@@ -127,6 +130,9 @@ class Fight extends Command {
         }
 
         if (mapArray.filter(e => this.ctx.isResp(e.resp, "y")).length !== mapArray.length) {
+            for (const p of teams["1"].concat(teams["2"]).filter(e => e.id !== this.message.author.id)) {
+                this.client.requests.get(p.id).delete(this.message.id);
+            }
             return await this.ctx.reply(
                 "Arène - Équipes",
                 `Les joueurs suivant ont refusé le combat: ${mapArray.filter(e => this.ctx.isResp(e.resp, "n")).map(e => `\`${e.author.username}\``).join(" / ")}`,

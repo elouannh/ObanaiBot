@@ -33,7 +33,7 @@ class Dig extends Command {
         const lastDig = mDatas.exploration[`${loc.id}_${area.id}`]?.lastDig ?? null;
         const timeSpent = Date.now() - (lastDig ?? 0);
 
-        if (lastDig === null || timeSpent > 7_200_000_000) {
+        if (lastDig === null || timeSpent > 7_200_000) {
             const items = fs.readdirSync("./src/elements/materials").map(item => require(`../../elements/materials/${item}`));
             const areaItems = items.filter(item => item.areas.includes(area.biome));
 
@@ -42,7 +42,7 @@ class Dig extends Command {
                 let luck = 1;
 
                 if (iDatas.active_grimoire !== null) {
-                    const grim = iDatas.acirequire(`../../elements/grimoires/${iDatas.active_grimoire}.json`);
+                    const grim = require(`../../elements/grimoires/${iDatas.active_grimoire}.json`);
                     if (grim.benefits.includes("loot_rate_boost")) luck += (grim.boost - 1);
                 }
 
@@ -96,7 +96,7 @@ class Dig extends Command {
         else {
             return await this.ctx.reply(
                 "Fouiller la zone.",
-                `Il semblerait que vous ayez déjà fouillé cette zone. Revenez dans **${convertDate(7_200_000 - timeSpent, false).string}** à cet emplacement.`,
+                `Il semblerait que vous ayez déjà fouillé cette zone. Revenez dans **${convertDate(7_200_000 - (lastDig === null ? 0 : timeSpent), false).string}** à cet emplacement.`,
                 "🔎",
                 null,
                 "error",
