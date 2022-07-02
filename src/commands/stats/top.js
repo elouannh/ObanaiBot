@@ -24,9 +24,7 @@ class Top extends Command {
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Vous avez déjà commencé votre aventure.", null, null, "error");
 
         const players = this.client.playerDb.db.array();
-        console.log(players);
         const topPlayers = players.sort((a, b) => b.exp - a.exp);
-        console.log(topPlayers);
         let lb = `Votre rang: **#${topPlayers.length > 0 ? topPlayers.map(e => e.id).indexOf(this.message.author.id) + 1 : "Non classé"}**\n\n`;
 
         let i = 0;

@@ -1,0 +1,330 @@
+Fontconfig error: Cannot load default config file
+Fontconfig error: Cannot load default config file
+Fontconfig error: Cannot load default config file
+Fontconfig error: Cannot load default config file
+Fontconfig error: Cannot load default config file
+Fontconfig error: Cannot load default config file
+Fontconfig error: Cannot load default config file
+Fontconfig error: Cannot load default config file
+Fontconfig error: Cannot load default config file
+Fontconfig error: Cannot load default config file
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Fontconfig error: Cannot load default config file
+Fontconfig error: Cannot load default config file
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Fontconfig error: Cannot load default config file
+Fontconfig error: Cannot load default config file
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildDelete.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildDelete.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+DiscordAPIError
+    at RequestHandler.execute (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:350:13)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async RequestHandler.push (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:51:14)
+    at async TextChannel.sendTyping (/home/debian/obanai_vps/node_modules/discord.js/src/structures/interfaces/TextBasedChannel.js:188:5) {
+  method: 'post',
+  path: '/channels/949290720764776448/typing',
+  code: undefined,
+  httpStatus: 403,
+  requestData: { json: undefined, files: [] }
+}
+Unhandled promise rejection: DiscordAPIError
+    at RequestHandler.execute (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:350:13)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async RequestHandler.push (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:51:14)
+    at async TextChannel.sendTyping (/home/debian/obanai_vps/node_modules/discord.js/src/structures/interfaces/TextBasedChannel.js:188:5) {
+  method: 'post',
+  path: '/channels/949290720764776448/typing',
+  code: undefined,
+  httpStatus: 403,
+  requestData: { json: undefined, files: [] }
+}
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildDelete.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildDelete.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildDelete.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildDelete.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildDelete.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildDelete.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildDelete.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildDelete.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Fontconfig error: Cannot load default config file
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Fontconfig error: Cannot load default config file
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildDelete.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildDelete.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+DiscordAPIError: Missing Permissions
+    at RequestHandler.execute (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:350:13)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async RequestHandler.push (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:51:14)
+    at async TextChannel.send (/home/debian/obanai_vps/node_modules/discord.js/src/structures/interfaces/TextBasedChannel.js:175:15) {
+  method: 'post',
+  path: '/channels/845334361825214488/messages',
+  code: 50013,
+  httpStatus: 403,
+  requestData: {
+    json: {
+      content: undefined,
+      tts: false,
+      nonce: undefined,
+      embeds: [Array],
+      components: undefined,
+      username: undefined,
+      avatar_url: undefined,
+      allowed_mentions: undefined,
+      flags: 0,
+      message_reference: [Object],
+      attachments: undefined,
+      sticker_ids: undefined
+    },
+    files: []
+  }
+}
+Unhandled promise rejection: DiscordAPIError: Missing Permissions
+    at RequestHandler.execute (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:350:13)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async RequestHandler.push (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:51:14)
+    at async TextChannel.send (/home/debian/obanai_vps/node_modules/discord.js/src/structures/interfaces/TextBasedChannel.js:175:15) {
+  method: 'post',
+  path: '/channels/845334361825214488/messages',
+  code: 50013,
+  httpStatus: 403,
+  requestData: {
+    json: {
+      content: undefined,
+      tts: false,
+      nonce: undefined,
+      embeds: [Array],
+      components: undefined,
+      username: undefined,
+      avatar_url: undefined,
+      allowed_mentions: undefined,
+      flags: 0,
+      message_reference: [Object],
+      attachments: undefined,
+      sticker_ids: undefined
+    },
+    files: []
+  }
+}
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildDelete.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildDelete.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildDelete.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildDelete.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Fontconfig error: Cannot load default config file
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+Unhandled promise rejection: TypeError: Cannot read properties of undefined (reading 'tag')
+    at Object.execute (/home/debian/obanai_vps/src/events/guildCreate.js:16:84)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+DiscordAPIError: Missing Permissions
+    at RequestHandler.execute (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:350:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async RequestHandler.push (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:51:14)
+    at async GuildMemberManager.kick (/home/debian/obanai_vps/node_modules/discord.js/src/managers/GuildMemberManager.js:363:5) {
+  method: 'delete',
+  path: '/guilds/864939983050375178/members/539842701592494111',
+  code: 50013,
+  httpStatus: 403,
+  requestData: { json: undefined, files: [] }
+}
+Unhandled promise rejection: DiscordAPIError: Missing Permissions
+    at RequestHandler.execute (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:350:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async RequestHandler.push (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:51:14)
+    at async GuildMemberManager.kick (/home/debian/obanai_vps/node_modules/discord.js/src/managers/GuildMemberManager.js:363:5) {
+  method: 'delete',
+  path: '/guilds/864939983050375178/members/539842701592494111',
+  code: 50013,
+  httpStatus: 403,
+  requestData: { json: undefined, files: [] }
+}
+DiscordAPIError: Missing Permissions
+    at RequestHandler.execute (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:350:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async RequestHandler.push (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:51:14)
+    at async GuildMemberManager.kick (/home/debian/obanai_vps/node_modules/discord.js/src/managers/GuildMemberManager.js:363:5) {
+  method: 'delete',
+  path: '/guilds/864939983050375178/members/938004635866767391',
+  code: 50013,
+  httpStatus: 403,
+  requestData: { json: undefined, files: [] }
+}
+Unhandled promise rejection: DiscordAPIError: Missing Permissions
+    at RequestHandler.execute (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:350:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async RequestHandler.push (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:51:14)
+    at async GuildMemberManager.kick (/home/debian/obanai_vps/node_modules/discord.js/src/managers/GuildMemberManager.js:363:5) {
+  method: 'delete',
+  path: '/guilds/864939983050375178/members/938004635866767391',
+  code: 50013,
+  httpStatus: 403,
+  requestData: { json: undefined, files: [] }
+}
+DiscordAPIError: Missing Permissions
+    at RequestHandler.execute (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:350:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async RequestHandler.push (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:51:14)
+    at async GuildMemberManager.kick (/home/debian/obanai_vps/node_modules/discord.js/src/managers/GuildMemberManager.js:363:5) {
+  method: 'delete',
+  path: '/guilds/864939983050375178/members/539842701592494111',
+  code: 50013,
+  httpStatus: 403,
+  requestData: { json: undefined, files: [] }
+}
+Unhandled promise rejection: DiscordAPIError: Missing Permissions
+    at RequestHandler.execute (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:350:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async RequestHandler.push (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:51:14)
+    at async GuildMemberManager.kick (/home/debian/obanai_vps/node_modules/discord.js/src/managers/GuildMemberManager.js:363:5) {
+  method: 'delete',
+  path: '/guilds/864939983050375178/members/539842701592494111',
+  code: 50013,
+  httpStatus: 403,
+  requestData: { json: undefined, files: [] }
+}
+DiscordAPIError: Missing Permissions
+    at RequestHandler.execute (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:350:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async RequestHandler.push (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:51:14)
+    at async GuildMemberManager.kick (/home/debian/obanai_vps/node_modules/discord.js/src/managers/GuildMemberManager.js:363:5) {
+  method: 'delete',
+  path: '/guilds/864939983050375178/members/938004635866767391',
+  code: 50013,
+  httpStatus: 403,
+  requestData: { json: undefined, files: [] }
+}
+Unhandled promise rejection: DiscordAPIError: Missing Permissions
+    at RequestHandler.execute (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:350:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async RequestHandler.push (/home/debian/obanai_vps/node_modules/discord.js/src/rest/RequestHandler.js:51:14)
+    at async GuildMemberManager.kick (/home/debian/obanai_vps/node_modules/discord.js/src/managers/GuildMemberManager.js:363:5) {
+  method: 'delete',
+  path: '/guilds/864939983050375178/members/938004635866767391',
+  code: 50013,
+  httpStatus: 403,
+  requestData: { json: undefined, files: [] }
+}
+Fontconfig error: Cannot load default config file

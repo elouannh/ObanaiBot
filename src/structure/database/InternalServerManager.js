@@ -86,7 +86,7 @@ class InternalServerManager {
                             const qs = [`${player.storyProgress.quest}`, `${nextQuest.split("_")[1]}`];
                             const sameQuest = (cs[0] === cs[1]) && (qs[0] === qs[1]);
                             const quest = require(`../../quests/slayer/chapter${nextQuest.split("_")[0]}/quest${nextQuest.split("_")[1]}.js`)(sameQuest === true ? player.storyProgress.step : 0);
-                            t.client.questDb.db.push(player.id, quest, "slayer");
+                            if (quest !== true) t.client.questDb.db.push(player.id, quest, "slayer");
                         }
                         else {
                             const cs = [`${player.storyProgress.chapter}`, `${probablyTheSame.split("_")[0]}`];
