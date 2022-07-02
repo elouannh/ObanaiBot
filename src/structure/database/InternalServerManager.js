@@ -95,7 +95,7 @@ class InternalServerManager {
 
                             if (sameQuest) {
                                 const quest = require(`../../quests/slayer/chapter${probablyTheSame.split("_")[0]}/quest${probablyTheSame.split("_")[1]}.js`)(sameQuest === true ? player.storyProgress.step + 1 : 0);
-                                t.client.questDb.db.push(player.id, quest, "slayer");
+                                if (quest !== true) t.client.questDb.db.push(player.id, quest, "slayer");
                             }
                         }
                     }
