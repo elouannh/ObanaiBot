@@ -71,6 +71,8 @@ class Dig extends Command {
             let finalStr = "";
             if (Object.values(itemsGot).length === 0) {
                 finalStr = "Cette fouille n'aura pas été fructueuse, vous n'avez rien obtenu. Terrible malchance !";
+                this.client.mapDb.db.ensure(this.message.author.id, this.client.mapDb.model(this.message.author.i));
+                this.client.mapDb.db.set(this.message.author.id, Date.now(), `exploration.${loc.id}_${area.id}.lastDig`);
             }
             else {
                 finalStr += "Vous avez obtenu des objets ! Jetez un œil:\n";
