@@ -35,6 +35,14 @@ class InternalServerManager {
     }
 
     async launch() {
+        const order = (chap, que, ste) => {
+            let number = 0;
+            number += ste;
+            number += (que * Math.pow(10, 4));
+            number += (chap * Math.pow(10, 8));
+
+            return number;
+        };
         // PARTIE OU ON VA GENERER LES QUETES DE TOUT LE MONDE TOUS LES JOURS
         async function refreshStoryQuest(t) {
             const questSuit = [];
@@ -109,6 +117,11 @@ class InternalServerManager {
                     t.datas.slayerQuests.caches["2"].includes(player.id)
                 ) {
                     await t.db.remove("internalServer", player.id, "slayerQuests.caches.2");
+                }
+
+                if (player.slayer.length > 1) {
+                    const largerQuest = player.slayer.sort((a, b) => order(b.chapter, b.quest, b.step) - order(a.chapter, a.quest, a.step));
+                    t.client.questDb.db.set(player.id, largerQuest[0], "slayer");
                 }
             }
         }

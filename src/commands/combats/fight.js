@@ -63,7 +63,10 @@ class Fight extends Command {
                 await scan.search();
                 const user = await scan.selection(this);
 
-                if (user !== null && !teams["1"].concat(teams["2"]).map(player => player.id).includes(user.id)) teams[String(i)].push(user);
+                if (user !== null && !teams["1"].concat(teams["2"]).map(player => player.id).includes(user.id)) {
+                    const pExists = await this.client.playerDb.started(user.id);
+                    if (pExists) teams[String(i)].push(user);
+                }
             }
 
             i++;

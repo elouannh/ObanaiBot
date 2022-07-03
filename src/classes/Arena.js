@@ -43,12 +43,10 @@ class Arena {
         const opponentTeam = this.teams[actualTeam.nid];
 
         for (const team of [actualTeam, opponentTeam]) {
-            const actualPlayerFocused = Object.keys(team.players).indexOf(this.cache.lastPlayers);
-            const lengthMax = Object.keys(team.players).length;
+            const lengthMax = Object.values(team.players).filter(p => p.id !== this.cache.lastPlayers[team.id]).length;
 
-            if (lengthMax > 1) {
-                if ((actualPlayerFocused + 1) === lengthMax) this.cache.lastPlayers[team.id] = Object.keys(team.players)?.at(0);
-                else this.cache.lastPlayers[team.id] = Object.keys(team.players)?.at(actualPlayerFocused + 1);
+            if (lengthMax > 0) {
+                this.cache.lastPlayers[team.id] = Object.keys(team.players)[Math.floor(Math.random() * Object.keys(team.players).length)];
             }
         }
 
@@ -254,9 +252,9 @@ class Arena {
         if (def === "forfeit") return await this.forfeit(playerDefending);
         if (atk === null || def === null) return await this.stop();
 
+        this.rotate();
         this.damageManager(atk, def, playerAttacking, playerDefending);
 
-        this.rotate();
         await this.begin();
     }
 
