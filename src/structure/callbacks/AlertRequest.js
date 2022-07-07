@@ -53,12 +53,13 @@ async function alertQuest(client, type, datas, quest) {
                 "Étape de quête terminée !",
                 string
                 +
-                ` Quête terminée:\n\n\`-   ${quest.title}   -\`\n*${quest.description}*\n\n**Passage à la quête:**\n\n\`-   ${questFile.title}   -\`\n*${questFile.description}*`,
+                ` Quête terminée:\n\n\`-   ${quest.title}   -\`\n*${quest.description}*\n\n`
+                +
+                "**Cependant, un corbeau de liaison vous apportera la suite de cette quête prochainement. Restez à l'affût !**",
                 "❗",
                 null,
                 "outline",
             );
-            client.questDb.db.push(datas.id, questFile, `${type}`);
         }
         catch (err) {
             return;

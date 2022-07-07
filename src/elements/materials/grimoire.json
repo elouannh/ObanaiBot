@@ -3,7 +3,7 @@
     "name": "Grimoire",
     "price": 500,
     "size": 10,
-    "areas": ["suburban_area"],
+    "areas": ["landscaped_area"],
     "rarity": 5,
     "emoji": "📖"
 }

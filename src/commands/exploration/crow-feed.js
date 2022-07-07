@@ -42,7 +42,10 @@ class CrowFeed extends Command {
         const choice = await this.ctx.messageCollection(msg);
 
         const resp = choice.split(/ +/);
-        const [type, quantity] = resp;
+        // eslint-disable-next-line prefer-const
+        let [type, quantity] = resp;
+        quantity = Math.sqrt(Math.pow(Number(quantity), 2));
+        console.log(type, quantity);
 
         const str = "La syntaxe saisie est erronée. Veuillez réessayer sous ce modèle:\n```[vous]: !crow-feed\n[Obanai]: <embed>\n"
                     +
@@ -52,10 +55,10 @@ class CrowFeed extends Command {
         if (
             type?.length === undefined ? true : !["seed", "worm"].includes(type)
             ||
-            quantity?.length === undefined ? true : isNaN(Number(quantity))
+            isNaN(quantity)
         ) return await this.ctx.reply("Oups...", str, null, null, "warning");
 
-        if (quantity > (type === "seeds" ? seeds : worms)) {
+        if (quantity > (type === "seed" ? seeds : worms)) {
             return await this.ctx.reply("Oups...", "Vous n'avez pas autant d'éléments dans votre inventaire !", null, null, "warning");
         }
 

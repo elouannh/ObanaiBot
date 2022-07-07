@@ -71,8 +71,7 @@ class GrimoireSet extends Command {
             return await this.ctx.reply("Équiper un grimoire.", `Vous avez donc équipé **${grimDatas.name}**.`, "📖", null, "outline");
         }
         else if (this.ctx.isResp(choice, "n")) {
-            const grimDatas = grimoires.filter(g => g[1] === choice)?.at(0)?.at(0);
-            return await this.ctx.reply("Équiper un grimoire.", `Vous avez décidé de ne pas équiper **${grimDatas.name}**.`, "📖", null, "outline");
+            return await this.ctx.reply("Équiper un grimoire.", "Vous avez décidé de ne pas équiper de grimoire.", "📖", null, "outline");
         }
         else {
             return await this.ctx.reply("Équiper un grimoire.", "La commande n'a pas aboutie.", null, null, "timeout");

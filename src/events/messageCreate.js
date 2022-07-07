@@ -8,8 +8,6 @@ module.exports = {
         if (
             client.AVAILABLE.get("_") === "owner"
             &&
-            message.guild.id !== "958430837068681236"
-            &&
             !client.config.owners.includes(message.author.id)
         ) return;
 

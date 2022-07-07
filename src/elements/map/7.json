@@ -7,7 +7,7 @@
     "Areas": [
         {
             "name": "Entrée du village",
-            "biome": "suburban_area",
+            "biome": "landscaped_area",
             "id": 0,
             "default": true,
             "accesses": []

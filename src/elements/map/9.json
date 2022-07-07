@@ -7,15 +7,15 @@
     "Areas": [
         {
             "name": "Ruelle principale",
-            "biome": "suburban_area",
+            "biome": "landscaped_area",
             "id": 0,
             "default": true,
             "accesses": []
         },
         {
             "name": "Chez Franky",
-            "biome": "suburban_area",
-            "id": 0,
+            "biome": "dwelling",
+            "id": 1,
             "default": true,
             "accesses": [0]
         }

@@ -141,9 +141,7 @@ class InventoryDb {
     }
 
     async changeCrow(id, crow) {
-        const p = await this.get(id);
-
-        if (p.kasugai_crow_exp > 0) this.db.set(id, 0, "kasugai_crow_exp");
+        this.db.set(id, 0, "kasugai_crow_exp");
         this.db.set(id, crow, "kasugai_crow");
     }
 

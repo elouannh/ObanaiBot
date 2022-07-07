@@ -6,8 +6,8 @@
     "id": 8,
     "Areas": [
         {
-            "name": "X",
-            "biome": "blank_area",
+            "name": "Gare",
+            "biome": "landscaped_area",
             "id": 0,
             "default": true,
             "accesses": []

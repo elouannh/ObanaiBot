@@ -17,7 +17,7 @@ b) Les catégories
     ______________________________________________________________________________________________________________________________________________________
     Dompteur de lunes    | moon_tamer   | moon_katana     | Un pourfendeur ayant un katana ayant la capacité de se déformer avec des croissants de lune
     Pourfendeur          | slayer       | katana          | Un pourfendeur ayant un katana basique.
-    Lépidoptérologue     | butterfly    | poison          | Un pourfendeur ayant un katana en forme de pointe.
+    Lépidoptériste     | butterfly    | poison          | Un pourfendeur ayant un katana en forme de pointe.
     Déchiqueteur         | shredding    | shredding       | Un pourfendeur ayant deux katana complètement amochés de façon à tout déchiqueter.
     Cactus               | cactus       | spiked          | Un pourfendeur ayant un fléau à pointes et une hache reliés par une immense chaîne.
     Charmeur de serpents | charmer      | torsion         | Un pourfendeur ayant un katana qui a la particularité de pouvoir se mouvoir comme un serpent.
@@ -28,7 +28,7 @@ b) Les catégories
     ______________________________________________________________________________________________________________________________________________________
     Dompteur de lunes    | +Df -Vi   | Lune
     Pourfendeur          | +Fo -Ag   | Flamme, Fleur, Brume, Soleil, Foudre, Eau, Vent
-    Lépidoptérologue     | +Vi -Ag   | Insecte 
+    Lépidoptériste     | +Vi -Ag   | Insecte 
     Déchiqueteur         | +Df -Fo   | Bête
     Cactus               | +Fo -Vi   | Roche
     Charmeur de serpents | +Ag -Df   | Serpent

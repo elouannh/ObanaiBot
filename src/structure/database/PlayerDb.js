@@ -51,7 +51,7 @@ class PlayerDb {
             const gr = require(`../../elements/grimoires/${grimoire}`);
 
             if (gr.benefits.includes("stats_boost") && i.active_grimoire === grimoire.split(".")[0]) {
-                p.stats = {
+                p.aptitudes = {
                     agility: p.stats.agility * gr.boost,
                     defense: p.stats.defense * gr.boost,
                     force: p.stats.force * gr.boost,

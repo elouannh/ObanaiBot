@@ -6,8 +6,8 @@
     "id": 6,
     "Areas": [
         {
-            "name": "Cour",
-            "biome": "blank_area",
+            "name": "Cour principale",
+            "biome": "landscaped_area",
             "id": 0,
             "default": true,
             "accesses": []

@@ -44,14 +44,13 @@ class Claim extends Command {
                     break;
                 case "vip+":
                     await this.client.inventoryDb.addGrimoire(eDatas.id, "mastery");
-                    await this.client.inventoryDb.addGrimoire(eDatas.id, "eternal");
                     await this.client.inventoryDb.db.math(eDatas.id, "+", 100000, "yens");
 
                     await this.client.playerDb.db.math(eDatas.id, "+", 5, "stats.force");
                     await this.client.playerDb.db.math(eDatas.id, "+", 5, "stats.agility");
                     await this.client.playerDb.db.math(eDatas.id, "+", 5, "stats.speed");
                     await this.client.playerDb.db.math(eDatas.id, "+", 5, "stats.defense");
-                    str += "\n**BONUS VIP(+)**\nGrimoire de maîtrise +1\n+100'000 ¥\n+5 niveau d'aptitude";
+                    str += "\n\n**BONUS VIP(+)**\nGrimoire de maîtrise +1\n+100'000 ¥\n+5 niveau d'aptitude";
                     break;
             }
         }

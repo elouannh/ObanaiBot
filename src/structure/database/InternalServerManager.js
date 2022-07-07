@@ -58,8 +58,6 @@ class InternalServerManager {
 
                 if (player.slayer.length === 0) {
                     if (player.storyProgress.chapter === 0) {
-                        const quest = require("../../quests/slayer/chapter1/quest1.js")(0);
-                        t.client.questDb.db.push(player.id, quest, "slayer");
                         t.client.questDb.db.set(player.id, 1, "storyProgress.chapter");
                         player = await t.client.questDb.get(p.id);
                     }
@@ -126,7 +124,7 @@ class InternalServerManager {
             }
         }
 
-        setInterval(async () => await refreshStoryQuest(this), 300_000);
+        setInterval(async () => await refreshStoryQuest(this), 20_000);
 
         const lastRefresh = this.datas.dailyQuests.lastRefresh;
         const timeSpent = Date.now() - lastRefresh;

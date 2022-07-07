@@ -16,5 +16,5 @@ forest = foret
 dark_forest = foret noire
 blank_area = zone vide
 dwelling = habitat (dans une maison)
-suburban_area = zone urbaine avec des constructions
+landscaped_area = zone urbaine avec des constructions
 rocky_valley = vallée rocheuse

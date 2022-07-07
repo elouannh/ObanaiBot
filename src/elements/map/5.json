@@ -7,7 +7,7 @@
     "Areas": [
         {
             "name": "Cour",
-            "biome": "blank_area",
+            "biome": "landscaped_area",
             "id": 0,
             "default": true,
             "accesses": []

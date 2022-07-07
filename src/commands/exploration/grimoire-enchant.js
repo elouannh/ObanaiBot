@@ -55,6 +55,8 @@ class GrimoireEnchant extends Command {
                 null,
                 "outline",
             );
+            await this.client.inventoryDb.addGrimoire(this.message.author.id, grimoire.label);
+            await this.client.inventoryDb.db.dec(this.message.author.id, "materials.grimoire");
         }
         else if (this.ctx.isResp(choice, "n")) {
             await this.ctx.reply("Enchanter un grimoire.", "Vous n'avez pas enchanté votre grimoire.", "🪄", null, "outline");

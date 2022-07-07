@@ -55,6 +55,7 @@ module.exports = client => {
                     const newv = source in newValue ? (item in newValue[source] ? newValue[source][item] : 0) : 0;
                     const oldv = source in oldValue ? (item in oldValue[source] ? oldValue[source][item] : 0) : 0;
                     const toAdd = newv - oldv;
+                    if (toAdd <= 0) return;
                     const newAmount = hadBefore + toAdd;
                     const quests = qDatas[qKey].filter(q => q.id !== dq.id);
 

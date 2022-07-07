@@ -6,8 +6,8 @@
     "id": 10,
     "Areas": [
         {
-            "name": "X",
-            "biome": "blank_area",
+            "name": "Grand rue",
+            "biome": "landscaped_area",
             "id": 0,
             "default": true,
             "accesses": []

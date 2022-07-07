@@ -76,7 +76,7 @@ class CrowBait extends Command {
         let y = 1;
 
         if (iDatas.active_grimoire !== null) {
-            const grim = iDatas.acirequire(`../../elements/grimoires/${iDatas.active_grimoire}.json`);
+            const grim = require(`../../elements/grimoires/${iDatas.active_grimoire}.json`);
             if (grim.benefits.includes("kasugai_crows_rarity_boost")) y += (grim.boost - 1);
         }
 
@@ -108,7 +108,7 @@ class CrowBait extends Command {
             return await this.ctx.reply("Appâtage d'oiseaux.", `Vous avez donc apprivoisé **${kasugai.name}** !`, "🐦", null, "outline");
         }
         else if (this.ctx.isResp(choice, "n")) {
-            return await this.ctx.reply("Appâtage d'oiseaux.", "Vous avez décidé de ne pas récupérer l'oiseau.", "🐦", null, "outline");
+            return await this.ctx.reply("Appeâtage d'oiseaux.", "Vous avez décidé de ne pas récupérer l'oiseau.", "🐦", null, "outline");
         }
         else {
             return await this.ctx.reply("Appâtage d'oiseaux.", "La commande n'a pas aboutie.", null, null, "timeout");
