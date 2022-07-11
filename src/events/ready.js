@@ -9,7 +9,7 @@ module.exports = {
         ];
 		setInterval(() => {
 			client.user.setPresence({
-				status: "invisible",
+				status: "online",
 				afk: false,
 				// activities: [
 				// 	{
