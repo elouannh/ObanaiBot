@@ -47,10 +47,6 @@ class TravelRegion extends Command {
                 await this.client.activityDb.endOfTrip(this.message.author.id);
                 await this.client.playerDb.earnExp(this.message.author.id, Math.floor(Math.random() * 150) + 100, this);
 
-                // BADGE
-                await this.client.externalServerDb.checkBadges(this.message.author.id, "adventurer", 1);
-                //
-
                 return await this.ctx.reply("Voyage.", `Vous voilà arrivé à: **${destName}**. Passez un bon séjour !`, "🗺️", null, "outline");
             }
         }
@@ -85,6 +81,9 @@ class TravelRegion extends Command {
             const destName = `${reg.name} - ${reg.Areas.filter(ar => ar.default).at(0).name}`;
             const destCode = `${reg.id}_${reg.Areas.filter(ar => ar.default).at(0).id}`;
             await this.client.activityDb.travels(this.message.author.id, reg.distance, destCode);
+            // BADGE
+            await this.client.externalServerDb.checkBadges(this.message.author.id, "adventurer", 1);
+            //
             return await this.ctx.reply(
                 "Voyage.",
                 `Vous voilà parti à l'aventure dans la région de **${destName}** !`
