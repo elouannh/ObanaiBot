@@ -67,7 +67,7 @@ class TravelRegion extends Command {
             const reg = accessibleRegions.at(i);
             const timeInMinutes = dist(reg.x, loc.x, reg.y, loc.y);
 
-            const dis = await this.client.activityDb.travellingTime(this.message.author.id, Math.ceil(timeInMinutes));
+            const dis = await this.client.activityDb.travellingTime(this.message.author.id, Math.ceil(timeInMinutes / 15));
             str += `\`${String(i + 1)}\` • ${reg.name} | 🕣 ${convertDate(dis, true).string}\n`;
             reg["distance"] = dis;
             r[String(i + 1)] = reg;
