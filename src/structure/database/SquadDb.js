@@ -21,6 +21,7 @@ class SquadDb {
             quote: "*Cette escouade n'a pas de citation.*",
             created: Date.now(),
             id: Number((Date.now() / 1000).toFixed(0)).toString(20),
+            original: true,
         };
 
         if (right_hand !== null) datas.right_hand = right_hand;
@@ -64,6 +65,15 @@ class SquadDb {
     async joinSquad(owner, user) {
         const s = await this.get(owner);
 
+        // BADGE
+        const max = await this.client.externalServerDb.get(owner);
+        if (max.badges["warChief"].value < s.members.length + 1) {
+            if (s.original) {
+                await this.client.externalServerDb.checkBadges(owner, "warChief", s.members.length + 1);
+            }
+        }
+        //
+
         this.db.push(s.owner, user, "members");
     }
 
@@ -85,6 +95,7 @@ class SquadDb {
                 this.db.set(s.right_hand, s);
                 this.db.set(s.right_hand, s.right_hand, "owner");
                 this.db.set(s.right_hand, "", "right_hand");
+                this.db.set(s.right_hand, false, "original");
             }
             this.db.delete(s.owner);
         }

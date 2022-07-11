@@ -59,6 +59,30 @@ class Context {
         return await this.command.message.channel.send({ embeds: [reponse.embed] });
     }
 
+    async betterReply(title, description, emoji, color, style, displayName = true, image) {
+
+        await this.command.message.channel.sendTyping();
+        const tit = await this.trStr(title);
+        const desc = await this.trStr(description);
+
+        const reponse = new SuperEmbed()
+            .setTitle(tit)
+            .setDescription(desc);
+
+        if (displayName) reponse.setAuthor(this.command.message.author);
+
+        if (style !== null) {
+            reponse.setStyle(style);
+        }
+        if (emoji !== null || color !== null) {
+            if (emoji !== null) reponse.setEmoji(emoji);
+            if (color !== null) reponse.setColor(color.replace("#", ""));
+        }
+        if (image !== null) reponse.setImage(image);
+
+        return await this.command.message.channel.send({ embeds: [reponse.embed] });
+    }
+
     async reactionCollection(message = null, reacts, time = null, userr = undefined) {
         if (message === null) message = this.command.message;
         if (time === null) time = 30_000;

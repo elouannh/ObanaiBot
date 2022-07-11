@@ -41,7 +41,9 @@ class ForgeCollect extends Command {
         if ((Object.values(dates).filter(d => d === true).length + existingWeapons.length) > 10) {
             return await this.ctx.reply(
                 "Oups...",
-                "Vous ne pouvez pas récupérer les objets qui sont forgés. Votre inventaire d'arme est plein. Veuillez vendre des armes avec la commande !weapon-sell.",
+                "Vous ne pouvez pas récupérer les objets qui sont forgés. Votre inventaire d'arme est plein. "
+                +
+                `Veuillez vendre des armes avec la commande \`${this.prefix}weapon-sell\`.`,
                 null,
                 null,
                 "warning",

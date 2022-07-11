@@ -1,24 +1,22 @@
 {
     "name": "Yoshiwara",
     "emoji": "👘",
-    "x": 9.5,
-    "y": 2,
+    "x": 1891,
+    "y": 746,
     "id": 9,
     "Areas": [
         {
             "name": "Ruelle principale",
             "biome": "landscaped_area",
             "id": 0,
-            "default": true,
-            "accesses": []
+            "default": true
         },
         {
             "name": "Chez Franky",
             "biome": "dwelling",
             "id": 1,
-            "default": true,
-            "accesses": [0]
+            "default": true
         }
     ],
-    "accesses": [8, 7, 10]
+    "accesses": [5, 7]
 }

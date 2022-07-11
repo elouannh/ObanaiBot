@@ -46,6 +46,11 @@ class TravelRegion extends Command {
                 const destName = `${loc.name} - ${loc.Areas.filter(ar => ar.id === Number(aDatas.travelling.destination.split("_")[1])).at(0).name}`;
                 await this.client.activityDb.endOfTrip(this.message.author.id);
                 await this.client.playerDb.earnExp(this.message.author.id, Math.floor(Math.random() * 150) + 100, this);
+
+                // BADGE
+                await this.client.externalServerDb.checkBadges(this.message.author.id, "adventurer", 1);
+                //
+
                 return await this.ctx.reply("Voyage.", `Vous voilà arrivé à: **${destName}**. Passez un bon séjour !`, "🗺️", null, "outline");
             }
         }
@@ -82,7 +87,9 @@ class TravelRegion extends Command {
             await this.client.activityDb.travels(this.message.author.id, reg.distance, destCode);
             return await this.ctx.reply(
                 "Voyage.",
-                `Vous voilà parti à l'aventure dans la région de **${destName}** !` + " Faites la commande !travel-area ou !travel-zone pour voir dans combien de temps vous arrivez.",
+                `Vous voilà parti à l'aventure dans la région de **${destName}** !`
+                +
+                ` Faites la commande \`${this.prefix}travel-area\` ou \`${this.prefix}travel-region\` pour voir dans combien de temps vous arrivez.`,
                 "🧳",
                 null,
                 "outline",

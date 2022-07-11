@@ -99,11 +99,9 @@ class ActivityDb {
             }
         }
 
+        time *= coeff;
         time *= 3;
         time *= 100000;
-        time *= Number(coeff.toFixed(2));
-
-        time = Math.ceil(time);
 
         return Math.ceil(time);
     }
@@ -129,11 +127,9 @@ class ActivityDb {
             }
         }
 
+        time *= coeff;
         time *= 60;
         time *= 1000;
-        time *= Number(coeff.toFixed(2));
-
-        time = Math.ceil(time);
 
         return Math.ceil(time);
     }

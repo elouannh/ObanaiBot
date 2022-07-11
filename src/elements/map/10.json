@@ -1,17 +1,16 @@
 {
     "name": "Asakusa",
     "emoji": "🐈",
-    "x": -9.5,
-    "y": -5,
+    "x": 1833,
+    "y": 1389,
     "id": 10,
     "Areas": [
         {
             "name": "Grand rue",
             "biome": "landscaped_area",
             "id": 0,
-            "default": true,
-            "accesses": []
+            "default": true
         }
     ],
-    "accesses": [7, 9]
+    "accesses": [7]
 }

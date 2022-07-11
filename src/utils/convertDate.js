@@ -47,8 +47,8 @@ module.exports = (milisecs, short = false) => {
     else {
         if (datas.days > 0) datas.string += `${datas.days}j `;
         if (datas.hours > 0) datas.string += `${datas.hours}h `;
-        if (datas.mins > 0) datas.string += `${datas.mins}min `;
-        if (datas.secs > 0) datas.string += `${datas.secs}sec`;
+        if (datas.mins > 0) datas.string += `${datas.mins}m `;
+        if (datas.secs > 0) datas.string += `${datas.secs}s`;
     }
 
     if (datas.string.length === 0) datas.string = "terminé(e)";

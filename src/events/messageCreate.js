@@ -35,7 +35,7 @@ module.exports = {
             if (cmd === 0) return;
 
             cmd = new cmd();
-            cmd.init(client, message, args);
+            cmd.init(client, message, args, guildPrefix.prefix);
 
             const cooldownReady = await cmd.cooldownReady(client, message, true);
             if (!cooldownReady) return;

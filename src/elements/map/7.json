@@ -1,17 +1,16 @@
 {
     "name": "Village des forgerons",
     "emoji": "🛖",
-    "x": 6.5,
-    "y": 2,
+    "x": 1430,
+    "y": 865,
     "id": 7,
     "Areas": [
         {
             "name": "Entrée du village",
             "biome": "landscaped_area",
             "id": 0,
-            "default": true,
-            "accesses": []
+            "default": true
         }
     ],
-    "accesses": [6, 10, 9]
+    "accesses": [6, 9, 10]
 }

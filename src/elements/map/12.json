@@ -1,0 +1,16 @@
+{
+    "name": "Maison aux tambours",
+    "emoji": "🪘",
+    "x": 1123,
+    "y": 1444,
+    "id": 12,
+    "Areas": [
+        {
+            "name": "Extérieur de la maison",
+            "biome": "landscaped_area",
+            "id": 0,
+            "default": true
+        }
+    ],
+    "accesses": [6]
+}

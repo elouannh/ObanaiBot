@@ -1,8 +1,7 @@
 {
     "label": "tamahagane",
     "name": "Tamahagane",
-    "price": 50,
-    "size": 2,
+    "size": 20,
     "areas": ["rocky_valley"],
     "rarity": 25,
     "emoji": "🪨"

@@ -1,6 +1,7 @@
 const Command = require("../../base/Command");
 const MemberScanning = require("../../structure/tools/MemberScanning");
 const map = require("../../elements/map");
+const convertDate = require("../../utils/convertDate");
 
 class Map extends Command {
     constructor() {
@@ -30,24 +31,29 @@ class Map extends Command {
         const pExists = await this.client.playerDb.started(user.id);
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
-        const mDatas = await this.client.mapDb.get(this.message.author.id);
+        const mDatas = await this.client.mapDb.get(user.id);
         const loc = map.Regions.filter(r => r.id === mDatas.region)?.at(0);
         const area = loc.Areas.filter(a => a.id === mDatas.area)?.at(0);
 
-        const title = `Emplacement de ${user.username}`;
-        let infos = "*```diff\n- Le visuel de la carte arrivera prochainement.```*";
+        let infos = "";
 
-        infos += "\n**Localisation**";
-        infos += `\n> ${loc.emoji} **${loc.name}** | **${area.name}**`;
-        infos += `\n*(Coordonnées GPS: ${loc.x}X/${loc.y}Y/${area.id}R)*`;
+        infos += `\n> ${loc.emoji} **${loc.name}**`;
 
-        infos += "\n\n**Débouchés de voyage**";
-        infos += `\n**\`\`\`${map.Regions.filter(r => r.accesses.includes(loc.id)).map(r => `- ${r.name}`).join("\n")}\`\`\`**`;
-        infos += `\n**Autres zones de région:** ${
-            loc.Areas.filter(a => a.id !== area.id).length > 0 ? loc.Areas.filter(a => a.id !== area.id).map(r => `**${r.name}**`).join(", ") : "Aucune autre zone."
-        }`;
+        infos += "\n\nZones de région:\n";
+        const areaList = [];
+        for (const area_ of loc.Areas) {
+            const lastDig = mDatas.exploration[`${loc.id}_${area_.id}`]?.lastDig ?? null;
+            const timeSpent = Date.now() - (lastDig ?? 0);
+            let finalStr = `${map.BiomesEmojis[area_.biome]} • ${area_.id === area.id ? "***" : ""}${area_.name}${area_.id === area.id ? "***" : ""}  • `;
 
-        return await this.ctx.reply(title, infos, "🗺️", null, "outline");
+            if (lastDig === null || timeSpent > 7_200_000) finalStr += "🔎 Fouille **prête** !";
+            else finalStr += `⏰ Fouille disponible dans **${convertDate(7_200_000 - (lastDig === null ? 0 : timeSpent), true).string}**`;
+
+            areaList.push(finalStr);
+        }
+        infos += `${areaList.join("\n")}`;
+
+        return await this.ctx.betterReply(`Emplacement de ${user.username}`, infos, "🗺️", null, "outline", true, { url: "https://cdn.discordapp.com/attachments/995812450970652672/995812746794909796/obanai_map_v1.jpg" });
     }
 }
 

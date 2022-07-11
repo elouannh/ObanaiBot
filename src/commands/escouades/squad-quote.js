@@ -7,7 +7,7 @@ class SquadQuote extends Command {
             aliases: ["squad-quote", "sqqt"],
             args: [["quote", "nouvelle citation pour l'escouade", true]],
             category: "Escouades",
-            cooldown: 30,
+            cooldown: 1,
             description: "Commande permettant de changer la citation de votre escouade.",
             examples: ["squad-quote Nous sommes les plus forts"],
             finishRequest: "ADVENTURE",
@@ -25,6 +25,8 @@ class SquadQuote extends Command {
         const name = this.args.join(" ");
         let r = name.match(new RegExp("([a-zA-Z\\s]{1,}\\s?[0-9]{0,}\\D{0,}){0,}", "g"));
         r = r?.join(" ")?.slice(0, 400).split(/ +/).join(" ");
+
+        if (r.endsWith(" ")) r = r.split("").splice(r, r.length - 1).join("");
 
         if (r === undefined || r?.length < 10) {
             return await this.ctx.reply(

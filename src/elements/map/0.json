@@ -1,16 +1,21 @@
 {
     "name": "Mont Sagiri",
     "emoji": "🗻",
-    "x": -8,
-    "y": 11,
+    "x": 180,
+    "y": 246,
     "id": 0,
     "Areas": [
         {
             "name": "Pied de la montagne",
             "biome": "meadow",
             "id": 0,
-            "default": true,
-            "accesses": []
+            "default": true
+        },
+        {
+            "name": "Sommet de la montagne",
+            "biome": "rocky_valley",
+            "id": 1,
+            "default": false
         }
     ],
     "accesses": [4]

@@ -1,17 +1,16 @@
 {
     "name": "Ville du train",
     "emoji": "🚂",
-    "x": 10,
-    "y": 9,
+    "x": 1835,
+    "y": 315,
     "id": 8,
     "Areas": [
         {
             "name": "Gare",
             "biome": "landscaped_area",
             "id": 0,
-            "default": true,
-            "accesses": []
+            "default": true
         }
     ],
-    "accesses": [2, 9]
+    "accesses": [5]
 }

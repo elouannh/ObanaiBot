@@ -3,6 +3,21 @@ const map = require("../../elements/map.js");
 const convertDate = require("../../utils/convertDate");
 const fs = require("fs");
 
+class Bag {
+    constructor() {
+        this.elements = {};
+    }
+
+    get size() {
+        return Object.entries(this.elements).map(e => require(`../../elements/materials/${e[0]}.json`).size).reduce((a, b) => a + b, 0);
+    }
+
+    addItem(item, amount) {
+        if (item in this.elements) this.elements[item] += amount;
+        else this.elements[item] = amount;
+    }
+}
+
 class Dig extends Command {
     constructor() {
         super({
@@ -10,7 +25,7 @@ class Dig extends Command {
             aliases: ["dig"],
             args: [],
             category: "Exploration",
-            cooldown: 15,
+            cooldown: 5,
             description: "Commande permettant de fouiller la zone où vous vous trouver afin de récolter quelques items.",
             examples: ["dig"],
             finishRequest: "ADVENTURE",
@@ -27,46 +42,59 @@ class Dig extends Command {
 
         const mDatas = await this.client.mapDb.get(this.message.author.id);
         let iDatas = await this.client.inventoryDb.get(this.message.author.id);
+        const eDatas = await this.client.externalServerDb.get(this.message.author.id);
         const loc = map.Regions.filter(r => r.id === mDatas.region)?.at(0);
         const area = loc.Areas.filter(a => a.id === mDatas.area)?.at(0);
+        const aDatas = await this.client.activityDb.get(this.message.author.id);
+
+        if (aDatas.isTravelling) {
+            const timeLeft = aDatas.travelling.start + aDatas.travelling.duration - Date.now();
+            if (timeLeft > 0) {
+                const loc_ = map.Regions.filter(r => r.id === Number(aDatas.travelling.destination.split("_")[0]))?.at(0);
+                const destName = `${loc_.name} - ${loc_.Areas.filter(ar => ar.id === Number(aDatas.travelling.destination.split("_")[1])).at(0).name}`;
+                return await this.ctx.reply(
+                    "Voyage (intrarégional).",
+                    "Il semblerait que vous êtes déjà en train de voyager ! Voici plus d'informations :\n"
+                    +
+                    `\`\`\`Destination: ${destName}\nTemps restant: ${convertDate(timeLeft).string}\`\`\``,
+                    "🧳",
+                    null,
+                    "outline",
+                );
+            }
+            else {
+                const loc_ = map.Regions.filter(r => r.id === Number(aDatas.travelling.destination.split("_")[0]))?.at(0);
+                const destName = `${loc_.name} - ${loc_.Areas.filter(ar => ar.id === Number(aDatas.travelling.destination.split("_")[1])).at(0).name}`;
+                await this.client.activityDb.endOfTrip(this.message.author.id);
+                await this.client.playerDb.earnExp(this.message.author.id, Math.floor(Math.random() * 150) + 100, this);
+                return await this.ctx.reply("Voyage (intrarégional).", `Vous voilà arrivé à: **${destName}**. Passez un bon séjour !`, "🗺️", null, "outline");
+            }
+        }
 
         const lastDig = mDatas.exploration[`${loc.id}_${area.id}`]?.lastDig ?? null;
         const timeSpent = Date.now() - (lastDig ?? 0);
 
         if (lastDig === null || timeSpent > 7_200_000) {
+            let luck = 1;
+
+            if (iDatas.active_grimoire !== null) {
+                const grim = require(`../../elements/grimoires/${iDatas.active_grimoire}.json`);
+                if (grim.benefits.includes("loot_rate_boost")) luck += (grim.boost - 1);
+            }
+
             const items = fs.readdirSync("./src/elements/materials").map(item => require(`../../elements/materials/${item}`));
             const areaItems = items.filter(item => item.areas.includes(area.biome));
 
-            const itemsGot = {};
-            for (const obj of areaItems) {
-                let luck = 1;
+            const bag = new Bag();
+            const bagSize = eDatas.grades.includes("vip") ? 300 : 200;
+            const gotItems = areaItems.filter(e => (Math.random() * 100 / luck) < e.rarity).sort((a, b) => b.size - a.size);
 
-                if (iDatas.active_grimoire !== null) {
-                    const grim = require(`../../elements/grimoires/${iDatas.active_grimoire}.json`);
-                    if (grim.benefits.includes("loot_rate_boost")) luck += (grim.boost - 1);
-                }
-
-                const rate = Math.random() * 100;
-                const gotItem = (rate / luck) <= obj.rarity;
-
-                if (gotItem) {
-                    let quantity = 1;
-                    let digAgain = true;
-
-                    while (digAgain) {
-                        const gotAnother = ((Math.random() * 100) / luck) <= (obj.rarity * 2 / quantity);
-
-                        if (gotAnother) {
-                            quantity += Math.ceil(obj.rarity);
-                        }
-                        else {
-                            digAgain = false;
-                        }
-                    }
-
-                    itemsGot[obj.label] = quantity;
-                }
+            for (const item of gotItems) {
+                const itemMax = Math.floor((bagSize - bag.size) / item.size);
+                if (itemMax >= 1) bag.addItem(item.label, Math.floor(Math.random() * (itemMax - 1)) + 1);
             }
+
+            const itemsGot = bag.elements;
 
             let finalStr = "";
             if (Object.values(itemsGot).length === 0) {
@@ -86,6 +114,10 @@ class Dig extends Command {
                     this.client.inventoryDb.db.ensure(this.message.author.id, this.client.inventoryDb.model(this.message.author.i));
                     this.client.inventoryDb.db.set(this.message.author.id, hadBefore + itemsGot[item], `materials.${item}`);
                 }
+
+                // BADGE
+                await this.client.externalServerDb.checkBadges(this.message.author.id, "archaeologist", 1);
+                //
 
                 finalStr += "\n\n**Revenez dans 2h pour fouiller cette zone !**";
                 this.client.mapDb.db.ensure(this.message.author.id, this.client.mapDb.model(this.message.author.i));

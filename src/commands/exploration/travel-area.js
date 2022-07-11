@@ -79,7 +79,9 @@ class TravelArea extends Command {
             await this.client.activityDb.travels(this.message.author.id, zo.distance, destCode);
             return await this.ctx.reply(
                 "Voyage (intrarégional).",
-                `Vous voilà parti à l'aventure dans la zone de **${destName}** !` + " Faites la commande !travel-area ou !travel-zone pour voir dans combien de temps vous arrivez.",
+                `Vous voilà parti à l'aventure dans la zone de **${destName}** !`
+                +
+                ` Faites la commande \`${this.prefix}travel-area\` ou \`${this.prefix}travel-region\` pour voir dans combien de temps vous arrivez.`,
                 "🧳",
                 null,
                 "outline",

@@ -39,10 +39,11 @@ class Command {
         }
     }
 
-    init(client, message, args) {
+    init(client, message, args, guildPrefix) {
         this.client = client;
         this.message = message;
         this.args = args;
+        this.prefix = guildPrefix;
         this.ctx = new Context(this.client, this);
     }
 

@@ -1,17 +1,22 @@
 {
     "name": "Mont Natagumo",
     "emoji": "🕷️",
-    "x": 1,
-    "y": 4,
+    "x": 1023,
+    "y": 673,
     "id": 3,
     "Areas": [
         {
             "name": "Pied de la montagne",
             "biome": "meadow",
             "id": 0,
-            "default": true,
-            "accesses": []
+            "default": true
+        },
+        {
+            "name": "Sommet de la montagne",
+            "biome": "rocky_valley",
+            "id": 1,
+            "default": false
         }
     ],
-    "accesses": [2, 5]
+    "accesses": [6]
 }

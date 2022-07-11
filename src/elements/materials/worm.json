@@ -1,9 +1,8 @@
 {
     "label": "worm",
     "name": "Ver",
-    "price": 10,
-    "size": 1,
+    "size": 10,
     "areas": ["forest", "dark_forest", "meadow"],
-    "rarity": 30,
+    "rarity": 60,
     "emoji": "🪱"
 }

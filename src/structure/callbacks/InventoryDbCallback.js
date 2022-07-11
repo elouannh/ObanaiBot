@@ -69,6 +69,15 @@ module.exports = client => {
 
             }
         }
+
+        // BADGE DE FERMER
+
+        const oldSeeds = "materials" in (oldValue ?? {}) ? ("seed" in oldValue.materials ? oldValue.materials.seed : 0) : 0;
+        const newSeeds = "materials" in (newValue ?? {}) ? ("seed" in newValue.materials ? newValue.materials.seed : 0) : 0;
+
+        if (oldSeeds < newSeeds) {
+            await client.externalServerDb.checkBadges(oldValue.id, "farmer", newSeeds - oldSeeds);
+        }
     }
 
     return InventoryDbCallback;

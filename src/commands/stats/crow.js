@@ -53,7 +53,7 @@ class Crow extends Command {
             crowinfos += `\nExp du niveau: ⭐ **${intRender(crowLevel.tempExp, " ")}**/${intRender(crowLevel.required, " ")}`;
         }
         else {
-            crowinfos += "```Aucun corbeau de liaison. Essayez d'en trouver un avec la commande !crow-bait.```";
+            crowinfos += `\`\`\`Aucun corbeau de liaison. Essayez d'en trouver un avec la commande \`${this.prefix}crow-bait.\`\`\`\``;
         }
 
 

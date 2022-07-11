@@ -51,7 +51,7 @@ class Arena {
         }
 
         this.cache.teamPlaying = opponentTeam.id;
-        this.cache.playing = this.cache.lastPlayers[opponentTeam.id];
+        this.cache.playing = this.cache.lastPlayers[this.cache.teamPlaying];
     }
 
     async targetChoice(player) {
@@ -209,6 +209,7 @@ class Arena {
     }
 
     async begin() {
+        this.rotate();
         const deaths = await this.checkDeath();
         if (deaths.length > 0) {
             this.deaths.push(deaths);

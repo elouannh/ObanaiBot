@@ -1,17 +1,22 @@
 {
     "name": "Mont Urusai",
     "emoji": "⛰️",
-    "x": -6,
-    "y": 5,
+    "x": 172,
+    "y": 803,
     "id": 1,
     "Areas": [
         {
             "name": "Pied de la montagne",
             "biome": "meadow",
             "id": 0,
-            "default": true,
-            "accesses": []
+            "default": true
+        },
+        {
+            "name": "Sommet de la montagne",
+            "biome": "rocky_valley",
+            "id": 1,
+            "default": false
         }
     ],
-    "accesses": [4, 2, 6]
+    "accesses": [2, 4, 6, 11]
 }

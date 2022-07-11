@@ -1,4 +1,7 @@
 const Enmap = require("enmap");
+const Command = require("../../base/Command");
+const badgesObjectives = require("../../elements/badgesObjectives.json");
+const intRender = require("../../utils/intRender");
 
 class ExternalServerDb {
     constructor(client) {
@@ -10,7 +13,32 @@ class ExternalServerDb {
         const datas = {
             id: id,
             grades: [],
-            badges: [],
+            badges: {
+                farmer: {
+                    value: 0,
+                    tier: "0",
+                },
+                adventurer: {
+                    value: 0,
+                    tier: "0",
+                },
+                domineering: {
+                    value: 0,
+                    tier: "0",
+                },
+                warChief: {
+                    value: 0,
+                    tier: "0",
+                },
+                archaeologist: {
+                    value: 0,
+                    tier: "0",
+                },
+                masterFalconer: {
+                    value: 0,
+                    tier: "0",
+                },
+            },
             daily: 0,
             claimed: [],
         };
@@ -35,10 +63,116 @@ class ExternalServerDb {
         this.db.push(id, grade, "grades");
     }
 
-    async addBadge(id, badge) {
-        this.db.push(id, badge, "badges");
+    async checkBadges(id, type, value) {
+        const p = await this.get(id);
+        const oldValue = p.badges[type];
+        const newValue = {
+            value: oldValue.value,
+            tier: "0",
+        };
+
+        switch (type) {
+            case "farmer":
+                newValue.value = oldValue.value + value;
+                newValue.tier = this.getObjective(badgesObjectives.objectives.farmer, newValue.value);
+                break;
+            case "adventurer":
+                newValue.value = oldValue.value + value;
+                newValue.tier = this.getObjective(badgesObjectives.objectives.adventurer, newValue.value);
+                break;
+            case "domineering":
+                newValue.value = oldValue.value + value;
+                newValue.tier = this.getObjective(badgesObjectives.objectives.domineering, newValue.value);
+                break;
+            case "warChief":
+                newValue.value = oldValue.value + value;
+                newValue.tier = this.getObjective(badgesObjectives.objectives.warChief, newValue.value);
+                break;
+            case "archaeologist":
+                newValue.value = oldValue.value + value;
+                newValue.tier = this.getObjective(badgesObjectives.objectives.archaeologist, newValue.value);
+                break;
+            case "masterFalconer":
+                newValue.value = oldValue.value + value;
+                newValue.tier = this.getObjective(badgesObjectives.objectives.masterFalconer, newValue.value);
+                break;
+        }
+
+        if (oldValue.value < newValue.value) {
+            this.db.set(id, newValue, `badges.${type}`);
+            if (oldValue.tier !== newValue.tier) {
+                try {
+                    const cmd = new Command();
+                    cmd.init(this.client,
+                        {
+                            author: this.client.users.cache.get(id),
+                            channel: this.client.lastChannel.get(id),
+                        },
+                    []);
+                    await cmd.ctx.reply(
+                        "Badge obtenu !",
+                        `Passage du badge \`${this.getBadge(type)}\` au tier: **\`${this.getTier(newValue.tier)}\`**`,
+                        "⭐",
+                        null,
+                        "outline",
+                    );
+                }
+                catch (err) {
+                    return;
+                }
+            }
+        }
     }
 
+    getObjective(obj, v) {
+        const tier = Object.entries(obj).filter(e => Number(e[1]) <= v)?.at(-1)?.at(0) ?? "0";
+        return tier;
+    }
+
+    getTier(tier) {
+        return {
+            "0": "I",
+            "1": "II",
+            "2": "III",
+            "3": "IV",
+        }[tier];
+    }
+
+    getBadge(type) {
+        return {
+            "farmer": "Fermier",
+            "adventurer": "Aventurier",
+            "domineering": "Dominateur",
+            "warChief": "Chef de guerre",
+            "archaeologist": "Archéologue",
+            "lasterFalconer": "Maître fauconnier",
+        }[type];
+    }
+
+    getProgress(type, quantity, mode) {
+        const tier = this.getObjective(badgesObjectives.objectives[type], quantity);
+        const indexOfTier = Number(tier);
+        const actualTier = this.getTier(tier);
+        let progress = "";
+
+        if (mode === "minimal") {
+            progress = `\`${actualTier}\``;
+        }
+        else if (mode === "maximal") {
+            progress = `${badgesObjectives.descriptions[type]}\n» Actuel: \`tier ${actualTier}\``;
+
+            if (indexOfTier === 3) {
+                progress = `**${intRender(quantity, " ")}** \`- (terminé) -\``;
+            }
+            else {
+                const afterIndex = indexOfTier + 1;
+                const afterTier = ["0", "1", "2", "3"][afterIndex];
+                progress += `\n» Prochain: \`tier ${this.getTier(afterTier)}\`: **${intRender(quantity, " ")}**/${badgesObjectives.objectives[type][afterTier]}`;
+            }
+        }
+
+        return progress;
+    }
 }
 
 module.exports = { ExternalServerDb };

@@ -45,7 +45,6 @@ class CrowFeed extends Command {
         // eslint-disable-next-line prefer-const
         let [type, quantity] = resp;
         quantity = Math.sqrt(Math.pow(Number(quantity), 2));
-        console.log(type, quantity);
 
         const str = "La syntaxe saisie est erronée. Veuillez réessayer sous ce modèle:\n```[vous]: !crow-feed\n[Obanai]: <embed>\n"
                     +

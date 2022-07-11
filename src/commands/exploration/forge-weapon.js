@@ -73,7 +73,7 @@ class ForgeWeapon extends Command {
             await this.ctx.reply(
                 "Forger une arme.", `Vous forgez donc une arme !\n\n**Détails de l'arme:**\nTemps de forge: **${convertDate(7_200_000 * rarity).string}**\n`
                 +
-                `Rareté: **${rarity}**\n*Plus d'informations avec la commande !forge-list.*`,
+                `Rareté: **${rarity}**\n*Plus d'informations avec la commande \`${this.prefix}forge-list.\`*`,
                 "🗡️",
                 null,
                 "outline",

@@ -1,9 +1,8 @@
 {
     "label": "grimoire",
     "name": "Grimoire",
-    "price": 500,
-    "size": 10,
+    "size": 200,
     "areas": ["landscaped_area"],
-    "rarity": 5,
+    "rarity": 1,
     "emoji": "📖"
 }

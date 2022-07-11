@@ -1,9 +1,8 @@
 {
     "label": "wood",
     "name": "Bois",
-    "price": 20,
-    "size": 1,
+    "size": 20,
     "areas": ["forest", "dark_forest"],
-    "rarity": 50,
+    "rarity": 80,
     "emoji": "🪵"
 }

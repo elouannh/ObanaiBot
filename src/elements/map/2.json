@@ -1,17 +1,22 @@
 {
     "name": "Mont Fujikasane",
     "emoji": "🌸",
-    "x": 4,
-    "y": 11,
+    "x": 999,
+    "y": 262,
     "id": 2,
     "Areas": [
         {
             "name": "Pied de la montagne",
             "biome": "meadow",
             "id": 0,
-            "default": true,
-            "accesses": []
+            "default": true
+        },
+        {
+            "name": "Sommet de la montagne",
+            "biome": "rocky_valley",
+            "id": 1,
+            "default": false
         }
     ],
-    "accesses": [1, 3, 5, 8]
+    "accesses": [1, 4, 5]
 }

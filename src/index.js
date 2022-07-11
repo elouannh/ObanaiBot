@@ -14,6 +14,8 @@ client.requests = new Collection();
 client.lastChannel = new Collection();
 
 client.AVAILABLE = new Enmap({ name: "AVAILABLE" });
+client.AVAILABLE.set("_", "owner");
+
 
 loadEvents(client);
 client.launch();

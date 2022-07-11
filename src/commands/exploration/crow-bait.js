@@ -51,11 +51,11 @@ class CrowBait extends Command {
         const worms = "materials" in iDatas ? ("worm" in iDatas.materials ? iDatas.materials.worm : 0) : 0;
 
         if (seeds < 100) return await this.ctx.reply("Oups...", `Vous n'avez pas assez de graines.\n**Graines requises: ${seeds}/100**`, null, null, "warning");
-        if (worms < 10) return await this.ctx.reply("Oups...", `Vous n'avez pas assez de vers de terre.\n**Vers requis: ${worms}/10**`, null, null, "warning");
+        if (worms < 25) return await this.ctx.reply("Oups...", `Vous n'avez pas assez de vers de terre.\n**Vers requis: ${worms}/25**`, null, null, "warning");
 
         await this.ctx.reply("Appâtage d'oiseaux.", "Vous tentez d'appâter des oiseaux aux alentours... Voyons voir...", "🐦", null, "outline");
         this.client.inventoryDb.db.set(this.message.author.id, seeds - 100, "materials.seed");
-        this.client.inventoryDb.db.set(this.message.author.id, worms - 10, "materials.worm");
+        this.client.inventoryDb.db.set(this.message.author.id, worms - 25, "materials.worm");
 
         const birdFound = Math.floor(Math.random() * 100) > 50;
         if (!birdFound) {
@@ -67,6 +67,9 @@ class CrowBait extends Command {
 
             return await this.ctx.reply("Appâtage d'oiseaux.", resp[Math.floor(Math.random() * resp.length)], "🐦", null, "error");
         }
+        // BADGE
+        await this.client.externalServerDb.checkBadges(this.message.author.id, "masterFalconer", 1);
+        //
 
         function luck(x = 1, count = 0) {
             if (((Math.random() * 100) / x) < (100 / (count + 1)) && count < 5) return luck(x, count + 1);

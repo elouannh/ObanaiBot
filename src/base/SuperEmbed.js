@@ -7,6 +7,7 @@ class SuperEmbed {
         this.description = "";
         this.fields = [],
         this.title = "";
+        this.image = { url: null, proxy_url: null, height: null, width: null };
     }
 
 
@@ -40,6 +41,14 @@ class SuperEmbed {
         return this;
     }
 
+    setImage(image = { url: null, proxy_url: null, height: null, width: null }) {
+        if (image.url !== null) this.image.url = image.url;
+        if (image.proxy_url !== null) this.image.proxy_url = image.proxy_url;
+        if (image.height !== null) this.image.height = image.height;
+        if (image.width !== null) this.image.width = image.width;
+        return this;
+    }
+
     setStyle(style) {
         const allStyles = {
             "error": ["#ff2323", "❌"],
@@ -69,6 +78,7 @@ class SuperEmbed {
 
         if (this.title) toReturn.title = `${this.emoji} — ${this.title}`;
         if (this.description.length > 0) toReturn.description = this.description;
+        if (this.image.url !== null) toReturn.image = this.image;
         return toReturn;
     }
 }

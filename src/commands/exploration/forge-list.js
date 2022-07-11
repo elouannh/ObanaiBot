@@ -45,7 +45,7 @@ class ForgeList extends Command {
         if (Object.values(dates).includes(true)) {
             activity += "\n\nCertains objets sont prêts à la récupération ! "
                         +
-                        "Vous pouvez obtenir le produit de forge avec la commande !forge-collect.";
+                        `Vous pouvez obtenir le produit de forge avec la commande \`${this.prefix}forge-collect\`.`;
         }
 
         if (Object.entries(items).length === 0) activity = "Aucun objet n'est en train d'être forgé.";
