@@ -6,7 +6,6 @@ const convertDate = require("../../utils/convertDate");
 class Map extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["map"],
             args: [["player", "joueur dont vous souhaitez voir l'emplacement sur la carte. (ou vous)", false]],
             category: "Exploration",
@@ -15,7 +14,7 @@ class Map extends Command {
             examples: ["[p]map @pandawou"],
             finishRequest: "ADVENTURE",
             name: "map",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "map <?player>",
         });

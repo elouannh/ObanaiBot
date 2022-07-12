@@ -4,7 +4,6 @@ const convertDate = require("../../utils/convertDate");
 class SquadDelete extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["squad-delete", "sqdl"],
             args: [],
             category: "Escouades",
@@ -13,7 +12,7 @@ class SquadDelete extends Command {
             examples: ["[p]squad-delete"],
             finishRequest: "ADVENTURE",
             name: "squad-delete",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "squad-delete",
         });

@@ -4,7 +4,6 @@ const convertDate = require("../../utils/convertDate");
 class ForgeList extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["forge-list", "fl"],
             args: [],
             category: "Exploration",
@@ -13,7 +12,7 @@ class ForgeList extends Command {
             examples: ["[p]forge-list"],
             finishRequest: "ADVENTURE",
             name: "forge-list",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "forge-list",
         });

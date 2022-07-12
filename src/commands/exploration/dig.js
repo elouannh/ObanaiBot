@@ -21,7 +21,6 @@ class Bag {
 class Dig extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["dig"],
             args: [],
             category: "Exploration",
@@ -30,7 +29,7 @@ class Dig extends Command {
             examples: ["[p]dig"],
             finishRequest: "ADVENTURE",
             name: "dig",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "dig",
         });

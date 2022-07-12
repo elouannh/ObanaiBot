@@ -3,7 +3,6 @@ const Command = require("../../base/Command");
 class SquadQuote extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["squad-quote", "sqqu"],
             args: [["quote", "nouvelle citation pour l'escouade.", true]],
             category: "Escouades",
@@ -12,7 +11,7 @@ class SquadQuote extends Command {
             examples: ["[p]squad-quote Nous sommes les plus forts"],
             finishRequest: "ADVENTURE",
             name: "squad-quote",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "squad-quote <quote>",
         });

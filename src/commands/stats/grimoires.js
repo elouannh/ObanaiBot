@@ -5,7 +5,6 @@ const convertDate = require("../../utils/convertDate");
 class Grimoires extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["grimoires", "gr"],
             args: [["player", "joueur dont vous souhaitez voir les grimoires. (ou vous)", false]],
             category: "Stats",
@@ -14,7 +13,7 @@ class Grimoires extends Command {
             examples: ["[p]grimoires @pandawou"],
             finishRequest: "ADVENTURE",
             name: "grimoires",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "grimoires <?player>",
         });

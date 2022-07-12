@@ -3,7 +3,6 @@ const Command = require("../../base/Command");
 class WeaponSell extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["weapon-sell", "wsell"],
             args: [],
             category: "Stats",
@@ -12,7 +11,7 @@ class WeaponSell extends Command {
             examples: ["[p]weapon-sell"],
             finishRequest: "ADVENTURE",
             name: "weapon-sell",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "weapon-sell",
         });

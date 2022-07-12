@@ -4,7 +4,6 @@ const convertDate = require("../../utils/convertDate");
 class ForgeWeapon extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["forge-weapon", "fw"],
             args: [],
             category: "Exploration",
@@ -13,7 +12,7 @@ class ForgeWeapon extends Command {
             examples: ["[p]forge-weapon"],
             finishRequest: "ADVENTURE",
             name: "forge-weapon",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "forge-weapon",
         });

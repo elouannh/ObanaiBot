@@ -3,7 +3,6 @@ const Command = require("../../base/Command");
 class Eval extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["eval"],
             args: [["program", "programme à faire exécuter par le client.", true]],
             category: "Administrateur",
@@ -12,7 +11,7 @@ class Eval extends Command {
             examples: ["[p]eval console.log(\"hello world !\");"],
             finishRequest: ["eval"],
             name: "eval",
-            ownerOnly: true,
+            private: "owners",
             permissions: 0,
             syntax: "eval <program>",
         });

@@ -1,5 +1,4 @@
 const { Collection } = require("discord.js");
-const Enmap = require("enmap");
 const { token } = require("../token.json");
 const Obanai = require("./base/Obanai");
 const { loadEvents } = require("./utils/eventLoader");
@@ -12,10 +11,6 @@ client.cooldowns = new Collection();
 client.requests = new Collection();
 // ................<string, Channel>
 client.lastChannel = new Collection();
-
-client.AVAILABLE = new Enmap({ name: "AVAILABLE" });
-client.AVAILABLE.set("_", "owner");
-
 
 loadEvents(client);
 client.launch();

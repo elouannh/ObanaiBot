@@ -4,7 +4,6 @@ const intRender = require("../../utils/intRender");
 class Top extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["top", "lb"],
             args: [],
             category: "Stats",
@@ -13,7 +12,7 @@ class Top extends Command {
             examples: ["[p]top"],
             finishRequest: "ADVENTURE",
             name: "top",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "top",
         });

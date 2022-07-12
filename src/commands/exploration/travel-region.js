@@ -5,7 +5,6 @@ const convertDate = require("../../utils/convertDate");
 class TravelRegion extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["travel-region", "tr"],
             args: [],
             category: "Exploration",
@@ -14,7 +13,7 @@ class TravelRegion extends Command {
             examples: ["[p]travel-region"],
             finishRequest: "ADVENTURE",
             name: "travel-region",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "travel-region",
         });

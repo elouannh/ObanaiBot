@@ -3,7 +3,6 @@ const Command = require("../../base/Command");
 class SquadKick extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["squad-demote", "sqdm"],
             args: [],
             category: "Escouades",
@@ -12,7 +11,7 @@ class SquadKick extends Command {
             examples: ["[p]squad-demote"],
             finishRequest: "ADVENTURE",
             name: "squad-demote",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "squad-demote",
         });

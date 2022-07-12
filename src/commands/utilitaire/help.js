@@ -3,7 +3,6 @@ const Command = require("../../base/Command");
 class Help extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["help"],
             args: [["command", "nom de la commande.", false]],
             category: "Utilitaire",
@@ -12,7 +11,7 @@ class Help extends Command {
             examples: ["[p]help", "[p]help prefix"],
             finishRequest: [],
             name: "help",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "help <command>",
         });
@@ -73,8 +72,6 @@ class Help extends Command {
             string += `*${i.description}*\n\ntSyntaxe: \`${i.syntax}\` | Aliases: \`${i.aliases.join(", ")}\`\n`;
             if (i.args.length > 0) string += `\`\`\`diff\nArgs:\n${i.args.map(e => `- ${e[0]} (${e[2] === true ? "Obligatoire" : "Optionnel"}): ${e[1]}`).join("\n")}\`\`\``;
             string += `\`\`\`diff\nExemples:\n${i.examples.map(e => `${e.replace("[p]", this.prefix)}`).join("\n")}\`\`\``;
-            if (i.ownerOnly) string += "```fix\nCette commande n'est faisable que par le créateur du bot.```";
-            else if (i.adminOnly) string += "```fix\nCette commande nécessite des autorisations particulières.```";
             string += "\n\n*Certaines informations de cette page ne peuvent pas être traduites.*";
 
             return await this.ctx.reply(`t**Commande \`${i.name}\`**\n`, string, null, null, "outline");

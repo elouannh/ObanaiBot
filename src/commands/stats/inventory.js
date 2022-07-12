@@ -5,7 +5,6 @@ const intRender = require("../../utils/intRender");
 class Inventory extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["inventory", "i", "inv"],
             args: [["player", "joueur dont vous souhaitez voir l'invetaire de jeu. (ou vous)", false]],
             category: "Stats",
@@ -14,7 +13,7 @@ class Inventory extends Command {
             examples: ["[p]inventory @pandawou"],
             finishRequest: "ADVENTURE",
             name: "inventory",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "inventory <?player>",
         });

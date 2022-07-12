@@ -32,7 +32,6 @@ async function requestReady(client, user, infos) {
 class Fight extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["fight"],
             args: [["players", "joueurs que vous souhaitez affronter.", false], ["teams", "équipes que vous souhaitez former. 4 Joueurs maximum par équipe.", false]],
             category: "Combats",
@@ -41,7 +40,7 @@ class Fight extends Command {
             examples: ["[p]fight @pandawou", "[p]fight @pandawou && @myrly"],
             finishRequest: "ADVENTURE",
             name: "fight",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "fight <?players|?teams>",
         });

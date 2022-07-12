@@ -3,7 +3,6 @@ const Command = require("../../base/Command");
 class SquadLeave extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["squad-leave", "sqlv"],
             args: [],
             category: "Escouades",
@@ -12,7 +11,7 @@ class SquadLeave extends Command {
             examples: ["[p]squad-leave"],
             finishRequest: "ADVENTURE",
             name: "squad-leave",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "squad-leave",
         });

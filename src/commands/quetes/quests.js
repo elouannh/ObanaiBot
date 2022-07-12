@@ -3,7 +3,6 @@ const Command = require("../../base/Command");
 class Quests extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["quests", "q"],
             args: [],
             category: "Quêtes",
@@ -12,7 +11,7 @@ class Quests extends Command {
             examples: ["[p]quests"],
             finishRequest: "ADVENTURE",
             name: "quests",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "quests",
         });

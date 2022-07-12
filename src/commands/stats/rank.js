@@ -6,7 +6,6 @@ const intRender = require("../../utils/intRender");
 class Rank extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["rank", "r"],
             args: [["player", "joueur dont vous souhaitez voir le rang de jeu. (ou vous)", false]],
             category: "Stats",
@@ -15,7 +14,7 @@ class Rank extends Command {
             examples: ["[p]rank @pandawou"],
             finishRequest: "ADVENTURE",
             name: "rank",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "rank <?player>",
         });

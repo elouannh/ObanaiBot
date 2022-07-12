@@ -3,7 +3,6 @@ const Command = require("../../base/Command");
 class ForgeCollect extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["forge-collect", "fc"],
             args: [],
             category: "Exploration",
@@ -12,7 +11,7 @@ class ForgeCollect extends Command {
             examples: ["[p]forge-collect"],
             finishRequest: "ADVENTURE",
             name: "forge-collect",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "forge-collect",
         });

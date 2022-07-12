@@ -14,7 +14,7 @@ class Command {
         examples: [],
         finishRequest: [],
         name: "",
-        ownerOnly: false,
+        private: "none",
         permissions: 0,
         syntax: "",
     }) {
@@ -160,6 +160,42 @@ class Command {
             }
         }
         return hasPerms;
+    }
+
+    async commandPrivateReady() {
+        let ready = true;
+
+        switch (this.infos.private) {
+            case "none":
+                break;
+            case "testers":
+                if (!this.client.config.testers.concat(this.client.config.admins).concat(this.client.config.owners).includes(this.message.author.id)) {
+                    ready = false;
+                }
+                break;
+            case "admins":
+                if (!this.client.config.admins.concat(this.client.config.owners).includes(this.message.author.id)) {
+                    ready = false;
+                }
+                break;
+            case "owners":
+                if (!this.client.config.owners.includes(this.message.author.id)) {
+                    ready = false;
+                }
+                break;
+        }
+
+        if (!ready) {
+            await this.ctx.reply(
+                "Vous n'avez pas l'autorisation.",
+                "L'accès à cette commande est limitée, et vous semblez ne pas avoir les autorisations pour l'exécuter.",
+                null,
+                null,
+                "error",
+            );
+        }
+
+        return ready;
     }
 }
 

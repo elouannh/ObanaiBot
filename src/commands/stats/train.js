@@ -5,7 +5,6 @@ const calcPlayerLevel = require("../../elements/calcPlayerLevel");
 class Train extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["train"],
             args: [],
             category: "Stats",
@@ -14,7 +13,7 @@ class Train extends Command {
             examples: ["[p]train"],
             finishRequest: "ADVENTURE",
             name: "train",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "train",
         });

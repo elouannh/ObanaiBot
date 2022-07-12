@@ -3,7 +3,6 @@ const Command = require("../../base/Command");
 class Prefix extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["prefix"],
             args: [["prefix", "nouveau préfixe à configurer.", false]],
             category: "Utilitaire",
@@ -12,7 +11,7 @@ class Prefix extends Command {
             examples: ["[p]prefix", "[p]prefix !"],
             finishRequest: ["prefix"],
             name: "prefix",
-            ownerOnly: false,
+            private: "none",
             permissions: 32n,
             syntax: "prefix <prefix>",
         });

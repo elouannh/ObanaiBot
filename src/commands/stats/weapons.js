@@ -4,7 +4,6 @@ const MemberScanning = require("../../structure/tools/MemberScanning");
 class Weapons extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["weapons", "w"],
             args: [["player", "joueur dont vous souhaitez voir l'invetaire de jeu. (ou vous)", false]],
             category: "Stats",
@@ -13,7 +12,7 @@ class Weapons extends Command {
             examples: ["[p]weapons @pandawou"],
             finishRequest: "ADVENTURE",
             name: "weapons",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "weapons <?player>",
         });

@@ -3,7 +3,6 @@ const Command = require("../../base/Command");
 class Reset extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["reset", "rs"],
             args: [],
             category: "Stats",
@@ -12,7 +11,7 @@ class Reset extends Command {
             examples: ["[p]reset"],
             finishRequest: "ADVENTURE",
             name: "reset",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "reset",
         });

@@ -6,7 +6,6 @@ const calcCrowLevel = require("../../elements/calcCrowLevel");
 class CrowBait extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["crow-bait", "cb"],
             args: [],
             category: "Exploration",
@@ -15,7 +14,7 @@ class CrowBait extends Command {
             examples: ["[p]crow-bait"],
             finishRequest: "ADVENTURE",
             name: "crow-bait",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "crow-bait",
         });

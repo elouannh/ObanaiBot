@@ -5,7 +5,6 @@ const alertQuest = require("../../structure/callbacks/AlertRequest");
 class Talk extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["talk"],
             args: [],
             category: "Quêtes",
@@ -14,7 +13,7 @@ class Talk extends Command {
             examples: ["[p]talk"],
             finishRequest: "ADVENTURE",
             name: "talk",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "talk",
         });

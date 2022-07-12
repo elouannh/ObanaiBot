@@ -4,7 +4,6 @@ const calcCrowLevel = require("../../elements/calcCrowLevel");
 class CrowFeed extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["crow-feed", "cf"],
             args: [],
             category: "Exploration",
@@ -13,7 +12,7 @@ class CrowFeed extends Command {
             examples: ["[p]crow-feed"],
             finishRequest: "ADVENTURE",
             name: "crow-feed",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "crow-feed",
         });

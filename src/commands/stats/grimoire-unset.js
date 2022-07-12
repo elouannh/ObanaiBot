@@ -3,7 +3,6 @@ const Command = require("../../base/Command");
 class GrimoireUnset extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["grimoire-unset", "gu"],
             args: [],
             category: "Stats",
@@ -12,7 +11,7 @@ class GrimoireUnset extends Command {
             examples: ["[p]grimoire-unset"],
             finishRequest: "ADVENTURE",
             name: "grimoire-unset",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "grimoire-unset",
         });

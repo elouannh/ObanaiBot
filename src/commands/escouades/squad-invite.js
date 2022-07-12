@@ -30,7 +30,6 @@ async function requestReady(client, user, infos) {
 class SquadInvite extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["squad-invite", "sqin"],
             args: [["player", "joueur que vous voulez inviter.", true]],
             category: "Escouades",
@@ -39,7 +38,7 @@ class SquadInvite extends Command {
             examples: ["[p]squad-invite @pandawou"],
             finishRequest: "ADVENTURE",
             name: "squad-invite",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "squad-invite <player>",
         });

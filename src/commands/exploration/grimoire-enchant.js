@@ -4,7 +4,6 @@ const fs = require("fs");
 class GrimoireEnchant extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["grimoire-enchant", "ge"],
             args: [],
             category: "Exploration",
@@ -13,7 +12,7 @@ class GrimoireEnchant extends Command {
             examples: ["[p]grimoire-enchant"],
             finishRequest: "ADVENTURE",
             name: "grimoire-enchant",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "grimoire-enchant",
         });

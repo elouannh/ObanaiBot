@@ -5,7 +5,6 @@ const convertDate = require("../../utils/convertDate");
 class TravelArea extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["travel-area", "ta"],
             args: [],
             category: "Exploration",
@@ -14,7 +13,7 @@ class TravelArea extends Command {
             examples: ["[p]travel-area"],
             finishRequest: "ADVENTURE",
             name: "travel-area",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "travel-area",
         });

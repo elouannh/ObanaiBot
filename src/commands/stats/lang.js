@@ -3,7 +3,6 @@ const Command = require("../../base/Command");
 class Lang extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["lang", "lg"],
             args: [],
             category: "Stats",
@@ -12,7 +11,7 @@ class Lang extends Command {
             examples: ["[p]lang"],
             finishRequest: "ADVENTURE",
             name: "lang",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "lang",
         });

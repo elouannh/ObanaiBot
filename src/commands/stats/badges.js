@@ -4,7 +4,6 @@ const MemberScanning = require("../../structure/tools/MemberScanning");
 class Badges extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["badges"],
             args: [["player", "joueur dont vous souhaitez voir les badges de jeu. (ou vous)", false]],
             category: "Stats",
@@ -13,7 +12,7 @@ class Badges extends Command {
             examples: ["[p]badges @pandawou"],
             finishRequest: "ADVENTURE",
             name: "badges",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "badges <?player>",
         });

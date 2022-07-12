@@ -3,7 +3,6 @@ const Command = require("../../base/Command");
 class Claim extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["claim"],
             args: [],
             category: "Stats",
@@ -12,7 +11,7 @@ class Claim extends Command {
             examples: ["[p]claim @pandawou"],
             finishRequest: "ADVENTURE",
             name: "claim",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "claim <?player>",
         });

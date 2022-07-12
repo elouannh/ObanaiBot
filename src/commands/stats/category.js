@@ -4,7 +4,6 @@ const fs = require("fs");
 class Category extends Command {
     constructor() {
         super({
-            adminOnly: false,
             aliases: ["category", "cat"],
             args: [],
             category: "Stats",
@@ -13,7 +12,7 @@ class Category extends Command {
             examples: ["[p]category"],
             finishRequest: "ADVENTURE",
             name: "category",
-            ownerOnly: false,
+            private: "none",
             permissions: 0,
             syntax: "category",
         });

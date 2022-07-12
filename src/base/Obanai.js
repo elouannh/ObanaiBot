@@ -8,8 +8,10 @@ const { MapDb } = require("../structure/database/MapDb");
 const { QuestDb } = require("../structure/database/QuestDb");
 const { InternalServerManager } = require("../structure/database/InternalServerManager");
 const { ExternalServerDb } = require("../structure/database/ExternalServerDb");
+const { StatusDb } = require("../structure/database/StatusDb");
 const CommandManager = require("./CommandManager");
 const config = require("../config.json");
+const Package = require("../../package.json");
 
 class Obanai extends Client {
     constructor(token) {
@@ -24,6 +26,7 @@ class Obanai extends Client {
 
         this.prefix = "!";
         this.color = "#2f3136";
+        this.version = Package.version;
 
         this.playerDb = new PlayerDb(this);
         this.activityDb = new ActivityDb(this);
@@ -33,6 +36,7 @@ class Obanai extends Client {
         this.mapDb = new MapDb(this);
         this.questDb = new QuestDb(this);
         this.externalServerDb = new ExternalServerDb(this);
+        this.StatusDb = new StatusDb(this);
 
         const PlayerDbCallback = require("../structure/callbacks/PlayerDbCallback")(this);
         const InventoryDbCallback = require("../structure/callbacks/InventoryDbCallback")(this);
