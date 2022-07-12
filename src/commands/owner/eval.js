@@ -5,7 +5,7 @@ class Eval extends Command {
         super({
             aliases: ["eval"],
             args: [["program", "programme à faire exécuter par le client.", true]],
-            category: "Administrateur",
+            category: "Owner",
             cooldown: 1,
             description: "Commande permettant au fondateur d'exécuter du JavaScript directement depuis le salon textuel.",
             examples: ["[p]eval console.log(\"hello world !\");"],

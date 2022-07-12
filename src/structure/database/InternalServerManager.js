@@ -50,6 +50,10 @@ class InternalServerManager {
         return this.datas.testers;
     }
 
+    get staffs() {
+        return this.owners.concat(this.admins).concat(this.testers);
+    }
+
     async launch() {
         const order = (chap, que, ste) => {
             let number = 0;
@@ -225,7 +229,26 @@ class InternalServerManager {
             this.db.set("internalServer", news.admins, "admins");
             this.db.set("internalServer", news.testers, "testers");
 
-			if (fields.length > 0) this.client.supportLog("Bot staff changes.", "There are the changes of the bot staff (owners, admins, testers) if there is a change.", fields, "outline");
+			if (fields.length > 0) {
+                let str = "```diff\n";
+                str += `${
+                    olds.owners.length < news.owners.length ?
+                        `+${news.owners.length - olds.owners.length} owners\n`
+                        : (olds.owners.length > news.owners.length ? `-${olds.owners.length - news.owners.length} owners\n` : "")
+                }`;
+                str += `${
+                    olds.admins.length < news.admins.length ?
+                        `+${news.admins.length - olds.admins.length} admins\n`
+                        : (olds.admins.length > news.admins.length ? `-${olds.admins.length - news.admins.length} admins\n` : "")
+                }`;
+                str += `${
+                    olds.testers.length < news.testers.length ?
+                        `+${news.testers.length - olds.testers.length} testers`
+                        : (olds.testers.length > news.testers.length ? `-${olds.testers.length - news.testers.length} testers` : "")
+                }`;
+                str += "```";
+                this.client.supportLog("Bot staff changes.", str, fields, "outline");
+            }
 
 		}, 5000);
     }

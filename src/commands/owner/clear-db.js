@@ -5,7 +5,7 @@ class ClearDb extends Command {
         super({
             aliases: ["clear-db"],
             args: [["db", "nom de la base de donnée à clear.", true]],
-            category: "Administrateur",
+            category: "Owner",
             cooldown: 3,
             description: "Commande permettant de clear directement une base de données dans son intégralité.",
             examples: ["[p]clear-db all", "[p]clear-db activity"],

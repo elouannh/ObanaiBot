@@ -27,17 +27,20 @@ class Help extends Command {
                 else content[command.infos.category] = [command.infos];
             }
             const emojis = {
-                "Administrateur": "⚠️",
+                "Admin": "🚧",
                 "Combats": "🏟️",
                 "Escouades": "⛩️",
                 "Exploration": "🗺️",
+                "Owner": "👑",
                 "Quêtes": "❗",
                 "Stats": "🎒",
+                "Testing": "🔨",
                 "Utilitaire": "📣",
             };
             const datas = {
-                "Commandes Globales": ["Administrateur", "Utilitaire"],
+                "Commandes Globales": ["Utilitaire"],
                 "Commandes du RPG Demon Slayer": ["Combats", "Escouades", "Exploration", "Quêtes", "Stats"],
+                "Commandes du Personnel": ["Testing", "Admin", "Owner"],
             };
             for (const dat in datas) {
                 let string = dat === "Commandes Globales" ?
@@ -49,20 +52,36 @@ class Help extends Command {
                              : "";
                 let commands = 0;
                 for (const key of datas[dat]) {
-                    const cmds = Object.values(content[key]).length;
+                    const cmds = Object.values(content[key] ?? {}).length;
                     commands += cmds;
                     string += `> **${emojis[key]} • ${key}** (**${cmds}** commandes)\nt`;
-                    if (key === "Administrateur" && !this.client.internalServerManager.owners.includes(this.message.author.id)) {
-                        string += "*Cette catégorie de commande est réservée.*";
+                    if (dat === "Commandes du Personnel") {
+                        if (key === "Testing" && this.client.internalServerManager.testers.includes(this.message.author.id)) {
+                            string += `${Object.values(content[key] ?? {}).map(command => `\`${command.name}\``).join(" » ")}`;
+                        }
+                        else if (key === "Admin" && this.client.internalServerManager.admins.includes(this.message.author.id)) {
+                            string += `${Object.values(content[key] ?? {}).map(command => `\`${command.name}\``).join(" » ")}`;
+                        }
+                        else if (key === "Owner" && this.client.internalServerManager.owners.includes(this.message.author.id)) {
+                            string += `${Object.values(content[key] ?? {}).map(command => `\`${command.name}\``).join(" » ")}`;
+                        }
+                        else {
+                            string += "Vous ne possédez pas les autorisations nécessaires pour voir ces commandes.";
+                        }
                     }
                     else {
-                        string += `${Object.values(content[key]).map(command => `\`${command.name}\``).join(" » ")}`;
+                        string += `${Object.values(content[key] ?? {}).map(command => `\`${command.name}\``).join(" » ")}`;
                     }
                     string += "\n\n";
                 }
                 const title = `${dat} (${commands})`;
 
-                await this.ctx.reply(title, string, null, null, "outline");
+                if (dat === "Commandes du Personnel" && !this.client.internalServerManager.staffs.includes(this.message.author.id)) {
+                    "que dalle";
+                }
+                else {
+                    await this.ctx.reply(title, string, null, null, "outline");
+                }
             }
         }
         else if (cmd !== 0) {
