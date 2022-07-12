@@ -9,7 +9,7 @@ class Lang extends Command {
             category: "Stats",
             cooldown: 15,
             description: "Commande permettant de changer la langue du bot.",
-            examples: ["lang"],
+            examples: ["[p]lang"],
             finishRequest: "ADVENTURE",
             name: "lang",
             ownerOnly: false,

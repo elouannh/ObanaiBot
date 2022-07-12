@@ -9,7 +9,7 @@ class ForgeCollect extends Command {
             category: "Exploration",
             cooldown: 10,
             description: "Commande permettant de récupérer les objets forgés prêts.",
-            examples: ["forge-collect"],
+            examples: ["[p]forge-collect"],
             finishRequest: "ADVENTURE",
             name: "forge-collect",
             ownerOnly: false,

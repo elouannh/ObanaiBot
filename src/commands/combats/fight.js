@@ -33,17 +33,17 @@ class Fight extends Command {
     constructor() {
         super({
             adminOnly: false,
-            aliases: ["fight", "f"],
-            args: [["players", "joueurs que vous souhaitez affronter/avoir dans votre équipe.", true]],
+            aliases: ["fight"],
+            args: [["players", "joueurs que vous souhaitez affronter.", false], ["teams", "équipes que vous souhaitez former. 4 Joueurs maximum par équipe.", false]],
             category: "Combats",
-            cooldown: 30,
-            description: "se battre contre un pourfendeur ou des pourfendeurs. (en équipe ou non)",
-            examples: ["fight @pandawou", "fight @pandawou && @myrly"],
+            cooldown: 15,
+            description: "Commande permettant de se battre contre des joueurs, avec des alliés ou non.",
+            examples: ["[p]fight @pandawou", "[p]fight @pandawou && @myrly"],
             finishRequest: "ADVENTURE",
             name: "fight",
             ownerOnly: false,
             permissions: 0,
-            syntax: "fight <?players>",
+            syntax: "fight <?players|?teams>",
         });
     }
 
@@ -116,29 +116,32 @@ class Fight extends Command {
             null,
             "outline",
         );
-        const response = await this.ctx.multipleMessageCollection(msg, null, teams["1"].concat(teams["2"]).map(e => e.id));
+        // const response = await this.ctx.multipleMessageCollection(msg, null, teams["1"].concat(teams["2"]).map(e => e.id));
+        const allUsers = teams["1"].concat(teams["2"]);
+        const response = await this.ctx.fightAwaitResponse(msg, 5_000, allUsers.map(e => e.id));
 
-        const mapArray = response.map(e => Object.assign({ author: "", resp: "" }, { author: e.author, resp: e.content }));
-        if (mapArray.map(e => e.author).length !== new Set(mapArray.map(e => e.author)).size) {
-            for (const p of teams["1"].concat(teams["2"]).filter(e => e.id !== this.message.author.id)) {
+        if (response.reacted.length < allUsers.map(e => e.id).length) {
+            for (const p of allUsers.filter(e => e.id !== this.message.author.id)) {
                 this.client.requests.get(p.id).delete(this.message.id);
             }
             return await this.ctx.reply(
                 "Arène - Équipes",
-                "Des joueurs ont répondu plusieurs fois.",
+                `Les joueurs suivant n'ont pas répondu: ${
+                    allUsers.filter(e => !response.reacted.includes(e.id)).map(e => `\`${this.client.users.cache.get(e.id)?.username ?? "Pourfendeur X"}\``).join(" / ")
+                }`,
                 "🏟️",
                 null,
                 "outline",
             );
         }
 
-        if (mapArray.filter(e => this.ctx.isResp(e.resp, "y")).length !== mapArray.length) {
-            for (const p of teams["1"].concat(teams["2"]).filter(e => e.id !== this.message.author.id)) {
+        if (response.nopes.length > 0) {
+            for (const p of allUsers.filter(e => e.id !== this.message.author.id)) {
                 this.client.requests.get(p.id).delete(this.message.id);
             }
             return await this.ctx.reply(
                 "Arène - Équipes",
-                `Les joueurs suivant ont refusé le combat: ${mapArray.filter(e => this.ctx.isResp(e.resp, "n")).map(e => `\`${e.author.username}\``).join(" / ")}`,
+                `Les joueurs suivant ont refusé le combat: ${response.nopes.map(e => `\`${this.client.users.cache.get(e.id)?.username ?? "Pourfendeur X"}\``).join(" / ")}`,
                 "🏟️",
                 null,
                 "outline",

@@ -10,7 +10,7 @@ class ForgeList extends Command {
             category: "Exploration",
             cooldown: 10,
             description: "Commande permettant de voir les objets en train d'être forgé.",
-            examples: ["forge-list"],
+            examples: ["[p]forge-list"],
             finishRequest: "ADVENTURE",
             name: "forge-list",
             ownerOnly: false,

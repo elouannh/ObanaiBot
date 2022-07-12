@@ -12,7 +12,7 @@ class Crow extends Command {
             category: "Stats",
             cooldown: 5,
             description: "Commande permettant de voir son corbeau de liaison.",
-            examples: ["crow @pandawou"],
+            examples: ["[p]crow @pandawou"],
             finishRequest: "ADVENTURE",
             name: "crow",
             ownerOnly: false,

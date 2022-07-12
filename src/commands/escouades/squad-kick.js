@@ -5,12 +5,12 @@ class SquadKick extends Command {
     constructor() {
         super({
             adminOnly: false,
-            aliases: ["squad-kick", "sqkick"],
+            aliases: ["squad-kick", "sqki"],
             args: [["player", "joueur que vous voulez exclure.", true]],
             category: "Escouades",
-            cooldown: 30,
+            cooldown: 15,
             description: "Commande permettant d'exclure des membres de son escouade.",
-            examples: ["squad-kick @pandawou"],
+            examples: ["[p]squad-kick @pandawou"],
             finishRequest: "ADVENTURE",
             name: "squad-kick",
             ownerOnly: false,

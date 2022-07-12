@@ -9,7 +9,7 @@ class WeaponSell extends Command {
             category: "Stats",
             cooldown: 15,
             description: "Commande permettant de vendre une arme.",
-            examples: ["weapon-sell"],
+            examples: ["[p]weapon-sell"],
             finishRequest: "ADVENTURE",
             name: "weapon-sell",
             ownerOnly: false,

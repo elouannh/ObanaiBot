@@ -11,7 +11,7 @@ class TravelRegion extends Command {
             category: "Exploration",
             cooldown: 15,
             description: "Commande permettant de voyager à travers les régions du monde.",
-            examples: ["travel-region"],
+            examples: ["[p]travel-region"],
             finishRequest: "ADVENTURE",
             name: "travel-region",
             ownerOnly: false,

@@ -4,12 +4,12 @@ class SquadQuote extends Command {
     constructor() {
         super({
             adminOnly: false,
-            aliases: ["squad-quote", "sqqt"],
-            args: [["quote", "nouvelle citation pour l'escouade", true]],
+            aliases: ["squad-quote", "sqqu"],
+            args: [["quote", "nouvelle citation pour l'escouade.", true]],
             category: "Escouades",
-            cooldown: 1,
+            cooldown: 7,
             description: "Commande permettant de changer la citation de votre escouade.",
-            examples: ["squad-quote Nous sommes les plus forts"],
+            examples: ["[p]squad-quote Nous sommes les plus forts"],
             finishRequest: "ADVENTURE",
             name: "squad-quote",
             ownerOnly: false,

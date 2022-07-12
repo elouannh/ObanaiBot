@@ -9,7 +9,7 @@ class Reset extends Command {
             category: "Stats",
             cooldown: 15,
             description: "Commande permettant de remettre votre aventure à 0.",
-            examples: ["reset"],
+            examples: ["[p]reset"],
             finishRequest: "ADVENTURE",
             name: "reset",
             ownerOnly: false,

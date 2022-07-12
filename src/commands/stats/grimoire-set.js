@@ -9,7 +9,7 @@ class GrimoireSet extends Command {
             category: "Stats",
             cooldown: 15,
             description: "Commande permettant d'équiper un grimoire.",
-            examples: ["grimoire-set"],
+            examples: ["[p]grimoire-set"],
             finishRequest: "ADVENTURE",
             name: "grimoire-set",
             ownerOnly: false,

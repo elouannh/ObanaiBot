@@ -10,7 +10,7 @@ class Stats extends Command {
             category: "Stats",
             cooldown: 5,
             description: "Commande permettant de voir ses stats de pourfendeur.",
-            examples: ["stats @pandawou"],
+            examples: ["[p]stats @pandawou"],
             finishRequest: "ADVENTURE",
             name: "stats",
             ownerOnly: false,

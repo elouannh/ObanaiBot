@@ -5,11 +5,11 @@ class Help extends Command {
         super({
             adminOnly: false,
             aliases: ["help"],
-            args: [["command", "nom de la commande", false]],
+            args: [["command", "nom de la commande.", false]],
             category: "Utilitaire",
-            cooldown: 10,
+            cooldown: 0,
             description: "Commande permet de voir la liste des autres commandes.",
-            examples: ["help", "help prefix"],
+            examples: ["[p]help", "[p]help prefix"],
             finishRequest: [],
             name: "help",
             ownerOnly: false,
@@ -57,7 +57,7 @@ class Help extends Command {
                         string += "*Cette catégorie de commande est réservée.*";
                     }
                     else {
-                        string += `${Object.values(content[key]).map(command => `\`${command.syntax}\` : ${command.description}`).join("\n")}`;
+                        string += `${Object.values(content[key]).map(command => `\`${command.name}\``).join(" » ")}`;
                     }
                     string += "\n\n";
                 }
@@ -71,8 +71,8 @@ class Help extends Command {
             cmd = new cmd();
             const i = cmd.infos;
             string += `*${i.description}*\n\ntSyntaxe: \`${i.syntax}\` | Aliases: \`${i.aliases.join(", ")}\`\n`;
-            if (i.args.length > 0) string += `\`\`\`diff\nArgs:\n${i.args.map(e => `- ${e[0]} : ${e[1]} | ${e[2] === true ? "Obligatoire" : "Optionnel"}`).join("\n")}\`\`\``;
-            string += `\`\`\`diff\nExemples:\n${i.examples.map(e => `- ${e}`).join("\n")}\`\`\``;
+            if (i.args.length > 0) string += `\`\`\`diff\nArgs:\n${i.args.map(e => `- ${e[0]} (${e[2] === true ? "Obligatoire" : "Optionnel"}): ${e[1]}`).join("\n")}\`\`\``;
+            string += `\`\`\`diff\nExemples:\n${i.examples.map(e => `${e.replace("[p]", this.prefix)}`).join("\n")}\`\`\``;
             if (i.ownerOnly) string += "```fix\nCette commande n'est faisable que par le créateur du bot.```";
             else if (i.adminOnly) string += "```fix\nCette commande nécessite des autorisations particulières.```";
             string += "\n\n*Certaines informations de cette page ne peuvent pas être traduites.*";

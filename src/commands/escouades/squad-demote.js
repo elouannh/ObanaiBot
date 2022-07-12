@@ -9,7 +9,7 @@ class SquadKick extends Command {
             category: "Escouades",
             cooldown: 30,
             description: "Commande permettant de dégrader son bras droit de l'escouade.",
-            examples: ["squad-demote"],
+            examples: ["[p]squad-demote"],
             finishRequest: "ADVENTURE",
             name: "squad-demote",
             ownerOnly: false,

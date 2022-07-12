@@ -9,7 +9,7 @@ class Claim extends Command {
             category: "Stats",
             cooldown: 5,
             description: "Commande permettant de récupérer son bonus de grade.",
-            examples: ["claim @pandawou"],
+            examples: ["[p]claim @pandawou"],
             finishRequest: "ADVENTURE",
             name: "claim",
             ownerOnly: false,

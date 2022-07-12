@@ -11,7 +11,7 @@ class Inventory extends Command {
             category: "Stats",
             cooldown: 5,
             description: "Commande permettant de voir son inventaire de pourfendeur.",
-            examples: ["inventory @pandawou"],
+            examples: ["[p]inventory @pandawou"],
             finishRequest: "ADVENTURE",
             name: "inventory",
             ownerOnly: false,

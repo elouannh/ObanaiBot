@@ -12,7 +12,7 @@ class Rank extends Command {
             category: "Stats",
             cooldown: 5,
             description: "Commande permettant de voir son rank de pourfendeur.",
-            examples: ["rank @pandawou"],
+            examples: ["[p]rank @pandawou"],
             finishRequest: "ADVENTURE",
             name: "rank",
             ownerOnly: false,

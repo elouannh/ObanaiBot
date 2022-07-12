@@ -3,18 +3,18 @@ const Command = require("../../base/Command");
 class ClearDb extends Command {
     constructor() {
         super({
-            adminOnly: true,
+            adminOnly: false,
             aliases: ["clear-db"],
-            args: [],
+            args: [["db", "nom de la base de donnée à clear.", true]],
             category: "Administrateur",
-            cooldown: 0,
-            description: "C'est privé ! Interdit d'utiliser.",
-            examples: ["clear-db"],
+            cooldown: 3,
+            description: "Commande permettant de clear directement une base de données dans son intégralité.",
+            examples: ["[p]clear-db all", "[p]clear-db activity"],
             finishRequest: ["clear-db"],
             name: "clear-db",
             ownerOnly: true,
             permissions: 0,
-            syntax: "clear-db",
+            syntax: "clear-db <db>",
         });
     }
 

@@ -8,9 +8,9 @@ class Category extends Command {
             aliases: ["category", "cat"],
             args: [],
             category: "Stats",
-            cooldown: 5,
+            cooldown: 15,
             description: "Commande permettant de changer de catégorie de pourfendeur.",
-            examples: ["category"],
+            examples: ["[p]category"],
             finishRequest: "ADVENTURE",
             name: "category",
             ownerOnly: false,
@@ -87,7 +87,7 @@ class Category extends Command {
             if (masteries <= 0) return await this.ctx.reply("Oups...", "Vous n'avez pas de **Grimoire de maîtrise** en stock.", null, null, "warning");
 
             if (cat.label === pDatas.category && breath === pDatas.breath) {
-                if (pDatas.categoryLevel === 14) return await this.ctx.reply("Oups...", "Votre catégorie est déjà au niveau maximum.", null, null, "warning");
+                if (pDatas.categoryLevel === 5) return await this.ctx.reply("Oups...", "Votre catégorie est déjà au niveau maximum.", null, null, "warning");
 
                 await this.client.playerDb.upgradeCategory(this.message.author.id, pDatas.categoryLevel);
                 return await this.ctx.reply(

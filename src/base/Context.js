@@ -2,6 +2,7 @@ const SuperEmbed = require("./SuperEmbed");
 const translate = require("translate");
 const SuperRow = require("./SuperRow");
 const SuperButton = require("./SuperButton");
+const delay = require("../utils/delay");
 
 class Context {
     constructor(client, command) {
@@ -173,6 +174,24 @@ class Context {
             if (choice) return choice;
             else return null;
         }
+    }
+
+    async fightAwaitResponse(message = null, time = null, users = null) {
+        if (message === null) message = this.command.message;
+        if (time === null) time = 60_000;
+
+        const reacted = [];
+        const nopes = [];
+        const filter = msg => (this.isResp(msg.content, "y") || this.isResp(msg.content, "n")) && users.includes(msg.author.id) && !reacted.includes(msg.author.id);
+        const collector = message.channel.createMessageCollector({ filter, time });
+        collector.on("collect", r => {
+            reacted.push(r.author.id);
+            if (this.isResp(r.content, "n")) nopes.push(r.author.id);
+        });
+        collector.on("end", () => { return reacted; });
+
+        await delay(time);
+        return { reacted, nopes };
     }
 
 }

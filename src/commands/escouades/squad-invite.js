@@ -31,12 +31,12 @@ class SquadInvite extends Command {
     constructor() {
         super({
             adminOnly: false,
-            aliases: ["squad-invite", "sqinv"],
+            aliases: ["squad-invite", "sqin"],
             args: [["player", "joueur que vous voulez inviter.", true]],
             category: "Escouades",
-            cooldown: 10,
+            cooldown: 15,
             description: "Commande permettant d'inviter des membres dans son escouade.",
-            examples: ["squad-invite @pandawou"],
+            examples: ["[p]squad-invite @pandawou"],
             finishRequest: "ADVENTURE",
             name: "squad-invite",
             ownerOnly: false,

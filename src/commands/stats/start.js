@@ -9,7 +9,7 @@ class Start extends Command {
             category: "Stats",
             cooldown: 15,
             description: "Commande permettant de commencer votre aventure.",
-            examples: ["start"],
+            examples: ["[p]start"],
             finishRequest: "ADVENTURE",
             name: "start",
             ownerOnly: false,

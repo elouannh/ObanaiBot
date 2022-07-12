@@ -10,7 +10,7 @@ class Top extends Command {
             category: "Stats",
             cooldown: 5,
             description: "Commande permettant de voir le classement des meilleurs joueurs.",
-            examples: ["top"],
+            examples: ["[p]top"],
             finishRequest: "ADVENTURE",
             name: "top",
             ownerOnly: false,

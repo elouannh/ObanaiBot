@@ -27,7 +27,7 @@ class Dig extends Command {
             category: "Exploration",
             cooldown: 5,
             description: "Commande permettant de fouiller la zone où vous vous trouver afin de récolter quelques items.",
-            examples: ["dig"],
+            examples: ["[p]dig"],
             finishRequest: "ADVENTURE",
             name: "dig",
             ownerOnly: false,

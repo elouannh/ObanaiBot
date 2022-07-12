@@ -1,5 +1,20 @@
 # CHANGELOG
 
+
+---
+
+> # _**1.0.2 Beta update**_
+
+## Patch notes :
+
+- Arenas are working now
+- Help informations updated
+
+## New content :
+
+## Reworked :
+
+
 ---
 
 > # _**1.0.2 Beta update**_

@@ -3,18 +3,18 @@ const Command = require("../../base/Command");
 class Eval extends Command {
     constructor() {
         super({
-            adminOnly: true,
-            aliases: ["eval", "e"],
-            args: [["command", "commande à executer", false]],
+            adminOnly: false,
+            aliases: ["eval"],
+            args: [["program", "programme à faire exécuter par le client.", true]],
             category: "Administrateur",
-            cooldown: 0,
-            description: "C'est privé ! Interdit d'utiliser.",
-            examples: ["eval", "eval console.log(\"hello world !\");"],
+            cooldown: 1,
+            description: "Commande permettant au fondateur d'exécuter du JavaScript directement depuis le salon textuel.",
+            examples: ["[p]eval console.log(\"hello world !\");"],
             finishRequest: ["eval"],
             name: "eval",
             ownerOnly: true,
             permissions: 0,
-            syntax: "eval <command>",
+            syntax: "eval <program>",
         });
     }
 

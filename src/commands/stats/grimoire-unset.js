@@ -9,7 +9,7 @@ class GrimoireUnset extends Command {
             category: "Stats",
             cooldown: 15,
             description: "Commande permettant de retirer son grimoire.",
-            examples: ["grimoire-unset"],
+            examples: ["[p]grimoire-unset"],
             finishRequest: "ADVENTURE",
             name: "grimoire-unset",
             ownerOnly: false,

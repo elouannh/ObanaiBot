@@ -11,7 +11,7 @@ class Grimoires extends Command {
             category: "Stats",
             cooldown: 5,
             description: "Commande permettant de voir ses grimoires.",
-            examples: ["grimoires @pandawou"],
+            examples: ["[p]grimoires @pandawou"],
             finishRequest: "ADVENTURE",
             name: "grimoires",
             ownerOnly: false,

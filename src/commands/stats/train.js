@@ -11,7 +11,7 @@ class Train extends Command {
             category: "Stats",
             cooldown: 10,
             description: "Commande permettant de vous entrainer et d'améliorer le niveaux de vos aptitudes.",
-            examples: ["train"],
+            examples: ["[p]train"],
             finishRequest: "ADVENTURE",
             name: "train",
             ownerOnly: false,

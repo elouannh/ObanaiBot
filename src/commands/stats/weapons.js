@@ -10,7 +10,7 @@ class Weapons extends Command {
             category: "Stats",
             cooldown: 5,
             description: "Commande permettant de voir son inventaire d'armes.",
-            examples: ["weapons @pandawou"],
+            examples: ["[p]weapons @pandawou"],
             finishRequest: "ADVENTURE",
             name: "weapons",
             ownerOnly: false,

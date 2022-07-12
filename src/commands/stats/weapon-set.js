@@ -9,7 +9,7 @@ class WeaponSet extends Command {
             category: "Stats",
             cooldown: 15,
             description: "Commande permettant d'équiper une arme.",
-            examples: ["weapon-set"],
+            examples: ["[p]weapon-set"],
             finishRequest: "ADVENTURE",
             name: "weapon-set",
             ownerOnly: false,
