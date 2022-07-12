@@ -1,5 +1,6 @@
 const Enmap = require("enmap");
 const fs = require("fs");
+const compareArrays = require("../../utils/compareArrays");
 const dailyQuests = fs.readdirSync("./src/quests/daily").map(q => require(`../../quests/daily/${q}`)(0));
 
 class InternalServerManager {
@@ -24,6 +25,9 @@ class InternalServerManager {
                     "2": [],
                 },
             },
+            owners: [],
+            admins: [],
+            testers: [],
         };
 
         return datas;
@@ -32,6 +36,18 @@ class InternalServerManager {
     get datas() {
         this.db.ensure("internalServer", this.model());
         return this.db.get("internalServer");
+    }
+
+    get owners() {
+        return this.datas.owners;
+    }
+
+    get admins() {
+        return this.datas.admins;
+    }
+
+    get testers() {
+        return this.datas.testers;
     }
 
     async launch() {
@@ -148,6 +164,70 @@ class InternalServerManager {
             await giveDailyQuest(this);
             setInterval(async () => await giveDailyQuest(this), 86_400_000);
         }, startDelay);
+    }
+
+    async staffUpdate() {
+        setInterval(async () => {
+			const testing = this.client.guilds.cache.get(this.client.config.testing);
+
+			const olds = {
+				owners: this.client.internalServerManager.owners,
+				admins: this.client.internalServerManager.admins,
+				testers: this.client.internalServerManager.testers,
+			};
+			const news = {
+				owners: testing.roles.cache.get(this.client.config.roles.owners).members.filter(e => !e.user.bot).map(e => e.id),
+				admins: testing.roles.cache.get(this.client.config.roles.admins).members.filter(e => !e.user.bot).map(e => e.id),
+				testers: testing.roles.cache.get(this.client.config.roles.testers).members.filter(e => !e.user.bot).map(e => e.id),
+			};
+
+			const changedOwners = compareArrays(olds.owners, news.owners);
+			const changedAdmins = compareArrays(olds.admins, news.admins);
+			const changedTesters = compareArrays(olds.testers, news.testers);
+
+			const fields = [];
+
+			if (changedOwners.removed.length > 0 || changedOwners.added.length > 0) {
+				fields.push(
+					[
+						"👑 __Owners update__",
+						changedOwners.added.length > 0 ? `**(+) Added:** ${changedOwners.added.map(e => `\`${this.client.users.cache.get(e)?.username ?? "Owner lambda"}\``)}\n\n` : ""
+						+
+						changedOwners.removed.length > 0 ? `**(-) Removed:** ${changedOwners.removed.map(e => `\`${this.client.users.cache.get(e)?.username ?? "Owner lambda"}\``)}\n\n` : "",
+						false,
+					],
+				);
+			}
+			if (changedAdmins.removed.length > 0 || changedAdmins.added.length > 0) {
+				fields.push(
+					[
+						"🚧 __Admins update__",
+						changedAdmins.added.length > 0 ? `**(+) Added:** ${changedAdmins.added.map(e => `\`${this.client.users.cache.get(e)?.username ?? "Admin lambda"}\``)}\n\n` : ""
+						+
+						changedAdmins.removed.length > 0 ? `**(-) Removed:** ${changedAdmins.removed.map(e => `\`${this.client.users.cache.get(e)?.username ?? "Admin lambda"}\``)}\n\n` : "",
+						false,
+					],
+				);
+			}
+			if (changedTesters.removed.length > 0 || changedTesters.added.length > 0) {
+				fields.push(
+					[
+						"🔨 __Testers update__",
+						changedTesters.added.length > 0 ? `**(+) Added:** ${changedTesters.added.map(e => `\`${this.client.users.cache.get(e)?.username ?? "Tester lambda"}\``)}\n\n` : ""
+						+
+						changedTesters.removed.length > 0 ? `**(-) Removed:** ${changedTesters.removed.map(e => `\`${this.client.users.cache.get(e)?.username ?? "Tester lambda"}\``)}\n\n` : "",
+						false,
+					],
+				);
+			}
+
+            this.db.set("internalServer", news.owners, "owners");
+            this.db.set("internalServer", news.admins, "admins");
+            this.db.set("internalServer", news.testers, "testers");
+
+			if (fields.length > 0) this.client.supportLog("Bot staff changes.", "There are the changes of the bot staff (owners, admins, testers) if there is a change.", fields, "outline");
+
+		}, 5000);
     }
 }
 

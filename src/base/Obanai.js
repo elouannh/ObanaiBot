@@ -12,6 +12,7 @@ const { StatusDb } = require("../structure/database/StatusDb");
 const CommandManager = require("./CommandManager");
 const config = require("../config.json");
 const Package = require("../../package.json");
+const SuperEmbed = require("./SuperEmbed");
 
 class Obanai extends Client {
     constructor(token) {
@@ -54,6 +55,18 @@ class Obanai extends Client {
 
         if (token.length > 0) this.login(token);
         else this.login(this.token);
+    }
+
+    supportLog(title, description, fields, style) {
+        const embed = new SuperEmbed();
+        embed.addField(fields)
+             .setStyle(style)
+             .setEmoji("📰")
+             .setTitle(title)
+             .setDescription(description);
+
+        const channel = this.guilds.cache.get(this.config.support).channels.cache.get(this.config.channels.logs);
+        channel.send({ embeds: [embed.embed] });
     }
 }
 

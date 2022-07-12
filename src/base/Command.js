@@ -169,17 +169,17 @@ class Command {
             case "none":
                 break;
             case "testers":
-                if (!this.client.config.testers.concat(this.client.config.admins).concat(this.client.config.owners).includes(this.message.author.id)) {
+                if (!this.client.internalServerManager.testers.concat(this.client.internalServerManager.admins).concat(this.client.internalServerManager.owners).includes(this.message.author.id)) {
                     ready = false;
                 }
                 break;
             case "admins":
-                if (!this.client.config.admins.concat(this.client.config.owners).includes(this.message.author.id)) {
+                if (!this.client.internalServerManager.admins.concat(this.client.internalServerManager.owners).includes(this.message.author.id)) {
                     ready = false;
                 }
                 break;
             case "owners":
-                if (!this.client.config.owners.includes(this.message.author.id)) {
+                if (!this.client.internalServerManager.owners.includes(this.message.author.id)) {
                     ready = false;
                 }
                 break;

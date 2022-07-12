@@ -306,8 +306,6 @@ class Arena {
                 break;
         }
 
-        console.log(dmg);
-
         let collection = 0;
 
         switch (def) {
@@ -325,8 +323,6 @@ class Arena {
                 collection = defense * 0.4;
                 break;
         }
-
-        console.log(collection);
 
         const finalHazardRate = Math.floor(Math.random() * 100) < (hazardRate / (playerAttacking.datas.aptitudes.agility * 0.05));
         const finalHazardRate2 = Math.floor(Math.random() * 100) < (hazardRate2 / (playerDefending.datas.aptitudes.agility * 0.05));
@@ -351,10 +347,7 @@ class Arena {
 
                 dmg = force2 * 0.4 - defense2 * 0.15;
 
-                console.log(dmg);
-
                 let finalDamages2 = Math.ceil(dmg * (Math.floor(Math.random() + 0.5) / 10 + 1) * 1.5);
-                console.log("situation 1:", finalDamages2);
                 if (finalDamages2 < 0) finalDamages2 = 0;
                 this.teams[playerAttacking.team.id].hurtPlayer(playerAttacking.number, finalDamages2);
                 str += `\n\n» ${playerAttacking.name} se fait contrer par ${playerDefending.name} en voulant attaquer... il perd -${finalDamages2}❤️ !`;
@@ -364,7 +357,6 @@ class Arena {
                 this.teams[playerDefending.team.id].players[playerDefending.number].counterRate = counterRate;
                 const dodged = Math.floor(Math.random() * 100) <= (playerDefending.datas.aptitudes.speed / playerAttacking.datas.aptitudes.speed);
                 let finalDamages = Math.ceil((dmg - collection) * (Math.floor(Math.random() + 0.5) / 10 + 1) * 1.5);
-                console.log("situation 2:", finalDamages);
 
                 if (!dodged) {
                     if (finalDamages < 0) finalDamages = 0;

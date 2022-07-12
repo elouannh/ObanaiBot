@@ -37,7 +37,7 @@ class SuperEmbed {
     }
 
     addField(field) {
-        this.fields.push(field);
+        this.fields = field.map(e => Object.assign({ name: "Vide.", value: "\u200b", inline: false }, { name: e[0], value: e[1], inline: e[2] }));
         return this;
     }
 
