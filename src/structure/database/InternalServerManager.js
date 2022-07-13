@@ -7,8 +7,10 @@ class InternalServerManager {
     constructor(client) {
         this.client = client;
         this.db = new Enmap({ name: "internalServer" });
-        this.day = 1000;
         this.day = 86_400_000;
+
+        this.readyOrNot = [false, false];
+        this.processing = [[false, false], [false]];
 
         this.launch();
     }
@@ -65,6 +67,7 @@ class InternalServerManager {
         };
         // PARTIE OU ON VA GENERER LES QUETES DE TOUT LE MONDE TOUS LES JOURS
         async function refreshStoryQuest(t) {
+            t.processing[0][0] = true;
             const questSuit = [];
             for (const folder of fs.readdirSync("./src/quests/slayer/")) {
                 for (const file of fs.readdirSync(`./src/quests/slayer/${folder}/`).map(e => e.replace(".js", ""))) {
@@ -142,6 +145,7 @@ class InternalServerManager {
                     t.client.questDb.db.set(player.id, largerQuest[0], "slayer");
                 }
             }
+            t.processing[0][0] = false;
         }
 
         setInterval(async () => await refreshStoryQuest(this), 20_000);
@@ -151,6 +155,7 @@ class InternalServerManager {
         const startDelay = this.day - timeSpent;
 
         async function giveDailyQuest(t) {
+            t.processing[0][1] = true;
             for (const player of t.client.playerDb.db.array()) {
                 if (!t.datas.dailyQuests.cache.includes(player.id)) {
                     const randomQuests = dailyQuests.sort(() => 0.5 - Math.random()).slice(0, (dailyQuests.length >= 2 ? 2 : 1));
@@ -162,16 +167,22 @@ class InternalServerManager {
             }
             await t.db.set("internalServer", [], "dailyQuests.cache");
             await t.db.set("internalServer", Date.now(), "dailyQuests.lastRefresh");
+            t.processing[0][0] = false;
         }
 
         setTimeout(async () => {
             await giveDailyQuest(this);
-            setInterval(async () => await giveDailyQuest(this), 86_400_000);
+            setInterval(async () => {
+                await giveDailyQuest(this);
+            }, 86_400_000);
         }, startDelay);
+
+        this.readyOrNot[0] = true;
     }
 
     async staffUpdate() {
         setInterval(async () => {
+            this.processing[1][0] = true;
 			const testing = this.client.guilds.cache.get(this.client.config.testing);
 
 			const olds = {
@@ -249,8 +260,11 @@ class InternalServerManager {
                 str += "```";
                 this.client.supportLog("Bot staff changes.", str, fields, "outline");
             }
+            this.processing[1][0] = false;
 
-		}, 5000);
+		}, 120_000);
+
+        this.readyOrNot[1] = true;
     }
 }
 

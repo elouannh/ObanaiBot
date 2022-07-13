@@ -37,7 +37,7 @@ class Obanai extends Client {
         this.mapDb = new MapDb(this);
         this.questDb = new QuestDb(this);
         this.externalServerDb = new ExternalServerDb(this);
-        this.StatusDb = new StatusDb(this);
+        this.statusDb = new StatusDb(this);
 
         const PlayerDbCallback = require("../structure/callbacks/PlayerDbCallback")(this);
         const InventoryDbCallback = require("../structure/callbacks/InventoryDbCallback")(this);
