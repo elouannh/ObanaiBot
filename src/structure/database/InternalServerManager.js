@@ -183,7 +183,7 @@ class InternalServerManager {
         setTimeout(() => this.readyOrNot[0] = "2", [120_000, startDelay].sort((b, a) => b - a)[0]);
     }
 
-    async mod() {
+    async sync_p2p() {
         setInterval(async () => {
             this.processing[1][0] = true;
 			const testing = this.client.guilds.cache.get(this.client.config.testing);
@@ -311,7 +311,7 @@ class InternalServerManager {
 		}, 120_000);
 
         this.readyOrNot[1] = "1";
-        setTimeout(() => this.readyOrNot[0] = "2", 120_000);
+        setTimeout(() => this.readyOrNot[1] = "2", 120_000);
     }
 }
 

@@ -1,4 +1,4 @@
-const { Client } = require("discord.js");
+const { Client, Util } = require("discord.js");
 const { PlayerDb } = require("../structure/database/PlayerDb");
 const { InventoryDb } = require("../structure/database/InventoryDb");
 const { SquadDb } = require("../structure/database/SquadDb");
@@ -13,6 +13,7 @@ const CommandManager = require("./CommandManager");
 const config = require("../config.json");
 const Package = require("../../package.json");
 const SuperEmbed = require("./SuperEmbed");
+const dateRender = require("../utils/dateRender");
 
 class Obanai extends Client {
     constructor(token) {
@@ -46,8 +47,12 @@ class Obanai extends Client {
         this.inventoryDb.db.changed(InventoryDbCallback);
         this.mapDb.db.changed(MapDbCallback);
 
-
         this.internalServerManager = new InternalServerManager(this);
+    }
+
+    log(message, ...args) {
+        const time = dateRender(new Date(), true);
+        console.log(`${time} || ${message}`, ...args);
     }
 
     launch(token = "") {
@@ -65,8 +70,44 @@ class Obanai extends Client {
              .setTitle(title)
              .setDescription(description);
 
-        const channel = this.guilds.cache.get(this.config.support).channels.cache.get(this.config.channels.logs);
-        channel.send({ embeds: [embed.embed] });
+        if (this.id === "958433246050406440") {
+            const channel = this.guilds.cache.get(this.config.support).channels.cache.get(this.config.channels.logs);
+            channel.send({ embeds: [embed.embed] });
+        }
+        else {
+            this.log("[AUTO] supportLog()");
+            this.log(`title: ${Util.escapeMarkdown(title)} | description: ${description.replace("```diff\n", "").replace("```", "").replace("\n", " ⁂ ")}`);
+        }
+    }
+
+    addRole(id, serv, roleId) {
+        if (this.id === "958433246050406440") {
+            try {
+                serv.members.cache.get(id)?.roles?.add(roleId);
+            }
+            catch {
+                "que dalle";
+            }
+        }
+        else {
+            this.log("[AUTO] addRole()");
+            this.log(`user: ${id} | serv: ${serv} | roleId: ${roleId}`);
+        }
+    }
+
+    removeRole(id, serv, roleId) {
+        if (this.id === "958433246050406440") {
+            try {
+                serv.members.cache.get(id)?.roles?.remove(roleId);
+            }
+            catch {
+                "que dalle";
+            }
+        }
+        else {
+            this.log("[AUTO] removeRole()");
+            this.log(`user: ${id} | serv: ${serv} | roleId: ${roleId}`);
+        }
     }
 }
 

@@ -25,6 +25,9 @@ async function executeCommand(client, message, prefix) {
     const commandPrivateReady = await cmd.commandPrivateReady();
     if (!commandPrivateReady) return;
 
+    const clientStatusReady = await cmd.clientStatusReady();
+    if (!clientStatusReady) return;
+
     if (await client.commandManager.isOverloaded()) return message.channel.send("Le bot est actuellement surchargé, veuillez réessayer plus tard.");
 
     client.lastChannel.set(message.author.id, message.channel);

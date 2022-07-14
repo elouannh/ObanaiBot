@@ -197,6 +197,10 @@ class Command {
 
         return ready;
     }
+
+    async clientStatusReady() {
+        let ready = false;
+    }
 }
 
 module.exports = Command;

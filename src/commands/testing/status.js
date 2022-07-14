@@ -11,9 +11,9 @@ class Status extends Command {
             cooldown: 7,
             description: "Commande permettant de voir le statut du bot en temps réel.",
             examples: ["[p]status"],
-            finishRequest: "ADVENTURE",
+            finishRequest: ["Testing"],
             name: "status",
-            private: "none",
+            private: "testers",
             permissions: 0,
             syntax: "status",
         });
@@ -79,7 +79,7 @@ class Status extends Command {
         datas += `\`status\`: **\`${ready["server1"]}\`**\n`;
         datas += `\`process\`: **\`${processStrings(processus["server1"])}\`**\n`;
 
-        datas += "**Server 2 [mod]**\n";
+        datas += "**Server 2 [sync_p2p]**\n";
         datas += `\`status\`: **\`${ready["server2"]}\`**\n`;
         datas += `\`process\`: **\`${processStrings(processus["server2"])}\`**\n\n`;
 
@@ -90,7 +90,7 @@ class Status extends Command {
         const memoryUsage = process.memoryUsage().heapTotal / 1024 / 1024;
         const ramPercent = Math.ceil(memoryUsage * 100 / (4.00 * 1024));
         datas += `\`memory usage\`: **\`${((memoryUsage).toFixed(4))} MB\`**/\`${(4.00 * 1024).toFixed(0)} MB\` \`(${ramPercent}%)\`\n`;
-        datas += `\`process\`: **\`${processStrings(ramPercent)}\`**\n`;
+        datas += `\`process\`: **\`${processStrings(this.client.requests.map(e => e).length * 100 / 10)}\`**\n`;
         datas += `\`uptime\`: **\`${convertDate(process.uptime() * 1000, true).string}\`**`;
 
         await this.ctx.reply("Statut du processus Obanai", datas, "🖥️", null, "info");

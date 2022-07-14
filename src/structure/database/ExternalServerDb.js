@@ -180,7 +180,7 @@ class ExternalServerDb {
             case "support":
                 const serv = this.client.guilds.cache.get(this.client.config.support);
                 try {
-                    serv.members.cache.get(user)?.roles?.add(this.client.config.roles.vip);
+                    this.client.addRole(user, serv, this.client.config.roles.vip);
                 }
                 catch {
                     "que dalle";
@@ -200,7 +200,7 @@ class ExternalServerDb {
             case "support":
                 const serv = this.client.guilds.cache.get(this.client.config.support);
                 try {
-                    serv.members.cache.get(user)?.roles?.add(this.client.config.roles["vip+"]);
+                    this.client.addRole(user, serv, this.client.config.roles["vip+"]);
                 }
                 catch {
                     "que dalle";
@@ -220,7 +220,7 @@ class ExternalServerDb {
             case "support":
                 const serv = this.client.guilds.cache.get(this.client.config.support);
                 try {
-                    serv.members.cache.get(user)?.roles?.remove(this.client.config.roles.vip);
+                    this.client.removeRole(user, serv, this.client.config.roles.vip);
                 }
                 catch {
                     "que dalle";
@@ -229,10 +229,10 @@ class ExternalServerDb {
             case "bdd":
                 const userGrades = await this.get(user);
                 if (!userGrades.claimed.includes("vip")) {
-                    if (userGrades.grades.includes("vip")) this.db.push(user, userGrades.grades.filter(gr => gr !== "vip"), "grades");
+                    if (userGrades.grades.includes("vip")) this.db.set(user, userGrades.grades.filter(gr => gr !== "vip"), "grades");
                 }
                 else {
-                    if (userGrades.grades.includes("vip")) this.db.push(user, userGrades.grades.filter(gr => gr !== "vip"), "grades");
+                    if (userGrades.grades.includes("vip")) this.db.set(user, userGrades.grades.filter(gr => gr !== "vip"), "grades");
                     await this.client.playerDb.db.math(user, "-", 2, "stats.force");
                     await this.client.playerDb.db.math(user, "-", 2, "stats.agility");
                     await this.client.playerDb.db.math(user, "-", 2, "stats.speed");
@@ -247,7 +247,7 @@ class ExternalServerDb {
                         this.client.inventoryDb.db.set(user, 0, "active_grimoire_since");
                     }
                     else {
-                        this.client.inventoryDb.removeGrimoire(user, "eternal");
+                        this.client.inventoryDb.db.delete(user, "grimoires.eternal");
                     }
                 }
                 break;
@@ -262,7 +262,7 @@ class ExternalServerDb {
             case "support":
                 const serv = this.client.guilds.cache.get(this.client.config.support);
                 try {
-                    serv.members.cache.get(user)?.roles?.remove(this.client.config.roles["vip+"]);
+                    this.client.removeRole(user, serv, this.client.config.roles["vip+"]);
                 }
                 catch {
                     "que dalle";
@@ -275,11 +275,12 @@ class ExternalServerDb {
                 }
                 else {
                     if (userGrades.grades.includes("vip+")) this.db.set(user, userGrades.grades.filter(gr => gr !== "vip+"), "grades");
-                    await this.client.playerDb.db.math(user, "-", 5, "stats.force");
-                    await this.client.playerDb.db.math(user, "-", 5, "stats.agility");
-                    await this.client.playerDb.db.math(user, "-", 5, "stats.speed");
-                    await this.client.playerDb.db.math(user, "-", 5, "stats.defense");
-                    await this.client.inventoryDb.db.math(user, "-", 100000, "yens");
+                    this.client.playerDb.db.math(user, "-", 5, "stats.force");
+                    this.client.playerDb.db.math(user, "-", 5, "stats.agility");
+                    this.client.playerDb.db.math(user, "-", 5, "stats.speed");
+                    this.client.playerDb.db.math(user, "-", 5, "stats.defense");
+                    if (this.client.playerDb.db.get(user).category === "moon_tamer") await this.client.playerDb.changeCategory(user, "slayer", "water");
+                    this.client.inventoryDb.db.math(user, "-", 100000, "yens");
                     await this.client.inventoryDb.removeGrimoire(user, "mastery");
                 }
                 break;
