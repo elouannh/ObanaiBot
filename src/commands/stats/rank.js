@@ -50,7 +50,6 @@ class Rank extends Command {
         const grades = {
             "vip": "VIP",
             "vip+": "VIP(+)",
-            "tester": "Testeur",
         };
         rank += `${eDatas.grades.length > 0 ? eDatas.grades.map(e => `**${grades[e]}**`).join(" • ") : "aucun grade."}`;
 

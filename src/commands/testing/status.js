@@ -24,12 +24,12 @@ class Status extends Command {
         const statusDb = await this.client.statusDb;
 
         const processus = {
-            "server1": internalServer.processing[0].map(e => e === true ? 100 / internalServer.processing[0].length : 0).reduce((a, b) => a + b, 0),
-            "server2": internalServer.processing[1].map(e => e === true ? 100 / internalServer.processing[0].length : 0).reduce((a, b) => a + b, 0),
+            "server1": internalServer.processing[0].filter(e => e === true).length * 100 / internalServer.processing[0].length,
+            "server2": internalServer.processing[1].filter(e => e === true).length * 100 / internalServer.processing[1].length,
         };
         const ready = {
-            "server1": internalServer.readyOrNot[0] === true ? "🟢 online" : "🔴 offline",
-            "server2": internalServer.readyOrNot[1] === true ? "🟢 online" : "🔴 offline",
+            "server1": { "0": "🔴 offline", "1": "🟡 preparing", "2": "🟢 online" }[internalServer.readyOrNot[0]],
+            "server2": { "0": "🔴 offline", "1": "🟡 preparing", "2": "🟢 online" }[internalServer.readyOrNot[1]],
         };
 
         function processStrings(percent) {

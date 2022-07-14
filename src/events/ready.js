@@ -7,6 +7,6 @@ module.exports = {
 		console.log(`Bot connecté en tant que ${client.user.tag} !`);
 		client.user.setPresence({ activities: [{ name: `version ${client.version}`, type: ActivityType.Watching }], status: "online" });
 
-		await client.internalServerManager.staffUpdate();
+		await client.internalServerManager.mod();
 	},
 };

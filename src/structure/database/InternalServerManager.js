@@ -1,6 +1,7 @@
 const Enmap = require("enmap");
 const fs = require("fs");
 const compareArrays = require("../../utils/compareArrays");
+const delay = require("../../utils/delay");
 const dailyQuests = fs.readdirSync("./src/quests/daily").map(q => require(`../../quests/daily/${q}`)(0));
 
 class InternalServerManager {
@@ -9,10 +10,10 @@ class InternalServerManager {
         this.db = new Enmap({ name: "internalServer" });
         this.day = 86_400_000;
 
-        this.readyOrNot = [false, false];
-        this.processing = [[false, false], [false]];
+        this.readyOrNot = ["0", "0"];
+        this.processing = [[false, false], [false, false]];
 
-        this.launch();
+        this.launcher();
     }
 
     model() {
@@ -56,7 +57,7 @@ class InternalServerManager {
         return this.owners.concat(this.admins).concat(this.testers);
     }
 
-    async launch() {
+    async launcher() {
         const order = (chap, que, ste) => {
             let number = 0;
             number += ste;
@@ -148,7 +149,7 @@ class InternalServerManager {
             t.processing[0][0] = false;
         }
 
-        setInterval(async () => await refreshStoryQuest(this), 20_000);
+        setInterval(async () => await refreshStoryQuest(this), 120_000);
 
         const lastRefresh = this.datas.dailyQuests.lastRefresh;
         const timeSpent = Date.now() - lastRefresh;
@@ -167,6 +168,7 @@ class InternalServerManager {
             }
             await t.db.set("internalServer", [], "dailyQuests.cache");
             await t.db.set("internalServer", Date.now(), "dailyQuests.lastRefresh");
+            await delay(20_000);
             t.processing[0][0] = false;
         }
 
@@ -177,10 +179,11 @@ class InternalServerManager {
             }, 86_400_000);
         }, startDelay);
 
-        this.readyOrNot[0] = true;
+        this.readyOrNot[0] = "1";
+        setTimeout(() => this.readyOrNot[0] = "2", [120_000, startDelay].sort((b, a) => b - a)[0]);
     }
 
-    async staffUpdate() {
+    async mod() {
         setInterval(async () => {
             this.processing[1][0] = true;
 			const testing = this.client.guilds.cache.get(this.client.config.testing);
@@ -260,11 +263,55 @@ class InternalServerManager {
                 str += "```";
                 this.client.supportLog("Bot staff changes.", str, fields, "outline");
             }
+            await delay(20_000);
             this.processing[1][0] = false;
 
 		}, 120_000);
 
-        this.readyOrNot[1] = true;
+        setInterval(async () => {
+            this.processing[1][1] = true;
+			const server = this.client.guilds.cache.get(this.client.config.support);
+
+            // VIP PART
+            const bddv = this.client.externalServerDb.db.array().filter(e => e.grades.includes("vip")).map(e => e.id);
+            const supportv = server.roles.cache.get(this.client.config.roles.vip).members.filter(e => !e.user.bot).map(e => e.id);
+
+            const datasv = {
+                add: bddv.filter(user => !supportv.includes(user)),
+                remove: supportv.filter(user => !bddv.includes(user)),
+            };
+
+            for (const toAdd of datasv.add) {
+                await this.client.externalServerDb.addVip(toAdd, "support");
+            }
+
+            for (const toRemove of datasv.remove) {
+                await this.client.externalServerDb.removeVip(toRemove, "support");
+            }
+
+            // VIP(+) PART
+            const bddvp = this.client.externalServerDb.db.array().filter(e => e.grades.includes("vip+")).map(e => e.id);
+            const supportvp = server.roles.cache.get(this.client.config.roles["vip+"]).members.filter(e => !e.user.bot).map(e => e.id);
+
+            const datasvp = {
+                add: bddvp.filter(user => !supportvp.includes(user)),
+                remove: supportvp.filter(user => !bddvp.includes(user)),
+            };
+
+            for (const toAdd of datasvp.add) {
+                await this.client.externalServerDb.addVipplus(toAdd, "support");
+            }
+
+            for (const toRemove of datasvp.remove) {
+                await this.client.externalServerDb.removeVipplus(toRemove, "support");
+            }
+
+            await delay(20_000);
+            this.processing[1][1] = false;
+		}, 120_000);
+
+        this.readyOrNot[1] = "1";
+        setTimeout(() => this.readyOrNot[0] = "2", 120_000);
     }
 }
 

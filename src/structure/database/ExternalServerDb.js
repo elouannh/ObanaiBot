@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 const Enmap = require("enmap");
 const Command = require("../../base/Command");
 const badgesObjectives = require("../../elements/badgesObjectives.json");
@@ -172,6 +173,119 @@ class ExternalServerDb {
         }
 
         return progress;
+    }
+
+    async addVip(user, mode) {
+        switch (mode) {
+            case "support":
+                const serv = this.client.guilds.cache.get(this.client.config.support);
+                try {
+                    serv.members.cache.get(user)?.roles?.add(this.client.config.roles.vip);
+                }
+                catch {
+                    "que dalle";
+                }
+                break;
+            case "bdd":
+                const userGrades = await this.get(user);
+                if (!userGrades.grades.includes("vip")) this.db.push(user, "vip", "grades");
+                break;
+            default:
+                break;
+        }
+    }
+
+    async addVipplus(user, mode) {
+        switch (mode) {
+            case "support":
+                const serv = this.client.guilds.cache.get(this.client.config.support);
+                try {
+                    serv.members.cache.get(user)?.roles?.add(this.client.config.roles["vip+"]);
+                }
+                catch {
+                    "que dalle";
+                }
+                break;
+            case "bdd":
+                const userGrades = await this.get(user);
+                if (!userGrades.grades.includes("vip+")) this.db.push(user, "vip+", "grades");
+                break;
+            default:
+                break;
+        }
+    }
+
+    async removeVip(user, mode) {
+        switch (mode) {
+            case "support":
+                const serv = this.client.guilds.cache.get(this.client.config.support);
+                try {
+                    serv.members.cache.get(user)?.roles?.remove(this.client.config.roles.vip);
+                }
+                catch {
+                    "que dalle";
+                }
+                break;
+            case "bdd":
+                const userGrades = await this.get(user);
+                if (!userGrades.claimed.includes("vip")) {
+                    if (userGrades.grades.includes("vip")) this.db.push(user, userGrades.grades.filter(gr => gr !== "vip"), "grades");
+                }
+                else {
+                    if (userGrades.grades.includes("vip")) this.db.push(user, userGrades.grades.filter(gr => gr !== "vip"), "grades");
+                    await this.client.playerDb.db.math(user, "-", 2, "stats.force");
+                    await this.client.playerDb.db.math(user, "-", 2, "stats.agility");
+                    await this.client.playerDb.db.math(user, "-", 2, "stats.speed");
+                    await this.client.playerDb.db.math(user, "-", 2, "stats.defense");
+                    await this.client.inventoryDb.db.math(user, "-", 50000, "yens");
+                    await this.client.inventoryDb.removeGrimoire(user, "mastery");
+
+                    const inventory = await this.client.inventoryDb.get(user);
+
+                    if (inventory.active_grimoire === "eternal") {
+                        this.client.inventoryDb.db.set(user, null, "active_grimoire");
+                        this.client.inventoryDb.db.set(user, 0, "active_grimoire_since");
+                    }
+                    else {
+                        this.client.inventoryDb.removeGrimoire(user, "eternal");
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    async removeVipplus(user, mode) {
+        switch (mode) {
+            case "support":
+                const serv = this.client.guilds.cache.get(this.client.config.support);
+                try {
+                    serv.members.cache.get(user)?.roles?.remove(this.client.config.roles["vip+"]);
+                }
+                catch {
+                    "que dalle";
+                }
+                break;
+            case "bdd":
+                const userGrades = await this.get(user);
+                if (!userGrades.claimed.includes("vip+")) {
+                    if (userGrades.grades.includes("vip+")) this.db.set(user, userGrades.grades.filter(gr => gr !== "vip+"), "grades");
+                }
+                else {
+                    if (userGrades.grades.includes("vip+")) this.db.set(user, userGrades.grades.filter(gr => gr !== "vip+"), "grades");
+                    await this.client.playerDb.db.math(user, "-", 5, "stats.force");
+                    await this.client.playerDb.db.math(user, "-", 5, "stats.agility");
+                    await this.client.playerDb.db.math(user, "-", 5, "stats.speed");
+                    await this.client.playerDb.db.math(user, "-", 5, "stats.defense");
+                    await this.client.inventoryDb.db.math(user, "-", 100000, "yens");
+                    await this.client.inventoryDb.removeGrimoire(user, "mastery");
+                }
+                break;
+            default:
+                break;
+        }
     }
 }
 
