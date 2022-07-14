@@ -199,7 +199,41 @@ class Command {
     }
 
     async clientStatusReady() {
-        let ready = false;
+        let ready = true;
+
+        const clientStatus = this.client.statusDb.datas;
+
+        switch (clientStatus.mode) {
+            case "online":
+                break;
+            case "maintenance":
+                if (this.infos.private === "none") {
+                    ready = false;
+
+                    await this.ctx.reply(
+                        "Maintenance.",
+                        "Le bot est actuellement en maintenance. Plus d'informations ici: **https://bit.ly/obanaihelp**.",
+                        "🚧",
+                        null,
+                        "warning",
+                    );
+                }
+                break;
+            case "disabled":
+                if (!this.client.internalServerManager.staffs.includes(this.message.author.id)) {
+                    ready = false;
+                }
+                else if (this.client.internalServerManager.owners.includes(this.message.author.id)) {
+                        ready = true;
+                }
+                else if (this.infos.private === "none") {
+                    ready = false;
+                    this.message.react("❌");
+                }
+                break;
+        }
+
+        return ready;
     }
 }
 
