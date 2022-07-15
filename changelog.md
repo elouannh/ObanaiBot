@@ -14,6 +14,8 @@
 
 ## Reworked :
 
+- Global structure and command handler
+- Moderation and admin panel
 
 ---
 

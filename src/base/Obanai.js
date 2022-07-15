@@ -81,6 +81,27 @@ class Obanai extends Client {
         }
     }
 
+    supportProgress(addOrRemove, guild) {
+        const embed = new SuperEmbed();
+        embed.setStyle(addOrRemove === "add" ? "success" : "error")
+             .setEmoji(addOrRemove === "add" ? "🎉" : "🚪")
+             .setTitle(addOrRemove === "add" ? "Un serveur a ajouté le bot !" : "Un serveur a retiré le bot...")
+             .setDescription(
+                `**Serveur**: \`${Util.escapeMarkdown(guild.name)}\`\n**Membres**: \`${guild.memberCount}\`\n\n`
+                +
+                `*Stats actuelles:*\n\n**Nombre de serveurs**: \`${this.guilds.cache.size}\``,
+             );
+
+        if (this.id === "958433246050406440") {
+            const channel = this.guilds.cache.get(this.config.support).channels.cache.get(this.config.channels.progress);
+            channel.send({ embeds: [embed.embed] });
+        }
+        else {
+            // this.log("[AUTO] supportLog()");
+            // this.log(`title: ${Util.escapeMarkdown(title)} | description: ${description.replace("```diff\n", "").replace("```", "").replace("\n", " ⁂ ")}`);
+        }
+    }
+
     addRole(id, serv, roleId) {
         if (this.id === "958433246050406440") {
             try {

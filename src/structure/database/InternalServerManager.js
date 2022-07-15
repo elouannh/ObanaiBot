@@ -31,6 +31,7 @@ class InternalServerManager {
             owners: [],
             admins: [],
             testers: [],
+            authServers: [],
         };
 
         return datas;
@@ -55,6 +56,10 @@ class InternalServerManager {
 
     get staffs() {
         return this.owners.concat(this.admins).concat(this.testers);
+    }
+
+    get servers() {
+        return this.datas.authServers;
     }
 
     async launcher() {
