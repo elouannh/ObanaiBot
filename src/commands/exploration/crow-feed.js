@@ -13,7 +13,7 @@ class CrowFeed extends Command {
             finishRequest: "ADVENTURE",
             name: "crow-feed",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "crow-feed",
         });
     }

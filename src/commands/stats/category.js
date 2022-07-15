@@ -13,7 +13,7 @@ class Category extends Command {
             finishRequest: "ADVENTURE",
             name: "category",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "category",
         });
     }

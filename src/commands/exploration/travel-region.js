@@ -14,7 +14,7 @@ class TravelRegion extends Command {
             finishRequest: "ADVENTURE",
             name: "travel-region",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "travel-region",
         });
     }

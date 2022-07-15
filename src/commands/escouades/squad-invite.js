@@ -39,7 +39,7 @@ class SquadInvite extends Command {
             finishRequest: "ADVENTURE",
             name: "squad-invite",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "squad-invite <player>",
         });
     }

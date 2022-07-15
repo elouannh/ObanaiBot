@@ -13,7 +13,7 @@ class BotInfos extends Command {
             finishRequest: ["Testing"],
             name: "bot-infos",
             private: "testers",
-            permissions: 0,
+            permissions: 0n,
             syntax: "bot-infos",
         });
     }

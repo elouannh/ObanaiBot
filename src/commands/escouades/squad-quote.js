@@ -12,7 +12,7 @@ class SquadQuote extends Command {
             finishRequest: "ADVENTURE",
             name: "squad-quote",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "squad-quote <quote>",
         });
     }

@@ -15,7 +15,7 @@ class Crow extends Command {
             finishRequest: "ADVENTURE",
             name: "crow",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "crow <?player>",
         });
     }

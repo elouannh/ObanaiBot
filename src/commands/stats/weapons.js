@@ -13,7 +13,7 @@ class Weapons extends Command {
             finishRequest: "ADVENTURE",
             name: "weapons",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "weapons <?player>",
         });
     }

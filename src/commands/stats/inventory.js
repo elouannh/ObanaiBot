@@ -14,7 +14,7 @@ class Inventory extends Command {
             finishRequest: "ADVENTURE",
             name: "inventory",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "inventory <?player>",
         });
     }

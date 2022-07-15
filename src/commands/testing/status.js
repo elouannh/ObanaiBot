@@ -14,7 +14,7 @@ class Status extends Command {
             finishRequest: ["Testing"],
             name: "status",
             private: "testers",
-            permissions: 0,
+            permissions: 0n,
             syntax: "status",
         });
     }

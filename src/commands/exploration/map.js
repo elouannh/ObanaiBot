@@ -15,7 +15,7 @@ class Map extends Command {
             finishRequest: "ADVENTURE",
             name: "map",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "map <?player>",
         });
     }

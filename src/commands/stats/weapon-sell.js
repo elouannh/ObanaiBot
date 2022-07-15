@@ -12,7 +12,7 @@ class WeaponSell extends Command {
             finishRequest: "ADVENTURE",
             name: "weapon-sell",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "weapon-sell",
         });
     }

@@ -12,7 +12,7 @@ class Lang extends Command {
             finishRequest: "ADVENTURE",
             name: "lang",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "lang",
         });
     }

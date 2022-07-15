@@ -13,7 +13,7 @@ class SquadPromote extends Command {
             finishRequest: "ADVENTURE",
             name: "squad-promote",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "squad-promote <player>",
         });
     }

@@ -12,7 +12,7 @@ class WeaponSet extends Command {
             finishRequest: "ADVENTURE",
             name: "weapon-set",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "weapon-set",
         });
     }

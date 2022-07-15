@@ -13,7 +13,7 @@ class UnsetVip extends Command {
             finishRequest: ["Admin"],
             name: "unset-vip",
             private: "admins",
-            permissions: 0,
+            permissions: 0n,
             syntax: "unset-vip <user>",
         });
     }

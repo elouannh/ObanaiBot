@@ -12,7 +12,7 @@ class Reset extends Command {
             finishRequest: "ADVENTURE",
             name: "reset",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "reset",
         });
     }

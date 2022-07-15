@@ -13,7 +13,7 @@ class GrimoireEnchant extends Command {
             finishRequest: "ADVENTURE",
             name: "grimoire-enchant",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "grimoire-enchant",
         });
     }

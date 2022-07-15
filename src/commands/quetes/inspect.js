@@ -14,7 +14,7 @@ class Inspect extends Command {
             finishRequest: "ADVENTURE",
             name: "inspect",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "inspect",
         });
     }

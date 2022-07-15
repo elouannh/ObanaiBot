@@ -13,7 +13,7 @@ class Squad extends Command {
             finishRequest: "ADVENTURE",
             name: "squad",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "squad <?player>",
         });
     }

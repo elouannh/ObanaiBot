@@ -13,7 +13,7 @@ class Stats extends Command {
             finishRequest: "ADVENTURE",
             name: "stats",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "stats <?player>",
         });
     }

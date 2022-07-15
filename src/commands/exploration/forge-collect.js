@@ -12,7 +12,7 @@ class ForgeCollect extends Command {
             finishRequest: "ADVENTURE",
             name: "forge-collect",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "forge-collect",
         });
     }

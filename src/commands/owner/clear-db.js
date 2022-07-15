@@ -12,7 +12,7 @@ class ClearDb extends Command {
             finishRequest: ["clear-db"],
             name: "clear-db",
             private: "owners",
-            permissions: 0,
+            permissions: 0n,
             syntax: "clear-db <db>",
         });
     }

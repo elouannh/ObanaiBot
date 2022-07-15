@@ -30,7 +30,7 @@ class Dig extends Command {
             finishRequest: "ADVENTURE",
             name: "dig",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "dig",
         });
     }

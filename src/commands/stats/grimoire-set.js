@@ -12,7 +12,7 @@ class GrimoireSet extends Command {
             finishRequest: "ADVENTURE",
             name: "grimoire-set",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "grimoire-set",
         });
     }

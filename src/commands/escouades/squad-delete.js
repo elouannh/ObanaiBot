@@ -13,7 +13,7 @@ class SquadDelete extends Command {
             finishRequest: "ADVENTURE",
             name: "squad-delete",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "squad-delete",
         });
     }

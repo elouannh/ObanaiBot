@@ -14,7 +14,7 @@ class Give extends Command {
             finishRequest: "ADVENTURE",
             name: "give",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "give",
         });
     }

@@ -12,7 +12,7 @@ class SquadLeave extends Command {
             finishRequest: "ADVENTURE",
             name: "squad-leave",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "squad-leave",
         });
     }

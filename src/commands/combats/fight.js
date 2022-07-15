@@ -41,7 +41,7 @@ class Fight extends Command {
             finishRequest: "ADVENTURE",
             name: "fight",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "fight <?players|?teams>",
         });
     }

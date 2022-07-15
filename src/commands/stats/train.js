@@ -14,7 +14,7 @@ class Train extends Command {
             finishRequest: "ADVENTURE",
             name: "train",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "train",
         });
     }

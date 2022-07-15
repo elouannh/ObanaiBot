@@ -13,7 +13,7 @@ class SquadKick extends Command {
             finishRequest: "ADVENTURE",
             name: "squad-kick",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "squad-kick <player>",
         });
     }

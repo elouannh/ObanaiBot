@@ -13,7 +13,7 @@ class Top extends Command {
             finishRequest: "ADVENTURE",
             name: "top",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "top",
         });
     }

@@ -15,7 +15,7 @@ class Rank extends Command {
             finishRequest: "ADVENTURE",
             name: "rank",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "rank <?player>",
         });
     }

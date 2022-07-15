@@ -12,7 +12,7 @@ class SquadRename extends Command {
             finishRequest: "ADVENTURE",
             name: "squad-rename",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "squad-rename <name>",
         });
     }

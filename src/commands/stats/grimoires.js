@@ -14,7 +14,7 @@ class Grimoires extends Command {
             finishRequest: "ADVENTURE",
             name: "grimoires",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "grimoires <?player>",
         });
     }

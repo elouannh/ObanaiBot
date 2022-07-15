@@ -15,7 +15,7 @@ class CrowBait extends Command {
             finishRequest: "ADVENTURE",
             name: "crow-bait",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "crow-bait",
         });
     }

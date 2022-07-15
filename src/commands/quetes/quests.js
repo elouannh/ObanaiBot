@@ -12,7 +12,7 @@ class Quests extends Command {
             finishRequest: "ADVENTURE",
             name: "quests",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "quests",
         });
     }

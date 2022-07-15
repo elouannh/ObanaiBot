@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const { Client, Util } = require("discord.js");
 const { PlayerDb } = require("../structure/database/PlayerDb");
 const { InventoryDb } = require("../structure/database/InventoryDb");
@@ -75,8 +76,8 @@ class Obanai extends Client {
             channel.send({ embeds: [embed.embed] });
         }
         else {
-            this.log("[AUTO] supportLog()");
-            this.log(`title: ${Util.escapeMarkdown(title)} | description: ${description.replace("```diff\n", "").replace("```", "").replace("\n", " ⁂ ")}`);
+            // this.log("[AUTO] supportLog()");
+            // this.log(`title: ${Util.escapeMarkdown(title)} | description: ${description.replace("```diff\n", "").replace("```", "").replace("\n", " ⁂ ")}`);
         }
     }
 
@@ -90,8 +91,8 @@ class Obanai extends Client {
             }
         }
         else {
-            this.log("[AUTO] addRole()");
-            this.log(`user: ${id} | serv: ${serv} | roleId: ${roleId}`);
+            // this.log("[AUTO] addRole()");
+            // this.log(`user: ${id} | serv: ${serv} | roleId: ${roleId}`);
         }
     }
 
@@ -105,8 +106,8 @@ class Obanai extends Client {
             }
         }
         else {
-            this.log("[AUTO] removeRole()");
-            this.log(`user: ${id} | serv: ${serv} | roleId: ${roleId}`);
+            // this.log("[AUTO] removeRole()");
+            // this.log(`user: ${id} | serv: ${serv} | roleId: ${roleId}`);
         }
     }
 }

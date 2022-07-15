@@ -12,7 +12,7 @@ class Claim extends Command {
             finishRequest: "ADVENTURE",
             name: "claim",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "claim <?player>",
         });
     }

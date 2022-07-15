@@ -14,7 +14,7 @@ class TravelArea extends Command {
             finishRequest: "ADVENTURE",
             name: "travel-area",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "travel-area",
         });
     }

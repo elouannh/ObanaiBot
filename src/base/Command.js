@@ -15,7 +15,7 @@ class Command {
         finishRequest: [],
         name: "",
         private: "none",
-        permissions: 0,
+        permissions: 0n,
         syntax: "",
     }) {
         this.infos = infos;

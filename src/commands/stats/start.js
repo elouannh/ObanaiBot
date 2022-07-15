@@ -12,7 +12,7 @@ class Start extends Command {
             finishRequest: "ADVENTURE",
             name: "start",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "start",
         });
     }

@@ -13,7 +13,7 @@ class SetVip extends Command {
             finishRequest: ["Admin"],
             name: "set-vip",
             private: "admins",
-            permissions: 0,
+            permissions: 0n,
             syntax: "set-vip <user>",
         });
     }

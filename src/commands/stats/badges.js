@@ -13,7 +13,7 @@ class Badges extends Command {
             finishRequest: "ADVENTURE",
             name: "badges",
             private: "none",
-            permissions: 0,
+            permissions: 0n,
             syntax: "badges <?player>",
         });
     }

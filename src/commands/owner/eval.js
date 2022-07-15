@@ -12,7 +12,7 @@ class Eval extends Command {
             finishRequest: ["eval"],
             name: "eval",
             private: "owners",
-            permissions: 0,
+            permissions: 0n,
             syntax: "eval <program>",
         });
     }
