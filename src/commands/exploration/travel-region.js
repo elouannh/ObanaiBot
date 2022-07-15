@@ -44,8 +44,6 @@ class TravelRegion extends Command {
                 const loc = map.Regions.filter(r => r.id === Number(aDatas.travelling.destination.split("_")[0]))?.at(0);
                 const destName = `${loc.name} - ${loc.Areas.filter(ar => ar.id === Number(aDatas.travelling.destination.split("_")[1])).at(0).name}`;
                 await this.client.activityDb.endOfTrip(this.message.author.id);
-                await this.client.playerDb.earnExp(this.message.author.id, Math.floor(Math.random() * 150) + 100, this);
-
                 return await this.ctx.reply("Voyage.", `Vous voilà arrivé à: **${destName}**. Passez un bon séjour !`, "🗺️", null, "outline");
             }
         }

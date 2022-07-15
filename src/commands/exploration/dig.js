@@ -65,7 +65,6 @@ class Dig extends Command {
                 const loc_ = map.Regions.filter(r => r.id === Number(aDatas.travelling.destination.split("_")[0]))?.at(0);
                 const destName = `${loc_.name} - ${loc_.Areas.filter(ar => ar.id === Number(aDatas.travelling.destination.split("_")[1])).at(0).name}`;
                 await this.client.activityDb.endOfTrip(this.message.author.id);
-                await this.client.playerDb.earnExp(this.message.author.id, Math.floor(Math.random() * 150) + 100, this);
                 return await this.ctx.reply("Voyage (intrarégional).", `Vous voilà arrivé à: **${destName}**. Passez un bon séjour !`, "🗺️", null, "outline");
             }
         }

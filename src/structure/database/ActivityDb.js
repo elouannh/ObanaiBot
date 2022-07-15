@@ -74,6 +74,7 @@ class ActivityDb {
         this.db.set(id, 0, "travelling.start");
         this.db.set(id, 0, "travelling.duration");
         this.db.set(id, null, "travelling.destination");
+        await this.client.playerDb.earnExp(id, ((a.travelling.duration / 60_000) * (Math.random() + 3)), this);
         this.client.mapDb.db.set(id, Number(a.travelling.destination.split("_")[0]), "region");
         this.client.mapDb.db.set(id, Number(a.travelling.destination.split("_")[1]), "area");
     }
