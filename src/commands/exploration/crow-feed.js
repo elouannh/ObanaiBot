@@ -61,7 +61,7 @@ class CrowFeed extends Command {
         }
 
         const actualExp = iDatas.kasugai_crow_exp;
-        const limit = [Math.floor((33250 - actualExp)), Math.floor((33250 - actualExp) / 10)];
+        const limit = [Math.floor((15750 - actualExp)), Math.floor((15750 - actualExp) / 10)];
 
         if (quantity > limit[type === "seed" ? 0 : 1]) {
             const str2 = "La quantité d'XP générée est supérieure à la quantité maximale autorisé. "
