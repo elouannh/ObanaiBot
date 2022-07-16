@@ -3,7 +3,7 @@
 
 ---
 
-> # _**1.0.2 Beta update**_
+> # _**1.0-beta.3 Public release update**_
 
 ## Patch notes :
 
@@ -11,6 +11,8 @@
 - Help informations updated
 
 ## New content :
+
+- Nothing
 
 ## Reworked :
 
@@ -24,7 +26,7 @@
 
 ---
 
-> # _**1.0.2 Beta update**_
+> # _**1.0-beta.2 Beta update**_
 
 ## Patch notes :
 

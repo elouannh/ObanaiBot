@@ -71,7 +71,7 @@ class Obanai extends Client {
              .setTitle(title)
              .setDescription(description);
 
-        if (this.id === "958433246050406440") {
+        if (this.user.id === "958433246050406440") {
             const channel = this.guilds.cache.get(this.config.support).channels.cache.get(this.config.channels.logs);
             channel.send({ embeds: [embed.embed] });
         }
@@ -92,7 +92,7 @@ class Obanai extends Client {
                 `*Stats actuelles:*\n\n**Nombre de serveurs**: \`${this.guilds.cache.size}\``,
              );
 
-        if (this.id === "958433246050406440") {
+        if (this.user.id === "958433246050406440") {
             const channel = this.guilds.cache.get(this.config.support).channels.cache.get(this.config.channels.progress);
             channel.send({ embeds: [embed.embed] });
         }
@@ -103,7 +103,7 @@ class Obanai extends Client {
     }
 
     addRole(id, serv, roleId) {
-        if (this.id === "958433246050406440") {
+        if (this.user.id === "958433246050406440") {
             try {
                 serv.members.cache.get(id)?.roles?.add(roleId);
             }
@@ -118,7 +118,7 @@ class Obanai extends Client {
     }
 
     removeRole(id, serv, roleId) {
-        if (this.id === "958433246050406440") {
+        if (this.user.id === "958433246050406440") {
             try {
                 serv.members.cache.get(id)?.roles?.remove(roleId);
             }

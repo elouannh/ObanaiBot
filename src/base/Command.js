@@ -208,15 +208,26 @@ class Command {
                 break;
             case "maintenance":
                 if (this.infos.private === "none") {
-                    ready = false;
-
-                    await this.ctx.reply(
-                        "Maintenance.",
-                        "Le bot est actuellement en maintenance. Plus d'informations ici: **https://bit.ly/obanaihelp**.",
-                        "🚧",
-                        null,
-                        "warning",
-                    );
+                    if (!this.client.internalServerManager.staffs.includes(this.message.author.id)) {
+                        ready = false;
+                        await this.ctx.reply(
+                            "Maintenance.",
+                            "Le bot est actuellement en maintenance. Plus d'informations ici: **https://bit.ly/obanaihelp**.",
+                            "🚧",
+                            null,
+                            "warning",
+                        );
+                    }
+                    else if (this.infos.private === "none") {
+                        ready = false;
+                        await this.ctx.reply(
+                            "Maintenance.",
+                            "Le bot est actuellement en maintenance. Plus d'informations ici: **https://bit.ly/obanaihelp**.",
+                            "🚧",
+                            null,
+                            "warning",
+                        );
+                    }
                 }
                 break;
             case "disabled":
@@ -224,7 +235,7 @@ class Command {
                     ready = false;
                 }
                 else if (this.client.internalServerManager.owners.includes(this.message.author.id)) {
-                        ready = true;
+                    ready = true;
                 }
                 else if (this.infos.private === "none") {
                     ready = false;
