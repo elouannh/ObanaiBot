@@ -24,7 +24,7 @@ class CrowFeed extends Command {
 
         const iDatas = await this.client.inventoryDb.get(this.message.author.id);
         if (iDatas.kasugai_crow === null) return await this.ctx.reply("Oups...", "Vous n'avez pas de oiseau à nourrir !", null, null, "warning");
-        if (iDatas.kasugai_crow_exp >= 33250) return await this.ctx.reply("Oups...", "Votre oiseau a atteint le niveau max possible ! (15)", null, null, "warning");
+        if (iDatas.kasugai_crow_exp >= 15750) return await this.ctx.reply("Oups...", "Votre oiseau a atteint le niveau max possible ! (10)", null, null, "warning");
 
         const seeds = "materials" in iDatas ? ("seed" in iDatas.materials ? iDatas.materials.seed : 0) : 0;
         const worms = "materials" in iDatas ? ("worm" in iDatas.materials ? iDatas.materials.worm : 0) : 0;
