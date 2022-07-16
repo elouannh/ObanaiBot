@@ -257,19 +257,120 @@ class Arena {
         await this.begin();
     }
 
-    damageManager(atk, def, playerAttacking, playerDefending) {
-        let str = "";
-        this.staminaManager(atk, def, playerAttacking, playerDefending);
+    damageManager(atk, def, pattacking, pdefending) {
+        this.staminaManager(atk, def, pattacking, pdefending);
 
-        let dmg = 0;
-        let hazardRate = 5;
-        let hazardRate2 = 5;
-        let dodgeCounterRate = 10;
-        let counterRate = playerDefending.counterRate + 5;
+        const variables = {
+            "atk": {
+                force: Math.ceil(pattacking.datas.aptitudes.force / 30) * 10,
+                defense: Math.ceil(pattacking.datas.aptitudes.defense / 30) * 10,
+                dmg: 0,
+                col: 0,
+                hazardRate: 5,
+                dodgeCounterRate: 10,
+                mvt: pattacking.datas.breath.attack[atk],
+            },
+            "def": {
+                force: Math.ceil(pdefending.datas.aptitudes.force / 30) * 10,
+                defense: Math.ceil(pdefending.datas.aptitudes.defense / 30) * 10,
+                dmg: 0,
+                col: 0,
+                hazardRate: 5,
+                counterRate: pdefending.counterRate + 5,
+                mvt: pdefending.datas.breath.attack[atk],
+            },
+        };
 
-        const attackMvt = playerAttacking.datas.breath.attack[atk];
-        const defenseMvt = playerDefending.datas.breath.defense[def];
+        variables.atk.col = variables.atk.defense * 0.2;
+        variables.def.dmg = variables.atk.force * 0.4;
 
+        let str = this.stringManager("", pattacking, pdefending, variables.atk.mvt, variables.def.mvt);
+
+        switch (atk) {
+            case "quick":
+                variables.atk.dmg = variables.atk.force * 0.45;
+                this.teams[pattacking.team.id].addStamina(pattacking.number, 1);
+                break;
+            case "powerful":
+                variables.atk.dmg = variables.atk.force * 0.65;
+                variables.atk.hazardRate += 10;
+                break;
+            case "dodge_preparation":
+                variables.atk.dmg = variables.atk.force * 0.45;
+                variables.atk.dodgeCounterRate += 30;
+                break;
+            case "special_attack":
+                variables.atk.dmg = variables.atk.force * 0.9;
+                variables.atk.hazardRate += 20;
+                break;
+        }
+
+        switch (def) {
+            case "quick":
+                variables.def.col = variables.def.defense * 0.5;
+                this.teams[pdefending.team.id].addStamina(pdefending.number, 1);
+                break;
+            case "powerful":
+                variables.def.col = variables.def.defense * 0.75;
+                variables.def.hazardRate += 10;
+                break;
+            case "counter_preparation":
+                variables.def.col = variables.def.defense * 0.4;
+                variables.def.hazardRate += 10;
+                variables.def.counterRate += 20;
+                break;
+        }
+
+        const fh1 = Math.random() * 100 < (variables.atk.hazardRate / (pattacking.datas.aptitudes.agility * 0.02));
+        const fh2 = Math.random() * 100 < (variables.def.hazardRate / (pdefending.datas.aptitudes.agility * 0.02));
+        let fd1 = Math.ceil((variables.atk.dmg / variables.def.col) * (11 + Math.random()));
+        let fd2 = Math.ceil((variables.def.dmg / variables.atk.col) * (11 + Math.random()));
+
+        if (fd1 < 0) fd1 = 0;
+        if (fd2 < 0) fd2 = 0;
+
+        if (fh1 || fh2) {
+            if (fh1) {
+                this.teams[pattacking.team.id].hurtPlayer(pattacking.number, 3);
+                str += `\n\n» ${pattacking.name} se blesse en voulant attaquer... il perd -3❤️ !`;
+            }
+            if (fh2) {
+                if (!fh1) {
+                    this.teams[pdefending.team.id].hurtPlayer(pdefending.number, 3 + fd1);
+                    str += `\n\n» ${pdefending.name} se blesse en voulant défendre, et encaisse les dégâts de son attaquant ! Il perd -${3 + fd1}❤️ !`;
+                }
+                else {
+                    this.teams[pdefending.team.id].hurtPlayer(pdefending.number, 3);
+                    str += `\n\n» ${pdefending.name} se blesse en voulant défendre... il perd -3❤️ !`;
+                }
+            }
+        }
+        else {
+            const fc = (Math.random() * 100 < variables.def.counterRate) && (Math.random() * 100 < variables.atk.dodgeCounterRate);
+
+            if (fc) {
+                this.teams[pattacking.team.id].hurtPlayer(pattacking.number, fd2);
+                str += `\n\n» ${pattacking.name} se fait contrer par ${pdefending.name} en voulant attaquer... il perd -${fd2}❤️ !`;
+                this.teams[pdefending.team.id].players[pdefending.number].counterRate = 5;
+            }
+            else {
+                this.teams[pdefending.team.id].players[pdefending.number].counterRate = variables.def.counterRate;
+                const dodged = Math.floor(Math.random() * 100) <= (pdefending.datas.aptitudes.speed / pattacking.datas.aptitudes.speed) * 10;
+
+                if (!dodged) {
+                    this.teams[pdefending.team.id].hurtPlayer(pdefending.number, fd1);
+                    str += `\n\n» ${pattacking.name} inflige de lourds dégâts à ${pdefending.name}... il inflige -${fd1}❤️ !`;
+                }
+                else {
+                    str += `\n\n» ${pattacking.name} se fait esqsuiver par ${pdefending.name} en voulant attaquer !`;
+                }
+            }
+        }
+
+        this.fightLog.push(str);
+    }
+
+    stringManager(str = "", playerAttacking, playerDefending, attackMvt, defenseMvt) {
         let sentence = [
             '{aname} utilise "{abreath}, {amvt}" ! {dname} répond avec "{dbreath}, {dmvt}"',
             '{dname} commence à parer avec "{dbreath}", "{dmvt}", tandis que {aname} utilise "{abreath}", "{amvt}" !',
@@ -284,93 +385,8 @@ class Arena {
         sentence = sentence.replace("{dbreath}", `${playerDefending.datas.breath.emoji} ${playerDefending.datas.breath.name}`);
 
         str += sentence;
-        const force = Math.ceil(playerAttacking.datas.aptitudes.force / 30) * 10;
-        const defense = Math.ceil(playerDefending.datas.aptitudes.defense / 30) * 10;
 
-        switch (atk) {
-            case "quick":
-                dmg = force * 0.55;
-                this.teams[playerAttacking.team.id].addStamina(playerAttacking.number, 1);
-                break;
-            case "powerful":
-                dmg = force * 0.65;
-                hazardRate += 10;
-                break;
-            case "dodge_preparation":
-                dmg = force * 0.5;
-                dodgeCounterRate += 30;
-                break;
-            case "special_attack":
-                dmg = force * 0.9;
-                hazardRate += 20;
-                break;
-        }
-
-        let collection = 0;
-
-        switch (def) {
-            case "quick":
-                collection = defense * 0.5;
-                this.teams[playerDefending.team.id].addStamina(playerDefending.number, 1);
-                break;
-            case "powerful":
-                collection = defense * 0.75;
-                hazardRate2 += 10;
-                break;
-            case "counter_preparation":
-                hazardRate2 += 10;
-                counterRate += 20;
-                collection = defense * 0.4;
-                break;
-        }
-
-        const finalHazardRate = Math.floor(Math.random() * 100) < (hazardRate / (playerAttacking.datas.aptitudes.agility * 0.05));
-        const finalHazardRate2 = Math.floor(Math.random() * 100) < (hazardRate2 / (playerDefending.datas.aptitudes.agility * 0.05));
-
-        if (finalHazardRate || finalHazardRate2) {
-            if (finalHazardRate) {
-                this.teams[playerAttacking.team.id].hurtPlayer(playerAttacking.number, 3);
-                str += `\n\n» ${playerAttacking.name} se blesse en voulant attaquer... il perd -3❤️ !`;
-            }
-            if (finalHazardRate2) {
-                this.teams[playerDefending.team.id].hurtPlayer(playerDefending.number, 3);
-                str += `\n\n» ${playerDefending.name} se blesse en voulant défendre... il perd -3❤️ !`;
-            }
-        }
-        else {
-            let finalCounterRate = Math.ceil(counterRate - dodgeCounterRate);
-            if (finalCounterRate < 0) finalCounterRate = 0;
-
-            if (Math.floor(Math.random() * 100) < finalCounterRate) {
-                const force2 = Math.ceil(playerDefending.datas.stats.force / 3) * 10;
-                const defense2 = Math.ceil(playerAttacking.datas.stats.defense / 3) * 10;
-
-                dmg = force2 * 0.4 - defense2 * 0.15;
-
-                let finalDamages2 = Math.ceil(dmg * (Math.floor(Math.random() + 0.5) / 10 + 1) * 1.5);
-                if (finalDamages2 < 0) finalDamages2 = 0;
-                this.teams[playerAttacking.team.id].hurtPlayer(playerAttacking.number, finalDamages2);
-                str += `\n\n» ${playerAttacking.name} se fait contrer par ${playerDefending.name} en voulant attaquer... il perd -${finalDamages2}❤️ !`;
-                this.teams[playerDefending.team.id].players[playerDefending.number].counterRate = 5;
-            }
-            else {
-                this.teams[playerDefending.team.id].players[playerDefending.number].counterRate = counterRate;
-                const dodged = Math.floor(Math.random() * 100) <= (playerDefending.datas.aptitudes.speed / playerAttacking.datas.aptitudes.speed);
-                let finalDamages = Math.ceil((dmg - collection) * (Math.floor(Math.random() + 0.5) / 10 + 1) * 1.5);
-
-                if (!dodged) {
-                    if (finalDamages < 0) finalDamages = 0;
-
-                    this.teams[playerDefending.team.id].hurtPlayer(playerDefending.number, finalDamages);
-                    str += `\n\n» ${playerAttacking.name} inflige de lourds dégâts à ${playerDefending.name}... il inflige -${finalDamages}❤️ !`;
-                }
-                else {
-                    str += `\n\n» ${playerAttacking.name} se fait esqsuiver par ${playerDefending.name} en voulant attaquer !`;
-                }
-            }
-        }
-
-        this.fightLog.push(str);
+        return str;
     }
 
     staminaManager(atk, def, playerAttacking, playerDefending) {

@@ -67,14 +67,14 @@ class ActivityDb {
         this.db.set(id, destination, "travelling.destination");
     }
 
-    async endOfTrip(id) {
+    async endOfTrip(id, cmd) {
         const a = await this.get(id);
 
         this.db.set(id, false, "isTravelling");
         this.db.set(id, 0, "travelling.start");
         this.db.set(id, 0, "travelling.duration");
         this.db.set(id, null, "travelling.destination");
-        await this.client.playerDb.earnExp(id, ((a.travelling.duration / 60_000) * (Math.random() + 3)), this);
+        await this.client.playerDb.earnExp(id, ((a.travelling.duration / 60_000) * (Math.random() + 3)), cmd);
         this.client.mapDb.db.set(id, Number(a.travelling.destination.split("_")[0]), "region");
         this.client.mapDb.db.set(id, Number(a.travelling.destination.split("_")[1]), "area");
     }
@@ -88,7 +88,7 @@ class ActivityDb {
 
         if (crow !== null) {
             if (crow.bonus.includes("travelling_time")) {
-                const crowBoost = crowLevel.level * 5;
+                const crowBoost = crowLevel.level * 2.5;
                 coeff -= (crowBoost / 100);
             }
         }
@@ -116,7 +116,7 @@ class ActivityDb {
 
         if (crow !== null) {
             if (crow.bonus.includes("training_time")) {
-                const crowBoost = crowLevel.level * 5;
+                const crowBoost = crowLevel.level * 2.5;
                 coeff -= (crowBoost / 100);
             }
         }

@@ -163,7 +163,7 @@ class ExternalServerDb {
             progress = `${badgesObjectives.descriptions[type]}\n» Actuel: \`tier ${actualTier}\``;
 
             if (indexOfTier === 3) {
-                progress = `**${intRender(quantity, " ")}** \`- (terminé) -\``;
+                progress = "`- (terminé) -`";
             }
             else {
                 const afterIndex = indexOfTier + 1;

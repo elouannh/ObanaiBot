@@ -134,7 +134,7 @@ class PlayerDb {
 
         if (crow !== null) {
             if (crow.bonus.includes("experience_gain")) {
-                const crowBoost = crowLevel.level * 5;
+                const crowBoost = crowLevel.level * 2.5;
                 coeff += crowBoost / 100;
             }
         }

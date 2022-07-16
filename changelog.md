@@ -16,6 +16,11 @@
 
 - Global structure and command handler
 - Moderation and admin panel
+- Crow bonus is 2.5% instead of 5% for all crows
+- Damages when fight are totally edited
+- Crow proud and sparrow exchanged their rarity
+- The experience earned when travelling is calculated with the time spent
+- Badges display
 
 ---
 

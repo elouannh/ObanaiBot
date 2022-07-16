@@ -35,10 +35,10 @@ class Crow extends Command {
         const crowLevel = calcCrowLevel(pDatas.kasugai_crow_exp);
         const boost = crowLevel.level;
         const crows_boost = {
-            "experience_gain": `+${boost * 5}%⭐`,
-            "yens_gain": `+${boost * 5}%💰`,
-            "travelling_time": `-${boost * 5}%🕣 voyage`,
-            "training_time": `-${boost * 5}%🕣 entrainement`,
+            "experience_gain": `+${boost * 2.5}%⭐`,
+            "yens_gain": `+${boost * 2.5}%💰`,
+            "travelling_time": `-${boost * 2.5}%🕣 voyage`,
+            "training_time": `-${boost * 2.5}%🕣 entrainement`,
         };
 
         let crowinfos = "";

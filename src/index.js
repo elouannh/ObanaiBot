@@ -15,4 +15,4 @@ client.lastChannel = new Collection();
 loadEvents(client);
 client.launch();
 
-setInterval(() => client.log("................"), 600_000);
+setInterval(() => client.log("................"), 900_000);
