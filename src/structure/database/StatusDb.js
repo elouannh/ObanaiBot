@@ -31,7 +31,7 @@ class StatusDb {
     async setOnline() {
         this.db.set("status", "online", "mode");
 
-        if (this.id === "958433246050406440") {
+        if (this.client.user.id === "958433246050406440") {
             const channel = this.client.channels.cache.get(this.client.config.channels.uptime);
             await channel.sendTyping();
 
@@ -51,7 +51,7 @@ class StatusDb {
     async setMaintenance() {
         this.db.set("status", "maintenance", "mode");
 
-        if (this.id === "958433246050406440") {
+        if (this.client.user.id === "958433246050406440") {
             const channel = this.client.channels.cache.get(this.client.config.channels.uptime);
             await channel.sendTyping();
 
@@ -71,7 +71,7 @@ class StatusDb {
     async setDisabled() {
         this.db.set("status", "disabled", "mode");
 
-        if (this.id === "958433246050406440") {
+        if (this.client.user.id === "958433246050406440") {
             const channel = this.client.channels.cache.get(this.client.config.channels.uptime);
             await channel.sendTyping();
 
