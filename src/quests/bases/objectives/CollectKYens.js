@@ -4,7 +4,7 @@ class CollectKYens {
         this.quantity = quantity;
         this.got = 0;
         this.display = function() {
-            return `Collecter des yens: **\`${this.got}\`**\`/${this.quantity}\``;
+            return `Collectez des yens: **\`${this.got}\`**\`/${this.quantity}\``;
         };
     }
 }

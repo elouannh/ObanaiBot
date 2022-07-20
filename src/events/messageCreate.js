@@ -62,7 +62,7 @@ module.exports = {
             const prefixes = [
                 `${guildPrefix.prefix}`,
                 "obanai",
-                "obanai ",
+                "obanaitest ",
             ];
 
             for (const prf of prefixes) {

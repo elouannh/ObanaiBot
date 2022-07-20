@@ -4,7 +4,7 @@ class TrainStat {
         this.stat = stat;
         this.statName = statName;
         this.display = function() {
-            return `Entrainer votre **${this.statName}**`;
+            return `Entrainez votre **${this.statName}**`;
         };
     }
 }

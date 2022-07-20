@@ -1,4 +1,5 @@
 const Command = require("../../base/Command");
+const MapDbCallback = require("../../structure/callbacks/MapDbCallback");
 
 class Quests extends Command {
     constructor() {
@@ -21,7 +22,13 @@ class Quests extends Command {
         const pExists = await this.client.playerDb.started(this.message.author.id);
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
+        const mDatas = await this.client.mapDb.get(this.message.author.id);
+        const fct = MapDbCallback(this.client);
+        await fct(this.message.author.id, { region: -1, area: -1 }, mDatas);
+
         const qDatas = await this.client.questDb.get(this.message.author.id);
+
+
         let quests = "";
 
         if (qDatas.daily.length > 0) {

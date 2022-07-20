@@ -4,7 +4,7 @@ class EquipGrimoire {
         this.grimoire = grimoire;
         this.grimName = grimName;
         this.display = function() {
-            return `Équiper le grimoire **${this.grimName}**`;
+            return `Équipez le grimoire **${this.grimName}**`;
         };
     }
 }

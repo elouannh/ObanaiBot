@@ -12,10 +12,22 @@
             "default": true
         },
         {
-            "name": "Chez Franky",
+            "name": "Maison de Franky",
             "biome": "dwelling",
             "id": 1,
-            "default": true
+            "default": false
+        },
+        {
+            "name": "Taverne de Makino",
+            "biome": "dwelling",
+            "id": 2,
+            "default": false
+        },
+        {
+            "name": "Ruelle secondaire",
+            "biome": "landscaped_area",
+            "id": 3,
+            "default": false
         }
     ],
     "accesses": [5, 7]

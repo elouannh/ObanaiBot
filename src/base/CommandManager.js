@@ -37,7 +37,7 @@ class CommandManager {
             requests += userReqs.map(e => e).length;
         }
 
-        return requests >= 10;
+        return requests >= this.client.maxRequests;
     }
 }
 

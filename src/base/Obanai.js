@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const { Client, Util } = require("discord.js");
+const { Client, Util, IntentsBitField } = require("discord.js");
 const { PlayerDb } = require("../structure/database/PlayerDb");
 const { InventoryDb } = require("../structure/database/InventoryDb");
 const { SquadDb } = require("../structure/database/SquadDb");
@@ -19,7 +19,7 @@ const dateRender = require("../utils/dateRender");
 class Obanai extends Client {
     constructor(token) {
         super({
-            intents: 1795,
+            intents: new IntentsBitField().add("GuildMessages", "MessageContent", "GuildMembers", "Guilds"),
         });
 
         this.token = token;
@@ -30,6 +30,7 @@ class Obanai extends Client {
         this.prefix = "!";
         this.color = "#2f3136";
         this.version = Package.version;
+        this.maxRequests = 30;
 
         this.playerDb = new PlayerDb(this);
         this.activityDb = new ActivityDb(this);

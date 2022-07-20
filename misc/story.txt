@@ -14,10 +14,10 @@ quête 1 -- Minh, Pierre et Hime
 10. Parler à pierre
 11. inspecter la zone
 
-quête 2 -- la taverne de brook
+quête 2 -- la taverne de Makino
 
-1. se rendre dans quartier yoshiwara - taverne de brook
-2. parler à l'un deu afin d'écouter leur conversation
+1. se rendre dans quartier yoshiwara - taverne de Makino
+2. parler à l'un d'eux afin d'écouter leur conversation
 3. se rendre dans le quartier yoshiwara - rue principale
 
 quête 3 -- Franky le vioc

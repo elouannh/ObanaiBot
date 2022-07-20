@@ -13,7 +13,7 @@ module.exports = step => {
         new SlayerQuest(
             "Minh, Pierre et Hime - Journée banale",
             "Les champs sont prêts à être récoltés ! Rendez-vous sur place afin de vous en occuper.",
-            new VoyageTo(4, 2, "Maison familiale, champs"),
+            new VoyageTo(4, 2),
             "chapter1/quest1:0",
             1,
             1,
@@ -22,7 +22,7 @@ module.exports = step => {
         new SlayerQuest(
             "Minh, Pierre et Hime - Un inconnu (1)",
             "Pendant que vous vous occupiez de vos champs, vous vous rendez compte qu'un homme est allongé sur le sol, dans la forêt non loin de là.",
-            new VoyageTo(4, 3, "Maison familiale, forêt"),
+            new VoyageTo(4, 3),
             "chapter1/quest1:1",
             1,
             1,
@@ -48,7 +48,7 @@ module.exports = step => {
         new SlayerQuest(
             "Minh, Pierre et Hime - Premiers soins ! (1)",
             "Ramenez l'homme blessé dans votre hutte, afin de le soigner.",
-            new VoyageTo(4, 1, "Maison familiale, dans la hutte."),
+            new VoyageTo(4, 1),
             "chapter1/quest1:3",
             1,
             1,
@@ -84,7 +84,7 @@ module.exports = step => {
         new SlayerQuest(
             "Minh, Pierre et Hime - Visite inopinée (1)",
             "Après les explications de Pierre, vous décidez de retourner voir dans la forêt afin de voir si quelque chose cloche.",
-            new VoyageTo(4, 3, "Maison familiale, forêt"),
+            new VoyageTo(4, 3),
             "chapter1/quest1:7",
             1,
             1,
@@ -93,7 +93,7 @@ module.exports = step => {
         new SlayerQuest(
             "Minh, Pierre et Hime - Visite inopinée (2)",
             "Vous ne trouvez rien. Cependant, une odeur horrible émane de la hutte. Vous ne savez plus où vous êtes, mais vous devez absolument y retourner !",
-            new VoyageTo(4, 1, "Maison familiale, dans la hutte"),
+            new VoyageTo(4, 1),
             "chapter1/quest1:8",
             1,
             1,
