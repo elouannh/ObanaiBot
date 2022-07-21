@@ -10,6 +10,10 @@ class SuperRow {
         this.datas["components"].push(component);
     }
 
+    get row() {
+        return this.datas;
+    }
+
 }
 
 module.exports = SuperRow;

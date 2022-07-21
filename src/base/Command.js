@@ -169,7 +169,7 @@ class Command {
             case "none":
                 break;
             case "testers":
-                if (!this.client.internalServerManager.testers.concat(this.client.internalServerManager.admins).concat(this.client.internalServerManager.owners).includes(this.message.author.id)) {
+                if (!this.client.internalServerManager.staffs.includes(this.message.author.id)) {
                     ready = false;
                 }
                 break;

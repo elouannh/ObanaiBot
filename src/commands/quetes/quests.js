@@ -28,7 +28,6 @@ class Quests extends Command {
 
         const qDatas = await this.client.questDb.get(this.message.author.id);
 
-
         let quests = "";
 
         if (qDatas.daily.length > 0) {

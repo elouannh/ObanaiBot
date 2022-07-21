@@ -5,7 +5,7 @@ class SuperButton {
             "style": 1,
             "label": "<instance>",
             "emoji": "",
-            "custom_id": "default",
+            "customId": "default",
             "url": "",
             "disabled": false,
         };
@@ -53,6 +53,10 @@ class SuperButton {
         this.datas["disabled"] = disabled;
 
         return this;
+    }
+
+    get button() {
+        return this.datas;
     }
 }
 

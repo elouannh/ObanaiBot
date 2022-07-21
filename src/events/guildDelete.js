@@ -4,10 +4,10 @@ module.exports = {
     run: async (guild, client) => {
 
         if (guild.memberCount >= 30) {
-            await client.supportProgress("add", guild);
+            await client.supportProgress("remove", guild);
         }
         else if (client.internalServerManager.servers.includes(guild.id)) {
-            await client.supportProgress("add", guild);
+            await client.supportProgress("remove", guild);
         }
     },
 };

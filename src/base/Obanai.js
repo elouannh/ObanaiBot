@@ -20,6 +20,7 @@ class Obanai extends Client {
     constructor(token) {
         super({
             intents: new IntentsBitField().add("GuildMessages", "MessageContent", "GuildMembers", "Guilds"),
+            failIfNotExists: false,
         });
 
         this.token = token;
@@ -66,7 +67,7 @@ class Obanai extends Client {
 
     supportLog(title, description, fields, style) {
         const embed = new SuperEmbed();
-        embed.addField(fields)
+        embed.setFields(fields)
              .setStyle(style)
              .setEmoji("📰")
              .setTitle(title)

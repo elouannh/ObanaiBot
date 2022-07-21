@@ -2,6 +2,7 @@ const SuperEmbed = require("./SuperEmbed");
 const translate = require("translate");
 const SuperRow = require("./SuperRow");
 const SuperButton = require("./SuperButton");
+const SuperSelectMenu = require("./SuperSelectMenu");
 const delay = require("../utils/delay");
 
 class Context {
@@ -15,6 +16,24 @@ class Context {
         const choices2 = ["n", "no", "non", "refuse", "cancel"];
 
         return [choices1, choices2][["y", "n"].indexOf(compareStr)].includes(str?.toLowerCase() ?? "chèvre");
+    }
+
+    async embedGenerator(title, description, emoji, color, style) {
+        const tit = await this.trStr(title);
+        const desc = await this.trStr(description);
+
+        const reponse = new SuperEmbed()
+            .setTitle(tit)
+            .setDescription(desc);
+
+        if (style !== null) {
+            reponse.setStyle(style);
+        }
+        if (emoji !== null || color !== null) {
+            if (emoji !== null) reponse.setEmoji(emoji);
+            if (color !== null) reponse.setColor(color.replace("#", ""));
+        }
+        return reponse.embed;
     }
 
     async trStr(str) {
@@ -39,7 +58,6 @@ class Context {
     }
 
     async reply(title, description, emoji, color, style, displayName = true) {
-
         await this.command.message.channel.sendTyping();
         const tit = await this.trStr(title);
         const desc = await this.trStr(description);
@@ -138,10 +156,10 @@ class Context {
             const cache = new SuperRow(1);
             for (const but of row) {
                 cache.addComponent(
-                    new SuperButton().setCustomId(but.customId).setDisabled(but.disabled).setEmoji(but.emoji).setLabel(but.label).setStyle(but.style).setUrl(but.url).datas,
+                    new SuperButton().setCustomId(but.customId).setDisabled(but.disabled).setEmoji(but.emoji).setLabel(but.label).setStyle(but.style).setUrl(but.url).button,
                 );
             }
-            compos.push(cache.datas);
+            compos.push(cache.row);
         }
 
         const msg = await this.command.message.channel.send({ content: `<@${author.id}>`, embeds: [reponse.embed], components: compos });
@@ -158,6 +176,134 @@ class Context {
             }
         }
         catch (err) { null; }
+
+        return way;
+    }
+
+    // ROW MODEL -------------------------------------
+    /*
+
+    [
+        {
+            "type": "button"||"menu",
+            "components": [
+                {
+                    "style": 1,
+                    "label": "<instance>",
+                    "emoji": "",
+                    "customId": "default",
+                    "url": "",
+                    "disabled": false,
+                },
+                {
+                    "customId": "default",
+                    "options": [
+                        "label": "default label",
+                        "value": "default_label",
+                        "description": "null",
+                        "default": true,
+                    ],
+                    "placeholder": "placeholder",
+                    "minValues": 0,
+                    "maxValues": 1,
+                    "disabled": false,
+                }
+            ]
+        }
+    ]
+
+    */
+
+    async superRequest(embeds, rows, author = null, msgToEdit = null, sendIfFail = false) {
+        // MESSAGE PART --------------------------------------------------------------------------------------------------------------------------
+        if (msgToEdit === null) await this.command.message.channel.sendTyping();
+        const em = [];
+
+        for (const embed of embeds) {
+            const tit = await this.trStr(embed.title);
+            const desc = await this.trStr(embed.description);
+            if (author === null) author = this.command.message.author;
+
+            const reponse = new SuperEmbed()
+                .setAuthor(author)
+                .setTitle(tit)
+                .setDescription(desc);
+
+            if (embed.style !== null) {
+                reponse.setStyle(embed.style);
+            }
+            if (embed.emoji !== null || embed.color !== null) {
+                if (embed.emoji !== null) reponse.setEmoji(embed.emoji);
+                if (embed.color !== null) reponse.setColor(embed.color.replace("#", ""));
+            }
+
+            em.push(reponse.embed);
+        }
+
+        // ROW PART ------------------------------------------------------------------------------------------------------------------------------
+        const compos = [];
+        for (const row of rows) {
+            const cache = new SuperRow(1);
+            for (const sr of row.components) {
+                if (row.type === "button") {
+                    cache.addComponent(
+                        new SuperButton()
+                        .setCustomId(sr.customId)
+                        .setDisabled(sr.disabled)
+                        .setEmoji(sr.emoji)
+                        .setLabel(sr.label)
+                        .setStyle(sr.style)
+                        .setUrl(sr.url)
+                        .button,
+                    );
+                }
+                else if (row.type === "menu") {
+                    cache.addComponent(
+                        new SuperSelectMenu()
+                        .setCustomId(sr.customId)
+                        .setPlaceholder(sr.placeholder)
+                        .setDisabled(sr.disabled)
+                        .setMaxValues(sr.maxValues)
+                        .setMinValues(sr.minValues)
+                        .setOptions(sr.options)
+                        .menu,
+                    );
+                }
+            }
+            compos.push(cache.row);
+        }
+
+        if (msgToEdit === null) {
+            return await this.command.message.channel.send({ embeds: em, components: compos });
+        }
+        else {
+            const edited = await msgToEdit.edit({ embeds: em, components: compos })
+                .catch(async () => {
+                    if (sendIfFail) {
+                        return await this.command.message.channel.send({ embeds: em, components: compos });
+                    }
+                    else {
+                        return null;
+                    }
+                });
+
+            return edited;
+        }
+    }
+
+    async superResp(msg, time = null, userr = undefined) {
+        if (time === null) time = 30_000;
+
+        const filter = interaction => interaction.user.id === (userr ?? this.command.message.author.id);
+        const way = await msg.awaitMessageComponent({ filter, time })
+            .catch(() => { return null; });
+
+        try {
+            way.deferUpdate();
+        }
+        catch (err) {
+            null;
+        }
 
         return way;
     }
