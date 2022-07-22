@@ -55,7 +55,10 @@ class InternalServerManager {
     }
 
     get staffs() {
-        return this.owners.concat(this.admins).concat(this.testers);
+        const staff = this.testers;
+        staff.push(this.admins);
+        staff.push(this.owners);
+        return staff;
     }
 
     get servers() {
@@ -166,7 +169,7 @@ class InternalServerManager {
                 if (!t.datas.dailyQuests.cache.includes(player.id)) {
                     const randomQuests = dailyQuests.sort(() => 0.5 - Math.random()).slice(0, (dailyQuests.length >= 2 ? 2 : 1));
 
-                    await t.client.questDb.get(player.id);
+                    await t.client.questDb.ensure(player.id);
                     await t.client.questDb.db.set(player.id, randomQuests, "daily");
                     await t.db.push("internalServer", player.id, "dailyQuests.cache");
                 }

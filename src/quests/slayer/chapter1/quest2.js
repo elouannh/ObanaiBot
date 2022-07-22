@@ -7,7 +7,7 @@ const texts = require("../../../elements/texts/c1_q2.json");
 module.exports = step => {
     const q = [
         new SlayerQuest(
-            "La taverne de Makino - Fuite urbaine",
+            "Fuite urbaine",
             "Quittez la maison familiale et partez en direction de la ville.",
             new VoyageTo(9, 2),
             "chapter1/quest2:0",
@@ -16,7 +16,7 @@ module.exports = step => {
             0,
         ),
         new SlayerQuest(
-            "La taverne de Makino - Qui sont ces gens ?",
+            "Qui sont ces gens ?",
             "Vous voilà dans le bar, mais la situation semble étrange. Espionnez la conversation des deux individus.",
             new Talk(pnj4.name, pnj4.id, texts["1"].join("\n\n"), 9, 2),
             "chapter1/quest2:1",
@@ -25,7 +25,7 @@ module.exports = step => {
             1,
         ),
         new SlayerQuest(
-            "La taverne de Makino - Évitez le combat !",
+            "Évitez le combat !",
             "Quittez immédiatement la taverne et rejoignez la ruelle principale.",
             new VoyageTo(9, 0),
             "chapter1/quest2:2",

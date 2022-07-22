@@ -7,7 +7,7 @@ const texts = require("../../../elements/texts/c1_q3.json");
 module.exports = step => {
     const q = [
         new SlayerQuest(
-            "Franky le vioc' ! - Partie de cache-cache",
+            "Partie de cache-cache",
             "Allez vous cacher dans la ruelle secondaire, là où les deux pourfendeurs ne vous trouveront pas !",
             new VoyageTo(9, 3),
             "chapter1/quest3:0",
@@ -16,7 +16,7 @@ module.exports = step => {
             0,
         ),
         new SlayerQuest(
-            "Franky le vioc' ! - On est où là ?",
+            "Où suis-je ?",
             "Qui a déplacé le tonneau dans lequel vous étiez caché ?? Parlez à Franky, il a l'air d'avoir quelque chose d'important à vous dire !",
             new Talk(pnj6.name, pnj6.id, texts["1"].join("\n\n"), 9, 1),
             "chapter1/quest3:1",
@@ -25,7 +25,7 @@ module.exports = step => {
             1,
         ),
         new SlayerQuest(
-            "Franky le vioc' ! - De retour à la réalité",
+            "Retour à la réalité",
             "Pendant ce temps, les pourfendeurs vous cherchent toujours dans les rues du quartier Yoshiwara... Continuez de vous enfuir !",
             new VoyageTo(9, 3),
             "chapter1/quest3:2",

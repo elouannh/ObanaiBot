@@ -1,5 +1,7 @@
 const Command = require("../../base/Command");
 const MapDbCallback = require("../../structure/callbacks/MapDbCallback");
+const storyDatas = require("../../elements/storyDatas.json");
+const fs = require("fs");
 
 class Testing extends Command {
     constructor() {
@@ -27,6 +29,60 @@ class Testing extends Command {
         await fct(this.message.author.id, { region: -1, area: -1 }, mDatas);
 
         const qDatas = await this.client.questDb.get(this.message.author.id);
+        let sp = qDatas.storyProgress;
+        // ---------------------------------------------------------------
+        const questSuit = [];
+        for (const folder of fs.readdirSync("./src/quests/slayer/")) {
+            for (const file of fs.readdirSync(`./src/quests/slayer/${folder}/`).map(e => e.replace(".js", ""))) {
+                questSuit.push(`${folder.replace("chapter", "")}_${file.replace("quest", "")}`);
+            }
+        }
+        const advancement = `${sp.chapter}_${sp.quest}`;
+        const nextQuest = questSuit[questSuit.indexOf(advancement) + 1];
+        const probablyTheSame = questSuit[questSuit.indexOf(advancement)];
+
+        if (nextQuest !== undefined) {
+            const cs = [`${sp.chapter}`, `${nextQuest.split("_")[0]}`];
+            const qs = [`${sp.quest}`, `${nextQuest.split("_")[1]}`];
+            const sameQuest = (cs[0] === cs[1]) && (qs[0] === qs[1]);
+            const quest = require(`../../quests/slayer/chapter${nextQuest.split("_")[0]}/quest${nextQuest.split("_")[1]}.js`)(sameQuest === true ? sp.step : 0);
+            if (quest !== true) sp = { chapter: Number(cs[0]), quest: Number(qs[0]), step: sameQuest === true ? sp.step : 0 };
+        }
+        else {
+            const cs = [`${sp.chapter}`, `${probablyTheSame.split("_")[0]}`];
+            const qs = [`${sp.quest}`, `${probablyTheSame.split("_")[1]}`];
+            const sameQuest = (cs[0] === cs[1]) && (qs[0] === qs[1]);
+
+            if (sameQuest) {
+                const quest = require(`../../quests/slayer/chapter${probablyTheSame.split("_")[0]}/quest${probablyTheSame.split("_")[1]}.js`)(sameQuest === true ? sp.step + 1 : 0);
+                if (quest !== true) sp = { chapter: Number(cs[0]), quest: Number(qs[0]), step: sameQuest === true ? sp.step + 1 : 0 };
+            }
+        }
+
+        // ---------------------------------------------------------------
+
+        const sd = storyDatas[`chapter${sp.chapter}`];
+        const sq = sd.quests[sp.quest - 1];
+
+        const slayerQuestsStr =
+            `**Obanai, l'héritage d'Ichi** - Chapitre **${sp.chapter}**, **${sd.name}**\n`
+            +
+            `> *« ${sd.description} »*\n\n`
+            +
+            `> [**Quête \`${sp.quest}\`** » ${sq.name}](${sq.link}) • partie **${sp.step + 1}**:\n`
+            +
+            `\n${qDatas.slayer.length > 0 ?
+                qDatas.slayer.map(e => e.display()).join("\n")
+                : "La suite du mode histoire n'est pas encore disponible."}`;
+
+        const lastRefresh = this.client.internalServerManager.datas.dailyQuests.lastRefresh;
+        const dailyQuestsStr =
+            `**Nouvelles quêtes:** <t:${((lastRefresh + 86_400_000) / 1000).toFixed(0)}:R>\n\n`
+            +
+            `${qDatas.daily.length > 0 ?
+                qDatas.daily.map(e => e.display()).join("\n\n")
+                : "Vous n'avez aucune quête pour le moment."}`;
+
         const pages = [
             {
                 react: "slayer",
@@ -34,7 +90,7 @@ class Testing extends Command {
                     embeds: [
                         {
                             title: "Quêtes de pourfendeur",
-                            description: qDatas.slayer.length > 0 ? qDatas.slayer.map(e => e.display()).join("\n") : "Aucune quête active.",
+                            description: slayerQuestsStr,
                             emoji: "👺",
                             color: null,
                             style: "outline",
@@ -48,7 +104,7 @@ class Testing extends Command {
                     embeds: [
                         {
                             title: "Quêtes quotidiennes",
-                            description: qDatas.daily.length > 0 ? qDatas.daily.map(e => e.display()).join("\n") : "Aucune quête active.",
+                            description: dailyQuestsStr,
                             emoji: "🗓️",
                             color: null,
                             style: "outline",
@@ -74,6 +130,7 @@ class Testing extends Command {
 
         let loop = true;
         let focus = "slayer";
+        let exitMode = "timeout";
 
         let req = null;
 
@@ -118,16 +175,28 @@ class Testing extends Command {
             req = tempoReq;
 
             const res = await this.ctx.superResp(req);
-            console.log(res);
-            if (res === null || res.customId === "leave") {
+            if (res === null) {
                 loop = false;
             }
             else if (res.customId === "main_menu") {
                 focus = res.values[0];
             }
+            else if (res.customId === "leave") {
+                loop = false;
+                exitMode = "leaved";
+            }
         }
 
-        return await this.ctx.reply("Navigation - Quêtes.", "La navigation a été quittée.", null, null, "timeout");
+        let errorMessage = "La navigation a été arrêtée car le temps est écoulé.";
+        if (exitMode === "leaved") errorMessage = "Vous avez arrêtez la navigation.";
+
+        return await this.ctx.reply(
+            "Navigation - Quêtes.",
+            errorMessage,
+            null,
+            null,
+            { "timeout": "timeout", "leaved": "success" }[exitMode],
+        );
     }
 }
 

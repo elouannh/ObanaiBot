@@ -11,7 +11,7 @@ const texts = require("../../../elements/texts/c1_q1.json");
 module.exports = step => {
     const q = [
         new SlayerQuest(
-            "Minh, Pierre et Hime - Journée banale",
+            "Journée banale",
             "Les champs sont prêts à être récoltés ! Rendez-vous sur place afin de vous en occuper.",
             new VoyageTo(4, 2),
             "chapter1/quest1:0",
@@ -20,7 +20,7 @@ module.exports = step => {
             0,
         ),
         new SlayerQuest(
-            "Minh, Pierre et Hime - Un inconnu (1)",
+            "Un inconnu (1)",
             "Pendant que vous vous occupiez de vos champs, vous vous rendez compte qu'un homme est allongé sur le sol, dans la forêt non loin de là.",
             new VoyageTo(4, 3),
             "chapter1/quest1:1",
@@ -29,7 +29,7 @@ module.exports = step => {
             1,
         ),
         new SlayerQuest(
-            "Minh, Pierre et Hime - Un inconnu (2)",
+            "Un inconnu (2)",
             "Vous voilà dans la forêt où le corps sans vie bougeait, inspectez les environs.",
             new InspectArea(
                 "*Un homme torse nu, couvert de blessure dont le bras manque se trouve sur le sol. Vous décidez de le prendre et de l'emmener à votre hutte.*",
@@ -46,7 +46,7 @@ module.exports = step => {
             2,
         ),
         new SlayerQuest(
-            "Minh, Pierre et Hime - Premiers soins ! (1)",
+            "Premiers soins ! (1)",
             "Ramenez l'homme blessé dans votre hutte, afin de le soigner.",
             new VoyageTo(4, 1),
             "chapter1/quest1:3",
@@ -55,7 +55,7 @@ module.exports = step => {
             3,
         ),
         new SlayerQuest(
-            "Minh, Pierre et Hime - Premiers soins ! (2)",
+            "Premiers soins ! (2)",
             "Donnez l'homme blessé à Hime pour qu'elle puisse s'en occuper.",
             new GiveKItems(pnj2.name, pnj2.id, "pierre_body", "Corps d'un homme blessé", "questItems", 1, 4, 1),
             "chapter1/quest1:4",
@@ -64,7 +64,7 @@ module.exports = step => {
             4,
         ),
         new SlayerQuest(
-            "Minh, Pierre et Hime - Routine",
+            "Routine",
             "Votre routine reprend. Vous devez désormais retourner aux champs et vous en occuper.",
             new CollectKItems(50, "seed", "Graine", "materials"),
             "chapter1/quest1:5",
@@ -73,7 +73,7 @@ module.exports = step => {
             5,
         ),
         new SlayerQuest(
-            "Minh, Pierre et Hime - Explications",
+            "Explications",
             "Le jeune homme anciennement inconscient semble rétabli, et vous avez une discussion à entretenir avec lui et Hime.",
             new Talk(pnj2.name, pnj2.id, texts["6"].join("\n\n"), 4, 1),
             "chapter1/quest1:6",
@@ -82,7 +82,7 @@ module.exports = step => {
             6,
         ),
         new SlayerQuest(
-            "Minh, Pierre et Hime - Visite inopinée (1)",
+            "Visite inopinée (1)",
             "Après les explications de Pierre, vous décidez de retourner voir dans la forêt afin de voir si quelque chose cloche.",
             new VoyageTo(4, 3),
             "chapter1/quest1:7",
@@ -91,7 +91,7 @@ module.exports = step => {
             7,
         ),
         new SlayerQuest(
-            "Minh, Pierre et Hime - Visite inopinée (2)",
+            "Visite inopinée (2)",
             "Vous ne trouvez rien. Cependant, une odeur horrible émane de la hutte. Vous ne savez plus où vous êtes, mais vous devez absolument y retourner !",
             new VoyageTo(4, 1),
             "chapter1/quest1:8",
@@ -100,7 +100,7 @@ module.exports = step => {
             8,
         ),
         new SlayerQuest(
-            "Minh, Pierre et Hime - Destruction !!",
+            "Destruction !!",
             "La hutte étant détruite, Hime disparue... Tout ce qu'il vous reste à faire, c'est demander des explications à Pierre !",
             new Talk(pnj3.name, pnj3.id, texts["9"].join("\n\n"), 4, 1),
             "chapter1/quest1:9",
@@ -109,7 +109,7 @@ module.exports = step => {
             9,
         ),
         new SlayerQuest(
-            "Minh, Pierre et Hime - Hime ? Où es-tu passée ?...",
+            "Hime ? Où es-tu passée ?...",
             "Hime a disparu. Pierre est mort. Il ne vous reste qu'une chose, partir à sa recherche. Trouvez d'abord des indices.",
             new InspectArea("*Vous trouverez sur le sol un peu de sang et des cheveux blancs d'Hime. Vous les prenez avec vous.*", "hime_hair", "Cheveux d'Hime", "questItems", 3, 4, 1),
             "chapter1/quest1:10",

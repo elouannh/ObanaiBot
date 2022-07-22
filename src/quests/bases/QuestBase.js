@@ -7,7 +7,7 @@ class QuestBase {
         this.id = id;
         this.step = step;
         this.display = function() {
-            return `**\`» ${this.title.toUpperCase()} «\`**\n→ __${this.objective?.display() ?? "Objectif"}__\n||*${this.description}*||`;
+            return `**${this.title}**\n> *« ${this.description} »*\n→ __${this.objective?.display() ?? "Objectif"}__`;
         };
     }
 }
