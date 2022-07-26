@@ -1,5 +1,6 @@
-const { Collection } = require("discord.js");
+const SuperModal = require("../../base/SuperModal");
 const Command = require("../../base/Command");
+const { PermissionsBitField } = require("discord.js");
 
 const emojis = {
     "Admin": "🚧",
@@ -85,7 +86,7 @@ class Help extends Command {
             }
         }
 
-        const commandsPageContent = Object.values(datas).map(e => `${e.emoji} » **${e.name}** | \`${e.commands.length}\` commandes`).join("\n");
+        const commandsPageContent = Object.values(datas).map(e => `> ${e.emoji} » **${e.name}** | \`${e.commands.length}\` commandes`).join("\n\n");
 
         let loop = true;
         let focus = "main";
@@ -159,64 +160,64 @@ class Help extends Command {
 
         let req = null;
 
+        const defaultsMenu = {
+            "default": {
+                "type": "menu",
+                "components": [
+                    {
+                        "type": 3,
+                        "customId": "main_menu",
+                        "options": [
+                            ["Page principale", "main", "Page principale du menu d'aide", "👋", false],
+                            ["Liste des commandes", "commands", "Liste de toutes les commandes du bot", "🍜", false],
+                        ],
+                        "placeholder": "Changer de page",
+                        "minValues": 0,
+                        "maxValues": 1,
+                        "disabled": false,
+                    },
+                ],
+            },
+            "leave": {
+                "type": "button",
+                "components": [
+                    {
+                        "style": "danger",
+                        "label": "Quitter la navigation",
+                        "customId": "leave",
+                    },
+                ],
+            },
+            "commands_selector": {
+                "type": "menu",
+                "components": [
+                    {
+                        "type": 3,
+                        "customId": "commands",
+                        "options": Object.values(datas).map(e =>
+                            [e.name, `${e.row}_list`, Object.entries(sections).filter(f => f[1].includes(e.name)).at(0).at(0), e.emoji, false],
+                        ),
+                        "placeholder": "Choisir une catégorie de commandes",
+                        "minValues": 0,
+                        "maxValues": 1,
+                        "disabled": false,
+                    },
+                ],
+            },
+            "search_command": {
+                "type": "button",
+                "components": [
+                    {
+                        "style": "secondary",
+                        "emoji": "🔎",
+                        "label": "Chercher une commande",
+                        "customId": "search_command",
+                    },
+                ],
+            },
+        };
 
         while (loop) {
-            const defaultsMenu = {
-                "default": {
-                    "type": "menu",
-                    "components": [
-                        {
-                            "type": 3,
-                            "customId": "main_menu",
-                            "options": [
-                                ["Page principale", "main", "Page principale du menu d'aide", "👋", focus === "main"],
-                                ["Liste des commandes", "commands", "Liste de toutes les commandes du bot", "🍜", focus === "commands"],
-                            ],
-                            "placeholder": "Choisir une catégorie de commandes",
-                            "minValues": 0,
-                            "maxValues": 1,
-                            "disabled": false,
-                        },
-                    ],
-                },
-                "leave": {
-                    "type": "button",
-                    "components": [
-                        {
-                            "style": "danger",
-                            "label": "Quitter la navigation",
-                            "customId": "leave",
-                        },
-                    ],
-                },
-                "commands_selector": {
-                    "type": "menu",
-                    "components": [
-                        {
-                            "type": 3,
-                            "customId": "commands",
-                            "options": Object.values(datas).map(e =>
-                                [e.name, `${e.row}_list`, Object.entries(sections).filter(f => f[1].includes(e.name)).at(0).at(0), e.emoji, focus === `${e.row}_list`],
-                            ),
-                            "placeholder": "Changer de page",
-                            "minValues": 0,
-                            "maxValues": 1,
-                            "disabled": false,
-                        },
-                    ],
-                },
-                "search_command": {
-                    "type": "button",
-                    "components": [
-                        {
-                            "style": "secondary",
-                            "emoji": "🔎",
-                            "label": "Chercher une commande",
-                            "customId": "search_command",
-                        },
-                    ],
-                },
-            };
             const tempoReq = await this.ctx.superRequest(
                 pages.filter(e => e.react === focus)?.at(0).msgArgs.embeds,
                 pages.filter(e => e.react === focus)?.at(0).msgArgs.components
@@ -228,7 +229,7 @@ class Help extends Command {
 
             req = tempoReq;
 
-            const res = await this.ctx.superResp(req);
+            const res = await this.ctx.superResp(req, null, undefined, ["search_command"]);
             if (res === null) {
                 loop = false;
             }
@@ -240,7 +241,71 @@ class Help extends Command {
                 focus = res.values[0];
             }
             else if (res.componentType === 2) {
-                if (res.customId === "search_command") {}
+                if (res.customId === "search_command") {
+                    await res.showModal(
+                        new SuperModal()
+                        .setTitle("Chercher une commande 🔎")
+                        .setCustomId("search_command_modal")
+                        .setComponents([
+                            [
+                                ["command_name", "Nom (ou alias) de la commande à rechercher", 1, 25, "help, stats, prefix, weapons...", 1, true],
+                            ],
+                        ])
+                        .modal,
+                    );
+                    const modalSubmission = await this.ctx.modalSubmission(res, "search_command_modal", true, 10_000);
+                    if (modalSubmission === null) {
+                        await this.ctx.reply("Formulaire non-complété.", "Vous n'avez pas répondu au modal à temps.", null, null, "timeout");
+                    }
+                    else {
+                        const commandName = modalSubmission.fields.fields.get("command_name")?.value ?? "";
+                        let cmd = this.client.commandManager.getCommand(commandName);
+
+                        if (cmd === 0) {
+                            await this.ctx.reply("Commande introuvable.", "Vérifiez le nom de la commande et réessayez.", null, null, "error");
+                        }
+                        else {
+                            let string = "";
+                            cmd = new cmd();
+                            const i = cmd.infos;
+
+                            string += `\`${emojis[i.category]}\` **${i.category}** » ${i.description}\n`;
+                            string += `\`🏷️\` **Aliases**: ${i.aliases.map(e => `**\`${e}\`**`).join(" - ")}\n`;
+                            string += `\`⏰\` **Délai**: **\`${i.cooldown}\`** secondes\n`;
+                            string += `\`✏️\` **Syntaxe**: **\`${i.syntax}\`**\n`;
+                            string += `\`⚙️\` **Paramètres**:\n\`\`\`fix\n${i.args.length > 0 ? i.args.map((e, j) => `${j + 1}. ${e[0]}${e[2] === true ? "(⁕)" : ""} : ${e[1]}`).join("\n") : "- Aucun paramètre requis -"}\`\`\`\n`;
+                            string += `\`🖼️\` **Exemples**:\`\`\`fix\n${i.examples.map(e => `${e.replace("[p]", this.prefix)}`).join("\n")}\`\`\`\n`;
+                            const perms = new PermissionsBitField(i.permissions).toArray();
+                            string += `\`👘\` **Permissions**:\`\`\`fix\n${perms.length > 0 ? perms.join(" - ") : "- Aucune permission requise -"}\`\`\`\n\n`;
+
+                            if (!pages.map(e => e.react).includes(`command_${i.name}`)) {
+                                pages.push(
+                                    {
+                                        react: `command_${i.name}`,
+                                        msgArgs: {
+                                            embeds: [
+                                                {
+                                                    title: `Commande | ${i.name}`,
+                                                    description: string,
+                                                    emoji: emojis[i.category],
+                                                    color: null,
+                                                    style: "outline",
+                                                },
+                                            ],
+                                            components: [
+                                                "commands_selector",
+                                                "default",
+                                                "search_command",
+                                                "leave",
+                                            ],
+                                        },
+                                    },
+                                );
+                            }
+                            focus = `command_${i.name}`;
+                        }
+                    }
+                }
             }
         }
 

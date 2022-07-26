@@ -56,15 +56,7 @@ function removeDuplicate(string = "", model = "") {
         datas.push(cache);
     }
     let finalStr = "";
-    console.log("(----[--------------------------------------]----)");
-    console.log(datas[1].map(e => e.id).join(""));
-    console.log("-----------------");
     for (let i = 0, j = 0; i < datas[0].length; i++) {
-        console.log(datas[0]);
-        console.log(i);
-        console.log("-----------------");
-        console.log(j);
-        console.log("[--------------------------------------]");
         if (datas[0][i].id === datas[1][j].id) {
             if (datas[0][i].count >= datas[1][j].count) {
                 finalStr += `${datas[0][i].id.repeat(datas[1][j].count)}`;
@@ -72,7 +64,7 @@ function removeDuplicate(string = "", model = "") {
             }
         }
         else {
-            finalStr += `${datas[0][i].id.repeat(datas[0][i].count)}`;
+            finalStr += `${`${datas[0][i]?.id ?? ""}`.repeat(datas[0][i].count ?? 0)}`;
         }
     }
     return finalStr;
@@ -119,7 +111,7 @@ async function autoReply(client, message, ...replies) {
 
         if (reply.mode === "end") {
             let needToReply = false;
-            let tempoCleanStr = cleanStr.at;
+            let tempoCleanStr = cleanStr;
             for (const trigger of reply.triggers) {
                 tempoCleanStr = removeDuplicate(cleanStr, trigger);
                 if (tempoCleanStr.endsWith(trigger)) needToReply = true;

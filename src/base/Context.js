@@ -291,7 +291,7 @@ class Context {
         }
     }
 
-    async superResp(msg, time = null, userr = undefined) {
+    async superResp(msg, time = null, userr = undefined, noDefer = []) {
         if (time === null) time = 30_000;
 
         const filter = interaction => interaction.user.id === (userr ?? this.command.message.author.id);
@@ -299,7 +299,7 @@ class Context {
             .catch(() => { return null; });
 
         try {
-            way.deferUpdate();
+            if (!noDefer.includes(way.customId)) way.deferUpdate();
         }
         catch (err) {
             null;
@@ -313,6 +313,20 @@ class Context {
         .catch(async () => {
             return null;
         });
+    }
+
+    async modalSubmission(interaction, customId, defer = true, time = 30_000) {
+        const modalSubmission = await interaction.awaitModalSubmit({
+            filter: (inter) => inter.customId === customId,
+            time,
+        }).catch(() => { return null; });
+
+        if (defer) {
+            try { modalSubmission.deferUpdate(); }
+            catch (err) { null; }
+        }
+
+        return modalSubmission;
     }
 
     async multipleMessageCollection(message = null, time = null, users = null) {

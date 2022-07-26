@@ -18,7 +18,6 @@ class Testing extends Command {
     }
 
     async run() {
-
     }
 }
 
