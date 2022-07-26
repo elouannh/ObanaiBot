@@ -1,4 +1,4 @@
-const Command = require("../base/Command");
+const repliesJson = require("../utils/json/replies.json");
 
 async function executeCommand(client, message, prefix) {
     const args = message.content.replace(prefix, "").split(/ +/);
@@ -38,6 +38,102 @@ async function executeCommand(client, message, prefix) {
     client.requests.get(message.author.id).delete(message.id);
 }
 
+function removeDuplicate(string = "", model = "") {
+    const datas = [];
+    for (const str of [string, model]) {
+        const cache = [];
+        let tempoStr = { id: str[0], count: 0 };
+        for (const car of str) {
+            if (car === tempoStr.id) {
+                tempoStr.count++;
+            }
+            else {
+                cache.push(tempoStr);
+                tempoStr = { id: car, count: 1 };
+            }
+        }
+        cache.push(tempoStr);
+        datas.push(cache);
+    }
+    let finalStr = "";
+    console.log("(----[--------------------------------------]----)");
+    console.log(datas[1].map(e => e.id).join(""));
+    console.log("-----------------");
+    for (let i = 0, j = 0; i < datas[0].length; i++) {
+        console.log(datas[0]);
+        console.log(i);
+        console.log("-----------------");
+        console.log(j);
+        console.log("[--------------------------------------]");
+        if (datas[0][i].id === datas[1][j].id) {
+            if (datas[0][i].count >= datas[1][j].count) {
+                finalStr += `${datas[0][i].id.repeat(datas[1][j].count)}`;
+                if ((j + 1) < datas[1].length) j++;
+            }
+        }
+        else {
+            finalStr += `${datas[0][i].id.repeat(datas[0][i].count)}`;
+        }
+    }
+    return finalStr;
+}
+
+async function autoReply(client, message, ...replies) {
+    const zalgos = {
+        "a": ["a"],
+        "b": ["b"],
+        "c": ["c"],
+        "d": ["d"],
+        "e": ["e"],
+        "f": ["f"],
+        "g": ["g"],
+        "h": ["h"],
+        "i": ["i"],
+        "j": ["j"],
+        "k": ["k"],
+        "l": ["l"],
+        "m": ["m"],
+        "n": ["n"],
+        "o": ["o"],
+        "p": ["p"],
+        "q": ["q"],
+        "r": ["r"],
+        "s": ["s"],
+        "t": ["t"],
+        "u": ["u"],
+        "v": ["v"],
+        "w": ["w"],
+        "x": ["x"],
+        "y": ["y"],
+        "z": ["z"],
+    };
+
+    for (const reply of replies) {
+        let cleanStr = "";
+        reply.string = reply.string.toLowerCase();
+        for (const car of reply.string) {
+            const cleanCar = Object.entries(zalgos).filter(entry => entry[1].includes(car))?.at(0)?.at(0) ?? null;
+
+            if (cleanCar !== null) cleanStr += `${cleanCar}`;
+        }
+
+        if (reply.mode === "end") {
+            let needToReply = false;
+            let tempoCleanStr = cleanStr.at;
+            for (const trigger of reply.triggers) {
+                tempoCleanStr = removeDuplicate(cleanStr, trigger);
+                if (tempoCleanStr.endsWith(trigger)) needToReply = true;
+            }
+
+            if (needToReply) {
+                const repl = reply.replies[Math.floor(Math.random() * reply.replies.length)];
+                message.reply({ content: `**-${repl}**` });
+
+            }
+        }
+    }
+}
+
 module.exports = {
     name: "messageCreate",
     once: false,
@@ -47,27 +143,39 @@ module.exports = {
         const guildPrefix = await client.guildDb.get(message.guild.id);
 
         if (message.content.startsWith(`<@${client.user.id}>`)) {
-            const cmd = new Command();
-            const args = message.content.split(/ +/);
-            cmd.init(client, message, args);
-            await cmd.ctx.reply(
-                "Bonjour !",
-                `Je suis Obanai. Mon préfixe sur ce serveur est \`${guildPrefix.prefix}\`. Tu peux voir la liste de mes commandes en faisant \`${guildPrefix.prefix}help\`.`,
-                null,
-                null,
-                "info",
-            );
+            message.content = "help";
+            await executeCommand(client, message, guildPrefix.prefix);
         }
         else {
             const prefixes = [
                 `${guildPrefix.prefix}`,
                 "obanai",
-                "obanaitest ",
+                "oba",
+                "obanai ",
+                "oba ",
             ];
 
+            let executed = false;
             for (const prf of prefixes) {
-                if (message.content.toLowerCase().startsWith(prf.toLowerCase())) await executeCommand(client, message, prf);
+                if (message.content.toLowerCase().startsWith(prf)) {
+                    executed = true;
+                    await executeCommand(client, Object.assign(message, { content: message.content.replace(prf, guildPrefix.prefix) }), guildPrefix.prefix);
+                }
             }
+
+            if (!executed) {
+                await autoReply(
+                    client,
+                    message,
+                    {
+                        string: message.content.toLowerCase(),
+                        triggers: repliesJson["quoi-feur"].triggers,
+                        replies: repliesJson["quoi-feur"].replies,
+                        mode: "end",
+                    },
+                );
+            }
+
         }
 
     },

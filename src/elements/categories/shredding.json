@@ -4,7 +4,7 @@
     "weapon": "shredding",
     "vip": false,
     "description": "",
-    "bonus": ["defense", "force"],
+    "bonus": ["defense", "strength"],
     "breaths": ["beast"],
     "weaponName": "Épées tailladées",
     "rarityNames": [

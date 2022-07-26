@@ -29,7 +29,7 @@ class Stats extends Command {
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
         const pDatas = await this.client.playerDb.get(user.id);
-        const emojis = { "agility":"🤸‍♂️", "defense":"🛡️", "force":"👊", "speed": "⚡" };
+        const emojis = { "agility":"🤸‍♂️", "defense":"🛡️", "strength":"👊", "speed": "⚡" };
 
         let stats = "";
 
@@ -38,7 +38,7 @@ class Stats extends Command {
 
         stats += "**Aptitudes**\n";
         stats += `\`\`\`🤸‍♂️ Agilité: ${pDatas.aptitudes.agility} • Niveau ${pDatas.stats.agility}\n🛡️ Défense: ${pDatas.aptitudes.defense} • Niveau ${pDatas.stats.defense}`;
-        stats += `\n👊 Force: ${pDatas.aptitudes.force} • Niveau ${pDatas.stats.force}\n⚡ Vitesse: ${pDatas.aptitudes.speed} • Niveau ${pDatas.stats.speed}\`\`\``;
+        stats += `\n👊 Force: ${pDatas.aptitudes.strength} • Niveau ${pDatas.stats.strength}\n⚡ Vitesse: ${pDatas.aptitudes.speed} • Niveau ${pDatas.stats.speed}\`\`\``;
 
         stats += `\n**Catégorie**: ${category.name} • Niveau **${pDatas.categoryLevel}**`;
         stats += `\n*Effets:*\n\`\`\`${

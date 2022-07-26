@@ -17,7 +17,7 @@ class PlayerDb {
             stats: {
                 agility: 1,
                 defense: 1,
-                force: 1,
+                strength: 1,
                 speed: 1,
             },
             category: "slayer",
@@ -54,7 +54,7 @@ class PlayerDb {
                 p.aptitudes = {
                     agility: p.stats.agility * gr.boost,
                     defense: p.stats.defense * gr.boost,
-                    force: p.stats.force * gr.boost,
+                    strength: p.stats.strength * gr.boost,
                     speed: p.stats.speed * gr.boost,
                 };
             }
@@ -63,14 +63,14 @@ class PlayerDb {
         p.aptitudes = {
             agility: p.stats.agility * 10,
             defense: p.stats.defense * 10,
-            force: p.stats.force * 10,
+            strength: p.stats.strength * 10,
             speed: p.stats.speed * 10,
         };
 
         p.stats = {
             agility: Math.floor(p.stats.agility),
             defense: Math.floor(p.stats.defense),
-            force: Math.floor(p.stats.force),
+            strength: Math.floor(p.stats.strength),
             speed: Math.floor(p.stats.speed),
         };
 
@@ -80,7 +80,7 @@ class PlayerDb {
 
         p.aptitudes.agility = Math.ceil(p.aptitudes.agility);
         p.aptitudes.defense = Math.ceil(p.aptitudes.defense);
-        p.aptitudes.force = Math.ceil(p.aptitudes.force);
+        p.aptitudes.strength = Math.ceil(p.aptitudes.strength);
         p.aptitudes.speed = Math.ceil(p.aptitudes.speed);
 
         p.squad = await this.client.squadDb.findUser(p.id);

@@ -48,7 +48,7 @@ class ForgeWeapon extends Command {
             "Forger une arme.",
             "Souhaitez-vous vraiment forger une arme ? Vous aurez une arme de rareté aléatoire. (PS: vos chances sont accrues si vous vous trouvez au **Village des forgerons**)\n"
             +
-            "\n__Matériaux :__\n```diff\n- x1 Modèle d'arme\n- x100 Tamahagane\n- x20 Bois\n- 100'000 ¥```\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "\n__Matériaux :__\n```diff\n- x1 Modèle d'arme\n- x100 Tamahagane\n- x20 Bois\n- 50'000 ¥```\n\nRépondre avec `y` (oui) ou `n` (non).",
             "🗡️",
             null,
             "outline",
@@ -68,6 +68,10 @@ class ForgeWeapon extends Command {
                 if (i[0] < i[1]) missing[item] = [i[0], i[1], i[1] - i[0]];
             }
             if (Object.values(missing).length !== 0) return await this.ctx.reply("Oups...", "Vous n'avez pas les éléments nécessaires.", null, null, "warning");
+            this.client.inventoryDb.db.set(this.message.author.id, objects["weapon_model"][0] - objects["weapon_model"][1], "materials.weapon_model");
+            this.client.inventoryDb.db.set(this.message.author.id, objects["tamahagane"][0] - objects["tamahagane"][1], "materials.tamahagane");
+            this.client.inventoryDb.db.set(this.message.author.id, objects["wood"][0] - objects["wood"][1], "materials.wood");
+            this.client.inventoryDb.db.set(this.message.author.id, objects["yens"][0] - objects["yens"][1], "yens");
             const rarity = luck((this.client.mapDb.db.get(this.message.author.id).region === 7 ? 3 : 1));
             await this.ctx.reply(
                 "Forger une arme.", `Vous forgez donc une arme !\n\n**Détails de l'arme:**\nTemps de forge: **${convertDate(7_200_000 * rarity).string}**\n`

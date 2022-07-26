@@ -157,22 +157,11 @@ class InventoryDb {
         this.db.set(id, newXp, "kasugai_crow_exp");
     }
 
-    sameObject(a, b) {
-        return a.rarity === b.rarity && a.name === b.name && a.label === b.label;
-    }
-
     async changeWeapon(id, weapon) {
         const p = await this.client.playerDb.get(id);
         const i = await this.get(id);
 
-        const newArray = [p.weapon];
-        const count = i.weapons.filter(elt => this.sameObject(elt, weapon)).length - 1;
-        for (const elt of i.weapons) {
-            if (this.sameObject(elt, weapon) && newArray.filter(e => this.sameObject(e, weapon)).length < count) newArray.push(elt);
-            else newArray.push(elt);
-        }
-
-        this.db.set(id, newArray, "weapons");
+        this.db.set(id, i.weapons.concat([p.weapon]), "weapons");
         this.db.set(id, weapon, "weapon");
     }
 

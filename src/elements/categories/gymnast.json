@@ -4,7 +4,7 @@
     "weapon": "whisk",
     "vip": false,
     "description": "",
-    "bonus": ["agility", "force"],
+    "bonus": ["agility", "strength"],
     "breaths": ["love"],
     "weaponName": "Épée en fouet",
     "rarityNames": [

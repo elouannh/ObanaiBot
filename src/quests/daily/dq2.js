@@ -6,7 +6,7 @@ module.exports = step => {
         new DailyQuest(
             "De beaux muscles luisants",
             "1, 2, 3... 456, 457, 458 ! Quelle force incroyable vous avez dans les bras pour faire autant de pompes !",
-            new TrainStat("force", "Force"),
+            new TrainStat("strength", "Force"),
             "dq2:0",
             0,
         ),

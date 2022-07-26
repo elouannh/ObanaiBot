@@ -35,7 +35,7 @@ class Claim extends Command {
                     await this.client.inventoryDb.addGrimoire(eDatas.id, "eternal");
                     await this.client.inventoryDb.db.math(eDatas.id, "+", 50000, "yens");
 
-                    await this.client.playerDb.db.math(eDatas.id, "+", 2, "stats.force");
+                    await this.client.playerDb.db.math(eDatas.id, "+", 2, "stats.strength");
                     await this.client.playerDb.db.math(eDatas.id, "+", 2, "stats.agility");
                     await this.client.playerDb.db.math(eDatas.id, "+", 2, "stats.speed");
                     await this.client.playerDb.db.math(eDatas.id, "+", 2, "stats.defense");
@@ -45,7 +45,7 @@ class Claim extends Command {
                     await this.client.inventoryDb.addGrimoire(eDatas.id, "mastery");
                     await this.client.inventoryDb.db.math(eDatas.id, "+", 100000, "yens");
 
-                    await this.client.playerDb.db.math(eDatas.id, "+", 5, "stats.force");
+                    await this.client.playerDb.db.math(eDatas.id, "+", 5, "stats.strength");
                     await this.client.playerDb.db.math(eDatas.id, "+", 5, "stats.agility");
                     await this.client.playerDb.db.math(eDatas.id, "+", 5, "stats.speed");
                     await this.client.playerDb.db.math(eDatas.id, "+", 5, "stats.defense");

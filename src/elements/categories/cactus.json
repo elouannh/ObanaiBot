@@ -4,7 +4,7 @@
     "weapon": "spiked",
     "vip": false,
     "description": "",
-    "bonus": ["force", "speed"],
+    "bonus": ["strength", "speed"],
     "breaths": ["stone"],
     "weaponName": "Fléau à pointe & Hache",
     "rarityNames": [

@@ -1,0 +1,2664 @@
+node:events:368
+      throw er; // Unhandled 'error' event
+      ^
+
+TypeError: Cannot read properties of undefined (reading 'name')
+    at /home/debian/obanai/src/commands/stats/weapons.js:36:156
+    at Array.map (<anonymous>)
+    at Weapons.run (/home/debian/obanai/src/commands/stats/weapons.js:36:130)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async executeCommand (/home/debian/obanai/src/events/messageCreate.js:37:5)
+    at async Object.run (/home/debian/obanai/src/events/messageCreate.js:69:82)
+Emitted 'error' event on Obanai instance at:
+    at emitUnhandledRejectionOrErr (node:events:251:10)
+    at processTicksAndRejections (node:internal/process/task_queues:85:21)
+node:events:368
+      throw er; // Unhandled 'error' event
+      ^
+
+TypeError: Cannot read properties of undefined (reading 'name')
+    at /home/debian/obanai/src/commands/stats/weapons.js:36:156
+    at Array.map (<anonymous>)
+    at Weapons.run (/home/debian/obanai/src/commands/stats/weapons.js:36:130)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async executeCommand (/home/debian/obanai/src/events/messageCreate.js:37:5)
+    at async Object.run (/home/debian/obanai/src/events/messageCreate.js:69:82)
+Emitted 'error' event on Obanai instance at:
+    at emitUnhandledRejectionOrErr (node:events:251:10)
+    at processTicksAndRejections (node:internal/process/task_queues:85:21)
+node:events:368
+      throw er; // Unhandled 'error' event
+      ^
+
+TypeError: Cannot read properties of undefined (reading 'name')
+    at /home/debian/obanai/src/commands/stats/weapons.js:36:156
+    at Array.map (<anonymous>)
+    at Weapons.run (/home/debian/obanai/src/commands/stats/weapons.js:36:130)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async executeCommand (/home/debian/obanai/src/events/messageCreate.js:37:5)
+    at async Object.run (/home/debian/obanai/src/events/messageCreate.js:69:82)
+Emitted 'error' event on Obanai instance at:
+    at emitUnhandledRejectionOrErr (node:events:251:10)
+    at processTicksAndRejections (node:internal/process/task_queues:85:21)
+node:events:368
+      throw er; // Unhandled 'error' event
+      ^
+
+TypeError: Cannot read properties of undefined (reading 'label')
+    at /home/debian/obanai/src/commands/stats/weapon-set.js:30:51
+    at Array.filter (<anonymous>)
+    at WeaponSet.run (/home/debian/obanai/src/commands/stats/weapon-set.js:30:37)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async executeCommand (/home/debian/obanai/src/events/messageCreate.js:37:5)
+    at async Object.run (/home/debian/obanai/src/events/messageCreate.js:69:82)
+Emitted 'error' event on Obanai instance at:
+    at emitUnhandledRejectionOrErr (node:events:251:10)
+    at processTicksAndRejections (node:internal/process/task_queues:85:21)
+node:events:368
+      throw er; // Unhandled 'error' event
+      ^
+
+TypeError: Cannot read properties of undefined (reading 'name')
+    at /home/debian/obanai/src/commands/stats/weapons.js:36:156
+    at Array.map (<anonymous>)
+    at Weapons.run (/home/debian/obanai/src/commands/stats/weapons.js:36:130)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async executeCommand (/home/debian/obanai/src/events/messageCreate.js:37:5)
+    at async Object.run (/home/debian/obanai/src/events/messageCreate.js:69:82)
+Emitted 'error' event on Obanai instance at:
+    at emitUnhandledRejectionOrErr (node:events:251:10)
+    at processTicksAndRejections (node:internal/process/task_queues:85:21)
+node:events:368
+      throw er; // Unhandled 'error' event
+      ^
+
+TypeError: Cannot read properties of undefined (reading 'name')
+    at /home/debian/obanai/src/commands/stats/weapons.js:36:156
+    at Array.map (<anonymous>)
+    at Weapons.run (/home/debian/obanai/src/commands/stats/weapons.js:36:130)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async executeCommand (/home/debian/obanai/src/events/messageCreate.js:37:5)
+    at async Object.run (/home/debian/obanai/src/events/messageCreate.js:69:82)
+Emitted 'error' event on Obanai instance at:
+    at emitUnhandledRejectionOrErr (node:events:251:10)
+    at processTicksAndRejections (node:internal/process/task_queues:85:21)
+/home/debian/obanai/src/quests/bases/superobjectives/Talk.js:12
+        this.getLoc = `${this.loc.name}, ${this.loc.Areas.filter(a => a.id === this.area)?.at(0).name}`;
+                                                                                                ^
+
+TypeError: Cannot read properties of undefined (reading 'name')
+    at new Talk (/home/debian/obanai/src/quests/bases/superobjectives/Talk.js:12:97)
+    at module.exports (/home/debian/obanai/src/quests/slayer/chapter1/quest2.js:21:13)
+    at refreshStoryQuest (/home/debian/obanai/src/structure/database/InternalServerManager.js:123:142)
+    at async Timeout._onTimeout (/home/debian/obanai/src/structure/database/InternalServerManager.js:157:33)
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152
+    throw new RangeError('BITFIELD_INVALID', bit);
+    ^
+
+RangeError [BITFIELD_INVALID]: Invalid bitfield flag or number: MessageContent.
+    at Function.resolve (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:152:11)
+    at IntentsBitField.add (/home/debian/obanai/node_modules/discord.js/src/util/BitField.js:74:33)
+    at new Obanai (/home/debian/obanai/src/base/Obanai.js:22:44)
+    at Object.<anonymous> (/home/debian/obanai/src/index.js:6:16)
+    at Module._compile (node:internal/modules/cjs/loader:1101:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1153:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  [Symbol(code)]: 'BITFIELD_INVALID'
+}
+(node:583719) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:583851) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:583906) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+node:events:368
+      throw er; // Unhandled 'error' event
+      ^
+
+TypeError: Cannot read properties of undefined (reading 'rarity')
+    at /home/debian/obanai/src/commands/stats/weapon-sell.js:36:102
+    at Array.map (<anonymous>)
+    at WeaponSell.run (/home/debian/obanai/src/commands/stats/weapon-sell.js:36:58)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async executeCommand (/home/debian/obanai/src/events/messageCreate.js:37:5)
+    at async Object.run (/home/debian/obanai/src/events/messageCreate.js:62:82)
+Emitted 'error' event on Obanai instance at:
+    at emitUnhandledRejectionOrErr (node:events:251:10)
+    at processTicksAndRejections (node:internal/process/task_queues:85:21)
+(node:584943) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+node:events:368
+      throw er; // Unhandled 'error' event
+      ^
+
+TypeError: Cannot read properties of undefined (reading 'name')
+    at /home/debian/obanai/src/commands/stats/weapons.js:36:160
+    at Array.map (<anonymous>)
+    at Weapons.run (/home/debian/obanai/src/commands/stats/weapons.js:36:130)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async executeCommand (/home/debian/obanai/src/events/messageCreate.js:37:5)
+    at async Object.run (/home/debian/obanai/src/events/messageCreate.js:62:82)
+Emitted 'error' event on Obanai instance at:
+    at emitUnhandledRejectionOrErr (node:events:251:10)
+    at processTicksAndRejections (node:internal/process/task_queues:85:21)
+(node:584970) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+node:events:368
+      throw er; // Unhandled 'error' event
+      ^
+
+TypeError: Cannot read properties of undefined (reading 'name')
+    at /home/debian/obanai/src/commands/stats/weapons.js:36:160
+    at Array.map (<anonymous>)
+    at Weapons.run (/home/debian/obanai/src/commands/stats/weapons.js:36:130)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async executeCommand (/home/debian/obanai/src/events/messageCreate.js:37:5)
+    at async Object.run (/home/debian/obanai/src/events/messageCreate.js:62:82)
+Emitted 'error' event on Obanai instance at:
+    at emitUnhandledRejectionOrErr (node:events:251:10)
+    at processTicksAndRejections (node:internal/process/task_queues:85:21)
+(node:584995) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+node:events:368
+      throw er; // Unhandled 'error' event
+      ^
+
+TypeError: Cannot read properties of undefined (reading 'name')
+    at /home/debian/obanai/src/commands/stats/weapons.js:36:160
+    at Array.map (<anonymous>)
+    at Weapons.run (/home/debian/obanai/src/commands/stats/weapons.js:36:130)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async executeCommand (/home/debian/obanai/src/events/messageCreate.js:37:5)
+    at async Object.run (/home/debian/obanai/src/events/messageCreate.js:62:82)
+Emitted 'error' event on Obanai instance at:
+    at emitUnhandledRejectionOrErr (node:events:251:10)
+    at processTicksAndRejections (node:internal/process/task_queues:85:21)
+(node:585026) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+node:events:368
+      throw er; // Unhandled 'error' event
+      ^
+
+TypeError: Cannot read properties of undefined (reading 'name')
+    at /home/debian/obanai/src/commands/stats/weapons.js:36:160
+    at Array.map (<anonymous>)
+    at Weapons.run (/home/debian/obanai/src/commands/stats/weapons.js:36:130)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async executeCommand (/home/debian/obanai/src/events/messageCreate.js:37:5)
+    at async Object.run (/home/debian/obanai/src/events/messageCreate.js:62:82)
+Emitted 'error' event on Obanai instance at:
+    at emitUnhandledRejectionOrErr (node:events:251:10)
+    at processTicksAndRejections (node:internal/process/task_queues:85:21)
+(node:585052) ExperimentalWarning: stream/web is an experimental feature. This feature could change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

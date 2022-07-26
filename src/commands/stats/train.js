@@ -24,8 +24,8 @@ class Train extends Command {
         if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
 
         const aDatas = await this.client.activityDb.get(this.message.author.id);
-        const values = { "agility": "Agilité", "defense": "Défense", "force": "Force", "speed": "Vitesse" };
-        const emojis = { "agility": "🤸‍♂️", "defense": "🛡️", "force": "👊", "speed": "⚡" };
+        const values = { "agility": "Agilité", "defense": "Défense", "strength": "Force", "speed": "Vitesse" };
+        const emojis = { "agility": "🤸‍♂️", "defense": "🛡️", "strength": "👊", "speed": "⚡" };
         const times = {};
 
         if (aDatas.isTraining) {

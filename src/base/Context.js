@@ -308,6 +308,13 @@ class Context {
         return way;
     }
 
+    async end(msg) {
+        await msg.edit({ embeds: msg.embeds, content: msg.content, attachments: msg.attachments, components: [] })
+        .catch(async () => {
+            return null;
+        });
+    }
+
     async multipleMessageCollection(message = null, time = null, users = null) {
         if (message === null) message = this.command.message;
         if (time === null) time = 60_000;

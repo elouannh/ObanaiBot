@@ -233,7 +233,7 @@ class ExternalServerDb {
                 }
                 else {
                     if (userGrades.grades.includes("vip")) this.db.set(user, userGrades.grades.filter(gr => gr !== "vip"), "grades");
-                    await this.client.playerDb.db.math(user, "-", 2, "stats.force");
+                    await this.client.playerDb.db.math(user, "-", 2, "stats.strength");
                     await this.client.playerDb.db.math(user, "-", 2, "stats.agility");
                     await this.client.playerDb.db.math(user, "-", 2, "stats.speed");
                     await this.client.playerDb.db.math(user, "-", 2, "stats.defense");
@@ -275,7 +275,7 @@ class ExternalServerDb {
                 }
                 else {
                     if (userGrades.grades.includes("vip+")) this.db.set(user, userGrades.grades.filter(gr => gr !== "vip+"), "grades");
-                    this.client.playerDb.db.math(user, "-", 5, "stats.force");
+                    this.client.playerDb.db.math(user, "-", 5, "stats.strength");
                     this.client.playerDb.db.math(user, "-", 5, "stats.agility");
                     this.client.playerDb.db.math(user, "-", 5, "stats.speed");
                     this.client.playerDb.db.math(user, "-", 5, "stats.defense");

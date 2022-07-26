@@ -262,7 +262,7 @@ class Arena {
 
         const variables = {
             "atk": {
-                force: Math.ceil(pattacking.datas.aptitudes.force / 30) * 10,
+                strength: Math.ceil(pattacking.datas.aptitudes.strength / 30) * 10,
                 defense: Math.ceil(pattacking.datas.aptitudes.defense / 30) * 10,
                 dmg: 0,
                 col: 0,
@@ -271,7 +271,7 @@ class Arena {
                 mvt: pattacking.datas.breath.attack[atk],
             },
             "def": {
-                force: Math.ceil(pdefending.datas.aptitudes.force / 30) * 10,
+                strength: Math.ceil(pdefending.datas.aptitudes.strength / 30) * 10,
                 defense: Math.ceil(pdefending.datas.aptitudes.defense / 30) * 10,
                 dmg: 0,
                 col: 0,
@@ -282,25 +282,25 @@ class Arena {
         };
 
         variables.atk.col = variables.atk.defense * 0.2;
-        variables.def.dmg = variables.atk.force * 0.4;
+        variables.def.dmg = variables.atk.strength * 0.4;
 
         let str = this.stringManager("", pattacking, pdefending, variables.atk.mvt, variables.def.mvt);
 
         switch (atk) {
             case "quick":
-                variables.atk.dmg = variables.atk.force * 0.45;
+                variables.atk.dmg = variables.atk.strength * 0.45;
                 this.teams[pattacking.team.id].addStamina(pattacking.number, 1);
                 break;
             case "powerful":
-                variables.atk.dmg = variables.atk.force * 0.65;
+                variables.atk.dmg = variables.atk.strength * 0.65;
                 variables.atk.hazardRate += 10;
                 break;
             case "dodge_preparation":
-                variables.atk.dmg = variables.atk.force * 0.45;
+                variables.atk.dmg = variables.atk.strength * 0.45;
                 variables.atk.dodgeCounterRate += 30;
                 break;
             case "special_attack":
-                variables.atk.dmg = variables.atk.force * 0.9;
+                variables.atk.dmg = variables.atk.strength * 0.9;
                 variables.atk.hazardRate += 20;
                 break;
         }

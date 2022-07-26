@@ -35,5 +35,7 @@ module.exports = step => {
         ),
     ];
 
+    if (step === "SIZE") return q.length;
+
     return step < q.length ? q[Number(step)] : true;
 };

@@ -33,7 +33,7 @@ class Weapons extends Command {
         weapons += `Nom: ${iDatas.weapon.name}\nRareté: ${iDatas.weapon.rarity}\`\`\``;
 
         weapons += "\n**Stock**\n```";
-        weapons += `${iDatas.weapons.length === 0 ? "Aucune arme en stock." : iDatas.weapons.sort((a, b) => b.rarity - a.rarity).map((e, i) => `${i} • ${e.name} (rareté ${e.rarity})`)}\`\`\``;
+        weapons += `${iDatas.weapons.length === 0 ? "Aucune arme en stock." : iDatas.weapons.filter(e => e !== undefined).sort((a, b) => b.rarity - a.rarity).map((e, i) => `${i + 1} • ${e.name} (rareté ${e.rarity})`)}\`\`\``;
 
         await this.ctx.reply(`Inventaire d'armes de ${user.username}`, weapons, "🗡️", null, "outline");
     }

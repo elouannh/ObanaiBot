@@ -4,7 +4,7 @@
     "weapon": "katana",
     "vip": false,
     "description": "",
-    "bonus": ["force", "agility"],
+    "bonus": ["strength", "agility"],
     "breaths": ["flame", "flower", "mist", "sun", "thunder", "water", "wind"],
     "weaponName": "Épée",
     "rarityNames": [

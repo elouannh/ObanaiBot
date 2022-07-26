@@ -1,5 +1,7 @@
 const Command = require("../../base/Command");
 const MapDbCallback = require("../../structure/callbacks/MapDbCallback");
+const storyDatas = require("../../elements/storyDatas.json");
+const fs = require("fs");
 
 class Quests extends Command {
     constructor() {
@@ -28,32 +30,170 @@ class Quests extends Command {
 
         const qDatas = await this.client.questDb.get(this.message.author.id);
 
-        let quests = "";
+        // ---------------------------------------------------------------
+        const questSuit = [];
+        for (const folder of fs.readdirSync("./src/quests/slayer/")) {
+            for (const file of fs.readdirSync(`./src/quests/slayer/${folder}/`).map(e => e.replace(".js", ""))) {
+                const size = require(`../../quests/slayer/${folder}/${file}`)("SIZE");
+                for (let i = 0; i < size; i++) {
+                    questSuit.push(`${folder.replace("chapter", "")}_${file.replace("quest", "")}_${i}`);
+                }
+            }
+        }
+        const sp = qDatas.storyProgress;
+        const advancement = `${sp.chapter}_${sp.quest}_${sp.step}`;
+        const nextQuest = questSuit[questSuit.indexOf(advancement) + 1];
+        let spstr = "";
+        if (nextQuest === undefined) {
+            spstr =
+                "Il semblerait que l'histoire ne va pas plus loin pour l'instant. "
+                +
+                "Patientez jusqu'au prochaines mises à jour !";
+        }
+        else {
+            const sd = storyDatas[`chapter${sp.chapter}`];
+            const sq = sd.quests[sp.quest - 1];
+            spstr =
+                `**Obanai, l'héritage d'Ichi** - Chapitre **${sp.chapter}**, **${sd.name}**\n`
+                +
+                `> *« ${sd.description} »*\n\n`
+                +
+                `> **Quête \`${sp.quest}\`** » ${sq.name} • partie **${sp.step + 1}**:\n`
+                +
+                `\n${qDatas.slayer.length > 0 ?
+                    qDatas.slayer.map(e => e.display()).join("\n") + `\n\n[*Lire l'histoire complète sur Wattpad*](${sq.link})`
+                    : "Votre prochaine mission arrive dans quelques minutes !"}`;
+        }
 
-        if (qDatas.daily.length > 0) {
-            quests += "> 📅 **Quêtes journalières**";
-            for (const q of qDatas.daily) {
-                quests += `\n\n${q.display()}`;
+        // ---------------------------------------------------------------
+
+
+        const slayerQuestsStr = spstr;
+
+        const lastRefresh = this.client.internalServerManager.datas.dailyQuests.lastRefresh;
+        const dailyQuestsStr =
+            `**Nouvelles quêtes:** <t:${((lastRefresh + 86_400_000) / 1000).toFixed(0)}:R>\n\n`
+            +
+            `${qDatas.daily.length > 0 ?
+                qDatas.daily.map(e => e.display()).join("\n\n")
+                : "Vous n'avez aucune quête pour le moment."}`;
+
+        const pages = [
+            {
+                react: "slayer",
+                msgArgs: {
+                    embeds: [
+                        {
+                            title: "Quêtes de pourfendeur",
+                            description: slayerQuestsStr,
+                            emoji: "👺",
+                            color: null,
+                            style: "outline",
+                        },
+                    ],
+                },
+            },
+            {
+                react: "daily",
+                msgArgs: {
+                    embeds: [
+                        {
+                            title: "Quêtes quotidiennes",
+                            description: dailyQuestsStr,
+                            emoji: "🗓️",
+                            color: null,
+                            style: "outline",
+                        },
+                    ],
+                },
+            },
+            {
+                react: "world",
+                msgArgs: {
+                    embeds: [
+                        {
+                            title: "Quêtes de monde",
+                            description: qDatas.world.length > 0 ? qDatas.world.map(e => e.display()).join("\n") : "Aucune quête active.",
+                            emoji: "🌍",
+                            color: null,
+                            style: "outline",
+                        },
+                    ],
+                },
+            },
+        ];
+
+        let loop = true;
+        let focus = "slayer";
+        let exitMode = "timeout";
+
+        let req = null;
+
+        while (loop) {
+            const tempoReq = await this.ctx.superRequest(
+                pages.filter(e => e.react === focus)?.at(0).msgArgs.embeds,
+                [
+                    {
+                        "type": "menu",
+                        "components": [
+                            {
+                                "type": 3,
+                                "customId": "main_menu",
+                                "options": [
+                                    ["Quêtes de pourfendeur", "slayer", "Quêtes liées au mode histoire.", "👺", focus === "slayer"],
+                                    ["Quêtes journalières", "daily", "Quêtes liées au mode histoire.", "🗓️", focus === "daily"],
+                                    ["Quêtes du monde", "world", "Quêtes liées au mode histoire.", "🌍", focus === "world"],
+                                ],
+                                "placeholder": "Voir vos autres quêtes",
+                                "minValues": 0,
+                                "maxValues": 1,
+                                "disabled": false,
+                            },
+                        ],
+                    },
+                    {
+                        "type": "button",
+                        "components": [
+                            {
+                                "style": "danger",
+                                "label": "Quitter la navigation",
+                                "customId": "leave",
+                            },
+                        ],
+                    },
+                ],
+                null,
+                req,
+                true,
+            );
+
+            req = tempoReq;
+
+            const res = await this.ctx.superResp(req);
+            if (res === null) {
+                loop = false;
+            }
+            else if (res.customId === "main_menu") {
+                focus = res.values[0];
+            }
+            else if (res.customId === "leave") {
+                loop = false;
+                exitMode = "leaved";
             }
         }
 
-        if (qDatas.slayer.length > 0) {
-            quests += `${quests.length > 1 ? "\n\n" : ""}> 🥋 **Quêtes de pourfendeur**`;
-            for (const q of qDatas.slayer) {
-                quests += `\n\n${q.display()}`;
-            }
-        }
+        let errorMessage = "La navigation a été arrêtée car le temps est écoulé.";
+        if (exitMode === "leaved") errorMessage = "Vous avez arrêtez la navigation.";
 
-        if (qDatas.world.length > 0) {
-            quests += `${quests.length > 1 ? "\n\n" : ""}> 👒 **Quêtes du monde**`;
-            for (const q of qDatas.world) {
-                quests += `\n\n${q.display()}`;
-            }
-        }
+        await this.ctx.end(req);
 
-        if (quests.length < 1) quests = "Vous n'avez aucune quête.";
-
-        return await this.ctx.reply("Liste des quêtes", quests, "📜", null, "outline");
+        return await this.ctx.reply(
+            "Navigation - Quêtes.",
+            errorMessage,
+            null,
+            null,
+            { "timeout": "timeout", "leaved": "success" }[exitMode],
+        );
     }
 }
 

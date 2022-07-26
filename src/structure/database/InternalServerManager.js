@@ -56,8 +56,8 @@ class InternalServerManager {
 
     get staffs() {
         const staff = this.testers;
-        staff.push(this.admins);
-        staff.push(this.owners);
+        for (const owner of this.owners) staff.push(owner);
+        for (const admin of this.admins) staff.push(admin);
         return staff;
     }
 
@@ -274,7 +274,7 @@ class InternalServerManager {
             await delay(20_000);
             this.processing[1][0] = false;
 
-		}, 120_000);
+		}, 10_000);
 
         setInterval(async () => {
             this.processing[1][1] = true;
