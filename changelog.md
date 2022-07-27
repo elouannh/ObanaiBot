@@ -1,5 +1,26 @@
 # CHANGELOG
 
+---
+
+> # _**1.0-beta.4 Big fix moment**_
+
+## Patch notes :
+
+- Critical error when bot-infos
+
+## New content :
+
+- Help command executed when bot mentionned
+- Quest 2 & 3 in slayer quests
+- More daily quests
+
+## Reworked :
+
+- Help menu display
+- Quests menu display
+- Code remade with ruler alignement
+
+---
 
 ---
 
