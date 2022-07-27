@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "bot": "node ."
   },
-  "author": "pandawou",
+  "author": "PxndxDev",
   "license": "MIT",
   "dependencies": {
     "better-sqlite3": "^7.4.3",
