@@ -16,7 +16,9 @@ module.exports = client => {
                         const newAmount = hadBefore + toAdd;
                         const quests = qDatas[qKey].filter(q => q.id !== dq.id);
 
-                        if (!(await UpdateQuest(quests, qKey, dq, client, key, newValue, newAmount >= dq.objective.quantity))) {
+                        if (!(await UpdateQuest(
+                            quests, qKey, dq, client, key, newValue, newAmount >= dq.objective.quantity,
+                        ))) {
                             const newQ = dq;
                             newQ.objective.got = newAmount;
                             quests.push(newQ);

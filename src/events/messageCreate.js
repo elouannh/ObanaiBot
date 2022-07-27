@@ -28,11 +28,16 @@ async function executeCommand(client, message, prefix) {
     const clientStatusReady = await cmd.clientStatusReady();
     if (!clientStatusReady) return;
 
-    if (await client.commandManager.isOverloaded()) return message.channel.send("Le bot est actuellement surchargé, veuillez réessayer plus tard.");
+    if (await client.commandManager.isOverloaded()) {
+        return message.channel.send("Le bot est actuellement surchargé, veuillez réessayer plus tard.");
+    }
 
     client.lastChannel.set(message.author.id, message.channel);
     client.requests.get(message.author.id).set(message.id,
-        { req: cmd.infos.name, src: `https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id}` },
+        {
+            req: cmd.infos.name,
+            src: `https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id}`,
+        },
     );
     await cmd.run();
     client.requests.get(message.author.id).delete(message.id);

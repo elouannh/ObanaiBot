@@ -22,7 +22,9 @@ class InventoryDb {
             questItems: {},
             weapon: {
                 rarity: 1,
-                name:  `${require("../../elements/categories/slayer.json").weaponName} ${require("../../elements/categories/slayer.json").rarityNames[0]}`,
+                name:  `${require("../../elements/categories/slayer.json").weaponName} `
+                       +
+                       `${require("../../elements/categories/slayer.json").rarityNames[0]}`,
                 label:  `${require("../../elements/categories/slayer.json").weapon}`,
             },
             weapons: [],
@@ -105,7 +107,15 @@ class InventoryDb {
             const timeLeft = (grim.expiration * 1000) - (Date.now() - p.active_grimoire_since);
             const yensToEarn = await this.earnYens(id, Math.ceil(Math.ceil(timeLeft / 3_600_000) * 150));
 
-            if (cmd !== null) await cmd.ctx.reply("Gain de yens !", `Vous avez obtenu **${yensToEarn}** grâce à la vente de votre grimoire.`, "💰", "fff665", null);
+            if (cmd !== null) {
+                await cmd.ctx.reply(
+                    "Gain de yens !",
+                    `Vous avez obtenu **${yensToEarn}** grâce à la vente de votre grimoire.`,
+                    "💰",
+                    "fff665",
+                    null,
+                );
+            }
 
             this.db.math(id, "+", yensToEarn, "yens");
             this.db.set(id, null, "active_grimoire");
@@ -171,8 +181,12 @@ class InventoryDb {
         const newArray = [];
         const count = i.weapons.filter(elt => this.sameObject(elt, weapon)).length - 1;
         for (const elt of i.weapons) {
-            if (this.sameObject(elt, weapon) && newArray.filter(e => this.sameObject(e, weapon)).length < count) newArray.push(elt);
-            else newArray.push(elt);
+            if (this.sameObject(elt, weapon) && newArray.filter(e => this.sameObject(e, weapon)).length < count) {
+                newArray.push(elt);
+            }
+            else {
+                newArray.push(elt);
+            }
         }
 
         this.db.set(id, newArray, "weapons");

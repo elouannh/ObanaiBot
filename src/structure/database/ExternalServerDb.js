@@ -168,7 +168,8 @@ class ExternalServerDb {
             else {
                 const afterIndex = indexOfTier + 1;
                 const afterTier = ["0", "1", "2", "3"][afterIndex];
-                progress += `\n» Prochain: \`tier ${this.getTier(afterTier)}\`: **${intRender(quantity, " ")}**/${badgesObjectives.objectives[type][afterTier]}`;
+                progress += `\n» Prochain: \`tier ${this.getTier(afterTier)}\`: `;
+                progress += `**${intRender(quantity, " ")}**/${badgesObjectives.objectives[type][afterTier]}`;
             }
         }
 
@@ -229,10 +230,14 @@ class ExternalServerDb {
             case "bdd":
                 const userGrades = await this.get(user);
                 if (!userGrades.claimed.includes("vip")) {
-                    if (userGrades.grades.includes("vip")) this.db.set(user, userGrades.grades.filter(gr => gr !== "vip"), "grades");
+                    if (userGrades.grades.includes("vip")) {
+                        this.db.set(user, userGrades.grades.filter(gr => gr !== "vip"), "grades");
+                    }
                 }
                 else {
-                    if (userGrades.grades.includes("vip")) this.db.set(user, userGrades.grades.filter(gr => gr !== "vip"), "grades");
+                    if (userGrades.grades.includes("vip")) {
+                        this.db.set(user, userGrades.grades.filter(gr => gr !== "vip"), "grades");
+                    }
                     await this.client.playerDb.db.math(user, "-", 2, "stats.strength");
                     await this.client.playerDb.db.math(user, "-", 2, "stats.agility");
                     await this.client.playerDb.db.math(user, "-", 2, "stats.speed");

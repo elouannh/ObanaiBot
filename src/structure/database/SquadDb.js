@@ -44,7 +44,9 @@ class SquadDb {
         if (s === null || s === undefined) return null;
 
         function getXp(t, x) { return t.client.playerDb.db.get(x).exp; }
-        s.leader = s.members.filter(m => m !== s.right_hand && m !== s.owner)?.sort((a, b) => getXp(this, b) - getXp(this, a))?.at(0) ?? "";
+        s.leader = s.members.filter(m => m !== s.right_hand && m !== s.owner)
+                            ?.sort((a, b) => getXp(this, b) - getXp(this, a))
+                            ?.at(0) ?? "";
 
         this.db.set(owner, s.leader, "leader");
 

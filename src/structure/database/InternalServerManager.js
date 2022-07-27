@@ -123,7 +123,11 @@ class InternalServerManager {
                             const cs = [`${player.storyProgress.chapter}`, `${nextQuest.split("_")[0]}`];
                             const qs = [`${player.storyProgress.quest}`, `${nextQuest.split("_")[1]}`];
                             const sameQuest = (cs[0] === cs[1]) && (qs[0] === qs[1]);
-                            const quest = require(`../../quests/slayer/chapter${nextQuest.split("_")[0]}/quest${nextQuest.split("_")[1]}.js`)(sameQuest === true ? player.storyProgress.step : 0);
+                            const quest = require(
+                                `../../quests/slayer/chapter${nextQuest.split("_")[0]}`
+                                +
+                                `/quest${nextQuest.split("_")[1]}.js`,
+                            )(sameQuest === true ? player.storyProgress.step : 0);
                             if (quest !== true) t.client.questDb.db.push(player.id, quest, "slayer");
                         }
                         else {
@@ -132,7 +136,11 @@ class InternalServerManager {
                             const sameQuest = (cs[0] === cs[1]) && (qs[0] === qs[1]);
 
                             if (sameQuest) {
-                                const quest = require(`../../quests/slayer/chapter${probablyTheSame.split("_")[0]}/quest${probablyTheSame.split("_")[1]}.js`)(sameQuest === true ? player.storyProgress.step + 1 : 0);
+                                const quest = require(
+                                    `../../quests/slayer/chapter${probablyTheSame.split("_")[0]}`
+                                    +
+                                    `/quest${probablyTheSame.split("_")[1]}.js`,
+                                )(sameQuest === true ? player.storyProgress.step + 1 : 0);
                                 if (quest !== true) t.client.questDb.db.push(player.id, quest, "slayer");
                             }
                         }
@@ -150,7 +158,8 @@ class InternalServerManager {
                 }
 
                 if (player.slayer.length > 1) {
-                    const largerQuest = player.slayer.sort((a, b) => order(b.chapter, b.quest, b.step) - order(a.chapter, a.quest, a.step));
+                    const largerQuest = player.slayer
+                                .sort((a, b) => order(b.chapter, b.quest, b.step) - order(a.chapter, a.quest, a.step));
                     t.client.questDb.db.set(player.id, largerQuest[0], "slayer");
                 }
             }
@@ -167,7 +176,8 @@ class InternalServerManager {
             t.processing[0][1] = true;
             for (const player of t.client.playerDb.db.array()) {
                 if (!t.datas.dailyQuests.cache.includes(player.id)) {
-                    const randomQuests = dailyQuests.sort(() => 0.5 - Math.random()).slice(0, (dailyQuests.length >= 2 ? 2 : 1));
+                    const randomQuests = dailyQuests
+                                .sort(() => 0.5 - Math.random()).slice(0, (dailyQuests.length >= 2 ? 2 : 1));
 
                     await t.client.questDb.ensure(player.id);
                     await t.client.questDb.db.set(player.id, randomQuests, "daily");
@@ -202,9 +212,12 @@ class InternalServerManager {
 				testers: this.client.internalServerManager.testers,
 			};
 			const news = {
-				owners: testing.roles.cache.get(this.client.config.roles.owners).members.filter(e => !e.user.bot).map(e => e.id),
-				admins: testing.roles.cache.get(this.client.config.roles.admins).members.filter(e => !e.user.bot).map(e => e.id),
-				testers: testing.roles.cache.get(this.client.config.roles.testers).members.filter(e => !e.user.bot).map(e => e.id),
+				owners: testing.roles.cache.get(this.client.config.roles.owners).members
+                                           .filter(e => !e.user.bot).map(e => e.id),
+				admins: testing.roles.cache.get(this.client.config.roles.admins).members
+                                           .filter(e => !e.user.bot).map(e => e.id),
+				testers: testing.roles.cache.get(this.client.config.roles.testers).members
+                                            .filter(e => !e.user.bot).map(e => e.id),
 			};
 
 			const changedOwners = compareArrays(olds.owners, news.owners);
@@ -217,9 +230,17 @@ class InternalServerManager {
 				fields.push(
 					[
 						"👑 __Owners update__",
-						changedOwners.added.length > 0 ? `**(+) Added:** ${changedOwners.added.map(e => `\`${this.client.users.cache.get(e)?.username ?? "Owner lambda"}\``)}\n\n` : ""
+						changedOwners.added.length > 0 ? `**(+) Added:** ${
+                            changedOwners.added.map(e => `\`${
+                                this.client.users.cache.get(e)?.username ?? "Owner lambda"
+                            }\``)
+                        }\n\n` : ""
 						+
-						changedOwners.removed.length > 0 ? `**(-) Removed:** ${changedOwners.removed.map(e => `\`${this.client.users.cache.get(e)?.username ?? "Owner lambda"}\``)}\n\n` : "",
+						changedOwners.removed.length > 0 ? `**(-) Removed:** ${
+                            changedOwners.removed.map(e => `\`${
+                                this.client.users.cache.get(e)?.username ?? "Owner lambda"
+                            }\``)
+                        }\n\n` : "",
 						false,
 					],
 				);
@@ -228,9 +249,17 @@ class InternalServerManager {
 				fields.push(
 					[
 						"🚧 __Admins update__",
-						changedAdmins.added.length > 0 ? `**(+) Added:** ${changedAdmins.added.map(e => `\`${this.client.users.cache.get(e)?.username ?? "Admin lambda"}\``)}\n\n` : ""
+						changedAdmins.added.length > 0 ? `**(+) Added:** ${
+                            changedAdmins.added.map(e => `\`${
+                                this.client.users.cache.get(e)?.username ?? "Admin lambda"
+                            }\``)
+                        }\n\n` : ""
 						+
-						changedAdmins.removed.length > 0 ? `**(-) Removed:** ${changedAdmins.removed.map(e => `\`${this.client.users.cache.get(e)?.username ?? "Admin lambda"}\``)}\n\n` : "",
+						changedAdmins.removed.length > 0 ? `**(-) Removed:** ${
+                            changedAdmins.removed.map(e => `\`${
+                                this.client.users.cache.get(e)?.username ?? "Admin lambda"
+                            }\``)
+                        }\n\n` : "",
 						false,
 					],
 				);
@@ -239,9 +268,17 @@ class InternalServerManager {
 				fields.push(
 					[
 						"🔨 __Testers update__",
-						changedTesters.added.length > 0 ? `**(+) Added:** ${changedTesters.added.map(e => `\`${this.client.users.cache.get(e)?.username ?? "Tester lambda"}\``)}\n\n` : ""
+						changedTesters.added.length > 0 ? `**(+) Added:** ${
+                            changedTesters.added.map(e => `\`${
+                                this.client.users.cache.get(e)?.username ?? "Tester lambda"
+                            }\``)
+                        }\n\n` : ""
 						+
-						changedTesters.removed.length > 0 ? `**(-) Removed:** ${changedTesters.removed.map(e => `\`${this.client.users.cache.get(e)?.username ?? "Tester lambda"}\``)}\n\n` : "",
+						changedTesters.removed.length > 0 ? `**(-) Removed:** ${
+                            changedTesters.removed.map(e => `\`${
+                                this.client.users.cache.get(e)?.username ?? "Tester lambda"
+                            }\``)
+                        }\n\n` : "",
 						false,
 					],
 				);
@@ -256,17 +293,29 @@ class InternalServerManager {
                 str += `${
                     olds.owners.length < news.owners.length ?
                         `+${news.owners.length - olds.owners.length} owners\n`
-                        : (olds.owners.length > news.owners.length ? `-${olds.owners.length - news.owners.length} owners\n` : "")
+                        : (
+                            olds.owners.length > news.owners.length ?
+                            `-${olds.owners.length - news.owners.length} owners\n`
+                            : ""
+                        )
                 }`;
                 str += `${
                     olds.admins.length < news.admins.length ?
                         `+${news.admins.length - olds.admins.length} admins\n`
-                        : (olds.admins.length > news.admins.length ? `-${olds.admins.length - news.admins.length} admins\n` : "")
+                        : (
+                            olds.admins.length > news.admins.length ?
+                            `-${olds.admins.length - news.admins.length} admins\n`
+                            : ""
+                        )
                 }`;
                 str += `${
                     olds.testers.length < news.testers.length ?
                         `+${news.testers.length - olds.testers.length} testers`
-                        : (olds.testers.length > news.testers.length ? `-${olds.testers.length - news.testers.length} testers` : "")
+                        : (
+                            olds.testers.length > news.testers.length ?
+                            `-${olds.testers.length - news.testers.length} testers`
+                            : ""
+                        )
                 }`;
                 str += "```";
                 this.client.supportLog("Bot staff changes.", str, fields, "outline");
@@ -281,8 +330,11 @@ class InternalServerManager {
 			const server = this.client.guilds.cache.get(this.client.config.support);
 
             // VIP PART
-            const bddv = this.client.externalServerDb.db.array().filter(e => e.grades.includes("vip")).map(e => e.id);
-            const supportv = server.roles.cache.get(this.client.config.roles.vip).members.filter(e => !e.user.bot).map(e => e.id);
+            const bddv = this.client.externalServerDb.db.array()
+                                                        .filter(e => e.grades.includes("vip")).map(e => e.id);
+            const supportv = server.roles.cache.get(this.client.config.roles.vip).members
+                                               .filter(e => !e.user.bot)
+                                               .map(e => e.id);
 
             const datasv = {
                 add: bddv.filter(user => !supportv.includes(user)),
@@ -298,8 +350,12 @@ class InternalServerManager {
             }
 
             // VIP(+) PART
-            const bddvp = this.client.externalServerDb.db.array().filter(e => e.grades.includes("vip+")).map(e => e.id);
-            const supportvp = server.roles.cache.get(this.client.config.roles["vip+"]).members.filter(e => !e.user.bot).map(e => e.id);
+            const bddvp = this.client.externalServerDb.db.array()
+                                                         .filter(e => e.grades.includes("vip+"))
+                                                         .map(e => e.id);
+            const supportvp = server.roles.cache.get(this.client.config.roles["vip+"]).members
+                                                .filter(e => !e.user.bot)
+                                                .map(e => e.id);
 
             const datasvp = {
                 add: bddvp.filter(user => !supportvp.includes(user)),

@@ -14,7 +14,15 @@ module.exports = client => {
                 if (hasChangement(oldValue, newValue)) {
                     if (dq.objective.type === "voyage_to") {
                         const quests = qDatas[qKey].filter(q => q.id !== dq.id);
-                        await UpdateQuest(quests, qKey, dq, client, key, newValue, dq.objective.region === newValue.region && dq.objective.area === newValue.area);
+                        await UpdateQuest(
+                            quests,
+                            qKey,
+                            dq,
+                            client,
+                            key,
+                            newValue,
+                            dq.objective.region === newValue.region && dq.objective.area === newValue.area,
+                        );
                     }
                 }
 

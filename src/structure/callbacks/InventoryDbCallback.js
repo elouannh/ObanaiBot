@@ -15,7 +15,9 @@ module.exports = client => {
                         const newAmount = hadBefore + toAdd;
                         const quests = qDatas[qKey].filter(q => q.id !== dq.id);
 
-                        if (!(await UpdateQuest(quests, qKey, dq, client, key, newValue, newAmount >= dq.objective.quantity))) {
+                        if (!(await UpdateQuest(
+                            quests, qKey, dq, client, key, newValue, newAmount >= dq.objective.quantity,
+                        ))) {
                             const newQ = dq;
                             newQ.objective.got = newAmount;
                             quests.push(newQ);
@@ -27,7 +29,9 @@ module.exports = client => {
                 if (oldValue?.active_grimoire === null && newValue?.active_grimoire !== null) {
                     if (dq.objective.type === "equip_grimoire") {
                         const quests = qDatas[qKey].filter(q => q.id !== dq.id);
-                        await UpdateQuest(quests, qKey, dq, client, key, newValue, newValue.active_grimoire === dq.objective.grimoire);
+                        await UpdateQuest(
+                            quests, qKey, dq, client, key, newValue, newValue.active_grimoire === dq.objective.grimoire,
+                        );
                     }
                 }
 
@@ -39,7 +43,9 @@ module.exports = client => {
                         const newAmount = hadBefore + toAdd;
                         const quests = qDatas[qKey].filter(q => q.id !== dq.id);
 
-                        if (!(await UpdateQuest(quests, qKey, dq, client, key, newValue, newAmount >= dq.objective.quantity))) {
+                        if (!(await UpdateQuest(
+                            quests, qKey, dq, client, key, newValue, newAmount >= dq.objective.quantity,
+                        ))) {
                             const newQ = dq;
                             newQ.objective.got = newAmount;
                             quests.push(newQ);
@@ -59,7 +65,9 @@ module.exports = client => {
                     const newAmount = hadBefore + toAdd;
                     const quests = qDatas[qKey].filter(q => q.id !== dq.id);
 
-                    if (!(await UpdateQuest(quests, qKey, dq, client, key, newValue, newAmount >= dq.objective.quantity))) {
+                    if (!(await UpdateQuest(
+                        quests, qKey, dq, client, key, newValue, newAmount >= dq.objective.quantity,
+                    ))) {
                         const newQ = dq;
                         newQ.objective.got = newAmount;
                         quests.push(newQ);
@@ -72,8 +80,12 @@ module.exports = client => {
 
         // BADGE DE FERMER
 
-        const oldSeeds = "materials" in (oldValue ?? {}) ? ("seed" in oldValue.materials ? oldValue.materials.seed : 0) : 0;
-        const newSeeds = "materials" in (newValue ?? {}) ? ("seed" in newValue.materials ? newValue.materials.seed : 0) : 0;
+        const oldSeeds = "materials" in (oldValue ?? {}) ?
+                         ("seed" in oldValue.materials ? oldValue.materials.seed : 0)
+                         : 0;
+        const newSeeds = "materials" in (newValue ?? {}) ?
+                         ("seed" in newValue.materials ? newValue.materials.seed : 0)
+                         : 0;
 
         if (oldSeeds < newSeeds) {
             await client.externalServerDb.checkBadges(oldValue.id, "farmer", newSeeds - oldSeeds);

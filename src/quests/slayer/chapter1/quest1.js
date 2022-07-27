@@ -21,7 +21,9 @@ module.exports = step => {
         ),
         new SlayerQuest(
             "Un inconnu (1)",
-            "Pendant que vous vous occupiez de vos champs, vous vous rendez compte qu'un homme est allongé sur le sol, dans la forêt non loin de là.",
+            "Pendant que vous vous occupiez de vos champs, vous vous rendez compte qu'un homme est allongé sur le sol,"
+            +
+            " dans la forêt non loin de là.",
             new VoyageTo(4, 3),
             "chapter1/quest1:1",
             1,
@@ -32,7 +34,9 @@ module.exports = step => {
             "Un inconnu (2)",
             "Vous voilà dans la forêt où le corps sans vie bougeait, inspectez les environs.",
             new InspectArea(
-                "*Un homme torse nu, couvert de blessure dont le bras manque se trouve sur le sol. Vous décidez de le prendre et de l'emmener à votre hutte.*",
+                "*Un homme torse nu, couvert de blessure dont le bras manque se trouve sur le sol. "
+                +
+                "Vous décidez de le prendre et de l'emmener à votre hutte.*",
                 "pierre_body",
                 "Corps d'un homme blessé",
                 "questItems",
@@ -74,7 +78,9 @@ module.exports = step => {
         ),
         new SlayerQuest(
             "Explications",
-            "Le jeune homme anciennement inconscient semble rétabli, et vous avez une discussion à entretenir avec lui et Hime.",
+            "Le jeune homme anciennement inconscient semble rétabli, "
+            +
+            "et vous avez une discussion à entretenir avec lui et Hime.",
             new Talk(pnj2.name, pnj2.id, texts["6"].join("\n\n"), 4, 1),
             "chapter1/quest1:6",
             1,
@@ -83,7 +89,9 @@ module.exports = step => {
         ),
         new SlayerQuest(
             "Visite inopinée (1)",
-            "Après les explications de Pierre, vous décidez de retourner voir dans la forêt afin de voir si quelque chose cloche.",
+            "Après les explications de Pierre, vous décidez de retourner "
+            +
+            "voir dans la forêt afin de voir si quelque chose cloche.",
             new VoyageTo(4, 3),
             "chapter1/quest1:7",
             1,
@@ -92,7 +100,9 @@ module.exports = step => {
         ),
         new SlayerQuest(
             "Visite inopinée (2)",
-            "Vous ne trouvez rien. Cependant, une odeur horrible émane de la hutte. Vous ne savez plus où vous êtes, mais vous devez absolument y retourner !",
+            "Vous ne trouvez rien. Cependant, une odeur horrible émane de la hutte. "
+            +
+            "Vous ne savez plus où vous êtes, mais vous devez absolument y retourner !",
             new VoyageTo(4, 1),
             "chapter1/quest1:8",
             1,
@@ -101,7 +111,9 @@ module.exports = step => {
         ),
         new SlayerQuest(
             "Destruction !!",
-            "La hutte étant détruite, Hime disparue... Tout ce qu'il vous reste à faire, c'est demander des explications à Pierre !",
+            "La hutte étant détruite, Hime disparue... "
+            +
+            "Tout ce qu'il vous reste à faire, c'est demander des explications à Pierre !",
             new Talk(pnj3.name, pnj3.id, texts["9"].join("\n\n"), 4, 1),
             "chapter1/quest1:9",
             1,
@@ -110,8 +122,18 @@ module.exports = step => {
         ),
         new SlayerQuest(
             "Hime ? Où es-tu passée ?...",
-            "Hime a disparu. Pierre est mort. Il ne vous reste qu'une chose, partir à sa recherche. Trouvez d'abord des indices.",
-            new InspectArea("*Vous trouverez sur le sol un peu de sang et des cheveux blancs d'Hime. Vous les prenez avec vous.*", "hime_hair", "Cheveux d'Hime", "questItems", 3, 4, 1),
+            "Hime a disparu. Pierre est mort. "
+            +
+            "Il ne vous reste qu'une chose, partir à sa recherche. Trouvez d'abord des indices.",
+            new InspectArea(
+                "*Vous trouverez sur le sol un peu de sang et des cheveux blancs d'Hime. Vous les prenez avec vous.*",
+                "hime_hair",
+                "Cheveux d'Hime",
+                "questItems",
+                3,
+                4,
+                1,
+            ),
             "chapter1/quest1:10",
             1,
             1,

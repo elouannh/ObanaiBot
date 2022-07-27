@@ -17,7 +17,9 @@ module.exports = step => {
         ),
         new SlayerQuest(
             "Où suis-je ?",
-            "Qui a déplacé le tonneau dans lequel vous étiez caché ?? Parlez à Franky, il a l'air d'avoir quelque chose d'important à vous dire !",
+            "Qui a déplacé le tonneau dans lequel vous étiez caché ?? "
+            +
+            "Parlez à Franky, il a l'air d'avoir quelque chose d'important à vous dire !",
             new Talk(pnj6.name, pnj6.id, texts["1"].join("\n\n"), 9, 1),
             "chapter1/quest3:1",
             1,
@@ -26,7 +28,9 @@ module.exports = step => {
         ),
         new SlayerQuest(
             "Retour à la réalité",
-            "Pendant ce temps, les pourfendeurs vous cherchent toujours dans les rues du quartier Yoshiwara... Continuez de vous enfuir !",
+            "Pendant ce temps, les pourfendeurs vous cherchent toujours dans les rues du quartier Yoshiwara... "
+            +
+            "Continuez de vous enfuir !",
             new VoyageTo(9, 3),
             "chapter1/quest3:2",
             1,

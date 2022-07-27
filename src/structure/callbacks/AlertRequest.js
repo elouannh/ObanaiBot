@@ -26,7 +26,13 @@ async function alertQuest(client, type, datas, quest) {
                 },
             []);
             await client.playerDb.earnExp(datas.id, Math.floor(Math.random() * 150) + 100, cmd);
-            await cmd.ctx.reply("Félicitations !", string + ` Quête terminée:\n\n\`-   ${quest.title}   -\`\n*${quest.description}*`, "❗", "2f3136", null);
+            await cmd.ctx.reply(
+                "Félicitations !",
+                string + ` Quête terminée:\n\n**${this.title}**\n> *« ${this.description} »*`,
+                "❗",
+                "2f3136",
+                null,
+            );
         }
         catch (err) {
             await client.playerDb.earnExp(datas.id, Math.floor(Math.random() * 150) + 100);
@@ -34,7 +40,9 @@ async function alertQuest(client, type, datas, quest) {
     }
     else {
         const playerId = Number((datas.created / 1000).toFixed(0)).toString(20);
-        const model = `**${client.users.cache.get(datas.id)?.username ?? `Joueur #${playerId}`}** a franchi une étape de quête`;
+        const model = `**${
+            client.users.cache.get(datas.id)?.username ?? `Joueur #${playerId}`
+        }** a franchi une étape de quête`;
         const string = {
             "daily": `${model} quotidienne.`,
             "slayer": `${model} de pourfendeur.`,
@@ -53,9 +61,11 @@ async function alertQuest(client, type, datas, quest) {
                 "Étape de quête terminée !",
                 string
                 +
-                ` Quête terminée:\n\n\`-   ${quest.title}   -\`\n*${quest.description}*\n\n`
+                ` Quête terminée:\n\n**${this.title}**\n> *« ${this.description} »*\n\n`
                 +
-                "**Cependant, un corbeau de liaison vous apportera la suite de cette quête prochainement. Restez à l'affût !**",
+                "**Cependant, un corbeau de liaison vous apportera la suite de cette quête prochainement. "
+                +
+                "Restez à l'affût !**",
                 "❗",
                 null,
                 "outline",

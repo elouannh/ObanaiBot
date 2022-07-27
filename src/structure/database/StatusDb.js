@@ -81,7 +81,9 @@ class StatusDb {
                         text: "Changement de statut",
                     },
                     color: 0xff2323,
-                    description: `*Une erreur est survenue, le mode **sécurité** a été activé.*\n\n**Horodatage**: <t:${Math.ceil(Date.now() / 1000)}:R>`,
+                    description: "*Une erreur est survenue, le mode **sécurité** a été activé.*"
+                                 +
+                                 `\n\n**Horodatage**: <t:${Math.ceil(Date.now() / 1000)}:R>`,
                     title: "🔨 — Le bot est désactivé.",
                 },
             ] });
