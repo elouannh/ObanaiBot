@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const { Client, Util, IntentsBitField } = require("discord.js");
+const { Client, escapeMarkdown, IntentsBitField } = require("discord.js");
 const { PlayerDb } = require("../structure/database/PlayerDb");
 const { InventoryDb } = require("../structure/database/InventoryDb");
 const { SquadDb } = require("../structure/database/SquadDb");
@@ -79,7 +79,7 @@ class Obanai extends Client {
         }
         else {
             // this.log("[AUTO] supportLog()");
-            // this.log(`title: ${Util.escapeMarkdown(title)} | description: ${description.replace("```diff\n", "").replace("```", "").replace("\n", " ⁂ ")}`);
+            // this.log(`title: ${escapeMarkdown(title)} | description: ${description.replace("```diff\n", "").replace("```", "").replace("\n", " ⁂ ")}`);
         }
     }
 
@@ -89,7 +89,7 @@ class Obanai extends Client {
              .setEmoji(addOrRemove === "add" ? "🎉" : "🚪")
              .setTitle(addOrRemove === "add" ? "Un serveur a ajouté le bot !" : "Un serveur a retiré le bot...")
              .setDescription(
-                `**Serveur**: \`${Util.escapeMarkdown(guild.name)}\`\n**Membres**: \`${guild.memberCount}\`\n\n`
+                `**Serveur**: \`${escapeMarkdown(guild.name)}\`\n**Membres**: \`${guild.memberCount}\`\n\n`
                 +
                 `*Stats actuelles:*\n\n**Nombre de serveurs**: \`${this.guilds.cache.size}\``,
              );
@@ -100,7 +100,7 @@ class Obanai extends Client {
         }
         else {
             // this.log("[AUTO] supportLog()");
-            // this.log(`title: ${Util.escapeMarkdown(title)} | description: ${description.replace("```diff\n", "").replace("```", "").replace("\n", " ⁂ ")}`);
+            // this.log(`title: ${escapeMarkdown(title)} | description: ${description.replace("```diff\n", "").replace("```", "").replace("\n", " ⁂ ")}`);
         }
     }
 

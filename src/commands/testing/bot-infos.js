@@ -1,5 +1,5 @@
 const Command = require("../../base/Command");
-const { Util } = require("discord.js");
+const { escapeMarkdown } = require("discord.js");
 
 class BotInfos extends Command {
     constructor() {
@@ -41,7 +41,7 @@ class BotInfos extends Command {
                 .sort((a, b) => b.created - a.created)
                 .splice(0, 5)
                 .map(e => `**\`${
-                    Util.escapeMarkdown(this.client.users.cache.get(e.id)?.username) ?? "non-cached player"
+                    escapeMarkdown(this.client.users.cache.get(e.id)?.username ?? "non-cached player")
                 }\` - <t:${((e.created) / 1000).toFixed(0)}:R>**`)
                 .join("\n")
         }\n`;
