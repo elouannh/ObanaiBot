@@ -20,7 +20,14 @@ class SuperSelectMenu {
     }
 
     setOptions(options) {
-        this.datas["options"] = options.map(e => new SuperSelectMenuOption().setLabel(e[0]).setValue(e[1]).setDescription(e[2]).setEmoji(e[3]).setDefault(e[4]).option);
+        this.datas["options"] = options.map(e => new SuperSelectMenuOption()
+            .setLabel(e[0])
+            .setValue(e[1])
+            .setDescription(e[2])
+            .setEmoji(e[3])
+            .setDefault(e[4])
+            .option,
+        );
 
         return this;
     }

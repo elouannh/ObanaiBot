@@ -18,24 +18,6 @@ class Context {
         return [choices1, choices2][["y", "n"].indexOf(compareStr)].includes(str?.toLowerCase() ?? "chèvre");
     }
 
-    async embedGenerator(title, description, emoji, color, style) {
-        const tit = await this.trStr(title);
-        const desc = await this.trStr(description);
-
-        const reponse = new SuperEmbed()
-            .setTitle(tit)
-            .setDescription(desc);
-
-        if (style !== null) {
-            reponse.setStyle(style);
-        }
-        if (emoji !== null || color !== null) {
-            if (emoji !== null) reponse.setEmoji(emoji);
-            if (color !== null) reponse.setColor(color.replace("#", ""));
-        }
-        return reponse.embed;
-    }
-
     async trStr(str) {
         const l = await this.client.playerDb.getLang(this.command.message.author.id);
 
@@ -76,6 +58,15 @@ class Context {
             if (color !== null) reponse.setColor(color.replace("#", ""));
         }
         return await this.command.message.channel.send({ embeds: [reponse.embed] });
+    }
+
+    async send(content = "", emoji = "", reply = true) {
+        if (reply) {
+            await this.command.message.channel.send({ content: `> <@${this.command.message.author.id}>, ${emoji === "" ? "" : `${emoji} `}${content}`, failIfNoExists: false });
+        }
+        else {
+            await this.command.message.channel.send({ content: `> ${emoji === "" ? "" : `${emoji} `}${content}` });
+        }
     }
 
     async betterReply(title, description, emoji, color, style, displayName = true, image) {

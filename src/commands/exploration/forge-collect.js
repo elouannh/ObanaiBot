@@ -19,7 +19,9 @@ class ForgeCollect extends Command {
 
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const aDatas = await this.client.activityDb.get(this.message.author.id);
         const iDatas = await this.client.inventoryDb.get(this.message.author.id);

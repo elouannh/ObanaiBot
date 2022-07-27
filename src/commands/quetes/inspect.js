@@ -21,7 +21,9 @@ class Inspect extends Command {
 
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const mDatas = await this.client.mapDb.get(this.message.author.id);
         const loc = map.Regions.filter(r => r.id === mDatas.region)?.at(0);
@@ -69,11 +71,25 @@ class Inspect extends Command {
                 const iDatas = await this.client.inventoryDb.get(this.message.author.id);
 
                 const mat1 = q[0].objective.itemCategory in iDatas ?
-                            (q[0].objective.item in iDatas[q[0].objective.itemCategory] ? iDatas[q[0].objective.itemCategory][q[0].objective.item] : 0) : 0;
+                            (
+                                q[0].objective.item in iDatas[q[0].objective.itemCategory] ?
+                                iDatas[q[0].objective.itemCategory][q[0].objective.item]
+                                : 0
+                            )
+                            : 0;
                 const mat2 = q[0].objective.itemCategory in added ?
-                            (q[0].objective.item in added[q[0].objective.itemCategory] ? added[q[0].objective.itemCategory][q[0].objective.item] : 0) : 0;
+                            (
+                                q[0].objective.item in added[q[0].objective.itemCategory] ?
+                                added[q[0].objective.itemCategory][q[0].objective.item]
+                                : 0
+                            )
+                            : 0;
 
-                this.client.inventoryDb.db.set(this.message.author.id, q[0].objective.quantity + mat1, `${q[0].objective.itemCategory}.${q[0].objective.item}`);
+                this.client.inventoryDb.db.set(
+                    this.message.author.id,
+                    q[0].objective.quantity + mat1,
+                    `${q[0].objective.itemCategory}.${q[0].objective.item}`,
+                );
                 added[q[0].objective.itemCategory][q[0].objective.item] = mat2 + q[0].objective.quantity;
 
                 const newValue = await this.client.questDb.get(this.message.author.id);
@@ -86,7 +102,10 @@ class Inspect extends Command {
 
         return await this.ctx.reply(
             "Interaction: inspecter la zone.",
-            `${Object.values(added.materials).length > 0 ? "**»** Vous avez obtenu des matériaux, regardez votre inventaire !\n\n" : ""}`
+            `${Object.values(added.materials).length > 0 ?
+                "**»** Vous avez obtenu des matériaux, regardez votre inventaire !\n\n"
+                : ""
+            }`
             +
             `${Object.values(added.materials).length > 0 ? "**»** Vous avez obtenu des objets de quête !" : ""}`,
             "🧩",

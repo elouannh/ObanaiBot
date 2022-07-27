@@ -21,7 +21,9 @@ class Talk extends Command {
 
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const mDatas = await this.client.mapDb.get(this.message.author.id);
         const loc = map.Regions.filter(r => r.id === mDatas.region)?.at(0);
@@ -47,23 +49,33 @@ class Talk extends Command {
         }
 
         let questToTalk = "";
-        if (quests.region.length > 0) questToTalk += `> **🌍 Quêtes de régions**\n\n${quests.region.map(q => q[0].display()).join("\n\n")}`;
+        if (quests.region.length > 0) {
+            questToTalk += `> **🌍 Quêtes de régions**\n\n${quests.region.map(q => q[0].display()).join("\n\n")}`;
+        }
         if (quests.area.length > 0) {
             questToTalk += `\n\n> **🗺️ Quêtes de zone**\n\n${
-                quests.area.slice(0, 10).map((q, i) => `**${i + 1}.**┆` + q[0].display()).join("\n\n")}${quests.area.length > 10 ? `\n...(${quests.area.length - 10} autres)` : ""
-            }`;
+                    quests.area.slice(0, 10).map((q, i) => `**${i + 1}.**┆` + q[0].display()).join("\n\n")
+                }${
+                    quests.area.length > 10 ? `\n...(${quests.area.length - 10} autres)` : ""
+                }`;
         }
         else {
             questToTalk += "\n\nVous n'avez aucune quête avec laquelle interagir.";
         }
 
         if (!questToTalk.endsWith("interagir.")) {
-            questToTalk += "\n\n\n\nLorsque vous répondrez à ce message, vous entamerez le dialogue avec le personnage..";
+            questToTalk += "\n\nLorsque vous répondrez à ce message, vous entamerez le dialogue avec le personnage..";
             questToTalk += "\n\nRépondre avec le numéro correspondant à votre choix de quête.";
             questToTalk += "Répondre `n` (non) pour annuler.";
         }
 
-        const msg = await this.ctx.reply("Interaction: dialoguer avec un personnage.", questToTalk, "🧩", null, "outline");
+        const msg = await this.ctx.reply(
+            "Interaction: dialoguer avec un personnage.",
+            questToTalk,
+            "🧩",
+            null,
+            "outline",
+        );
         if (questToTalk.endsWith("interagir.")) return;
 
         const choices = {};
@@ -84,10 +96,22 @@ class Talk extends Command {
             await alertQuest(this.client, q[1], newValue, q[0]);
         }
         else if (this.ctx.isResp(choice, "n")) {
-            return await this.ctx.reply("Interaction: dialoguer avec un personnage.", "Vous avez décidé de ne pas interagir.", "🧩", null, "outline");
+            return await this.ctx.reply(
+                "Interaction: dialoguer avec un personnage.",
+                "Vous avez décidé de ne pas interagir.",
+                "🧩",
+                null,
+                "outline",
+            );
         }
         else {
-            return await this.ctx.reply("Interaction: dialoguer avec un personnage.", "La commande n'a pas aboutie.", null, null, "timeout");
+            return await this.ctx.reply(
+                "Interaction: dialoguer avec un personnage.",
+                "La commande n'a pas aboutie.",
+                null,
+                null,
+                "timeout",
+            );
         }
     }
 }

@@ -20,7 +20,9 @@ class ForgeWeapon extends Command {
 
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         function luck(x, count = 0) {
             if (((Math.random() * 100) / x) < (100 / (count + 1)) && count < 5) return luck(x, count + 1);
@@ -38,17 +40,33 @@ class ForgeWeapon extends Command {
             }
         }
 
-        if (Object.entries(items).length >= 3) return await this.ctx.reply("Oups...", "Vous avez atteint le nombre d'items maximum possible en forge. (3)", null, null, "warning");
-        const weaponModels = "materials" in iDatas ? ("weapon_model" in iDatas.materials ? iDatas.materials["weapon_model"] : 0) : 0;
-        const tamahagane = "materials" in iDatas ? ("tamahagane" in iDatas.materials ? iDatas.materials["tamahagane"] : 0) : 0;
+        if (Object.entries(items).length >= 3) {
+            return await this.ctx.reply(
+                "Oups...",
+                "Vous avez atteint le nombre d'items maximum possible en forge. (3)",
+                null,
+                null,
+                "warning",
+            );
+        }
+        const weaponModels = "materials" in iDatas ?
+                                ("weapon_model" in iDatas.materials ? iDatas.materials["weapon_model"] : 0)
+                                : 0;
+        const tamahagane = "materials" in iDatas ?
+                            ("tamahagane" in iDatas.materials ? iDatas.materials["tamahagane"] : 0)
+                            : 0;
         const woodLogs = "materials" in iDatas ? ("wood" in iDatas.materials ? iDatas.materials["wood"] : 0) : 0;
         const yens = iDatas.yens ?? 0;
 
         const msg = await this.ctx.reply(
             "Forger une arme.",
-            "Souhaitez-vous vraiment forger une arme ? Vous aurez une arme de rareté aléatoire. (PS: vos chances sont accrues si vous vous trouvez au **Village des forgerons**)\n"
+            "Souhaitez-vous vraiment forger une arme ? Vous aurez une arme de rareté aléatoire. "
             +
-            "\n__Matériaux :__\n```diff\n- x1 Modèle d'arme\n- x100 Tamahagane\n- x20 Bois\n- 50'000 ¥```\n\nRépondre avec `y` (oui) ou `n` (non).",
+            "(PS: vos chances sont accrues si vous vous trouvez au **Village des forgerons**)\n"
+            +
+            "\n__Matériaux :__\n```diff\n- x1 Modèle d'arme\n- x100 Tamahagane\n- x20 Bois\n- 50'000 ¥```\n\n"
+            +
+            "Répondre avec `y` (oui) ou `n` (non).",
             "🗡️",
             null,
             "outline",
@@ -67,14 +85,37 @@ class ForgeWeapon extends Command {
                 const i = objects[item];
                 if (i[0] < i[1]) missing[item] = [i[0], i[1], i[1] - i[0]];
             }
-            if (Object.values(missing).length !== 0) return await this.ctx.reply("Oups...", "Vous n'avez pas les éléments nécessaires.", null, null, "warning");
-            this.client.inventoryDb.db.set(this.message.author.id, objects["weapon_model"][0] - objects["weapon_model"][1], "materials.weapon_model");
-            this.client.inventoryDb.db.set(this.message.author.id, objects["tamahagane"][0] - objects["tamahagane"][1], "materials.tamahagane");
-            this.client.inventoryDb.db.set(this.message.author.id, objects["wood"][0] - objects["wood"][1], "materials.wood");
+            if (Object.values(missing).length !== 0) {
+                return await this.ctx.reply(
+                    "Oups...",
+                    "Vous n'avez pas les éléments nécessaires.",
+                    null,
+                    null,
+                    "warning",
+                );
+            }
+            this.client.inventoryDb.db.set(
+                this.message.author.id,
+                objects["weapon_model"][0] - objects["weapon_model"][1],
+                "materials.weapon_model",
+            );
+            this.client.inventoryDb.db.set(
+                this.message.author.id,
+                objects["tamahagane"][0] - objects["tamahagane"][1],
+                "materials.tamahagane",
+            );
+            this.client.inventoryDb.db.set(
+                this.message.author.id,
+                objects["wood"][0] - objects["wood"][1],
+                "materials.wood",
+            );
             this.client.inventoryDb.db.set(this.message.author.id, objects["yens"][0] - objects["yens"][1], "yens");
             const rarity = luck((this.client.mapDb.db.get(this.message.author.id).region === 7 ? 3 : 1));
             await this.ctx.reply(
-                "Forger une arme.", `Vous forgez donc une arme !\n\n**Détails de l'arme:**\nTemps de forge: **${convertDate(7_200_000 * rarity).string}**\n`
+                "Forger une arme.",
+                "Vous forgez donc une arme !"
+                +
+                `\n\n**Détails de l'arme:**\nTemps de forge: **${convertDate(7_200_000 * rarity).string}**\n`
                 +
                 `Rareté: **${rarity}**\n*Plus d'informations avec la commande \`${this.prefix}forge-list.\`*`,
                 "🗡️",
@@ -93,7 +134,13 @@ class ForgeWeapon extends Command {
             await this.client.activityDb.forgeItem(this.message.author.id, itemDat);
         }
         else if (this.ctx.isResp(choice, "n")) {
-            return await this.ctx.reply("Forger une arme.", "Vous avez décidé de ne pas forger.", "🗡️", null, "outline");
+            return await this.ctx.reply(
+                "Forger une arme.",
+                "Vous avez décidé de ne pas forger.",
+                "🗡️",
+                null,
+                "outline",
+            );
         }
         else {
             return await this.ctx.reply("Forger une arme.", "La commande n'a pas aboutie.", null, null, "timeout");

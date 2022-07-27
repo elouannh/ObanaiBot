@@ -26,7 +26,9 @@ class SetVip extends Command {
         if (user === null) return;
 
         const pExists = await this.client.playerDb.started(user.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const eDatas = await this.client.externalServerDb.ensure(user.id);
         if (!eDatas.grades.includes("vip")) {

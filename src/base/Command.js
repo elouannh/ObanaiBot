@@ -3,6 +3,12 @@ const convertDate = require("../utils/convertDate");
 const Context = require("./Context");
 const fs = require("fs");
 
+const sections = {
+    "Commandes Globales": ["Utilitaire"],
+    "Commandes du RPG Demon Slayer": ["Combats", "Escouades", "Exploration", "Quêtes", "Stats"],
+    "Commandes du Personnel": ["Testing", "Admin", "Owner"],
+};
+
 class Command {
     constructor(infos = {
         adminOnly: false,
@@ -28,7 +34,7 @@ class Command {
             const req = [];
 
             fs.readdirSync("./src/commands")
-                .filter(cat => !["administrateur", "utilitaire"].includes(cat))
+                .filter(cat => sections["Commandes du RPG Demon Slayer"].includes(cat))
                 .forEach(folder => {
                     const files = fs.readdirSync(`./src/commands/${folder}`);
 
@@ -56,7 +62,8 @@ class Command {
         // ...............................................................................<string, Date>
         if (!this.client.cooldowns.has(this.infos.name)) this.client.cooldowns.set(this.infos.name, new Collection());
         if (!this.client.cooldowns.get(this.infos.name).has(this.message.author.id)) {
-            this.client.cooldowns.get(this.infos.name).set(this.message.author.id, Date.now() - this.infos.cooldown * 1000);
+            this.client.cooldowns.get(this.infos.name)
+                                 .set(this.message.author.id, Date.now() - this.infos.cooldown * 1000);
         }
 
         const lastRun = this.client.cooldowns.get(this.infos.name).get(this.message.author.id);
@@ -67,7 +74,9 @@ class Command {
             ready = false;
             await this.ctx.reply(
                 "Veuillez patienter.",
-                `Merci d'attendre \`${convertDate(readyForRun - tStamp, true).string}\` avant de pouvoir refaire cette commande.`,
+                `Merci d'attendre \`${convertDate(readyForRun - tStamp, true).string}\``
+                +
+                " avant de pouvoir refaire cette commande.",
                 null,
                 null,
                 "timeout",
@@ -76,7 +85,11 @@ class Command {
         else {
             this.client.cooldowns.get(this.infos.name).delete(this.message.author.id);
 
-            if (forExecuting) setTimeout(() => this.client.cooldowns.get(this.infos.name).set(this.message.author.id, Date.now()), this.command);
+            if (forExecuting) {
+                setTimeout(() => {
+                    this.client.cooldowns.get(this.infos.name).set(this.message.author.id, Date.now());
+                }, this.command);
+            }
         }
 
         return ready;
@@ -85,7 +98,9 @@ class Command {
     async requestReady() {
         let ready = true;
 
-        if (!this.client.requests.has(this.message.author.id)) this.client.requests.set(this.message.author.id, new Collection());
+        if (!this.client.requests.has(this.message.author.id)) {
+            this.client.requests.set(this.message.author.id, new Collection());
+        }
 
         // Collection<string, string> avec string[0] = cmd.name et string[1] = lien
         const userRequests = this.client.requests.get(this.message.author.id);
@@ -106,7 +121,9 @@ class Command {
             ready = false;
             await this.ctx.reply(
                 "Une erreur est survenue.",
-                `Vous n'avez pas fini de répondre aux requêtes suivantes :\nt${notFinished.map(req => `[\`${req.req}\`](${req.src})`)}`,
+                "Vous n'avez pas fini de répondre aux requêtes suivantes :\n"
+                +
+                `t${notFinished.map(req => `[\`${req.req}\`](${req.src})`)}`,
                 null,
                 null,
                 "warning",
@@ -139,7 +156,8 @@ class Command {
     }
 
     async clientPermissionsReady() {
-        const clientMember = this.message.guild.members.cache.get(this.client.user.id).permissionsIn(this.message.channel);
+        const clientMember = this.message.guild.members.cache.get(this.client.user.id)
+                                                             .permissionsIn(this.message.channel);
         const clientBitfield = new PermissionsBitField(this.client.bitfield).toArray();
         const clientPermissions = clientMember.toArray().filter(p => clientBitfield.includes(p));
 
@@ -174,7 +192,10 @@ class Command {
                 }
                 break;
             case "admins":
-                if (!this.client.internalServerManager.admins.concat(this.client.internalServerManager.owners).includes(this.message.author.id)) {
+                if (
+                    !this.client.internalServerManager.admins.concat(this.client.internalServerManager.owners)
+                                                             .includes(this.message.author.id)
+                ) {
                     ready = false;
                 }
                 break;
@@ -212,7 +233,9 @@ class Command {
                         ready = false;
                         await this.ctx.reply(
                             "Maintenance.",
-                            "Le bot est actuellement en maintenance. Plus d'informations ici: **https://bit.ly/obanaihelp**.",
+                            "Le bot est actuellement en maintenance. Plus d'informations ici: "
+                            +
+                            "**https://bit.ly/obanaihelp**.",
                             "🚧",
                             null,
                             "warning",
@@ -222,7 +245,9 @@ class Command {
                         ready = false;
                         await this.ctx.reply(
                             "Maintenance.",
-                            "Le bot est actuellement en maintenance. Plus d'informations ici: **https://bit.ly/obanaihelp**.",
+                            "Le bot est actuellement en maintenance. Plus d'informations ici: "
+                            +
+                            "**https://bit.ly/obanaihelp**.",
                             "🚧",
                             null,
                             "warning",

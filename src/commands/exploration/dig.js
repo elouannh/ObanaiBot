@@ -9,7 +9,9 @@ class Bag {
     }
 
     get size() {
-        return Object.entries(this.elements).map(e => require(`../../elements/materials/${e[0]}.json`).size).reduce((a, b) => a + b, 0);
+        return Object.entries(this.elements)
+                     .map(e => require(`../../elements/materials/${e[0]}.json`).size)
+                     .reduce((a, b) => a + b, 0);
     }
 
     addItem(item, amount) {
@@ -37,7 +39,9 @@ class Dig extends Command {
 
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const mDatas = await this.client.mapDb.get(this.message.author.id);
         let iDatas = await this.client.inventoryDb.get(this.message.author.id);
@@ -49,8 +53,16 @@ class Dig extends Command {
         if (aDatas.isTravelling) {
             const timeLeft = aDatas.travelling.start + aDatas.travelling.duration - Date.now();
             if (timeLeft > 0) {
-                const loc_ = map.Regions.filter(r => r.id === Number(aDatas.travelling.destination.split("_")[0]))?.at(0);
-                const destName = `${loc_.name} - ${loc_.Areas.filter(ar => ar.id === Number(aDatas.travelling.destination.split("_")[1])).at(0).name}`;
+                const loc_ = map.Regions
+                                .filter(r => r.id === Number(aDatas.travelling.destination.split("_")[0]))
+                                ?.at(0);
+                const destName = `${loc_.name} - `
+                                 +
+                                 `${loc_.Areas
+                                    .filter(ar => ar.id === Number(aDatas.travelling.destination.split("_")[1]))
+                                    .at(0).name
+                                 }`;
+
                 return await this.ctx.reply(
                     "Voyage (intrarégional).",
                     "Il semblerait que vous êtes déjà en train de voyager ! Voici plus d'informations :\n"
@@ -62,10 +74,23 @@ class Dig extends Command {
                 );
             }
             else {
-                const loc_ = map.Regions.filter(r => r.id === Number(aDatas.travelling.destination.split("_")[0]))?.at(0);
-                const destName = `${loc_.name} - ${loc_.Areas.filter(ar => ar.id === Number(aDatas.travelling.destination.split("_")[1])).at(0).name}`;
+                const loc_ = map.Regions
+                                .filter(r => r.id === Number(aDatas.travelling.destination.split("_")[0]))
+                                ?.at(0);
+                const destName = `${loc_.name} - `
+                                 +
+                                 `${loc_.Areas
+                                    .filter(ar => ar.id === Number(aDatas.travelling.destination.split("_")[1]))
+                                    .at(0).name
+                                 }`;
                 await this.client.activityDb.endOfTrip(this.message.author.id, this);
-                return await this.ctx.reply("Voyage (intrarégional).", `Vous voilà arrivé à: **${destName}**. Passez un bon séjour !`, "🗺️", null, "outline");
+                return await this.ctx.reply(
+                    "Voyage (intrarégional).",
+                    `Vous voilà arrivé à: **${destName}**. Passez un bon séjour !`,
+                    "🗺️",
+                    null,
+                    "outline",
+                );
             }
         }
 
@@ -80,12 +105,14 @@ class Dig extends Command {
                 if (grim.benefits.includes("loot_rate_boost")) luck += (grim.boost - 1);
             }
 
-            const items = fs.readdirSync("./src/elements/materials").map(item => require(`../../elements/materials/${item}`));
+            const items = fs.readdirSync("./src/elements/materials")
+                            .map(item => require(`../../elements/materials/${item}`));
             const areaItems = items.filter(item => item.areas.includes(area.biome));
 
             const bag = new Bag();
             const bagSize = eDatas.grades.includes("vip") ? 300 : 200;
-            const gotItems = areaItems.filter(e => (Math.random() * 100 / luck) < e.rarity).sort((a, b) => b.size - a.size);
+            const gotItems = areaItems.filter(e => (Math.random() * 100 / luck) < e.rarity)
+                                      .sort((a, b) => b.size - a.size);
 
             for (const item of gotItems) {
                 const itemMax = Math.floor((bagSize - bag.size) / item.size);
@@ -98,7 +125,11 @@ class Dig extends Command {
             if (Object.values(itemsGot).length === 0) {
                 finalStr = "Cette fouille n'aura pas été fructueuse, vous n'avez rien obtenu. Terrible malchance !";
                 this.client.mapDb.db.ensure(this.message.author.id, this.client.mapDb.model(this.message.author.i));
-                this.client.mapDb.db.set(this.message.author.id, Date.now(), `exploration.${loc.id}_${area.id}.lastDig`);
+                this.client.mapDb.db.set(
+                    this.message.author.id,
+                    Date.now(),
+                    `exploration.${loc.id}_${area.id}.lastDig`,
+                );
             }
             else {
                 finalStr += "Vous avez obtenu des objets ! Jetez un œil:\n";
@@ -108,9 +139,18 @@ class Dig extends Command {
                     const i = areaItems.filter(i_ => i_.label === item)?.at(0) ?? { name: "Item", emoji: "⬛" };
                     finalStr += `\n${i.emoji} **${i.name}(s)**: \`x${itemsGot[item]}\``;
 
-                    const hadBefore = "materials" in iDatas ? (item in iDatas.materials ? iDatas.materials[item] : 0) : 0;
-                    this.client.inventoryDb.db.ensure(this.message.author.id, this.client.inventoryDb.model(this.message.author.i));
-                    this.client.inventoryDb.db.set(this.message.author.id, hadBefore + itemsGot[item], `materials.${item}`);
+                    const hadBefore = "materials" in iDatas ?
+                                        (item in iDatas.materials ? iDatas.materials[item] : 0)
+                                        : 0;
+                    this.client.inventoryDb.db.ensure(
+                        this.message.author.id,
+                        this.client.inventoryDb.model(this.message.author.i),
+                    );
+                    this.client.inventoryDb.db.set(
+                        this.message.author.id,
+                        hadBefore + itemsGot[item],
+                        `materials.${item}`,
+                    );
                 }
 
                 // BADGE
@@ -119,7 +159,11 @@ class Dig extends Command {
 
                 finalStr += "\n\n**Revenez dans 2h pour fouiller cette zone !**";
                 this.client.mapDb.db.ensure(this.message.author.id, this.client.mapDb.model(this.message.author.i));
-                this.client.mapDb.db.set(this.message.author.id, Date.now(), `exploration.${loc.id}_${area.id}.lastDig`);
+                this.client.mapDb.db.set(
+                    this.message.author.id,
+                    Date.now(),
+                    `exploration.${loc.id}_${area.id}.lastDig`,
+                );
             }
 
             await this.client.playerDb.earnExp(this.message.author.id, Math.floor(Math.random() * 150) + 100, this);
@@ -128,7 +172,11 @@ class Dig extends Command {
         else {
             return await this.ctx.reply(
                 "Fouiller la zone.",
-                `Il semblerait que vous ayez déjà fouillé cette zone. Revenez dans **${convertDate(7_200_000 - (lastDig === null ? 0 : timeSpent), false).string}** à cet emplacement.`,
+                "Il semblerait que vous ayez déjà fouillé cette zone. "
+                +
+                `Revenez dans **${convertDate(7_200_000 - (lastDig === null ? 0 : timeSpent), false).string}** `
+                +
+                "à cet emplacement.",
                 "🔎",
                 null,
                 "error",

@@ -78,7 +78,10 @@ class Fight extends Command {
         teams["1"] = teams["1"].splice(0, 4);
         teams["2"] = teams["2"].splice(0, 4);
 
-        const teamsStr = `${Object.entries(teams).map(t => `Équipe **${t[0]}**: ${t[1].map(p => `\`${p.username}\``).join(" / ")}`).join("\n")}`;
+        const teamsStr = `${Object.entries(teams)
+            .map(t => `Équipe **${t[0]}**: ${t[1].map(p => `\`${p.username}\``).join(" / ")}`).join("\n")
+        }`;
+
         if (teams["1"].length === 1 && teams["2"].length === 0) {
             return await this.ctx.reply(
                 "Arène - Équipes",
@@ -97,12 +100,19 @@ class Fight extends Command {
             if (!ready) allReady = false;
         }
 
-        if (!allReady) return await this.ctx.reply("Oups...", "Des joueurs sont déjà en combat.", null, null, "warning");
+        if (!allReady) {
+            return await this.ctx.reply("Oups...", "Des joueurs sont déjà en combat.", null, null, "warning");
+        }
 
         for (const p of teams["1"].concat(teams["2"]).filter(e => e.id !== this.message.author.id)) {
             this.client.lastChannel.set(p.id, this.message.channel.channel);
             this.client.requests.get(p.id).set(this.message.id,
-                { req: this.infos.name, src: `https://discord.com/channels/${this.message.guild.id}/${this.message.channel.id}/${this.message.id}` },
+                {
+                    req: this.infos.name,
+                    src: "https://discord.com/channels/"
+                         +
+                         `${this.message.guild.id}/${this.message.channel.id}/${this.message.id}`,
+                },
             );
         }
 
@@ -110,12 +120,14 @@ class Fight extends Command {
             "Arène - Équipes",
             teamsStr
             +
-            "\n\n**Tous les participants** doivent valider leur participation en écrivant `y` (oui). Si vous ne voulez pas jouer, faites `n` (non).",
+            "\n\n**Tous les participants** doivent valider leur participation en écrivant `y` (oui)."
+            +
+            " Si vous ne voulez pas jouer, faites `n` (non).",
             "🏟️",
             null,
             "outline",
         );
-        // const response = await this.ctx.multipleMessageCollection(msg, null, teams["1"].concat(teams["2"]).map(e => e.id));
+
         const allUsers = teams["1"].concat(teams["2"]);
         const response = await this.ctx.fightAwaitResponse(msg, 5_000, allUsers.map(e => e.id));
 
@@ -126,7 +138,9 @@ class Fight extends Command {
             return await this.ctx.reply(
                 "Arène - Équipes",
                 `Les joueurs suivant n'ont pas répondu: ${
-                    allUsers.filter(e => !response.reacted.includes(e.id)).map(e => `\`${this.client.users.cache.get(e.id)?.username ?? "Pourfendeur X"}\``).join(" / ")
+                    allUsers.filter(e => !response.reacted.includes(e.id))
+                        .map(e => `\`${this.client.users.cache.get(e.id)?.username ?? "Pourfendeur X"}\``)
+                        .join(" / ")
                 }`,
                 "🏟️",
                 null,
@@ -140,7 +154,10 @@ class Fight extends Command {
             }
             return await this.ctx.reply(
                 "Arène - Équipes",
-                `Les joueurs suivant ont refusé le combat: ${response.nopes.map(e => `\`${this.client.users.cache.get(e.id)?.username ?? "Pourfendeur X"}\``).join(" / ")}`,
+                `Les joueurs suivant ont refusé le combat: ${response.nopes
+                    .map(e => `\`${this.client.users.cache.get(e.id)?.username ?? "Pourfendeur X"}\``)
+                    .join(" / ")
+                }`,
                 "🏟️",
                 null,
                 "outline",

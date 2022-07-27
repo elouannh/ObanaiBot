@@ -19,7 +19,11 @@ class RemoveServ extends Command {
 
     async run() {
         const auth = this.client.internalServerManager.servers;
-        this.client.internalServerManager.db.set("internalServer", auth.filter(e => e !== this.args?.at(0) ?? "undefined"), "authServers");
+        this.client.internalServerManager.db.set(
+            "internalServer",
+            auth.filter(e => e !== this.args?.at(0) ?? "undefined"),
+            "authServers",
+        );
         this.message.react("✅");
     }
 }

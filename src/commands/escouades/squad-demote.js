@@ -19,7 +19,9 @@ class SquadKick extends Command {
 
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const msg = await this.ctx.reply(
             "Dégrader votre bras droit.",
@@ -35,18 +37,54 @@ class SquadKick extends Command {
         if (this.ctx.isResp(choice, "y")) {
             const pDatas = await this.client.playerDb.get(this.message.author.id);
 
-            if (pDatas.squad === null) return await this.ctx.reply("Oups...", "Vous ne possédez pas d'escouade.", null, null, "warning");
-            if (pDatas.squad.owner !== this.message.author.id) return await this.ctx.reply("Oups...", "Seul les chefs d'escouade peuvent dégrader des membres.", null, null, "warning");
-            if (pDatas.squad.right_hand === "") return await this.ctx.reply("Oups...", "Votre escouade ne possède pas de bras droit.", null, null, "warning");
+            if (pDatas.squad === null) {
+                return await this.ctx.reply("Oups...", "Vous ne possédez pas d'escouade.", null, null, "warning");
+            }
+            if (pDatas.squad.owner !== this.message.author.id) {
+                return await this.ctx.reply(
+                    "Oups...",
+                    "Seul les chefs d'escouade peuvent dégrader des membres.",
+                    null,
+                    null,
+                    "warning",
+                );
+            }
+            if (pDatas.squad.right_hand === "") {
+                return await this.ctx.reply(
+                    "Oups...",
+                    "Votre escouade ne possède pas de bras droit.",
+                    null,
+                    null,
+                    "warning",
+                );
+            }
 
             await this.client.squadDb.demote(pDatas.squad.owner);
-            return await this.ctx.reply("Dégrader votre bras droit.", "Le bras droit a bien été retiré de ses fonctions.", "⛩️", null, "outline");
+            return await this.ctx.reply(
+                "Dégrader votre bras droit.",
+                "Le bras droit a bien été retiré de ses fonctions.",
+                "⛩️",
+                null,
+                "outline",
+            );
         }
         else if (this.ctx.isResp(choice, "n")) {
-            return await this.ctx.reply("Dégrader votre bras droit.", "Personne n'a été dégradé.", "⛩️", null, "outline");
+            return await this.ctx.reply(
+                "Dégrader votre bras droit.",
+                "Personne n'a été dégradé.",
+                "⛩️",
+                null,
+                "outline",
+            );
         }
         else {
-            return await this.ctx.reply("Dégrader votre bras droit.", "La commande n'a pas aboutie.", null, null, "timeout");
+            return await this.ctx.reply(
+                "Dégrader votre bras droit.",
+                "La commande n'a pas aboutie.",
+                null,
+                null,
+                "timeout",
+            );
         }
 
     }

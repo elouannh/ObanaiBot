@@ -22,7 +22,9 @@ class Quests extends Command {
 
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const mDatas = await this.client.mapDb.get(this.message.author.id);
         const fct = MapDbCallback(this.client);
@@ -61,7 +63,9 @@ class Quests extends Command {
                 `> **Quête \`${sp.quest}\`** » ${sq.name} • partie **${sp.step + 1}**:\n`
                 +
                 `\n${qDatas.slayer.length > 0 ?
-                    qDatas.slayer.map(e => e.display()).join("\n") + `\n\n[*Lire l'histoire complète sur Wattpad*](${sq.link})`
+                    qDatas.slayer.map(e => e.display()).join("\n")
+                    +
+                    `\n\n[*Lire l'histoire complète sur Wattpad*](${sq.link})`
                     : "Votre prochaine mission arrive dans quelques minutes !"}`;
         }
 
@@ -113,7 +117,9 @@ class Quests extends Command {
                     embeds: [
                         {
                             title: "Quêtes de monde",
-                            description: qDatas.world.length > 0 ? qDatas.world.map(e => e.display()).join("\n") : "Aucune quête active.",
+                            description: qDatas.world.length > 0 ?
+                                qDatas.world.map(e => e.display()).join("\n")
+                                : "Aucune quête active.",
                             emoji: "🌍",
                             color: null,
                             style: "outline",
@@ -140,9 +146,26 @@ class Quests extends Command {
                                 "type": 3,
                                 "customId": "main_menu",
                                 "options": [
-                                    ["Quêtes de pourfendeur", "slayer", "Quêtes liées au mode histoire.", "👺", focus === "slayer"],
-                                    ["Quêtes journalières", "daily", "Quêtes liées au mode histoire.", "🗓️", focus === "daily"],
-                                    ["Quêtes du monde", "world", "Quêtes liées au mode histoire.", "🌍", focus === "world"],
+                                    [
+                                        "Quêtes de pourfendeur",
+                                        "slayer",
+                                        "Quêtes liées au mode histoire.",
+                                        "👺",
+                                        focus === "slayer",
+                                    ],
+                                    [
+                                        "Quêtes journalières",
+                                        "daily",
+                                        "Quêtes liées au mode histoire.",
+                                        "🗓️",
+                                        focus === "daily",
+                                    ],
+                                    [
+                                        "Quêtes du monde", "world",
+                                        "Quêtes liées au mode histoire.",
+                                        "🌍",
+                                        focus === "world",
+                                    ],
                                 ],
                                 "placeholder": "Voir vos autres quêtes",
                                 "minValues": 0,

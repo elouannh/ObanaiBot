@@ -255,14 +255,14 @@ class Help extends Command {
                     );
                     const modalSubmission = await this.ctx.modalSubmission(res, "search_command_modal", true, 10_000);
                     if (modalSubmission === null) {
-                        await this.ctx.reply("Formulaire non-complété.", "Vous n'avez pas répondu au modal à temps.", null, null, "timeout");
+                        await this.ctx.send("Vous n'avez pas répondu à temps.", "❌", true);
                     }
                     else {
-                        const commandName = modalSubmission.fields.fields.get("command_name")?.value ?? "";
+                        const commandName = modalSubmission.fields.fields.get("command_name")?.value ?? "EMPTY_COMMAND";
                         let cmd = this.client.commandManager.getCommand(commandName);
 
                         if (cmd === 0) {
-                            await this.ctx.reply("Commande introuvable.", "Vérifiez le nom de la commande et réessayez.", null, null, "error");
+                            await this.ctx.send(`La commande \`${commandName}\` n'existe pas; vérifiez l'orthographe et réessayez.`, "❌", true);
                         }
                         else {
                             let string = "";
@@ -314,80 +314,12 @@ class Help extends Command {
 
         await this.ctx.end(req);
 
-        return await this.ctx.reply(
-            "Navigation - Quêtes.",
+        return await this.ctx.send(
             errorMessage,
-            null,
-            null,
-            { "timeout": "timeout", "leaved": "success" }[exitMode],
+            { "timeout": "⌛", "leaved": "✅" }[exitMode],
+            true,
         );
 
-        // let cmd = this.client.commandManager.getCommand(this.args[0]);
-        // if (this.args.length === 0 || cmd === 0) {
-        //     const content = {};
-        //     for (let command of this.client.commandManager.commands.map(e => e)) {
-        //         command = new command();
-        //         if (typeof content[command.infos.category] === "object") content[command.infos.category].push(command.infos);
-        //         else content[command.infos.category] = [command.infos];
-        //     }
-        //     for (const dat in datas) {
-        //         let string = dat === "Commandes Globales" ?
-        //                      "Bienvenue sur la liste des commandes du bot ! Vous pouvez voir ci-dessous les différentes commandes rangées "
-        //                      +
-        //                      "par catégories.\n\nSi vous cherchez de l'aide pour une commande, faites la commande `help <command>`.\n\n"
-        //                      +
-        //                      "Vous pouvez également rejoindre [**le serveur support**](https://discord.gg/8GDpnYvRrC) en cliquant [**ici**](https://discord.gg/8GDpnYvRrC).\n\n"
-        //                      : "";
-        //         let commands = 0;
-        //         for (const key of datas[dat]) {
-        //             const cmds = Object.values(content[key] ?? {}).length;
-        //             commands += cmds;
-        //             string += `> **${emojis[key]} • ${key}** (**${cmds}** commandes)\nt`;
-        //             if (dat === "Commandes du Personnel") {
-        //                 if (key === "Testing" && this.client.internalServerManager.testers.includes(this.message.author.id)) {
-        //                     string += `${Object.values(content[key] ?? {}).map(command => `\`${command.name}\``).join(" » ")}`;
-        //                 }
-        //                 else if (key === "Admin" && this.client.internalServerManager.admins.includes(this.message.author.id)) {
-        //                     string += `${Object.values(content[key] ?? {}).map(command => `\`${command.name}\``).join(" » ")}`;
-        //                 }
-        //                 else if (key === "Owner" && this.client.internalServerManager.owners.includes(this.message.author.id)) {
-        //                     string += `${Object.values(content[key] ?? {}).map(command => `\`${command.name}\``).join(" » ")}`;
-        //                 }
-        //                 else {
-        //                     string += "Vous ne possédez pas les autorisations nécessaires pour voir ces commandes.";
-        //                 }
-        //             }
-        //             else {
-        //                 string += `${Object.values(content[key] ?? {}).map(command => `\`${command.name}\``).join(" » ")}`;
-        //             }
-        //             string += "\n\n";
-        //         }
-        //         const title = `${dat} (${commands})`;
-
-        //         if (dat === "Commandes du Personnel" && !this.client.internalServerManager.staffs.includes(this.message.author.id)) {
-        //             "que dalle";
-        //         }
-        //         else {
-        //             await this.ctx.reply(title, string, null, null, "outline");
-        //         }
-        //     }
-        // }
-        // else if (cmd !== 0) {
-        //     let string = "";
-        //     cmd = new cmd();
-        //     const i = cmd.infos;
-
-        //     string += `\`${emojis[i.category]}\` **${i.category}** » ${i.description}\n`;
-        //     string += `\`🏷️\` **Aliases**: ${i.aliases.map(e => `**\`${e}\`**`).join(" - ")}\n`;
-        //     string += `\`⏰\` **Délai**: **\`${i.cooldown}\`** secondes\n`;
-        //     string += `\`✏️\` **Syntaxe**: **\`${i.syntax}\`**\n`;
-        //     string += `\`⚙️\` **Paramètres**:\n\`\`\`fix\n${i.args.length > 0 ? i.args.map((e, j) => `${j + 1}. ${e[0]}${e[2] === true ? "(⁕)" : ""} : ${e[1]}`).join("\n") : "- Aucun paramètre requis -"}\`\`\`\n`;
-        //     string += `\`🖼️\` **Exemples**:\`\`\`fix\n${i.examples.map(e => `${e.replace("[p]", this.prefix)}`).join("\n")}\`\`\`\n`;
-        //     const perms = new PermissionsBitField(i.permissions).toArray();
-        //     string += `\`👘\` **Permissions**:\`\`\`fix\n${perms.length > 0 ? perms.join(" - ") : "- Aucune permission requise -"}\`\`\`\n\n`;
-
-        //     return await this.ctx.reply(`t**Commande \`${i.name}\`**\n`, string, null, null, "outline");
-        // }
     }
 }
 

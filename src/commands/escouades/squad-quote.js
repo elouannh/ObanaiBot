@@ -19,7 +19,9 @@ class SquadQuote extends Command {
 
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const name = this.args.join(" ");
         let r = name.match(new RegExp("([a-zA-Z\\s]{1,}\\s?[0-9]{0,}\\D{0,}){0,}", "g"));
@@ -32,7 +34,9 @@ class SquadQuote extends Command {
                 "Nouvelle citation invalide.",
                 "Votre citation doit contenir entre **10** et **200** caractères, et doit être de la forme suivante:"
                 +
-                "\n```([a-zA-Z\\s]{1,}\\s?[0-9]{0,}\\D{0,}){0,}```\n```Exemples:\n- squad-quote Nous sommes les meilleurs !```",
+                "\n```([a-zA-Z\\s]{1,}\\s?[0-9]{0,}\\D{0,}){0,}```\n```Exemples:"
+                +
+                "\n- squad-quote Nous sommes les meilleurs !```",
                 null,
                 null,
                 "warning",
@@ -52,19 +56,45 @@ class SquadQuote extends Command {
         if (this.ctx.isResp(choice, "y")) {
             const pDatas = await this.client.playerDb.get(this.message.author.id);
 
-            if (pDatas.squad === null) return await this.ctx.reply("Oups...", "Vous ne possédez pas d'escouade.", "⛩️", null, "outline");
+            if (pDatas.squad === null) {
+                return await this.ctx.reply("Oups...", "Vous ne possédez pas d'escouade.", "⛩️", null, "outline");
+            }
             if (pDatas.squad.owner !== this.message.author.id && pDatas.squad.right_hand !== this.message.author.id) {
-                return await this.ctx.reply("Oups...", "Seul les chefs d'escouade et les bras droits peuvent changer les citations d'escouade.", null, null, "warning");
+                return await this.ctx.reply(
+                    "Oups...",
+                    "Seul les chefs d'escouade et les bras droits peuvent changer les citations d'escouade.",
+                    null,
+                    null,
+                    "warning",
+                );
             }
 
             await this.client.squadDb.changeQuote(pDatas.squad.owner, r);
-            return await this.ctx.reply("Changement de citation.", "La citation a bien été modifiée.", "⛩️", null, "outline");
+            return await this.ctx.reply(
+                "Changement de citation.",
+                "La citation a bien été modifiée.",
+                "⛩️",
+                null,
+                "outline",
+            );
         }
         else if (this.ctx.isResp(choice, "n")) {
-            return await this.ctx.reply("Changement de citation.", "La citation n'a donc pas été modifiée.", "⛩️", null, "outline");
+            return await this.ctx.reply(
+                "Changement de citation.",
+                "La citation n'a donc pas été modifiée.",
+                "⛩️",
+                null,
+                "outline",
+            );
         }
         else {
-            return await this.ctx.reply("Changement de citation.", "La commande n'a pas aboutie.", null, null, "timeout");
+            return await this.ctx.reply(
+                "Changement de citation.",
+                "La commande n'a pas aboutie.",
+                null,
+                null,
+                "timeout",
+            );
         }
     }
 }

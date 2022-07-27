@@ -12,7 +12,10 @@ class SuperEmbed {
 
 
     setAuthor(user) {
-        this.author = { username: user.username, avatar: user.displayAvatarURL({ extensions: "webp", forceStatic: true, size: 512 }) };
+        this.author = {
+            username: user.username,
+            avatar: user.displayAvatarURL({ extensions: "webp", forceStatic: true, size: 512 }),
+        };
         return this;
     }
 
@@ -37,7 +40,10 @@ class SuperEmbed {
     }
 
     setFields(fields) {
-        this.fields = fields.map(e => Object.assign({ name: "Vide.", value: "\u200b", inline: false }, { name: e[0], value: e[1], inline: e[2] }));
+        this.fields = fields.map(e => Object.assign(
+            { name: "Vide.", value: "\u200b", inline: false },
+            { name: e[0], value: e[1], inline: e[2] },
+        ));
         return this;
     }
 

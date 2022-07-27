@@ -28,7 +28,9 @@ class Map extends Command {
         if (user === null) return;
 
         const pExists = await this.client.playerDb.started(user.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const mDatas = await this.client.mapDb.get(user.id);
         const loc = map.Regions.filter(r => r.id === mDatas.region)?.at(0);
@@ -43,16 +45,32 @@ class Map extends Command {
         for (const area_ of loc.Areas) {
             const lastDig = mDatas.exploration[`${loc.id}_${area_.id}`]?.lastDig ?? null;
             const timeSpent = Date.now() - (lastDig ?? 0);
-            let finalStr = `${map.BiomesEmojis[area_.biome]} • ${area_.id === area.id ? "***" : ""}${area_.name}${area_.id === area.id ? "***" : ""}  • `;
+            let finalStr = `${map.BiomesEmojis[area_.biome]} • ${area_.id === area.id ? "***" : ""}`
+                           +
+                           `${area_.name}${area_.id === area.id ? "***" : ""}  • `;
 
-            if (lastDig === null || timeSpent > 7_200_000) finalStr += "🔎 Fouille **prête** !";
-            else finalStr += `⏰ Fouille disponible dans **${convertDate(7_200_000 - (lastDig === null ? 0 : timeSpent), true).string}**`;
+            if (lastDig === null || timeSpent > 7_200_000) {
+                finalStr += "🔎 Fouille **prête** !";
+            }
+            else {
+                finalStr += "⏰ Fouille disponible dans "
+                            +
+                            `**${convertDate(7_200_000 - (lastDig === null ? 0 : timeSpent), true).string}**`;
+            }
 
             areaList.push(finalStr);
         }
         infos += `${areaList.join("\n")}`;
 
-        return await this.ctx.betterReply(`Emplacement de ${user.username}`, infos, "🗺️", null, "outline", true, { url: "https://cdn.discordapp.com/attachments/995812450970652672/995812746794909796/obanai_map_v1.jpg" });
+        return await this.ctx.betterReply(
+            `Emplacement de ${user.username}`,
+            infos,
+            "🗺️",
+            null,
+            "outline",
+            true,
+            { url: "https://cdn.discordapp.com/attachments/995812450970652672/995812746794909796/obanai_map_v1.jpg" },
+        );
     }
 }
 

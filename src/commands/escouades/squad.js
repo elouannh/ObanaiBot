@@ -26,10 +26,20 @@ class Squad extends Command {
         if (user === null) return;
 
         const pExists = await this.client.playerDb.started(user.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const pDatas = await this.client.playerDb.get(user.id);
-        if (pDatas.squad === null) return await this.ctx.reply("Oups...", "Aucune escouade n'a été trouvée pour ce joueur.", null, null, "warning");
+        if (pDatas.squad === null) {
+            return await this.ctx.reply(
+                "Oups...",
+                "Aucune escouade n'a été trouvée pour ce joueur.",
+                null,
+                null,
+                "warning",
+            );
+        }
 
         const mDatas = pDatas.squad;
         const title = `Escouade de ${user.username}`;
@@ -44,14 +54,19 @@ class Squad extends Command {
             if (mDatas.owner === m) emoji = "👑";
             if (mDatas.right_hand === m) emoji = "⚜️";
             if (mDatas.leader === m) emoji = "🎖️";
-            members[m] = [`${emoji} ${this.client.users.cache.get(m)?.username ?? "Joueur"} | ⭐ ${tempPDatas.exp}`, tempPDatas.exp];
+            members[m] = [
+                `${emoji} ${this.client.users.cache.get(m)?.username ?? "Joueur"} | ⭐ ${tempPDatas.exp}`,
+                tempPDatas.exp,
+            ];
         });
 
         members = Object.entries(members).sort((a, b) => b[1][1] - a[1][1]);
 
         squad += `\n> **${mDatas.name}** | ${totalExp} :star: | \`id: #${mDatas.id.toUpperCase()}\``;
 
-        squad += `\n\n"*${mDatas.quote}*" - ${this.client.users.cache.get(mDatas.owner)?.username ?? "Chef d'escouade"}, ${new Date(mDatas.created).getFullYear()}`;
+        squad += `\n\n"*${mDatas.quote}*" - ${this.client.users.cache.get(mDatas.owner)?.username ?? "Chef d'escouade"}`
+                 +
+                 `, ${new Date(mDatas.created).getFullYear()}`;
 
         squad += `\n\n> Membres: **${mDatas.members.length}**/8\n`;
         squad += `\`\`\`${members.map(e => e[1][0]).join("\n")}\`\`\``;

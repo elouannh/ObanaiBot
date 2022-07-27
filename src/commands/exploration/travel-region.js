@@ -21,7 +21,9 @@ class TravelRegion extends Command {
 
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const aDatas = await this.client.activityDb.get(this.message.author.id);
 
@@ -29,7 +31,12 @@ class TravelRegion extends Command {
             const timeLeft = aDatas.travelling.start + aDatas.travelling.duration - Date.now();
             if (timeLeft > 0) {
                 const loc = map.Regions.filter(r => r.id === Number(aDatas.travelling.destination.split("_")[0]))?.at(0);
-                const destName = `${loc.name} - ${loc.Areas.filter(ar => ar.id === Number(aDatas.travelling.destination.split("_")[1])).at(0).name}`;
+                const destName = `${loc.name} - `
+                                 +
+                                 `${loc.Areas
+                                    .filter(ar => ar.id === Number(aDatas.travelling.destination.split("_")[1]))
+                                    .at(0).name
+                                 }`;
                 return await this.ctx.reply(
                     "Voyage.",
                     "Il semblerait que vous êtes déjà en train de voyager ! Voici plus d'informations :\n"
@@ -41,10 +48,23 @@ class TravelRegion extends Command {
                 );
             }
             else {
-                const loc = map.Regions.filter(r => r.id === Number(aDatas.travelling.destination.split("_")[0]))?.at(0);
-                const destName = `${loc.name} - ${loc.Areas.filter(ar => ar.id === Number(aDatas.travelling.destination.split("_")[1])).at(0).name}`;
+                const loc = map.Regions
+                            .filter(r => r.id === Number(aDatas.travelling.destination.split("_")[0]))
+                            ?.at(0);
+                const destName = `${loc.name} - `
+                                 +
+                                 `${loc.Areas
+                                    .filter(ar => ar.id === Number(aDatas.travelling.destination.split("_")[1]))
+                                    .at(0).name
+                                 }`;
                 await this.client.activityDb.endOfTrip(this.message.author.id, this);
-                return await this.ctx.reply("Voyage.", `Vous voilà arrivé à: **${destName}**. Passez un bon séjour !`, "🗺️", null, "outline");
+                return await this.ctx.reply(
+                    "Voyage.",
+                    `Vous voilà arrivé à: **${destName}**. Passez un bon séjour !`,
+                    "🗺️",
+                    null,
+                    "outline",
+                );
             }
         }
         const mDatas = await this.client.mapDb.get(this.message.author.id);
@@ -60,13 +80,17 @@ class TravelRegion extends Command {
             const reg = accessibleRegions.at(i);
             const timeInMinutes = dist(reg.x, loc.x, reg.y, loc.y);
 
-            const dis = await this.client.activityDb.travellingTime(this.message.author.id, Math.ceil(timeInMinutes / 15));
+            const dis = await this.client.activityDb.travellingTime(
+                this.message.author.id,
+                Math.ceil(timeInMinutes / 15),
+            );
             str += `\`${String(i + 1)}\` • ${reg.name} | 🕣 ${convertDate(dis, true).string}\n`;
             reg["distance"] = dis;
             r[String(i + 1)] = reg;
         }
 
-        str += "\nLorsque vous répondrez à ce message, vous partirez directement en voyage !\n\nRépondre avec le numéro correspondant à votre choix de destination.";
+        str += "\nLorsque vous répondrez à ce message, vous partirez directement en voyage !\n\n";
+        str += "Répondre avec le numéro correspondant à votre choix de destination.";
         str += " Répondre `n` (non) pour annuler.";
 
         const msg = await this.ctx.reply("Voyage.", str, "🧳", null, "outline");
@@ -85,7 +109,9 @@ class TravelRegion extends Command {
                 "Voyage.",
                 `Vous voilà parti à l'aventure dans la région de **${destName}** !`
                 +
-                ` Faites la commande \`${this.prefix}travel-area\` ou \`${this.prefix}travel-region\` pour voir dans combien de temps vous arrivez.`,
+                ` Faites la commande \`${this.prefix}travel-area\` ou \`${this.prefix}travel-region\``
+                +
+                "pour voir dans combien de temps vous arrivez.",
                 "🧳",
                 null,
                 "outline",

@@ -46,7 +46,9 @@ class Arena {
             const lengthMax = Object.values(team.players).filter(p => p.id !== this.cache.lastPlayers[team.id]).length;
 
             if (lengthMax > 0) {
-                this.cache.lastPlayers[team.id] = Object.keys(team.players)[Math.floor(Math.random() * Object.keys(team.players).length)];
+                this.cache.lastPlayers[team.id] = Object.keys(team.players)[
+                    Math.floor(Math.random() * Object.keys(team.players).length)
+                ];
             }
         }
 
@@ -58,9 +60,13 @@ class Arena {
         const opponentTeam = this.teams[player.team.nid];
         const msg = await this.cmd.ctx.reply(
             `${player.name} change sa cible !`,
-            `**Adversaires**\n\n${Object.entries(opponentTeam.players).map(e => `**${e[0]}** • ${e[1].name} **${e[1].pv}**/100`).join("\n")}`
+            `**Adversaires**\n\n${Object.entries(opponentTeam.players)
+                    .map(e => `**${e[0]}** • ${e[1].name} **${e[1].pv}**/100`).join("\n")
+                }`
             +
-            "\n\nRenvoyez le numéro correspondant à l'ennemi que vous souhaitez cibler. Répondez `n` (non) pour garder votre cible.",
+            "\n\nRenvoyez le numéro correspondant à l'ennemi que vous souhaitez cibler."
+            +
+            " Répondez `n` (non) pour garder votre cible.",
             "🎯",
             null,
             "outline",
@@ -88,7 +94,9 @@ class Arena {
     removePlayer(player) {
         const userTeam = this.teams[player.team.id];
         const newPlayers = {};
-        for (const p of Object.entries(userTeam.players).filter(pl => pl[1].number !== player.number)) newPlayers[p[0]] = p[1];
+        for (const p of Object.entries(userTeam.players).filter(pl => pl[1].number !== player.number)) {
+            newPlayers[p[0]] = p[1];
+        }
         this.teams[player.team.id].players = newPlayers;
 
         Object.entries(this.teams[userTeam.nid].players).forEach(p => {
@@ -112,14 +120,28 @@ class Arena {
         const choice = await this.cmd.ctx.messageCollection(msg, 1, 30_000, player.id);
 
         if (this.cmd.ctx.isResp(choice, "y")) {
-            await this.cmd.ctx.reply(`${player.name} veut déclarer forfait.`, "Il quitte l'arène de combat.", "🍃", null, "error", false);
+            await this.cmd.ctx.reply(
+                `${player.name} veut déclarer forfait.`,
+                "Il quitte l'arène de combat.",
+                "🍃",
+                null,
+                "error",
+                false,
+            );
 
             this.removePlayer(player);
 
             await this.begin();
         }
         else {
-            await this.cmd.ctx.reply(`${player.name} veut déclarer forfait.`, "Mais il décide de ne pas déclarer forfait.", "🍃", null, "outline", false);
+            await this.cmd.ctx.reply(
+                `${player.name} veut déclarer forfait.`,
+                "Mais il décide de ne pas déclarer forfait.",
+                "🍃",
+                null,
+                "outline",
+                false,
+            );
 
             await this.begin();
         }
@@ -135,9 +157,13 @@ class Arena {
             `${playerAttacking.name}, choisisez votre attaque.`,
             `\`\`\`diff\n+ Tour ${this.turn.number} - ${this.turn.phase}\`\`\`\n\`\`\`xl\n${this.getLog}\`\`\`\n\n`
             +
-            `————— **Stats** —————————————\n**${playerAttacking.name}**: ❤️**\`${playerAttacking.pv}\`**\`/100\` • ⚡**\`${playerAttacking.stamina}\`**\`/10\``
+            `————— **Stats** —————————————\n**${playerAttacking.name}**: ❤️**\`${playerAttacking.pv}\`**\`/100\``
             +
-            `\n\n(🎯) **${playerDefending.name}**: ❤️**\`${playerDefending.pv}\`**\`/100\` • ⚡**\`${playerDefending.stamina}\`**\`/10\``
+            ` • ⚡**\`${playerAttacking.stamina}\`**\`/10\``
+            +
+            `\n\n(🎯) **${playerDefending.name}**: ❤️**\`${playerDefending.pv}\`**\`/100\``
+            +
+            ` • ⚡**\`${playerDefending.stamina}\`**\`/10\``
             +
             "\n\n————— **Choix** —————————————\n"
             +
@@ -159,9 +185,13 @@ class Arena {
             `${playerDefending.name}, choisisez votre défense.`,
             `\`\`\`diff\n- Tour ${this.turn.number} - ${this.turn.phase}\`\`\`\`\`\`xl\n${this.getLog}\`\`\`\n\n`
             +
-            `————— **Stats** —————————————\n**${playerDefending.name}**: ❤️**\`${playerDefending.pv}\`**\`/100\` • ⚡**\`${playerDefending.stamina}\`**\`/10\``
+            `————— **Stats** —————————————\n**${playerDefending.name}**: ❤️**\`${playerDefending.pv}\`**\`/100\``
             +
-            `\n\n(🗡️) **${playerAttacking.name}**: ❤️**\`${playerAttacking.pv}\`**\`/100\` • ⚡**\`${playerAttacking.stamina}\`**\`/10\``
+            ` • ⚡**\`${playerDefending.stamina}\`**\`/10\``
+            +
+            `\n\n(🗡️) **${playerAttacking.name}**: ❤️**\`${playerAttacking.pv}\`**\`/100\``
+            +
+            ` • ⚡**\`${playerAttacking.stamina}\`**\`/10\``
             +
             "\n\n————— **Choix** —————————————\n"
             +
@@ -231,7 +261,9 @@ class Arena {
 
         let atk = null;
         this.turn.phase = "Phase d'Attaque";
-        if (playerAttacking.entityType === "player") atk = await this.atkPlayer(playerAttacking, playerDefending, defendingTeam);
+        if (playerAttacking.entityType === "player") {
+            atk = await this.atkPlayer(playerAttacking, playerDefending, defendingTeam);
+        }
 
         if (["target_change", "forfeit"].includes(atk)) {
             switch (atk) {
@@ -337,7 +369,9 @@ class Arena {
             if (fh2) {
                 if (!fh1) {
                     this.teams[pdefending.team.id].hurtPlayer(pdefending.number, 3 + fd1);
-                    str += `\n\n» ${pdefending.name} se blesse en voulant défendre, et encaisse les dégâts de son attaquant ! Il perd -${3 + fd1}❤️ !`;
+                    str += `\n\n» ${pdefending.name} se blesse en voulant défendre, `
+                           +
+                           `et encaisse les dégâts de son attaquant ! Il perd -${3 + fd1}❤️ !`;
                 }
                 else {
                     this.teams[pdefending.team.id].hurtPlayer(pdefending.number, 3);
@@ -346,20 +380,28 @@ class Arena {
             }
         }
         else {
-            const fc = (Math.random() * 100 < variables.def.counterRate) && (Math.random() * 100 < variables.atk.dodgeCounterRate);
+            const fc = (Math.random() * 100 < variables.def.counterRate)
+                       &&
+                       (Math.random() * 100 < variables.atk.dodgeCounterRate);
 
             if (fc) {
                 this.teams[pattacking.team.id].hurtPlayer(pattacking.number, fd2);
-                str += `\n\n» ${pattacking.name} se fait contrer par ${pdefending.name} en voulant attaquer... il perd -${fd2}❤️ !`;
+                str += `\n\n» ${pattacking.name} se fait contrer par ${pdefending.name} en voulant attaquer...`
+                       +
+                       ` il perd -${fd2}❤️ !`;
                 this.teams[pdefending.team.id].players[pdefending.number].counterRate = 5;
             }
             else {
                 this.teams[pdefending.team.id].players[pdefending.number].counterRate = variables.def.counterRate;
-                const dodged = Math.floor(Math.random() * 100) <= (pdefending.datas.aptitudes.speed / pattacking.datas.aptitudes.speed) * 10;
+                const dodged = Math.floor(Math.random() * 100)
+                               <=
+                               (pdefending.datas.aptitudes.speed / pattacking.datas.aptitudes.speed) * 10;
 
                 if (!dodged) {
                     this.teams[pdefending.team.id].hurtPlayer(pdefending.number, fd1);
-                    str += `\n\n» ${pattacking.name} inflige de lourds dégâts à ${pdefending.name}... il inflige -${fd1}❤️ !`;
+                    str += `\n\n» ${pattacking.name} inflige de lourds dégâts à ${pdefending.name}...`
+                    +
+                    ` il inflige -${fd1}❤️ !`;
                 }
                 else {
                     str += `\n\n» ${pattacking.name} se fait esqsuiver par ${pdefending.name} en voulant attaquer !`;
@@ -381,8 +423,12 @@ class Arena {
         sentence = sentence.replace("{dname}", playerDefending.name);
         sentence = sentence.replace("{amvt}", attackMvt[Math.floor(Math.random() * attackMvt.length)]);
         sentence = sentence.replace("{dmvt}", defenseMvt[Math.floor(Math.random() * defenseMvt.length)]);
-        sentence = sentence.replace("{abreath}", `${playerAttacking.datas.breath.emoji} ${playerAttacking.datas.breath.name}`);
-        sentence = sentence.replace("{dbreath}", `${playerDefending.datas.breath.emoji} ${playerDefending.datas.breath.name}`);
+        sentence = sentence.replace(
+            "{abreath}", `${playerAttacking.datas.breath.emoji} ${playerAttacking.datas.breath.name}`,
+        );
+        sentence = sentence.replace(
+            "{dbreath}", `${playerDefending.datas.breath.emoji} ${playerDefending.datas.breath.name}`,
+        );
 
         str += sentence;
 

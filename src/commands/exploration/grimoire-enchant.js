@@ -20,9 +20,12 @@ class GrimoireEnchant extends Command {
 
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
-
-        const grims = fs.readdirSync("./src/elements/grimoires").map(e => require(`../../elements/grimoires/${e}`)).filter(e => !["eternal", "mastery"].includes(e.label));
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
+        const grims = fs.readdirSync("./src/elements/grimoires")
+                        .map(e => require(`../../elements/grimoires/${e}`))
+                        .filter(e => !["eternal", "mastery"].includes(e.label));
 
         const grimoire = grims[Math.floor(Math.random() * grims.length)];
         const msg = await this.ctx.reply(
@@ -40,12 +43,36 @@ class GrimoireEnchant extends Command {
             const iDatas = await this.client.inventoryDb.get(this.message.author.id);
             const mDatas = await this.client.mapDb.get(this.message.author.id);
 
-            const grimoireModels = "materials" in iDatas ? ("grimoire" in iDatas.materials ? iDatas.materials.grimoire : 0) : 0;
-            if (grimoireModels === 0) return await this.ctx.reply("Oups...", "Vous ne possédez pas de grimoire vierge.", null, null, "warning");
-            if (mDatas.region !== 9) {
-                return await this.ctx.reply("Oups...", "Commencez par vous rendre au **quartier Yoshiwara**, et rendez visite à Franky le vioc' !", null, null, "warning");
+            const grimoireModels = "materials" in iDatas ?
+                                    ("grimoire" in iDatas.materials ? iDatas.materials.grimoire : 0)
+                                    : 0;
+            if (grimoireModels === 0) {
+                return await this.ctx.reply(
+                    "Oups...",
+                    "Vous ne possédez pas de grimoire vierge.",
+                    null,
+                    null,
+                    "warning",
+                );
             }
-            if (mDatas.area !== 1) return await this.ctx.reply("Oups...", "Allez rendre visite à Franky le vioc' !", null, null, "warning");
+            if (mDatas.region !== 9) {
+                return await this.ctx.reply(
+                    "Oups...",
+                    "Commencez par vous rendre au **quartier Yoshiwara**, et rendez visite à Franky le vioc' !",
+                    null,
+                    null,
+                    "warning",
+                );
+            }
+            if (mDatas.area !== 1) {
+                return await this.ctx.reply(
+                    "Oups...",
+                    "Allez rendre visite à Franky le vioc' !",
+                    null,
+                    null,
+                    "warning",
+                );
+            }
 
             await this.ctx.reply(
                 "Enchanter un grimoire.",
@@ -58,7 +85,13 @@ class GrimoireEnchant extends Command {
             await this.client.inventoryDb.db.dec(this.message.author.id, "materials.grimoire");
         }
         else if (this.ctx.isResp(choice, "n")) {
-            await this.ctx.reply("Enchanter un grimoire.", "Vous n'avez pas enchanté votre grimoire.", "🪄", null, "outline");
+            await this.ctx.reply(
+                "Enchanter un grimoire.",
+                "Vous n'avez pas enchanté votre grimoire.",
+                "🪄",
+                null,
+                "outline",
+            );
         }
         else {
             await this.ctx.reply("Enchanter un grimoire.", "La commande n'a pas aboutie.", null, null, "timeout");
