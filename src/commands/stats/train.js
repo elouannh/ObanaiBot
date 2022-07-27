@@ -21,7 +21,9 @@ class Train extends Command {
 
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const aDatas = await this.client.activityDb.get(this.message.author.id);
         const values = { "agility": "Agilité", "defense": "Défense", "strength": "Force", "speed": "Vitesse" };
@@ -35,7 +37,9 @@ class Train extends Command {
                     "S'entraîner.",
                     "Il semblerait que vous êtes déjà en train de vous entraîner ! Voici plus d'informations :"
                     +
-                    `\n\`\`\`Aptitude: ${emojis[aDatas.training.aptitude]}${values[aDatas.training.aptitude]}\nTemps restant: ${convertDate(timeLeft).string}\`\`\``,
+                    `\n\`\`\`Aptitude: ${emojis[aDatas.training.aptitude]}${values[aDatas.training.aptitude]}\n`
+                    +
+                    `Temps restant: ${convertDate(timeLeft).string}\`\`\``,
                     "🤜",
                     null,
                     "outline",
@@ -48,7 +52,9 @@ class Train extends Command {
                 await this.client.playerDb.earnExp(this.message.author.id, Math.floor(Math.random() * 150) + 100, this);
                 return await this.ctx.reply(
                     "S'entraîner.",
-                    `Votre aptitude \`${aDatas.training.aptitude}\` monte ! Passage de niveau **${apt}** > **${apt + 1}**`,
+                    `Votre aptitude \`${aDatas.training.aptitude}\` monte ! `
+                    +
+                    `Passage de niveau **${apt}** > **${apt + 1}**`,
                     "🤜",
                     null,
                     "outline",
@@ -65,7 +71,10 @@ class Train extends Command {
                 str += " | Niveau max atteint. Pour continuer à progresser, gagnez en XP.";
             }
             else {
-                times[key] = await this.client.activityDb.trainingTime(this.message.author.id, ((15 + (pDatas.stats[key] * 15))));
+                times[key] = await this.client.activityDb.trainingTime(
+                    this.message.author.id,
+                    ((15 + (pDatas.stats[key] * 15))),
+                );
                 str += ` | Niveau **${pDatas.stats[key]}** > Niveau **${pDatas.stats[key] + 1}**`;
                 str += `\n*🕣 Durée d'entraînement: ${convertDate(times[key], true).string}*`;
             }
@@ -74,14 +83,17 @@ class Train extends Command {
         if (Object.keys(times).length === 0) {
             return await this.ctx.reply(
                 "S'entraîner.",
-                "Il semblerait que vous n'ayez pas assez d'expérience pour continuer de vous entraîner. Continuez de progresser !",
+                "Il semblerait que vous n'ayez pas assez d'expérience pour continuer de vous entraîner. "
+                +
+                "Continuez de progresser !",
                 "🤜",
                 null,
                 "outline",
             );
         }
         else {
-            str += "\n\nRépondre avec l'id de l'aptitude. En répondant avec le nom de l'aptitude, l'entraînement se lancera directement. Répondre avec `n` (non) pour annuler.";
+            str += "\n\nRépondre avec l'id de l'aptitude. En répondant avec le nom de l'aptitude, ";
+            str += "l'entraînement se lancera directement. Répondre avec `n` (non) pour annuler.";
         }
 
         const msg = await this.ctx.reply("S'entraîner.", str, "🤜", null, "outline");
@@ -90,10 +102,22 @@ class Train extends Command {
         if (Object.keys(times).includes(choice)) {
             const finalChoice = Object.keys(emojis).filter(e => e === choice)?.at(0);
             await this.client.activityDb.trains(this.message.author.id, finalChoice, times[finalChoice]);
-            return await this.ctx.reply("S'entraîner.", `Vous voilà parti à l'entraînement ! Revenez dans **${convertDate(times[choice], true).string}**.`, "🤜", null, "outline");
+            return await this.ctx.reply(
+                "S'entraîner.",
+                `Vous voilà parti à l'entraînement ! Revenez dans **${convertDate(times[choice], true).string}**.`,
+                "🤜",
+                null,
+                "outline",
+            );
         }
         else if (this.ctx.isResp(choice, "n")) {
-            return await this.ctx.reply("S'entraîner.", "Vous décidez de ne pas vous entraîner.", "🤜", null, "outline");
+            return await this.ctx.reply(
+                "S'entraîner.",
+                "Vous décidez de ne pas vous entraîner.",
+                "🤜",
+                null,
+                "outline",
+            );
         }
         else {
             return await this.ctx.reply("S'entraîner.", "La commande n'a pas aboutie.", null, null, "timeout");

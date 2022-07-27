@@ -11,7 +11,7 @@ class Lang extends Command {
             examples: ["[p]lang"],
             finishRequest: "ADVENTURE",
             name: "lang",
-            private: "none",
+            private: "testers",
             permissions: 0n,
             syntax: "lang",
         });
@@ -29,7 +29,9 @@ class Lang extends Command {
         if (!this.args[0] || !allowedLangs.includes(this.args[0]?.toLowerCase() ?? "")) {
             return this.ctx.reply(
                 "Votre langue n'existe pas.",
-                "Si vous cherchez une langue, utilisez une ci-dessous :\n\nt:flag_fr: | `fr` Je parlerai français !\nt:flag_gb: | `en` I will speak english !\n",
+                "Si vous cherchez une langue, utilisez une ci-dessous :"
+                +
+                "\n\nt:flag_fr: | `fr` Je parlerai français !\nt:flag_gb: | `en` I will speak english !\n",
                 null,
                 null,
                 "error",
@@ -37,7 +39,13 @@ class Lang extends Command {
         }
         await this.client.playerDb.changeLang(this.message.author.id, this.args[0].toLowerCase());
         const flag = { "fr":":flag_fr:", "en":":flag_gb:" }[this.args[0].toLowerCase()];
-        return await this.ctx.reply("Changement de langue effectué.", "Je parlerai désormais cette langue !", flag, null, "outline");
+        return await this.ctx.reply(
+            "Changement de langue effectué.",
+            "Je parlerai désormais cette langue !",
+            flag,
+            null,
+            "outline",
+        );
     }
 }
 

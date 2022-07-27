@@ -26,14 +26,20 @@ class Weapons extends Command {
         if (user === null) return;
 
         const pExists = await this.client.playerDb.started(user.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const iDatas = await this.client.inventoryDb.get(user.id);
         let weapons = "**Équipée**\n```";
         weapons += `Nom: ${iDatas.weapon.name}\nRareté: ${iDatas.weapon.rarity}\`\`\``;
 
         weapons += "\n**Stock**\n```";
-        weapons += `${iDatas.weapons.length === 0 ? "Aucune arme en stock." : iDatas.weapons.filter(e => e !== undefined).sort((a, b) => b.rarity - a.rarity).map((e, i) => `${i + 1} • ${e.name} (rareté ${e.rarity})`)}\`\`\``;
+        weapons += `${iDatas.weapons.length === 0 ?
+                   "Aucune arme en stock."
+                   : iDatas.weapons.filter(e => e !== undefined)
+                                   .sort((a, b) => b.rarity - a.rarity)
+                                   .map((e, i) => `${i + 1} • ${e.name} (rareté ${e.rarity})`)}\`\`\``;
 
         await this.ctx.reply(`Inventaire d'armes de ${user.username}`, weapons, "🗡️", null, "outline");
     }

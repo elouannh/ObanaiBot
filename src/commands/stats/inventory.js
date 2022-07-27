@@ -27,7 +27,9 @@ class Inventory extends Command {
         if (user === null) return;
 
         const pExists = await this.client.playerDb.started(user.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const pDatas = await this.client.inventoryDb.get(user.id);
         const title = `Inventaire de ${user.username}`;
@@ -39,7 +41,10 @@ class Inventory extends Command {
         if (Object.values(pDatas.materials).length > 0) {
             for (const key in pDatas.materials) {
                 const gr = require(`../../elements/materials/${key}.json`);
-                st += `${gr.emoji} ${gr.name}: x${"materials" in pDatas ? (key in pDatas.materials ? pDatas.materials[key] : 0) : 0}\n`;
+                st += `${gr.emoji} ${gr.name}: x${"materials" in pDatas ?
+                        (key in pDatas.materials ? pDatas.materials[key] : 0)
+                        : 0
+                      }\n`;
             }
         }
         else {

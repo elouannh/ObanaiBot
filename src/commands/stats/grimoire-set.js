@@ -19,7 +19,9 @@ class GrimoireSet extends Command {
 
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         let pDatas = await this.client.inventoryDb.get(this.message.author.id);
 
@@ -46,7 +48,8 @@ class GrimoireSet extends Command {
                           .map(e => [require(`../../elements/grimoires/${e[0]}.json`), emojis[e[0]], e[1]]);
         let str = `${grimoires.map(g => `${g[1]} **• \`id:${g[0].label}\` ${g[0].name}** (\`x${g[2]}\`)`).join("\n")}`;
 
-        str += "\n\nRépondez au message ci-dessous avec l'id correspondant de votre grimoire. Répondez avec `n` (non) pour annuler. ";
+        str += "\n\nRépondez au message ci-dessous avec l'id correspondant ";
+        str += "de votre grimoire. Répondez avec `n` (non) pour annuler. ";
         str += "Une fois que vous répondrez, votre grimoire sera automatiquement mis en place.";
 
         const msg = await this.ctx.reply("Équiper un grimoire.", str, "📖", null, "outline");
@@ -67,10 +70,22 @@ class GrimoireSet extends Command {
 
             const grimDatas = grimoires.filter(g => g[0].label === choice)?.at(0)?.at(0);
             await this.client.inventoryDb.equipGrimoire(this.message.author.id, grimDatas.label);
-            return await this.ctx.reply("Équiper un grimoire.", `Vous avez donc équipé **${grimDatas.name}**.`, "📖", null, "outline");
+            return await this.ctx.reply(
+                "Équiper un grimoire.",
+                `Vous avez donc équipé **${grimDatas.name}**.`,
+                "📖",
+                null,
+                "outline",
+            );
         }
         else if (this.ctx.isResp(choice, "n")) {
-            return await this.ctx.reply("Équiper un grimoire.", "Vous avez décidé de ne pas équiper de grimoire.", "📖", null, "outline");
+            return await this.ctx.reply(
+                "Équiper un grimoire.",
+                "Vous avez décidé de ne pas équiper de grimoire.",
+                "📖",
+                null,
+                "outline",
+            );
         }
         else {
             return await this.ctx.reply("Équiper un grimoire.", "La commande n'a pas aboutie.", null, null, "timeout");

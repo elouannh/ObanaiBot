@@ -19,19 +19,34 @@ class WeaponSet extends Command {
 
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const iDatas = await this.client.inventoryDb.get(this.message.author.id);
         const pDatas = await this.client.playerDb.get(this.message.author.id);
         const weapons = "weapons" in iDatas ? iDatas.weapons : [];
 
-        if (weapons.length === 0) return await this.ctx.reply("Oups...", "Il semblerait que vous n'ayez aucune arme en stock.", null, null, "warning");
+        if (weapons.length === 0) {
+            return await this.ctx.reply(
+                "Oups...",
+                "Il semblerait que vous n'ayez aucune arme en stock.",
+                null,
+                null,
+                "warning",
+            );
+        }
 
-        const goodWeapons = weapons.filter(w => w.label === require(`../../elements/categories/${pDatas.category}.json`).weapon).sort((a, b) => b.rarity - a.rarity);
+        const goodWeapons = weapons.filter(w =>
+                                        w.label === require(`../../elements/categories/${pDatas.category}.json`).weapon,
+                                    )
+                                   .sort((a, b) => b.rarity - a.rarity);
         if (goodWeapons.length === 0) {
             return await this.ctx.reply(
                 "Oups...",
-                `Vous ne possédez aucune arme apte pour la catégorie **${require(`../../elements/categories/${pDatas.category}.json`).name}** en stock.`,
+                "Vous ne possédez aucune arme apte pour la catégorie "
+                +
+                `**${require(`../../elements/categories/${pDatas.category}.json`).name}** en stock.`,
                 null,
                 null,
                 "warning",
@@ -45,9 +60,13 @@ class WeaponSet extends Command {
         if (goodWeapons.length > 1) {
             const msg = await this.ctx.reply(
                 "Changement d'arme.",
-                `Vous possédez plusieurs armes.\n\n${goodWeapons.map((e, i) => `**${i + 1}** | \`rareté: ${e.rarity}\` | ${e.name}`).join("\n")}`
+                "Vous possédez plusieurs armes."
                 +
-                "\n\nRépondez avec le numéro correspondant à l'arme que vous souhaitez équiper. Répondre avec `n` (non) pour annuler.",
+                `\n\n${goodWeapons.map((e, i) => `**${i + 1}** | \`rareté: ${e.rarity}\` | ${e.name}`).join("\n")}`
+                +
+                "\n\nRépondez avec le numéro correspondant à l'arme que vous souhaitez équiper. "
+                +
+                "Répondre avec `n` (non) pour annuler.",
                 "🗡️",
                 null,
                 "outline",
@@ -69,7 +88,13 @@ class WeaponSet extends Command {
             }
             else {
                 isGood = false;
-                return await this.ctx.reply("Changement d'arme.", "La commande n'a pas aboutie.", null, null, "timeout");
+                return await this.ctx.reply(
+                    "Changement d'arme.",
+                    "La commande n'a pas aboutie.",
+                    null,
+                    null,
+                    "timeout",
+                );
             }
         }
 
@@ -79,7 +104,9 @@ class WeaponSet extends Command {
             "Changement d'arme.",
             "Êtes-vous sûr de vouloir changer d'arme ? Celle équipée retournera dans votre inventaire."
             +
-            `\n**Ancienne arme:** ${actualWeapon.name} (rareté **${actualWeapon.rarity}**)\n**Nouvelle arme:** ${weaponToSet.name} (rareté **${weaponToSet.rarity}**)`
+            `\n**Ancienne arme:** ${actualWeapon.name} (rareté **${actualWeapon.rarity}**)\n`
+            +
+            `**Nouvelle arme:** ${weaponToSet.name} (rareté **${weaponToSet.rarity}**)`
             +
             "\n\nRépondre avec `y` (oui) ou `n` (non).",
             "🗡️",

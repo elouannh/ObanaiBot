@@ -151,7 +151,11 @@ module.exports = {
             for (const prf of prefixes) {
                 if (message.content.toLowerCase().startsWith(prf)) {
                     executed = true;
-                    await executeCommand(client, Object.assign(message, { content: message.content.replace(prf, guildPrefix.prefix) }), guildPrefix.prefix);
+                    await executeCommand(
+                        client,
+                        Object.assign(message, { content: message.content.replace(prf, guildPrefix.prefix) }),
+                        guildPrefix.prefix,
+                    );
                 }
             }
 

@@ -57,7 +57,12 @@ class Help extends Command {
             +
             [
                 ["Serveur support", "https://discord.gg/8GDpnYvRrC"],
-                ["Inviter le bot", "https://discord.com/oauth2/authorize?client_id=958433246050406440&scope=bot&permissions=274878286912"],
+                [
+                    "Inviter le bot",
+                    "https://discord.com/oauth2/"
+                    +
+                    "authorize?client_id=958433246050406440&scope=bot&permissions=274878286912",
+                ],
                 ["Twitter officiel", "https://twitter.com/ObanaiBot"],
                 ["Twitter du développeur", "https://twitter.com/pxndxdev"],
                 ["Chaîne YouTube", "https://www.youtube.com/channel/UC-6D-ACs0yTzngli2NBKYkg"],
@@ -86,7 +91,9 @@ class Help extends Command {
             }
         }
 
-        const commandsPageContent = Object.values(datas).map(e => `> ${e.emoji} » **${e.name}** | \`${e.commands.length}\` commandes`).join("\n\n");
+        const commandsPageContent = Object.values(datas)
+                                          .map(e => `> ${e.emoji} » **${e.name}** | \`${e.commands.length}\` commandes`)
+                                          .join("\n\n");
 
         let loop = true;
         let focus = "main";
@@ -141,7 +148,8 @@ class Help extends Command {
                         embeds: [
                             {
                                 title: `Commandes | ${data.name}`,
-                                description: data.commands.map(e => `**\`${e.infos.name}\`** : ${e.infos.description}`).join("\n"),
+                                description: data.commands.map(e => `**\`${e.infos.name}\`** : ${e.infos.description}`)
+                                                          .join("\n"),
                                 emoji: data.emoji,
                                 color: null,
                                 style: "outline",
@@ -195,7 +203,13 @@ class Help extends Command {
                         "type": 3,
                         "customId": "commands",
                         "options": Object.values(datas).map(e =>
-                            [e.name, `${e.row}_list`, Object.entries(sections).filter(f => f[1].includes(e.name)).at(0).at(0), e.emoji, false],
+                            [
+                                e.name,
+                                `${e.row}_list`,
+                                Object.entries(sections).filter(f => f[1].includes(e.name)).at(0).at(0),
+                                e.emoji,
+                                false,
+                            ],
                         ),
                         "placeholder": "Choisir une catégorie de commandes",
                         "minValues": 0,
@@ -248,7 +262,15 @@ class Help extends Command {
                         .setCustomId("search_command_modal")
                         .setComponents([
                             [
-                                ["command_name", "Nom (ou alias) de la commande à rechercher", 1, 25, "help, stats, prefix, weapons...", 1, true],
+                                [
+                                    "command_name",
+                                    "Nom (ou alias) de la commande à rechercher",
+                                    1,
+                                    25,
+                                    "help, stats, prefix, weapons...",
+                                    1,
+                                    true,
+                                ],
                             ],
                         ])
                         .modal,
@@ -262,7 +284,11 @@ class Help extends Command {
                         let cmd = this.client.commandManager.getCommand(commandName);
 
                         if (cmd === 0) {
-                            await this.ctx.send(`La commande \`${commandName}\` n'existe pas; vérifiez l'orthographe et réessayez.`, "❌", true);
+                            await this.ctx.send(
+                                `La commande \`${commandName}\` n'existe pas; vérifiez l'orthographe et réessayez.`,
+                                "❌",
+                                true,
+                            );
                         }
                         else {
                             let string = "";
@@ -273,10 +299,19 @@ class Help extends Command {
                             string += `\`🏷️\` **Aliases**: ${i.aliases.map(e => `**\`${e}\`**`).join(" - ")}\n`;
                             string += `\`⏰\` **Délai**: **\`${i.cooldown}\`** secondes\n`;
                             string += `\`✏️\` **Syntaxe**: **\`${i.syntax}\`**\n`;
-                            string += `\`⚙️\` **Paramètres**:\n\`\`\`fix\n${i.args.length > 0 ? i.args.map((e, j) => `${j + 1}. ${e[0]}${e[2] === true ? "(⁕)" : ""} : ${e[1]}`).join("\n") : "- Aucun paramètre requis -"}\`\`\`\n`;
-                            string += `\`🖼️\` **Exemples**:\`\`\`fix\n${i.examples.map(e => `${e.replace("[p]", this.prefix)}`).join("\n")}\`\`\`\n`;
+                            string += `\`⚙️\` **Paramètres**:\n\`\`\`fix\n${
+                                i.args.length > 0 ?
+                                i.args.map((e, j) => `${j + 1}. ${e[0]}${e[2] === true ? "(⁕)" : ""} : ${e[1]}`)
+                                      .join("\n")
+                                : "- Aucun paramètre requis -"
+                            }\`\`\`\n`;
+                            string += `\`🖼️\` **Exemples**:\`\`\`fix\n${
+                                i.examples.map(e => `${e.replace("[p]", this.prefix)}`).join("\n")
+                            }\`\`\`\n`;
                             const perms = new PermissionsBitField(i.permissions).toArray();
-                            string += `\`👘\` **Permissions**:\`\`\`fix\n${perms.length > 0 ? perms.join(" - ") : "- Aucune permission requise -"}\`\`\`\n\n`;
+                            string += `\`👘\` **Permissions**:\`\`\`fix\n${
+                                perms.length > 0 ? perms.join(" - ") : "- Aucune permission requise -"
+                            }\`\`\`\n\n`;
 
                             if (!pages.map(e => e.react).includes(`command_${i.name}`)) {
                                 pages.push(

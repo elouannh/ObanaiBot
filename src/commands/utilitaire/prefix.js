@@ -25,7 +25,9 @@ class Prefix extends Command {
             if (isValid === null) {
                 return await this.ctx.reply(
                     "Nouveau préfixe invalide.",
-                    "Votre préfixe doit être de la forme suivante:```[a-z]{0,1}?[!?.:;,]```\n```Exemples:\n- prefix d?```",
+                    "Votre préfixe doit être de la forme suivante:"
+                    +
+                    "```[a-z]{0,1}?[!?.:;,]```\n```Exemples:\n- prefix d?```",
                     null,
                     null,
                     "error",
@@ -41,19 +43,39 @@ class Prefix extends Command {
             const choice = await this.ctx.reactionCollection(msg, ["❌", "✅"]);
             if (choice === "✅") {
                 await this.client.guildDb.changePrefix(this.message.guild.id, isValid);
-                return await this.ctx.reply("Changement de préfixe.", "Le préfixe a bien été modifié.", null, null, "success");
+                return await this.ctx.reply(
+                    "Changement de préfixe.",
+                    "Le préfixe a bien été modifié.",
+                    null,
+                    null,
+                    "success",
+                );
             }
             else if (choice === "❌") {
-                return await this.ctx.reply("Changement de préfixe.", "Le préfixe n'a donc pas été modifié.", null, null, "info");
+                return await this.ctx.reply(
+                    "Changement de préfixe.",
+                    "Le préfixe n'a donc pas été modifié.",
+                    null,
+                    null,
+                    "info",
+                );
             }
             else if (choice === null) {
-                return await this.ctx.reply("Changement de préfixe.", "La commande n'a pas aboutie.", null, null, "timeout");
+                return await this.ctx.reply(
+                    "Changement de préfixe.",
+                    "La commande n'a pas aboutie.",
+                    null,
+                    null,
+                    "timeout",
+                );
             }
         }
         else {
             return await this.ctx.reply(
                 "Bonjour !",
-                `Je suis Obanai. Mon préfixe sur ce serveur est \`${guildPrefix.prefix}\`. Tu peux voir la liste de mes commandes en faisant \`${guildPrefix.prefix}help\`.`,
+                `Je suis Obanai. Mon préfixe sur ce serveur est \`${guildPrefix.prefix}\`. `
+                +
+                `Tu peux voir la liste de mes commandes en faisant \`${guildPrefix.prefix}help\`.`,
                 null,
                 null,
                 "info",

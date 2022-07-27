@@ -24,8 +24,10 @@ class Status extends Command {
         const statusDb = await this.client.statusDb;
 
         const processus = {
-            "server1": internalServer.processing[0].filter(e => e === true).length * 100 / internalServer.processing[0].length,
-            "server2": internalServer.processing[1].filter(e => e === true).length * 100 / internalServer.processing[1].length,
+            "server1": internalServer.processing[0]
+                        .filter(e => e === true).length * 100 / internalServer.processing[0].length,
+            "server2": internalServer.processing[1]
+                        .filter(e => e === true).length * 100 / internalServer.processing[1].length,
         };
         const ready = {
             "server1": { "0": "🔴 offline", "1": "🟡 preparing", "2": "🟢 online" }[internalServer.readyOrNot[0]],
@@ -89,7 +91,8 @@ class Status extends Command {
         datas += "**Process**\n";
         const memoryUsage = process.memoryUsage().heapTotal / 1024 / 1024;
         const ramPercent = Math.ceil(memoryUsage * 100 / (4.00 * 1024));
-        datas += `\`memory usage\`: **\`${((memoryUsage).toFixed(4))} MB\`**/\`${(4.00 * 1024).toFixed(0)} MB\` \`(${ramPercent}%)\`\n`;
+        datas += `\`memory usage\`: **\`${((memoryUsage).toFixed(4))} MB\`**/\`${(4.00 * 1024).toFixed(0)} MB\``;
+        datas += `\`(${ramPercent}%)\`\n`;
         let requests = 0;
         for (const userReqs of this.client.requests.map(u => u)) {
             requests += userReqs.map(e => e).length;

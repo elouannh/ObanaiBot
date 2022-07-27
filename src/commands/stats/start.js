@@ -19,7 +19,15 @@ class Start extends Command {
 
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
-        if (pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Vous avez déjà commencé votre aventure.", null, null, "error");
+        if (pExists) {
+            return await this.ctx.reply(
+                "Vous n'êtes pas autorisé.",
+                "Vous avez déjà commencé votre aventure.",
+                null,
+                null,
+                "error",
+            );
+        }
 
         const msg = await this.ctx.reply(
             "Voulez-vous vraiment commencer votre aventure ?",
@@ -33,19 +41,29 @@ class Start extends Command {
             await this.client.playerDb.createAdventure(this.message.author.id);
             return await this.ctx.reply(
                 "Bienvenue jeune joueur !",
-                "Vous êtes désormais un joueur Obanai. Vous pouvez voir la liste des commandes à tout moment avec la commande help.",
+                "Vous êtes désormais un joueur Obanai. "
+                +
+                "Vous pouvez voir la liste des commandes à tout moment avec la commande help.",
                 "🎉",
                 null,
                 "outline",
             );
         }
         else if (this.ctx.isResp(choice, "n")) {
-            return await this.ctx.reply("J'espère bientôt vous revoir !", "N'hésitez pas à venir me voir lorsque vous souhaitez commencer.", "👋", null, "outline");
+            return await this.ctx.reply(
+                "J'espère bientôt vous revoir !",
+                "N'hésitez pas à venir me voir lorsque vous souhaitez commencer.",
+                "👋",
+                null,
+                "outline",
+            );
         }
         else {
             return await this.ctx.reply(
                 "Commencer votre aventure.",
-                "La commande n'a pas aboutie. Soit vous avez mis trop de temps à répondre, soit vous n'avez pas répondu comme convenu.",
+                "La commande n'a pas aboutie. Soit vous avez mis trop de temps à répondre, "
+                +
+                "soit vous n'avez pas répondu comme convenu.",
                 null,
                 null,
                 "timeout",

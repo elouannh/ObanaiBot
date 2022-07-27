@@ -28,7 +28,9 @@ class Crow extends Command {
         if (user === null) return;
 
         const pExists = await this.client.playerDb.started(user.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const pDatas = await this.client.inventoryDb.get(user.id);
 
@@ -43,16 +45,24 @@ class Crow extends Command {
 
         let crowinfos = "";
 
-        const crow = pDatas.kasugai_crow === null ? null : require(`../../elements/kasugai_crows/${pDatas.kasugai_crow}.json`);
+        const crow = pDatas.kasugai_crow === null ?
+                     null
+                     : require(`../../elements/kasugai_crows/${pDatas.kasugai_crow}.json`);
 
         if (crow !== null) {
             crowinfos += `**${crow.name}** • Rareté: **${crow.rarity}**\n`;
-            crowinfos += `*Effets:*\n\`\`\`${crow.bonus.length > 0 ? `${crow.bonus.map(e => crows_boost[e]).join("\n")}` : "Aucun effet."}\`\`\``;
+            crowinfos += `*Effets:*\n\`\`\`${crow.bonus.length > 0 ? `${
+                crow.bonus.map(e => crows_boost[e]).join("\n")}` : "Aucun effet."
+            }\`\`\``;
             crowinfos += `\nNiveau: **${crowLevel.level}** | Exp total: ⭐ **${intRender(crowLevel.exp, " ")}**`;
-            crowinfos += `\nExp du niveau: ⭐ **${intRender(crowLevel.tempExp, " ")}**/${intRender(crowLevel.required, " ")}`;
+            crowinfos += `\nExp du niveau: ⭐ **${
+                intRender(crowLevel.tempExp, " ")}**/${intRender(crowLevel.required, " ")
+            }`;
         }
         else {
-            crowinfos += `\`\`\`Aucun corbeau de liaison. Essayez d'en trouver un avec la commande \`${this.prefix}crow-bait.\`\`\`\``;
+            crowinfos += "```Aucun corbeau de liaison. Essayez d'en "
+                         +
+                         `trouver un avec la commande \`${this.prefix}crow-bait.\`\`\`\``;
         }
 
 

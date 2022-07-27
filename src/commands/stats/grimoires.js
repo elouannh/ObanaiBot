@@ -27,7 +27,9 @@ class Grimoires extends Command {
         if (user === null) return;
 
         const pExists = await this.client.playerDb.started(user.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const pDatas = await this.client.inventoryDb.get(user.id);
         const grims_boost = {
@@ -40,12 +42,17 @@ class Grimoires extends Command {
             "training_time": "-[b]%🕣 entrainement",
         };
         let grimoires = "";
-        const grim = pDatas.active_grimoire === null ? null : require(`../../elements/grimoires/${pDatas.active_grimoire}.json`);
+        const grim = pDatas.active_grimoire === null ?
+                     null
+                     : require(`../../elements/grimoires/${pDatas.active_grimoire}.json`);
 
         if (grim !== null) {
             const timeLeft = (grim.expiration * 1000) - (Date.now() - pDatas.active_grimoire_since);
             grimoires += `Grimoire: **${grim.name}** • Durée restante: **${convertDate(timeLeft, false).string}**\n`;
-            grimoires += `*Effets:*\n\`\`\`${grim.benefits.map(e => `${grims_boost[e].replace("[b]", ((grim.boost - 1) * 100).toFixed(0))}`).join("\n")}\`\`\``;
+            grimoires += `*Effets:*\n\`\`\`${
+                grim.benefits.map(e => `${grims_boost[e].replace("[b]", ((grim.boost - 1) * 100).toFixed(0))}`)
+                             .join("\n")
+            }\`\`\``;
         }
         else {
             grimoires += "```Aucun grimoire actif.```";

@@ -19,13 +19,19 @@ class Claim extends Command {
 
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Vous avez déjà commencé votre aventure.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
         const eDatas = await this.client.externalServerDb.get(this.message.author.id);
-        if (eDatas.grades.length === 0) return await this.ctx.reply("Oups...", "Vous n'avez aucun grade.", null, null, "warning");
+        if (eDatas.grades.length === 0) {
+            return await this.ctx.reply("Oups...", "Vous n'avez aucun grade.", null, null, "warning");
+        }
 
         const canBeClaimed = eDatas.grades.filter(g => !eDatas.claimed.includes(g));
-        if (canBeClaimed.length === 0) return await this.ctx.reply("Oups...", "Vous avez déjà récupéré toutes les récompenses de grade.", null, null, "warning");
+        if (canBeClaimed.length === 0) {
+            return await this.ctx.reply("Oups...", "Vous avez déjà récupéré toutes les récompenses de grade.", null, null, "warning");
+        }
 
         let str = "";
         for (const grade of canBeClaimed) {
@@ -39,7 +45,8 @@ class Claim extends Command {
                     await this.client.playerDb.db.math(eDatas.id, "+", 2, "stats.agility");
                     await this.client.playerDb.db.math(eDatas.id, "+", 2, "stats.speed");
                     await this.client.playerDb.db.math(eDatas.id, "+", 2, "stats.defense");
-                    str += "**BONUS VIP**\nGrimoire de maîtrise +1\nGrimoire éternel +1\n+50'000 ¥\n+2 niveau d'aptitude";
+                    str += "**BONUS VIP**\nGrimoire de maîtrise +1\n";
+                    str += "Grimoire éternel +1\n+50'000 ¥\n+2 niveau d'aptitude";
                     break;
                 case "vip+":
                     await this.client.inventoryDb.addGrimoire(eDatas.id, "mastery");

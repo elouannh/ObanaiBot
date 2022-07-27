@@ -20,7 +20,9 @@ class BotInfos extends Command {
 
     async run() {
         let botinfos = "> 📦 ***Databases sizes***\n\n";
-        botinfos += `\`players\`: **\`${this.client.playerDb.db.array().filter(e => e.started === true).length} entries\`**\n`;
+        botinfos += `\`players\`: **\`${
+            this.client.playerDb.db.array().filter(e => e.started === true).length
+        } entries\`**\n`;
         botinfos += `\`users\`: **\`${this.client.users.cache.size} entries\`**\n`;
         botinfos += `\`servers\`: **\`${this.client.guilds.cache.size} entries\`**\n\n`;
 
@@ -38,7 +40,9 @@ class BotInfos extends Command {
                 .filter(e => e.started === true)
                 .sort((a, b) => b.created - a.created)
                 .splice(0, 5)
-                .map(e => `**\`${Util.escapeMarkdown(this.client.users.cache.get(e.id)?.username) ?? "non-cached player"}\` - <t:${((e.created) / 1000).toFixed(0)}:R>**`)
+                .map(e => `**\`${
+                    Util.escapeMarkdown(this.client.users.cache.get(e.id)?.username) ?? "non-cached player"
+                }\` - <t:${((e.created) / 1000).toFixed(0)}:R>**`)
                 .join("\n")
         }\n`;
 

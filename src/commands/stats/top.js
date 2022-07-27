@@ -20,15 +20,21 @@ class Top extends Command {
 
     async run() {
         const pExists = await this.client.playerDb.started(this.message.author.id);
-        if (!pExists) return await this.ctx.reply("Vous n'êtes pas autorisé.", "Vous avez déjà commencé votre aventure.", null, null, "error");
+        if (!pExists) {
+            return await this.ctx.reply("Vous n'êtes pas autorisé.", "Ce profil est introuvable.", null, null, "error");
+        }
 
-        const players = this.client.playerDb.db.array();
+        const players = this.client.playerDb.db.array().filter(async p => await this.client.playerDb.started(p.id));
         const topPlayers = players.sort((a, b) => b.exp - a.exp);
-        let lb = `Votre rang: **#${topPlayers.length > 0 ? topPlayers.map(e => e.id).indexOf(this.message.author.id) + 1 : "Non classé"}**\n\n`;
+        const userRank = topPlayers.length > 0 ?
+                         topPlayers.map(e => e.id).indexOf(this.message.author.id) + 1
+                         : "Non classé";
+        let lb = `Votre rang: **#${userRank}**\n\n`;
 
         let i = 0;
         for (const player of topPlayers.splice(0, 20)) {
-            lb += `\`#${i + 1}\` ¦ ${this.client.users.cache.get(player.id)?.username ?? "Pourfendeur X"} ¦ **${intRender(player.exp, " ")}** :star:\n`;
+            lb += `\`#${i + 1}\` ¦ ${this.client.users.cache.get(player.id)?.username ?? "Pourfendeur X"}`;
+            lb += ` ¦ **${intRender(player.exp, " ")}** :star:\n`;
             i++;
         }
 
