@@ -8,6 +8,8 @@ En rejoignant ce serveur ou en jouant au bot, vous affirmez avoir lu et pris con
 
 Ces règles sont amenées à être modifiées à tout moment et sans préavis si notre équipe le juge nécessaire. Vous en serez averti une fois ces changements réalisés.
 
+Vous devez également prendre connaissance de notre Politique de Confidentialité (https://github.com/PxndxDev/ObanaiDiscordBot/blob/main/LEGAL.md) et de nos Conditions Générales d'Utilisation (https://github.com/PxndxDev/ObanaiDiscordBot/blob/main/TERMS.md).
+
 > Dernière modification: 30/07/2022 13h27 heure de Paris.
 
 ---
