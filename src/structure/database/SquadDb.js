@@ -149,4 +149,4 @@ class SquadDb {
     }
 }
 
-module.exports = { SquadDb };
+module.exports = SquadDb;

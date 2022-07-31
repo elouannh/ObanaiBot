@@ -197,4 +197,4 @@ class InventoryDb {
 
 }
 
-module.exports = { InventoryDb };
+module.exports = InventoryDb;

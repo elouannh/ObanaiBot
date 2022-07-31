@@ -92,4 +92,4 @@ class StatusDb {
 
 }
 
-module.exports = { StatusDb };
+module.exports = StatusDb;

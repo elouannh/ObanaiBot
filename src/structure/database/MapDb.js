@@ -31,4 +31,4 @@ class MapDb {
     }
 }
 
-module.exports = { MapDb };
+module.exports = MapDb;

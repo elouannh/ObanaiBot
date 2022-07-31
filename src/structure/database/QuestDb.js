@@ -36,4 +36,4 @@ class QuestDb {
     }
 }
 
-module.exports = { QuestDb };
+module.exports = QuestDb;

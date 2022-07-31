@@ -42,4 +42,4 @@ class GuildDb {
     }
 }
 
-module.exports = { GuildDb };
+module.exports = GuildDb;

@@ -160,4 +160,4 @@ class ActivityDb {
     }
 }
 
-module.exports = { ActivityDb };
+module.exports = ActivityDb;

@@ -184,4 +184,4 @@ class PlayerDb {
     }
 }
 
-module.exports = { PlayerDb };
+module.exports = PlayerDb;

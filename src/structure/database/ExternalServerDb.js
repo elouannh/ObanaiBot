@@ -295,4 +295,4 @@ class ExternalServerDb {
     }
 }
 
-module.exports = { ExternalServerDb };
+module.exports = ExternalServerDb;

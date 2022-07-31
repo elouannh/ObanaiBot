@@ -379,4 +379,4 @@ class InternalServerManager {
     }
 }
 
-module.exports = { InternalServerManager };
+module.exports = InternalServerManager;
