@@ -93,11 +93,7 @@ class Status extends Command {
         const ramPercent = Math.ceil(memoryUsage * 100 / (4.00 * 1024));
         datas += `\`memory usage\`: **\`${((memoryUsage).toFixed(4))} MB\`**/\`${(4.00 * 1024).toFixed(0)} MB\``;
         datas += `\`(${ramPercent}%)\`\n`;
-        let requests = 0;
-        for (const userReqs of this.client.requests.map(u => u)) {
-            requests += userReqs.map(e => e).length;
-        }
-        datas += `\`process\`: **\`${processStrings(requests * 100 / this.client.maxRequests)}\`**\n`;
+        datas += `\`process\`: **\`${processStrings(this.client.requestsManager.amountOfRequests * 100 / this.client.maxRequests)}\`**\n`;
         datas += `\`uptime\`: **\`${convertDate(process.uptime() * 1000, true).string}\`**`;
 
         await this.ctx.reply("Statut du processus Obanai", datas, "🖥️", null, "info");

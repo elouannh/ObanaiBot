@@ -33,14 +33,9 @@ async function executeCommand(client, message, prefix) {
     }
 
     client.lastChannel.set(message.author.id, message.channel);
-    client.requests.get(message.author.id).set(message.id,
-        {
-            req: cmd.infos.name,
-            src: `https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id}`,
-        },
-    );
+    client.requestsManager.add(message.author.id, cmd);
     await cmd.run();
-    client.requests.get(message.author.id).delete(message.id);
+    client.requestsManager.remove(message.author.id, cmd);
 }
 
 function removeDuplicate(string = "", model = "") {

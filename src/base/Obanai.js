@@ -1,19 +1,20 @@
 /* eslint-disable no-unused-vars */
 const { Client, escapeMarkdown, IntentsBitField } = require("discord.js");
-const { PlayerDb } = require("../structure/database/PlayerDb");
-const { InventoryDb } = require("../structure/database/InventoryDb");
-const { SquadDb } = require("../structure/database/SquadDb");
-const { GuildDb } = require("../structure/database/GuildDb");
-const { ActivityDb } = require("../structure/database/ActivityDb");
-const { MapDb } = require("../structure/database/MapDb");
-const { QuestDb } = require("../structure/database/QuestDb");
-const { InternalServerManager } = require("../structure/database/InternalServerManager");
-const { ExternalServerDb } = require("../structure/database/ExternalServerDb");
-const { StatusDb } = require("../structure/database/StatusDb");
+const PlayerDb = require("../structure/database/PlayerDb");
+const InventoryDb = require("../structure/database/InventoryDb");
+const SquadDb = require("../structure/database/SquadDb");
+const GuildDb = require("../structure/database/GuildDb");
+const ActivityDb = require("../structure/database/ActivityDb");
+const MapDb = require("../structure/database/MapDb");
+const QuestDb = require("../structure/database/QuestDb");
+const InternalServerManager = require("../structure/database/InternalServerManager");
+const ExternalServerDb = require("../structure/database/ExternalServerDb");
+const StatusDb = require("../structure/database/StatusDb");
 const CommandManager = require("./CommandManager");
 const config = require("../config.json");
 const Package = require("../../package.json");
 const SuperEmbed = require("./SuperEmbed");
+const RequestsManager = require("./RequestsManager");
 const dateRender = require("../utils/dateRender");
 
 class Obanai extends Client {
@@ -32,6 +33,7 @@ class Obanai extends Client {
         this.color = "#2f3136";
         this.version = Package.version;
         this.maxRequests = 30;
+        this.requestsManager = new RequestsManager(this);
 
         this.playerDb = new PlayerDb(this);
         this.activityDb = new ActivityDb(this);

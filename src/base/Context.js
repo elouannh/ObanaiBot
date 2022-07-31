@@ -60,9 +60,9 @@ class Context {
         return await this.command.message.channel.send({ embeds: [reponse.embed] });
     }
 
-    async send(content = "", emoji = "", reply = true) {
+    async send(content = "", emoji = "", reply = true, user = undefined) {
         if (reply) {
-            await this.command.message.channel.send({ content: `> <@${this.command.message.author.id}>, ${emoji === "" ? "" : `${emoji} `}${content}`, failIfNoExists: false });
+            await this.command.message.channel.send({ content: `> <@${user ?? this.command.message.author.id}>, ${emoji === "" ? "" : `${emoji} `}${content}`, failIfNoExists: false });
         }
         else {
             await this.command.message.channel.send({ content: `> ${emoji === "" ? "" : `${emoji} `}${content}` });

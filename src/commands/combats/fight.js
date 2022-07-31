@@ -4,31 +4,6 @@ const Player = require("../../classes/Player");
 const MemberScanning = require("../../structure/tools/MemberScanning");
 const { Collection } = require("discord.js");
 
-async function requestReady(client, user, infos) {
-    let ready = true;
-
-    if (!client.requests.has(user)) client.requests.set(user, new Collection());
-
-    // Collection<string, string> avec string[0] = cmd.name et string[1] = lien
-    const userRequests = client.requests.get(user);
-    // Array<string> avec string.prototype = cmd.name
-    const neededRequests = infos.finishRequest;
-    const notFinished = [];
-
-    // ........string of Array<string>
-    for (const needed of neededRequests) {
-        if (userRequests.filter(req => req.req === needed).map(e => e).length > 0) {
-            for (const mulReq of userRequests.filter(req => req.req === needed).map(e => e)) {
-                notFinished.push(mulReq);
-            }
-        }
-    }
-
-    if (notFinished.length > 0) ready = false;
-
-    return ready;
-}
-
 class Fight extends Command {
     constructor() {
         super({
@@ -96,7 +71,7 @@ class Fight extends Command {
 
         let allReady = true;
         for (const p of teams["1"].concat(teams["2"]).filter(e => e.id !== this.message.author.id)) {
-            const ready = await requestReady(this.client, p.id, this.infos);
+            const ready = await this.requestReady(p.id);
             if (!ready) allReady = false;
         }
 

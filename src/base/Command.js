@@ -95,39 +95,16 @@ class Command {
         return ready;
     }
 
-    async requestReady() {
+    async requestReady(user = undefined) {
         let ready = true;
 
-        if (!this.client.requests.has(this.message.author.id)) {
-            this.client.requests.set(this.message.author.id, new Collection());
-        }
-
-        // Collection<string, string> avec string[0] = cmd.name et string[1] = lien
-        const userRequests = this.client.requests.get(this.message.author.id);
-        // Array<string> avec string.prototype = cmd.name
-        const neededRequests = this.infos.finishRequest;
-        const notFinished = [];
-
-        // ........string of Array<string>
-        for (const needed of neededRequests) {
-            if (userRequests.filter(req => req.req === needed).map(e => e).length > 0) {
-                for (const mulReq of userRequests.filter(req => req.req === needed).map(e => e)) {
-                    notFinished.push(mulReq);
-                }
-            }
-        }
+        const notFinished = this.client.requestsManager.has(user ?? this.message.author.id);
 
         if (notFinished.length > 0) {
             ready = false;
-            await this.ctx.reply(
-                "Une erreur est survenue.",
-                "Vous n'avez pas fini de répondre aux requêtes suivantes :\n"
-                +
-                `t${notFinished.map(req => `[\`${req.req}\`](${req.src})`)}`,
-                null,
-                null,
-                "warning",
-            );
+            await this.ctx.send(`Vous avez déjà des commandes en cours d'execution qui doivent se terminer:\n\n${
+                notFinished.map(e => `**${e.name}** - <t:${(e.ts / 1000).toFixed(0)}:F>`)
+            }`, "🛠️", true, user ?? undefined);
         }
 
         return ready;

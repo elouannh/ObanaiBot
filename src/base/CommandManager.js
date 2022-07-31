@@ -32,12 +32,7 @@ class CommandManager {
     }
 
     async isOverloaded() {
-        let requests = 0;
-        for (const userReqs of this.client.requests.map(u => u)) {
-            requests += userReqs.map(e => e).length;
-        }
-
-        return requests >= this.client.maxRequests;
+        return this.client.requestsManager.amountOfRequests >= this.client.maxRequests;
     }
 }
 

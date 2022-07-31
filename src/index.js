@@ -7,8 +7,6 @@ const client = new Obanai(token);
 client.log("Starting bot process...");
 // ................<string, Collection<string, Date>>
 client.cooldowns = new Collection();
-// ................<string, Collection<string, string>>
-client.requests = new Collection();
 // ................<string, Channel>
 client.lastChannel = new Collection();
 
