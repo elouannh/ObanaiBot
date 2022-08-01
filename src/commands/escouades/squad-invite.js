@@ -45,14 +45,7 @@ class SquadInvite extends Command {
         }
 
         this.client.lastChannel.set(user.id, this.message.channel.channel);
-        this.client.requests.get(user.id).set(this.message.id,
-            {
-                req: this.infos.name,
-                src: "https://discord.com/channels/"
-                     +
-                     `${this.message.guild.id}/${this.message.channel.id}/${this.message.id}`,
-            },
-        );
+        this.client.requestsManager.add(user.id, this.infos.name);
 
         const msg = await this.ctx.reply(
             "Inviter un nouveau membre.",
@@ -64,7 +57,7 @@ class SquadInvite extends Command {
             "outline",
         );
         const choice = await this.ctx.messageCollection(msg, 1, 30_000, user.id);
-        this.client.requests.get(user.id).delete(this.message.id);
+        this.client.requestsManager.remove(user.id, this.infos.name)
 
         if (this.ctx.isResp(choice, "y")) {
             const pDatas = await this.client.playerDb.get(this.message.author.id);

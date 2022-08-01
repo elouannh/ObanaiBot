@@ -32,7 +32,7 @@ class CommandManager {
     }
 
     async isOverloaded() {
-        return this.client.requestsManager.amountOfRequests >= this.client.maxRequests;
+        return this.client.requestsManager.totalSize >= this.client.maxRequests;
     }
 }
 

@@ -57,37 +57,30 @@ class Command {
         await this.message.channel.send("this is a default reply.");
     }
 
-    async cooldownReady(forExecuting) {
+    async cooldownReady(forExecuting, user) {
         let ready = true;
-        // ...............................................................................<string, Date>
-        if (!this.client.cooldowns.has(this.infos.name)) this.client.cooldowns.set(this.infos.name, new Collection());
-        if (!this.client.cooldowns.get(this.infos.name).has(this.message.author.id)) {
-            this.client.cooldowns.get(this.infos.name)
-                                 .set(this.message.author.id, Date.now() - this.infos.cooldown * 1000);
-        }
 
-        const lastRun = this.client.cooldowns.get(this.infos.name).get(this.message.author.id);
+        const lastRun = this.client.cooldownsManager.getSub(this.message.author.id, this.infos.name);
         const tStamp = Date.now();
         const readyForRun = lastRun + this.infos.cooldown * 1000;
 
         if (tStamp < readyForRun) {
             ready = false;
-            await this.ctx.reply(
-                "Veuillez patienter.",
-                `Merci d'attendre \`${convertDate(readyForRun - tStamp, true).string}\``
+            await this.ctx.send(
+                `Veuillez patienter \`${convertDate(readyForRun - tStamp, true).string}\``
                 +
-                " avant de pouvoir refaire cette commande.",
-                null,
-                null,
-                "timeout",
+                "avant de refaire cette commande.",
+                "⏳",
+                true,
+                user ?? undefined,
             );
         }
         else {
-            this.client.cooldowns.get(this.infos.name).delete(this.message.author.id);
+            this.client.cooldownsManager.remove(this.message.author.id, this.infos.name);
 
             if (forExecuting) {
                 setTimeout(() => {
-                    this.client.cooldowns.get(this.infos.name).set(this.message.author.id, Date.now());
+                    this.client.cooldownsManager(this.message.author.id, this.infos.name);
                 }, this.command);
             }
         }

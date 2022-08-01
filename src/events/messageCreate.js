@@ -33,9 +33,9 @@ async function executeCommand(client, message, prefix) {
     }
 
     client.lastChannel.set(message.author.id, message.channel);
-    client.requestsManager.add(message.author.id, cmd);
+    client.requestsManager.add(message.author.id, cmd.infos.name);
     await cmd.run();
-    client.requestsManager.remove(message.author.id, cmd);
+    client.requestsManager.remove(message.author.id, cmd.infos.name);
 }
 
 function removeDuplicate(string = "", model = "") {

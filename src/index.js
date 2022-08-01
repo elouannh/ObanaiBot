@@ -5,8 +5,6 @@ const { loadEvents } = require("./utils/eventLoader");
 
 const client = new Obanai(token);
 client.log("Starting bot process...");
-// ................<string, Collection<string, Date>>
-client.cooldowns = new Collection();
 // ................<string, Channel>
 client.lastChannel = new Collection();
 

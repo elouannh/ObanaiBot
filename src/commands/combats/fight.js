@@ -80,14 +80,7 @@ class Fight extends Command {
 
         for (const p of teams["1"].concat(teams["2"]).filter(e => e.id !== this.message.author.id)) {
             this.client.lastChannel.set(p.id, this.message.channel.channel);
-            this.client.requests.get(p.id).set(this.message.id,
-                {
-                    req: this.infos.name,
-                    src: "https://discord.com/channels/"
-                         +
-                         `${this.message.guild.id}/${this.message.channel.id}/${this.message.id}`,
-                },
-            );
+            this.client.requestsManager.add(p.id, this.infos.name);
         }
 
         const msg = await this.ctx.reply(
@@ -107,7 +100,7 @@ class Fight extends Command {
 
         if (response.reacted.length < allUsers.map(e => e.id).length) {
             for (const p of allUsers.filter(e => e.id !== this.message.author.id)) {
-                this.client.requests.get(p.id).delete(this.message.id);
+                this.client.requestsManager.remove(p.id, this.infos.name);
             }
             return await this.ctx.reply(
                 "Arène - Équipes",
@@ -124,7 +117,7 @@ class Fight extends Command {
 
         if (response.nopes.length > 0) {
             for (const p of allUsers.filter(e => e.id !== this.message.author.id)) {
-                this.client.requests.get(p.id).delete(this.message.id);
+                this.client.requestsManager.remove(p.id, this.infos.name);
             }
             return await this.ctx.reply(
                 "Arène - Équipes",
@@ -148,7 +141,7 @@ class Fight extends Command {
         await arena.begin();
 
         for (const p of teams["1"].concat(teams["2"]).filter(e => e.id !== this.message.author.id)) {
-            this.client.requests.get(p.id).delete(this.message.id);
+            this.client.requestsManager.remove(p.id, this.message.infos.name);
         }
     }
 }

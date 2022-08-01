@@ -14,7 +14,7 @@ const CommandManager = require("./CommandManager");
 const config = require("../config.json");
 const Package = require("../../package.json");
 const SuperEmbed = require("./SuperEmbed");
-const RequestsManager = require("./RequestsManager");
+const CollectionManager = require("./CollectionManager");
 const dateRender = require("../utils/dateRender");
 
 class Obanai extends Client {
@@ -33,7 +33,16 @@ class Obanai extends Client {
         this.color = "#2f3136";
         this.version = Package.version;
         this.maxRequests = 30;
-        this.requestsManager = new RequestsManager(this);
+
+        const callbackFunction = function(manager, key) {
+            return Object.entries(manager.get(key)).map(e => Object.assign(
+                {}, { name: e[0], time: e[1] },
+            ));
+        };
+        const dateNowFunction = function() { return Date.now(); };
+
+        this.requestsManager = new CollectionManager(this, callbackFunction, dateNowFunction, dateNowFunction);
+        this.cooldownsManager = new CollectionManager(this, callbackFunction, dateNowFunction, () => 0);
 
         this.playerDb = new PlayerDb(this);
         this.activityDb = new ActivityDb(this);
