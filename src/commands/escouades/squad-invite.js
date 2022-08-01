@@ -1,6 +1,5 @@
 const Command = require("../../base/Command");
 const MemberScanning = require("../../structure/tools/MemberScanning");
-const { Collection } = require("discord.js");
 
 class SquadInvite extends Command {
     constructor() {

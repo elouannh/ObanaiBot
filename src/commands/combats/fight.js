@@ -2,7 +2,6 @@ const Command = require("../../base/Command");
 const Arena = require("../../classes/Arena");
 const Player = require("../../classes/Player");
 const MemberScanning = require("../../structure/tools/MemberScanning");
-const { Collection } = require("discord.js");
 
 class Fight extends Command {
     constructor() {
