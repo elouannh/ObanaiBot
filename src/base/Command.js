@@ -61,6 +61,7 @@ class Command {
         let ready = true;
 
         const lastRun = this.client.cooldownsManager.getSub(this.message.author.id, this.infos.name);
+        console.log(lastRun);
         const tStamp = Date.now();
         const readyForRun = lastRun + this.infos.cooldown * 1000;
 
@@ -69,19 +70,19 @@ class Command {
             await this.ctx.send(
                 `Veuillez patienter \`${convertDate(readyForRun - tStamp, true).string}\``
                 +
-                "avant de refaire cette commande.",
+                " avant de refaire cette commande.",
                 "⏳",
                 true,
                 user ?? undefined,
             );
         }
         else {
-            this.client.cooldownsManager.remove(this.message.author.id, this.infos.name);
+            this.client.cooldownsManager.add(this.message.author.id, { key: this.infos.name, value: Date.now() });
 
             if (forExecuting) {
                 setTimeout(() => {
-                    this.client.cooldownsManager(this.message.author.id, this.infos.name);
-                }, this.command);
+                    this.client.cooldownsManager.remove(this.message.author.id, this.infos.name);
+                }, this.infos.cooldown * 1000);
             }
         }
 
@@ -96,7 +97,7 @@ class Command {
         if (notFinished.length > 0) {
             ready = false;
             await this.ctx.send(`Vous avez déjà des commandes en cours d'execution qui doivent se terminer:\n\n${
-                notFinished.map(e => `**${e.name}** - <t:${(e.ts / 1000).toFixed(0)}:F>`)
+                notFinished.map(e => `» **\`${e.name}\`** - <t:${(e.ts / 1000).toFixed(0)}:F>`)
             }`, "🛠️", true, user ?? undefined);
         }
 

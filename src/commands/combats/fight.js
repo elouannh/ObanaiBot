@@ -80,7 +80,7 @@ class Fight extends Command {
 
         for (const p of teams["1"].concat(teams["2"]).filter(e => e.id !== this.message.author.id)) {
             this.client.lastChannel.set(p.id, this.message.channel.channel);
-            this.client.requestsManager.add(p.id, this.infos.name);
+            this.client.requestsManager.add(p.id, { key: this.infos.name, value: Date.now() });
         }
 
         const msg = await this.ctx.reply(

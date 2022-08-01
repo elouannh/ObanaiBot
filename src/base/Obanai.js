@@ -35,14 +35,29 @@ class Obanai extends Client {
         this.maxRequests = 30;
 
         const callbackFunction = function(manager, key) {
-            return Object.entries(manager.get(key)).map(e => Object.assign(
-                {}, { name: e[0], time: e[1] },
-            ));
+            const map = manager.get(key).entries();
+            const finalReq = [];
+            for (const [entryKey, entryValue] of map) {
+                finalReq.push([entryKey, entryValue]);
+            }
+            return finalReq.map(e => Object.assign({}, { name: e[0], ts: e[1] }));
         };
         const dateNowFunction = function() { return Date.now(); };
 
-        this.requestsManager = new CollectionManager(this, callbackFunction, dateNowFunction, dateNowFunction);
-        this.cooldownsManager = new CollectionManager(this, callbackFunction, dateNowFunction, () => 0);
+        this.requestsManager = new CollectionManager(
+            this,
+            "requests",
+            callbackFunction,
+            dateNowFunction,
+            dateNowFunction,
+        );
+        this.cooldownsManager = new CollectionManager(
+            this,
+            "cooldowns",
+            callbackFunction,
+            dateNowFunction,
+            () => 0,
+        );
 
         this.playerDb = new PlayerDb(this);
         this.activityDb = new ActivityDb(this);

@@ -1,11 +1,11 @@
 const { Collection } = require("discord.js");
 
 class CollectionManager {
-    constructor(client, callback, addValue, defaultValue) {
+    constructor(client, name, callback, addValue, defaultValue) {
         this.client = client;
+        this.name = name;
         this.collection = new Collection();
         this.callback = callback;
-        this.addValue = addValue;
         this.defaultValue = defaultValue;
     }
 
@@ -22,27 +22,27 @@ class CollectionManager {
         return this.get(key).get(valueKey) ?? this.defaultValue();
     }
 
-    add(key, valueKey) {
+    add(key, entry) {
         this.ensure(key);
-        this.collection.get(key).set(valueKey, this.addValue());
+        this.collection.get(key).set(entry.key, entry.value);
     }
 
-    addSome(key, valueKey, values) {
+    addSome(key, entries) {
         this.ensure(key);
-        for (const value of values) {
-            this.add(valueKey, value);
+        for (const entry of entries) {
+            this.add(key, entry);
         }
     }
 
-    addToAGroup(keys, value) {
+    addToAGroup(keys, entry) {
         for (const key of keys) {
-            this.add(key, value);
+            this.add(key, entry);
         }
     }
 
-    addSomeToAGroup(keys, values) {
+    addSomeToAGroup(keys, entries) {
         for (const key of keys) {
-            this.addSome(key, values);
+            this.addSome(key, entries);
         }
     }
 
@@ -51,9 +51,9 @@ class CollectionManager {
         return this.callback(this, key);
     }
 
-    remove(key, value) {
+    remove(key, entryKey) {
         this.ensure(key);
-        this.collection.get(key).delete(value);
+        this.collection.get(key).delete(entryKey);
     }
 
     removeAll(key) {
@@ -61,16 +61,16 @@ class CollectionManager {
         this.collection.get(key).set(new Collection());
     }
 
-    removeSome(key, values) {
+    removeSome(key, entries) {
         this.ensure(key);
-        for (const value of values) {
-            this.remove(key, value);
+        for (const entry of entries) {
+            this.remove(key, entry);
         }
     }
 
-    removeToAGroup(keys, value) {
+    removeToAGroup(keys, entry) {
         for (const key of keys) {
-            this.remove(key, value);
+            this.remove(key, entry);
         }
     }
 
@@ -80,15 +80,15 @@ class CollectionManager {
         }
     }
 
-    removeSomeToAGroup(keys, values) {
+    removeSomeToAGroup(keys, entries) {
         for (const key of keys) {
-            this.removeSome(key, values);
+            this.removeSome(key, entries);
         }
     }
 
-    ready(key, value) {
+    ready(key, entryKey) {
         this.ensure(key);
-        return this.collection.get(key).has(value);
+        return this.collection.get(key).has(entryKey);
     }
 
     get totalSize() {

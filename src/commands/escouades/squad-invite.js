@@ -45,7 +45,7 @@ class SquadInvite extends Command {
         }
 
         this.client.lastChannel.set(user.id, this.message.channel.channel);
-        this.client.requestsManager.add(user.id, this.infos.name);
+        this.client.requestsManager.add(user.id, { key: this.infos.name, value: Date.now() });
 
         const msg = await this.ctx.reply(
             "Inviter un nouveau membre.",
