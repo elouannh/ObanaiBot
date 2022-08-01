@@ -1,4 +1,4 @@
-const { Collection, PermissionsBitField } = require("discord.js");
+const { PermissionsBitField } = require("discord.js");
 const convertDate = require("../utils/convertDate");
 const Context = require("./Context");
 const fs = require("fs");
