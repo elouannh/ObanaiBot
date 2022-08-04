@@ -23,8 +23,10 @@ class Command {
         this.client = null;
         this.interaction = null;
         this.lang = new Language("fr").json.commands[this.infos.name];
+        this.rpgCommand = false;
 
         if (this.infos.finishRequest === "ADVENTURE") {
+            this.rpgCommand = true;
             const req = [];
 
             fs.readdirSync("./src/commands")

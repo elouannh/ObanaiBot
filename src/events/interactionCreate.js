@@ -16,7 +16,9 @@ class InteractionCreate extends Event {
         this.client = client;
         this.interaction = interaction;
 
-        await this.executeCommand();
+        if (this.interaction.isChatInputCommand()) {
+            await this.executeCommand();
+        }
     }
 
     async executeCommand() {

@@ -59,6 +59,19 @@ class InternalServerManager {
         return staff;
     }
 
+    userRank(userId) {
+        return {
+            isTester: this.datas.testers.includes(userId),
+            isAdmin: this.datas.admins.includes(userId),
+            isOwner: this.datas.owners.includes(userId),
+            allGrades: [
+                this.datas.testers.includes(userId) ? "tester" : "",
+                this.datas.admins.includes(userId) ? "admin" : "",
+                this.datas.owners.includes(userId) ? "owner" : "",
+            ],
+        };
+    }
+
     get servers() {
         return this.datas.authServers;
     }
@@ -282,9 +295,9 @@ class InternalServerManager {
 				);
 			}
 
-            this.db.set("internalServer", news.owners, "owners");
-            this.db.set("internalServer", news.admins, "admins");
-            this.db.set("internalServer", news.testers, "testers");
+            this.db.set("internalServer", changedOwners.unchanged.concat(changedOwners.added), "owners");
+            this.db.set("internalServer", changedAdmins.unchanged.concat(changedAdmins.added), "admins");
+            this.db.set("internalServer", changedTesters.unchanged.concat(changedTesters.added), "testers");
 
 			if (fields.length > 0) {
                 let str = "```diff\n";
@@ -321,7 +334,7 @@ class InternalServerManager {
             await this.client.util.delay(20_000);
             this.processing[1][0] = false;
 
-		}, 10_000);
+		}, 25_000);
 
         setInterval(async () => {
             this.processing[1][1] = true;
