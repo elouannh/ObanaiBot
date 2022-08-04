@@ -2,7 +2,6 @@
 const Enmap = require("enmap");
 const Command = require("../../base/Command");
 const badgesObjectives = require("../../elements/badgesObjectives.json");
-const intRender = require("../../utils/intRender");
 
 class ExternalServerDb {
     constructor(client) {
@@ -169,7 +168,7 @@ class ExternalServerDb {
                 const afterIndex = indexOfTier + 1;
                 const afterTier = ["0", "1", "2", "3"][afterIndex];
                 progress += `\n» Prochain: \`tier ${this.getTier(afterTier)}\`: `;
-                progress += `**${intRender(quantity, " ")}**/${badgesObjectives.objectives[type][afterTier]}`;
+                progress += `**${this.client.util.intRender(quantity, " ")}**/${badgesObjectives.objectives[type][afterTier]}`;
             }
         }
 

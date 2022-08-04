@@ -1,5 +1,3 @@
-const names = require("../utils/json/names.json");
-
 const Util = {
     intRender: function(int, sep) {
         let args = [];
@@ -35,6 +33,28 @@ const Util = {
         return `${datas.day}/${datas.month}/${datas.year}` + (full ? ` ${datas.hour}:${datas.min}:${datas.sec}` : "");
     },
     coolNameGenerator: function() {
+        const names = {
+            "m": {
+                "s": {
+                    "names": ["du Pourfendeur", "du Démon", "du Forgeron", "du Kimono", "du Corbeau"],
+                    "adjectives": ["Légendaire", "Infini", "Surpuissant", "Démoniaque"],
+                },
+                "p": {
+                    "names": ["des Pourfendeurs", "des Démons", "des Forgerons", "des Kimonos", "des Corbeaux"],
+                    "adjectives": ["Légendaires", "Infinis", "Surpuissants", "Démoniaques"],
+                },
+            },
+            "f": {
+                "s": {
+                    "names": ["de la Pourfendeuse", "de la Démone", "de la Forgeronne", "de l'Épée"],
+                    "adjectives": ["Légendaire", "Infinie", "Surpuissante", "Démoniaque"],
+                },
+                "p": {
+                    "names": ["des Pourfendeuses", "des Démones", "des Forgeronnes", "des Épées"],
+                    "adjectives": ["Légendaires", "Infinies", "Surpuissantes", "Démoniaques"],
+                },
+            },
+        };
         let quote = "";
 
         const genre = ["m", "f"][Math.floor(Math.random() * 2)];

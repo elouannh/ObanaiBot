@@ -16,7 +16,7 @@ const Util = require("./Util");
 const config = require("../config.json");
 const Package = require("../../package.json");
 const CollectionManager = require("./CollectionManager");
-const dateRender = require("../utils/dateRender");
+const LanguageManager = require("./LanguageManager");
 
 class Obanai extends Client {
     constructor(token, registerSlash) {
@@ -30,6 +30,7 @@ class Obanai extends Client {
         this.registerSlash = registerSlash;
         this.commandManager = new CommandManager(this);
         this.eventManager = new EventManager(this);
+        this.languageManager = new LanguageManager(this);
         this.eventManager.loadFiles();
         this.config = config;
         this.bitfield = 274878286912n;
@@ -85,7 +86,7 @@ class Obanai extends Client {
     }
 
     log(message, ...args) {
-        const time = dateRender(new Date(), true);
+        const time = this.util.dateRender(new Date(), true);
         console.log(`${time} || ${message}`, ...args);
     }
 

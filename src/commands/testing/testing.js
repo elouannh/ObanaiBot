@@ -1,5 +1,4 @@
 const Command = require("../../base/Command");
-const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 
 class Testing extends Command {
     constructor() {
@@ -9,13 +8,14 @@ class Testing extends Command {
             description: "Commande permettant de tester une fonctionnalité.",
             finishRequest: ["Testing"],
             name: "testing",
-            private: "testers",
+            private: "none",
             permissions: 0n,
         });
     }
 
     async run() {
-        await this.interaction.reply("test slash command réussi");
+        const userLang = (await this.client.playerDb.get(this.interaction.user.id)).lang;
+        await this.interaction.reply(this.language.reply.replace("%LANG", userLang));
     }
 }
 

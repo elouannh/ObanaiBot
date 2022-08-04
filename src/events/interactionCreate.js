@@ -21,11 +21,12 @@ class InteractionCreate extends Event {
 
     async executeCommand() {
         let cmd = this.client.commandManager.getCommand(this.interaction.commandName);
-
         if (cmd === 0) return;
 
+        const userLang = (await this.client.playerDb.get(this.interaction.user.id)).lang;
+
         cmd = new cmd();
-        cmd.init(this.client, this.interaction);
+        cmd.init(this.client, this.interaction, this.client.languageManager.getLang(userLang));
 
         const cooldownReady = await cmd.cooldownReady(true);
         if (!cooldownReady) return;

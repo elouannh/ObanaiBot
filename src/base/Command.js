@@ -1,5 +1,6 @@
 const { PermissionsBitField } = require("discord.js");
 const fs = require("fs");
+const Language = require("../languages/Language");
 
 const sections = {
     "Commandes Globales": ["Utilitaire"],
@@ -21,6 +22,7 @@ class Command {
         this.infos = infos;
         this.client = null;
         this.interaction = null;
+        this.lang = new Language("fr").json.commands[this.infos.name];
 
         if (this.infos.finishRequest === "ADVENTURE") {
             const req = [];
@@ -37,9 +39,10 @@ class Command {
         }
     }
 
-    init(client, interaction) {
+    init(client, interaction, language) {
         this.client = client;
         this.interaction = interaction;
+        this.language = language.json.commands[this.infos.name];
     }
 
     async exe() {

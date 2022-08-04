@@ -1,6 +1,5 @@
 const Command = require("../../base/Command");
 const calcPlayerLevel = require("../../elements/calcPlayerLevel");
-const coolNameGenerator = require("../../utils/coolNameGenerator");
 
 class SquadCreate extends Command {
     constructor() {
@@ -66,7 +65,7 @@ class SquadCreate extends Command {
                 );
             }
 
-            const generated = coolNameGenerator();
+            const generated = this.client.util.coolNameGenerator();
             const newSquad = this.client.squadDb.model(
                 this.message.author.id, null, generated.sentence, generated.quote,
             );

@@ -1,5 +1,4 @@
 const Command = require("../../base/Command");
-const intRender = require("../../utils/intRender");
 
 class Top extends Command {
     constructor() {
@@ -30,7 +29,7 @@ class Top extends Command {
         let i = 0;
         for (const player of topPlayers.splice(0, 20)) {
             lb += `\`#${i + 1}\` ¦ ${this.client.users.cache.get(player.id)?.username ?? "Pourfendeur X"}`;
-            lb += ` ¦ **${intRender(player.exp, " ")}** :star:\n`;
+            lb += ` ¦ **${this.client.util.intRender(player.exp, " ")}** :star:\n`;
             i++;
         }
 

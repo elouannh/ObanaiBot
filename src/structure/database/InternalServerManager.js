@@ -1,6 +1,5 @@
 const Enmap = require("enmap");
 const fs = require("fs");
-const delay = require("../../utils/delay");
 const dailyQuests = fs.readdirSync("./src/quests/daily").map(q => require(`../../quests/daily/${q}`)(0));
 
 class InternalServerManager {
@@ -185,7 +184,7 @@ class InternalServerManager {
             }
             await t.db.set("internalServer", [], "dailyQuests.cache");
             await t.db.set("internalServer", Date.now(), "dailyQuests.lastRefresh");
-            await delay(20_000);
+            await this.client.util.delay(20_000);
             t.processing[0][0] = false;
         }
 
@@ -319,7 +318,7 @@ class InternalServerManager {
                 str += "```";
                 // this.client.supportLog("Bot staff changes.", str, fields, "outline");
             }
-            await delay(20_000);
+            await this.client.util.delay(20_000);
             this.processing[1][0] = false;
 
 		}, 10_000);
@@ -369,7 +368,7 @@ class InternalServerManager {
                 await this.client.externalServerDb.removeVipplus(toRemove, "support");
             }
 
-            await delay(20_000);
+            await this.client.util.delay(20_000);
             this.processing[1][1] = false;
 		}, 120_000);
 

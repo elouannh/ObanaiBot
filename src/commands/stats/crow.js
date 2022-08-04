@@ -1,7 +1,6 @@
 const Command = require("../../base/Command");
 const calcCrowLevel = require("../../elements/calcCrowLevel");
 const MemberScanning = require("../../structure/tools/MemberScanning");
-const intRender = require("../../utils/intRender");
 
 class Crow extends Command {
     constructor() {
@@ -50,9 +49,9 @@ class Crow extends Command {
             crowinfos += `*Effets:*\n\`\`\`${crow.bonus.length > 0 ? `${
                 crow.bonus.map(e => crows_boost[e]).join("\n")}` : "Aucun effet."
             }\`\`\``;
-            crowinfos += `\nNiveau: **${crowLevel.level}** | Exp total: ⭐ **${intRender(crowLevel.exp, " ")}**`;
+            crowinfos += `\nNiveau: **${crowLevel.level}** | Exp total: ⭐ **${this.client.util.intRender(crowLevel.exp, " ")}**`;
             crowinfos += `\nExp du niveau: ⭐ **${
-                intRender(crowLevel.tempExp, " ")}**/${intRender(crowLevel.required, " ")
+                this.client.util.intRender(crowLevel.tempExp, " ")}**/${this.client.util.intRender(crowLevel.required, " ")
             }`;
         }
         else {

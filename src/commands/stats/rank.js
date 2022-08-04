@@ -1,7 +1,6 @@
 const Command = require("../../base/Command");
 const MemberScanning = require("../../structure/tools/MemberScanning");
 const calcPlayerLevel = require("../../elements/calcPlayerLevel");
-const intRender = require("../../utils/intRender");
 
 class Rank extends Command {
     constructor() {
@@ -33,9 +32,9 @@ class Rank extends Command {
 
         let rank = "";
         const playerLevel = calcPlayerLevel(pDatas.exp);
-        rank += `Niveau: **${playerLevel.level}** | Exp total: ⭐ **${intRender(pDatas.exp, " ")}**`;
+        rank += `Niveau: **${playerLevel.level}** | Exp total: ⭐ **${this.client.util.intRender(pDatas.exp, " ")}**`;
         rank += `\nExp du niveau: ⭐ **${
-            intRender(playerLevel.tempExp, " ")}**/${intRender(playerLevel.required, " ")
+            this.client.util.intRender(playerLevel.tempExp, " ")}**/${this.client.util.intRender(playerLevel.required, " ")
         }`;
 
         rank += "\n\nBadges: ";
