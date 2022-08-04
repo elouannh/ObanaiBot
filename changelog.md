@@ -2,7 +2,9 @@
 
 ---
 
-> # _**1.0-beta.4 Big fix moment**_
+> # _**`(in development)` 1.0-beta.4 Structure statement**_
+ 
+> *This 1.0.4 changelog is currently in development then many changes can overwrite these written below.*
 
 ## Patch notes :
 
@@ -10,15 +12,21 @@
 
 ## New content :
 
-- Help command executed when bot mentionned
-- Quest 2 & 3 in slayer quests
+- Slash commands
 - More daily quests
+- Tutorial for learn to play RPG
+- Merchants in differents zones
+- New zones for somes regions
+- Marks on map command
 
 ## Reworked :
 
-- Help menu display
-- Quests menu display
+- All commands display
 - Code remade with ruler alignement
+- Home-made translation
+- Global structure of bot
+- Removed messages commands → bot uses slash commands now
+- Less commands
 
 ---
 
