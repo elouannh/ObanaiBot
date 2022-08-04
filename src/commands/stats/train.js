@@ -1,21 +1,16 @@
 const Command = require("../../base/Command");
-const convertDate = require("../../utils/convertDate");
 const calcPlayerLevel = require("../../elements/calcPlayerLevel");
 
 class Train extends Command {
     constructor() {
         super({
-            aliases: ["train"],
-            args: [],
             category: "Stats",
             cooldown: 10,
             description: "Commande permettant de vous entrainer et d'améliorer le niveaux de vos aptitudes.",
-            examples: ["[p]train"],
             finishRequest: "ADVENTURE",
             name: "train",
             private: "none",
             permissions: 0n,
-            syntax: "train",
         });
     }
 
@@ -39,7 +34,7 @@ class Train extends Command {
                     +
                     `\n\`\`\`Aptitude: ${emojis[aDatas.training.aptitude]}${values[aDatas.training.aptitude]}\n`
                     +
-                    `Temps restant: ${convertDate(timeLeft).string}\`\`\``,
+                    `Temps restant: ${this.client.util.convertDate(timeLeft).string}\`\`\``,
                     "🤜",
                     null,
                     "outline",
@@ -76,7 +71,7 @@ class Train extends Command {
                     ((15 + (pDatas.stats[key] * 15))),
                 );
                 str += ` | Niveau **${pDatas.stats[key]}** > Niveau **${pDatas.stats[key] + 1}**`;
-                str += `\n*🕣 Durée d'entraînement: ${convertDate(times[key], true).string}*`;
+                str += `\n*🕣 Durée d'entraînement: ${this.client.util.convertDate(times[key], true).string}*`;
             }
         }
 
@@ -104,7 +99,7 @@ class Train extends Command {
             await this.client.activityDb.trains(this.message.author.id, finalChoice, times[finalChoice]);
             return await this.ctx.reply(
                 "S'entraîner.",
-                `Vous voilà parti à l'entraînement ! Revenez dans **${convertDate(times[choice], true).string}**.`,
+                `Vous voilà parti à l'entraînement ! Revenez dans **${this.client.util.convertDate(times[choice], true).string}**.`,
                 "🤜",
                 null,
                 "outline",

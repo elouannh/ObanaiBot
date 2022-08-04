@@ -3,17 +3,13 @@ const Command = require("../../base/Command");
 class SquadKick extends Command {
     constructor() {
         super({
-            aliases: ["squad-demote", "sqdm"],
-            args: [],
             category: "Escouades",
             cooldown: 30,
             description: "Commande permettant de dégrader son bras droit de l'escouade.",
-            examples: ["[p]squad-demote"],
             finishRequest: "ADVENTURE",
             name: "squad-demote",
             private: "none",
             permissions: 0n,
-            syntax: "squad-demote",
         });
     }
 

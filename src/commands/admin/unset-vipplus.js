@@ -4,17 +4,13 @@ const MemberScanning = require("../../structure/tools/MemberScanning");
 class UnsetVipplus extends Command {
     constructor() {
         super({
-            aliases: ["unset-vipplus"],
-            args: [["user", "utilisateur à mettre VIP(+).", true]],
             category: "Admin",
             cooldown: 7,
             description: "Commande permettant de mettre un joueur VIP(+).",
-            examples: ["[p]unset-vipplus @pandawou"],
             finishRequest: ["Admin"],
             name: "unset-vipplus",
             private: "admins",
             permissions: 0n,
-            syntax: "unset-vipplus <user>",
         });
     }
 

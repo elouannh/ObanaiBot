@@ -4,17 +4,13 @@ const calcCrowLevel = require("../../elements/calcCrowLevel");
 class CrowFeed extends Command {
     constructor() {
         super({
-            aliases: ["crow-feed", "cf"],
-            args: [],
             category: "Exploration",
             cooldown: 10,
             description: "Commande permettant de nourrir votre corbeau de liaison afin d'augmenter les bonus qu'il vous octroie.",
-            examples: ["[p]crow-feed"],
             finishRequest: "ADVENTURE",
             name: "crow-feed",
             private: "none",
             permissions: 0n,
-            syntax: "crow-feed",
         });
     }
 

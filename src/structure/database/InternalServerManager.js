@@ -1,6 +1,5 @@
 const Enmap = require("enmap");
 const fs = require("fs");
-const compareArrays = require("../../utils/compareArrays");
 const delay = require("../../utils/delay");
 const dailyQuests = fs.readdirSync("./src/quests/daily").map(q => require(`../../quests/daily/${q}`)(0));
 
@@ -220,9 +219,9 @@ class InternalServerManager {
                                             .filter(e => !e.user.bot).map(e => e.id),
 			};
 
-			const changedOwners = compareArrays(olds.owners, news.owners);
-			const changedAdmins = compareArrays(olds.admins, news.admins);
-			const changedTesters = compareArrays(olds.testers, news.testers);
+			const changedOwners = this.client.util.compareArrays(olds.owners, news.owners);
+			const changedAdmins = this.client.util.compareArrays(olds.admins, news.admins);
+			const changedTesters = this.client.util.compareArrays(olds.testers, news.testers);
 
 			const fields = [];
 
@@ -318,7 +317,7 @@ class InternalServerManager {
                         )
                 }`;
                 str += "```";
-                this.client.supportLog("Bot staff changes.", str, fields, "outline");
+                // this.client.supportLog("Bot staff changes.", str, fields, "outline");
             }
             await delay(20_000);
             this.processing[1][0] = false;

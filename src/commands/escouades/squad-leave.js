@@ -3,17 +3,13 @@ const Command = require("../../base/Command");
 class SquadLeave extends Command {
     constructor() {
         super({
-            aliases: ["squad-leave", "sqlv"],
-            args: [],
             category: "Escouades",
             cooldown: 10,
             description: "Commande permettant de quitter son escouade.",
-            examples: ["[p]squad-leave"],
             finishRequest: "ADVENTURE",
             name: "squad-leave",
             private: "none",
             permissions: 0n,
-            syntax: "squad-leave",
         });
     }
 

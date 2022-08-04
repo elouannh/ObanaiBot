@@ -1,22 +1,17 @@
 const Command = require("../../base/Command");
 const MemberScanning = require("../../structure/tools/MemberScanning");
 const map = require("../../elements/map");
-const convertDate = require("../../utils/convertDate");
 
 class Map extends Command {
     constructor() {
         super({
-            aliases: ["map"],
-            args: [["player", "joueur dont vous souhaitez voir l'emplacement sur la carte. (ou vous)", false]],
             category: "Exploration",
             cooldown: 7,
             description: "Commande permettant de voir son emplacement sur la carte.",
-            examples: ["[p]map @pandawou"],
             finishRequest: "ADVENTURE",
             name: "map",
             private: "none",
             permissions: 0n,
-            syntax: "map <?player>",
         });
     }
 
@@ -55,7 +50,7 @@ class Map extends Command {
             else {
                 finalStr += "⏰ Fouille disponible dans "
                             +
-                            `**${convertDate(7_200_000 - (lastDig === null ? 0 : timeSpent), true).string}**`;
+                            `**${this.client.util.convertDate(7_200_000 - (lastDig === null ? 0 : timeSpent), true).string}**`;
             }
 
             areaList.push(finalStr);

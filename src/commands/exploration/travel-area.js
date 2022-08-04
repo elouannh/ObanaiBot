@@ -1,21 +1,16 @@
 const Command = require("../../base/Command");
 const map = require("../../elements/map.js");
-const convertDate = require("../../utils/convertDate");
 
 class TravelArea extends Command {
     constructor() {
         super({
-            aliases: ["travel-area", "ta"],
-            args: [],
             category: "Exploration",
             cooldown: 15,
             description: "Commande permettant de voyager d'une zone à l'autre dans votre région.",
-            examples: ["[p]travel-area"],
             finishRequest: "ADVENTURE",
             name: "travel-area",
             private: "none",
             permissions: 0n,
-            syntax: "travel-area",
         });
     }
 
@@ -41,7 +36,7 @@ class TravelArea extends Command {
                     "Voyage (intrarégional).",
                     "Il semblerait que vous êtes déjà en train de voyager ! Voici plus d'informations :\n"
                     +
-                    `\`\`\`Destination: ${destName}\nTemps restant: ${convertDate(timeLeft).string}\`\`\``,
+                    `\`\`\`Destination: ${destName}\nTemps restant: ${this.client.util.convertDate(timeLeft).string}\`\`\``,
                     "🧳",
                     null,
                     "outline",
@@ -78,7 +73,7 @@ class TravelArea extends Command {
             const zo = areas.at(i);
 
             const dis = await this.client.activityDb.travellingTime(this.message.author.id, Math.ceil(2));
-            str += `\`${i + 1}\` • ${zo.name} | 🕣 ${convertDate(dis, true).string}\n`;
+            str += `\`${i + 1}\` • ${zo.name} | 🕣 ${this.client.util.convertDate(dis, true).string}\n`;
             zo["distance"] = dis;
             r[String(i + 1)] = zo;
         }

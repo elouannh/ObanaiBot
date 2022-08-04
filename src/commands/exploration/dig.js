@@ -1,6 +1,5 @@
 const Command = require("../../base/Command");
 const map = require("../../elements/map.js");
-const convertDate = require("../../utils/convertDate");
 const fs = require("fs");
 
 class Bag {
@@ -23,17 +22,13 @@ class Bag {
 class Dig extends Command {
     constructor() {
         super({
-            aliases: ["dig"],
-            args: [],
             category: "Exploration",
             cooldown: 5,
             description: "Commande permettant de fouiller la zone où vous vous trouver afin de récolter quelques items.",
-            examples: ["[p]dig"],
             finishRequest: "ADVENTURE",
             name: "dig",
             private: "none",
             permissions: 0n,
-            syntax: "dig",
         });
     }
 
@@ -67,7 +62,7 @@ class Dig extends Command {
                     "Voyage (intrarégional).",
                     "Il semblerait que vous êtes déjà en train de voyager ! Voici plus d'informations :\n"
                     +
-                    `\`\`\`Destination: ${destName}\nTemps restant: ${convertDate(timeLeft).string}\`\`\``,
+                    `\`\`\`Destination: ${destName}\nTemps restant: ${this.client.util.convertDate(timeLeft).string}\`\`\``,
                     "🧳",
                     null,
                     "outline",
@@ -174,7 +169,7 @@ class Dig extends Command {
                 "Fouiller la zone.",
                 "Il semblerait que vous ayez déjà fouillé cette zone. "
                 +
-                `Revenez dans **${convertDate(7_200_000 - (lastDig === null ? 0 : timeSpent), false).string}** `
+                `Revenez dans **${this.client.util.convertDate(7_200_000 - (lastDig === null ? 0 : timeSpent), false).string}** `
                 +
                 "à cet emplacement.",
                 "🔎",

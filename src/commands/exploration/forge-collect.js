@@ -3,17 +3,13 @@ const Command = require("../../base/Command");
 class ForgeCollect extends Command {
     constructor() {
         super({
-            aliases: ["forge-collect", "fc"],
-            args: [],
             category: "Exploration",
             cooldown: 10,
             description: "Commande permettant de récupérer les objets forgés prêts.",
-            examples: ["[p]forge-collect"],
             finishRequest: "ADVENTURE",
             name: "forge-collect",
             private: "none",
             permissions: 0n,
-            syntax: "forge-collect",
         });
     }
 

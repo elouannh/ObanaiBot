@@ -1,21 +1,16 @@
 const Command = require("../../base/Command");
 const map = require("../../elements/map.js");
-const convertDate = require("../../utils/convertDate");
 
 class TravelRegion extends Command {
     constructor() {
         super({
-            aliases: ["travel-region", "tr"],
-            args: [],
             category: "Exploration",
             cooldown: 15,
             description: "Commande permettant de voyager à travers les régions du monde.",
-            examples: ["[p]travel-region"],
             finishRequest: "ADVENTURE",
             name: "travel-region",
             private: "none",
             permissions: 0n,
-            syntax: "travel-region",
         });
     }
 
@@ -41,7 +36,7 @@ class TravelRegion extends Command {
                     "Voyage.",
                     "Il semblerait que vous êtes déjà en train de voyager ! Voici plus d'informations :\n"
                     +
-                    `\`\`\`Destination: ${destName}\nTemps restant: ${convertDate(timeLeft).string}\`\`\``,
+                    `\`\`\`Destination: ${destName}\nTemps restant: ${this.client.util.convertDate(timeLeft).string}\`\`\``,
                     "🧳",
                     null,
                     "outline",
@@ -84,7 +79,7 @@ class TravelRegion extends Command {
                 this.message.author.id,
                 Math.ceil(timeInMinutes / 15),
             );
-            str += `\`${String(i + 1)}\` • ${reg.name} | 🕣 ${convertDate(dis, true).string}\n`;
+            str += `\`${String(i + 1)}\` • ${reg.name} | 🕣 ${this.client.util.convertDate(dis, true).string}\n`;
             reg["distance"] = dis;
             r[String(i + 1)] = reg;
         }

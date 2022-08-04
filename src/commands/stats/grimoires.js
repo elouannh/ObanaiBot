@@ -1,21 +1,16 @@
 const Command = require("../../base/Command");
 const MemberScanning = require("../../structure/tools/MemberScanning");
-const convertDate = require("../../utils/convertDate");
 
 class Grimoires extends Command {
     constructor() {
         super({
-            aliases: ["grimoires", "gr"],
-            args: [["player", "joueur dont vous souhaitez voir les grimoires. (ou vous)", false]],
             category: "Stats",
             cooldown: 5,
             description: "Commande permettant de voir ses grimoires.",
-            examples: ["[p]grimoires @pandawou"],
             finishRequest: "ADVENTURE",
             name: "grimoires",
             private: "none",
             permissions: 0n,
-            syntax: "grimoires <?player>",
         });
     }
 
@@ -48,7 +43,7 @@ class Grimoires extends Command {
 
         if (grim !== null) {
             const timeLeft = (grim.expiration * 1000) - (Date.now() - pDatas.active_grimoire_since);
-            grimoires += `Grimoire: **${grim.name}** • Durée restante: **${convertDate(timeLeft, false).string}**\n`;
+            grimoires += `Grimoire: **${grim.name}** • Durée restante: **${this.client.util.convertDate(timeLeft, false).string}**\n`;
             grimoires += `*Effets:*\n\`\`\`${
                 grim.benefits.map(e => `${grims_boost[e].replace("[b]", ((grim.boost - 1) * 100).toFixed(0))}`)
                              .join("\n")

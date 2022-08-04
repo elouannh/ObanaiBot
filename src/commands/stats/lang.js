@@ -3,17 +3,13 @@ const Command = require("../../base/Command");
 class Lang extends Command {
     constructor() {
         super({
-            aliases: ["lang", "lg"],
-            args: [],
             category: "Stats",
             cooldown: 15,
             description: "Commande permettant de changer la langue du bot.",
-            examples: ["[p]lang"],
             finishRequest: "ADVENTURE",
             name: "lang",
             private: "testers",
             permissions: 0n,
-            syntax: "lang",
         });
     }
 

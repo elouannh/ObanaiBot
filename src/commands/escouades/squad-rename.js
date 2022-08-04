@@ -3,17 +3,13 @@ const Command = require("../../base/Command");
 class SquadRename extends Command {
     constructor() {
         super({
-            aliases: ["squad-rename", "sqrn"],
-            args: [["name", "nouveau nom pour l'escouade.", true]],
             category: "Escouades",
             cooldown: 7,
             description: "Commande permettant de renommer votre escouade.",
-            examples: ["[p]squad-rename Escouade des pigeons"],
             finishRequest: "ADVENTURE",
             name: "squad-rename",
             private: "none",
             permissions: 0n,
-            syntax: "squad-rename <name>",
         });
     }
 

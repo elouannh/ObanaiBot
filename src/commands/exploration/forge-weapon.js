@@ -1,20 +1,15 @@
 const Command = require("../../base/Command");
-const convertDate = require("../../utils/convertDate");
 
 class ForgeWeapon extends Command {
     constructor() {
         super({
-            aliases: ["forge-weapon", "fw"],
-            args: [],
             category: "Exploration",
             cooldown: 10,
             description: "Commande permettant de forger des armes.",
-            examples: ["[p]forge-weapon"],
             finishRequest: "ADVENTURE",
             name: "forge-weapon",
             private: "none",
             permissions: 0n,
-            syntax: "forge-weapon",
         });
     }
 
@@ -115,7 +110,7 @@ class ForgeWeapon extends Command {
                 "Forger une arme.",
                 "Vous forgez donc une arme !"
                 +
-                `\n\n**Détails de l'arme:**\nTemps de forge: **${convertDate(7_200_000 * rarity).string}**\n`
+                `\n\n**Détails de l'arme:**\nTemps de forge: **${this.client.util.convertDate(7_200_000 * rarity).string}**\n`
                 +
                 `Rareté: **${rarity}**\n*Plus d'informations avec la commande \`${this.prefix}forge-list.\`*`,
                 "🗡️",

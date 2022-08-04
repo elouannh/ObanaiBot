@@ -11,21 +11,26 @@ const InternalServerManager = require("../structure/database/InternalServerManag
 const ExternalServerDb = require("../structure/database/ExternalServerDb");
 const StatusDb = require("../structure/database/StatusDb");
 const CommandManager = require("./CommandManager");
+const EventManager = require("./EventManager");
+const Util = require("./Util");
 const config = require("../config.json");
 const Package = require("../../package.json");
-const SuperEmbed = require("./SuperEmbed");
 const CollectionManager = require("./CollectionManager");
 const dateRender = require("../utils/dateRender");
 
 class Obanai extends Client {
-    constructor(token) {
+    constructor(token, registerSlash) {
         super({
             intents: new IntentsBitField().add("GuildMessages", "MessageContent", "GuildMembers", "Guilds"),
             failIfNotExists: false,
         });
 
         this.token = token;
+        this.util = Util;
+        this.registerSlash = registerSlash;
         this.commandManager = new CommandManager(this);
+        this.eventManager = new EventManager(this);
+        this.eventManager.loadFiles();
         this.config = config;
         this.bitfield = 274878286912n;
 
@@ -85,8 +90,6 @@ class Obanai extends Client {
     }
 
     launch(token = "") {
-        (async () => await this.commandManager.loadFiles())();
-
         if (token.length > 0) this.login(token);
         else this.login(this.token);
     }

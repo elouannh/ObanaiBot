@@ -6,17 +6,13 @@ const calcCrowLevel = require("../../elements/calcCrowLevel");
 class CrowBait extends Command {
     constructor() {
         super({
-            aliases: ["crow-bait", "cb"],
-            args: [],
             category: "Exploration",
             cooldown: 10,
             description: "Commande permettant de tenter d'appâter des oiseaux à proximiter afin d'obtenir un corbeau de liaison.",
-            examples: ["[p]crow-bait"],
             finishRequest: "ADVENTURE",
             name: "crow-bait",
             private: "none",
             permissions: 0n,
-            syntax: "crow-bait",
         });
     }
 

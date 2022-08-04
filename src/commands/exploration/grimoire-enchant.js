@@ -4,17 +4,13 @@ const fs = require("fs");
 class GrimoireEnchant extends Command {
     constructor() {
         super({
-            aliases: ["grimoire-enchant", "ge"],
-            args: [],
             category: "Exploration",
             cooldown: 10,
             description: "Commande permettant d'enchanter des grimoires.",
-            examples: ["[p]grimoire-enchant"],
             finishRequest: "ADVENTURE",
             name: "grimoire-enchant",
             private: "none",
             permissions: 0n,
-            syntax: "grimoire-enchant",
         });
     }
 

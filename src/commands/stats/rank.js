@@ -6,17 +6,13 @@ const intRender = require("../../utils/intRender");
 class Rank extends Command {
     constructor() {
         super({
-            aliases: ["rank", "r"],
-            args: [["player", "joueur dont vous souhaitez voir le rang de jeu. (ou vous)", false]],
             category: "Stats",
             cooldown: 5,
             description: "Commande permettant de voir son rank de pourfendeur.",
-            examples: ["[p]rank @pandawou"],
             finishRequest: "ADVENTURE",
             name: "rank",
             private: "none",
             permissions: 0n,
-            syntax: "rank <?player>",
         });
     }
 

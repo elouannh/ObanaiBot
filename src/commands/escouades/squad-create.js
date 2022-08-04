@@ -5,17 +5,13 @@ const coolNameGenerator = require("../../utils/coolNameGenerator");
 class SquadCreate extends Command {
     constructor() {
         super({
-            aliases: ["squad-create", "sqcr"],
-            args: [],
             category: "Escouades",
             cooldown: 15,
             description: "Commande permettant de créer son escouade.",
-            examples: ["[p]squad-create"],
             finishRequest: "ADVENTURE",
             name: "squad-create",
             private: "none",
             permissions: 0n,
-            syntax: "squad-create",
         });
     }
 

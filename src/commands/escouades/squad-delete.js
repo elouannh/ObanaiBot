@@ -1,20 +1,15 @@
 const Command = require("../../base/Command");
-const convertDate = require("../../utils/convertDate");
 
 class SquadDelete extends Command {
     constructor() {
         super({
-            aliases: ["squad-delete", "sqdl"],
-            args: [],
             category: "Escouades",
             cooldown: 15,
             description: "Commande permettant de supprimer son escouade.",
-            examples: ["[p]squad-delete"],
             finishRequest: "ADVENTURE",
             name: "squad-delete",
             private: "none",
             permissions: 0n,
-            syntax: "squad-delete",
         });
     }
 
@@ -63,7 +58,7 @@ class SquadDelete extends Command {
                     "Oups...",
                     "Pour supprimer une escouade, celle-ci doit exister depuis au moins 30 jours."
                     +
-                    `Vous pourrez la supprimer dans: **${convertDate((days * 86_400_000) - timeLeft, true).string}**.`,
+                    `Vous pourrez la supprimer dans: **${this.client.util.convertDate((days * 86_400_000) - timeLeft, true).string}**.`,
                     null,
                     null,
                     "warning",

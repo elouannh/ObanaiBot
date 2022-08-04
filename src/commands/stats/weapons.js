@@ -4,17 +4,13 @@ const MemberScanning = require("../../structure/tools/MemberScanning");
 class Weapons extends Command {
     constructor() {
         super({
-            aliases: ["weapons", "w"],
-            args: [["player", "joueur dont vous souhaitez voir l'invetaire de jeu. (ou vous)", false]],
             category: "Stats",
             cooldown: 5,
             description: "Commande permettant de voir son inventaire d'armes.",
-            examples: ["[p]weapons @pandawou"],
             finishRequest: "ADVENTURE",
             name: "weapons",
             private: "none",
             permissions: 0n,
-            syntax: "weapons <?player>",
         });
     }
 

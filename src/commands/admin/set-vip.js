@@ -4,17 +4,13 @@ const MemberScanning = require("../../structure/tools/MemberScanning");
 class SetVip extends Command {
     constructor() {
         super({
-            aliases: ["set-vip"],
-            args: [["user", "utilisateur à mettre VIP.", true]],
             category: "Admin",
             cooldown: 7,
             description: "Commande permettant de mettre un joueur VIP.",
-            examples: ["[p]set-vip @pandawou"],
             finishRequest: ["Admin"],
             name: "set-vip",
             private: "admins",
             permissions: 0n,
-            syntax: "set-vip <user>",
         });
     }
 

@@ -3,17 +3,13 @@ const Command = require("../../base/Command");
 class WeaponSell extends Command {
     constructor() {
         super({
-            aliases: ["weapon-sell", "wsell"],
-            args: [],
             category: "Stats",
             cooldown: 15,
             description: "Commande permettant de vendre une arme.",
-            examples: ["[p]weapon-sell"],
             finishRequest: "ADVENTURE",
             name: "weapon-sell",
             private: "none",
             permissions: 0n,
-            syntax: "weapon-sell",
         });
     }
 

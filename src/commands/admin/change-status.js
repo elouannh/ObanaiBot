@@ -3,17 +3,13 @@ const Command = require("../../base/Command");
 class ChangeStatus extends Command {
     constructor() {
         super({
-            aliases: ["change-status"],
-            args: [["status", "nouveau statut du bot à mettre.", true]],
             category: "Admin",
             cooldown: 7,
             description: "Commande permettant de changer le statut du bot.",
-            examples: ["[p]change-status online", "[p]change-status maintenance"],
             finishRequest: ["Admin"],
             name: "change-status",
             private: "admins",
             permissions: 0n,
-            syntax: "change-status <status>",
         });
     }
 

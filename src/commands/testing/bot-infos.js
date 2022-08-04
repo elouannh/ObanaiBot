@@ -4,17 +4,13 @@ const { escapeMarkdown } = require("discord.js");
 class BotInfos extends Command {
     constructor() {
         super({
-            aliases: ["bot-infos"],
-            args: [],
             category: "Testing",
             cooldown: 7,
             description: "Commande permettant de voir les informations du bot.",
-            examples: ["[p]bot-infos"],
             finishRequest: ["Testing"],
             name: "bot-infos",
             private: "testers",
             permissions: 0n,
-            syntax: "bot-infos",
         });
     }
 

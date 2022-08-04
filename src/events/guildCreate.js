@@ -1,18 +1,26 @@
-module.exports = {
-    name: "guildCreate",
-    once: false,
-    run: async (guild, client) => {
+const Event = require("../base/Event");
 
+class GuildCreate extends Event {
+    constructor() {
+        super({
+            name: "guildCreate",
+            once: false,
+        });
+    }
+
+    async exe(client, guild) {
         if (guild.memberCount < 30 && !client.internalServerManager.servers.includes(guild.id)) {
             try {
-                guild.leave();
+                await guild.leave();
             }
             catch {
                 "que dalle";
             }
         }
         else {
-            await client.supportProgress("add", guild);
+            // await client.supportProgress("add", guild);
         }
-    },
-};
+    }
+}
+
+module.exports = GuildCreate;

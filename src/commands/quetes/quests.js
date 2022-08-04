@@ -6,17 +6,13 @@ const fs = require("fs");
 class Quests extends Command {
     constructor() {
         super({
-            aliases: ["quests", "q"],
-            args: [],
             category: "Quêtes",
             cooldown: 10,
             description: "Commande qui permet de voir la liste de toutes les quêtes.",
-            examples: ["[p]quests"],
             finishRequest: "ADVENTURE",
             name: "quests",
             private: "none",
             permissions: 0n,
-            syntax: "quests",
         });
     }
 

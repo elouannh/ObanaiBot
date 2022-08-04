@@ -1,4 +1,4 @@
-const { Collection } = require("discord.js");
+const { Collection, SlashCommandBuilder } = require("discord.js");
 const fs = require("fs");
 
 class CommandManager {
@@ -20,6 +20,9 @@ class CommandManager {
                 this.commands.set(new (command)().infos.name, command);
             }
         });
+
+        const slashCommands = this.commands.map(cmd => new SlashCommandBuilder(cmd).setName(new cmd().infos.name).setDescription(new cmd().infos.description.substring(0, 100))).map(cmd => cmd.toJSON());
+        this.client.application.commands.set(slashCommands);
     }
 
     getCommand(name) {

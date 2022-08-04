@@ -6,17 +6,13 @@ const MemberScanning = require("../../structure/tools/MemberScanning");
 class Fight extends Command {
     constructor() {
         super({
-            aliases: ["fight"],
-            args: [["players", "joueurs que vous souhaitez affronter.", false], ["teams", "équipes que vous souhaitez former. 4 Joueurs maximum par équipe.", false]],
             category: "Combats",
             cooldown: 15,
             description: "Commande permettant de se battre contre des joueurs, avec des alliés ou non.",
-            examples: ["[p]fight @pandawou", "[p]fight @pandawou && @myrly"],
             finishRequest: "ADVENTURE",
             name: "fight",
             private: "none",
             permissions: 0n,
-            syntax: "fight <?players|?teams>",
         });
     }
 
@@ -57,14 +53,12 @@ class Fight extends Command {
         }`;
 
         if (teams["1"].length === 1 && teams["2"].length === 0) {
-            return await this.ctx.reply(
-                "Arène - Équipes",
+            return await this.ctx.send(
+                "🏟️ Arènes:\n"
+                +
                 teamsStr
                 +
                 "\n\nVous ne pouvez pas jouer tout seul !",
-                "🏟️",
-                null,
-                "outline",
             );
         }
 

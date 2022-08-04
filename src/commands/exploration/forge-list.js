@@ -1,20 +1,15 @@
 const Command = require("../../base/Command");
-const convertDate = require("../../utils/convertDate");
 
 class ForgeList extends Command {
     constructor() {
         super({
-            aliases: ["forge-list", "fl"],
-            args: [],
             category: "Exploration",
             cooldown: 10,
             description: "Commande permettant de voir les objets en train d'être forgé.",
-            examples: ["[p]forge-list"],
             finishRequest: "ADVENTURE",
             name: "forge-list",
             private: "none",
             permissions: 0n,
-            syntax: "forge-list",
         });
     }
 
@@ -38,7 +33,7 @@ class ForgeList extends Command {
                 if (dat.itemCat === "weapon") {
                     str += `Fabrication d'une arme: **${dat.itemName}** (rareté **${dat.itemRarity}**)`;
                 }
-                str += `\n> *Fin dans: ${convertDate((dat.start + dat.duration) - Date.now()).string}*`;
+                str += `\n> *Fin dans: ${this.client.util.convertDate((dat.start + dat.duration) - Date.now()).string}*`;
                 if ((dat.start + dat.duration) - Date.now() <= 0) dates[i] = true;
                 else dates[i] = false;
                 activity += `\n\n${str}`;

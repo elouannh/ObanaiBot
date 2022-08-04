@@ -3,17 +3,13 @@ const Command = require("../../base/Command");
 class WeaponSet extends Command {
     constructor() {
         super({
-            aliases: ["weapon-set", "wset"],
-            args: [],
             category: "Stats",
             cooldown: 15,
             description: "Commande permettant d'équiper une arme.",
-            examples: ["[p]weapon-set"],
             finishRequest: "ADVENTURE",
             name: "weapon-set",
             private: "none",
             permissions: 0n,
-            syntax: "weapon-set",
         });
     }
 

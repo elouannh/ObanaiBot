@@ -3,17 +3,13 @@ const Command = require("../../base/Command");
 class Start extends Command {
     constructor() {
         super({
-            aliases: ["start", "st"],
-            args: [],
             category: "Stats",
             cooldown: 15,
             description: "Commande permettant de commencer votre aventure.",
-            examples: ["[p]start"],
             finishRequest: "ADVENTURE",
             name: "start",
             private: "none",
             permissions: 0n,
-            syntax: "start",
         });
     }
 

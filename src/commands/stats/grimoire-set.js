@@ -3,17 +3,13 @@ const Command = require("../../base/Command");
 class GrimoireSet extends Command {
     constructor() {
         super({
-            aliases: ["grimoire-set", "gs"],
-            args: [],
             category: "Stats",
             cooldown: 15,
             description: "Commande permettant d'équiper un grimoire.",
-            examples: ["[p]grimoire-set"],
             finishRequest: "ADVENTURE",
             name: "grimoire-set",
             private: "none",
             permissions: 0n,
-            syntax: "grimoire-set",
         });
     }
 

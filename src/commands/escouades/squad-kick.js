@@ -4,17 +4,13 @@ const MemberScanning = require("../../structure/tools/MemberScanning");
 class SquadKick extends Command {
     constructor() {
         super({
-            aliases: ["squad-kick", "sqki"],
-            args: [["player", "joueur que vous voulez exclure.", true]],
             category: "Escouades",
             cooldown: 15,
             description: "Commande permettant d'exclure des membres de son escouade.",
-            examples: ["[p]squad-kick @pandawou"],
             finishRequest: "ADVENTURE",
             name: "squad-kick",
             private: "none",
             permissions: 0n,
-            syntax: "squad-kick <player>",
         });
     }
 

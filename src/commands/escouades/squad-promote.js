@@ -4,17 +4,13 @@ const MemberScanning = require("../../structure/tools/MemberScanning");
 class SquadPromote extends Command {
     constructor() {
         super({
-            aliases: ["squad-promote", "sqpro"],
-            args: [["player", "joueur de l'escouade à promouvoir.", true]],
             category: "Escouades",
             cooldown: 15,
             description: "Commande permettant de promouvoir un membre de son escouade au rang de bras droit.",
-            examples: ["[p]squad-promote @pandawou"],
             finishRequest: "ADVENTURE",
             name: "squad-promote",
             private: "none",
             permissions: 0n,
-            syntax: "squad-promote <player>",
         });
     }
 

@@ -3,17 +3,13 @@ const Command = require("../../base/Command");
 class Reset extends Command {
     constructor() {
         super({
-            aliases: ["reset", "rs"],
-            args: [],
             category: "Stats",
             cooldown: 15,
             description: "Commande permettant de remettre votre aventure à 0.",
-            examples: ["[p]reset"],
             finishRequest: "ADVENTURE",
             name: "reset",
             private: "none",
             permissions: 0n,
-            syntax: "reset",
         });
     }
 

@@ -4,17 +4,13 @@ const intRender = require("../../utils/intRender");
 class Top extends Command {
     constructor() {
         super({
-            aliases: ["top", "lb"],
-            args: [],
             category: "Stats",
             cooldown: 5,
             description: "Commande permettant de voir le classement des meilleurs joueurs.",
-            examples: ["[p]top"],
             finishRequest: "ADVENTURE",
             name: "top",
             private: "none",
             permissions: 0n,
-            syntax: "top",
         });
     }
 

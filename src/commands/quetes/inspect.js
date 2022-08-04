@@ -5,17 +5,13 @@ const alertQuest = require("../../structure/callbacks/AlertRequest");
 class Inspect extends Command {
     constructor() {
         super({
-            aliases: ["inspect"],
-            args: [],
             category: "Quêtes",
             cooldown: 10,
             description: "Commande permettant d'inspecter là où vous vous trouver.",
-            examples: ["[p]inspect"],
             finishRequest: "ADVENTURE",
             name: "inspect",
             private: "none",
             permissions: 0n,
-            syntax: "inspect",
         });
     }
 

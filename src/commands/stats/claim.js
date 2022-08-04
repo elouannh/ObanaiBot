@@ -3,17 +3,13 @@ const Command = require("../../base/Command");
 class Claim extends Command {
     constructor() {
         super({
-            aliases: ["claim"],
-            args: [],
             category: "Stats",
             cooldown: 5,
             description: "Commande permettant de récupérer son bonus de grade.",
-            examples: ["[p]claim @pandawou"],
             finishRequest: "ADVENTURE",
             name: "claim",
             private: "none",
             permissions: 0n,
-            syntax: "claim <?player>",
         });
     }
 

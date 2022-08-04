@@ -1,14 +1,12 @@
 const { Collection } = require("discord.js");
 const { token } = require("../token.json");
 const Obanai = require("./base/Obanai");
-const { loadEvents } = require("./utils/eventLoader");
 
-const client = new Obanai(token);
+const registerSlash = Boolean(process.argv.filter(arg => arg.startsWith("--register-slash=")).map(arg => arg.split("=")[1]));
+const client = new Obanai(token, registerSlash);
+
 client.log("Starting bot process...");
-// ................<string, Channel>
 client.lastChannel = new Collection();
-
-loadEvents(client);
 client.launch();
 
 setInterval(() => client.log("................"), 900_000);

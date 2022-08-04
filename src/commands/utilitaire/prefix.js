@@ -3,17 +3,13 @@ const Command = require("../../base/Command");
 class Prefix extends Command {
     constructor() {
         super({
-            aliases: ["prefix"],
-            args: [["prefix", "nouveau préfixe à configurer.", false]],
             category: "Utilitaire",
             cooldown: 10,
             description: "Commande permettant de changer le préfixe du bot sur votre serveur.",
-            examples: ["[p]prefix", "[p]prefix !"],
             finishRequest: ["prefix"],
             name: "prefix",
             private: "none",
             permissions: 32n,
-            syntax: "prefix <prefix>",
         });
     }
 

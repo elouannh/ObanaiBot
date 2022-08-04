@@ -4,17 +4,13 @@ const fs = require("fs");
 class Category extends Command {
     constructor() {
         super({
-            aliases: ["category", "cat"],
-            args: [],
             category: "Stats",
             cooldown: 15,
             description: "Commande permettant de changer de catégorie de pourfendeur.",
-            examples: ["[p]category"],
             finishRequest: "ADVENTURE",
             name: "category",
             private: "none",
             permissions: 0n,
-            syntax: "category",
         });
     }
 

@@ -4,17 +4,13 @@ const MemberScanning = require("../../structure/tools/MemberScanning");
 class Stats extends Command {
     constructor() {
         super({
-            aliases: ["stats", "s"],
-            args: [["player", "joueur dont vous souhaitez voir les stats de jeu. (ou vous)", false]],
             category: "Stats",
             cooldown: 5,
             description: "Commande permettant de voir ses stats de pourfendeur.",
-            examples: ["[p]stats @pandawou"],
             finishRequest: "ADVENTURE",
             name: "stats",
             private: "none",
             permissions: 0n,
-            syntax: "stats <?player>",
         });
     }
 

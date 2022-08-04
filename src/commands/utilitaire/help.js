@@ -1,4 +1,3 @@
-const SuperModal = require("../../base/SuperModal");
 const Command = require("../../base/Command");
 const { PermissionsBitField } = require("discord.js");
 
@@ -33,17 +32,13 @@ const sections = {
 class Help extends Command {
     constructor() {
         super({
-            aliases: ["help"],
-            args: [["command", "nom de la commande.", false]],
             category: "Utilitaire",
             cooldown: 0,
             description: "Commande permettant de voir la liste des autres commandes, ou d'obtenir des informations précises sur l'une d'entre elles.",
-            examples: ["[p]help", "[p]help prefix"],
             finishRequest: ["help"],
             name: "help",
             private: "none",
             permissions: 0n,
-            syntax: "help <command>",
         });
     }
 

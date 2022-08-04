@@ -1,21 +1,16 @@
 const Command = require("../../base/Command");
-const convertDate = require("../../utils/convertDate");
 const DiscordStatus = require("discord.js").Status;
 
 class Status extends Command {
     constructor() {
         super({
-            aliases: ["status"],
-            args: [],
             category: "Testing",
             cooldown: 7,
             description: "Commande permettant de voir le statut du bot en temps réel.",
-            examples: ["[p]status"],
             finishRequest: ["Testing"],
             name: "status",
             private: "testers",
             permissions: 0n,
-            syntax: "status",
         });
     }
 
@@ -94,7 +89,7 @@ class Status extends Command {
         datas += `\`memory usage\`: **\`${((memoryUsage).toFixed(4))} MB\`**/\`${(4.00 * 1024).toFixed(0)} MB\``;
         datas += `\`(${ramPercent}%)\`\n`;
         datas += `\`process\`: **\`${processStrings(this.client.requestsManager.totalSize * 100 / this.client.maxRequests)}\`**\n`;
-        datas += `\`uptime\`: **\`${convertDate(process.uptime() * 1000, true).string}\`**`;
+        datas += `\`uptime\`: **\`${this.client.util.convertDate(process.uptime() * 1000, true).string}\`**`;
 
         await this.ctx.reply("Statut du processus Obanai", datas, "🖥️", null, "info");
     }

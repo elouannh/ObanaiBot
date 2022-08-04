@@ -1,0 +1,122 @@
+const names = require("../utils/json/names.json");
+
+const Util = {
+    intRender: function(int, sep) {
+        let args = [];
+
+        const length = String(int).length - 1;
+        for (const k in String(int)) {
+            args = [String(int)[length - k]].concat(args);
+            if (args.filter(e => e !== sep).length % 3 === 0) args = [sep].concat(args);
+        }
+
+        if (args[0] === sep) args = args.slice(1);
+
+        return args.join("");
+    },
+    delay: function(ms) {
+        new Promise(res => setTimeout(res, ms));
+    },
+    dateRender: function(date, full) {
+        const datas = {
+            day: String(date.getDate()),
+            month: String(date.getMonth() + 1),
+            year: String(date.getFullYear()),
+            hour: String(date.getHours()),
+            min: String(date.getMinutes()),
+            sec: String(date.getSeconds()),
+        };
+
+        if (datas.day.length < 2) datas.day = "0" + datas.day;
+        if (datas.month.length < 2) datas.month = "0" + datas.month;
+        if (datas.hour.length < 2) datas.hour = "0" + datas.hour;
+        if (datas.min.length < 2) datas.min = "0" + datas.min;
+        if (datas.sec.length < 2) datas.sec = "0" + datas.sec;
+        return `${datas.day}/${datas.month}/${datas.year}` + (full ? ` ${datas.hour}:${datas.min}:${datas.sec}` : "");
+    },
+    coolNameGenerator: function() {
+        let quote = "";
+
+        const genre = ["m", "f"][Math.floor(Math.random() * 2)];
+        const singOrPl = ["s", "p"][Math.floor(Math.random() * 2)];
+        const exp = names.words[genre][singOrPl];
+        let sentence = `Escouade ${exp.names.at(Math.floor(Math.random() * exp.names.length))}`;
+        sentence += `${exp.adjectives.at(Math.floor(Math.random() * exp.adjectives.length))}`;
+
+        quote = names.quotes[Math.floor(Math.random() * names.quotes.length)];
+
+        return { sentence, quote };
+    },
+    convertDate: function(milisecs, short = false) {
+        const datas = {
+            secs: 0,
+            mins: 0,
+            hours: 0,
+            days: 0,
+            string: "",
+        };
+
+        while (milisecs > 999) {
+            if (milisecs <= 60000) {
+                datas.secs += Math.ceil(milisecs / 1000);
+                milisecs = 0;
+            }
+            else if (milisecs >= 60000 && milisecs < 3600000) {
+                datas.mins++;
+                milisecs -= 60000;
+            }
+            else if (milisecs >= 3600000 && milisecs < 86400000) {
+                datas.hours++;
+                milisecs -= 3600000;
+            }
+            else if (milisecs >= 86400000) {
+                datas.days++;
+                milisecs -= 86400000;
+            }
+        }
+
+        if (datas.secs === 60) {
+            datas.mins++;
+            datas.secs = 0;
+        }
+        if (datas.mins === 60) {
+            datas.hours++;
+            datas.mins = 0;
+        }
+        if (datas.hours === 24) {
+            datas.days++;
+            datas.hours = 0;
+        }
+        if (!short) {
+            if (datas.days > 0) datas.string += `${datas.days} jours `;
+            if (datas.hours > 0) datas.string += `${datas.hours} heures `;
+            if (datas.mins > 0) datas.string += `${datas.mins} minutes `;
+            if (datas.secs > 0) datas.string += `${datas.secs} secondes`;
+        }
+        else {
+            if (datas.days > 0) datas.string += `${datas.days}j `;
+            if (datas.hours > 0) datas.string += `${datas.hours}h `;
+            if (datas.mins > 0) datas.string += `${datas.mins}m `;
+            if (datas.secs > 0) datas.string += `${datas.secs}s`;
+        }
+
+        if (datas.string.length === 0) datas.string = "terminé(e)";
+
+        return datas;
+    },
+    compareArrays: function(firstArray = [], secondArray = []) {
+        const datas = {
+            added: [],
+            removed: [],
+            unchanged: [],
+        };
+
+        datas.added = secondArray.filter(element => !firstArray.includes(element));
+        datas.removed = firstArray.filter(element => !secondArray.includes(element));
+        datas.unchanged = secondArray.filter(element => firstArray.includes(element));
+
+        return datas;
+    },
+};
+
+module.exports = Util;

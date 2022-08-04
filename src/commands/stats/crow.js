@@ -6,17 +6,13 @@ const intRender = require("../../utils/intRender");
 class Crow extends Command {
     constructor() {
         super({
-            aliases: ["crow", "cr"],
-            args: [["player", "joueur dont vous souhaitez voir le corbeau de liaison. (ou vous)", false]],
             category: "Stats",
             cooldown: 5,
             description: "Commande permettant de voir son corbeau de liaison.",
-            examples: ["[p]crow @pandawou"],
             finishRequest: "ADVENTURE",
             name: "crow",
             private: "none",
             permissions: 0n,
-            syntax: "crow <?player>",
         });
     }
 

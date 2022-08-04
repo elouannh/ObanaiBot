@@ -5,17 +5,13 @@ const alertQuest = require("../../structure/callbacks/AlertRequest");
 class Give extends Command {
     constructor() {
         super({
-            aliases: ["give"],
-            args: [],
             category: "Quêtes",
             cooldown: 10,
             description: "Commande permettant de donner des items aux personnages fictifs du jeu.",
-            examples: ["[p]give"],
             finishRequest: "ADVENTURE",
             name: "give",
             private: "none",
             permissions: 0n,
-            syntax: "give",
         });
     }
 

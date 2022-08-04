@@ -4,17 +4,13 @@ const MemberScanning = require("../../structure/tools/MemberScanning");
 class SquadInvite extends Command {
     constructor() {
         super({
-            aliases: ["squad-invite", "sqin"],
-            args: [["player", "joueur que vous voulez inviter.", true]],
             category: "Escouades",
             cooldown: 15,
             description: "Commande permettant d'inviter des membres dans son escouade.",
-            examples: ["[p]squad-invite @pandawou"],
             finishRequest: "ADVENTURE",
             name: "squad-invite",
             private: "none",
             permissions: 0n,
-            syntax: "squad-invite <player>",
         });
     }
 

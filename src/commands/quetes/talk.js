@@ -5,17 +5,13 @@ const alertQuest = require("../../structure/callbacks/AlertRequest");
 class Talk extends Command {
     constructor() {
         super({
-            aliases: ["talk"],
-            args: [],
             category: "Quêtes",
             cooldown: 10,
             description: "Commande permettant de parler aux personnages fictifs du jeu.",
-            examples: ["[p]talk"],
             finishRequest: "ADVENTURE",
             name: "talk",
             private: "none",
             permissions: 0n,
-            syntax: "talk",
         });
     }
 
