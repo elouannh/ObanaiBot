@@ -22,10 +22,10 @@ ObanaiDiscordBot utilise un algorithme orienté classes pour gérer les différe
 
 ---
 
-- ### [CGU](https://github.com/PxndxDev/ObanaiDiscordBot/blob/main/TERMS.md)
-- ### [Privacy Policy](https://github.com/PxndxDev/ObanaiDiscordBot/blob/main/LEGAL.md)
-- ### [Global Rules](https://github.com/PxndxDev/ObanaiDiscordBot/blob/main/RULES.md)
-- ### [MIT License](https://github.com/PxndxDev/ObanaiDiscordBot/blob/main/LICENSE)
+- ### [CGU](https://github.com/PxndxDev/ObanaiDiscordBot/blob/main/TERMS.md) (fr-FR)
+- ### [Privacy Policy](https://github.com/PxndxDev/ObanaiDiscordBot/blob/main/LEGAL.md) (fr-FR)
+- ### [Global Rules](https://github.com/PxndxDev/ObanaiDiscordBot/blob/main/RULES.md) (fr-FR)
+- ### [MIT License](https://github.com/PxndxDev/ObanaiDiscordBot/blob/main/LICENSE) (en-US)
 
 ---
 
