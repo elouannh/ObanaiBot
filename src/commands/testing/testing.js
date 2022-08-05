@@ -1,5 +1,6 @@
 const Command = require("../../base/Command");
 const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder, Status, ButtonBuilder, escapeMarkdown } = require("discord.js");
+const Nav = require("../../base/NavigationClasses");
 
 class Testing extends Command {
     constructor() {
@@ -120,69 +121,84 @@ class Testing extends Command {
         }\n`;
 
         const pages = {
-            "testing_panel": {
-                component: {
-                    "label": "Panel de testing",
-                    "value": "testing_panel",
-                },
-                pages: [
-                    {
-                        component: {
-                            value: "user_informations",
-                            label: "Informations utilisateur",
-                            description: "Informations relatives à l'utilisateur faisant la commande.",
-                        },
-                        embeds: [
+            "testing_panel": new Nav.Panel()
+                .setIdentifier(
+                    new Nav.Identifier()
+                        .setLabel("Panel de testing")
+                        .setValue("testing_panel")
+                )
+                .setPages([
+                    new Nav.Page()
+                        .setIdentifier(
+                            new Nav.Identifier()
+                                .setLabel("Informations utilisateur")
+                                .setValue("user_informations")
+                                .setDescription("Informations relatives à l'utilisateur faisant la commande.")
+                        )
+                        .setEmbeds([
                             new EmbedBuilder()
                                 .setTitle("Panel Administrateur - Informations")
-                                .setDescription(`**Grades:** ${userGrade.allGrades.join(", ")}`)
-                                .setFooter({
-                                    text: "Cette page se désactivera au bout de 30 secondes d'inactivité. Elle restera active 2 minutes.",
-                                }),
-                        ],
-                    },
-                    {
-                        component: {
-                            value: "bot_status",
-                            label: "Statut du bot",
-                            description: "Statut du bot ainsi que les processus en cours.",
-                        },
-                        embeds: [
+                                .setDescription(`**Grades:** ${userGrade.allGrades.filter(g => g.length > 1).join(", ")}`),
+                        ]),
+                    new Nav.Page()
+                        .setIdentifier(
+                            new Nav.Identifier()
+                                .setLabel("Statut du bot")
+                                .setValue("bot_status")
+                                .setDescription("Statut du bot ainsi que les processus en cours.")
+                        )
+                        .setEmbeds([
                             new EmbedBuilder()
                                 .setTitle("Panel Administrateur - Statut du bot")
-                                .setDescription(`${datas}`)
-                                .setFooter({
-                                    text: "Cette page se désactivera au bout de 30 secondes d'inactivité. Elle restera active 2 minutes.",
-                                }),
-                        ],
-                    },
-                    {
-                        component: {
-                            value: "bot_infos",
-                            label: "Informations du bot",
-                            description: "Informations du bot ainsi que certaines données.",
-                        },
-                        embeds: [
+                                .setDescription(`${datas}`),
+                        ]),
+                    new Nav.Page()
+                        .setIdentifier(
+                            new Nav.Identifier()
+                                .setLabel("Informations du bot")
+                                .setValue("bot_infos")
+                                .setDescription("Informations du bot ainsi que certaines données.")
+                        )
+                        .setEmbeds([
                             new EmbedBuilder()
                                 .setTitle("Panel Administrateur - Statut du bot")
-                                .setDescription(`${botinfos}`)
-                                .setFooter({
-                                    text: "Cette page se désactivera au bout de 30 secondes d'inactivité. Elle restera active 2 minutes.",
-                                }),
-                        ],
-                    },
-                ],
-            },
+                                .setDescription(`${botinfos}`),
+                        ]),
+                ])
+                .setComponents([
+                    new ActionRowBuilder()
+                        .setComponents(
+                            new SelectMenuBuilder()
+                                .setCustomId("testing_panel")
+                                .setPlaceholder("Choisir la page du panel de testing")
+                                .setOptions([
+                                    {
+                                        value: "user_informations",
+                                        label: "Informations utilisateur",
+                                        description: "Informations relatives à l'utilisateur faisant la commande.",
+                                    },
+                                    {
+                                        value: "bot_status",
+                                        label: "Statut du bot",
+                                        description: "Statut du bot ainsi que les processus en cours.",
+                                    },
+                                    {
+                                        value: "bot_infos",
+                                        label: "Informations du bot",
+                                        description: "Informations du bot ainsi que certaines données.",
+                                    },
+                                ]),
+                        ),
+                ]),
         };
 
-        const navigationRows = {
-            "universal": [
+        const universalRows = [
                 new ActionRowBuilder()
                     .setComponents(
                         new SelectMenuBuilder()
                             .setCustomId("panel_category_selector")
                             .setPlaceholder("Choisir la catégorie de panel")
-                            .setOptions(Object.values(pages).map(option => option.component)),
+                            .setOptions(Object.values(pages).map(option => option.identifier)),
                     ),
                 new ActionRowBuilder()
                     .setComponents(
@@ -191,21 +207,11 @@ class Testing extends Command {
                             .setLabel("Quitter le panel")
                             .setStyle("Danger"),
                     ),
-            ],
-            "testing_panel": [
-                new ActionRowBuilder()
-                    .setComponents(
-                        new SelectMenuBuilder()
-                            .setCustomId("testing_panel")
-                            .setPlaceholder("Choisir la page du panel de testing")
-                            .setOptions(Object.values(pages.testing_panel.pages).map(option => option.component)),
-                    ),
-            ],
-        };
+        ];
 
         const panel = await this.interaction.reply({
-            embeds: pages.testing_panel.pages.find(p => p.component.value === "user_informations").embeds,
-            components: navigationRows.testing_panel.concat(navigationRows.universal),
+            embeds: pages.testing_panel.pages[0].embeds,
+            components: pages.testing_panel.components.concat(universalRows),
         }).catch(() => null);
         const navigation = panel.createMessageComponentCollector({
             filter: inter => inter.user.id === this.interaction.user.id,
@@ -218,18 +224,26 @@ class Testing extends Command {
 
         navigation.on("collect", async inter => {
             if (inter.isSelectMenu()) {
-                console.log(inter);
                 if (inter.customId === "panel_category_selector") {
                     currentPanel = inter.values[0];
+
+                    const newComponents = pages[currentPanel].pages[0].components;
+                    for (const pageRow of pages[currentPanel].components) newComponents.push(pageRow);
+                    for (const universalRow of universalRows) newComponents.push(universalRow);
+
                     panel.interaction.editReply({
                         embeds: pages[currentPanel].pages[0].embeds,
-                        components: navigationRows[currentPanel].concat(navigationRows.universal),
+                        components: newComponents,
                     }).catch(() => null);
                 }
                 else if (Object.keys(pages).includes(inter.customId)) {
+                    const newComponents = pages[currentPanel].pages.find(p => p.identifier.value === inter.values[0]).components;
+                    for (const pageRow of pages[currentPanel].components) newComponents.push(pageRow);
+                    for (const universalRow of universalRows) newComponents.push(universalRow);
+
                     panel.interaction.editReply({
-                        embeds: pages[currentPanel].pages.find(p => p.component.value === inter.values[0]).embeds,
-                        components: navigationRows[currentPanel].concat(navigationRows.universal),
+                        embeds: pages[currentPanel].pages.find(p => p.identifier.value === inter.values[0]).embeds,
+                        components: pages[currentPanel].components.concat(universalRows),
                     }).catch(() => null);
                 }
                 await inter.deferUpdate()
