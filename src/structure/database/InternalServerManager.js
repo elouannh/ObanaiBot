@@ -197,7 +197,7 @@ class InternalServerManager {
             }
             await t.db.set("internalServer", [], "dailyQuests.cache");
             await t.db.set("internalServer", Date.now(), "dailyQuests.lastRefresh");
-            await this.client.util.delay(20_000);
+            await t.client.util.delay(20_000);
             t.processing[0][0] = false;
         }
 
