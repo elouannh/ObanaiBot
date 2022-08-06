@@ -11,18 +11,23 @@ class CommandManager {
     }
 
     loadFiles() {
-        const commandFolders = fs.readdirSync(this.dir);
-        commandFolders.forEach(folder => {
-            const files = fs.readdirSync(`${this.dir}${folder}/`);
+        if (this.client.registerSlash) {
+            const commandFolders = fs.readdirSync(this.dir);
+            commandFolders.forEach(folder => {
+                const files = fs.readdirSync(`${this.dir}${folder}/`);
 
-            for (const file of files) {
-                const command = require(`../commands/${folder}/${file}`);
-                this.commands.set(new (command)().infos.name, command);
+                for (const file of files) {
+                    const command = require(`../commands/${folder}/${file}`);
+                    this.commands.set(new (command)().infos.name, command);
+                }
+            });
+
+            const slashCommands = this.commands.map(cmd => new SlashCommandBuilder(cmd).setName(new cmd().infos.name).setDescription(new cmd().infos.description.substring(0, 100))).map(cmd => cmd.toJSON());
+            this.client.application.commands.set(slashCommands);
+            for (const guild of this.client.guilds.cache.values()) {
+                guild.commands.set([], guild.id);
             }
-        });
-
-        const slashCommands = this.commands.map(cmd => new SlashCommandBuilder(cmd).setName(new cmd().infos.name).setDescription(new cmd().infos.description.substring(0, 100))).map(cmd => cmd.toJSON());
-        this.client.application.commands.set(slashCommands);
+        }
     }
 
     getCommand(name) {

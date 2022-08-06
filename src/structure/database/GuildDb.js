@@ -40,6 +40,8 @@ class GuildDb {
         this.db.ensure(guild, p);
         await this.db.set(guild, prefix, "prefix");
     }
+
+
 }
 
 module.exports = GuildDb;

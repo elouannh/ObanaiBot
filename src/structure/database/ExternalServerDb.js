@@ -1,4 +1,5 @@
 /* eslint-disable no-case-declarations */
+const { escapeMarkdown } = require("discord.js");
 const Enmap = require("enmap");
 const Command = require("../../base/Command");
 const badgesObjectives = require("../../elements/badgesObjectives.json");
@@ -291,6 +292,25 @@ class ExternalServerDb {
             default:
                 break;
         }
+    }
+
+    async players() {
+        const players = await this.db.array();
+        const vips = players.filter(p => p.grades.includes("vip"));
+        const vipplus = players.filter(p => p.grades.includes("vip+"));
+
+        const datas = {
+            "all": players,
+            "vips": vips,
+            "vipplus": vipplus,
+            "cache": {
+                "all": players.map(p => escapeMarkdown(this.client.users.cache.get(p.id)?.username ?? p.id)),
+                "vips": vips.map(p => escapeMarkdown(this.client.users.cache.get(p.id)?.username ?? p.id)),
+                "vipplus": vipplus.map(p => escapeMarkdown(this.client.users.cache.get(p.id)?.username ?? p.id)),
+            },
+        };
+
+        return datas;
     }
 }
 

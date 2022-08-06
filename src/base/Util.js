@@ -137,6 +137,7 @@ const Util = {
 
         return datas;
     },
+    blankField: { name: "\u200B", value: "\u200B" },
 };
 
 module.exports = Util;

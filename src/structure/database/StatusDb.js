@@ -90,6 +90,25 @@ class StatusDb {
         }
     }
 
+    async infos() {
+        const guilds = this.client.guilds.cache;
+        const players = this.client.playerDb.db.array();
+
+        const datas = {
+            "guilds": guilds.size,
+            "totalMembers": this.client.guilds.cache.map(g => g.memberCount).reduce((a, b) => a + b, 0),
+            "users": this.client.users.cache.size,
+            "players": {
+                "ensured": players.length,
+                "started": players.filter(e => e.started).length,
+            },
+            "lastServers": guilds.sort((a, b) => b.joinedTimestamp - a.joinedTimestamp),
+            "lastPlayers": players.sort((a, b) => b.created - a.created),
+        };
+
+        return datas;
+    }
+
 }
 
 module.exports = StatusDb;

@@ -1,5 +1,5 @@
 const Command = require("../../base/Command");
-const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder, Status, ButtonBuilder, escapeMarkdown } = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder, ButtonBuilder, inlineCode } = require("discord.js");
 const Nav = require("../../base/NavigationClasses");
 
 class Testing extends Command {
@@ -10,122 +10,46 @@ class Testing extends Command {
             description: "Commande permettant de tester une fonctionnalité.",
             finishRequest: ["Testing"],
             name: "testing",
-            private: "testing",
+            private: "testers",
             permissions: 0n,
         });
     }
 
     async run() {
         const userGrade = this.client.internalServerManager.userRank(this.interaction.user.id);
-        const internalServer = await this.client.internalServerManager;
-        const statusDb = await this.client.statusDb;
+        const status = await this.client.internalServerManager.status(this.interaction);
+        const infos = await this.client.statusDb.infos();
+        const players = await this.client.externalServerDb.players();
 
-        const processus = {
-            "server1": internalServer.processing[0]
-                .filter(e => e === true).length * 100 / internalServer.processing[0].length,
-            "server2": internalServer.processing[1]
-                .filter(e => e === true).length * 100 / internalServer.processing[1].length,
-        };
-        const ready = {
-            "server1": { "0": "🔴 offline", "1": "🟡 preparing", "2": "🟢 online" }[internalServer.readyOrNot[0]],
-            "server2": { "0": "🔴 offline", "1": "🟡 preparing", "2": "🟢 online" }[internalServer.readyOrNot[1]],
-        };
+        const botStatus = `» Ping API: **${status.apiPing}**\n`
+            + `» Ping Serveur: **${status.serverPing}**\n\n`
+            + `» Serveur Interne 1: **${status.server1.status}** | **${status.server1.processus}**\n`
+            + `» Serveur Interne 2: **${status.server2.status}** | **${status.server2.processus}**\n`
+            + `» Statut du RPG: **${status.clientStatus}**\n\n`
+            + `» Mémoire **(${status.memoryPercent})**: **${status.memoryUsage[0]}**/${status.memoryUsage[1]}\n`
+            + `» Capacité **(${status.requestsPercent})**: **${status.requests[0]}**/${status.requests[1]}\n`
+            + `» En ligne depuis: **${status.uptime}**`;
 
-        function processStrings(percent) {
-            const identifiers = {
-                "0": "🟣 <10%",
-                "10": "🔵 <25%",
-                "25": "🟢 <50%",
-                "50": "🟡 <60%",
-                "60": "🟠 <80%",
-                "80": "🔴 >80%",
-            };
+        const botInfos = `» Serveurs: **${infos.guilds}**\n`
+            + `» Total de membres: **${infos.totalMembers}**\n`
+            + `» Utilisateurs dans le cache: **${infos.users}**\n`
+            + `» Joueurs: **${infos.players.ensured}** | **${infos.players.started}** ayant commencé leur aventure.\n`
+            + `» Version: **${this.client.version}**`;
 
-            return Object.entries(identifiers).filter(e => percent >= Number(e[0])).at(-1)[1];
-        }
-
-        function statusString(name) {
-            const identifiers = {
-                "online": "🟢 online",
-                "disabled": "🔴 unavailable",
-                "maintenance": "🟡 maintenance",
-            };
-
-            return identifiers[name];
-        }
-
-        function pingString(amount) {
-            const identifiers = {
-                "50": "🟣",
-                "100": "🔵",
-                "150": "🟢",
-                "200": "🟡",
-                "400": "🟠",
-                "600": "🔴",
-            };
-
-            return Object.entries(identifiers).filter(e => amount >= Number(e[0])).at(-1)[1] + ` ${amount} ms`;
-        }
-
-        // DISCORD API STATUS
-        let datas = "> 🔨 ***Discord API***\n\n";
-        datas += `\`ping\`: **\`${pingString(this.client.ws.ping)}\`**\n`;
-        datas += `\`api status\`: **\`${Status[this.client.ws.status]}\`**\n\n`;
-
-        // INTERNAL SERVER STATUS
-        datas += "> ⚗️ ***Obanai's Internal Server***\n\n";
-        datas += "**Server 1 [launcher]**\n";
-        datas += `\`status\`: **\`${ready["server1"]}\`**\n`;
-        datas += `\`process\`: **\`${processStrings(processus["server1"])}\`**\n`;
-
-        datas += "**Server 2 [sync_p2p]**\n";
-        datas += `\`status\`: **\`${ready["server2"]}\`**\n`;
-        datas += `\`process\`: **\`${processStrings(processus["server2"])}\`**\n\n`;
-
-        // RPG STATUS
-        datas += "> 🌍 ***Obanai's RPG Server***\n\n";
-        datas += `\`status\`: **\`${statusString(statusDb.datas.mode)}\`**\n`;
-        datas += "**Process**\n";
-        const memoryUsage = process.memoryUsage().heapTotal / 1024 / 1024;
-        const ramPercent = Math.ceil(memoryUsage * 100 / (4.00 * 1024));
-        datas += `\`memory usage\`: **\`${((memoryUsage).toFixed(4))} MB\`**/\`${(4.00 * 1024).toFixed(0)} MB\``;
-        datas += `\`(${ramPercent}%)\`\n`;
-        datas += `\`process\`: **\`${processStrings(this.client.requestsManager.totalSize * 100 / this.client.maxRequests)}\`**\n`;
-        datas += `\`uptime\`: **\`${this.client.util.convertDate(process.uptime() * 1000, true).string}\`**`;
-
-        let botinfos = "> 📦 ***Databases sizes***\n\n";
-        botinfos += `\`players\`: **\`${
-            this.client.playerDb.db.array().filter(e => e.started === true).length
-        } entries\`**\n`;
-        botinfos += `\`users\`: **\`${this.client.users.cache.size} entries\`**\n`;
-        botinfos += `\`servers\`: **\`${this.client.guilds.cache.size} entries\`**\n\n`;
-
-        botinfos += "> ❗ ***Last entries***\n\n";
-        botinfos += `**Last 5 Servers**\n${
-            this.client.guilds.cache
-                .map(e => [e.name, e.joinedTimestamp])
-                .sort((a, b) => b[1] - a[1])
-                .splice(0, 5)
-                .map(e => `**\`${e[0]}\` - <t:${((e[1]) / 1000).toFixed(0)}:R>**`)
-                .join("\n")
-        }\n`;
-        botinfos += `\n**Last 5 Players**\n${
-            this.client.playerDb.db.array()
-                .filter(e => e.started === true)
-                .sort((a, b) => b.created - a.created)
-                .splice(0, 5)
-                .map(e => `**\`${
-                    escapeMarkdown(this.client.users.cache.get(e.id)?.username ?? "non-cached player")
-                }\` - <t:${((e.created) / 1000).toFixed(0)}:R>**`)
-                .join("\n")
-        }\n`;
+        const playersInfos = "**- Joueurs VIPs**:\n"
+            + `${players.cache.vips.map(p => inlineCode(p)).join(" / ")}\n\n`
+            + "**- Joueurs VIP(+)**\n"
+            + `${players.cache.vipplus.map(p => inlineCode(p)).join(" / ")}`;
 
         const pages = {
-            "testing_panel": new Nav.Panel()
+            "tester_panel": new Nav.Panel()
                 .setIdentifier(
                     new Nav.Identifier()
-                        .setLabel("Panel de testing")
-                        .setValue("testing_panel")
+                        .setLabel("Panel Testeur")
+                        .setValue("tester_panel")
+                        .setDescription("Panel contenant des informations utiles sur le bot.")
+                        .setEmoji("⛏️")
+                        .identifier,
                 )
                 .setPages([
                     new Nav.Page()
@@ -134,10 +58,11 @@ class Testing extends Command {
                                 .setLabel("Informations utilisateur")
                                 .setValue("user_informations")
                                 .setDescription("Informations relatives à l'utilisateur faisant la commande.")
+                                .identifier,
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle("Panel Administrateur - Informations")
+                                .setTitle("⛏️ | Panel Testeur - Informations utilisateur")
                                 .setDescription(`**Grades:** ${userGrade.allGrades.filter(g => g.length > 1).join(", ")}`),
                         ]),
                     new Nav.Page()
@@ -146,11 +71,12 @@ class Testing extends Command {
                                 .setLabel("Statut du bot")
                                 .setValue("bot_status")
                                 .setDescription("Statut du bot ainsi que les processus en cours.")
+                                .identifier,
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle("Panel Administrateur - Statut du bot")
-                                .setDescription(`${datas}`),
+                                .setTitle("⛏️ | Panel Testeur - Statut du bot")
+                                .setDescription(`${botStatus}`),
                         ]),
                     new Nav.Page()
                         .setIdentifier(
@@ -158,19 +84,20 @@ class Testing extends Command {
                                 .setLabel("Informations du bot")
                                 .setValue("bot_infos")
                                 .setDescription("Informations du bot ainsi que certaines données.")
+                                .identifier,
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle("Panel Administrateur - Statut du bot")
-                                .setDescription(`${botinfos}`),
+                                .setTitle("⛏️ | Panel Testeur - Informations du bot")
+                                .setDescription(`${botInfos}`),
                         ]),
                 ])
                 .setComponents([
                     new ActionRowBuilder()
                         .setComponents(
                             new SelectMenuBuilder()
-                                .setCustomId("testing_panel")
-                                .setPlaceholder("Choisir la page du panel de testing")
+                                .setCustomId("tester_panel")
+                                .setPlaceholder("Page...")
                                 .setOptions([
                                     {
                                         value: "user_informations",
@@ -190,6 +117,105 @@ class Testing extends Command {
                                 ]),
                         ),
                 ]),
+            "admin_panel": new Nav.Panel()
+                .setIdentifier(
+                    new Nav.Identifier()
+                        .setLabel("Panel Administrateur")
+                        .setValue("admin_panel")
+                        .setDescription("Panel contenant des fonctions administratives.")
+                        .setEmoji("🚀")
+                        .identifier,
+                )
+                .setPages([
+                    new Nav.Page()
+                        .setIdentifier(
+                            new Nav.Identifier()
+                                .setLabel("Serveurs")
+                                .setValue("admin_guilds")
+                                .setDescription("Panel administrateur pour gérer les serveurs."),
+                        )
+                        .setEmbeds([
+                            new EmbedBuilder()
+                                .setTitle("🚀 | Panel Administrateur - Serveurs")
+                                .setDescription("Intéragissez avec les boutons ci-dessous.\n\u200B")
+                                .setFields([
+                                    { name: "» 👥 «", value: "Voir la liste des serveurs", inline: true },
+                                    { name: "» 🔓 «", value: "Ajoute des serveurs autorisés (- de 30 membres)", inline: true },
+                                    { name: "» 🔒 «", value: "Supprimer des serveurs autorisés (+ de 30 membres)", inline: true },
+                                ]),
+                        ])
+                        .setComponents([
+                            new ActionRowBuilder()
+                                .setComponents(
+                                    new ButtonBuilder()
+                                        .setEmoji("👥")
+                                        .setCustomId("guilds_list")
+                                        .setStyle("Secondary"),
+                                    new ButtonBuilder()
+                                        .setEmoji("🔓")
+                                        .setCustomId("add_auth_guilds")
+                                        .setStyle("Secondary"),
+                                    new ButtonBuilder()
+                                        .setEmoji("🔒")
+                                        .setCustomId("remove_auth_guilds")
+                                        .setStyle("Secondary"),
+                                ),
+                        ]),
+                    new Nav.Page()
+                        .setIdentifier(
+                            new Nav.Identifier()
+                                .setLabel("VIPs/VIPs(+)")
+                                .setValue("admin_vip")
+                                .setDescription("Panel administrateur pour gérer les VIPs et les VIPs(+)."),
+                        )
+                        .setEmbeds([
+                            new EmbedBuilder()
+                                .setTitle("🚀 | Panel Administrateur - VIPs/VIPs(+)")
+                                .setDescription("Intéragissez avec les boutons ci-dessous.\n\u200B")
+                                .setFields([
+                                    { name: "» 💎 «", value: "Voir la liste des VIPs/VIPs(+)", inline: true },
+                                    { name: "» 🪄 «", value: "Ajouter des VIPs/VIPs(+)", inline: true },
+                                    { name: "» 🧲 «", value: "Supprimer des VIPs/VIPs(+)", inline: true },
+                                ]),
+                        ])
+                        .setComponents([
+                            new ActionRowBuilder()
+                                .setComponents(
+                                    new ButtonBuilder()
+                                        .setEmoji("💎")
+                                        .setCustomId("vip_list")
+                                        .setStyle("Secondary"),
+                                    new ButtonBuilder()
+                                        .setEmoji("🪄")
+                                        .setCustomId("add_vip")
+                                        .setStyle("Secondary"),
+                                    new ButtonBuilder()
+                                        .setEmoji("🧲")
+                                        .setCustomId("remove_vip")
+                                        .setStyle("Secondary"),
+                                ),
+                        ]),
+                ])
+                .setComponents([
+                    new ActionRowBuilder()
+                        .setComponents(
+                            new SelectMenuBuilder()
+                                .setCustomId("admin_panel")
+                                .setPlaceholder("Page...")
+                                .setOptions([
+                                    {
+                                        value: "admin_guilds",
+                                        label: "Serveurs",
+                                        description: "Panel administrateur pour gérer les serveurs.",
+                                    },
+                                    {
+                                        value: "admin_vip",
+                                        label: "VIPs/VIPs(+)",
+                                        description: "Panel administrateur pour gérer les VIPs et les VIPs(+).",
+                                    },
+                                ]),
+                        ),
+                ]),
         };
 
         const universalRows = [
@@ -197,7 +223,7 @@ class Testing extends Command {
                     .setComponents(
                         new SelectMenuBuilder()
                             .setCustomId("panel_category_selector")
-                            .setPlaceholder("Choisir la catégorie de panel")
+                            .setPlaceholder("Panel...")
                             .setOptions(Object.values(pages).map(option => option.identifier)),
                     ),
                 new ActionRowBuilder()
@@ -210,9 +236,9 @@ class Testing extends Command {
         ];
 
         const panel = await this.interaction.reply({
-            embeds: pages.testing_panel.pages[0].embeds,
-            components: pages.testing_panel.components.concat(universalRows),
-        }).catch(() => null);
+            embeds: pages.tester_panel.pages[0].embeds,
+            components: pages.tester_panel.components.concat(universalRows),
+        }).catch(console.error);
         const navigation = panel.createMessageComponentCollector({
             filter: inter => inter.user.id === this.interaction.user.id,
             time: 120_000,
@@ -220,21 +246,30 @@ class Testing extends Command {
             dispose: true,
         });
 
-        let currentPanel = "testing_panel";
+        let currentPanel = "tester_panel";
 
         navigation.on("collect", async inter => {
+            await inter.deferUpdate()
+                .catch(console.error);
             if (inter.isSelectMenu()) {
                 if (inter.customId === "panel_category_selector") {
-                    currentPanel = inter.values[0];
+                    if (userGrade.asMinimal(userGrade.allGrades).includes(inter.values[0].split("_")[0])) {
+                        currentPanel = inter.values[0];
+                        const newComponents = pages[currentPanel].pages[0].components;
+                        for (const pageRow of pages[currentPanel].components) newComponents.push(pageRow);
+                        for (const universalRow of universalRows) newComponents.push(universalRow);
 
-                    const newComponents = pages[currentPanel].pages[0].components;
-                    for (const pageRow of pages[currentPanel].components) newComponents.push(pageRow);
-                    for (const universalRow of universalRows) newComponents.push(universalRow);
-
-                    panel.interaction.editReply({
-                        embeds: pages[currentPanel].pages[0].embeds,
-                        components: newComponents,
-                    }).catch(() => null);
+                        panel.interaction.editReply({
+                            embeds: pages[currentPanel].pages[0].embeds,
+                            components: newComponents,
+                        }).catch(console.error);
+                    }
+                    else {
+                        inter.followUp({
+                            content: ":warning: Il semblerait que vous n'ayez pas les permissions nécessaires pour accéder à cette page.",
+                            ephemeral: true,
+                        });
+                    }
                 }
                 else if (Object.keys(pages).includes(inter.customId)) {
                     const newComponents = pages[currentPanel].pages.find(p => p.identifier.value === inter.values[0]).components;
@@ -243,21 +278,39 @@ class Testing extends Command {
 
                     panel.interaction.editReply({
                         embeds: pages[currentPanel].pages.find(p => p.identifier.value === inter.values[0]).embeds,
-                        components: pages[currentPanel].components.concat(universalRows),
-                    }).catch(() => null);
+                        components: newComponents,
+                    }).catch(console.error);
                 }
-                await inter.deferUpdate()
-                    .catch(() => null);
             }
             else if (inter.isButton()) {
                 if (inter.customId === "leave_panel") {
-                    panel.interaction.editReply({ embeds: panel.embeds, components: [] })
-                        .catch(() => null);
                     await inter.deferUpdate()
-                        .catch(() => null);
+                        .catch(console.error);
                     navigation.stop();
                 }
+                else if (inter.customId === "guilds_list") {
+                    const posted = await this.client.pasteGGManager.postGuildsList(this.client.guilds.cache);
+
+                    if (posted.status === "success") {
+                        inter.followUp({
+                            content: "`(Expire dans 24h)` La liste des serveurs a été générées sur ce lien **Paste.gg** :"
+                                + `\n\n**• [${posted.result.id}](${posted.result.url})**`,
+                            ephemeral: true,
+                        });
+                    }
+                    else if (posted.status === "error") {
+                        inter.followUp({
+                            content: ":warning: Une erreur est survenue lors de la génération de la liste des serveurs.",
+                            ephemeral: true,
+                        });
+                    }
+                }
             }
+        });
+
+        navigation.on("end", async () => {
+            panel.interaction.editReply({ embeds: panel.embeds, components: [] })
+                .catch(console.error);
         });
     }
 }

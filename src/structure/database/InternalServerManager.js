@@ -26,7 +26,7 @@ class InternalServerManager {
                     "2": [],
                 },
             },
-            owners: [],
+            owners: [this.client.config.owner],
             admins: [],
             testers: [],
             authServers: [],
@@ -69,6 +69,16 @@ class InternalServerManager {
                 this.datas.admins.includes(userId) ? "admin" : "",
                 this.datas.owners.includes(userId) ? "owner" : "",
             ],
+            asMinimal: (ranks) => {
+                const allRanks = [];
+                for (const rank of ranks) {
+                    if (rank === "owner") allRanks.push("tester", "admin", "owner");
+                    if (rank === "admin") allRanks.push("tester", "admin");
+                    if (rank === "tester") allRanks.push("tester");
+                }
+
+                return allRanks;
+            },
         };
     }
 
@@ -387,6 +397,73 @@ class InternalServerManager {
 
         this.readyOrNot[1] = "1";
         setTimeout(() => this.readyOrNot[1] = "2", 120_000);
+    }
+
+    percentPrettier(percent) {
+        const identifiers = {
+            "0": "🟣 <10%",
+            "10": "🔵 <25%",
+            "25": "🟢 <50%",
+            "50": "🟡 <60%",
+            "60": "🟠 <80%",
+            "80": "🔴 >80%",
+        };
+
+        return Object.entries(identifiers).filter(e => percent >= Number(e[0])).at(-1)[1];
+    }
+
+    statusString(status) {
+        const identifiers = {
+            "online": "🟢",
+            "disabled": "🔴",
+            "maintenance": "🟡",
+        };
+
+        return identifiers[status];
+    }
+
+    pingString(amount) {
+        const identifiers = {
+            "50": "🟣",
+            "100": "🔵",
+            "150": "🟢",
+            "200": "🟡",
+            "400": "🟠",
+            "600": "🔴",
+        };
+
+        return Object.entries(identifiers).filter(e => amount >= Number(e[0])).at(-1)[1] + ` ${amount} ms`;
+    }
+
+    async status(interaction) {
+        const status = ["🔴", "🟡", "🟢"];
+        const memoryUsage = process.memoryUsage().heapTotal / 1024 / 1024;
+        const ramPercent = Math.ceil(memoryUsage * 100 / (4.00 * 1024));
+        const requests = this.client.requestsManager.totalSize;
+
+        const datas = {
+            "clientStatus": this.statusString(this.client.statusDb.datas.mode),
+            "apiPing": this.pingString(this.client.ws.ping),
+            "serverPing": this.pingString(Date.now() - interaction.createdTimestamp),
+            "memoryUsage": [
+                `${((memoryUsage).toFixed(4))} MB`,
+                `${this.client.util.intRender((4.00 * 1024).toFixed(0), " ")} MB`,
+            ],
+            "memoryPercent": `${ramPercent}%`,
+            "requests": [requests, this.client.maxRequests],
+            "requestsPercent": `${this.percentPrettier(requests * 100 / this.client.maxRequests)}`,
+            "uptime": this.client.util.convertDate(process.uptime() * 1000, true).string,
+            "server1": {
+                processus: `${this.processing[0].filter(e => e === true).length * 100 / this.processing[0].length}%`,
+                status: status[Number(this.readyOrNot[0])],
+            },
+            "server2": {
+                processus: `${this.processing[1].filter(e => e === true).length * 100 / this.processing[1].length}%`,
+                status: status[Number(this.readyOrNot[1])],
+            },
+        };
+
+        return datas;
     }
 }
 

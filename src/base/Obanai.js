@@ -17,6 +17,7 @@ const config = require("../config.json");
 const Package = require("../../package.json");
 const CollectionManager = require("./CollectionManager");
 const LanguageManager = require("./LanguageManager");
+const PasteGGClasses = require("./PasteGGClasses");
 
 class Obanai extends Client {
     constructor(token, registerSlash) {
@@ -28,6 +29,7 @@ class Obanai extends Client {
         this.token = token;
         this.util = Util;
         this.registerSlash = registerSlash;
+        this.pasteGGManager = new PasteGGClasses.PasteGGManager(this);
         this.commandManager = new CommandManager(this);
         this.eventManager = new EventManager(this);
         this.languageManager = new LanguageManager(this);
@@ -163,6 +165,8 @@ class Obanai extends Client {
             // this.log(`user: ${id} | serv: ${serv} | roleId: ${roleId}`);
         }
     }
+
+
 }
 
 module.exports = Obanai;
