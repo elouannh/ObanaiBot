@@ -255,7 +255,7 @@ class Testing extends Command {
                 if (inter.customId === "panel_category_selector") {
                     if (userGrade.asMinimal(userGrade.allGrades).includes(inter.values[0].split("_")[0])) {
                         currentPanel = inter.values[0];
-                        const newComponents = pages[currentPanel].pages[0].components;
+                        const newComponents = [...pages[currentPanel].pages[0].components];
                         for (const pageRow of pages[currentPanel].components) newComponents.push(pageRow);
                         for (const universalRow of universalRows) newComponents.push(universalRow);
 
@@ -272,7 +272,7 @@ class Testing extends Command {
                     }
                 }
                 else if (Object.keys(pages).includes(inter.customId)) {
-                    const newComponents = pages[currentPanel].pages.find(p => p.identifier.value === inter.values[0]).components;
+                    const newComponents = [...pages[currentPanel].pages.find(p => p.identifier.value === inter.values[0]).components];
                     for (const pageRow of pages[currentPanel].components) newComponents.push(pageRow);
                     for (const universalRow of universalRows) newComponents.push(universalRow);
 
