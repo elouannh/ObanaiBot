@@ -109,9 +109,10 @@ class PasteGGManager {
     }
 
     async postGuildsList(guilds) {
-        const maxLength = guilds.map(e => e.name).sort((a, b) => b - a)[0].length;
+        const maxLength = guilds.map(e => e.name).sort((a, b) => b.length - a.length)?.at(0)?.length;
         const guildRender = (guild) => {
-            return `${guild.id} | ${guild.name}${" ".repeat(maxLength - guild.name.length)} | ${guild.memberCount} members`;
+            return `${guild.id} | ${guild.name}${" ".repeat(maxLength - guild.name.length)}`
+                + ` | ${guild.memberCount} members`;
         }
         const file = [
             new PasteGGFile()

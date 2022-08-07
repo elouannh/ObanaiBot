@@ -1,5 +1,6 @@
 const Enmap = require("enmap");
 const fs = require("fs");
+const { escapeMarkdown } = require("discord.js");
 const dailyQuests = fs.readdirSync("./src/quests/daily").map(q => require(`../../quests/daily/${q}`)(0));
 
 class InternalServerManager {
@@ -461,6 +462,17 @@ class InternalServerManager {
                 processus: `${this.processing[1].filter(e => e === true).length * 100 / this.processing[1].length}%`,
                 status: status[Number(this.readyOrNot[1])],
             },
+        };
+
+        return datas;
+    }
+
+    async guilds() {
+        const authServers = this.datas.authServers;
+
+        const datas = {
+            "list": this.datas.authServers,
+            "cached": authServers.map(g => `\`${escapeMarkdown(this.client.guilds.cache.get(g)?.name ?? g)}\``),
         };
 
         return datas;

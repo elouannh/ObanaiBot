@@ -20,6 +20,7 @@ class Testing extends Command {
         const status = await this.client.internalServerManager.status(this.interaction);
         const infos = await this.client.statusDb.infos();
         const players = await this.client.externalServerDb.players();
+        const guilds = await this.client.internalServerManager.guilds();
 
         const botStatus = `» Ping API: **${status.apiPing}**\n`
             + `» Ping Serveur: **${status.serverPing}**\n\n`
@@ -36,10 +37,13 @@ class Testing extends Command {
             + `» Joueurs: **${infos.players.ensured}** | **${infos.players.started}** ayant commencé leur aventure.\n`
             + `» Version: **${this.client.version}**`;
 
-        const playersInfos = "**- Joueurs VIPs**:\n"
+        const playersInfos = "**» Joueurs VIPs**:\n"
             + `${players.cache.vips.map(p => inlineCode(p)).join(" / ")}\n\n`
-            + "**- Joueurs VIP(+)**\n"
+            + "**» Joueurs VIP(+)**:\n"
             + `${players.cache.vipplus.map(p => inlineCode(p)).join(" / ")}`;
+
+        const authGuilds = "**» Serveurs autorisés**:\n"
+            + `${guilds.cached.map(e => `${e}`).join(" / ")}`;
 
         const pages = {
             "tester_panel": new Nav.Panel()
@@ -293,8 +297,10 @@ class Testing extends Command {
 
                     if (posted.status === "success") {
                         inter.followUp({
-                            content: "`(Expire dans 24h)` La liste des serveurs a été générées sur ce lien **Paste.gg** :"
-                                + `\n\n**• [${posted.result.id}](${posted.result.url})**`,
+                            content: "`(Expire dans 24h)`"
+                                + " La liste des serveurs a été générées sur ce lien **Paste.gg** :"
+                                + `\n\n**• [${posted.result.id}](${posted.result.url})**\n\n`
+                                + `${authGuilds}`,
                             ephemeral: true,
                         });
                     }
@@ -304,6 +310,12 @@ class Testing extends Command {
                             ephemeral: true,
                         });
                     }
+                }
+                else if (inter.customId === "vip_list") {
+                    inter.followUp({
+                        content: `${playersInfos}`,
+                        ephemeral: true,
+                    });
                 }
             }
         });
