@@ -1,5 +1,14 @@
 const Command = require("../../base/Command");
-const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder, ButtonBuilder, inlineCode } = require("discord.js");
+const {
+    EmbedBuilder,
+    ActionRowBuilder,
+    SelectMenuBuilder,
+    ButtonBuilder,
+    inlineCode,
+    ModalBuilder,
+    TextInputStyle,
+    TextInputBuilder
+} = require("discord.js");
 const Nav = require("../../base/NavigationClasses");
 
 class Testing extends Command {
@@ -253,9 +262,9 @@ class Testing extends Command {
         let currentPanel = "tester_panel";
 
         navigation.on("collect", async inter => {
-            await inter.deferUpdate()
-                .catch(console.error);
             if (inter.isSelectMenu()) {
+                await inter.deferUpdate()
+                    .catch(console.error);
                 if (inter.customId === "panel_category_selector") {
                     if (userGrade.asMinimal(userGrade.allGrades).includes(inter.values[0].split("_")[0])) {
                         currentPanel = inter.values[0];
@@ -272,7 +281,7 @@ class Testing extends Command {
                         inter.followUp({
                             content: ":warning: Il semblerait que vous n'ayez pas les permissions nécessaires pour accéder à cette page.",
                             ephemeral: true,
-                        });
+                        }).catch(console.error);
                     }
                 }
                 else if (Object.keys(pages).includes(inter.customId)) {
@@ -293,6 +302,8 @@ class Testing extends Command {
                     navigation.stop();
                 }
                 else if (inter.customId === "guilds_list") {
+                    await inter.deferUpdate()
+                        .catch(console.error);
                     const posted = await this.client.pasteGGManager.postGuildsList(this.client.guilds.cache);
 
                     if (posted.status === "success") {
@@ -302,20 +313,74 @@ class Testing extends Command {
                                 + `\n\n**• [${posted.result.id}](${posted.result.url})**\n\n`
                                 + `${authGuilds}`,
                             ephemeral: true,
-                        });
+                        }).catch(console.error);
                     }
                     else if (posted.status === "error") {
                         inter.followUp({
                             content: ":warning: Une erreur est survenue lors de la génération de la liste des serveurs.",
                             ephemeral: true,
-                        });
+                        }).catch(console.error);
                     }
                 }
                 else if (inter.customId === "vip_list") {
+                    await inter.deferUpdate()
+                        .catch(console.error);
                     inter.followUp({
                         content: `${playersInfos}`,
                         ephemeral: true,
-                    });
+                    }).catch(console.error);
+                }
+                else if (inter.customId === "add_auth_guilds") {
+                    const modal = new ModalBuilder()
+                        .setTitle("Ajouter des serveurs autorisés")
+                        .setCustomId("modal_add_auth_guilds")
+                        .setComponents(
+                            new ActionRowBuilder().setComponents(
+                                new TextInputBuilder()
+                                    .setLabel("Entrez l'identifiant:")
+                                    .setCustomId("guild_added")
+                                    .setPlaceholder("ID")
+                                    .setMinLength(18)
+                                    .setMaxLength(19)
+                                    .setStyle(TextInputStyle.Short),
+                            ),
+                        );
+
+                    await inter.showModal(modal).catch(console.error);
+                    const modalResponse = await inter.awaitModalSubmit({
+                        filter: modalSubmitted => modalSubmitted.user.id === this.interaction.user.id,
+                        time: 15_000,
+                    }).catch(console.error);
+
+                    if (modalResponse !== undefined) {
+                        const guildIDField = modalResponse.fields.getTextInputValue("guild_added") ?? "null";
+
+                        // await modalResponse.deferUpdate()
+                        //     .catch(console.error);
+
+                        if (guilds.list.includes(guildIDField)) {
+                            modalResponse.reply({
+                                content: `⚠️ Le serveur \`${guildIDField}\` est **déjà autorisé**.`,
+                                ephemeral: true,
+                            }).catch(console.error);
+                        }
+                        else {
+                            modalResponse.reply({
+                                content: `✅ Le serveur \`${guildIDField}\` est **désormais autorisé**.`,
+                                ephemeral: true,
+                            }).catch(console.error);
+                            this.client.internalServerManager.db.push("internalServer", guildIDField, "authServers");
+                        }
+                    }
+                }
+                else if (inter.customId === "remove_auth_guilds") {
+
+                }
+                else if (inter.customId === "add_vip") {
+
+                }
+                else if (inter.customId === "remove_vip") {
+
                 }
             }
         });
