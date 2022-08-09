@@ -22,7 +22,11 @@ class CommandManager {
                 }
             });
 
-            const slashCommands = this.commands.map(cmd => new SlashCommandBuilder(cmd).setName(new cmd().infos.name).setDescription(new cmd().infos.description.substring(0, 100))).map(cmd => cmd.toJSON());
+            const slashCommands = this.commands.map(cmd =>
+                new SlashCommandBuilder()
+                    .setName(new cmd().infos.name)
+                    .setDescription(new cmd().infos.description.substring(0, 100))
+            ).map(cmd => cmd.toJSON());
             this.client.application.commands.set(slashCommands);
             for (const guild of this.client.guilds.cache.values()) {
                 guild.commands.set([], guild.id);

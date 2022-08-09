@@ -138,6 +138,37 @@ const Util = {
         return datas;
     },
     blankField: { name: "\u200B", value: "\u200B" },
+    eval: async (code) => {
+        code = `(async () => {\n${code}})();`;
+        const clean = text => {
+            if (typeof text === "string") {
+                return text.replace(/`/g, "`" + String.fromCharCode(8203))
+                    .replace(/@/g, "@" + String.fromCharCode(8203));
+            }
+            else {
+                return text;
+            }
+        };
+        let response = `📥 **Entrée**\n\`\`\`js\n${clean(code)}\n\`\`\`\n📤 **Sortie**\n`;
+        try {
+            let evaled = await eval(code);
+            if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
+
+            const cleanEvaled = clean(evaled);
+            if (cleanEvaled === "undefined") {
+                response += "```cs\n# Voided processus```";
+            }
+            else {
+                response += `\`\`\`xl\n${cleanEvaled.substring(0, 2000 - response.length - 20)}\`\`\``;
+            }
+        }
+        catch (err) {
+            const cleanErr = clean(err.message);
+            response += `\`\`\`xl\n${cleanErr.substring(0, 2000 - response.length - 20)}\`\`\``;
+        }
+
+        return response;
+    },
 };
 
 module.exports = Util;
