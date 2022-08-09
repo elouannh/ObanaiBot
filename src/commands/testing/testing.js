@@ -40,7 +40,7 @@ class Testing extends Command {
             }`
             + this.language.panels_accesses_message
             + `${Object.entries(this.language.panels_rendered).map(e => `• ${renderPanel(e)}`).join("\n")}\n\n`
-            + this.language.panels_timeout_message
+            + this.language.panels_timeout_message;
 
         const botStatus = `» Ping API: **${status.apiPing}**\n`
             + `» Ping Serveur: **${status.serverPing}**\n\n`
