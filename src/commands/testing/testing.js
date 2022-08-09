@@ -30,20 +30,17 @@ class Testing extends Command {
         const status = await this.client.internalServerManager.status(this.interaction);
         const infos = await this.client.statusDb.infos();
 
-        const gradesRendered = {
-            "owner": "👑 Owner",
-            "admin": "🚀 Administrateur",
-            "tester": "⛏️ Testeur",
-        };
         const renderPanel = rendered => {
-            return userGrade.allGrades.includes(rendered[0]) ? `Panel **${rendered[1]}**` : `~~Panel ${rendered[1]}~~`
+            return userGrade.allGrades.includes(rendered[0]) ? `**${rendered[1]}**` : `~~${rendered[1]}~~`;
         };
-        const userGrades = "Bienvenue sur le panel du personnel.\n\n__Vos grades:__  "
-            + `${userGrade.allGrades.filter(e => e.length > 1).map(e => `**${gradesRendered[e]}**`).join(" - ")}`
-            + "\n\nVous avez donc accès aux panels ci-dessous:\n"
-            + `${Object.entries(gradesRendered).map(e => `• ${renderPanel(e)}`).join("\n")}\n\n`
-            + "*Ce panel de navigation restera actif **2 minutes** "
-            + "et se désactivera au bout de **30 secondes** d'inactivité.*";
+        const userGrades = this.language.home_title
+            + `${userGrade.allGrades
+                .filter(e => e.length > 1)
+                .map(e => `**${this.language.grades_rendered[e]}**`).join(" - ")
+            }`
+            + this.language.panels_accesses_message
+            + `${Object.entries(this.language.panels_rendered).map(e => `• ${renderPanel(e)}`).join("\n")}\n\n`
+            + this.language.panels_timeout_message
 
         const botStatus = `» Ping API: **${status.apiPing}**\n`
             + `» Ping Serveur: **${status.serverPing}**\n\n`
