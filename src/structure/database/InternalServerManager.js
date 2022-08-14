@@ -445,7 +445,7 @@ class InternalServerManager {
         const datas = {
             "clientStatus": this.statusString(this.client.statusDb.datas.mode),
             "apiPing": this.pingString(this.client.ws.ping),
-            "serverPing": this.pingString(Date.now() - interaction.createdTimestamp),
+            "serverPing": this.pingString(Math.sqrt(Math.pow(Date.now() - interaction.createdTimestamp, 2))),
             "memoryUsage": [
                 `${((memoryUsage).toFixed(4))} MB`,
                 `${this.client.util.intRender((4.00 * 1024).toFixed(0), " ")} MB`,

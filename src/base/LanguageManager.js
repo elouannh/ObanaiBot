@@ -5,11 +5,11 @@ class LanguageManager {
     constructor(client) {
         this.client = client;
         const dir = "./src/languages/json/";
-        this.languages = fs.readdirSync(dir).map(file => new Language(file.replace(".json", "")));
+        this.languages = fs.readdirSync(dir).map(languageDir => new Language(languageDir));
     }
 
-    getLang(identifier) {
-        return this.languages.find(lang => lang.identifier === identifier) ?? new Language("fr");
+    getLang(lang) {
+        return this.languages.find(language => language.lang === lang) ?? new Language("fr");
     }
 }
 

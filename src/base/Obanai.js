@@ -27,7 +27,7 @@ class Obanai extends Client {
         });
 
         this.token = token;
-        this.util = Util;
+        this.util = Util(this);
         this.registerSlash = registerSlash;
         this.pasteGGManager = new PasteGGClasses.PasteGGManager(this);
         this.commandManager = new CommandManager(this);
@@ -85,11 +85,16 @@ class Obanai extends Client {
         this.mapDb.db.changed(MapDbCallback);
 
         this.internalServerManager = new InternalServerManager(this);
+
+        setInterval(() => this.log("................"), 900_000);
     }
 
     log(message, ...args) {
         const time = this.util.dateRender(new Date(), true);
-        console.log(`${time} || ${message}`, ...args);
+        console.log(`${time} || ${message}`);
+        for (const arg of args) {
+            console.log(arg);
+        }
     }
 
     launch(token = "") {

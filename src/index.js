@@ -8,5 +8,3 @@ const client = new Obanai(token, registerSlash);
 client.log("Starting bot process...");
 client.lastChannel = new Collection();
 client.launch();
-
-setInterval(() => client.log("................"), 900_000);

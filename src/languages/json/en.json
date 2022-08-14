@@ -1,7 +1,0 @@
-{
-  "commands": {
-    "testing": {
-      "reply": "This your lang: %LANG"
-    }
-  }
-}
