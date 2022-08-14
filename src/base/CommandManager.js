@@ -18,7 +18,9 @@ class CommandManager {
 
                 for (const file of files) {
                     const command = require(`../commands/${folder}/${file}`);
-                    this.commands.set(new (command)().infos.name, command);
+                    if (new (command)().infos?.type !== undefined) {
+                        this.commands.set(new (command)().infos.name, command);
+                    }
                 }
             });
 
@@ -26,6 +28,8 @@ class CommandManager {
                 new SlashCommandBuilder()
                     .setName(new cmd().infos.name)
                     .setDescription(new cmd().infos.description.substring(0, 100))
+                    .setDescriptionLocalizations(new cmd().infos.descriptionLocalizations)
+                    .setDMPermission(new cmd().infos.dmPermission),
             ).map(cmd => cmd.toJSON());
             this.client.application.commands.set(slashCommands);
             for (const guild of this.client.guilds.cache.values()) {
