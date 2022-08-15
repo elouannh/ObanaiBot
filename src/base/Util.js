@@ -1,10 +1,15 @@
 function ensureObj(source, obj) {
     for (const key in source) {
         if (source instanceof Object) {
-            const newValue = ensureObj(source[key], obj[key]);
-            obj[key] = newValue;
+            if (key in obj) {
+                const newValue = ensureObj(source[key], obj[key]);
+                obj[key] = newValue;
+            }
+            else {
+                obj[key] = source[key];
+            }
         }
-        else if (!(key in obj)) {
+        else {
             obj[key] = source[key];
         }
     }

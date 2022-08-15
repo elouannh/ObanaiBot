@@ -1,4 +1,22 @@
 {
+    "profile": {
+        "strings": {
+            "user_select_message": "Quel profil désirez-vous voir ?"
+        },
+        "rows": {
+            "buttons": {
+                "select_author": {
+                    "label": "Voir votre profil"
+                },
+                "select_custom": {
+                    "label": "Voir le profil d'un autre joueur"
+                },
+                "cancel_select": {
+                    "label": "Annuler"
+                }
+            }
+        }
+    },
     "staff-panel": {
         "strings": {
             "owner_grade": "👑 Owner",

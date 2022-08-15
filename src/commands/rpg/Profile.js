@@ -31,13 +31,26 @@ class StaffPanel extends Command {
     }
 
     async run() {
-        let pages = {
-            "user_select": new Nav.Panel()
-                .setIdentifier(
-                    new Nav.Identifier()
-                        .setLabel()
-                )
-        };
+        const user_select = await this.interaction.reply({
+            content: `**${this.language.strings.user_select_message}**\n\u200b`,
+            components: [
+                new ActionRowBuilder()
+                    .setComponents(
+                        new ButtonBuilder()
+                            .setLabel(this.language.rows.buttons.select_author.label)
+                            .setCustomId("select_author")
+                            .setStyle("Primary"),
+                        new ButtonBuilder()
+                            .setLabel(this.language.rows.buttons.select_custom.label)
+                            .setCustomId("select_custom")
+                            .setStyle("Primary"),
+                        new ButtonBuilder()
+                            .setLabel(this.language.rows.buttons.cancel_select.label)
+                            .setCustomId("cancel_select")
+                            .setStyle("Danger"),
+                    ),
+            ],
+        });
 
     }
 }
