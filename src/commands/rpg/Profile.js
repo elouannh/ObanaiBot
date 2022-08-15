@@ -31,7 +31,7 @@ class StaffPanel extends Command {
     }
 
     async run() {
-        const user_select = await this.interaction.reply({
+        const userSelect = await this.interaction.reply({
             content: `**${this.language.strings.user_select_message}**\n\u200b`,
             components: [
                 new ActionRowBuilder()
@@ -50,7 +50,16 @@ class StaffPanel extends Command {
                             .setStyle("Danger"),
                     ),
             ],
-        });
+        }).catch(this.client.util.catcherror);
+        const userSelected = await userSelect.awaitMessageComponent({
+            filter: inter => inter.user.id === this.interaction.user.id,
+            time: 30_000,
+        }).catch(this.client.util.catcherror);
+
+        if (userSelected === undefined) return;
+
+        await userSelected.deferUpdate()
+            .catch(this.client.util.catcherror);
 
     }
 }
