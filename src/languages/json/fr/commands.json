@@ -51,126 +51,126 @@
         "panels": {
             "tester": {
                 "identifier_description": "Panel contenant des informations utiles sur le bot.",
-                "pages": [
-                    {
+                "pages": {
+                    "0": {
                         "label": "Informations utilisateur",
                         "description": "Informations relatives à l'utilisateur faisant la commande.",
-                        "embeds": [
-                            {
+                        "embeds": {
+                            "0": {
                                 "title": "Panel Testeur - Informations utilisateur"
                             }
-                        ]
+                        }
                     },
-                    {
+                    "1": {
                         "label": "Statut du bot",
                         "description": "Statut du bot ainsi que les processus en cours.",
-                        "embeds": [
-                            {
+                        "embeds": {
+                            "0": {
                                 "title": "Panel Testeur - Statut du bot"
                             }
-                        ]
+                        }
                     },
-                    {
+                    "2": {
                         "label": "Informations du bot",
                         "description": "Informations du bot ainsi que certaines données.",
-                        "embeds": [
-                            {
+                        "embeds": {
+                            "0": {
                                 "title": "Panel Testeur - Informations du bot"
                             }
-                        ]
+                        }
                     }
-                ]
+                }
             },
             "admin": {
                 "identifier_description": "Panel contenant des fonctions administratives.",
-                "pages": [
-                    {
+                "pages": {
+                    "0": {
                         "label": "Changement de statut",
                         "description": "Panel administrateur pour changer le statut du bot.",
-                        "embeds": [
-                            {
+                        "embeds": {
+                            "0": {
                                 "title": "Panel Administrateur - Changement de statut",
                                 "description": "Interagissez avec les boutons ci-dessous.",
-                                "fields": [
-                                    {
+                                "fields": {
+                                    "0": {
                                         "value": "Voir le statut actuel"
                                     },
-                                    {
+                                    "1": {
                                         "value": "Passer en ligne"
                                     },
-                                    {
+                                    "2": {
                                         "value": "Passer en maintenance"
                                     },
-                                    {
+                                    "3": {
                                         "value": "Passer en désactivé"
                                     }
-                                ]
+                                }
                             }
-                        ]
+                        }
                     },
-                    {
+                    "1": {
                         "label": "Serveurs",
                         "description": "Panel administrateur pour gérer les serveurs.",
-                        "embeds": [
-                            {
+                        "embeds": {
+                            "0": {
                                 "title": "Panel Administrateur - Serveurs",
                                 "description": "Interagissez avec les boutons ci-dessous.",
-                                "fields": [
-                                    {
+                                "fields": {
+                                    "0": {
                                         "value": "Voir la liste des serveurs"
                                     },
-                                    {
+                                    "1": {
                                         "value": "Ajoute des serveurs autorisés (- de 30 membres)"
                                     },
-                                    {
+                                    "2": {
                                         "value": "Supprimer des serveurs autorisés (- de 30 membres)"
                                     }
-                                ]
+                                }
                             }
-                        ]
+                        }
                     },
-                    {
+                    "2": {
                         "label": "VIPs/VIPs(+)",
                         "description": "Panel administrateur pour gérer les VIPs et les VIPs(+).",
-                        "embeds": [
-                            {
+                        "embeds": {
+                            "0": {
                                 "title": "Panel Administrateur - VIPs/VIPs(+)",
                                 "description": "Interagissez avec les boutons ci-dessous.",
-                                "fields": [
-                                    {
+                                "fields": {
+                                    "0": {
                                         "value": "Voir la liste des VIPs/VIPs(+)"
                                     },
-                                    {
+                                    "1": {
                                         "value": "Ajouter des VIPs/VIPs(+)"
                                     },
-                                    {
+                                    "2": {
                                         "value": "Supprimer des VIPs/VIPs(+)"
                                     }
-                                ]
+                                }
                             }
-                        ]
+                        }
                     }
-                ]
+                }
             },
             "owner": {
                 "identifier_description": "Panel contenant des fonctions uniques pour l'owner du bot.",
-                "pages": [
-                    {
+                "pages": {
+                    "0": {
                         "label": "Exécution de code",
                         "description": "Panel pour exécuter du code depuis Discord.",
-                        "embeds": [
-                            {
+                        "embeds": {
+                            "0": {
                                 "title": "Panel Owner - Exécution de code",
                                 "description": "Interagissez avec les boutons ci-dessous.",
-                                "fields": [
-                                    {
+                                "fields": {
+                                    "0": {
                                         "value": "Exécuter du code"
                                     }
-                                ]
+                                }
                             }
-                        ]
+                        }
                     }
-                ]
+                }
             }
         },
         "rows": {
@@ -182,56 +182,56 @@
             "modals": {
                 "add_auth_guilds": {
                     "title": "Ajouter des serveurs autorisés",
-                    "inputs": [
-                        {
+                    "inputs": {
+                        "0": {
                             "label": "Entrez l'identifiant",
                             "placeholder": "ID"
                         }
-                    ]
+                    }
                 },
                 "remove_auth_guilds": {
                     "title": "Retirer des serveurs autorisés",
-                    "inputs": [
-                        {
+                    "inputs": {
+                        "0": {
                             "label": "Entrez l'identifiant",
                             "placeholder": "ID"
                         }
-                    ]
+                    }
                 },
                 "add_vip": {
                     "title": "Ajouter des VIPs/VIPs(+)",
-                    "inputs": [
-                        {
+                    "inputs": {
+                        "0": {
                             "label": "(VIP) Entrez l'identifiant",
                             "placeholder": "ID"
                         },
-                        {
+                        "1": {
                             "label": "(VIP(+)) Entrez l'identifiant",
                             "placeholder": "ID"
                         }
-                    ]
+                    }
                 },
                 "remove_vip": {
                     "title": "Retirer des VIPs/VIPs(+)",
-                    "inputs": [
-                        {
+                    "inputs": {
+                        "0": {
                             "label": "(VIP) Entrez l'identifiant",
                             "placeholder": "ID"
                         },
-                        {
+                        "1": {
                             "label": "(VIP(+)) Entrez l'identifiant",
                             "placeholder": "ID"
                         }
-                    ]
+                    }
                 },
                 "code_execute": {
                     "title": "Exécuter du code",
-                    "inputs": [
-                        {
+                    "inputs": {
+                        "0": {
                             "label": "Code (JavaScript):",
                             "placeholder": "console.log(\"Hello world\");"
                         }
-                    ]
+                    }
                 }
             }
         }

@@ -51,126 +51,126 @@
         "panels": {
             "tester": {
                 "identifier_description": "Panel which includes useful informations about the bot.",
-                "pages": [
-                    {
+                "pages": {
+                    "0": {
                         "label": "User informations",
                         "description": "Informations about the command author.",
-                        "embeds": [
-                            {
+                        "embeds": {
+                            "0": {
                                 "title": "Tester's panel - User informations"
                             }
-                        ]
+                        }
                     },
-                    {
+                    "1": {
                         "label": "Bot status",
                         "description": "Actual bot status & different currents processus.",
-                        "embeds": [
-                            {
+                        "embeds": {
+                            "0": {
                                 "title": "Tester's panel - Bot status"
                             }
-                        ]
+                        }
                     },
-                    {
+                    "2": {
                         "label": "Bot informations",
                         "description": "Bot informations and some other useful informations.",
-                        "embeds": [
-                            {
+                        "embeds": {
+                            "0": {
                                 "title": "Tester's panel - Bot informations"
                             }
-                        ]
+                        }
                     }
-                ]
+                }
             },
             "admin": {
                 "identifier_description": "Panel which includes useful administratives functions.",
-                "pages": [
-                    {
+                "pages": {
+                    "0": {
                         "label": "Status editing",
                         "description": "Administrator's panel for changing the bot's status.",
-                        "embeds": [
-                            {
+                        "embeds": {
+                            "0": {
                                 "title": "Administrator's panel - Status editing",
                                 "description": "Interact with the buttons below.",
-                                "fields": [
-                                    {
+                                "fields": {
+                                    "0": {
                                         "value": "See the actual status"
                                     },
-                                    {
+                                    "1": {
                                         "value": "Set online"
                                     },
-                                    {
+                                    "2": {
                                         "value": "Set maintenance"
                                     },
-                                    {
+                                    "3": {
                                         "value": "Set disabled"
                                     }
-                                ]
+                                }
                             }
-                        ]
+                        }
                     },
-                    {
+                    "1": {
                         "label": "Guilds",
                         "description": "Administrator's panel for managing bot's guilds.",
-                        "embeds": [
-                            {
+                        "embeds": {
+                            "0": {
                                 "title": "Administrator's panel - Guilds",
                                 "description": "Interact with the buttons below.",
-                                "fields": [
-                                    {
+                                "fields": {
+                                    "0": {
                                         "value": "See the guilds list"
                                     },
-                                    {
+                                    "1": {
                                         "value": "Add authorized guilds (less than 30 members)"
                                     },
-                                    {
+                                    "2": {
                                         "value": "Remove authorized guilds (less than 30 members)"
                                     }
-                                ]
+                                }
                             }
-                        ]
+                        }
                     },
-                    {
+                    "2": {
                         "label": "VIPs/VIPs(+)",
                         "description": "Administrator's panel for managing VIPs and VIPs(+).",
-                        "embeds": [
-                            {
+                        "embeds": {
+                            "0": {
                                 "title": "Administrator's panel - VIPs/VIPs(+)",
                                 "description": "Interact with the buttons below.",
-                                "fields": [
-                                    {
+                                "fields": {
+                                    "0": {
                                         "value": "See the VIPs/VIPs(+)'s list"
                                     },
-                                    {
+                                    "1": {
                                         "value": "Add VIPs/VIPs(+)"
                                     },
-                                    {
+                                    "2": {
                                         "value": "Remove VIPs/VIPs(+)"
                                     }
-                                ]
+                                }
                             }
-                        ]
+                        }
                     }
-                ]
+                }
             },
             "owner": {
                 "identifier_description": "Panel which includes useful functions for the bot's owner.",
-                "pages": [
-                    {
+                "pages": {
+                    "0": {
                         "label": "Execute code",
                         "description": "Panel for executing code directly into Discord.",
-                        "embeds": [
-                            {
+                        "embeds": {
+                            "0": {
                                 "title": "Owner's panel - Execute code",
                                 "description": "Interact with the buttons below.",
-                                "fields": [
-                                    {
+                                "fields": {
+                                    "0": {
                                         "value": "Execute code"
                                     }
-                                ]
+                                }
                             }
-                        ]
+                        }
                     }
-                ]
+                }
             }
         },
         "rows": {
@@ -182,56 +182,56 @@
             "modals": {
                 "add_auth_guilds": {
                     "title": "Add authorized guilds",
-                    "inputs": [
-                        {
+                    "inputs": {
+                        "0": {
                             "label": "Enter the ID",
                             "placeholder": "ID"
                         }
-                    ]
+                    }
                 },
                 "remove_auth_guilds": {
                     "title": "Remove authorized guilds",
-                    "inputs": [
-                        {
+                    "inputs": {
+                        "0": {
                             "label": "Enter the ID",
                             "placeholder": "ID"
                         }
-                    ]
+                    }
                 },
                 "add_vip": {
                     "title": "Add VIPs/VIPs(+)",
-                    "inputs": [
-                        {
+                    "inputs": {
+                        "0": {
                             "label": "(VIP) Enter the ID",
                             "placeholder": "ID"
                         },
-                        {
+                        "1": {
                             "label": "(VIP(+)) Enter the ID",
                             "placeholder": "ID"
                         }
-                    ]
+                    }
                 },
                 "remove_vip": {
                     "title": "Remove VIPs/VIPs(+)",
-                    "inputs": [
-                        {
+                    "inputs": {
+                        "0": {
                             "label": "(VIP) Enter the ID",
                             "placeholder": "ID"
                         },
-                        {
+                        "1": {
                             "label": "(VIP(+)) Enter the ID",
                             "placeholder": "ID"
                         }
-                    ]
+                    }
                 },
                 "code_execute": {
                     "title": "Execute code",
-                    "inputs": [
-                        {
+                    "inputs": {
+                        "0": {
                             "label": "Code (JavaScript):",
                             "placeholder": "console.log(\"Hello world\");"
                         }
-                    ]
+                    }
                 }
             }
         }

@@ -16,10 +16,9 @@ class StaffPanel extends Command {
     constructor() {
         super({
             name: "staff-panel",
-            description: "Commande permettant d'afficher le panel pour le personnel du bot.",
+            description: "Command to display the staff panel.",
             descriptionLocalizations: {
                 "fr": "Commande permettant d'afficher le panel pour le personnel du bot.",
-                "en-US": "Command to display the staff panel.",
             },
             type: 1,
             dmPermission: true,
@@ -57,7 +56,7 @@ class StaffPanel extends Command {
             + `» ${this.language.strings.capacity} **(${status.requestsPercent})**: **${status.requests[0]}**/${status.requests[1]}\n`
             + `» ${this.language.strings.uptime}: **${status.uptime}**`;
 
-        const botInfos = `» ${this.language.guilds}: **${infos.guilds}**\n`
+        const botInfos = `» ${this.language.strings.guilds}: **${infos.guilds}**\n`
             + `» ${this.language.strings.total_members}: **${infos.totalMembers}**\n`
             + `» ${this.language.strings.cached_users}: **${infos.users}**\n`
             + `» ${this.language.strings.players}: **${infos.players.ensured}** | **${infos.players.started}** ayant commencé leur aventure.\n`
@@ -77,40 +76,40 @@ class StaffPanel extends Command {
                     new Nav.Page()
                         .setIdentifier(
                             new Nav.Identifier()
-                                .setLabel(this.language.panels.tester.pages[0].label)
+                                .setLabel(this.language.panels.tester.pages["0"].label)
                                 .setValue("user_informations")
-                                .setDescription(this.language.panels.tester.pages[0].description)
+                                .setDescription(this.language.panels.tester.pages["0"].description)
                                 .identifier,
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle(`⛏️ | ${this.language.panels.tester.pages[0].embeds[0].title}`)
+                                .setTitle(`⛏️ | ${this.language.panels.tester.pages["0"].embeds["0"].title}`)
                                 .setDescription(userGrades),
                         ]),
                     new Nav.Page()
                         .setIdentifier(
                             new Nav.Identifier()
-                                .setLabel(this.language.panels.tester.pages[1].label)
+                                .setLabel(this.language.panels.tester.pages["1"].label)
                                 .setValue("bot_status")
-                                .setDescription(this.language.panels.tester.pages[1].description)
+                                .setDescription(this.language.panels.tester.pages["1"].description)
                                 .identifier,
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle(`⛏️ | ${this.language.panels.tester.pages[1].embeds[0].title}`)
+                                .setTitle(`⛏️ | ${this.language.panels.tester.pages["1"].embeds["0"].title}`)
                                 .setDescription(botStatus),
                         ]),
                     new Nav.Page()
                         .setIdentifier(
                             new Nav.Identifier()
-                                .setLabel(this.language.panels.tester.pages[2].label)
+                                .setLabel(this.language.panels.tester.pages["2"].label)
                                 .setValue("bot_infos")
-                                .setDescription(this.language.panels.tester.pages[2].description)
+                                .setDescription(this.language.panels.tester.pages["2"].description)
                                 .identifier,
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle(`⛏️ | ${this.language.panels.tester.pages[2].embeds[0].title}`)
+                                .setTitle(`⛏️ | ${this.language.panels.tester.pages["2"].embeds["0"].title}`)
                                 .setDescription(`${botInfos}`),
                         ]),
                 ])
@@ -123,18 +122,18 @@ class StaffPanel extends Command {
                                 .setOptions([
                                     {
                                         value: "user_informations",
-                                        label: this.language.panels.tester.pages[0].label,
-                                        description: this.language.panels.tester.pages[0].description,
+                                        label: this.language.panels.tester.pages["0"].label,
+                                        description: this.language.panels.tester.pages["0"].description,
                                     },
                                     {
                                         value: "bot_status",
-                                        label: this.language.panels.tester.pages[1].label,
-                                        description: this.language.panels.tester.pages[1].description,
+                                        label: this.language.panels.tester.pages["1"].label,
+                                        description: this.language.panels.tester.pages["1"].description,
                                     },
                                     {
                                         value: "bot_infos",
-                                        label: this.language.panels.tester.pages[2].label,
-                                        description: this.language.panels.tester.pages[2].description,
+                                        label: this.language.panels.tester.pages["2"].label,
+                                        description: this.language.panels.tester.pages["2"].description,
                                     },
                                 ]),
                         ),
@@ -152,19 +151,19 @@ class StaffPanel extends Command {
                     new Nav.Page()
                         .setIdentifier(
                             new Nav.Identifier()
-                                .setLabel(this.language.panels.admin.pages[0].label)
+                                .setLabel(this.language.panels.admin.pages["0"].label)
                                 .setValue("admin_status_change")
-                                .setDescription(this.language.panels.admin.pages[0].description),
+                                .setDescription(this.language.panels.admin.pages["0"].description),
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle(`🚀 | ${this.language.panels.admin.pages[0].embeds[0].title}`)
-                                .setDescription(`${this.language.panels.admin.pages[0].embeds[0].description}\n\u200B`)
+                                .setTitle(`🚀 | ${this.language.panels.admin.pages["0"].embeds["0"].title}`)
+                                .setDescription(`${this.language.panels.admin.pages["0"].embeds["0"].description}\n\u200B`)
                                 .setFields([
-                                    { name: "» 📝 «", value: this.language.panels.admin.pages[0].embeds[0].fields[0].value, inline: true },
-                                    { name: "» 🟢 «", value: this.language.panels.admin.pages[0].embeds[0].fields[1].value, inline: true },
-                                    { name: "» 🟡 «", value: this.language.panels.admin.pages[0].embeds[0].fields[2].value, inline: true },
-                                    { name: "» 🔴 «", value: this.language.panels.admin.pages[0].embeds[0].fields[3].value, inline: true },
+                                    { name: "» 📝 «", value: this.language.panels.admin.pages["0"].embeds["0"].fields["0"].value, inline: true },
+                                    { name: "» 🟢 «", value: this.language.panels.admin.pages["0"].embeds["0"].fields["1"].value, inline: true },
+                                    { name: "» 🟡 «", value: this.language.panels.admin.pages["0"].embeds["0"].fields["2"].value, inline: true },
+                                    { name: "» 🔴 «", value: this.language.panels.admin.pages["0"].embeds["0"].fields["3"].value, inline: true },
                                 ]),
                         ])
                         .setComponents([
@@ -191,18 +190,18 @@ class StaffPanel extends Command {
                     new Nav.Page()
                         .setIdentifier(
                             new Nav.Identifier()
-                                .setLabel(this.language.panels.admin.pages[1].label)
+                                .setLabel(this.language.panels.admin.pages["1"].label)
                                 .setValue("admin_guilds")
-                                .setDescription(this.language.panels.admin.pages[1].description),
+                                .setDescription(this.language.panels.admin.pages["1"].description),
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle(`🚀 | ${this.language.panels.admin.pages[1].embeds[0].title}`)
-                                .setDescription(`${this.language.panels.admin.pages[0].embeds[0].description}\n\u200B`)
+                                .setTitle(`🚀 | ${this.language.panels.admin.pages["1"].embeds["0"].title}`)
+                                .setDescription(`${this.language.panels.admin.pages["0"].embeds["0"].description}\n\u200B`)
                                 .setFields([
-                                    { name: "» 👥 «", value: this.language.panels.admin.pages[1].embeds[0].fields[0].value, inline: true },
-                                    { name: "» 🔓 «", value: this.language.panels.admin.pages[1].embeds[0].fields[1].value, inline: true },
-                                    { name: "» 🔒 «", value: this.language.panels.admin.pages[1].embeds[0].fields[2].value, inline: true },
+                                    { name: "» 👥 «", value: this.language.panels.admin.pages["1"].embeds["0"].fields["0"].value, inline: true },
+                                    { name: "» 🔓 «", value: this.language.panels.admin.pages["1"].embeds["0"].fields["1"].value, inline: true },
+                                    { name: "» 🔒 «", value: this.language.panels.admin.pages["1"].embeds["0"].fields["2"].value, inline: true },
                                 ]),
                         ])
                         .setComponents([
@@ -225,18 +224,18 @@ class StaffPanel extends Command {
                     new Nav.Page()
                         .setIdentifier(
                             new Nav.Identifier()
-                                .setLabel(this.language.panels.admin.pages[2].label)
+                                .setLabel(this.language.panels.admin.pages["2"].label)
                                 .setValue("admin_vip")
-                                .setDescription(this.language.panels.admin.pages[2].description),
+                                .setDescription(this.language.panels.admin.pages["2"].description),
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle(`🚀 | ${this.language.panels.admin.pages[2].embeds[0].title}`)
-                                .setDescription(`${this.language.panels.admin.pages[2].embeds[0].description}\n\u200B`)
+                                .setTitle(`🚀 | ${this.language.panels.admin.pages["2"].embeds["0"].title}`)
+                                .setDescription(`${this.language.panels.admin.pages["2"].embeds["0"].description}\n\u200B`)
                                 .setFields([
-                                    { name: "» 💎 «", value: this.language.panels.admin.pages[2].embeds[0].fields[0].value, inline: true },
-                                    { name: "» 🪄 «", value: this.language.panels.admin.pages[2].embeds[0].fields[1].value, inline: true },
-                                    { name: "» 🧲 «", value: this.language.panels.admin.pages[2].embeds[0].fields[2].value, inline: true },
+                                    { name: "» 💎 «", value: this.language.panels.admin.pages["2"].embeds["0"].fields["0"].value, inline: true },
+                                    { name: "» 🪄 «", value: this.language.panels.admin.pages["2"].embeds["0"].fields["1"].value, inline: true },
+                                    { name: "» 🧲 «", value: this.language.panels.admin.pages["2"].embeds["0"].fields["2"].value, inline: true },
                                 ]),
                         ])
                         .setComponents([
@@ -266,18 +265,18 @@ class StaffPanel extends Command {
                                 .setOptions([
                                     {
                                         value: "admin_status_change",
-                                        label: this.language.panels.admin.pages[0].label,
-                                        description: this.language.panels.admin.pages[0].description,
+                                        label: this.language.panels.admin.pages["0"].label,
+                                        description: this.language.panels.admin.pages["0"].description,
                                     },
                                     {
                                         value: "admin_guilds",
-                                        label: this.language.panels.admin.pages[1].label,
-                                        description: this.language.panels.admin.pages[1].description,
+                                        label: this.language.panels.admin.pages["1"].label,
+                                        description: this.language.panels.admin.pages["1"].description,
                                     },
                                     {
                                         value: "admin_vip",
-                                        label: this.language.panels.admin.pages[2].label,
-                                        description: this.language.panels.admin.pages[2].description,
+                                        label: this.language.panels.admin.pages["2"].label,
+                                        description: this.language.panels.admin.pages["2"].description,
                                     },
                                 ]),
                         ),
@@ -295,16 +294,16 @@ class StaffPanel extends Command {
                     new Nav.Page()
                         .setIdentifier(
                             new Nav.Identifier()
-                                .setLabel(this.language.panels.owner.pages[0].label)
+                                .setLabel(this.language.panels.owner.pages["0"].label)
                                 .setValue("owner_code_execute")
-                                .setDescription(this.language.panels.owner.pages[0].description),
+                                .setDescription(this.language.panels.owner.pages["0"].description),
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle(`👑 | ${this.language.panels.owner.pages[0].embeds[0].title}`)
-                                .setDescription(`${this.language.panels.owner.pages[0].embeds[0].description}\n\u200B`)
+                                .setTitle(`👑 | ${this.language.panels.owner.pages["0"].embeds["0"].title}`)
+                                .setDescription(`${this.language.panels.owner.pages["0"].embeds["0"].description}\n\u200B`)
                                 .setFields([
-                                    { name: "» 📡 «", value: this.language.panels.owner.pages[0].embeds[0].fields[0].value, inline: true },
+                                    { name: "» 📡 «", value: this.language.panels.owner.pages["0"].embeds["0"].fields["0"].value, inline: true },
                                 ]),
                         ])
                         .setComponents([
@@ -337,7 +336,7 @@ class StaffPanel extends Command {
         ];
 
         const panel = await this.interaction.reply({
-            embeds: pages.tester_panel.pages[0].embeds,
+            embeds: pages.tester_panel.pages["0"].embeds,
             components: pages.tester_panel.components.concat(universalRows),
         }).catch(this.client.util.catcherror);
         if (panel === undefined) return;
@@ -356,12 +355,12 @@ class StaffPanel extends Command {
                 if (inter.customId === "panel_category_selector") {
                     if (userGrade.asMinimal(userGrade.allGrades).includes(inter.values[0].split("_")[0])) {
                         currentPanel = inter.values[0];
-                        const newComponents = [...pages[currentPanel].pages[0].components];
+                        const newComponents = [...pages[currentPanel].pages["0"].components];
                         for (const pageRow of pages[currentPanel].components) newComponents.push(pageRow);
                         for (const universalRow of universalRows) newComponents.push(universalRow);
 
                         panel.interaction.editReply({
-                            embeds: pages[currentPanel].pages[0].embeds,
+                            embeds: pages[currentPanel].pages["0"].embeds,
                             components: newComponents,
                         }).catch(this.client.util.catcherror);
                     }
