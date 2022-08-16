@@ -19,6 +19,10 @@ class InteractionCreate extends Event {
         if (this.interaction.isChatInputCommand()) {
             await this.executeCommand();
         }
+        else if (this.interaction.isContextMenuCommand()) {
+            this.interaction.commandName = this.interaction.commandName.toLowerCase();
+            await this.executeCommand();
+        }
     }
 
     async executeCommand() {

@@ -1,4 +1,10 @@
-const { Collection, SlashCommandBuilder } = require("discord.js");
+const {
+    Collection,
+    SlashCommandBuilder,
+    SlashCommandUserOption,
+    ContextMenuCommandBuilder,
+    ApplicationCommandType,
+} = require("discord.js");
 const fs = require("fs");
 
 class CommandManager {
@@ -24,14 +30,42 @@ class CommandManager {
                 }
             });
 
-            const slashCommands = this.commands.map(cmd =>
-                new SlashCommandBuilder()
-                    .setName(new cmd().infos.name)
-                    .setDescription(new cmd().infos.description.substring(0, 100))
-                    .setDescriptionLocalizations(new cmd().infos.descriptionLocalizations)
-                    .setDMPermission(new cmd().infos.dmPermission),
-            ).map(cmd => cmd.toJSON());
-            this.client.application.commands.set(slashCommands);
+            const slashCommands = [];
+            const contextCommands = [];
+
+            this.commands.forEach(cmd => {
+                if (new cmd().infos.type.includes(1)) {
+                    const build = new SlashCommandBuilder()
+                        .setName(new cmd().infos.name)
+                        .setDescription(new cmd().infos.description.substring(0, 100))
+                        .setDescriptionLocalizations(new cmd().infos.descriptionLocalizations)
+                        .setDMPermission(new cmd().infos.dmPermission);
+
+                    for (const option of new cmd().infos.options) {
+                        if (option.type === 6) {
+                            const userOption = new SlashCommandUserOption()
+                                .setName(option.name)
+                                .setNameLocalizations(option.nameLocalizations)
+                                .setDescription(option.description)
+                                .setDescriptionLocalizations(option.descriptionLocalizations)
+                                .setRequired(option.required);
+
+                            build.addUserOption(userOption);
+                        }
+                    }
+
+                    slashCommands.push(build.toJSON());
+                }
+                if (new cmd().infos.type.includes(2)) {
+                    const build = new ContextMenuCommandBuilder()
+                        .setName(this.client.util.capitalize(new cmd().infos.name))
+                        .setType(ApplicationCommandType.User);
+
+                    contextCommands.push(build.toJSON());
+                }
+            });
+
+            this.client.application.commands.set(slashCommands.concat(contextCommands));
             for (const guild of this.client.guilds.cache.values()) {
                 guild.commands.set([], guild.id);
             }
@@ -41,8 +75,6 @@ class CommandManager {
     getCommand(name) {
         if (this.commands.has(name)) { return this.commands.get(name); }
         else {
-            const validCommands = this.commands.filter(c => new c().infos.aliases.includes(name));
-            if (validCommands.map(e => e).length) return validCommands.first();
             return 0;
         }
     }

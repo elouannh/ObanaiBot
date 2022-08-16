@@ -1,3 +1,5 @@
+const { User } = require("discord.js");
+
 function ensureObj(source, obj) {
     for (const key in source) {
         if (source instanceof Object) {
@@ -17,8 +19,11 @@ function ensureObj(source, obj) {
     return obj;
 }
 
-const Util = (client) => {
+const Util = client => {
     return {
+        capitalize: function(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        },
         intRender: function(int, sep) {
             let args = [];
 

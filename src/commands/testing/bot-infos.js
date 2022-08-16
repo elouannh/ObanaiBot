@@ -37,7 +37,7 @@ class BotInfos extends Command {
                 .sort((a, b) => b.created - a.created)
                 .splice(0, 5)
                 .map(e => `**\`${
-                    escapeMarkdown(this.client.users.cache.get(e.id)?.username ?? "non-cached player")
+                    escapeMarkdown(this.client.users.fetch(e.id)?.username ?? "non-cached player")
                 }\` - <t:${((e.created) / 1000).toFixed(0)}:R>**`)
                 .join("\n")
         }\n`;

@@ -10,7 +10,7 @@ async function alertQuest(client, type, datas, quest) {
     }
     if (questFile?.title === undefined) {
         const playerId = Number((datas.created / 1000).toFixed(0)).toString(20);
-        const model = `**${client.users.cache.get(datas.id)?.username ?? `Joueur #${playerId}`}** a terminé une quête`;
+        const model = `**${client.users.fetch(datas.id)?.username ?? `Joueur #${playerId}`}** a terminé une quête`;
         const string = {
             "daily": `${model} quotidienne.`,
             "slayer": `${model} de pourfendeur.`,
@@ -21,7 +21,7 @@ async function alertQuest(client, type, datas, quest) {
             const cmd = new Command();
             cmd.init(client,
                 {
-                    author: client.users.cache.get(datas.id),
+                    author: client.users.fetch(datas.id),
                     channel: client.lastChannel.get(datas.id),
                 },
             []);
@@ -41,7 +41,7 @@ async function alertQuest(client, type, datas, quest) {
     else {
         const playerId = Number((datas.created / 1000).toFixed(0)).toString(20);
         const model = `**${
-            client.users.cache.get(datas.id)?.username ?? `Joueur #${playerId}`
+            client.users.fetch(datas.id)?.username ?? `Joueur #${playerId}`
         }** a franchi une étape de quête`;
         const string = {
             "daily": `${model} quotidienne.`,
@@ -53,7 +53,7 @@ async function alertQuest(client, type, datas, quest) {
             const cmd = new Command();
             cmd.init(client,
                 {
-                    author: client.users.cache.get(datas.id),
+                    author: client.users.fetch(datas.id),
                     channel: client.lastChannel.get(datas.id),
                 },
             []);

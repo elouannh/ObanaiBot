@@ -51,7 +51,7 @@ class Squad extends Command {
             if (mDatas.right_hand === m) emoji = "⚜️";
             if (mDatas.leader === m) emoji = "🎖️";
             members[m] = [
-                `${emoji} ${this.client.users.cache.get(m)?.username ?? "Joueur"} | ⭐ ${tempPDatas.exp}`,
+                `${emoji} ${this.client.users.fetch(m)?.username ?? "Joueur"} | ⭐ ${tempPDatas.exp}`,
                 tempPDatas.exp,
             ];
         });
@@ -60,7 +60,7 @@ class Squad extends Command {
 
         squad += `\n> **${mDatas.name}** | ${totalExp} :star: | \`id: #${mDatas.id.toUpperCase()}\``;
 
-        squad += `\n\n"*${mDatas.quote}*" - ${this.client.users.cache.get(mDatas.owner)?.username ?? "Chef d'escouade"}`
+        squad += `\n\n"*${mDatas.quote}*" - ${this.client.users.fetch(mDatas.owner)?.username ?? "Chef d'escouade"}`
                  +
                  `, ${new Date(mDatas.created).getFullYear()}`;
 

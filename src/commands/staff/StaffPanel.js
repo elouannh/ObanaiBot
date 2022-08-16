@@ -16,11 +16,12 @@ class StaffPanel extends Command {
     constructor() {
         super({
             name: "staff-panel",
-            description: "Command to display the staff panel.",
+            description: "Commande permettant d'afficher le panel pour le personnel du bot.",
             descriptionLocalizations: {
-                "fr": "Commande permettant d'afficher le panel pour le personnel du bot.",
+                "en-US": "Command to display the staff panel.",
             },
-            type: 1,
+            options: [],
+            type: [1],
             dmPermission: true,
             category: "Staff",
             cooldown: 10,
@@ -652,13 +653,13 @@ class StaffPanel extends Command {
                                 if (playerDatas.grades.includes("vip")) {
                                     message += `⚠️${this.language.strings.is_already_vip.replace(
                                         "%PLAYER",
-                                        escapeMarkdown(this.client.users.cache.get(vip)?.username ?? vip),
+                                        escapeMarkdown(this.client.users.fetch(vip)?.username ?? vip),
                                     )}`;
                                 }
                                 else {
                                     message += `✅ ${this.language.strings.is_vip.replace(
                                         "%PLAYER",
-                                        escapeMarkdown(this.client.users.cache.get(vip)?.username ?? vip),
+                                        escapeMarkdown(this.client.users.fetch(vip)?.username ?? vip),
                                     )}`;
                                     this.client.externalServerDb.db.push(vip, "vip", "grades");
                                 }
@@ -669,13 +670,13 @@ class StaffPanel extends Command {
                                 if (playerDatas.grades.includes("vip+")) {
                                     message += `⚠️${this.language.strings.is_already_vipplus.replace(
                                         "%PLAYER",
-                                        escapeMarkdown(this.client.users.cache.get(vipplus)?.username ?? vipplus),
+                                        escapeMarkdown(this.client.users.fetch(vipplus)?.username ?? vipplus),
                                     )}`;
                                 }
                                 else {
                                     message += `✅ ${this.language.strings.is_vipplus.replace(
                                         "%PLAYER",
-                                        escapeMarkdown(this.client.users.cache.get(vipplus)?.username ?? vipplus),
+                                        escapeMarkdown(this.client.users.fetch(vipplus)?.username ?? vipplus),
                                     )}`;
                                     this.client.externalServerDb.db.push(vipplus, "vip+", "grades");
                                 }
@@ -701,13 +702,13 @@ class StaffPanel extends Command {
                                 if (!playerDatas.grades.includes("vip")) {
                                     message += `⚠️ ${this.language.strings.is_already_not_vip.replace(
                                         "%PLAYER",
-                                        escapeMarkdown(this.client.users.cache.get(vip)?.username ?? vip),
+                                        escapeMarkdown(this.client.users.fetch(vip)?.username ?? vip),
                                     )}`;
                                 }
                                 else {
                                     message += `✅ ${this.language.strings.is_not_vip.replace(
                                         "%PLAYER",
-                                        escapeMarkdown(this.client.users.cache.get(vip)?.username ?? vip),
+                                        escapeMarkdown(this.client.users.fetch(vip)?.username ?? vip),
                                     )}`;
                                     this.client.externalServerDb.db.set(
                                         vip,
@@ -722,13 +723,13 @@ class StaffPanel extends Command {
                                 if (!playerDatas.grades.includes("vip+")) {
                                     message += `⚠️ ${this.language.strings.is_already_not_vipplus.replace(
                                         "%PLAYER",
-                                        escapeMarkdown(this.client.users.cache.get(vipplus)?.username ?? vipplus),
+                                        escapeMarkdown(this.client.users.fetch(vipplus)?.username ?? vipplus),
                                     )}`;
                                 }
                                 else {
                                     message += `✅ ${this.language.strings.is_not_vipplus.replace(
                                         "%PLAYER",
-                                        escapeMarkdown(this.client.users.cache.get(vipplus)?.username ?? vipplus),
+                                        escapeMarkdown(this.client.users.fetch(vipplus)?.username ?? vipplus),
                                     )}`;
                                     this.client.externalServerDb.db.push(vipplus, "vip+", "grades");
                                 }

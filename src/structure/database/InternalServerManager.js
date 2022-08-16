@@ -254,13 +254,13 @@ class InternalServerManager {
 						"👑 __Owners update__",
 						changedOwners.added.length > 0 ? `**(+) Added:** ${
                             changedOwners.added.map(e => `\`${
-                                this.client.users.cache.get(e)?.username ?? "Owner lambda"
+                                this.client.users.fetch(e)?.username ?? "Owner lambda"
                             }\``)
                         }\n\n` : ""
 						+
 						changedOwners.removed.length > 0 ? `**(-) Removed:** ${
                             changedOwners.removed.map(e => `\`${
-                                this.client.users.cache.get(e)?.username ?? "Owner lambda"
+                                this.client.users.fetch(e)?.username ?? "Owner lambda"
                             }\``)
                         }\n\n` : "",
 						false,
@@ -273,13 +273,13 @@ class InternalServerManager {
 						"🚧 __Admins update__",
 						changedAdmins.added.length > 0 ? `**(+) Added:** ${
                             changedAdmins.added.map(e => `\`${
-                                this.client.users.cache.get(e)?.username ?? "Admin lambda"
+                                this.client.users.fetch(e)?.username ?? "Admin lambda"
                             }\``)
                         }\n\n` : ""
 						+
 						changedAdmins.removed.length > 0 ? `**(-) Removed:** ${
                             changedAdmins.removed.map(e => `\`${
-                                this.client.users.cache.get(e)?.username ?? "Admin lambda"
+                                this.client.users.fetch(e)?.username ?? "Admin lambda"
                             }\``)
                         }\n\n` : "",
 						false,
@@ -292,13 +292,13 @@ class InternalServerManager {
 						"🔨 __Testers update__",
 						changedTesters.added.length > 0 ? `**(+) Added:** ${
                             changedTesters.added.map(e => `\`${
-                                this.client.users.cache.get(e)?.username ?? "Tester lambda"
+                                this.client.users.fetch(e)?.username ?? "Tester lambda"
                             }\``)
                         }\n\n` : ""
 						+
 						changedTesters.removed.length > 0 ? `**(-) Removed:** ${
                             changedTesters.removed.map(e => `\`${
-                                this.client.users.cache.get(e)?.username ?? "Tester lambda"
+                                this.client.users.fetch(e)?.username ?? "Tester lambda"
                             }\``)
                         }\n\n` : "",
 						false,

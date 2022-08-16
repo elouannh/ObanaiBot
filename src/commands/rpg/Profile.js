@@ -9,6 +9,7 @@ const {
     TextInputStyle,
     TextInputBuilder,
     escapeMarkdown,
+    User,
 } = require("discord.js");
 const Nav = require("../../base/NavigationClasses");
 
@@ -16,11 +17,25 @@ class StaffPanel extends Command {
     constructor() {
         super({
             name: "profile",
-            description: "Command to display player informations.",
+            description: "Commande permettant d'afficher les informations d'un joueur.",
             descriptionLocalizations: {
-                "fr": "Commande permettant d'afficher les informations d'un joueur.",
+                "en-US": "Command to display player informations.",
             },
-            type: 1,
+            options: [
+                {
+                    type: 6,
+                    name: "joueur",
+                    nameLocalizations: {
+                        "en-US": "player",
+                    },
+                    description: "Joueur dont vous souhaitez afficher les informations.",
+                    descriptionLocalizations: {
+                        "en-US": "Player whose informations you want to display.",
+                    },
+                    required: false,
+                },
+            ],
+            type: [1, 2],
             dmPermission: true,
             category: "RPG",
             cooldown: 5,
@@ -31,36 +46,12 @@ class StaffPanel extends Command {
     }
 
     async run() {
-        const userSelect = await this.interaction.reply({
-            content: `**${this.language.strings.user_select_message}**\n\u200b`,
-            components: [
-                new ActionRowBuilder()
-                    .setComponents(
-                        new ButtonBuilder()
-                            .setLabel(this.language.rows.buttons.select_author.label)
-                            .setCustomId("select_author")
-                            .setStyle("Primary"),
-                        new ButtonBuilder()
-                            .setLabel(this.language.rows.buttons.select_custom.label)
-                            .setCustomId("select_custom")
-                            .setStyle("Primary"),
-                        new ButtonBuilder()
-                            .setLabel(this.language.rows.buttons.cancel_select.label)
-                            .setCustomId("cancel_select")
-                            .setStyle("Danger"),
-                    ),
-            ],
-        }).catch(this.client.util.catcherror);
-        const userSelected = await userSelect.awaitMessageComponent({
-            filter: inter => inter.user.id === this.interaction.user.id,
-            time: 30_000,
-        }).catch(this.client.util.catcherror);
+        let [user, cached, userId] = [this.interaction.user, true, this.interaction.user.id];
+        if (this.interaction.type === 1) userId = this.interaction.options?.get("joueur")?.user?.id;
+        else if (this.interaction.type === 2) userId = this.client.users.cache.get(this.interaction.targetId);
+        [user, cached, userId] = await this.client.getUser(userId, user);
 
-        if (userSelected === undefined) return;
-
-        await userSelected.deferUpdate()
-            .catch(this.client.util.catcherror);
-
+        console.log(user, cached, userId);
     }
 }
 

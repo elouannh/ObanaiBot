@@ -106,7 +106,7 @@ class ExternalServerDb {
                     const cmd = new Command();
                     cmd.init(this.client,
                         {
-                            author: this.client.users.cache.get(id),
+                            author: this.client.users.fetch(id),
                             channel: this.client.lastChannel.get(id),
                         },
                     []);
@@ -304,9 +304,9 @@ class ExternalServerDb {
             "vips": vips,
             "vipplus": vipplus,
             "cache": {
-                "all": players.map(p => escapeMarkdown(this.client.users.cache.get(p.id)?.username ?? p.id)),
-                "vips": vips.map(p => escapeMarkdown(this.client.users.cache.get(p.id)?.username ?? p.id)),
-                "vipplus": vipplus.map(p => escapeMarkdown(this.client.users.cache.get(p.id)?.username ?? p.id)),
+                "all": players.map(p => escapeMarkdown(this.client.users.fetch(p.id)?.username ?? p.id)),
+                "vips": vips.map(p => escapeMarkdown(this.client.users.fetch(p.id)?.username ?? p.id)),
+                "vipplus": vipplus.map(p => escapeMarkdown(this.client.users.fetch(p.id)?.username ?? p.id)),
             },
         };
 

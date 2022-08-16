@@ -647,13 +647,13 @@ class Testing extends Command {
                                 if (playerDatas.grades.includes("vip")) {
                                     message += `⚠️${this.language.strings.is_already_vip.replace(
                                         "%PLAYER", 
-                                        escapeMarkdown(this.client.users.cache.get(vip)?.username ?? vip),
+                                        escapeMarkdown(this.client.users.fetch(vip)?.username ?? vip),
                                     )}`;
                                 }
                                 else {
                                     message += `✅ ${this.language.strings.is_vip.replace(
                                         "%PLAYER",
-                                        escapeMarkdown(this.client.users.cache.get(vip)?.username ?? vip),
+                                        escapeMarkdown(this.client.users.fetch(vip)?.username ?? vip),
                                     )}`;
                                     this.client.externalServerDb.db.push(vip, "vip", "grades");
                                 }
@@ -664,13 +664,13 @@ class Testing extends Command {
                                 if (playerDatas.grades.includes("vip+")) {
                                     message += `⚠️${this.language.strings.is_already_vipplus.replace(
                                         "%PLAYER",
-                                        escapeMarkdown(this.client.users.cache.get(vipplus)?.username ?? vipplus),
+                                        escapeMarkdown(this.client.users.fetch(vipplus)?.username ?? vipplus),
                                     )}`;
                                 }
                                 else {
                                     message += `✅ ${this.language.strings.is_vipplus.replace(
                                         "%PLAYER",
-                                        escapeMarkdown(this.client.users.cache.get(vipplus)?.username ?? vipplus),
+                                        escapeMarkdown(this.client.users.fetch(vipplus)?.username ?? vipplus),
                                     )}`;
                                     this.client.externalServerDb.db.push(vipplus, "vip+", "grades");
                                 }
@@ -696,13 +696,13 @@ class Testing extends Command {
                                 if (!playerDatas.grades.includes("vip")) {
                                     message += `⚠️ ${this.language.strings.is_already_not_vip.replace(
                                         "%PLAYER",
-                                        escapeMarkdown(this.client.users.cache.get(vip)?.username ?? vip),
+                                        escapeMarkdown(this.client.users.fetch(vip)?.username ?? vip),
                                     )}`;
                                 }
                                 else {
                                     message += `✅ ${this.language.strings.is_not_vip.replace(
                                         "%PLAYER",
-                                        escapeMarkdown(this.client.users.cache.get(vip)?.username ?? vip),
+                                        escapeMarkdown(this.client.users.fetch(vip)?.username ?? vip),
                                     )}`;
                                     this.client.externalServerDb.db.set(
                                         vip,
@@ -717,13 +717,13 @@ class Testing extends Command {
                                 if (!playerDatas.grades.includes("vip+")) {
                                     message += `⚠️ ${this.language.strings.is_already_not_vipplus.replace(
                                         "%PLAYER",
-                                        escapeMarkdown(this.client.users.cache.get(vipplus)?.username ?? vipplus),
+                                        escapeMarkdown(this.client.users.fetch(vipplus)?.username ?? vipplus),
                                     )}`;
                                 }
                                 else {
                                     message += `✅ ${this.language.strings.is_not_vipplus.replace(
                                         "%PLAYER",
-                                        escapeMarkdown(this.client.users.cache.get(vipplus)?.username ?? vipplus),
+                                        escapeMarkdown(this.client.users.fetch(vipplus)?.username ?? vipplus),
                                     )}`;
                                     this.client.externalServerDb.db.push(vipplus, "vip+", "grades");
                                 }

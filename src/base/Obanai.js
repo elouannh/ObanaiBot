@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const { Client, escapeMarkdown, IntentsBitField } = require("discord.js");
+const { Client, escapeMarkdown, IntentsBitField, User } = require("discord.js");
 const PlayerDb = require("../structure/database/PlayerDb");
 const InventoryDb = require("../structure/database/InventoryDb");
 const SquadDb = require("../structure/database/SquadDb");
@@ -22,7 +22,7 @@ const PasteGGClasses = require("./PasteGGClasses");
 class Obanai extends Client {
     constructor(token, registerSlash) {
         super({
-            intents: new IntentsBitField().add("GuildMessages", "MessageContent", "GuildMembers", "Guilds"),
+            intents: new IntentsBitField().add("GuildMessages", "GuildMembers", "Guilds"),
             failIfNotExists: false,
         });
 
@@ -87,6 +87,21 @@ class Obanai extends Client {
         this.internalServerManager = new InternalServerManager(this);
 
         setInterval(() => this.log("................"), 900_000);
+    }
+
+    async getUser(id, secureValue) {
+        let user = secureValue;
+        let cached = true;
+
+
+        if (!((await this.users.fetch(id)) instanceof User)) {
+            cached = false;
+        }
+        else {
+            user = await this.users.fetch(id);
+        }
+
+        return [ user, cached, user?.id ];
     }
 
     log(message, ...args) {

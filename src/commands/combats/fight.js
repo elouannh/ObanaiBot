@@ -100,7 +100,7 @@ class Fight extends Command {
                 "Arène - Équipes",
                 `Les joueurs suivant n'ont pas répondu: ${
                     allUsers.filter(e => !response.reacted.includes(e.id))
-                        .map(e => `\`${this.client.users.cache.get(e.id)?.username ?? "Pourfendeur X"}\``)
+                        .map(e => `\`${this.client.users.fetch(e.id)?.username ?? "Pourfendeur X"}\``)
                         .join(" / ")
                 }`,
                 "🏟️",
@@ -116,7 +116,7 @@ class Fight extends Command {
             return await this.ctx.reply(
                 "Arène - Équipes",
                 `Les joueurs suivant ont refusé le combat: ${response.nopes
-                    .map(e => `\`${this.client.users.cache.get(e.id)?.username ?? "Pourfendeur X"}\``)
+                    .map(e => `\`${this.client.users.fetch(e.id)?.username ?? "Pourfendeur X"}\``)
                     .join(" / ")
                 }`,
                 "🏟️",
