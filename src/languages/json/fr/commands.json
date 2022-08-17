@@ -7,7 +7,58 @@
         "panels": {
             "player": {
                 "identifier_name": "Statistiques de %PLAYER",
-                "identifier_description": "Panel contenant les statistiques du joueur."
+                "identifier_description": "Panel contenant les statistiques du joueur.",
+                "pages": {
+                    "0": {
+                        "label": "Statistiques",
+                        "description": "Ensemble des statistiques du joueur.",
+                        "embeds": {
+                            "0": {
+                                "title": "Statistiques de %PLAYER"
+                            }
+                        }
+                    }
+                }
+            },
+            "inventory": {
+                "identifier_name": "Inventaire de %PLAYER",
+                "identifier_description": "Panel contenant l'inventaire du joueur.",
+                "pages": {
+                    "0": {
+                        "label": "Inventaire",
+                        "description": "Ensemble de l'inventaire du joueur.",
+                        "embeds": {
+                            "0": {
+                                "title": "Inventaire de %PLAYER"
+                            }
+                        }
+                    }
+                }
+            },
+            "activity": {
+                "identifier_name": "Activité de %PLAYER",
+                "identifier_description": "Panel contenant l'activité du joueur.",
+                "pages": {
+                    "0": {
+                        "label": "Activité",
+                        "description": "Ensemble de l'activité du joueur.",
+                        "embeds": {
+                            "0": {
+                                "title": "Activité de %PLAYER"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "rows": {
+            "page": "Page...",
+            "panel": "Panel...",
+            "universal": {
+                "leave_panel": "Quitter le panel",
+                "player_panel": "Voir les statistiques",
+                "inventory_panel": "Voir l'inventaire",
+                "activity_panel": "Voir l'activité"
             }
         }
     },

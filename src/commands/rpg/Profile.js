@@ -54,7 +54,6 @@ class StaffPanel extends Command {
         const userPDB = await this.client.playerDb.get(userId);
         const userIDB = await this.client.inventoryDb.get(userId);
         const userADB = await this.client.activityDb.get(userId);
-        console.log(userPDB, userIDB, userADB);
 
         const playerString = `__***${this.lang.strings.profile_aptitudes}:***__\n`
             + `__${this.lang.constants.aptitudes.strength}:__ **${userPDB.aptitudes.strength}** `
@@ -72,8 +71,132 @@ class StaffPanel extends Command {
                         .setEmoji("👤")
                         .identifier,
                 )
-                .setPages(),
+                .setPages([
+                    new Nav.Page()
+                        .setIdentifier(
+                            new Nav.Identifier()
+                                .setLabel(this.lang.panels.player.pages["0"].label)
+                                .setValue("player_main")
+                                .setDescription(this.lang.panels.player.pages["0"].description)
+                                .identifier,
+                        )
+                        .setEmbeds([
+                            new EmbedBuilder()
+                                .setTitle(this.lang.panels.player.pages["0"].embeds["0"].title)
+                                .setDescription(playerString),
+                        ]),
+                ]),
+            "inventory_panel": new Nav.Panel()
+                .setIdentifier(
+                    new Nav.Identifier()
+                        .setLabel(this.lang.panels.inventory.identifier_name)
+                        .setValue("inventory_panel")
+                        .setDescription(this.lang.panels.inventory.identifier_description)
+                        .setEmoji("🎒")
+                        .identifier,
+                )
+                .setPages([
+                    new Nav.Page()
+                        .setIdentifier(
+                            new Nav.Identifier()
+                                .setLabel(this.lang.panels.inventory.pages["0"].label)
+                                .setValue("inventory_main")
+                                .setDescription(this.lang.panels.inventory.pages["0"].description)
+                                .identifier,
+                        )
+                        .setEmbeds([
+                            new EmbedBuilder()
+                                .setTitle(this.lang.panels.inventory.pages["0"].embeds["0"].title)
+                                .setDescription(inventoryString),
+                        ]),
+                ]),
+            "activity_panel": new Nav.Panel()
+                .setIdentifier(
+                    new Nav.Identifier()
+                        .setLabel(this.lang.panels.activity.identifier_name)
+                        .setValue("activity_panel")
+                        .setDescription(this.lang.panels.activity.identifier_description)
+                        .setEmoji("📺")
+                        .identifier,
+                )
+                .setPages([
+                    new Nav.Page()
+                        .setIdentifier(
+                            new Nav.Identifier()
+                                .setLabel(this.lang.panels.activity.pages["0"].label)
+                                .setValue("activity_main")
+                                .setDescription(this.lang.panels.activity.pages["0"].description)
+                                .identifier,
+                        )
+                        .setEmbeds([
+                            new EmbedBuilder()
+                                .setTitle(this.lang.panels.activity.pages["0"].embeds["0"].title)
+                                .setDescription(activityString),
+                        ]),
+                ]),
         };
+
+        const universalRows = [
+            new ActionRowBuilder()
+                .setComponents(
+                    new ButtonBuilder()
+                        .setCustomId("player_panel")
+                        .setLabel(this.lang.rows.universal.player_panel)
+                        .setStyle("Primary"),
+                    new ButtonBuilder()
+                        .setCustomId("inventory_panel")
+                        .setLabel(this.lang.rows.universal.inventory_panel)
+                        .setStyle("Primary"),
+                    new ButtonBuilder()
+                        .setCustomId("activity_panel")
+                        .setLabel(this.lang.rows.universal.activity_panel)
+                        .setStyle("Primary"),
+                ),
+            new ActionRowBuilder()
+                .setComponents(
+                    new ButtonBuilder()
+                        .setCustomId("leave_panel")
+                        .setLabel(this.lang.rows.universal.leave_panel)
+                        .setStyle("Danger"),
+                ),
+        ];
+
+        const panel = await this.interaction.reply({
+            embeds: pages.player_panel.pages["0"].embeds,
+            components: pages.player_panel.components.concat(universalRows),
+        }).catch(this.client.util.catcherror);
+        if (panel === undefined) return;
+        const navigation = panel.createMessageComponentCollector({
+            filter: inter => inter.user.id === this.interaction.user.id,
+            time: 600_000,
+            dispose: true,
+        });
+
+        let currentPanel = "player_panel";
+
+        navigation.on("collect", async inter => {
+            if (inter.isButton()) {
+                if (inter.customId.endsWith("_panel")) {
+                    await inter.deferUpdate()
+                        .catch(this.client.util.catcherror);
+
+                    currentPanel = inter.customId;
+                    const newComponents = [...pages[currentPanel].pages["0"].components];
+                    for (const pageRow of pages[currentPanel].components) newComponents.push(pageRow);
+                    for (const universalRow of universalRows) newComponents.push(universalRow);
+
+                    panel.interaction.editReply({
+                        embeds: pages[currentPanel].pages["0"].embeds,
+                        components: newComponents,
+                    }).catch(this.client.util.catcherror);
+                }
+            }
+        });
+
+        navigation.on("end", async () => {
+            panel.interaction.editReply({ embeds: panel.embeds, components: [] })
+                .catch(this.client.util.catcherror);
+        });
     }
 }
 
