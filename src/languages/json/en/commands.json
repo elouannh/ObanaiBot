@@ -49,6 +49,7 @@
             "is_not_vipplus": "Le joueur %PLAYER **isn't plus VIP(+)** in the bot."
         },
         "panels": {
+            "identifier_name": "Tester's Panel",
             "tester": {
                 "identifier_description": "Panel which includes useful informations about the bot.",
                 "pages": {
@@ -82,6 +83,7 @@
                 }
             },
             "admin": {
+                "identifier_name": "Administrator's Panel",
                 "identifier_description": "Panel which includes useful administratives functions.",
                 "pages": {
                     "0": {
@@ -153,6 +155,7 @@
                 }
             },
             "owner": {
+                "identifier_name": "Owner's Panel",
                 "identifier_description": "Panel which includes useful functions for the bot's owner.",
                 "pages": {
                     "0": {

@@ -1,5 +1,8 @@
 {
-  "aptitudes": {
-    "strength": "Force"
-  }
+    "aptitudes": {
+        "strength": "Force",
+        "speed": "Vitesse",
+        "defense": "Défense",
+        "agility": "Agilité"
+    }
 }

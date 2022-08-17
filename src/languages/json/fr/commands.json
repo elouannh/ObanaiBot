@@ -1,19 +1,13 @@
 {
     "profile": {
         "strings": {
-            "user_select_message": "Quel profil désirez-vous voir ?"
+            "profile_aptitudes": "Aptitudes",
+            "level": "niveau"
         },
-        "rows": {
-            "buttons": {
-                "select_author": {
-                    "label": "Voir votre profil"
-                },
-                "select_custom": {
-                    "label": "Voir le profil d'un autre joueur"
-                },
-                "cancel_select": {
-                    "label": "Annuler"
-                }
+        "panels": {
+            "player": {
+                "identifier_name": "Statistiques de %PLAYER",
+                "identifier_description": "Panel contenant les statistiques du joueur."
             }
         }
     },
@@ -68,6 +62,7 @@
         },
         "panels": {
             "tester": {
+                "identifier_name": "Panel Testeur",
                 "identifier_description": "Panel contenant des informations utiles sur le bot.",
                 "pages": {
                     "0": {
@@ -100,6 +95,7 @@
                 }
             },
             "admin": {
+                "identifier_name": "Panel Administrateur",
                 "identifier_description": "Panel contenant des fonctions administratives.",
                 "pages": {
                     "0": {
@@ -171,6 +167,7 @@
                 }
             },
             "owner": {
+                "identifier_name": "Panel Owner",
                 "identifier_description": "Panel contenant des fonctions uniques pour l'owner du bot.",
                 "pages": {
                     "0": {
