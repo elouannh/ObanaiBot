@@ -22,7 +22,7 @@ class Command {
         this.infos = infos;
         this.client = null;
         this.interaction = null;
-        this.lang = new Language("fr").json.get("commands")[this.infos.name] ?? {};
+        this.lang = new Language("fr").json["commands"][this.infos.name] ?? {};
         this.rpgCommand = false;
 
         if (this.infos.finishRequest === "ADVENTURE") {
@@ -41,10 +41,24 @@ class Command {
         }
     }
 
-    init(client, interaction, language) {
+    init(client, interaction, lang) {
         this.client = client;
         this.interaction = interaction;
-        this.language = language.json.get("commands")[this.infos.name];
+        this.lang = {};
+        for (const [key, value] of Object.entries(lang.json)) {
+            if (key === "commands") {
+                for (const [key2, value2] of Object.entries(value)) {
+                    if (key2 === this.infos.name) {
+                        for (const [key3, value3] of Object.entries(value2)) {
+                            this.lang[key3] = value3;
+                        }
+                    }
+                }
+            }
+            else {
+                this.lang[key] = value;
+            }
+        }
     }
 
     async exe() {

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const { Client, escapeMarkdown, IntentsBitField, User } = require("discord.js");
+const { Client, escapeMarkdown, IntentsBitField, User, Snowflake } = require("discord.js");
 const PlayerDb = require("../structure/database/PlayerDb");
 const InventoryDb = require("../structure/database/InventoryDb");
 const SquadDb = require("../structure/database/SquadDb");
@@ -93,12 +93,16 @@ class Obanai extends Client {
         let user = secureValue;
         let cached = true;
 
-
-        if (!((await this.users.fetch(id)) instanceof User)) {
-            cached = false;
+        try {
+            if (!((await this.users.fetch(id)) instanceof User)) {
+                cached = false;
+            }
+            else {
+                user = await this.users.fetch(id);
+            }
         }
-        else {
-            user = await this.users.fetch(id);
+        catch {
+            cached = false;
         }
 
         return [ user, cached, user?.id ];

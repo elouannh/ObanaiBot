@@ -1,6 +1,6 @@
 const fs = require("fs");
 const Language = require("../languages/Language");
-const Util = require("./Util")
+const Util = require("./Util");
 
 class LanguageManager {
     constructor(client) {
@@ -8,11 +8,17 @@ class LanguageManager {
         const dir = "./src/languages/json/";
         this.languages = fs.readdirSync(dir).map(languageDir => new Language(languageDir));
 
-        const frenchLanguage = this.getLang("fr");
-        this.languages.map(language => language.json.set(
-            "commands",
-            Util(null).ensureObj(frenchLanguage.json.get("commands"), language.json.get("commands")),
-        ));
+        const french = this.getLang("fr");
+        for (const lang of this.languages) {
+            for (const frenchDir of french.jsonDir) {
+                if (!lang.jsonDir.includes(frenchDir)) {
+                     const replacedName = frenchDir.replace(".json", "");
+                    lang.json[replacedName] = french.json[replacedName];
+                }
+            }
+
+            lang.json = Util(this.client).ensureObj(french.json, lang.json);
+        }
     }
 
     getLang(lang) {

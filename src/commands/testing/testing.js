@@ -33,37 +33,37 @@ class Testing extends Command {
         const renderPanel = rendered => {
             return userGrade.allGrades.includes(rendered[0].split("_")[0]) ? `**${rendered[1]}**` : `~~${rendered[1]}~~`;
         };
-        const userGrades = this.language.strings.home_title
-            + `\n\n__${this.language.strings.your_grades}:__  `
+        const userGrades = this.lang.strings.home_title
+            + `\n\n__${this.lang.strings.your_grades}:__  `
             + userGrade.allGrades
                 .filter(e => e.length > 1)
-                .map(e => `**${this.language.strings[`${e}_grade`]}**`).join(" - ")
-            + `\n\n${this.language.strings.panels_accesses_message}:\n`
-            + `${Object.entries(this.language.strings).filter(e => e[0].endsWith("_grade")).map(e => `• ${renderPanel(e)}`).join("\n")}\n\n`
-            + `*${this.language.strings.panels_timeout_message}*`;
+                .map(e => `**${this.lang.strings[`${e}_grade`]}**`).join(" - ")
+            + `\n\n${this.lang.strings.panels_accesses_message}:\n`
+            + `${Object.entries(this.lang.strings).filter(e => e[0].endsWith("_grade")).map(e => `• ${renderPanel(e)}`).join("\n")}\n\n`
+            + `*${this.lang.strings.panels_timeout_message}*`;
 
-        const botStatus = `» ${this.language.strings.api_ping}: **${status.apiPing}**\n`
-            + `» ${this.language.strings.server_ping}: **${status.serverPing}**\n\n`
-            + `» ${this.language.strings.internal_server_1}: **${status.server1.status}** | **${status.server1.processus}**\n`
-            + `» ${this.language.strings.internal_server_2}: **${status.server2.status}** | **${status.server2.processus}**\n`
-            + `» ${this.language.strings.rpg_status}: **${status.clientStatus}**\n\n`
-            + `» ${this.language.strings.memory} **(${status.memoryPercent})**: **${status.memoryUsage[0]}**/${status.memoryUsage[1]}\n`
-            + `» ${this.language.strings.capacity} **(${status.requestsPercent})**: **${status.requests[0]}**/${status.requests[1]}\n`
-            + `» ${this.language.strings.uptime}: **${status.uptime}**`;
+        const botStatus = `» ${this.lang.strings.api_ping}: **${status.apiPing}**\n`
+            + `» ${this.lang.strings.server_ping}: **${status.serverPing}**\n\n`
+            + `» ${this.lang.strings.internal_server_1}: **${status.server1.status}** | **${status.server1.processus}**\n`
+            + `» ${this.lang.strings.internal_server_2}: **${status.server2.status}** | **${status.server2.processus}**\n`
+            + `» ${this.lang.strings.rpg_status}: **${status.clientStatus}**\n\n`
+            + `» ${this.lang.strings.memory} **(${status.memoryPercent})**: **${status.memoryUsage[0]}**/${status.memoryUsage[1]}\n`
+            + `» ${this.lang.strings.capacity} **(${status.requestsPercent})**: **${status.requests[0]}**/${status.requests[1]}\n`
+            + `» ${this.lang.strings.uptime}: **${status.uptime}**`;
 
-        const botInfos = `» ${this.language.guilds}: **${infos.guilds}**\n`
-            + `» ${this.language.strings.total_members}: **${infos.totalMembers}**\n`
-            + `» ${this.language.strings.cached_users}: **${infos.users}**\n`
-            + `» ${this.language.strings.players}: **${infos.players.ensured}** | **${infos.players.started}** ayant commencé leur aventure.\n`
-            + `» ${this.language.strings.version}: **${this.client.version}**`;
+        const botInfos = `» ${this.lang.guilds}: **${infos.guilds}**\n`
+            + `» ${this.lang.strings.total_members}: **${infos.totalMembers}**\n`
+            + `» ${this.lang.strings.cached_users}: **${infos.users}**\n`
+            + `» ${this.lang.strings.players}: **${infos.players.ensured}** | **${infos.players.started}** ayant commencé leur aventure.\n`
+            + `» ${this.lang.strings.version}: **${this.client.version}**`;
 
         const pages = {
             "tester_panel": new Nav.Panel()
                 .setIdentifier(
                     new Nav.Identifier()
-                        .setLabel(this.language.strings.tester_panel)
+                        .setLabel(this.lang.strings.tester_panel)
                         .setValue("tester_panel")
-                        .setDescription(this.language.panels.tester.identifier_description)
+                        .setDescription(this.lang.panels.tester.identifier_description)
                         .setEmoji("⛏️")
                         .identifier,
                 )
@@ -71,40 +71,40 @@ class Testing extends Command {
                     new Nav.Page()
                         .setIdentifier(
                             new Nav.Identifier()
-                                .setLabel(this.language.panels.tester.pages[0].label)
+                                .setLabel(this.lang.panels.tester.pages[0].label)
                                 .setValue("user_informations")
-                                .setDescription(this.language.panels.tester.pages[0].description)
+                                .setDescription(this.lang.panels.tester.pages[0].description)
                                 .identifier,
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle(`⛏️ | ${this.language.panels.tester.pages[0].embeds[0].title}`)
+                                .setTitle(`⛏️ | ${this.lang.panels.tester.pages[0].embeds[0].title}`)
                                 .setDescription(userGrades),
                         ]),
                     new Nav.Page()
                         .setIdentifier(
                             new Nav.Identifier()
-                                .setLabel(this.language.panels.tester.pages[1].label)
+                                .setLabel(this.lang.panels.tester.pages[1].label)
                                 .setValue("bot_status")
-                                .setDescription(this.language.panels.tester.pages[1].description)
+                                .setDescription(this.lang.panels.tester.pages[1].description)
                                 .identifier,
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle(`⛏️ | ${this.language.panels.tester.pages[1].embeds[0].title}`)
+                                .setTitle(`⛏️ | ${this.lang.panels.tester.pages[1].embeds[0].title}`)
                                 .setDescription(botStatus),
                         ]),
                     new Nav.Page()
                         .setIdentifier(
                             new Nav.Identifier()
-                                .setLabel(this.language.panels.tester.pages[2].label)
+                                .setLabel(this.lang.panels.tester.pages[2].label)
                                 .setValue("bot_infos")
-                                .setDescription(this.language.panels.tester.pages[2].description)
+                                .setDescription(this.lang.panels.tester.pages[2].description)
                                 .identifier,
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle(`⛏️ | ${this.language.panels.tester.pages[2].embeds[0].title}`)
+                                .setTitle(`⛏️ | ${this.lang.panels.tester.pages[2].embeds[0].title}`)
                                 .setDescription(`${botInfos}`),
                         ]),
                 ])
@@ -113,22 +113,22 @@ class Testing extends Command {
                         .setComponents(
                             new SelectMenuBuilder()
                                 .setCustomId("tester_panel")
-                                .setPlaceholder(this.language.rows.page)
+                                .setPlaceholder(this.lang.rows.page)
                                 .setOptions([
                                     {
                                         value: "user_informations",
-                                        label: this.language.panels.tester.pages[0].label,
-                                        description: this.language.panels.tester.pages[0].description,
+                                        label: this.lang.panels.tester.pages[0].label,
+                                        description: this.lang.panels.tester.pages[0].description,
                                     },
                                     {
                                         value: "bot_status",
-                                        label: this.language.panels.tester.pages[1].label,
-                                        description: this.language.panels.tester.pages[1].description,
+                                        label: this.lang.panels.tester.pages[1].label,
+                                        description: this.lang.panels.tester.pages[1].description,
                                     },
                                     {
                                         value: "bot_infos",
-                                        label: this.language.panels.tester.pages[2].label,
-                                        description: this.language.panels.tester.pages[2].description,
+                                        label: this.lang.panels.tester.pages[2].label,
+                                        description: this.lang.panels.tester.pages[2].description,
                                     },
                                 ]),
                         ),
@@ -136,9 +136,9 @@ class Testing extends Command {
             "admin_panel": new Nav.Panel()
                 .setIdentifier(
                     new Nav.Identifier()
-                        .setLabel(this.language.strings.admin_panel)
+                        .setLabel(this.lang.strings.admin_panel)
                         .setValue("admin_panel")
-                        .setDescription(this.language.panels.admin.identifier_description)
+                        .setDescription(this.lang.panels.admin.identifier_description)
                         .setEmoji("🚀")
                         .identifier,
                 )
@@ -146,7 +146,7 @@ class Testing extends Command {
                     new Nav.Page()
                         .setIdentifier(
                             new Nav.Identifier()
-                                .setLabel(this.language.panels.admin.pages[0].label)
+                                .setLabel(this.lang.panels.admin.pages[0].label)
                                 .setValue("admin_status_change")
                                 .setDescription(this.language.panels.admin.pages[0].description),
                         )

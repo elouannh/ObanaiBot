@@ -51,7 +51,45 @@ class StaffPanel extends Command {
         else if (this.interaction.type === 2) userId = this.client.users.cache.get(this.interaction.targetId);
         [user, cached, userId] = await this.client.getUser(userId, user);
 
-        console.log(user, cached, userId);
+        const userPDB = await this.client.playerDb.get(userId);
+        const userIDB = await this.client.inventoryDb.get(userId);
+
+        console.log(userPDB);
+        console.log(userIDB);
+        console.log(this.lang);
+
+        // {
+        //     started: false,
+        //         id: '854358656519110666',
+        //     lang: 'fr',
+        //     stats: { agility: 1, defense: 1, strength: 1, speed: 1 },
+        //     category: 'slayer',
+        //         categoryLevel: 1,
+        //     breath: 'water',
+        //     exp: 0,
+        //     created: 1660735861425,
+        //     aptitudes: { agility: 10, defense: 10, strength: 11, speed: 10 },
+        //     squad: null
+        // }
+        // {
+        //     id: '854358656519110666',
+        //         yens: 1000,
+        //     kasugai_crow: null,
+        //     kasugai_crow_exp: 0,
+        //     active_grimoire: null,
+        //     active_grimoire_since: 0,
+        //     grimoires: { mastery: 1 },
+        //     materials: {},
+        //     questItems: {},
+        //     weapon: { rarity: 1, name: 'Épée abîmée', label: 'katana' },
+        //     weapons: []
+        // }
+
+        const profile = ``;
+
+        await this.interaction.reply({
+            content: "```logged into the console```",
+        }).catch(this.client.util.catcherror);
     }
 }
 
