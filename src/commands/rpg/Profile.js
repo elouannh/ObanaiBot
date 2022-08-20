@@ -52,7 +52,7 @@ class StaffPanel extends Command {
         [user, cached, userId] = await this.client.getUser(userId, user);
 
         let userPDB = await this.client.playerDb.load(userId);
-
+        console.log(userPDB);
 
         userPDB = await this.client.playerDb.get(userId);
         const userIDB = await this.client.inventoryDb.get(userId);
