@@ -51,16 +51,52 @@ class StaffPanel extends Command {
         else if (this.interaction.type === 2) userId = this.client.users.cache.get(this.interaction.targetId);
         [user, cached, userId] = await this.client.getUser(userId, user);
 
-        let userPDB = await this.client.playerDb.load(userId);
-        console.log(userPDB);
+        // {
+        //     started: true,
+        //     id: '539842701592494111',
+        //     lang: 'en',
+        //     stats: { agility: 100, defense: 100, strength: 110, speed: 100 },
+        //     category: {
+        //         name: 'Dompteur de lunes',
+        //         label: 'moon_tamer',
+        //         weapon: 'moon_katana',
+        //         vip: true,
+        //         description: '',
+        //         bonus: [ 'defense', 'speed' ],
+        //         breaths: [ 'moon' ],
+        //         weaponName: 'Épée distordue',
+        //         rarityNames: [ 'abîmée', 'simple', 'aiguisée', 'destructrice', 'de Kokushibo' ]
+        //     },
+        //     categoryLevel: 3,
+        //     breath: {
+        //         name: 'Souffle de la Lune',
+        //         id: 'moon',
+        //         emoji: '🌙',
+        //         attack: {
+        //             quick: [Array],
+        //             powerful: [Array],
+        //             dodge_preparation: [Array],
+        //             special_attack: [Array]
+        //         },
+        //         defense: { quick: [Array], powerful: [Array], counter_preparation: [Array] }
+        //     },
+        //     exp: 21804,
+        //     created: 1656786175761,
+        //     statsLevel: { agility: 10, defense: 10, strength: 11, speed: 10 },
+        //     grimBoosts: { agility: 11, defense: 11, strength: 12, speed: 11 },
+        //     catBoosts: { defense: 15, speed: -6 },
+        //     statsFinal: { agility: 111, defense: 126, strength: 122, speed: 105 },
+        //     level: 9,
+        //     date: '1656786176'
+        // }
 
-        userPDB = await this.client.playerDb.get(userId);
+        const userPDB = await this.client.playerDb.load(userId);
         const userIDB = await this.client.inventoryDb.get(userId);
         const userADB = await this.client.activityDb.get(userId);
 
-        const playerString = `__***${this.lang.strings.profile_aptitudes}:***__\n`
-            + `__${this.lang.constants.aptitudes.strength}:__ **${userPDB.aptitudes.strength}** `
-            + `(${this.lang.strings.level} ${userPDB.stats.strength})`;
+        const playerString = `» ***${this.lang.strings.profile_aptitudes}:***\n`
+            + `__${this.lang.constants.aptitudes.strength}:__ **${userPDB.stats.strength}**`
+            + `(${this.lang.strings.level} \`${userPDB.statsLevel.strength}\` + \`${userPDB.grimBoosts}\`)`;
         const inventoryString = "inventory";
         const activityString = "activity";
 

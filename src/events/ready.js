@@ -12,9 +12,12 @@ class Ready extends Event {
 	async exe(client) {
 		await client.commandManager.loadFiles();
 		client.log(`Bot connecté en tant que ${client.user.tag} !`);
-		client.user.setPresence(
-			{ activities: [{ name: `version ${client.version}`, type: ActivityType.Watching }], status: "offline" },
-		);
+		client.user.setPresence({
+			activities: [
+				{ name: `version ${client.version}`, type: ActivityType.Watching },
+			],
+			status: "invisible",
+		});
 
 		await client.internalServerManager.sync_p2p();
 	}

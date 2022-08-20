@@ -47,22 +47,27 @@ class PlayerDb {
             p.stats[stat] = Math.ceil(p.stats[stat] * 10);
         }
 
-        p.grimBoosts = { ...p.stats };
+        p.grimBoosts = {
+            attack: 0,
+            defense: 0,
+            agility: 0,
+            speed: 0,
+        };
         if (i.active_grimoire !== null) {
             const gr = require(`../../elements/grimoires/${i.active_grimoire}.json`);
 
             if (gr.benefits.includes("stats_boost")) {
-                for (const stat in p.statsLevel) p.grimBoosts[stat] = Math.ceil(p.grimBoosts[stat] * (gr.boost - 1));
+                for (const stat in p.statsLevel) p.grimBoosts[stat] = Math.ceil(p.stats[stat] * (gr.boost - 1));
             }
         }
 
         const cat = require(`../../elements/categories/${p.category}`);
         p.catBoosts = {
-            [cat.bonus[0]]: p.stats[cat.bonus[0]],
-            [cat.bonus[1]]: p.stats[cat.bonus[1]],
+            [cat.bonus[0]]: 0,
+            [cat.bonus[1]]: 0,
         };
-        p.catBoosts[cat.bonus[0]] = Math.ceil(p.catBoosts[cat.bonus[0]] * (p.categoryLevel / 20));
-        p.catBoosts[cat.bonus[1]] = Math.ceil(p.catBoosts[cat.bonus[1]] * (- p.categoryLevel / 50));
+        p.catBoosts[cat.bonus[0]] = Math.ceil(p.stats[cat.bonus[0]] * (p.categoryLevel / 20));
+        p.catBoosts[cat.bonus[1]] = Math.ceil(p.stats[cat.bonus[1]] * (- p.categoryLevel / 50));
 
         p.statsFinal = { ...p.stats };
         for (const stat in p.statsFinal) {
@@ -73,6 +78,9 @@ class PlayerDb {
 
         p.level = calcPlayerLevel(p.exp).level;
         p.date = `${(p.created / 1000).toFixed(0)}`;
+
+        p.category = require(`../../elements/categories/${p.category}.json`);
+        p.breath = require(`../../elements/breaths/${p.breath}_style.json`);
 
         return p;
     }
