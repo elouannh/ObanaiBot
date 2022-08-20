@@ -179,7 +179,7 @@ class StaffPanel extends Command {
 
         navigation.on("collect", async inter => {
             if (inter.isButton()) {
-                if (inter.customId.endsWith("_panel")) {
+                if (inter.customId.endsWith("_panel") && inter.customId !== "leave_panel") {
                     await inter.deferUpdate()
                         .catch(this.client.util.catcherror);
 
@@ -192,6 +192,11 @@ class StaffPanel extends Command {
                         embeds: pages[currentPanel].pages[0].embeds,
                         components: newComponents,
                     }).catch(this.client.util.catcherror);
+                }
+                else if (inter.customId === "leave_panel") {
+                    await inter.deferUpdate()
+                        .catch(this.client.util.catcherror);
+                    navigation.stop();
                 }
             }
         });
