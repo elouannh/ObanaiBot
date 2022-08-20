@@ -51,7 +51,10 @@ class StaffPanel extends Command {
         else if (this.interaction.type === 2) userId = this.client.users.cache.get(this.interaction.targetId);
         [user, cached, userId] = await this.client.getUser(userId, user);
 
-        const userPDB = await this.client.playerDb.get(userId);
+        let userPDB = await this.client.playerDb.load(userId);
+
+
+        userPDB = await this.client.playerDb.get(userId);
         const userIDB = await this.client.inventoryDb.get(userId);
         const userADB = await this.client.activityDb.get(userId);
 
@@ -181,12 +184,12 @@ class StaffPanel extends Command {
                         .catch(this.client.util.catcherror);
 
                     currentPanel = inter.customId;
-                    const newComponents = [...pages[currentPanel].pages["0"].components];
+                    const newComponents = [...pages[currentPanel].pages[0].components];
                     for (const pageRow of pages[currentPanel].components) newComponents.push(pageRow);
                     for (const universalRow of universalRows) newComponents.push(universalRow);
 
                     panel.interaction.editReply({
-                        embeds: pages[currentPanel].pages["0"].embeds,
+                        embeds: pages[currentPanel].pages[0].embeds,
                         components: newComponents,
                     }).catch(this.client.util.catcherror);
                 }

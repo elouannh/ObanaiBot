@@ -33,13 +33,15 @@ class PlayerDb {
     async ensure(id) {
         const p = this.model(id);
         this.db.ensure(id, p);
-        await this.client.activityDb.ensure(id);
-        await this.client.inventoryDb.ensure(id);
-        await this.client.mapDb.ensure(id);
-        await this.client.questDb.ensure(id);
-        await this.client.externalServerDb.ensure(id);
 
         return this.db.get(id);
+    }
+
+    async load(id) {
+        const p = this.ensure(id);
+        const i = await this.client.inventoryDb.get(id);
+
+        return p;
     }
 
     async get(id) {
