@@ -57,9 +57,7 @@ class StaffPanel extends Command {
 
         console.log(userPDB);
 
-        const userObject = {
-
-        };
+        const userObject = {};
 
         for (const statKey in userPDB.statsLevel) {
             if (typeof userObject[statKey] !== "string") {
