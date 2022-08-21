@@ -13,6 +13,7 @@ const StatusDb = require("../structure/database/StatusDb");
 const CommandManager = require("./CommandManager");
 const EventManager = require("./EventManager");
 const Util = require("./Util");
+const Constants = require("./Constants");
 const config = require("../config.json");
 const Package = require("../../package.json");
 const CollectionManager = require("./CollectionManager");
@@ -28,6 +29,7 @@ class Obanai extends Client {
 
         this.token = token;
         this.util = Util(this);
+        this.constants = Constants;
         this.registerSlash = registerSlash;
         this.pasteGGManager = new PasteGGClasses.PasteGGManager(this);
         this.commandManager = new CommandManager(this);

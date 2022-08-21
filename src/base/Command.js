@@ -22,6 +22,7 @@ class Command {
         this.infos = infos;
         this.client = null;
         this.interaction = null;
+        this.consts = null;
         this.lang = new Language("fr").json["commands"][this.infos.name] ?? {};
         this.rpgCommand = false;
 
@@ -43,15 +44,14 @@ class Command {
 
     init(client, interaction, lang) {
         this.client = client;
+        this.consts = this.client.constants;
         this.interaction = interaction;
         this.lang = {};
         for (const [key, value] of Object.entries(lang.json)) {
             if (key === "commands") {
                 for (const [key2, value2] of Object.entries(value)) {
                     if (key2 === this.infos.name) {
-                        for (const [key3, value3] of Object.entries(value2)) {
-                            this.lang[key3] = value3;
-                        }
+                        for (const [key3, value3] of Object.entries(value2)) this.lang[key3] = value3;
                     }
                 }
             }

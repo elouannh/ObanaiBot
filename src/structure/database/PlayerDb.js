@@ -44,36 +44,47 @@ class PlayerDb {
         for (const stat in p.stats) {
             if (typeof p.statsLevel === "undefined") p.statsLevel = {};
             p.statsLevel[stat] = p.stats[stat];
-            p.stats[stat] = Math.ceil(p.stats[stat] * 10);
+            p.stats[stat] = this.client.util.round(p.stats[stat] * 10);
         }
 
         p.grimBoosts = {
-            attack: 0,
-            defense: 0,
-            agility: 0,
-            speed: 0,
+            strength: [0, 0],
+            defense: [0, 0],
+            agility: [0, 0],
+            speed: [0, 0],
         };
         if (i.active_grimoire !== null) {
             const gr = require(`../../elements/grimoires/${i.active_grimoire}.json`);
 
             if (gr.benefits.includes("stats_boost")) {
-                for (const stat in p.statsLevel) p.grimBoosts[stat] = Math.ceil(p.stats[stat] * (gr.boost - 1));
+                for (const stat in p.statsLevel) {
+                    p.grimBoosts[stat] = [
+                        this.client.util.round(p.stats[stat] * (gr.boost - 1)),
+                        this.client.util.round((gr.boost - 1) * 100),
+                    ];
+                }
             }
         }
 
         const cat = require(`../../elements/categories/${p.category}`);
         p.catBoosts = {
-            [cat.bonus[0]]: 0,
-            [cat.bonus[1]]: 0,
+            [cat.bonus[0]]: [0, 0],
+            [cat.bonus[1]]: [0, 0],
         };
-        p.catBoosts[cat.bonus[0]] = Math.ceil(p.stats[cat.bonus[0]] * (p.categoryLevel / 20));
-        p.catBoosts[cat.bonus[1]] = Math.ceil(p.stats[cat.bonus[1]] * (- p.categoryLevel / 50));
+        p.catBoosts[cat.bonus[0]] = [
+            this.client.util.round(p.stats[cat.bonus[0]] * (p.categoryLevel / 20)),
+            this.client.util.round((p.categoryLevel / 20) * 100),
+        ];
+        p.catBoosts[cat.bonus[1]] = [
+            this.client.util.round(p.stats[cat.bonus[1]] * (- p.categoryLevel / 50)),
+            this.client.util.round((- p.categoryLevel / 50) * 100),
+        ];
 
         p.statsFinal = { ...p.stats };
         for (const stat in p.statsFinal) {
-            let sum = p.statsFinal[stat] + p.grimBoosts[stat];
-            if (stat in p.catBoosts) sum += p.catBoosts[stat];
-            p.statsFinal[stat] = Math.ceil(sum);
+            let sum = p.statsFinal[stat] + p.grimBoosts[stat][0];
+            if (stat in p.catBoosts) sum += p.catBoosts[stat][0];
+            p.statsFinal[stat] = this.client.util.round(sum);
         }
 
         p.level = calcPlayerLevel(p.exp).level;

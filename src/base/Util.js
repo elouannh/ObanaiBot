@@ -21,10 +21,16 @@ function ensureObj(source, obj) {
 
 const Util = client => {
     return {
+        positivize: function(int) {
+            return Math.sqrt(int * int);
+        },
+        round: function(int, digits = 0) {
+            return Number(int.toFixed(digits));
+        },
         capitalize: function(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         },
-        intRender: function(int, sep) {
+        intRender: function(int, sep = " ") {
             let args = [];
 
             const length = String(int).length - 1;

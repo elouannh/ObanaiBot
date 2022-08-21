@@ -51,52 +51,45 @@ class StaffPanel extends Command {
         else if (this.interaction.type === 2) userId = this.client.users.cache.get(this.interaction.targetId);
         [user, cached, userId] = await this.client.getUser(userId, user);
 
-        // {
-        //     started: true,
-        //     id: '539842701592494111',
-        //     lang: 'en',
-        //     stats: { agility: 100, defense: 100, strength: 110, speed: 100 },
-        //     category: {
-        //         name: 'Dompteur de lunes',
-        //         label: 'moon_tamer',
-        //         weapon: 'moon_katana',
-        //         vip: true,
-        //         description: '',
-        //         bonus: [ 'defense', 'speed' ],
-        //         breaths: [ 'moon' ],
-        //         weaponName: 'Épée distordue',
-        //         rarityNames: [ 'abîmée', 'simple', 'aiguisée', 'destructrice', 'de Kokushibo' ]
-        //     },
-        //     categoryLevel: 3,
-        //     breath: {
-        //         name: 'Souffle de la Lune',
-        //         id: 'moon',
-        //         emoji: '🌙',
-        //         attack: {
-        //             quick: [Array],
-        //             powerful: [Array],
-        //             dodge_preparation: [Array],
-        //             special_attack: [Array]
-        //         },
-        //         defense: { quick: [Array], powerful: [Array], counter_preparation: [Array] }
-        //     },
-        //     exp: 21804,
-        //     created: 1656786175761,
-        //     statsLevel: { agility: 10, defense: 10, strength: 11, speed: 10 },
-        //     grimBoosts: { agility: 11, defense: 11, strength: 12, speed: 11 },
-        //     catBoosts: { defense: 15, speed: -6 },
-        //     statsFinal: { agility: 111, defense: 126, strength: 122, speed: 105 },
-        //     level: 9,
-        //     date: '1656786176'
-        // }
-
         const userPDB = await this.client.playerDb.load(userId);
         const userIDB = await this.client.inventoryDb.get(userId);
         const userADB = await this.client.activityDb.get(userId);
 
-        const playerString = `» ***${this.lang.strings.profile_aptitudes}:***\n`
-            + `__${this.lang.constants.aptitudes.strength}:__ **${userPDB.stats.strength}**`
-            + `(${this.lang.strings.level} \`${userPDB.statsLevel.strength}\` + \`${userPDB.grimBoosts}\`)`;
+        console.log(userPDB);
+
+        const userObject = {
+
+        };
+
+        for (const statKey in userPDB.statsLevel) {
+            if (typeof userObject[statKey] !== "string") {
+                userObject[statKey] = `${this.consts.emojis.rpg.stats[statKey]} `
+                    + `» **${this.lang.constants.aptitudes[statKey]} | `
+                    + `\`${this.client.util.intRender(userPDB.statsFinal[statKey])}\`**\n`
+                    + `*(${this.lang.strings.level} **${userPDB.statsLevel[statKey]}**) \`${userPDB.stats[statKey]}\`*`;
+
+                if (userPDB.grimBoosts[statKey][0] > 0) {
+                    userObject[statKey] += ` ***\`+\`** \`${userPDB.grimBoosts[statKey][0]}`
+                        + ` (${userPDB.grimBoosts[statKey][1]}%)\``
+                        + `${this.consts.emojis.rpg.objects.enchantedGrimoire}*`;
+                }
+
+                if (statKey in userPDB.catBoosts) {
+                    if (userPDB.catBoosts[statKey][0] > 0) {
+                        userObject[statKey] += ` ***\`+\`** \`${userPDB.catBoosts[statKey][0]}`
+                            + ` (${userPDB.catBoosts[statKey][1]}%)\``
+                            + `${this.consts.emojis.rpg.concepts.category}*`;
+                    }
+                    else {
+                        userObject[statKey] += ` ***\`-\`** \`${this.client.util.positivize(userPDB.catBoosts[statKey][0])}`
+                            + ` (${userPDB.catBoosts[statKey][1]}%)\``
+                            + `${this.consts.emojis.rpg.concepts.category}*`;
+                    }
+                }
+            }
+        }
+
+        const playerString = Object.values(userObject).join("\n\n");
         const inventoryString = "inventory";
         const activityString = "activity";
 
