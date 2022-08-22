@@ -57,29 +57,29 @@ class StaffPanel extends Command {
 
         console.log(userPDB);
 
-        const userObject = {};
+        const userStatsObject = {};
 
         for (const statKey in userPDB.statsLevel) {
-            if (typeof userObject[statKey] !== "string") {
-                userObject[statKey] = `${this.consts.emojis.rpg.stats[statKey]} `
+            if (typeof userStatsObject[statKey] !== "string") {
+                userStatsObject[statKey] = `${this.consts.emojis.rpg.stats[statKey]} `
                     + `» **${this.lang.constants.aptitudes[statKey]} | `
-                    + `\`${this.client.util.intRender(userPDB.statsFinal[statKey])}\`**\n`
+                    + `\`${this.client.util.intRender(userPDB.finalStats[statKey])}\`**\n`
                     + `*(${this.lang.strings.level} **${userPDB.statsLevel[statKey]}**) \`${userPDB.stats[statKey]}\`*`;
 
                 if (userPDB.grimBoosts[statKey][0] > 0) {
-                    userObject[statKey] += ` ***\`+\`** \`${userPDB.grimBoosts[statKey][0]}`
+                    userStatsObject[statKey] += ` ***\`+\`** \`${userPDB.grimBoosts[statKey][0]}`
                         + ` (${userPDB.grimBoosts[statKey][1]}%)\``
                         + `${this.consts.emojis.rpg.objects.enchantedGrimoire}*`;
                 }
 
                 if (statKey in userPDB.catBoosts) {
                     if (userPDB.catBoosts[statKey][0] > 0) {
-                        userObject[statKey] += ` ***\`+\`** \`${userPDB.catBoosts[statKey][0]}`
+                        userStatsObject[statKey] += ` ***\`+\`** \`${userPDB.catBoosts[statKey][0]}`
                             + ` (${userPDB.catBoosts[statKey][1]}%)\``
                             + `${this.consts.emojis.rpg.concepts.category}*`;
                     }
                     else {
-                        userObject[statKey] += ` ***\`-\`** \`${this.client.util.positivize(userPDB.catBoosts[statKey][0])}`
+                        userStatsObject[statKey] += ` ***\`-\`** \`${this.client.util.positivize(userPDB.catBoosts[statKey][0])}`
                             + ` (${userPDB.catBoosts[statKey][1]}%)\``
                             + `${this.consts.emojis.rpg.concepts.category}*`;
                     }
@@ -87,7 +87,7 @@ class StaffPanel extends Command {
             }
         }
 
-        const playerString = Object.values(userObject).join("\n\n");
+        const playerString = Object.values(userStatsObject).join("\n\n");
         const inventoryString = "inventory";
         const activityString = "activity";
 

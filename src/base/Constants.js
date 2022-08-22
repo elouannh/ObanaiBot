@@ -14,5 +14,10 @@ module.exports = {
                 category: "👑",
             },
         },
+        "systems": {
+            "grades": {
+                "tester": ""
+            }
+        },
     },
 };

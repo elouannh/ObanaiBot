@@ -80,11 +80,19 @@ class PlayerDb {
             this.client.util.round((- p.categoryLevel / 50) * 100),
         ];
 
-        p.statsFinal = { ...p.stats };
-        for (const stat in p.statsFinal) {
-            let sum = p.statsFinal[stat] + p.grimBoosts[stat][0];
+        p.finalStats = { ...p.stats };
+        for (const stat in p.finalStats) {
+            let sum = p.finalStats[stat] + p.grimBoosts[stat][0];
             if (stat in p.catBoosts) sum += p.catBoosts[stat][0];
-            p.statsFinal[stat] = this.client.util.round(sum);
+            p.finalStats[stat] = this.client.util.round(sum);
+        }
+
+        p.tournamentStats = { ...p.finalStats };
+        for (const stat in p.tournamentStats) {
+            p.tournamentStats[stat] = this.client.util.round(
+                this.client.util.round(p.finalStats[stat] / 30, 0) * 10,
+                0,
+            );
         }
 
         p.level = calcPlayerLevel(p.exp).level;
