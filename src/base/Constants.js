@@ -16,8 +16,10 @@ module.exports = {
         },
         "systems": {
             "grades": {
-                "tester": "test"
-            }
+                "tester": "🔬",
+                "admin": "🔑",
+                "owner": "👘",
+            },
         },
     },
 };

@@ -1,9 +1,9 @@
 {
     "staff-panel": {
         "strings": {
-            "owner_grade": "👑 Owner",
-            "admin_grade": "🚀 Administrator",
-            "tester_grade": "⛏️ Tester",
+            "owner_grade": "Owner",
+            "admin_grade": "Administrator",
+            "tester_grade": "Tester",
             "owner_panel": "Owner's Panel",
             "admin_panel": "Administrator's Panel",
             "tester_panel": "Tester's Panel",

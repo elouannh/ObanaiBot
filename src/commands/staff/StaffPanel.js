@@ -70,7 +70,7 @@ class StaffPanel extends Command {
                         .setLabel(this.lang.panels.tester.identifier_name)
                         .setValue("tester_panel")
                         .setDescription(this.lang.panels.tester.identifier_description)
-                        .setEmoji("⛏️")
+                        .setEmoji(this.consts.emojis.systems.grades.tester)
                         .identifier,
                 )
                 .setPages([
@@ -84,7 +84,7 @@ class StaffPanel extends Command {
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle(`⛏️ | ${this.lang.panels.tester.pages["0"].embeds["0"].title}`)
+                                .setTitle(`${this.consts.emojis.systems.grades.tester} | ${this.lang.panels.tester.pages["0"].embeds["0"].title}`)
                                 .setDescription(userGrades),
                         ]),
                     new Nav.Page()
@@ -97,7 +97,7 @@ class StaffPanel extends Command {
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle(`⛏️ | ${this.lang.panels.tester.pages["1"].embeds["0"].title}`)
+                                .setTitle(`${this.consts.emojis.systems.grades.tester} | ${this.lang.panels.tester.pages["1"].embeds["0"].title}`)
                                 .setDescription(botStatus),
                         ]),
                     new Nav.Page()
@@ -110,7 +110,7 @@ class StaffPanel extends Command {
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle(`⛏️ | ${this.lang.panels.tester.pages["2"].embeds["0"].title}`)
+                                .setTitle(`${this.consts.emojis.systems.grades.tester} | ${this.lang.panels.tester.pages["2"].embeds["0"].title}`)
                                 .setDescription(`${botInfos}`),
                         ]),
                 ])
@@ -145,7 +145,7 @@ class StaffPanel extends Command {
                         .setLabel(this.lang.panels.admin.identifier_name)
                         .setValue("admin_panel")
                         .setDescription(this.lang.panels.admin.identifier_description)
-                        .setEmoji("🚀")
+                        .setEmoji(this.consts.emojis.systems.grades.admin)
                         .identifier,
                 )
                 .setPages([
@@ -158,7 +158,7 @@ class StaffPanel extends Command {
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle(`🚀 | ${this.lang.panels.admin.pages["0"].embeds["0"].title}`)
+                                .setTitle(`${this.consts.emojis.systems.grades.admin} | ${this.lang.panels.admin.pages["0"].embeds["0"].title}`)
                                 .setDescription(`${this.lang.panels.admin.pages["0"].embeds["0"].description}\n\u200B`)
                                 .setFields([
                                     { name: "» 📝 «", value: this.lang.panels.admin.pages["0"].embeds["0"].fields["0"].value, inline: true },
@@ -197,7 +197,7 @@ class StaffPanel extends Command {
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle(`🚀 | ${this.lang.panels.admin.pages["1"].embeds["0"].title}`)
+                                .setTitle(`${this.consts.emojis.systems.grades.admin} | ${this.lang.panels.admin.pages["1"].embeds["0"].title}`)
                                 .setDescription(`${this.lang.panels.admin.pages["0"].embeds["0"].description}\n\u200B`)
                                 .setFields([
                                     { name: "» 👥 «", value: this.lang.panels.admin.pages["1"].embeds["0"].fields["0"].value, inline: true },
@@ -231,7 +231,7 @@ class StaffPanel extends Command {
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle(`🚀 | ${this.lang.panels.admin.pages["2"].embeds["0"].title}`)
+                                .setTitle(`${this.consts.emojis.systems.grades.admin} | ${this.lang.panels.admin.pages["2"].embeds["0"].title}`)
                                 .setDescription(`${this.lang.panels.admin.pages["2"].embeds["0"].description}\n\u200B`)
                                 .setFields([
                                     { name: "» 💎 «", value: this.lang.panels.admin.pages["2"].embeds["0"].fields["0"].value, inline: true },
@@ -288,7 +288,7 @@ class StaffPanel extends Command {
                         .setLabel(this.lang.panels.owner.identifier_name)
                         .setValue("owner_panel")
                         .setDescription(this.lang.panels.owner.identifier_description)
-                        .setEmoji("👑")
+                        .setEmoji(this.consts.emojis.systems.grades.owner)
                         .identifier,
                 )
                 .setPages([
@@ -301,7 +301,7 @@ class StaffPanel extends Command {
                         )
                         .setEmbeds([
                             new EmbedBuilder()
-                                .setTitle(`👑 | ${this.lang.panels.owner.pages["0"].embeds["0"].title}`)
+                                .setTitle(`${this.consts.emojis.systems.grades.owner} | ${this.lang.panels.owner.pages["0"].embeds["0"].title}`)
                                 .setDescription(`${this.lang.panels.owner.pages["0"].embeds["0"].description}\n\u200B`)
                                 .setFields([
                                     { name: "» 📡 «", value: this.lang.panels.owner.pages["0"].embeds["0"].fields["0"].value, inline: true },
