@@ -14,7 +14,15 @@
                         "description": "Ensemble des statistiques du joueur.",
                         "embeds": {
                             "0": {
-                                "title": "Statistiques de %PLAYER"
+                                "title": "Statistiques de %PLAYER",
+                                "fields": {
+                                    "0": {
+                                        "name": "Aptitudes"
+                                    },
+                                    "1": {
+                                        "name": "Niveau"
+                                    }
+                                }
                             }
                         }
                     }
@@ -49,6 +57,21 @@
                         }
                     }
                 }
+            },
+            "badges": {
+                "identifier_name": "badges de %PLAYER",
+                "identifier_description": "Panel contenant les badges du joueur.",
+                "pages": {
+                    "0": {
+                        "label": "Badges",
+                        "description": "Ensemble des badges du joueur.",
+                        "embeds": {
+                            "0": {
+                                "title": "Badges de %PLAYER"
+                            }
+                        }
+                    }
+                }
             }
         },
         "rows": {
@@ -56,9 +79,10 @@
             "panel": "Panel...",
             "universal": {
                 "leave_panel": "Quitter le panel",
-                "player_panel": "Voir les statistiques",
-                "inventory_panel": "Voir l'inventaire",
-                "activity_panel": "Voir l'activité"
+                "player_panel": "Statistiques",
+                "inventory_panel": "Inventaire",
+                "activity_panel": "Activité",
+                "badges_panel": "Badges"
             }
         }
     },

@@ -23,6 +23,7 @@ class Command {
         this.client = null;
         this.interaction = null;
         this.consts = null;
+        this.timestamp = Date.now();
         this.lang = new Language("fr").json["commands"][this.infos.name] ?? {};
         this.rpgCommand = false;
 

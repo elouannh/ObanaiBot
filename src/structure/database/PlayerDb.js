@@ -95,7 +95,7 @@ class PlayerDb {
             );
         }
 
-        p.level = calcPlayerLevel(p.exp).level;
+        p.level = calcPlayerLevel(p.exp);
         p.date = `${(p.created / 1000).toFixed(0)}`;
 
         p.category = require(`../../elements/categories/${p.category}.json`);

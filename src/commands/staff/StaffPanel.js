@@ -33,7 +33,7 @@ class StaffPanel extends Command {
 
     async run() {
         const userGrade = this.client.internalServerManager.userRank(this.interaction.user.id);
-        const status = await this.client.internalServerManager.status(this.interaction);
+        const status = await this.client.internalServerManager.status(this.timestamp);
         const infos = await this.client.statusDb.infos();
 
         const renderPanel = rendered => {
@@ -161,29 +161,29 @@ class StaffPanel extends Command {
                                 .setTitle(`${this.consts.emojis.systems.grades.admin} | ${this.lang.panels.admin.pages["0"].embeds["0"].title}`)
                                 .setDescription(`${this.lang.panels.admin.pages["0"].embeds["0"].description}\n\u200B`)
                                 .setFields([
-                                    { name: "» 📝 «", value: this.lang.panels.admin.pages["0"].embeds["0"].fields["0"].value, inline: true },
-                                    { name: "» 🟢 «", value: this.lang.panels.admin.pages["0"].embeds["0"].fields["1"].value, inline: true },
-                                    { name: "» 🟡 «", value: this.lang.panels.admin.pages["0"].embeds["0"].fields["2"].value, inline: true },
-                                    { name: "» 🔴 «", value: this.lang.panels.admin.pages["0"].embeds["0"].fields["3"].value, inline: true },
+                                    { name: `» ${this.consts.emojis.systems.symbols.edit} «`, value: this.lang.panels.admin.pages["0"].embeds["0"].fields["0"].value, inline: true },
+                                    { name: `» ${this.consts.emojis.systems.status.online} «`, value: this.lang.panels.admin.pages["0"].embeds["0"].fields["1"].value, inline: true },
+                                    { name: `» ${this.consts.emojis.systems.status.maintenance} «`, value: this.lang.panels.admin.pages["0"].embeds["0"].fields["2"].value, inline: true },
+                                    { name: `» ${this.consts.emojis.systems.status.disabled} «`, value: this.lang.panels.admin.pages["0"].embeds["0"].fields["3"].value, inline: true },
                                 ]),
                         ])
                         .setComponents([
                             new ActionRowBuilder()
                                 .setComponents(
                                     new ButtonBuilder()
-                                        .setEmoji("📝")
+                                        .setEmoji(this.consts.emojis.systems.symbols.edit)
                                         .setCustomId("view_status")
                                         .setStyle("Secondary"),
                                     new ButtonBuilder()
-                                        .setEmoji("🟢")
+                                        .setEmoji(this.consts.emojis.systems.status.online)
                                         .setCustomId("set_online")
                                         .setStyle("Secondary"),
                                     new ButtonBuilder()
-                                        .setEmoji("🟡")
+                                        .setEmoji(this.consts.emojis.systems.status.maintenance)
                                         .setCustomId("set_maintenance")
                                         .setStyle("Secondary"),
                                     new ButtonBuilder()
-                                        .setEmoji("🔴")
+                                        .setEmoji(this.consts.emojis.systems.status.disabled)
                                         .setCustomId("set_disabled")
                                         .setStyle("Secondary"),
                                 ),
@@ -200,24 +200,24 @@ class StaffPanel extends Command {
                                 .setTitle(`${this.consts.emojis.systems.grades.admin} | ${this.lang.panels.admin.pages["1"].embeds["0"].title}`)
                                 .setDescription(`${this.lang.panels.admin.pages["0"].embeds["0"].description}\n\u200B`)
                                 .setFields([
-                                    { name: "» 👥 «", value: this.lang.panels.admin.pages["1"].embeds["0"].fields["0"].value, inline: true },
-                                    { name: "» 🔓 «", value: this.lang.panels.admin.pages["1"].embeds["0"].fields["1"].value, inline: true },
-                                    { name: "» 🔒 «", value: this.lang.panels.admin.pages["1"].embeds["0"].fields["2"].value, inline: true },
+                                    { name: `» ${this.consts.emojis.systems.symbols.list} «`, value: this.lang.panels.admin.pages["1"].embeds["0"].fields["0"].value, inline: true },
+                                    { name: `» ${this.consts.emojis.systems.symbols.add} «`, value: this.lang.panels.admin.pages["1"].embeds["0"].fields["1"].value, inline: true },
+                                    { name: `» ${this.consts.emojis.systems.symbols.remove} «`, value: this.lang.panels.admin.pages["1"].embeds["0"].fields["2"].value, inline: true },
                                 ]),
                         ])
                         .setComponents([
                             new ActionRowBuilder()
                                 .setComponents(
                                     new ButtonBuilder()
-                                        .setEmoji("👥")
+                                        .setEmoji(this.consts.emojis.systems.symbols.list)
                                         .setCustomId("guilds_list")
                                         .setStyle("Secondary"),
                                     new ButtonBuilder()
-                                        .setEmoji("🔓")
+                                        .setEmoji(this.consts.emojis.systems.symbols.add)
                                         .setCustomId("add_auth_guilds")
                                         .setStyle("Secondary"),
                                     new ButtonBuilder()
-                                        .setEmoji("🔒")
+                                        .setEmoji(this.consts.emojis.systems.symbols.remove)
                                         .setCustomId("remove_auth_guilds")
                                         .setStyle("Secondary"),
                                 ),
@@ -234,24 +234,24 @@ class StaffPanel extends Command {
                                 .setTitle(`${this.consts.emojis.systems.grades.admin} | ${this.lang.panels.admin.pages["2"].embeds["0"].title}`)
                                 .setDescription(`${this.lang.panels.admin.pages["2"].embeds["0"].description}\n\u200B`)
                                 .setFields([
-                                    { name: "» 💎 «", value: this.lang.panels.admin.pages["2"].embeds["0"].fields["0"].value, inline: true },
-                                    { name: "» 🪄 «", value: this.lang.panels.admin.pages["2"].embeds["0"].fields["1"].value, inline: true },
-                                    { name: "» 🧲 «", value: this.lang.panels.admin.pages["2"].embeds["0"].fields["2"].value, inline: true },
+                                    { name: `» ${this.consts.emojis.systems.symbols.list} «`, value: this.lang.panels.admin.pages["2"].embeds["0"].fields["0"].value, inline: true },
+                                    { name: `» ${this.consts.emojis.systems.symbols.add} «`, value: this.lang.panels.admin.pages["2"].embeds["0"].fields["1"].value, inline: true },
+                                    { name: `» ${this.consts.emojis.systems.symbols.remove} «`, value: this.lang.panels.admin.pages["2"].embeds["0"].fields["2"].value, inline: true },
                                 ]),
                         ])
                         .setComponents([
                             new ActionRowBuilder()
                                 .setComponents(
                                     new ButtonBuilder()
-                                        .setEmoji("💎")
+                                        .setEmoji(this.consts.emojis.systems.symbols.list)
                                         .setCustomId("vip_list")
                                         .setStyle("Secondary"),
                                     new ButtonBuilder()
-                                        .setEmoji("🪄")
+                                        .setEmoji(this.consts.emojis.systems.symbols.add)
                                         .setCustomId("add_vip")
                                         .setStyle("Secondary"),
                                     new ButtonBuilder()
-                                        .setEmoji("🧲")
+                                        .setEmoji(this.consts.emojis.systems.symbols.remove)
                                         .setCustomId("remove_vip")
                                         .setStyle("Secondary"),
                                 ),
@@ -304,14 +304,14 @@ class StaffPanel extends Command {
                                 .setTitle(`${this.consts.emojis.systems.grades.owner} | ${this.lang.panels.owner.pages["0"].embeds["0"].title}`)
                                 .setDescription(`${this.lang.panels.owner.pages["0"].embeds["0"].description}\n\u200B`)
                                 .setFields([
-                                    { name: "» 📡 «", value: this.lang.panels.owner.pages["0"].embeds["0"].fields["0"].value, inline: true },
+                                    { name: `» ${this.consts.emojis.systems.symbols.execute} «`, value: this.lang.panels.owner.pages["0"].embeds["0"].fields["0"].value, inline: true },
                                 ]),
                         ])
                         .setComponents([
                             new ActionRowBuilder()
                                 .setComponents(
                                     new ButtonBuilder()
-                                        .setEmoji("📡")
+                                        .setEmoji(this.consts.emojis.systems.symbols.execute)
                                         .setCustomId("code_execute")
                                         .setStyle("Secondary"),
                                 ),
@@ -367,7 +367,7 @@ class StaffPanel extends Command {
                     }
                     else {
                         inter.followUp({
-                            content: `⚠️ ${this.lang.strings.no_permissions}`,
+                            content: `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.no_permissions}`,
                             ephemeral: true,
                         }).catch(this.client.util.catcherror);
                     }
@@ -407,14 +407,14 @@ class StaffPanel extends Command {
                         .catch(this.client.util.catcherror);
                     if (tempoStatus[0] === "online") {
                         inter.followUp({
-                            content: `⚠️ ${this.lang.strings.already_set} **${tempoStatus[0]}** ${tempoStatus[1].clientStatus}.`,
+                            content: `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.already_set} **${tempoStatus[0]}** ${tempoStatus[1].clientStatus}.`,
                             ephemeral: true,
                         }).catch(this.client.util.catcherror);
                     }
                     else {
                         this.client.statusDb.setOnline();
                         inter.followUp({
-                            content: `✅ ${this.lang.strings.set_online}`,
+                            content: `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.set_online}`,
                             ephemeral: true,
                         }).catch(this.client.util.catcherror);
                     }
@@ -424,14 +424,14 @@ class StaffPanel extends Command {
                         .catch(this.client.util.catcherror);
                     if (tempoStatus[0] === "maintenance") {
                         inter.followUp({
-                            content: `⚠️ ${this.lang.strings.already_set} **${tempoStatus[0]}** ${tempoStatus[1].clientStatus}.`,
+                            content: `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.already_set} **${tempoStatus[0]}** ${tempoStatus[1].clientStatus}.`,
                             ephemeral: true,
                         }).catch(this.client.util.catcherror);
                     }
                     else {
                         this.client.statusDb.setMaintenance();
                         inter.followUp({
-                            content: `✅ ${this.lang.strings.set_maintenance}`,
+                            content: `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.set_maintenance}`,
                             ephemeral: true,
                         }).catch(this.client.util.catcherror);
                     }
@@ -441,14 +441,14 @@ class StaffPanel extends Command {
                         .catch(this.client.util.catcherror);
                     if (tempoStatus[0] === "disabled") {
                         inter.followUp({
-                            content: `⚠️ ${this.lang.strings.already_set} **${tempoStatus[0]}** ${tempoStatus[1].clientStatus}.`,
+                            content: `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.already_set} **${tempoStatus[0]}** ${tempoStatus[1].clientStatus}.`,
                             ephemeral: true,
                         }).catch(this.client.util.catcherror);
                     }
                     else {
                         this.client.statusDb.setDisabled();
                         inter.followUp({
-                            content: `✅ ${this.lang.strings.set_disabled}`,
+                            content: `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.set_disabled}`,
                             ephemeral: true,
                         }).catch(this.client.util.catcherror);
                     }
@@ -470,7 +470,7 @@ class StaffPanel extends Command {
                     }
                     else if (posted.status === "error") {
                         inter.followUp({
-                            content: `⚠️ ${this.lang.strings.post_error}`,
+                            content: `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.post_error}`,
                             ephemeral: true,
                         }).catch(this.client.util.catcherror);
                     }
@@ -576,7 +576,7 @@ class StaffPanel extends Command {
                                     new TextInputBuilder()
                                         .setLabel(this.lang.rows.modals.remove_vip.inputs[0].label)
                                         .setCustomId("vip_removed")
-                                        .setPlaceholder(users.fetch.rows.modals.remove_vip.inputs[0].placeholder)
+                                        .setPlaceholder(this.lang.rows.modals.remove_vip.inputs[0].placeholder)
                                         .setMinLength(18)
                                         .setMaxLength(19)
                                         .setRequired(false)
@@ -584,9 +584,9 @@ class StaffPanel extends Command {
                                 ),
                                 new ActionRowBuilder().setComponents(
                                     new TextInputBuilder()
-                                        .setLabel(users.fetch.rows.modals.remove_vip.inputs[1].label)
+                                        .setLabel(this.lang.rows.modals.remove_vip.inputs[1].label)
                                         .setCustomId("vipplus_removed")
-                                        .setPlaceholder(users.fetch.rows.modals.remove_vip.inputs[1].placeholder)
+                                        .setPlaceholder(this.lang.rows.modals.remove_vip.inputs[1].placeholder)
                                         .setMinLength(18)
                                         .setMaxLength(19)
                                         .setRequired(false)
@@ -607,13 +607,13 @@ class StaffPanel extends Command {
 
                             if (guilds.list.includes(guildIDField)) {
                                 modalResponse.reply({
-                                    content: `⚠️ ${users.fetch.strings.is_already_authorized.replace("%GUILD", guildIDField)}`,
+                                    content: `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.is_already_authorized.replace("%GUILD", guildIDField)}`,
                                     ephemeral: true,
                                 }).catch(this.client.util.catcherror);
                             }
                             else {
                                 modalResponse.reply({
-                                    content: `✅ ${users.fetch.strings.is_authorized.replace("%GUILD", guildIDField)}`,
+                                    content: `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.is_authorized.replace("%GUILD", guildIDField)}`,
                                     ephemeral: true,
                                 }).catch(this.client.util.catcherror);
                                 this.client.internalServerManager.db.push("internalServer", guildIDField, "authServers");
@@ -624,13 +624,13 @@ class StaffPanel extends Command {
 
                             if (!guilds.list.includes(guildIDField)) {
                                 modalResponse.reply({
-                                    content: `⚠️ ${users.fetch.strings.is_already_unauthorized.replace("%GUILD", guildIDField)}`,
+                                    content: `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.is_already_unauthorized.replace("%GUILD", guildIDField)}`,
                                     ephemeral: true,
                                 }).catch(this.client.util.catcherror);
                             }
                             else {
                                 modalResponse.reply({
-                                    content: `✅ ${users.fetch.strings.is_unauthorized.replace("%GUILD", guildIDField)}`,
+                                    content: `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.is_unauthorized.replace("%GUILD", guildIDField)}`,
                                     ephemeral: true,
                                 }).catch(this.client.util.catcherror);
                                 this.client.internalServerManager.db.set(
@@ -651,13 +651,13 @@ class StaffPanel extends Command {
                             if (vip.length > 2) {
                                 const playerDatas = await this.client.externalServerDb.get(vip);
                                 if (playerDatas.grades.includes("vip")) {
-                                    message += `⚠️${users.fetch.strings.is_already_vip.replace(
+                                    message += `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.is_already_vip.replace(
                                         "%PLAYER",
                                         escapeMarkdown(this.client.users.fetch(vip)?.username ?? vip),
                                     )}`;
                                 }
                                 else {
-                                    message += `✅ ${users.fetch.strings.is_vip.replace(
+                                    message += `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.is_vip.replace(
                                         "%PLAYER",
                                         escapeMarkdown(this.client.users.fetch(vip)?.username ?? vip),
                                     )}`;
@@ -668,13 +668,13 @@ class StaffPanel extends Command {
                                 const playerDatas = await this.client.externalServerDb.get(vipplus);
                                 if (message.length > 4) message += "\n\n";
                                 if (playerDatas.grades.includes("vip+")) {
-                                    message += `⚠️${users.fetch.strings.is_already_vipplus.replace(
+                                    message += `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.is_already_vipplus.replace(
                                         "%PLAYER",
                                         escapeMarkdown(this.client.users.fetch(vipplus)?.username ?? vipplus),
                                     )}`;
                                 }
                                 else {
-                                    message += `✅ ${users.fetch.strings.is_vipplus.replace(
+                                    message += `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.is_vipplus.replace(
                                         "%PLAYER",
                                         escapeMarkdown(this.client.users.fetch(vipplus)?.username ?? vipplus),
                                     )}`;
@@ -700,13 +700,13 @@ class StaffPanel extends Command {
                             if (vip.length > 2) {
                                 const playerDatas = await this.client.externalServerDb.get(vip);
                                 if (!playerDatas.grades.includes("vip")) {
-                                    message += `⚠️ ${users.fetch.strings.is_already_not_vip.replace(
+                                    message += `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.is_already_not_vip.replace(
                                         "%PLAYER",
                                         escapeMarkdown(this.client.users.fetch(vip)?.username ?? vip),
                                     )}`;
                                 }
                                 else {
-                                    message += `✅ ${users.fetch.strings.is_not_vip.replace(
+                                    message += `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.is_not_vip.replace(
                                         "%PLAYER",
                                         escapeMarkdown(this.client.users.fetch(vip)?.username ?? vip),
                                     )}`;
@@ -721,13 +721,13 @@ class StaffPanel extends Command {
                                 const playerDatas = await this.client.externalServerDb.get(vipplus);
                                 if (message.length > 4) message += "\n\n";
                                 if (!playerDatas.grades.includes("vip+")) {
-                                    message += `⚠️ ${users.fetch.strings.is_already_not_vipplus.replace(
+                                    message += `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.is_already_not_vipplus.replace(
                                         "%PLAYER",
                                         escapeMarkdown(this.client.users.fetch(vipplus)?.username ?? vipplus),
                                     )}`;
                                 }
                                 else {
-                                    message += `✅ ${users.fetch.strings.is_not_vipplus.replace(
+                                    message += `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.is_not_vipplus.replace(
                                         "%PLAYER",
                                         escapeMarkdown(this.client.users.fetch(vipplus)?.username ?? vipplus),
                                     )}`;
@@ -746,14 +746,14 @@ class StaffPanel extends Command {
                 }
                 else if (inter.customId === "code_execute") {
                     const modal = new ModalBuilder()
-                        .setTitle(users.fetch.rows.modals.code_execute.title)
+                        .setTitle(this.lang.rows.modals.code_execute.title)
                         .setCustomId("modal_code_execute")
                         .setComponents(
                             new ActionRowBuilder().setComponents(
                                 new TextInputBuilder()
-                                    .setLabel(users.fetch.rows.modals.code_execute.inputs[0].label)
+                                    .setLabel(this.lang.rows.modals.code_execute.inputs[0].label)
                                     .setCustomId("code_input")
-                                    .setPlaceholder(users.fetch.rows.modals.code_execute.inputs[0].placeholder)
+                                    .setPlaceholder(this.lang.rows.modals.code_execute.inputs[0].placeholder)
                                     .setRequired(true)
                                     .setStyle(TextInputStyle.Paragraph),
                             ),

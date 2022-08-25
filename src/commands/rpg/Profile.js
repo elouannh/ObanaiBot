@@ -12,6 +12,7 @@ const {
     User,
 } = require("discord.js");
 const Nav = require("../../base/NavigationClasses");
+const calcPlayerLevel = require("../../elements/calcPlayerLevel");
 
 class StaffPanel extends Command {
     constructor() {
@@ -64,32 +65,49 @@ class StaffPanel extends Command {
                 userStatsObject[statKey] = `${this.consts.emojis.rpg.stats[statKey]} `
                     + `» **${this.lang.constants.aptitudes[statKey]} | `
                     + `\`${this.client.util.intRender(userPDB.finalStats[statKey])}\`**\n`
-                    + `*(${this.lang.strings.level} **${userPDB.statsLevel[statKey]}**) \`${userPDB.stats[statKey]}\`*`;
+                    + `*(${this.lang.strings.level} ${userPDB.statsLevel[statKey]}) **${userPDB.stats[statKey]}***`;
 
                 if (userPDB.grimBoosts[statKey][0] > 0) {
-                    userStatsObject[statKey] += ` ***\`+\`** \`${userPDB.grimBoosts[statKey][0]}`
-                        + ` (${userPDB.grimBoosts[statKey][1]}%)\``
+                    userStatsObject[statKey] += ` *+ **${userPDB.grimBoosts[statKey][0]}**`
+                        + ` (${userPDB.grimBoosts[statKey][1]}%)`
                         + `${this.consts.emojis.rpg.objects.enchantedGrimoire}*`;
                 }
 
                 if (statKey in userPDB.catBoosts) {
                     if (userPDB.catBoosts[statKey][0] > 0) {
-                        userStatsObject[statKey] += ` ***\`+\`** \`${userPDB.catBoosts[statKey][0]}`
-                            + ` (${userPDB.catBoosts[statKey][1]}%)\``
-                            + `${this.consts.emojis.rpg.concepts.category}*`;
+                        userStatsObject[statKey] += ` *+ **${userPDB.catBoosts[statKey][0]}**`
+                            + ` (${userPDB.catBoosts[statKey][1]}%)`
+                            + `${this.consts.emojis.rpg.symbols.category}*`;
                     }
                     else {
-                        userStatsObject[statKey] += ` ***\`-\`** \`${this.client.util.positivize(userPDB.catBoosts[statKey][0])}`
-                            + ` (${userPDB.catBoosts[statKey][1]}%)\``
-                            + `${this.consts.emojis.rpg.concepts.category}*`;
+                        userStatsObject[statKey] += ` *- **${this.client.util.positivize(userPDB.catBoosts[statKey][0])}**`
+                            + ` (${userPDB.catBoosts[statKey][1]}%)`
+                            + `${this.consts.emojis.rpg.symbols.category}*`;
                     }
                 }
             }
         }
 
-        const playerString = Object.values(userStatsObject).join("\n\n");
+        const userRank = `Niveau: **${userPDB.level.level}** | Exp total: ⭐ **${this.client.util.intRender(userPDB.exp, " ")}**`
+            + `\nExp du niveau: ⭐ **${
+                this.client.util.intRender(userPDB.level.tempExp, " ")}**/${this.client.util.intRender(userPDB.level.required, " ")
+            }`;
+
+        const playerFields = [
+            {
+                name: `» ${this.lang.panels.player.pages["0"].embeds["0"].fields["0"].name} «`,
+                value: `\u200b\n${Object.values(userStatsObject).join("\n")}`,
+                inline: true,
+            },
+            {
+                name: `» ${this.lang.panels.player.pages["0"].embeds["0"].fields["1"].name} «`,
+                value: `\u200b\n${userRank}`,
+                inline: true,
+            },
+        ];
         const inventoryString = "inventory";
         const activityString = "activity";
+        const badgesString = "badges";
 
         const pages = {
             "player_panel": new Nav.Panel()
@@ -98,7 +116,7 @@ class StaffPanel extends Command {
                         .setLabel(this.lang.panels.player.identifier_name)
                         .setValue("player_panel")
                         .setDescription(this.lang.panels.player.identifier_description)
-                        .setEmoji("👤")
+                        .setEmoji(this.consts.emojis.rpg.symbols.player)
                         .identifier,
                 )
                 .setPages([
@@ -113,7 +131,7 @@ class StaffPanel extends Command {
                         .setEmbeds([
                             new EmbedBuilder()
                                 .setTitle(this.lang.panels.player.pages["0"].embeds["0"].title)
-                                .setDescription(playerString),
+                                .setFields(playerFields),
                         ]),
                 ]),
             "inventory_panel": new Nav.Panel()
@@ -122,7 +140,7 @@ class StaffPanel extends Command {
                         .setLabel(this.lang.panels.inventory.identifier_name)
                         .setValue("inventory_panel")
                         .setDescription(this.lang.panels.inventory.identifier_description)
-                        .setEmoji("🎒")
+                        .setEmoji(this.consts.emojis.rpg.symbols.inventory)
                         .identifier,
                 )
                 .setPages([
@@ -146,7 +164,7 @@ class StaffPanel extends Command {
                         .setLabel(this.lang.panels.activity.identifier_name)
                         .setValue("activity_panel")
                         .setDescription(this.lang.panels.activity.identifier_description)
-                        .setEmoji("📺")
+                        .setEmoji(this.consts.emojis.rpg.symbols.activity)
                         .identifier,
                 )
                 .setPages([
@@ -164,6 +182,30 @@ class StaffPanel extends Command {
                                 .setDescription(activityString),
                         ]),
                 ]),
+            "badges_panel": new Nav.Panel()
+                .setIdentifier(
+                    new Nav.Identifier()
+                        .setLabel(this.lang.panels.badges.identifier_name)
+                        .setValue("badges_panel")
+                        .setDescription(this.lang.panels.badges.identifier_description)
+                        .setEmoji(this.consts.emojis.rpg.symbols.badges)
+                        .identifier,
+                )
+                .setPages([
+                    new Nav.Page()
+                        .setIdentifier(
+                            new Nav.Identifier()
+                                .setLabel(this.lang.panels.badges.pages["0"].label)
+                                .setValue("badges_main")
+                                .setDescription(this.lang.panels.badges.pages["0"].description)
+                                .identifier,
+                        )
+                        .setEmbeds([
+                            new EmbedBuilder()
+                                .setTitle(this.lang.panels.badges.pages["0"].embeds["0"].title)
+                                .setDescription(badgesString),
+                        ]),
+                ]),
         };
 
         const universalRows = [
@@ -172,15 +214,23 @@ class StaffPanel extends Command {
                     new ButtonBuilder()
                         .setCustomId("player_panel")
                         .setLabel(this.lang.rows.universal.player_panel)
-                        .setStyle("Primary"),
+                        .setEmoji(this.consts.emojis.rpg.symbols.player)
+                        .setStyle("Secondary"),
                     new ButtonBuilder()
                         .setCustomId("inventory_panel")
                         .setLabel(this.lang.rows.universal.inventory_panel)
-                        .setStyle("Primary"),
+                        .setEmoji(this.consts.emojis.rpg.symbols.inventory)
+                        .setStyle("Secondary"),
                     new ButtonBuilder()
                         .setCustomId("activity_panel")
                         .setLabel(this.lang.rows.universal.activity_panel)
-                        .setStyle("Primary"),
+                        .setEmoji(this.consts.emojis.rpg.symbols.activity)
+                        .setStyle("Secondary"),
+                    new ButtonBuilder()
+                        .setCustomId("badges_panel")
+                        .setLabel(this.lang.rows.universal.badges_panel)
+                        .setEmoji(this.consts.emojis.rpg.symbols.badges)
+                        .setStyle("Secondary"),
                 ),
             new ActionRowBuilder()
                 .setComponents(

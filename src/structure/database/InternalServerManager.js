@@ -425,6 +425,7 @@ class InternalServerManager {
 
     pingString(amount) {
         const identifiers = {
+            "0": "⚪",
             "50": "🟣",
             "100": "🔵",
             "150": "🟢",
@@ -433,10 +434,13 @@ class InternalServerManager {
             "600": "🔴",
         };
 
+        console.log(amount);
+        console.log(Object.entries(identifiers).filter(e => amount >= Number(e[0])).at(-1)[1]);
+
         return Object.entries(identifiers).filter(e => amount >= Number(e[0])).at(-1)[1] + ` ${amount} ms`;
     }
 
-    async status(interaction) {
+    async status(timestamp) {
         const status = ["🔴", "🟡", "🟢"];
         const memoryUsage = process.memoryUsage().heapTotal / 1024 / 1024;
         const ramPercent = Math.ceil(memoryUsage * 100 / (4.00 * 1024));
@@ -445,7 +449,7 @@ class InternalServerManager {
         const datas = {
             "clientStatus": this.statusString(this.client.statusDb.datas.mode),
             "apiPing": this.pingString(this.client.ws.ping),
-            "serverPing": this.pingString(Math.sqrt(Math.pow(Date.now() - interaction.createdTimestamp, 2))),
+            "serverPing": this.pingString(this.client.util.positivize(Date.now() - timestamp)),
             "memoryUsage": [
                 `${((memoryUsage).toFixed(4))} MB`,
                 `${this.client.util.intRender((4.00 * 1024).toFixed(0), " ")} MB`,

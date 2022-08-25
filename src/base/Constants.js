@@ -10,15 +10,37 @@ module.exports = {
             objects: {
                 enchantedGrimoire: "📖",
             },
-            concepts: {
+            symbols: {
                 category: "👑",
+                player: "👘",
+                inventory: "📦",
+                activity: "🎮",
+                badges: "🏅",
             },
         },
-        "systems": {
-            "grades": {
-                "tester": "🔬",
-                "admin": "🔑",
-                "owner": "👘",
+        systems: {
+            grades: {
+                tester: "🔬",
+                admin: "🔑",
+                owner: "👘",
+            },
+            symbols: {
+                check: "✅",
+                cross: "❌",
+                edit: "📝",
+                people: "👥",
+                unlock: "🔓",
+                lock: "🔒",
+                list: "📋",
+                add: "➕",
+                remove: "➖",
+                execute: "🔨",
+                warning: "⚠️",
+            },
+            status: {
+                online: "🟢",
+                maintenance: "🟡",
+                disabled: "🔴",
             },
         },
     },
