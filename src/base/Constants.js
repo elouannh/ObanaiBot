@@ -14,7 +14,7 @@ module.exports = {
                 category: "👑",
                 player: "👘",
                 inventory: "📦",
-                activity: "🎮",
+                activity: "🕣",
                 badges: "🏅",
                 crow: "🦉",
                 weapons: "🗡",

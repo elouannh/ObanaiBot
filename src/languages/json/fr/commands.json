@@ -2,7 +2,9 @@
     "base": {
         "strings": {
             "profile_aptitudes": "Aptitudes",
-            "level": "niveau"
+            "level": "Niveau",
+            "total_experience": "Expérience totale",
+            "level_experience": "Expérience de niveau"
         },
         "panels": {
             "player": {
@@ -29,7 +31,15 @@
                     "0": {
                         "embeds": {
                             "0": {
-                                "title": "Inventaire de %PLAYER"
+                                "title": "Inventaire de %PLAYER",
+                                "fields": {
+                                    "0": {
+                                        "name": "Ressources"
+                                    },
+                                    "1": {
+                                        "name": "Objets de quête"
+                                    }
+                                }
                             }
                         }
                     }
@@ -40,7 +50,12 @@
                     "0": {
                         "embeds": {
                             "0": {
-                                "title": "Activité de %PLAYER"
+                                "title": "Activité de %PLAYER",
+                                "fields": {
+                                    "0": {
+                                        "name": "Activité en cours"
+                                    }
+                                }
                             }
                         }
                     }
@@ -51,7 +66,12 @@
                     "0": {
                         "embeds": {
                             "0": {
-                                "title": "Badges de %PLAYER"
+                                "title": "Badges de %PLAYER",
+                                "fields": {
+                                    "0": {
+                                        "name": "Badges"
+                                    }
+                                }
                             }
                         }
                     }
@@ -62,7 +82,12 @@
                     "0": {
                         "embeds": {
                             "0": {
-                                "title": "Corbeau de %PLAYER"
+                                "title": "Corbeau de %PLAYER",
+                                "fields": {
+                                    "0": {
+                                        "name": "Corbeau actif"
+                                    }
+                                }
                             }
                         }
                     }
@@ -73,7 +98,12 @@
                     "0": {
                         "embeds": {
                             "0": {
-                                "title": "Badges de %PLAYER"
+                                "title": "Armes de %PLAYER",
+                                "fields": {
+                                    "0": {
+                                        "name": "Arme équipée"
+                                    }
+                                }
                             }
                         }
                     }

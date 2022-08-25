@@ -19,6 +19,7 @@ const Package = require("../../package.json");
 const CollectionManager = require("./CollectionManager");
 const LanguageManager = require("./LanguageManager");
 const PasteGGClasses = require("./PasteGGClasses");
+const RPGAssets = require("./RPGAssets");
 
 class Obanai extends Client {
     constructor(token, registerSlash) {
@@ -35,6 +36,7 @@ class Obanai extends Client {
         this.commandManager = new CommandManager(this);
         this.eventManager = new EventManager(this);
         this.languageManager = new LanguageManager(this);
+        this.RPGAssets = new RPGAssets("elements");
         this.eventManager.loadFiles();
         this.config = config;
         this.bitfield = 274878286912n;
@@ -107,7 +109,7 @@ class Obanai extends Client {
             cached = false;
         }
 
-        return [ user, cached, user?.id ];
+        return { user, cached, userId: user?.id };
     }
 
     log(message, ...args) {
