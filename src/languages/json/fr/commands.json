@@ -1,17 +1,13 @@
 {
-    "profile": {
+    "base": {
         "strings": {
             "profile_aptitudes": "Aptitudes",
             "level": "niveau"
         },
         "panels": {
             "player": {
-                "identifier_name": "Statistiques de %PLAYER",
-                "identifier_description": "Panel contenant les statistiques du joueur.",
                 "pages": {
                     "0": {
-                        "label": "Statistiques",
-                        "description": "Ensemble des statistiques du joueur.",
                         "embeds": {
                             "0": {
                                 "title": "Statistiques de %PLAYER",
@@ -29,12 +25,8 @@
                 }
             },
             "inventory": {
-                "identifier_name": "Inventaire de %PLAYER",
-                "identifier_description": "Panel contenant l'inventaire du joueur.",
                 "pages": {
                     "0": {
-                        "label": "Inventaire",
-                        "description": "Ensemble de l'inventaire du joueur.",
                         "embeds": {
                             "0": {
                                 "title": "Inventaire de %PLAYER"
@@ -44,12 +36,8 @@
                 }
             },
             "activity": {
-                "identifier_name": "Activité de %PLAYER",
-                "identifier_description": "Panel contenant l'activité du joueur.",
                 "pages": {
                     "0": {
-                        "label": "Activité",
-                        "description": "Ensemble de l'activité du joueur.",
                         "embeds": {
                             "0": {
                                 "title": "Activité de %PLAYER"
@@ -59,12 +47,30 @@
                 }
             },
             "badges": {
-                "identifier_name": "badges de %PLAYER",
-                "identifier_description": "Panel contenant les badges du joueur.",
                 "pages": {
                     "0": {
-                        "label": "Badges",
-                        "description": "Ensemble des badges du joueur.",
+                        "embeds": {
+                            "0": {
+                                "title": "Badges de %PLAYER"
+                            }
+                        }
+                    }
+                }
+            },
+            "crow": {
+                "pages": {
+                    "0": {
+                        "embeds": {
+                            "0": {
+                                "title": "Corbeau de %PLAYER"
+                            }
+                        }
+                    }
+                }
+            },
+            "weapons": {
+                "pages": {
+                    "0": {
                         "embeds": {
                             "0": {
                                 "title": "Badges de %PLAYER"
@@ -82,7 +88,9 @@
                 "player_panel": "Statistiques",
                 "inventory_panel": "Inventaire",
                 "activity_panel": "Activité",
-                "badges_panel": "Badges"
+                "badges_panel": "Badges",
+                "crow_panel": "Corbeau",
+                "weapons_panel": "Armes"
             }
         }
     },

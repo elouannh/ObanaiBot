@@ -16,6 +16,8 @@ module.exports = {
                 inventory: "📦",
                 activity: "🎮",
                 badges: "🏅",
+                crow: "🦉",
+                weapons: "🗡",
             },
         },
         systems: {

@@ -16,7 +16,7 @@ class Ready extends Event {
 			activities: [
 				{ name: `version ${client.version}`, type: ActivityType.Watching },
 			],
-			status: "invisible",
+			status: "online",
 		});
 
 		await client.internalServerManager.sync_p2p();

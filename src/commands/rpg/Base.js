@@ -14,10 +14,10 @@ const {
 const Nav = require("../../base/NavigationClasses");
 const calcPlayerLevel = require("../../elements/calcPlayerLevel");
 
-class StaffPanel extends Command {
+class Base extends Command {
     constructor() {
         super({
-            name: "profile",
+            name: "base",
             description: "Commande permettant d'afficher les informations d'un joueur.",
             descriptionLocalizations: {
                 "en-US": "Command to display player informations.",
@@ -25,9 +25,9 @@ class StaffPanel extends Command {
             options: [
                 {
                     type: 6,
-                    name: "joueur",
+                    name: "base",
                     nameLocalizations: {
-                        "en-US": "player",
+                        "en-US": "base",
                     },
                     description: "Joueur dont vous souhaitez afficher les informations.",
                     descriptionLocalizations: {
@@ -40,7 +40,7 @@ class StaffPanel extends Command {
             dmPermission: true,
             category: "RPG",
             cooldown: 5,
-            finishRequest: ["profile"],
+            finishRequest: ["base"],
             private: "none",
             permissions: 0n,
         });
@@ -108,26 +108,13 @@ class StaffPanel extends Command {
         const inventoryString = "inventory";
         const activityString = "activity";
         const badgesString = "badges";
+        const crowString = "crow";
+        const weaponsString = "weapons";
 
         const pages = {
             "player_panel": new Nav.Panel()
-                .setIdentifier(
-                    new Nav.Identifier()
-                        .setLabel(this.lang.panels.player.identifier_name)
-                        .setValue("player_panel")
-                        .setDescription(this.lang.panels.player.identifier_description)
-                        .setEmoji(this.consts.emojis.rpg.symbols.player)
-                        .identifier,
-                )
                 .setPages([
                     new Nav.Page()
-                        .setIdentifier(
-                            new Nav.Identifier()
-                                .setLabel(this.lang.panels.player.pages["0"].label)
-                                .setValue("player_main")
-                                .setDescription(this.lang.panels.player.pages["0"].description)
-                                .identifier,
-                        )
                         .setEmbeds([
                             new EmbedBuilder()
                                 .setTitle(this.lang.panels.player.pages["0"].embeds["0"].title)
@@ -135,23 +122,8 @@ class StaffPanel extends Command {
                         ]),
                 ]),
             "inventory_panel": new Nav.Panel()
-                .setIdentifier(
-                    new Nav.Identifier()
-                        .setLabel(this.lang.panels.inventory.identifier_name)
-                        .setValue("inventory_panel")
-                        .setDescription(this.lang.panels.inventory.identifier_description)
-                        .setEmoji(this.consts.emojis.rpg.symbols.inventory)
-                        .identifier,
-                )
                 .setPages([
                     new Nav.Page()
-                        .setIdentifier(
-                            new Nav.Identifier()
-                                .setLabel(this.lang.panels.inventory.pages["0"].label)
-                                .setValue("inventory_main")
-                                .setDescription(this.lang.panels.inventory.pages["0"].description)
-                                .identifier,
-                        )
                         .setEmbeds([
                             new EmbedBuilder()
                                 .setTitle(this.lang.panels.inventory.pages["0"].embeds["0"].title)
@@ -159,23 +131,8 @@ class StaffPanel extends Command {
                         ]),
                 ]),
             "activity_panel": new Nav.Panel()
-                .setIdentifier(
-                    new Nav.Identifier()
-                        .setLabel(this.lang.panels.activity.identifier_name)
-                        .setValue("activity_panel")
-                        .setDescription(this.lang.panels.activity.identifier_description)
-                        .setEmoji(this.consts.emojis.rpg.symbols.activity)
-                        .identifier,
-                )
                 .setPages([
                     new Nav.Page()
-                        .setIdentifier(
-                            new Nav.Identifier()
-                                .setLabel(this.lang.panels.activity.pages["0"].label)
-                                .setValue("activity_main")
-                                .setDescription(this.lang.panels.activity.pages["0"].description)
-                                .identifier,
-                        )
                         .setEmbeds([
                             new EmbedBuilder()
                                 .setTitle(this.lang.panels.activity.pages["0"].embeds["0"].title)
@@ -183,27 +140,30 @@ class StaffPanel extends Command {
                         ]),
                 ]),
             "badges_panel": new Nav.Panel()
-                .setIdentifier(
-                    new Nav.Identifier()
-                        .setLabel(this.lang.panels.badges.identifier_name)
-                        .setValue("badges_panel")
-                        .setDescription(this.lang.panels.badges.identifier_description)
-                        .setEmoji(this.consts.emojis.rpg.symbols.badges)
-                        .identifier,
-                )
                 .setPages([
                     new Nav.Page()
-                        .setIdentifier(
-                            new Nav.Identifier()
-                                .setLabel(this.lang.panels.badges.pages["0"].label)
-                                .setValue("badges_main")
-                                .setDescription(this.lang.panels.badges.pages["0"].description)
-                                .identifier,
-                        )
                         .setEmbeds([
                             new EmbedBuilder()
                                 .setTitle(this.lang.panels.badges.pages["0"].embeds["0"].title)
                                 .setDescription(badgesString),
+                        ]),
+                ]),
+            "crow_panel": new Nav.Panel()
+                .setPages([
+                    new Nav.Page()
+                        .setEmbeds([
+                            new EmbedBuilder()
+                                .setTitle(this.lang.panels.crow.pages["0"].embeds["0"].title)
+                                .setDescription(crowString),
+                        ]),
+                ]),
+            "weapons_panel": new Nav.Panel()
+                .setPages([
+                    new Nav.Page()
+                        .setEmbeds([
+                            new EmbedBuilder()
+                                .setTitle(this.lang.panels.weapons.pages["0"].embeds["0"].title)
+                                .setDescription(weaponsString),
                         ]),
                 ]),
         };
@@ -226,10 +186,23 @@ class StaffPanel extends Command {
                         .setLabel(this.lang.rows.universal.activity_panel)
                         .setEmoji(this.consts.emojis.rpg.symbols.activity)
                         .setStyle("Secondary"),
+                ),
+            new ActionRowBuilder()
+                .setComponents(
                     new ButtonBuilder()
                         .setCustomId("badges_panel")
                         .setLabel(this.lang.rows.universal.badges_panel)
                         .setEmoji(this.consts.emojis.rpg.symbols.badges)
+                        .setStyle("Secondary"),
+                    new ButtonBuilder()
+                        .setCustomId("crow_panel")
+                        .setLabel(this.lang.rows.universal.crow_panel)
+                        .setEmoji(this.consts.emojis.rpg.symbols.crow)
+                        .setStyle("Secondary"),
+                    new ButtonBuilder()
+                        .setCustomId("weapons_panel")
+                        .setLabel(this.lang.rows.universal.weapons_panel)
+                        .setEmoji(this.consts.emojis.rpg.symbols.weapons)
                         .setStyle("Secondary"),
                 ),
             new ActionRowBuilder()
@@ -285,4 +258,4 @@ class StaffPanel extends Command {
     }
 }
 
-module.exports = StaffPanel;
+module.exports = Base;

@@ -39,7 +39,7 @@ class PlayerDb {
 
     async load(id) {
         const p = await this.ensure(id);
-        const i = await this.client.inventoryDb.get(id);
+        const i = await this.client.inventoryDb.db.get(id);
 
         for (const stat in p.stats) {
             if (typeof p.statsLevel === "undefined") p.statsLevel = {};
