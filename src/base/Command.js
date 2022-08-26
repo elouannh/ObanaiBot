@@ -1,6 +1,6 @@
 const { PermissionsBitField } = require("discord.js");
 const fs = require("fs");
-const Language = require("../languages/Language");
+const Language = require("./Language");
 
 const sections = {
     "Commandes Globales": ["Utilitaire"],

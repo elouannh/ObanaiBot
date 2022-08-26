@@ -7,8 +7,7 @@ class Language {
         this.json = {};
 
         for (const fileName of this.jsonDir) {
-            const file = require(`../languages/json/${this.lang}/${fileName}`);
-            this.json[fileName.replace(".json", "")] = file;
+            this.json[fileName.replace(".json", "")] = require(`../languages/json/${this.lang}/${fileName}`);
         }
     }
 }

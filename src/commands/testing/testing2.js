@@ -1,6 +1,6 @@
 const Command = require("../../base/Command");
 const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder, Status, ButtonBuilder, escapeMarkdown } = require("discord.js");
-const PasteGG = require("../../base/PasteGGClasses");
+const PasteGG = require("../../base/PasteGGManager");
 
 class Testing extends Command {
     constructor() {
@@ -16,7 +16,6 @@ class Testing extends Command {
     }
 
     async run() {
-        console.log(await this.client.pasteGGManager.postGuildsList(this.client.guilds.cache));
     }
 }
 

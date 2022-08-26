@@ -1,8 +1,6 @@
-const { Collection, SlashCommandBuilder } = require("discord.js");
 const fs = require("fs");
 
 class EventManager {
-
     constructor(client, dir = "./src/events/") {
         this.client = client;
         this.dir = dir;

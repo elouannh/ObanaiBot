@@ -434,9 +434,6 @@ class InternalServerManager {
             "600": "🔴",
         };
 
-        console.log(amount);
-        console.log(Object.entries(identifiers).filter(e => amount >= Number(e[0])).at(-1)[1]);
-
         return Object.entries(identifiers).filter(e => amount >= Number(e[0])).at(-1)[1] + ` ${amount} ms`;
     }
 
@@ -449,7 +446,7 @@ class InternalServerManager {
         const datas = {
             "clientStatus": this.statusString(this.client.statusDb.datas.mode),
             "apiPing": this.pingString(this.client.ws.ping),
-            "serverPing": this.pingString(this.client.util.positivize(Date.now() - timestamp)),
+            "serverPing": this.pingString(this.client.util.positive(Date.now() - timestamp)),
             "memoryUsage": [
                 `${((memoryUsage).toFixed(4))} MB`,
                 `${this.client.util.intRender((4.00 * 1024).toFixed(0), " ")} MB`,

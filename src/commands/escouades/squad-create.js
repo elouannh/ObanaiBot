@@ -65,7 +65,7 @@ class SquadCreate extends Command {
                 );
             }
 
-            const generated = this.client.util.coolNameGenerator();
+            const generated = this.client.util.nameGenerator();
             const newSquad = this.client.squadDb.model(
                 this.message.author.id, null, generated.sentence, generated.quote,
             );

@@ -10,7 +10,7 @@ const {
     TextInputBuilder,
     escapeMarkdown,
 } = require("discord.js");
-const Nav = require("../../base/NavigationClasses");
+const Nav = require("../../base/Navigation");
 
 class Testing extends Command {
     constructor() {

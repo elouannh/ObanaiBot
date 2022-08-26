@@ -10,7 +10,7 @@ const {
     TextInputBuilder,
     escapeMarkdown,
 } = require("discord.js");
-const Nav = require("../../base/NavigationClasses");
+const Nav = require("../../base/Navigation");
 
 class StaffPanel extends Command {
     constructor() {
@@ -339,7 +339,7 @@ class StaffPanel extends Command {
         const panel = await this.interaction.reply({
             embeds: pages.tester_panel.pages["0"].embeds,
             components: pages.tester_panel.components.concat(universalRows),
-        }).catch(this.client.util.catcherror);
+        }).catch(this.client.util.catchError);
         if (panel === undefined) return;
         const navigation = panel.createMessageComponentCollector({
             filter: inter => inter.user.id === this.interaction.user.id,
@@ -352,7 +352,7 @@ class StaffPanel extends Command {
         navigation.on("collect", async inter => {
             if (inter.isSelectMenu()) {
                 await inter.deferUpdate()
-                    .catch(this.client.util.catcherror);
+                    .catch(this.client.util.catchError);
                 if (inter.customId === "panel_category_selector") {
                     if (userGrade.asMinimal(userGrade.allGrades).includes(inter.values[0].split("_")[0])) {
                         currentPanel = inter.values[0];
@@ -363,13 +363,13 @@ class StaffPanel extends Command {
                         panel.interaction.editReply({
                             embeds: pages[currentPanel].pages["0"].embeds,
                             components: newComponents,
-                        }).catch(this.client.util.catcherror);
+                        }).catch(this.client.util.catchError);
                     }
                     else {
                         inter.followUp({
                             content: `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.no_permissions}`,
                             ephemeral: true,
-                        }).catch(this.client.util.catcherror);
+                        }).catch(this.client.util.catchError);
                     }
                 }
                 else if (Object.keys(pages).includes(inter.customId)) {
@@ -380,7 +380,7 @@ class StaffPanel extends Command {
                     panel.interaction.editReply({
                         embeds: pages[currentPanel].pages.find(p => p.identifier.value === inter.values[0]).embeds,
                         components: newComponents,
-                    }).catch(this.client.util.catcherror);
+                    }).catch(this.client.util.catchError);
                 }
             }
             else if (inter.isButton()) {
@@ -391,71 +391,71 @@ class StaffPanel extends Command {
                 ];
                 if (inter.customId === "leave_panel") {
                     await inter.deferUpdate()
-                        .catch(this.client.util.catcherror);
+                        .catch(this.client.util.catchError);
                     navigation.stop();
                 }
                 else if (inter.customId === "view_status") {
                     await inter.deferUpdate()
-                        .catch(this.client.util.catcherror);
+                        .catch(this.client.util.catchError);
                     inter.followUp({
                         content: `${this.lang.strings.actual_bot_status}: **${tempoStatus[0]}** ${tempoStatus[1].clientStatus}`,
                         ephemeral: true,
-                    }).catch(this.client.util.catcherror);
+                    }).catch(this.client.util.catchError);
                 }
                 else if (inter.customId === "set_online") {
                     await inter.deferUpdate()
-                        .catch(this.client.util.catcherror);
+                        .catch(this.client.util.catchError);
                     if (tempoStatus[0] === "online") {
                         inter.followUp({
                             content: `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.already_set} **${tempoStatus[0]}** ${tempoStatus[1].clientStatus}.`,
                             ephemeral: true,
-                        }).catch(this.client.util.catcherror);
+                        }).catch(this.client.util.catchError);
                     }
                     else {
                         this.client.statusDb.setOnline();
                         inter.followUp({
                             content: `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.set_online}`,
                             ephemeral: true,
-                        }).catch(this.client.util.catcherror);
+                        }).catch(this.client.util.catchError);
                     }
                 }
                 else if (inter.customId === "set_maintenance") {
                     await inter.deferUpdate()
-                        .catch(this.client.util.catcherror);
+                        .catch(this.client.util.catchError);
                     if (tempoStatus[0] === "maintenance") {
                         inter.followUp({
                             content: `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.already_set} **${tempoStatus[0]}** ${tempoStatus[1].clientStatus}.`,
                             ephemeral: true,
-                        }).catch(this.client.util.catcherror);
+                        }).catch(this.client.util.catchError);
                     }
                     else {
                         this.client.statusDb.setMaintenance();
                         inter.followUp({
                             content: `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.set_maintenance}`,
                             ephemeral: true,
-                        }).catch(this.client.util.catcherror);
+                        }).catch(this.client.util.catchError);
                     }
                 }
                 else if (inter.customId === "set_disabled") {
                     await inter.deferUpdate()
-                        .catch(this.client.util.catcherror);
+                        .catch(this.client.util.catchError);
                     if (tempoStatus[0] === "disabled") {
                         inter.followUp({
                             content: `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.already_set} **${tempoStatus[0]}** ${tempoStatus[1].clientStatus}.`,
                             ephemeral: true,
-                        }).catch(this.client.util.catcherror);
+                        }).catch(this.client.util.catchError);
                     }
                     else {
                         this.client.statusDb.setDisabled();
                         inter.followUp({
                             content: `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.set_disabled}`,
                             ephemeral: true,
-                        }).catch(this.client.util.catcherror);
+                        }).catch(this.client.util.catchError);
                     }
                 }
                 else if (inter.customId === "guilds_list") {
                     await inter.deferUpdate()
-                        .catch(this.client.util.catcherror);
+                        .catch(this.client.util.catchError);
                     const posted = await this.client.pasteGGManager.postGuildsList(this.client.guilds.cache);
 
                     if (posted.status === "success") {
@@ -466,18 +466,18 @@ class StaffPanel extends Command {
                                 + `\n\n**• [${posted.result.id}](${posted.result.url})**\n\n`
                                 + authGuilds,
                             ephemeral: true,
-                        }).catch(this.client.util.catcherror);
+                        }).catch(this.client.util.catchError);
                     }
                     else if (posted.status === "error") {
                         inter.followUp({
                             content: `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.post_error}`,
                             ephemeral: true,
-                        }).catch(this.client.util.catcherror);
+                        }).catch(this.client.util.catchError);
                     }
                 }
                 else if (inter.customId === "vip_list") {
                     await inter.deferUpdate()
-                        .catch(this.client.util.catcherror);
+                        .catch(this.client.util.catchError);
                     const players = await this.client.externalServerDb.players();
                     const playersInfos = `**» ${this.lang.strings.vip_players}**:\n`
                         + `${players.cache.vips.map(p => inlineCode(p)).join(" / ")}\n\n`
@@ -486,7 +486,7 @@ class StaffPanel extends Command {
                     inter.followUp({
                         content: playersInfos,
                         ephemeral: true,
-                    }).catch(this.client.util.catcherror);
+                    }).catch(this.client.util.catchError);
                 }
                 else if (["add_auth_guilds", "remove_auth_guilds", "add_vip", "remove_vip"].includes(inter.customId)) {
                     let modalResponse = undefined;
@@ -506,11 +506,11 @@ class StaffPanel extends Command {
                                 ),
                             );
 
-                        await inter.showModal(modal).catch(this.client.util.catcherror);
+                        await inter.showModal(modal).catch(this.client.util.catchError);
                         modalResponse = await inter.awaitModalSubmit({
                             filter: modalSubmitted => modalSubmitted.user.id === this.interaction.user.id,
                             time: 15_000,
-                        }).catch(this.client.util.catcherror);
+                        }).catch(this.client.util.catchError);
                     }
                     else if (inter.customId === "remove_auth_guilds") {
                         const modal = new ModalBuilder()
@@ -528,11 +528,11 @@ class StaffPanel extends Command {
                                 ),
                             );
 
-                        await inter.showModal(modal).catch(this.client.util.catcherror);
+                        await inter.showModal(modal).catch(this.client.util.catchError);
                         modalResponse = await inter.awaitModalSubmit({
                             filter: modalSubmitted => modalSubmitted.user.id === this.interaction.user.id,
                             time: 15_000,
-                        }).catch(this.client.util.catcherror);
+                        }).catch(this.client.util.catchError);
                     }
                     else if (inter.customId === "add_vip") {
                         const modal = new ModalBuilder()
@@ -561,11 +561,11 @@ class StaffPanel extends Command {
                                 ),
                             );
 
-                        await inter.showModal(modal).catch(this.client.util.catcherror);
+                        await inter.showModal(modal).catch(this.client.util.catchError);
                         modalResponse = await inter.awaitModalSubmit({
                             filter: modalSubmitted => modalSubmitted.user.id === this.interaction.user.id,
                             time: 15_000,
-                        }).catch(this.client.util.catcherror);
+                        }).catch(this.client.util.catchError);
                     }
                     else if (inter.customId === "remove_vip") {
                         const modal = new ModalBuilder()
@@ -594,11 +594,11 @@ class StaffPanel extends Command {
                                 ),
                             );
 
-                        await inter.showModal(modal).catch(this.client.util.catcherror);
+                        await inter.showModal(modal).catch(this.client.util.catchError);
                         modalResponse = await inter.awaitModalSubmit({
                             filter: modalSubmitted => modalSubmitted.user.id === this.interaction.user.id,
                             time: 15_000,
-                        }).catch(this.client.util.catcherror);
+                        }).catch(this.client.util.catchError);
                     }
 
                     if (modalResponse !== undefined) {
@@ -609,13 +609,13 @@ class StaffPanel extends Command {
                                 modalResponse.reply({
                                     content: `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.is_already_authorized.replace("%GUILD", guildIDField)}`,
                                     ephemeral: true,
-                                }).catch(this.client.util.catcherror);
+                                }).catch(this.client.util.catchError);
                             }
                             else {
                                 modalResponse.reply({
                                     content: `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.is_authorized.replace("%GUILD", guildIDField)}`,
                                     ephemeral: true,
-                                }).catch(this.client.util.catcherror);
+                                }).catch(this.client.util.catchError);
                                 this.client.internalServerManager.db.push("internalServer", guildIDField, "authServers");
                             }
                         }
@@ -626,13 +626,13 @@ class StaffPanel extends Command {
                                 modalResponse.reply({
                                     content: `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.is_already_unauthorized.replace("%GUILD", guildIDField)}`,
                                     ephemeral: true,
-                                }).catch(this.client.util.catcherror);
+                                }).catch(this.client.util.catchError);
                             }
                             else {
                                 modalResponse.reply({
                                     content: `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.is_unauthorized.replace("%GUILD", guildIDField)}`,
                                     ephemeral: true,
-                                }).catch(this.client.util.catcherror);
+                                }).catch(this.client.util.catchError);
                                 this.client.internalServerManager.db.set(
                                     "internalServer",
                                     this.client.internalServerManager.datas.authServers.filter(s => s !== guildIDField),
@@ -686,7 +686,7 @@ class StaffPanel extends Command {
                                 modalResponse.reply({
                                     content: message,
                                     ephemeral: true,
-                                }).catch(this.client.util.catcherror);
+                                }).catch(this.client.util.catchError);
                             }
                         }
                         else if (modalResponse.customId === "modal_remove_vip") {
@@ -739,7 +739,7 @@ class StaffPanel extends Command {
                                 modalResponse.reply({
                                     content: message,
                                     ephemeral: true,
-                                }).catch(this.client.util.catcherror);
+                                }).catch(this.client.util.catchError);
                             }
                         }
                     }
@@ -759,20 +759,20 @@ class StaffPanel extends Command {
                             ),
                         );
 
-                    await inter.showModal(modal).catch(this.client.util.catcherror);
+                    await inter.showModal(modal).catch(this.client.util.catchError);
                     const modalSubmit = await inter.awaitModalSubmit({
                         filter: modalSubmitted => modalSubmitted.user.id === this.interaction.user.id,
                         time: 300_000,
-                    }).catch(this.client.util.catcherror);
+                    }).catch(this.client.util.catchError);
 
                     if (modalSubmit !== undefined) {
                         const codeInput = modalSubmit.fields.getTextInputValue("code_input") ?? "";
 
-                        const resp = await this.client.util.eval(codeInput, this);
+                        const resp = await this.client.util.evalCode(codeInput, this);
                         modalSubmit.reply({
                             content: resp,
                             ephemeral: false,
-                        }).catch(this.client.util.catcherror);
+                        }).catch(this.client.util.catchError);
                     }
                 }
             }
@@ -780,7 +780,7 @@ class StaffPanel extends Command {
 
         navigation.on("end", async () => {
             panel.interaction.editReply({ embeds: panel.embeds, components: [] })
-                .catch(this.client.util.catcherror);
+                .catch(this.client.util.catchError);
         });
     }
 }

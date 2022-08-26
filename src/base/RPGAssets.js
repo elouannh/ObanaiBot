@@ -1,19 +1,6 @@
 const fs = require("fs");
-
-class MovementBase {
-    constructor(breath) {
-        this.breath = breath;
-        this.id = this.breath.movements.length;
-    }
-}
-
-class BreathBase {
-    constructor() {
-        this.id = "null";
-        this.emoji = "🔴";
-        this.movements = [new MovementBase(this)];
-    }
-}
+const RPGBreathBase = require("./subclasses/RPGBreathBase");
+const RPGMovementBase = require("./subclasses/RPGMovementBase");
 
 class RPGAssets {
     constructor(dir) {

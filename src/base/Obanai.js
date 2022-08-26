@@ -18,7 +18,7 @@ const config = require("../config.json");
 const Package = require("../../package.json");
 const CollectionManager = require("./CollectionManager");
 const LanguageManager = require("./LanguageManager");
-const PasteGGClasses = require("./PasteGGClasses");
+const PasteGGClasses = require("./PasteGGManager");
 const RPGAssets = require("./RPGAssets");
 
 class Obanai extends Client {
@@ -29,7 +29,7 @@ class Obanai extends Client {
         });
 
         this.token = token;
-        this.util = Util(this);
+        this.util = new Util(this);
         this.constants = Constants;
         this.registerSlash = registerSlash;
         this.pasteGGManager = new PasteGGClasses.PasteGGManager(this);

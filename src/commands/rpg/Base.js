@@ -11,7 +11,7 @@ const {
     escapeMarkdown,
     User,
 } = require("discord.js");
-const Nav = require("../../base/NavigationClasses");
+const Nav = require("../../base/Navigation");
 const calcPlayerLevel = require("../../elements/calcPlayerLevel");
 
 class Base extends Command {
@@ -77,7 +77,7 @@ class Base extends Command {
                         + `${this.consts.emojis.rpg.symbols.category}*`;
                 }
                 else {
-                    userStatsObject[statKey] += ` *- **${this.client.util.positivize(userPDB.catBoosts[statKey][0])}**`
+                    userStatsObject[statKey] += ` *- **${this.client.util.positive(userPDB.catBoosts[statKey][0])}**`
                         + ` (${userPDB.catBoosts[statKey][1]}%)`
                         + `${this.consts.emojis.rpg.symbols.category}*`;
                 }
@@ -250,7 +250,7 @@ class Base extends Command {
         const panel = await this.interaction.reply({
             embeds: pages.player_panel.pages["0"].embeds,
             components: pages.player_panel.components.concat(universalRows),
-        }).catch(this.client.util.catcherror);
+        }).catch(this.client.util.catchError);
         if (panel === undefined) return;
         const navigation = panel.createMessageComponentCollector({
             filter: inter => inter.user.id === this.interaction.user.id,
@@ -264,7 +264,7 @@ class Base extends Command {
             if (inter.isButton()) {
                 if (inter.customId.endsWith("_panel") && inter.customId !== "leave_panel") {
                     await inter.deferUpdate()
-                        .catch(this.client.util.catcherror);
+                        .catch(this.client.util.catchError);
 
                     currentPanel = inter.customId;
                     const newComponents = [...pages[currentPanel].pages[0].components];
@@ -274,11 +274,11 @@ class Base extends Command {
                     panel.interaction.editReply({
                         embeds: pages[currentPanel].pages[0].embeds,
                         components: newComponents,
-                    }).catch(this.client.util.catcherror);
+                    }).catch(this.client.util.catchError);
                 }
                 else if (inter.customId === "leave_panel") {
                     await inter.deferUpdate()
-                        .catch(this.client.util.catcherror);
+                        .catch(this.client.util.catchError);
                     navigation.stop();
                 }
             }
@@ -286,7 +286,7 @@ class Base extends Command {
 
         navigation.on("end", async () => {
             panel.interaction.editReply({ embeds: panel.embeds, components: [] })
-                .catch(this.client.util.catcherror);
+                .catch(this.client.util.catchError);
         });
     }
 }

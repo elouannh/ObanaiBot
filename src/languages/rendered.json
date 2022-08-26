@@ -1,0 +1,761 @@
+{
+    " ----": "__________________________",
+    "_TUTORIEL": "Use this JSON to find bad translated files. Just search for \"[TRANSLATION NOT FOUND]\", and navigate !",
+    "TUTORIEL_": "You can also search [UNEXPECTED TRANSLATION] to find the translations that are not necessary.",
+    "---- ": "__________________________",
+    "en": {
+        "commands": {
+            "staff-panel": {
+                "strings": {
+                    "owner_grade": "[TRANSLATION NOT FOUND] Owner",
+                    "admin_grade": "Administrator",
+                    "tester_grade": "Tester",
+                    "owner_panel": "Owner's Panel",
+                    "admin_panel": "Administrator's Panel",
+                    "tester_panel": "Tester's Panel",
+                    "home_title": "Welcome into the staff's panel.",
+                    "your_grades": "Your grades",
+                    "panels_accesses_message": "You can access to the following panels",
+                    "panels_timeout_message": "This navigation panel will stay for 2 minutes and it will be disabled for 30 seconds of inactivity.",
+                    "api_ping": "API's Ping",
+                    "server_ping": "Server's Ping",
+                    "internal_server_1": "Internal Server 1",
+                    "internal_server_2": "Internal Server 2",
+                    "rpg_status": "RPG's Status",
+                    "memory": "Memory",
+                    "capacity": "Capacity",
+                    "uptime": "Uptime",
+                    "guilds": "Guilds",
+                    "total_members": "Total of members",
+                    "cached_users": "Cached users",
+                    "players": "Players",
+                    "version": "[TRANSLATION NOT FOUND] Version",
+                    "no_permissions": "You don't have permissions to access to this panel.",
+                    "actual_bot_status": "Actual bot status",
+                    "already_set": "The bot is already set",
+                    "set_online": "The bot is now **online** 🟢.",
+                    "set_maintenance": "The bot is now in **maintenance** 🟡.",
+                    "set_disabled": "The bot is now **disabled** 🔴.",
+                    "auth_guilds": "Authorized guilds",
+                    "post_success": "`(Expire in 24 hours)` Guilds list has been posted to this **Paste.gg** link:",
+                    "post_error": "An error occured while generating guilds list.",
+                    "vip_players": "VIPs players",
+                    "vipplus_players": "VIPs(+) players",
+                    "is_already_authorized": "The guild `%GUILD` **is already authorized**.",
+                    "is_authorized": "The guild `%GUILD` **is authorized**.",
+                    "is_already_unauthorized": "The guild `%GUILD` **is already unauthorized**.",
+                    "is_unauthorized": "The guild `%GUILD` **is unauthorized**.",
+                    "is_already_vip": "Player %PLAYER **is already VIP** in the bot.",
+                    "is_vip": "Player %PLAYER is **VIP** in the bot.",
+                    "is_already_vipplus": "Player %PLAYER is already **VIP(+)** in the bot.",
+                    "is_vipplus": "Player %PLAYER **is VIP(+)** in the bot.",
+                    "is_already_not_vip": "Player %PLAYER **is already not VIP** in the bot.",
+                    "is_not_vip": "Player %PLAYER **isn't VIP** in the bot.",
+                    "is_already_not_vipplus": "Player %PLAYER **is already not VIP(+)** in the bot.",
+                    "is_not_vipplus": "Le joueur %PLAYER **isn't plus VIP(+)** in the bot."
+                },
+                "panels": {
+                    "identifier_name": "[UNEXPECTED TRANSLATION] Tester's Panel",
+                    "tester": {
+                        "identifier_description": "Panel which includes useful informations about the bot.",
+                        "pages": {
+                            "0": {
+                                "label": "User informations",
+                                "description": "Informations about the command author.",
+                                "embeds": {
+                                    "0": {
+                                        "title": "Tester's panel - User informations"
+                                    }
+                                }
+                            },
+                            "1": {
+                                "label": "Bot status",
+                                "description": "Actual bot status & different currents processus.",
+                                "embeds": {
+                                    "0": {
+                                        "title": "Tester's panel - Bot status"
+                                    }
+                                }
+                            },
+                            "2": {
+                                "label": "Bot informations",
+                                "description": "Bot informations and some other useful informations.",
+                                "embeds": {
+                                    "0": {
+                                        "title": "Tester's panel - Bot informations"
+                                    }
+                                }
+                            }
+                        },
+                        "identifier_name": "Panel Testeur"
+                    },
+                    "admin": {
+                        "identifier_name": "Administrator's Panel",
+                        "identifier_description": "Panel which includes useful administratives functions.",
+                        "pages": {
+                            "0": {
+                                "label": "Status editing",
+                                "description": "Administrator's panel for changing the bot's status.",
+                                "embeds": {
+                                    "0": {
+                                        "title": "Administrator's panel - Status editing",
+                                        "description": "Interact with the buttons below.",
+                                        "fields": {
+                                            "0": {
+                                                "value": "See the actual status"
+                                            },
+                                            "1": {
+                                                "value": "Set online"
+                                            },
+                                            "2": {
+                                                "value": "Set maintenance"
+                                            },
+                                            "3": {
+                                                "value": "Set disabled"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "1": {
+                                "label": "Guilds",
+                                "description": "Administrator's panel for managing bot's guilds.",
+                                "embeds": {
+                                    "0": {
+                                        "title": "Administrator's panel - Guilds",
+                                        "description": "Interact with the buttons below.",
+                                        "fields": {
+                                            "0": {
+                                                "value": "See the guilds list"
+                                            },
+                                            "1": {
+                                                "value": "Add authorized guilds (less than 30 members)"
+                                            },
+                                            "2": {
+                                                "value": "Remove authorized guilds (less than 30 members)"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "2": {
+                                "label": "[TRANSLATION NOT FOUND] VIPs/VIPs(+)",
+                                "description": "Administrator's panel for managing VIPs and VIPs(+).",
+                                "embeds": {
+                                    "0": {
+                                        "title": "Administrator's panel - VIPs/VIPs(+)",
+                                        "description": "Interact with the buttons below.",
+                                        "fields": {
+                                            "0": {
+                                                "value": "See the VIPs/VIPs(+)'s list"
+                                            },
+                                            "1": {
+                                                "value": "Add VIPs/VIPs(+)"
+                                            },
+                                            "2": {
+                                                "value": "Remove VIPs/VIPs(+)"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "owner": {
+                        "identifier_name": "Owner's Panel",
+                        "identifier_description": "Panel which includes useful functions for the bot's owner.",
+                        "pages": {
+                            "0": {
+                                "label": "Execute code",
+                                "description": "Panel for executing code directly into Discord.",
+                                "embeds": {
+                                    "0": {
+                                        "title": "Owner's panel - Execute code",
+                                        "description": "Interact with the buttons below.",
+                                        "fields": {
+                                            "0": {
+                                                "value": "Execute code"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "rows": {
+                    "page": "[TRANSLATION NOT FOUND] Page...",
+                    "panel": "[TRANSLATION NOT FOUND] Panel...",
+                    "universal": {
+                        "leave_panel": "Leave panel"
+                    },
+                    "modals": {
+                        "add_auth_guilds": {
+                            "title": "Add authorized guilds",
+                            "inputs": {
+                                "0": {
+                                    "label": "Enter the ID",
+                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                }
+                            }
+                        },
+                        "remove_auth_guilds": {
+                            "title": "Remove authorized guilds",
+                            "inputs": {
+                                "0": {
+                                    "label": "Enter the ID",
+                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                }
+                            }
+                        },
+                        "add_vip": {
+                            "title": "Add VIPs/VIPs(+)",
+                            "inputs": {
+                                "0": {
+                                    "label": "(VIP) Enter the ID",
+                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                },
+                                "1": {
+                                    "label": "(VIP(+)) Enter the ID",
+                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                }
+                            }
+                        },
+                        "remove_vip": {
+                            "title": "Remove VIPs/VIPs(+)",
+                            "inputs": {
+                                "0": {
+                                    "label": "(VIP) Enter the ID",
+                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                },
+                                "1": {
+                                    "label": "(VIP(+)) Enter the ID",
+                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                }
+                            }
+                        },
+                        "code_execute": {
+                            "title": "Execute code",
+                            "inputs": {
+                                "0": {
+                                    "label": "[TRANSLATION NOT FOUND] Code (JavaScript):",
+                                    "placeholder": "[TRANSLATION NOT FOUND] console.log(\"Hello world\");"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "base": {
+                "strings": {
+                    "profile_aptitudes": "[TRANSLATION NOT FOUND] Aptitudes",
+                    "level": "[TRANSLATION NOT FOUND] Niveau",
+                    "total_experience": "[TRANSLATION NOT FOUND] Expérience totale",
+                    "level_experience": "[TRANSLATION NOT FOUND] Expérience de niveau"
+                },
+                "panels": {
+                    "player": {
+                        "pages": {
+                            "0": {
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Statistiques de %PLAYER",
+                                        "fields": {
+                                            "0": {
+                                                "name": "[TRANSLATION NOT FOUND] Aptitudes"
+                                            },
+                                            "1": {
+                                                "name": "[TRANSLATION NOT FOUND] Niveau"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "inventory": {
+                        "pages": {
+                            "0": {
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Inventaire de %PLAYER",
+                                        "fields": {
+                                            "0": {
+                                                "name": "[TRANSLATION NOT FOUND] Ressources"
+                                            },
+                                            "1": {
+                                                "name": "[TRANSLATION NOT FOUND] Objets de quête"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "activity": {
+                        "pages": {
+                            "0": {
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Activité de %PLAYER",
+                                        "fields": {
+                                            "0": {
+                                                "name": "[TRANSLATION NOT FOUND] Activité en cours"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "badges": {
+                        "pages": {
+                            "0": {
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Badges de %PLAYER",
+                                        "fields": {
+                                            "0": {
+                                                "name": "[TRANSLATION NOT FOUND] Badges"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "crow": {
+                        "pages": {
+                            "0": {
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Corbeau de %PLAYER",
+                                        "fields": {
+                                            "0": {
+                                                "name": "[TRANSLATION NOT FOUND] Corbeau actif"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "weapons": {
+                        "pages": {
+                            "0": {
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Armes de %PLAYER",
+                                        "fields": {
+                                            "0": {
+                                                "name": "[TRANSLATION NOT FOUND] Arme équipée"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "rows": {
+                    "page": "[TRANSLATION NOT FOUND] Page...",
+                    "panel": "[TRANSLATION NOT FOUND] Panel...",
+                    "universal": {
+                        "leave_panel": "[TRANSLATION NOT FOUND] Quitter le panel",
+                        "player_panel": "[TRANSLATION NOT FOUND] Statistiques",
+                        "inventory_panel": "[TRANSLATION NOT FOUND] Inventaire",
+                        "activity_panel": "[TRANSLATION NOT FOUND] Activité",
+                        "badges_panel": "[TRANSLATION NOT FOUND] Badges",
+                        "crow_panel": "[TRANSLATION NOT FOUND] Corbeau",
+                        "weapons_panel": "[TRANSLATION NOT FOUND] Armes"
+                    }
+                }
+            }
+        },
+        "universal": {
+            "aptitudes": {
+                "strength": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Force",
+                "speed": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Vitesse",
+                "defense": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Défense",
+                "agility": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Agilité"
+            }
+        }
+    },
+    "fr": {
+        "commands": {
+            "base": {
+                "strings": {
+                    "profile_aptitudes": "[TRANSLATION NOT FOUND] Aptitudes",
+                    "level": "[TRANSLATION NOT FOUND] Niveau",
+                    "total_experience": "[TRANSLATION NOT FOUND] Expérience totale",
+                    "level_experience": "[TRANSLATION NOT FOUND] Expérience de niveau"
+                },
+                "panels": {
+                    "player": {
+                        "pages": {
+                            "0": {
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Statistiques de %PLAYER",
+                                        "fields": {
+                                            "0": {
+                                                "name": "[TRANSLATION NOT FOUND] Aptitudes"
+                                            },
+                                            "1": {
+                                                "name": "[TRANSLATION NOT FOUND] Niveau"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "inventory": {
+                        "pages": {
+                            "0": {
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Inventaire de %PLAYER",
+                                        "fields": {
+                                            "0": {
+                                                "name": "[TRANSLATION NOT FOUND] Ressources"
+                                            },
+                                            "1": {
+                                                "name": "[TRANSLATION NOT FOUND] Objets de quête"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "activity": {
+                        "pages": {
+                            "0": {
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Activité de %PLAYER",
+                                        "fields": {
+                                            "0": {
+                                                "name": "[TRANSLATION NOT FOUND] Activité en cours"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "badges": {
+                        "pages": {
+                            "0": {
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Badges de %PLAYER",
+                                        "fields": {
+                                            "0": {
+                                                "name": "[TRANSLATION NOT FOUND] Badges"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "crow": {
+                        "pages": {
+                            "0": {
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Corbeau de %PLAYER",
+                                        "fields": {
+                                            "0": {
+                                                "name": "[TRANSLATION NOT FOUND] Corbeau actif"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "weapons": {
+                        "pages": {
+                            "0": {
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Armes de %PLAYER",
+                                        "fields": {
+                                            "0": {
+                                                "name": "[TRANSLATION NOT FOUND] Arme équipée"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "rows": {
+                    "page": "[TRANSLATION NOT FOUND] Page...",
+                    "panel": "[TRANSLATION NOT FOUND] Panel...",
+                    "universal": {
+                        "leave_panel": "[TRANSLATION NOT FOUND] Quitter le panel",
+                        "player_panel": "[TRANSLATION NOT FOUND] Statistiques",
+                        "inventory_panel": "[TRANSLATION NOT FOUND] Inventaire",
+                        "activity_panel": "[TRANSLATION NOT FOUND] Activité",
+                        "badges_panel": "[TRANSLATION NOT FOUND] Badges",
+                        "crow_panel": "[TRANSLATION NOT FOUND] Corbeau",
+                        "weapons_panel": "[TRANSLATION NOT FOUND] Armes"
+                    }
+                }
+            },
+            "staff-panel": {
+                "strings": {
+                    "owner_grade": "[TRANSLATION NOT FOUND] Owner",
+                    "admin_grade": "[TRANSLATION NOT FOUND] Administrateur",
+                    "tester_grade": "[TRANSLATION NOT FOUND] Testeur",
+                    "owner_panel": "[TRANSLATION NOT FOUND] Panel Owner",
+                    "admin_panel": "[TRANSLATION NOT FOUND] Panel Administrateur",
+                    "tester_panel": "[TRANSLATION NOT FOUND] Panel Testeur",
+                    "home_title": "[TRANSLATION NOT FOUND] Bienvenue sur le panel du personnel.",
+                    "your_grades": "[TRANSLATION NOT FOUND] Vos grades",
+                    "panels_accesses_message": "[TRANSLATION NOT FOUND] Vous avez donc accès aux panels ci-dessous",
+                    "panels_timeout_message": "[TRANSLATION NOT FOUND] Ce panel de navigation restera actif 2 minutes et se désactivera au bout de 30 secondes d'inactivité.",
+                    "api_ping": "[TRANSLATION NOT FOUND] Ping API",
+                    "server_ping": "[TRANSLATION NOT FOUND] Ping Serveur",
+                    "internal_server_1": "[TRANSLATION NOT FOUND] Serveur Interne 1",
+                    "internal_server_2": "[TRANSLATION NOT FOUND] Serveur Interne 2",
+                    "rpg_status": "[TRANSLATION NOT FOUND] Statut du RPG",
+                    "memory": "[TRANSLATION NOT FOUND] Mémoire",
+                    "capacity": "[TRANSLATION NOT FOUND] Capacité",
+                    "uptime": "[TRANSLATION NOT FOUND] En ligne depuis",
+                    "guilds": "[TRANSLATION NOT FOUND] Serveurs",
+                    "total_members": "[TRANSLATION NOT FOUND] Total de membres",
+                    "cached_users": "[TRANSLATION NOT FOUND] Utilisateurs dans le cache",
+                    "players": "[TRANSLATION NOT FOUND] Joueurs",
+                    "version": "[TRANSLATION NOT FOUND] Version",
+                    "no_permissions": "[TRANSLATION NOT FOUND] Il semblerait que vous n'ayez pas les permissions nécessaires pour accéder à cette page.",
+                    "actual_bot_status": "[TRANSLATION NOT FOUND] Statut actuel du bot",
+                    "already_set": "[TRANSLATION NOT FOUND] Le bot a déjà le statut",
+                    "set_online": "[TRANSLATION NOT FOUND] Le bot est désormais en **online** 🟢.",
+                    "set_maintenance": "[TRANSLATION NOT FOUND] Le bot est désormais en **maintenance** 🟡.",
+                    "set_disabled": "[TRANSLATION NOT FOUND] Le bot est désormais en **disabled** 🔴.",
+                    "auth_guilds": "[TRANSLATION NOT FOUND] Serveurs autorisés",
+                    "post_success": "[TRANSLATION NOT FOUND] `(Expire dans 24h)` La liste des serveurs a été générées sur ce lien **Paste.gg** :",
+                    "post_error": "[TRANSLATION NOT FOUND] Une erreur est survenue lors de la génération de la liste des serveurs.",
+                    "vip_players": "[TRANSLATION NOT FOUND] Joueurs VIPs",
+                    "vipplus_players": "[TRANSLATION NOT FOUND] Joueurs VIPs(+)",
+                    "is_already_authorized": "[TRANSLATION NOT FOUND] Le serveur `%GUILD` **est déjà autorisé**.",
+                    "is_authorized": "[TRANSLATION NOT FOUND] Le serveur `%GUILD` **est autorisé**.",
+                    "is_already_unauthorized": "[TRANSLATION NOT FOUND] Le serveur `%GUILD` **n'est actuellement pas autorisé**.",
+                    "is_unauthorized": "[TRANSLATION NOT FOUND] Le serveur `%GUILD` **n'est plus autorisé**.",
+                    "is_already_vip": "[TRANSLATION NOT FOUND] Le joueur %PLAYER **est déjà VIP** sur le bot.",
+                    "is_vip": "[TRANSLATION NOT FOUND] Le joueur %PLAYER **est désormais VIP** sur le bot.",
+                    "is_already_vipplus": "[TRANSLATION NOT FOUND] Le joueur %PLAYER **est déjà VIP(+)** sur le bot.",
+                    "is_vipplus": "[TRANSLATION NOT FOUND] Le joueur %PLAYER **est désormais VIP(+)** sur le bot.",
+                    "is_already_not_vip": "[TRANSLATION NOT FOUND] Le joueur %PLAYER **n'est pas VIP** sur le bot.",
+                    "is_not_vip": "[TRANSLATION NOT FOUND] Le joueur %PLAYER **n'est plus VIP** sur le bot.",
+                    "is_already_not_vipplus": "[TRANSLATION NOT FOUND] Le joueur %PLAYER **n'est pas VIP(+)** sur le bot.",
+                    "is_not_vipplus": "[TRANSLATION NOT FOUND] Le joueur %PLAYER **n'est plus VIP(+)** sur le bot."
+                },
+                "panels": {
+                    "tester": {
+                        "identifier_name": "[TRANSLATION NOT FOUND] Panel Testeur",
+                        "identifier_description": "[TRANSLATION NOT FOUND] Panel contenant des informations utiles sur le bot.",
+                        "pages": {
+                            "0": {
+                                "label": "[TRANSLATION NOT FOUND] Informations utilisateur",
+                                "description": "[TRANSLATION NOT FOUND] Informations relatives à l'utilisateur faisant la commande.",
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Panel Testeur - Informations utilisateur"
+                                    }
+                                }
+                            },
+                            "1": {
+                                "label": "[TRANSLATION NOT FOUND] Statut du bot",
+                                "description": "[TRANSLATION NOT FOUND] Statut du bot ainsi que les processus en cours.",
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Panel Testeur - Statut du bot"
+                                    }
+                                }
+                            },
+                            "2": {
+                                "label": "[TRANSLATION NOT FOUND] Informations du bot",
+                                "description": "[TRANSLATION NOT FOUND] Informations du bot ainsi que certaines données.",
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Panel Testeur - Informations du bot"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "admin": {
+                        "identifier_name": "[TRANSLATION NOT FOUND] Panel Administrateur",
+                        "identifier_description": "[TRANSLATION NOT FOUND] Panel contenant des fonctions administratives.",
+                        "pages": {
+                            "0": {
+                                "label": "[TRANSLATION NOT FOUND] Changement de statut",
+                                "description": "[TRANSLATION NOT FOUND] Panel administrateur pour changer le statut du bot.",
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Panel Administrateur - Changement de statut",
+                                        "description": "[TRANSLATION NOT FOUND] Interagissez avec les boutons ci-dessous.",
+                                        "fields": {
+                                            "0": {
+                                                "value": "[TRANSLATION NOT FOUND] Voir le statut actuel"
+                                            },
+                                            "1": {
+                                                "value": "[TRANSLATION NOT FOUND] Passer en ligne"
+                                            },
+                                            "2": {
+                                                "value": "[TRANSLATION NOT FOUND] Passer en maintenance"
+                                            },
+                                            "3": {
+                                                "value": "[TRANSLATION NOT FOUND] Passer en désactivé"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "1": {
+                                "label": "[TRANSLATION NOT FOUND] Serveurs",
+                                "description": "[TRANSLATION NOT FOUND] Panel administrateur pour gérer les serveurs.",
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Panel Administrateur - Serveurs",
+                                        "description": "[TRANSLATION NOT FOUND] Interagissez avec les boutons ci-dessous.",
+                                        "fields": {
+                                            "0": {
+                                                "value": "[TRANSLATION NOT FOUND] Voir la liste des serveurs"
+                                            },
+                                            "1": {
+                                                "value": "[TRANSLATION NOT FOUND] Ajoute des serveurs autorisés (- de 30 membres)"
+                                            },
+                                            "2": {
+                                                "value": "[TRANSLATION NOT FOUND] Supprimer des serveurs autorisés (- de 30 membres)"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "2": {
+                                "label": "[TRANSLATION NOT FOUND] VIPs/VIPs(+)",
+                                "description": "[TRANSLATION NOT FOUND] Panel administrateur pour gérer les VIPs et les VIPs(+).",
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Panel Administrateur - VIPs/VIPs(+)",
+                                        "description": "[TRANSLATION NOT FOUND] Interagissez avec les boutons ci-dessous.",
+                                        "fields": {
+                                            "0": {
+                                                "value": "[TRANSLATION NOT FOUND] Voir la liste des VIPs/VIPs(+)"
+                                            },
+                                            "1": {
+                                                "value": "[TRANSLATION NOT FOUND] Ajouter des VIPs/VIPs(+)"
+                                            },
+                                            "2": {
+                                                "value": "[TRANSLATION NOT FOUND] Supprimer des VIPs/VIPs(+)"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "owner": {
+                        "identifier_name": "[TRANSLATION NOT FOUND] Panel Owner",
+                        "identifier_description": "[TRANSLATION NOT FOUND] Panel contenant des fonctions uniques pour l'owner du bot.",
+                        "pages": {
+                            "0": {
+                                "label": "[TRANSLATION NOT FOUND] Exécution de code",
+                                "description": "[TRANSLATION NOT FOUND] Panel pour exécuter du code depuis Discord.",
+                                "embeds": {
+                                    "0": {
+                                        "title": "[TRANSLATION NOT FOUND] Panel Owner - Exécution de code",
+                                        "description": "[TRANSLATION NOT FOUND] Interagissez avec les boutons ci-dessous.",
+                                        "fields": {
+                                            "0": {
+                                                "value": "[TRANSLATION NOT FOUND] Exécuter du code"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "rows": {
+                    "page": "[TRANSLATION NOT FOUND] Page...",
+                    "panel": "[TRANSLATION NOT FOUND] Panel...",
+                    "universal": {
+                        "leave_panel": "[TRANSLATION NOT FOUND] Quitter le panel"
+                    },
+                    "modals": {
+                        "add_auth_guilds": {
+                            "title": "[TRANSLATION NOT FOUND] Ajouter des serveurs autorisés",
+                            "inputs": {
+                                "0": {
+                                    "label": "[TRANSLATION NOT FOUND] Entrez l'identifiant",
+                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                }
+                            }
+                        },
+                        "remove_auth_guilds": {
+                            "title": "[TRANSLATION NOT FOUND] Retirer des serveurs autorisés",
+                            "inputs": {
+                                "0": {
+                                    "label": "[TRANSLATION NOT FOUND] Entrez l'identifiant",
+                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                }
+                            }
+                        },
+                        "add_vip": {
+                            "title": "[TRANSLATION NOT FOUND] Ajouter des VIPs/VIPs(+)",
+                            "inputs": {
+                                "0": {
+                                    "label": "[TRANSLATION NOT FOUND] (VIP) Entrez l'identifiant",
+                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                },
+                                "1": {
+                                    "label": "[TRANSLATION NOT FOUND] (VIP(+)) Entrez l'identifiant",
+                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                }
+                            }
+                        },
+                        "remove_vip": {
+                            "title": "[TRANSLATION NOT FOUND] Retirer des VIPs/VIPs(+)",
+                            "inputs": {
+                                "0": {
+                                    "label": "[TRANSLATION NOT FOUND] (VIP) Entrez l'identifiant",
+                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                },
+                                "1": {
+                                    "label": "[TRANSLATION NOT FOUND] (VIP(+)) Entrez l'identifiant",
+                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                }
+                            }
+                        },
+                        "code_execute": {
+                            "title": "[TRANSLATION NOT FOUND] Exécuter du code",
+                            "inputs": {
+                                "0": {
+                                    "label": "[TRANSLATION NOT FOUND] Code (JavaScript):",
+                                    "placeholder": "[TRANSLATION NOT FOUND] console.log(\"Hello world\");"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "universal": {
+            "aptitudes": {
+                "strength": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Force",
+                "speed": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Vitesse",
+                "defense": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Défense",
+                "agility": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Agilité"
+            }
+        }
+    }
+}
