@@ -1,0 +1,201 @@
+{
+    "flower": {
+        "id": "flower",
+        "techniques": [
+            { "id": "flowerBreathingSecondFormHonorable Shadow Plum" },
+            { "id": "flowerBreathingFourthFormCrimsonHanagoromo" },
+            { "id": "flowerBreathingFifthFormPeoniesOfFutility" },
+            { "id": "flowerBreathingSixthFormWhirlingPeach" },
+            { "id": "flowerBreathingFinalFormEquinoctialVermilionEye" }
+        ]
+    },
+    "love": {
+        "id": "love",
+        "techniques": [
+            { "id": "loveBreathingFirstFormShiversOfFirstLove" },
+            { "id": "loveBreathingSecondFormLovePangs" },
+            { "id": "loveBreathingThirdFormCatLoveShower" },
+            { "id": "loveBreathingFifthFormSwayingLoveWildClaw" },
+            { "id": "loveBreathingSixthFormCatLeggedWindsOfLove" }
+        ]
+    },
+    "flame": {
+        "id": "flame",
+        "techniques": [
+            { "id": "flameBreathingFirstFormUnknowingFire" },
+            { "id": "flameBreathingSecondFormRisingScorchingSun" },
+            { "id": "flameBreathingThirdFormBlazingUniverse" },
+            { "id": "flameBreathingFourthFormBloomingFlameUndulation" },
+            { "id": "flameBreathingFifthFormFlameTiger" },
+            { "id": "flameBreathingNinthFormRengoku" }
+        ]
+    },
+    "sun": {
+        "id": "sun",
+        "techniques": [
+            { "id": "sunBreathingDance" },
+            { "id": "sunBreathingDancingFlash" },
+            { "id": "sunBreathingClearBlueSky" },
+            { "id": "sunBreathingRagingSun" },
+            { "id": "sunBreathingBurningBonesSummerSun" },
+            { "id": "sunBreathingSettingSunTransformation" },
+            { "id": "sunBreathingSolarHeatHaze" },
+            { "id": "sunBreathingBeneficentRadiance" },
+            { "id": "sunBreathingSunflowerThrust" },
+            { "id": "sunBreathingDragonSunHaloHeadDance" },
+            { "id": "sunBreathingFireWheel" },
+            { "id": "sunBreathingFakeRainbow" },
+            { "id": "sunBreathingFlameDance" },
+            { "id": "sunBreathingThirteenthForm" },
+            { "id": "sunBreathingCrossSlash" },
+            { "id": "sunBreathingScorchingRush" },
+            { "id": "sunBreathingPhoenixFlash" }
+        ]
+    },
+    "sound": {
+        "id": "sound",
+        "techniques": [
+            { "id": "soundBreathingFirstFormRoar" },
+            { "id": "soundBreathingFourthFormConstantResoundingSlashes" },
+            { "id": "soundBreathingFifthFormString Performance" },
+            { "id": "soundBreathingRisingKick" },
+            { "id": "soundBreathingFifthFormStringPerformanceBurstingBloom" }
+        ]
+    },
+    "thunder": {
+        "id": "thunder",
+        "techniques": [
+            { "id": "thunderBreathingFirstFormThunderclapAndFlash" },
+            { "id": "thunderBreathingFirstFormThunderclapAndFlashSixfold" },
+            { "id": "thunderBreathingFirstFormThunderclapAndFlashEightfold" },
+            { "id": "thunderBreathingFirstFormThunderclapAndFlashGodspeed" },
+            { "id": "thunderBreathingSecondFormRiceSpirit" },
+            { "id": "thunderBreathingThirdFormThunderSwarm" },
+            { "id": "thunderBreathingFourthFormDistantThunder" },
+            { "id": "thunderBreathingFifthFormHeatLightning" },
+            { "id": "thunderBreathingSixthFormRumbleAndFlash" },
+            { "id": "thunderBreathingSeventhFormHonoikazuchiNoKami" },
+            { "id": "thunderBreathingAirSpin" },
+            { "id": "thunderBreathingFirstFormThunderclapAndFlashPrime" }
+        ]
+    },
+    "wind": {
+        "id": "wind",
+        "techniques": [
+            { "id": "windBreathingFirstFormDustWhirlwindCutter" },
+            { "id": "windBreathingSecondFormClawsPurifyingWind" },
+            { "id": "windBreathingThirdFormCleanStormWindTree" },
+            { "id": "windBreathingFourthFormRisingDustStorm" },
+            { "id": "windBreathingFifthFormColdMountainWind" },
+            { "id": "windBreathingSixthFormBlackWindMountainMist" },
+            { "id": "windBreathingSeventhFormGaleSuddenGusts" },
+            { "id": "windBreathingEighthFormPrimaryGaleSlash" },
+            { "id": "windBreathingNinthFormIdatenTyphoon" }
+        ]
+    },
+    "water": {
+        "id": "water",
+        "techniques": [
+            { "id": "waterBreathingFirstFormWaterSurfaceSlash" },
+            { "id": "waterBreathingSecondFormWaterWheel" },
+            { "id": "waterBreathingSecondFormImprovedLateralWaterWheel" },
+            { "id": "waterBreathingThirdFormFlowingDance" },
+            { "id": "waterBreathingFourthFormStrikingTide" },
+            { "id": "waterBreathingFourthFormStrikingTideTurbulent" },
+            { "id": "waterBreathingFifthFormBlessedRainAfterTheDrought" },
+            { "id": "waterBreathingSixthFormWhirlpool" },
+            { "id": "waterBreathingSixthFormWhirlpoolFlow" },
+            { "id": "waterBreathingSeventhFormDropRippleThrust" },
+            { "id": "waterBreathingSeventhFormDropRippleThrustCurve" },
+            { "id": "waterBreathingEighthFormWaterfallBasin" },
+            { "id": "waterBreathingNinthFormSplashingWaterFlowTurbulent" },
+            { "id": "waterBreathingTenthFormConstantFlux" },
+            { "id": "waterBreathingEleventhFormDead Calm" },
+            { "id": "waterBreathingThirdFormFlowingDanceShadowsOfDawn" },
+            { "id": "waterBreathingEighthFormWaterfallBasinDestruction" },
+            { "id": "waterBreathingNinthFormSplashingWaterFlow" },
+            { "id": "waterBreathingNinthFormSplashingWaterFlowFlash" },
+            { "id": "waterBreathingNinthFormSplashingWaterFlowTurbulentEffervescence" },
+            { "id": "waterBreathingEleventhFormDeadCalmTidalWaves" }
+        ]
+    },
+    "insect": {
+        "id": "insect",
+        "techniques": [
+            { "id": "insectBreathingButterflyDanceCaprice" },
+            { "id": "insectBreathingDanceOfTheBeeStingTrueFlutter" },
+            { "id": "insectBreathingDanceOfTheDragonflyCompoundEyeHexagon" },
+            { "id": "insectBreathingDanceOfTheCentipedeHundredLeggedZigzag" },
+            { "id": "insectBreathingSwiftThrust" },
+            { "id": "insectBreathingRisingThrust" },
+            { "id": "insectBreathingSixfoldThrust" },
+            { "id": "insectBreathingButterflyDanceCapriceIllusoryLight" }
+        ]
+    },
+    "serpent": {
+        "id": "serpent",
+        "techniques": [
+            { "id": "serpentBreathingFirstFormWindingSerpentSlash" },
+            { "id": "serpentBreathingSecondFormVenomFangsOfTheNarrowHead" },
+            { "id": "serpentBreathingThirdFormCoilChoke" },
+            { "id": "serpentBreathingFourthFormTwinHeadedReptile" },
+            { "id": "serpentBreathingFifthFormSlitheringSerpent" }
+        ]
+    },
+    "moon": {
+        "id": "moon",
+        "techniques": [
+            { "id": "moonBreathingFirstFormDarkMoonEveningPalace" },
+            { "id": "moonBreathingSecondFormPearlFlowerMoonGazing" },
+            { "id": "moonBreathingThirdFormLoathsomeMoonChains" },
+            { "id": "moonBreathingFifthFormMoonSpiritCalamitousEddy" },
+            { "id": "moonBreathingSixthFormPerpetualNightLonelyMoonIncessant" },
+            { "id": "moonBreathingSeventhFormMirrorOfMisfortuneMoonlit" },
+            { "id": "moonBreathingEighthFormMoonDragonRingTail" },
+            { "id": "moonBreathingNinthFormWaningMoonSwaths" },
+            { "id": "moonBreathingTenthFormDrillingSlashesMoonThroughBambooLeaves" },
+            { "id": "moonBreathingFourteenthFormCatastropheTenmanCrescentMoon" },
+            { "id": "moonBreathingSixteenthFormMoonBowHalfMoon" }
+        ]
+    },
+    "stone": {
+        "id": "stone",
+        "techniques": [
+            { "id": "stoneBreathingFirstFormSerpentiniteBipolar" },
+            { "id": "stoneBreathingSecondFormUpperSmash" },
+            { "id": "stoneBreathingThirdFormStoneSkin" },
+            { "id": "stoneBreathingFourthFormVolcanicRockRapidConquest" },
+            { "id": "stoneBreathingFifthFormArcsOfJustice" }
+        ]
+    },
+    "mist": {
+        "id": "mist",
+        "techniques": [
+            { "id": "mistBreathingFirstFormLowCloudsDistantHaze" },
+            { "id": "mistBreathingSecondFormEightLayeredMist" },
+            { "id": "mistBreathingThirdFormScatteringMistSplash" },
+            { "id": "mistBreathingFourthFormShiftingFlowSlash" },
+            { "id": "mistBreathingFifthFormSeaOfCloudsAndHaze" },
+            { "id": "mistBreathingSixthFormLunarDispersingMist" },
+            { "id": "mistBreathingSeventhFormObscuringClouds" }
+        ]
+    },
+    "beast": {
+        "id": "beast",
+        "techniques": [
+            { "id": "beastBreathingFirstFangPierce" },
+            { "id": "beastBreathingSecondFangSlice" },
+            { "id": "beastBreathingThirdFangDevour" },
+            { "id": "beastBreathingFourthFangSliceNDice" },
+            { "id": "beastBreathingFifthFangCrazyCutting" },
+            { "id": "beastBreathingSixthFangPalisadeBite" },
+            { "id": "beastBreathingSeventhFormSpatialAwareness" },
+            { "id": "beastBreathingEighthFormExplosiveRush" },
+            { "id": "beastBreathingNinthFangExtendingBendySlash" },
+            { "id": "beastBreathingTenthFangWhirlingFangs" },
+            { "id": "beastBreathingSuddenThrowingStrike" },
+            { "id": "beastBreathingBoarRush" },
+            { "id": "beastBreathingThirdFangDevourRush" }
+        ]
+    }
+}

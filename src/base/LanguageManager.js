@@ -24,6 +24,7 @@ class LanguageManager {
             }
 
             lang.json = new Util(this.client).ensureLang(french.json, lang.json);
+            lang.json._id = lang.lang;
             Json[lang.lang] = lang.json;
         }
         fs.writeFileSync("./src/languages/rendered.json", JSON.stringify(Json, null, 4), "utf-8");

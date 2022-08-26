@@ -6,7 +6,7 @@ class RPGAssets {
     constructor(dir) {
         this.dir = dir;
 
-        this.breaths = fs.readdirSync(`./src/${this.dir}/breaths`).map(e => require(`../${this.dir}/breaths/${e}`));
+        this.breaths = require(`../${this.dir}/breathingStyles.json`);
         this.categories = fs.readdirSync(`./src/${this.dir}/categories`).map(e => require(`../${this.dir}/categories/${e}`));
         this.grimoires = fs.readdirSync(`./src/${this.dir}/grimoires`).map(e => require(`../${this.dir}/grimoires/${e}`));
         this.kasugaiCrows = fs.readdirSync(`./src/${this.dir}/kasugai_crows`).map(e => require(`../${this.dir}/kasugai_crows/${e}`));
