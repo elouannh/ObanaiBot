@@ -1,9 +1,10 @@
 const fs = require("fs");
 const RPGBreathBase = require("./subclasses/RPGBreathBase");
-const RPGMovementBase = require("./subclasses/RPGMovementBase");
+const RPGTechniqueBase = require("./subclasses/RPGTechniqueBase");
 
 class RPGAssets {
-    constructor(dir) {
+    constructor(client, dir) {
+        this.client = client;
         this.dir = dir;
 
         this.breaths = require(`../${this.dir}/breathingStyles.json`);
@@ -18,11 +19,20 @@ class RPGAssets {
         this.texts = fs.readdirSync(`./src/${this.dir}/texts`).map(e => require(`../${this.dir}/texts/${e}`));
     }
 
-    getBreath(id) {
-        if (id in this.breaths) {
-            return this.breaths[id];
-        }
-        return 0;
+    getLangDatas(lang, file = null) {
+        const langFile = this.client.languageManager.getLang(lang).json;
+        const datas = {
+            id: lang,
+            json: langFile.rpgAssets,
+        };
+
+        if (file !== null && file in langFile) datas.json = langFile[file];
+
+        return datas;
+    }
+
+    getBreath(lang, id) {
+        const breath = new RPGBreathBase(this.getLangDatas(lang, "breathingStyles"), id);
     }
 }
 

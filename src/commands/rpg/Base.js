@@ -57,10 +57,12 @@ class Base extends Command {
         const userIDB = await this.client.inventoryDb.get(userId);
         const userADB = await this.client.activityDb.get(userId);
 
+        this.client.RPGAssets.getBreath(this.lang._id, userPDB.breath.id);
+
         let userStatsObject = {};
         for (const statKey in userPDB.statsLevel) {
             userStatsObject[statKey] = `${this.consts.emojis.rpg.stats[statKey]} `
-                + `» **${this.lang.universal.aptitudes[statKey]} | `
+                + `» **${this.lang.rpgAssets.aptitudes[statKey]} | `
                 + `\`${this.client.util.intRender(userPDB.finalStats[statKey])}\`**\n`
                 + `*(${this.lang.strings.level} ${userPDB.statsLevel[statKey]}) **${userPDB.stats[statKey]}***`;
 
@@ -93,7 +95,6 @@ class Base extends Command {
         let userInventoryObjects = {};
         for (const mat in userIDB.materials) {
             const matFile = require(`../../elements/materials/${mat}`);
-            console.log(matFile);
         }
 
         const playerFields = [

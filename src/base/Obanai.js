@@ -36,7 +36,7 @@ class Obanai extends Client {
         this.commandManager = new CommandManager(this);
         this.eventManager = new EventManager(this);
         this.languageManager = new LanguageManager(this);
-        this.RPGAssets = new RPGAssets("elements");
+        this.RPGAssets = new RPGAssets(this, "elements");
         this.eventManager.loadFiles();
         this.config = config;
         this.bitfield = 274878286912n;

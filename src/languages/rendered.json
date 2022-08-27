@@ -55,9 +55,9 @@
                     "is_not_vipplus": "Le joueur %PLAYER **isn't plus VIP(+)** in the bot."
                 },
                 "panels": {
-                    "identifier_name": "[UNEXPECTED TRANSLATION] Tester's Panel",
+                    "identifier_name": "USELESSTester's Panel",
+                    "identifier_description": "USELESSPanel which includes useful informations about the bot.",
                     "tester": {
-                        "identifier_description": "Panel which includes useful informations about the bot.",
                         "pages": {
                             "0": {
                                 "label": "User informations",
@@ -87,7 +87,8 @@
                                 }
                             }
                         },
-                        "identifier_name": "Panel Testeur"
+                        "identifier_name": "Panel Testeur",
+                        "identifier_description": "Panel contenant des informations utiles sur le bot."
                     },
                     "admin": {
                         "identifier_name": "Administrator's Panel",
@@ -374,211 +375,211 @@
         },
         "breathingStyles": {
             "flower": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de la Fleur",
+                "name": "[TRANSLATION NOT FOUND] Souffle de la Fleur",
                 "techniques": {
-                    "flowerBreathingSecondFormHonorable Shadow Plum": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Esprit du Prunier",
-                    "flowerBreathingFourthFormCrimsonHanagoromo": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: Hanagoromo Pourpre",
-                    "flowerBreathingFifthFormPeoniesOfFutility": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: La Pivoine Futile",
-                    "flowerBreathingSixthFormWhirlingPeach": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième Mouvement: Tourbillon de Pêche",
-                    "flowerBreathingFinalFormEquinoctialVermilionEye": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Mouvement Final: Les Yeux du Lycoris"
+                    "flowerBreathingSecondFormHonorable Shadow Plum": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Esprit du Prunier",
+                    "flowerBreathingFourthFormCrimsonHanagoromo": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Hanagoromo Pourpre",
+                    "flowerBreathingFifthFormPeoniesOfFutility": "[TRANSLATION NOT FOUND] Cinquième Mouvement: La Pivoine Futile",
+                    "flowerBreathingSixthFormWhirlingPeach": "[TRANSLATION NOT FOUND] Sixième Mouvement: Tourbillon de Pêche",
+                    "flowerBreathingFinalFormEquinoctialVermilionEye": "[TRANSLATION NOT FOUND] Mouvement Final: Les Yeux du Lycoris"
                 }
             },
             "love": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de l'Amour",
+                "name": "[TRANSLATION NOT FOUND] Souffle de l'Amour",
                 "techniques": {
-                    "loveBreathingFirstFormShiversOfFirstLove": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Les Frissons du Premier Amour",
-                    "loveBreathingSecondFormLovePangs": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Amour Anxiogène",
-                    "loveBreathingThirdFormCatLoveShower": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: Toilette de Chaton Mignon",
-                    "loveBreathingFifthFormSwayingLoveWildClaw": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Attachement Hésitant - Ongles Mal Vernis",
-                    "loveBreathingSixthFormCatLeggedWindsOfLove": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième Mouvement: Un Amour de Patte de Chaton"
+                    "loveBreathingFirstFormShiversOfFirstLove": "[TRANSLATION NOT FOUND] Premier Mouvement: Les Frissons du Premier Amour",
+                    "loveBreathingSecondFormLovePangs": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Amour Anxiogène",
+                    "loveBreathingThirdFormCatLoveShower": "[TRANSLATION NOT FOUND] Troisième Mouvement: Toilette de Chaton Mignon",
+                    "loveBreathingFifthFormSwayingLoveWildClaw": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Attachement Hésitant - Ongles Mal Vernis",
+                    "loveBreathingSixthFormCatLeggedWindsOfLove": "[TRANSLATION NOT FOUND] Sixième Mouvement: Un Amour de Patte de Chaton"
                 }
             },
             "flame": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de la Flamme",
+                "name": "[TRANSLATION NOT FOUND] Souffle de la Flamme",
                 "techniques": {
-                    "flameBreathingFirstFormUnknowingFire": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Mer de Flammes",
-                    "flameBreathingSecondFormRisingScorchingSun": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Flammes du Soleil Ascendant",
-                    "flameBreathingThirdFormBlazingUniverse": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: Univers de Flammes",
-                    "flameBreathingFourthFormBloomingFlameUndulation:": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: La Vague Flamboyante",
-                    "flameBreathingFifthFormFlameTiger": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Tigre de Flammes",
-                    "flameBreathingNinthFormRengoku": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Neuvième Mouvement: Purgatoire"
+                    "flameBreathingFirstFormUnknowingFire": "[TRANSLATION NOT FOUND] Premier Mouvement: Mer de Flammes",
+                    "flameBreathingSecondFormRisingScorchingSun": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Flammes du Soleil Ascendant",
+                    "flameBreathingThirdFormBlazingUniverse": "[TRANSLATION NOT FOUND] Troisième Mouvement: Univers de Flammes",
+                    "flameBreathingFourthFormBloomingFlameUndulation:": "[TRANSLATION NOT FOUND] Quatrième Mouvement: La Vague Flamboyante",
+                    "flameBreathingFifthFormFlameTiger": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Tigre de Flammes",
+                    "flameBreathingNinthFormRengoku": "[TRANSLATION NOT FOUND] Neuvième Mouvement: Purgatoire"
                 }
             },
             "sun": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle du Soleil",
+                "name": "[TRANSLATION NOT FOUND] Souffle du Soleil",
                 "techniques": {
-                    "sunBreathingDance": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Valse",
-                    "sunBreathingDancingFlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Valse Foudroyante",
-                    "sunBreathingClearBlueSky": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Paradis Bleu",
-                    "sunBreathingRagingSun": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Miroir Brûlant Écarlate",
-                    "sunBreathingBurningBonesSummerSun": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Le Soleil qui Réduit les Os en Cendres",
-                    "sunBreathingSettingSunTransformation": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Le Coucher de Soleil",
-                    "sunBreathingSolarHeatHaze": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Chaleur Ondulante",
-                    "sunBreathingBeneficentRadiance": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Rai de Lumière",
-                    "sunBreathingSunflowerThrust": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Estoc Brillant du Soleil",
-                    "sunBreathingDragonSunHaloHeadDance": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Halo Solaire Danse Draconique",
-                    "sunBreathingFireWheel": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Char Enflammé",
-                    "sunBreathingFakeRainbow": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Arc-en-Ciel Parhélique",
-                    "sunBreathingFlameDance": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Valse Enflammée",
-                    "sunBreathingThirteenthForm": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Treizième Mouvement",
-                    "sunBreathingCrossSlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cross Slash",
-                    "sunBreathingScorchingRush": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Scorching Rush",
-                    "sunBreathingPhoenixFlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Phoenix Flash"
+                    "sunBreathingDance": "[TRANSLATION NOT FOUND] Valse",
+                    "sunBreathingDancingFlash": "[TRANSLATION NOT FOUND] Valse Foudroyante",
+                    "sunBreathingClearBlueSky": "[TRANSLATION NOT FOUND] Paradis Bleu",
+                    "sunBreathingRagingSun": "[TRANSLATION NOT FOUND] Miroir Brûlant Écarlate",
+                    "sunBreathingBurningBonesSummerSun": "[TRANSLATION NOT FOUND] Le Soleil qui Réduit les Os en Cendres",
+                    "sunBreathingSettingSunTransformation": "[TRANSLATION NOT FOUND] Le Coucher de Soleil",
+                    "sunBreathingSolarHeatHaze": "[TRANSLATION NOT FOUND] Chaleur Ondulante",
+                    "sunBreathingBeneficentRadiance": "[TRANSLATION NOT FOUND] Rai de Lumière",
+                    "sunBreathingSunflowerThrust": "[TRANSLATION NOT FOUND] Estoc Brillant du Soleil",
+                    "sunBreathingDragonSunHaloHeadDance": "[TRANSLATION NOT FOUND] Halo Solaire Danse Draconique",
+                    "sunBreathingFireWheel": "[TRANSLATION NOT FOUND] Char Enflammé",
+                    "sunBreathingFakeRainbow": "[TRANSLATION NOT FOUND] Arc-en-Ciel Parhélique",
+                    "sunBreathingFlameDance": "[TRANSLATION NOT FOUND] Valse Enflammée",
+                    "sunBreathingThirteenthForm": "[TRANSLATION NOT FOUND] Treizième Mouvement",
+                    "sunBreathingCrossSlash": "[TRANSLATION NOT FOUND] Cross Slash",
+                    "sunBreathingScorchingRush": "[TRANSLATION NOT FOUND] Scorching Rush",
+                    "sunBreathingPhoenixFlash": "[TRANSLATION NOT FOUND] Phoenix Flash"
                 }
             },
             "sound": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle du Son",
+                "name": "[TRANSLATION NOT FOUND] Souffle du Son",
                 "techniques": {
-                    "soundBreathingFirstFormRoar": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Tonnerre",
-                    "soundBreathingFourthFormConstantResoundingSlashes": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: Le Glas Mortel d'Avici",
-                    "soundBreathingFifthFormString Performance": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Symphonie Stridente",
-                    "soundBreathingRisingKick": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Rising Kick",
-                    "soundBreathingFifthFormStringPerformanceBurstingBloom": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Fifth Form: String Performance, Bursting Bloom"
+                    "soundBreathingFirstFormRoar": "[TRANSLATION NOT FOUND] Premier Mouvement: Tonnerre",
+                    "soundBreathingFourthFormConstantResoundingSlashes": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Le Glas Mortel d'Avici",
+                    "soundBreathingFifthFormString Performance": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Symphonie Stridente",
+                    "soundBreathingRisingKick": "[TRANSLATION NOT FOUND] Rising Kick",
+                    "soundBreathingFifthFormStringPerformanceBurstingBloom": "[TRANSLATION NOT FOUND] Fifth Form: String Performance, Bursting Bloom"
                 }
             },
             "thunder": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de la Foudre",
+                "name": "[TRANSLATION NOT FOUND] Souffle de la Foudre",
                 "techniques": {
-                    "thunderBreathingFirstFormThunderclapAndFlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante",
-                    "thunderBreathingFirstFormThunderclapAndFlashSixfold": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Six Coups",
-                    "thunderBreathingFirstFormThunderclapAndFlashEightfold": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Huit Coups",
-                    "thunderBreathingFirstFormThunderclapAndFlashGodspeed": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Vitesse Divine",
-                    "thunderBreathingSecondFormRiceSpirit": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Éclair Foudroyant",
-                    "thunderBreathingThirdFormThunderSwarm": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: Nuée d'Éclairs",
-                    "thunderBreathingFourthFormDistantThunder": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: Orage Lointain",
-                    "thunderBreathingFifthFormHeatLightning": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Éclair de Chaleur",
-                    "thunderBreathingSixthFormRumbleAndFlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième Mouvement: Tonnerre et Foudre",
-                    "thunderBreathingSeventhFormHonoikazuchiNoKami": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Septième Mouvements: Dieu du Feu Céleste",
-                    "thunderBreathingAirSpin": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Air Spin",
-                    "thunderBreathingFirstFormThunderclapAndFlashPrime": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] First Form: Thunderclap and Flash, Prime"
+                    "thunderBreathingFirstFormThunderclapAndFlash": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante",
+                    "thunderBreathingFirstFormThunderclapAndFlashSixfold": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Six Coups",
+                    "thunderBreathingFirstFormThunderclapAndFlashEightfold": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Huit Coups",
+                    "thunderBreathingFirstFormThunderclapAndFlashGodspeed": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Vitesse Divine",
+                    "thunderBreathingSecondFormRiceSpirit": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Éclair Foudroyant",
+                    "thunderBreathingThirdFormThunderSwarm": "[TRANSLATION NOT FOUND] Troisième Mouvement: Nuée d'Éclairs",
+                    "thunderBreathingFourthFormDistantThunder": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Orage Lointain",
+                    "thunderBreathingFifthFormHeatLightning": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Éclair de Chaleur",
+                    "thunderBreathingSixthFormRumbleAndFlash": "[TRANSLATION NOT FOUND] Sixième Mouvement: Tonnerre et Foudre",
+                    "thunderBreathingSeventhFormHonoikazuchiNoKami": "[TRANSLATION NOT FOUND] Septième Mouvements: Dieu du Feu Céleste",
+                    "thunderBreathingAirSpin": "[TRANSLATION NOT FOUND] Air Spin",
+                    "thunderBreathingFirstFormThunderclapAndFlashPrime": "[TRANSLATION NOT FOUND] First Form: Thunderclap and Flash, Prime"
                 }
             },
             "wind": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle du Vent",
+                "name": "[TRANSLATION NOT FOUND] Souffle du Vent",
                 "techniques": {
-                    "windBreathingFirstFormDustWhirlwindCutter": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Tourbillon de Poussière - Tranche",
-                    "windBreathingSecondFormClawsPurifyingWind": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Griffes de Vent Purificatrices",
-                    "windBreathingThirdFormCleanStormWindTree": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: Arbre Ondulant dans la Brise Montagnarde",
-                    "windBreathingFourthFormRisingDustStorm": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: La Tempête de Poussière Levante",
-                    "windBreathingFifthFormColdMountainWind": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Tempête Hivernale",
-                    "windBreathingSixthFormBlackWindMountainMist": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième Mouvement: La Rafale de Fumée Noire",
-                    "windBreathingSeventhFormGaleSuddenGusts": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Septième Mouvement: Vent Puissant - Bourrasque de Tengu",
-                    "windBreathingEighthFormPrimaryGaleSlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Huitième Mouvement: Frappe de la Première Bourrasque",
-                    "windBreathingNinthFormIdatenTyphoon": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Neuvième Mouvement: Typhon de Skanda"
+                    "windBreathingFirstFormDustWhirlwindCutter": "[TRANSLATION NOT FOUND] Premier Mouvement: Tourbillon de Poussière - Tranche",
+                    "windBreathingSecondFormClawsPurifyingWind": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Griffes de Vent Purificatrices",
+                    "windBreathingThirdFormCleanStormWindTree": "[TRANSLATION NOT FOUND] Troisième Mouvement: Arbre Ondulant dans la Brise Montagnarde",
+                    "windBreathingFourthFormRisingDustStorm": "[TRANSLATION NOT FOUND] Quatrième Mouvement: La Tempête de Poussière Levante",
+                    "windBreathingFifthFormColdMountainWind": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Tempête Hivernale",
+                    "windBreathingSixthFormBlackWindMountainMist": "[TRANSLATION NOT FOUND] Sixième Mouvement: La Rafale de Fumée Noire",
+                    "windBreathingSeventhFormGaleSuddenGusts": "[TRANSLATION NOT FOUND] Septième Mouvement: Vent Puissant - Bourrasque de Tengu",
+                    "windBreathingEighthFormPrimaryGaleSlash": "[TRANSLATION NOT FOUND] Huitième Mouvement: Frappe de la Première Bourrasque",
+                    "windBreathingNinthFormIdatenTyphoon": "[TRANSLATION NOT FOUND] Neuvième Mouvement: Typhon de Skanda"
                 }
             },
             "water": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de l'Eau",
+                "name": "[TRANSLATION NOT FOUND] Souffle de l'Eau",
                 "techniques": {
-                    "waterBreathingFirstFormWaterSurfaceSlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Entaille de l'Eau Calme",
-                    "waterBreathingSecondFormWaterWheel": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: La Roue d'Eau",
-                    "waterBreathingSecondFormImprovedLateralWaterWheel": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: La Roue d'Eau - Variation horizontal",
-                    "waterBreathingThirdFormFlowingDance": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: Danse des Courants",
-                    "waterBreathingFourthFormStrikingTide": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: La Marée Déferlante",
-                    "waterBreathingFourthFormStrikingTideTurbulent": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Fourth Form: Striking Tide, Turbulent",
-                    "waterBreathingFifthFormBlessedRainAfterTheDrought": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Averse Providentielle",
-                    "waterBreathingSixthFormWhirlpool": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième Mouvement: Tourbillon",
-                    "waterBreathingSixthFormWhirlpoolFlow": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième et Troisième Mouvement Combinés: Tourbillon Dansant",
-                    "waterBreathingSeventhFormDropRippleThrust": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Septième Mouvement: Goutte de Rosée Troublant l'Eau Dormante",
-                    "waterBreathingSeventhFormDropRippleThrustCurve": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Septième Mouvement: Goutte de Rosée Troublant l'Eau Dormante - En Crochet",
-                    "waterBreathingEighthFormWaterfallBasin": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Huitième Mouvement: Impact de la Cascade",
-                    "waterBreathingNinthFormSplashingWaterFlowTurbulent": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Neuvième Mouvement: Embruns des Flots Déchaînés",
-                    "waterBreathingTenthFormConstantFlux": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Dixième Mouvement: Les Vicissitudes de la Vie",
-                    "waterBreathingEleventhFormDead Calm": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Onzième Mouvement: Accalmie",
-                    "waterBreathingThirdFormFlowingDanceShadowsOfDawn": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Third Form: Flowing Dance, Shadows of Dawn",
-                    "waterBreathingEighthFormWaterfallBasinDestruction": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Eighth Form: Waterfall Basin, Destruction",
-                    "waterBreathingNinthFormSplashingWaterFlow": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow",
-                    "waterBreathingNinthFormSplashingWaterFlowFlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow, Flash",
-                    "waterBreathingNinthFormSplashingWaterFlowTurbulentEffervescence": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow, Turbulent Effervescence",
-                    "waterBreathingEleventhFormDeadCalmTidalWaves": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Eleventh Form: Dead Calm, Tidal Waves"
+                    "waterBreathingFirstFormWaterSurfaceSlash": "[TRANSLATION NOT FOUND] Premier Mouvement: Entaille de l'Eau Calme",
+                    "waterBreathingSecondFormWaterWheel": "[TRANSLATION NOT FOUND] Deuxième Mouvement: La Roue d'Eau",
+                    "waterBreathingSecondFormImprovedLateralWaterWheel": "[TRANSLATION NOT FOUND] Deuxième Mouvement: La Roue d'Eau - Variation horizontal",
+                    "waterBreathingThirdFormFlowingDance": "[TRANSLATION NOT FOUND] Troisième Mouvement: Danse des Courants",
+                    "waterBreathingFourthFormStrikingTide": "[TRANSLATION NOT FOUND] Quatrième Mouvement: La Marée Déferlante",
+                    "waterBreathingFourthFormStrikingTideTurbulent": "[TRANSLATION NOT FOUND] Fourth Form: Striking Tide, Turbulent",
+                    "waterBreathingFifthFormBlessedRainAfterTheDrought": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Averse Providentielle",
+                    "waterBreathingSixthFormWhirlpool": "[TRANSLATION NOT FOUND] Sixième Mouvement: Tourbillon",
+                    "waterBreathingSixthFormWhirlpoolFlow": "[TRANSLATION NOT FOUND] Sixième et Troisième Mouvement Combinés: Tourbillon Dansant",
+                    "waterBreathingSeventhFormDropRippleThrust": "[TRANSLATION NOT FOUND] Septième Mouvement: Goutte de Rosée Troublant l'Eau Dormante",
+                    "waterBreathingSeventhFormDropRippleThrustCurve": "[TRANSLATION NOT FOUND] Septième Mouvement: Goutte de Rosée Troublant l'Eau Dormante - En Crochet",
+                    "waterBreathingEighthFormWaterfallBasin": "[TRANSLATION NOT FOUND] Huitième Mouvement: Impact de la Cascade",
+                    "waterBreathingNinthFormSplashingWaterFlowTurbulent": "[TRANSLATION NOT FOUND] Neuvième Mouvement: Embruns des Flots Déchaînés",
+                    "waterBreathingTenthFormConstantFlux": "[TRANSLATION NOT FOUND] Dixième Mouvement: Les Vicissitudes de la Vie",
+                    "waterBreathingEleventhFormDead Calm": "[TRANSLATION NOT FOUND] Onzième Mouvement: Accalmie",
+                    "waterBreathingThirdFormFlowingDanceShadowsOfDawn": "[TRANSLATION NOT FOUND] Third Form: Flowing Dance, Shadows of Dawn",
+                    "waterBreathingEighthFormWaterfallBasinDestruction": "[TRANSLATION NOT FOUND] Eighth Form: Waterfall Basin, Destruction",
+                    "waterBreathingNinthFormSplashingWaterFlow": "[TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow",
+                    "waterBreathingNinthFormSplashingWaterFlowFlash": "[TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow, Flash",
+                    "waterBreathingNinthFormSplashingWaterFlowTurbulentEffervescence": "[TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow, Turbulent Effervescence",
+                    "waterBreathingEleventhFormDeadCalmTidalWaves": "[TRANSLATION NOT FOUND] Eleventh Form: Dead Calm, Tidal Waves"
                 }
             },
             "insect": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de l'Insecte",
+                "name": "[TRANSLATION NOT FOUND] Souffle de l'Insecte",
                 "techniques": {
-                    "insectBreathingButterflyDanceCaprice": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Danse des Papillons: Papillonnage",
-                    "insectBreathingDanceOfTheBeeStingTrueFlutter": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Danse de la Piqûre d'Abeille: Battement Véritable",
-                    "insectBreathingDanceOfTheDragonflyCompoundEyeHexagon": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Danse de la Libellule: Œil à Facettes Hexagonales",
-                    "insectBreathingDanceOfTheCentipedeHundredLeggedZigzag": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Danse du Myriapode: Zigzag Centipède",
-                    "insectBreathingSwiftThrust": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Swift Thrust",
-                    "insectBreathingRisingThrust": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Rising Thrust",
-                    "insectBreathingSixfoldThrust": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixfold Thrust",
-                    "insectBreathingButterflyDanceCapriceIllusoryLight": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Butterfly Dance: Caprice, Illusory Light"
+                    "insectBreathingButterflyDanceCaprice": "[TRANSLATION NOT FOUND] Danse des Papillons: Papillonnage",
+                    "insectBreathingDanceOfTheBeeStingTrueFlutter": "[TRANSLATION NOT FOUND] Danse de la Piqûre d'Abeille: Battement Véritable",
+                    "insectBreathingDanceOfTheDragonflyCompoundEyeHexagon": "[TRANSLATION NOT FOUND] Danse de la Libellule: Œil à Facettes Hexagonales",
+                    "insectBreathingDanceOfTheCentipedeHundredLeggedZigzag": "[TRANSLATION NOT FOUND] Danse du Myriapode: Zigzag Centipède",
+                    "insectBreathingSwiftThrust": "[TRANSLATION NOT FOUND] Swift Thrust",
+                    "insectBreathingRisingThrust": "[TRANSLATION NOT FOUND] Rising Thrust",
+                    "insectBreathingSixfoldThrust": "[TRANSLATION NOT FOUND] Sixfold Thrust",
+                    "insectBreathingButterflyDanceCapriceIllusoryLight": "[TRANSLATION NOT FOUND] Butterfly Dance: Caprice, Illusory Light"
                 }
             },
             "serpent": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle du Serpent",
+                "name": "[TRANSLATION NOT FOUND] Souffle du Serpent",
                 "techniques": {
-                    "serpentBreathingFirstFormWindingSerpentSlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Frappe du Serpent Recroquevillé",
-                    "serpentBreathingSecondFormVenomFangsOfTheNarrowHead": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Le Crochet Empoisonné du Petit Serpent",
-                    "serpentBreathingThirdFormCoilChoke": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: Constriction",
-                    "serpentBreathingFourthFormTwinHeadedReptile": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: Serpent Bicéphale",
-                    "serpentBreathingFifthFormSlitheringSerpent": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Ondulations du Serpent"
+                    "serpentBreathingFirstFormWindingSerpentSlash": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe du Serpent Recroquevillé",
+                    "serpentBreathingSecondFormVenomFangsOfTheNarrowHead": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Le Crochet Empoisonné du Petit Serpent",
+                    "serpentBreathingThirdFormCoilChoke": "[TRANSLATION NOT FOUND] Troisième Mouvement: Constriction",
+                    "serpentBreathingFourthFormTwinHeadedReptile": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Serpent Bicéphale",
+                    "serpentBreathingFifthFormSlitheringSerpent": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Ondulations du Serpent"
                 }
             },
             "moon": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de la Lune",
+                "name": "[TRANSLATION NOT FOUND] Souffle de la Lune",
                 "techniques": {
-                    "moonBreathingFirstFormDarkMoonEveningPalace": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Lune Sombre - Sanctuaire Nocturne",
-                    "moonBreathingSecondFormPearlFlowerMoonGazing": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Fleur de Nacre au Clair de Lune",
-                    "moonBreathingThirdFormLoathsomeMoonChains": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: La Lune Meurtrière de l'Abandon - Chaîne",
-                    "moonBreathingFifthFormMoonSpiritCalamitousEddy": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Vortex Maudit de la Lune Spectrale",
-                    "moonBreathingSixthFormPerpetualNightLonelyMoonIncessant": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième Mouvement: La Lune Solitaire dans l'Obscurité Éternelle - L'Avici",
-                    "moonBreathingSeventhFormMirrorOfMisfortuneMoonlit": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Septième Mouvement: Miroir du Malheur - Reflet de la Lune",
-                    "moonBreathingEighthFormMoonDragonRingTail": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Huitième Mouvement: Ouroboros Lunaire",
-                    "moonBreathingNinthFormWaningMoonSwaths": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Neuvième Mouvement: Lune Décroissante - Le Cycle Perpétuel",
-                    "moonBreathingTenthFormDrillingSlashesMoonThroughBambooLeaves": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Dixième Mouvement: Frappe du Cycle Transperçant - La Lune de Lierre",
-                    "moonBreathingFourteenthFormCatastropheTenmanCrescentMoon": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatorzième Mouvement: Le Croissant de Lune de Tenman",
-                    "moonBreathingSixteenthFormMoonBowHalfMoon": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Seizième Mouvement: Arc-en-Ciel Lunaire - Fragments Sélénites"
+                    "moonBreathingFirstFormDarkMoonEveningPalace": "[TRANSLATION NOT FOUND] Premier Mouvement: Lune Sombre - Sanctuaire Nocturne",
+                    "moonBreathingSecondFormPearlFlowerMoonGazing": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Fleur de Nacre au Clair de Lune",
+                    "moonBreathingThirdFormLoathsomeMoonChains": "[TRANSLATION NOT FOUND] Troisième Mouvement: La Lune Meurtrière de l'Abandon - Chaîne",
+                    "moonBreathingFifthFormMoonSpiritCalamitousEddy": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Vortex Maudit de la Lune Spectrale",
+                    "moonBreathingSixthFormPerpetualNightLonelyMoonIncessant": "[TRANSLATION NOT FOUND] Sixième Mouvement: La Lune Solitaire dans l'Obscurité Éternelle - L'Avici",
+                    "moonBreathingSeventhFormMirrorOfMisfortuneMoonlit": "[TRANSLATION NOT FOUND] Septième Mouvement: Miroir du Malheur - Reflet de la Lune",
+                    "moonBreathingEighthFormMoonDragonRingTail": "[TRANSLATION NOT FOUND] Huitième Mouvement: Ouroboros Lunaire",
+                    "moonBreathingNinthFormWaningMoonSwaths": "[TRANSLATION NOT FOUND] Neuvième Mouvement: Lune Décroissante - Le Cycle Perpétuel",
+                    "moonBreathingTenthFormDrillingSlashesMoonThroughBambooLeaves": "[TRANSLATION NOT FOUND] Dixième Mouvement: Frappe du Cycle Transperçant - La Lune de Lierre",
+                    "moonBreathingFourteenthFormCatastropheTenmanCrescentMoon": "[TRANSLATION NOT FOUND] Quatorzième Mouvement: Le Croissant de Lune de Tenman",
+                    "moonBreathingSixteenthFormMoonBowHalfMoon": "[TRANSLATION NOT FOUND] Seizième Mouvement: Arc-en-Ciel Lunaire - Fragments Sélénites"
                 }
             },
             "stone": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de la Roche",
+                "name": "[TRANSLATION NOT FOUND] Souffle de la Roche",
                 "techniques": {
-                    "stoneBreathingFirstFormSerpentiniteBipolar": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Serpentinite - Tenaille Polarisée",
-                    "stoneBreathingSecondFormUpperSmash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Fracasser la Voûte Céleste",
-                    "stoneBreathingThirdFormStoneSkin": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: Peau de Pierre",
-                    "stoneBreathingFourthFormVolcanicRockRapidConquest": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: Rhyolite - Conquête Rapide",
-                    "stoneBreathingFifthFormArcsOfJustice": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: La Roue de Pierre de la Justice"
+                    "stoneBreathingFirstFormSerpentiniteBipolar": "[TRANSLATION NOT FOUND] Premier Mouvement: Serpentinite - Tenaille Polarisée",
+                    "stoneBreathingSecondFormUpperSmash": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Fracasser la Voûte Céleste",
+                    "stoneBreathingThirdFormStoneSkin": "[TRANSLATION NOT FOUND] Troisième Mouvement: Peau de Pierre",
+                    "stoneBreathingFourthFormVolcanicRockRapidConquest": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Rhyolite - Conquête Rapide",
+                    "stoneBreathingFifthFormArcsOfJustice": "[TRANSLATION NOT FOUND] Cinquième Mouvement: La Roue de Pierre de la Justice"
                 }
             },
             "mist": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de la Brume",
+                "name": "[TRANSLATION NOT FOUND] Souffle de la Brume",
                 "techniques": {
-                    "mistBreathingFirstFormLowCloudsDistantHaze": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Nuages Bas et Brouillard Distant",
-                    "mistBreathingSecondFormEightLayeredMist": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Brume Stratifiée",
-                    "mistBreathingThirdFormScatteringMistSplash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: Explosion Désembuante",
-                    "mistBreathingFourthFormShiftingFlowSlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: Coup de Sabre Advectif",
-                    "mistBreathingFifthFormSeaOfCloudsAndHaze": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Brume de Mer",
-                    "mistBreathingSixthFormLunarDispersingMist": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième Mouvement: Brume au Clair de Lune",
-                    "mistBreathingSeventhFormObscuringClouds": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Septième mouvement: Brouillard"
+                    "mistBreathingFirstFormLowCloudsDistantHaze": "[TRANSLATION NOT FOUND] Premier Mouvement: Nuages Bas et Brouillard Distant",
+                    "mistBreathingSecondFormEightLayeredMist": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Brume Stratifiée",
+                    "mistBreathingThirdFormScatteringMistSplash": "[TRANSLATION NOT FOUND] Troisième Mouvement: Explosion Désembuante",
+                    "mistBreathingFourthFormShiftingFlowSlash": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Coup de Sabre Advectif",
+                    "mistBreathingFifthFormSeaOfCloudsAndHaze": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Brume de Mer",
+                    "mistBreathingSixthFormLunarDispersingMist": "[TRANSLATION NOT FOUND] Sixième Mouvement: Brume au Clair de Lune",
+                    "mistBreathingSeventhFormObscuringClouds": "[TRANSLATION NOT FOUND] Septième mouvement: Brouillard"
                 }
             },
             "beast": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de la Bête",
+                "name": "[TRANSLATION NOT FOUND] Souffle de la Bête",
                 "techniques": {
-                    "beastBreathingFirstFangPierce": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Croc: Perforation",
-                    "beastBreathingSecondFangSlice": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Croc: Lacération",
-                    "beastBreathingThirdFangDevour": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Croc: Déchiquetage",
-                    "beastBreathingFourthFangSliceNDice": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Croc: Dilacération",
-                    "beastBreathingFifthFangCrazyCutting": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Croc: Mutilation Furieuse",
-                    "beastBreathingSixthFangPalisadeBite": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième Croc: Morsure Irrégulière",
-                    "beastBreathingSeventhFormSpatialAwareness": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Septième Croc: Détection",
-                    "beastBreathingEighthFormExplosiveRush": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Huitième Croc: Charge du Sanglier",
-                    "beastBreathingNinthFangExtendingBendySlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Neuvième Croc: Taillade Ondulante Divine",
-                    "beastBreathingTenthFangWhirlingFangs": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Dixième Croc: Les Crocs Tournoyants",
-                    "beastBreathingSuddenThrowingStrike": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] La Frappe Lancée",
-                    "beastBreathingBoarRush": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Boar Rush",
-                    "beastBreathingThirdFangDevourRush": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Third Fang: Devour Rush"
+                    "beastBreathingFirstFangPierce": "[TRANSLATION NOT FOUND] Premier Croc: Perforation",
+                    "beastBreathingSecondFangSlice": "[TRANSLATION NOT FOUND] Deuxième Croc: Lacération",
+                    "beastBreathingThirdFangDevour": "[TRANSLATION NOT FOUND] Troisième Croc: Déchiquetage",
+                    "beastBreathingFourthFangSliceNDice": "[TRANSLATION NOT FOUND] Quatrième Croc: Dilacération",
+                    "beastBreathingFifthFangCrazyCutting": "[TRANSLATION NOT FOUND] Cinquième Croc: Mutilation Furieuse",
+                    "beastBreathingSixthFangPalisadeBite": "[TRANSLATION NOT FOUND] Sixième Croc: Morsure Irrégulière",
+                    "beastBreathingSeventhFormSpatialAwareness": "[TRANSLATION NOT FOUND] Septième Croc: Détection",
+                    "beastBreathingEighthFormExplosiveRush": "[TRANSLATION NOT FOUND] Huitième Croc: Charge du Sanglier",
+                    "beastBreathingNinthFangExtendingBendySlash": "[TRANSLATION NOT FOUND] Neuvième Croc: Taillade Ondulante Divine",
+                    "beastBreathingTenthFangWhirlingFangs": "[TRANSLATION NOT FOUND] Dixième Croc: Les Crocs Tournoyants",
+                    "beastBreathingSuddenThrowingStrike": "[TRANSLATION NOT FOUND] La Frappe Lancée",
+                    "beastBreathingBoarRush": "[TRANSLATION NOT FOUND] Boar Rush",
+                    "beastBreathingThirdFangDevourRush": "[TRANSLATION NOT FOUND] Third Fang: Devour Rush"
                 }
             }
         },
         "rpgAssets": {
             "aptitudes": {
-                "strength": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Force",
-                "speed": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Vitesse",
-                "defense": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Défense",
-                "agility": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Agilité"
+                "strength": "[TRANSLATION NOT FOUND] Force",
+                "speed": "[TRANSLATION NOT FOUND] Vitesse",
+                "defense": "[TRANSLATION NOT FOUND] Défense",
+                "agility": "[TRANSLATION NOT FOUND] Agilité"
             }
         },
         "_id": "en"
@@ -586,202 +587,202 @@
     "fr": {
         "breathingStyles": {
             "flower": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de la Fleur",
+                "name": "[TRANSLATION NOT FOUND] Souffle de la Fleur",
                 "techniques": {
-                    "flowerBreathingSecondFormHonorable Shadow Plum": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Esprit du Prunier",
-                    "flowerBreathingFourthFormCrimsonHanagoromo": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: Hanagoromo Pourpre",
-                    "flowerBreathingFifthFormPeoniesOfFutility": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: La Pivoine Futile",
-                    "flowerBreathingSixthFormWhirlingPeach": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième Mouvement: Tourbillon de Pêche",
-                    "flowerBreathingFinalFormEquinoctialVermilionEye": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Mouvement Final: Les Yeux du Lycoris"
+                    "flowerBreathingSecondFormHonorable Shadow Plum": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Esprit du Prunier",
+                    "flowerBreathingFourthFormCrimsonHanagoromo": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Hanagoromo Pourpre",
+                    "flowerBreathingFifthFormPeoniesOfFutility": "[TRANSLATION NOT FOUND] Cinquième Mouvement: La Pivoine Futile",
+                    "flowerBreathingSixthFormWhirlingPeach": "[TRANSLATION NOT FOUND] Sixième Mouvement: Tourbillon de Pêche",
+                    "flowerBreathingFinalFormEquinoctialVermilionEye": "[TRANSLATION NOT FOUND] Mouvement Final: Les Yeux du Lycoris"
                 }
             },
             "love": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de l'Amour",
+                "name": "[TRANSLATION NOT FOUND] Souffle de l'Amour",
                 "techniques": {
-                    "loveBreathingFirstFormShiversOfFirstLove": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Les Frissons du Premier Amour",
-                    "loveBreathingSecondFormLovePangs": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Amour Anxiogène",
-                    "loveBreathingThirdFormCatLoveShower": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: Toilette de Chaton Mignon",
-                    "loveBreathingFifthFormSwayingLoveWildClaw": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Attachement Hésitant - Ongles Mal Vernis",
-                    "loveBreathingSixthFormCatLeggedWindsOfLove": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième Mouvement: Un Amour de Patte de Chaton"
+                    "loveBreathingFirstFormShiversOfFirstLove": "[TRANSLATION NOT FOUND] Premier Mouvement: Les Frissons du Premier Amour",
+                    "loveBreathingSecondFormLovePangs": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Amour Anxiogène",
+                    "loveBreathingThirdFormCatLoveShower": "[TRANSLATION NOT FOUND] Troisième Mouvement: Toilette de Chaton Mignon",
+                    "loveBreathingFifthFormSwayingLoveWildClaw": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Attachement Hésitant - Ongles Mal Vernis",
+                    "loveBreathingSixthFormCatLeggedWindsOfLove": "[TRANSLATION NOT FOUND] Sixième Mouvement: Un Amour de Patte de Chaton"
                 }
             },
             "flame": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de la Flamme",
+                "name": "[TRANSLATION NOT FOUND] Souffle de la Flamme",
                 "techniques": {
-                    "flameBreathingFirstFormUnknowingFire": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Mer de Flammes",
-                    "flameBreathingSecondFormRisingScorchingSun": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Flammes du Soleil Ascendant",
-                    "flameBreathingThirdFormBlazingUniverse": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: Univers de Flammes",
-                    "flameBreathingFourthFormBloomingFlameUndulation:": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: La Vague Flamboyante",
-                    "flameBreathingFifthFormFlameTiger": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Tigre de Flammes",
-                    "flameBreathingNinthFormRengoku": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Neuvième Mouvement: Purgatoire"
+                    "flameBreathingFirstFormUnknowingFire": "[TRANSLATION NOT FOUND] Premier Mouvement: Mer de Flammes",
+                    "flameBreathingSecondFormRisingScorchingSun": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Flammes du Soleil Ascendant",
+                    "flameBreathingThirdFormBlazingUniverse": "[TRANSLATION NOT FOUND] Troisième Mouvement: Univers de Flammes",
+                    "flameBreathingFourthFormBloomingFlameUndulation:": "[TRANSLATION NOT FOUND] Quatrième Mouvement: La Vague Flamboyante",
+                    "flameBreathingFifthFormFlameTiger": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Tigre de Flammes",
+                    "flameBreathingNinthFormRengoku": "[TRANSLATION NOT FOUND] Neuvième Mouvement: Purgatoire"
                 }
             },
             "sun": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle du Soleil",
+                "name": "[TRANSLATION NOT FOUND] Souffle du Soleil",
                 "techniques": {
-                    "sunBreathingDance": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Valse",
-                    "sunBreathingDancingFlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Valse Foudroyante",
-                    "sunBreathingClearBlueSky": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Paradis Bleu",
-                    "sunBreathingRagingSun": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Miroir Brûlant Écarlate",
-                    "sunBreathingBurningBonesSummerSun": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Le Soleil qui Réduit les Os en Cendres",
-                    "sunBreathingSettingSunTransformation": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Le Coucher de Soleil",
-                    "sunBreathingSolarHeatHaze": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Chaleur Ondulante",
-                    "sunBreathingBeneficentRadiance": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Rai de Lumière",
-                    "sunBreathingSunflowerThrust": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Estoc Brillant du Soleil",
-                    "sunBreathingDragonSunHaloHeadDance": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Halo Solaire Danse Draconique",
-                    "sunBreathingFireWheel": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Char Enflammé",
-                    "sunBreathingFakeRainbow": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Arc-en-Ciel Parhélique",
-                    "sunBreathingFlameDance": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Valse Enflammée",
-                    "sunBreathingThirteenthForm": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Treizième Mouvement",
-                    "sunBreathingCrossSlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cross Slash",
-                    "sunBreathingScorchingRush": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Scorching Rush",
-                    "sunBreathingPhoenixFlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Phoenix Flash"
+                    "sunBreathingDance": "[TRANSLATION NOT FOUND] Valse",
+                    "sunBreathingDancingFlash": "[TRANSLATION NOT FOUND] Valse Foudroyante",
+                    "sunBreathingClearBlueSky": "[TRANSLATION NOT FOUND] Paradis Bleu",
+                    "sunBreathingRagingSun": "[TRANSLATION NOT FOUND] Miroir Brûlant Écarlate",
+                    "sunBreathingBurningBonesSummerSun": "[TRANSLATION NOT FOUND] Le Soleil qui Réduit les Os en Cendres",
+                    "sunBreathingSettingSunTransformation": "[TRANSLATION NOT FOUND] Le Coucher de Soleil",
+                    "sunBreathingSolarHeatHaze": "[TRANSLATION NOT FOUND] Chaleur Ondulante",
+                    "sunBreathingBeneficentRadiance": "[TRANSLATION NOT FOUND] Rai de Lumière",
+                    "sunBreathingSunflowerThrust": "[TRANSLATION NOT FOUND] Estoc Brillant du Soleil",
+                    "sunBreathingDragonSunHaloHeadDance": "[TRANSLATION NOT FOUND] Halo Solaire Danse Draconique",
+                    "sunBreathingFireWheel": "[TRANSLATION NOT FOUND] Char Enflammé",
+                    "sunBreathingFakeRainbow": "[TRANSLATION NOT FOUND] Arc-en-Ciel Parhélique",
+                    "sunBreathingFlameDance": "[TRANSLATION NOT FOUND] Valse Enflammée",
+                    "sunBreathingThirteenthForm": "[TRANSLATION NOT FOUND] Treizième Mouvement",
+                    "sunBreathingCrossSlash": "[TRANSLATION NOT FOUND] Cross Slash",
+                    "sunBreathingScorchingRush": "[TRANSLATION NOT FOUND] Scorching Rush",
+                    "sunBreathingPhoenixFlash": "[TRANSLATION NOT FOUND] Phoenix Flash"
                 }
             },
             "sound": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle du Son",
+                "name": "[TRANSLATION NOT FOUND] Souffle du Son",
                 "techniques": {
-                    "soundBreathingFirstFormRoar": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Tonnerre",
-                    "soundBreathingFourthFormConstantResoundingSlashes": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: Le Glas Mortel d'Avici",
-                    "soundBreathingFifthFormString Performance": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Symphonie Stridente",
-                    "soundBreathingRisingKick": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Rising Kick",
-                    "soundBreathingFifthFormStringPerformanceBurstingBloom": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Fifth Form: String Performance, Bursting Bloom"
+                    "soundBreathingFirstFormRoar": "[TRANSLATION NOT FOUND] Premier Mouvement: Tonnerre",
+                    "soundBreathingFourthFormConstantResoundingSlashes": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Le Glas Mortel d'Avici",
+                    "soundBreathingFifthFormString Performance": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Symphonie Stridente",
+                    "soundBreathingRisingKick": "[TRANSLATION NOT FOUND] Rising Kick",
+                    "soundBreathingFifthFormStringPerformanceBurstingBloom": "[TRANSLATION NOT FOUND] Fifth Form: String Performance, Bursting Bloom"
                 }
             },
             "thunder": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de la Foudre",
+                "name": "[TRANSLATION NOT FOUND] Souffle de la Foudre",
                 "techniques": {
-                    "thunderBreathingFirstFormThunderclapAndFlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante",
-                    "thunderBreathingFirstFormThunderclapAndFlashSixfold": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Six Coups",
-                    "thunderBreathingFirstFormThunderclapAndFlashEightfold": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Huit Coups",
-                    "thunderBreathingFirstFormThunderclapAndFlashGodspeed": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Vitesse Divine",
-                    "thunderBreathingSecondFormRiceSpirit": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Éclair Foudroyant",
-                    "thunderBreathingThirdFormThunderSwarm": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: Nuée d'Éclairs",
-                    "thunderBreathingFourthFormDistantThunder": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: Orage Lointain",
-                    "thunderBreathingFifthFormHeatLightning": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Éclair de Chaleur",
-                    "thunderBreathingSixthFormRumbleAndFlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième Mouvement: Tonnerre et Foudre",
-                    "thunderBreathingSeventhFormHonoikazuchiNoKami": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Septième Mouvements: Dieu du Feu Céleste",
-                    "thunderBreathingAirSpin": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Air Spin",
-                    "thunderBreathingFirstFormThunderclapAndFlashPrime": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] First Form: Thunderclap and Flash, Prime"
+                    "thunderBreathingFirstFormThunderclapAndFlash": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante",
+                    "thunderBreathingFirstFormThunderclapAndFlashSixfold": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Six Coups",
+                    "thunderBreathingFirstFormThunderclapAndFlashEightfold": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Huit Coups",
+                    "thunderBreathingFirstFormThunderclapAndFlashGodspeed": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Vitesse Divine",
+                    "thunderBreathingSecondFormRiceSpirit": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Éclair Foudroyant",
+                    "thunderBreathingThirdFormThunderSwarm": "[TRANSLATION NOT FOUND] Troisième Mouvement: Nuée d'Éclairs",
+                    "thunderBreathingFourthFormDistantThunder": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Orage Lointain",
+                    "thunderBreathingFifthFormHeatLightning": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Éclair de Chaleur",
+                    "thunderBreathingSixthFormRumbleAndFlash": "[TRANSLATION NOT FOUND] Sixième Mouvement: Tonnerre et Foudre",
+                    "thunderBreathingSeventhFormHonoikazuchiNoKami": "[TRANSLATION NOT FOUND] Septième Mouvements: Dieu du Feu Céleste",
+                    "thunderBreathingAirSpin": "[TRANSLATION NOT FOUND] Air Spin",
+                    "thunderBreathingFirstFormThunderclapAndFlashPrime": "[TRANSLATION NOT FOUND] First Form: Thunderclap and Flash, Prime"
                 }
             },
             "wind": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle du Vent",
+                "name": "[TRANSLATION NOT FOUND] Souffle du Vent",
                 "techniques": {
-                    "windBreathingFirstFormDustWhirlwindCutter": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Tourbillon de Poussière - Tranche",
-                    "windBreathingSecondFormClawsPurifyingWind": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Griffes de Vent Purificatrices",
-                    "windBreathingThirdFormCleanStormWindTree": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: Arbre Ondulant dans la Brise Montagnarde",
-                    "windBreathingFourthFormRisingDustStorm": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: La Tempête de Poussière Levante",
-                    "windBreathingFifthFormColdMountainWind": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Tempête Hivernale",
-                    "windBreathingSixthFormBlackWindMountainMist": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième Mouvement: La Rafale de Fumée Noire",
-                    "windBreathingSeventhFormGaleSuddenGusts": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Septième Mouvement: Vent Puissant - Bourrasque de Tengu",
-                    "windBreathingEighthFormPrimaryGaleSlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Huitième Mouvement: Frappe de la Première Bourrasque",
-                    "windBreathingNinthFormIdatenTyphoon": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Neuvième Mouvement: Typhon de Skanda"
+                    "windBreathingFirstFormDustWhirlwindCutter": "[TRANSLATION NOT FOUND] Premier Mouvement: Tourbillon de Poussière - Tranche",
+                    "windBreathingSecondFormClawsPurifyingWind": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Griffes de Vent Purificatrices",
+                    "windBreathingThirdFormCleanStormWindTree": "[TRANSLATION NOT FOUND] Troisième Mouvement: Arbre Ondulant dans la Brise Montagnarde",
+                    "windBreathingFourthFormRisingDustStorm": "[TRANSLATION NOT FOUND] Quatrième Mouvement: La Tempête de Poussière Levante",
+                    "windBreathingFifthFormColdMountainWind": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Tempête Hivernale",
+                    "windBreathingSixthFormBlackWindMountainMist": "[TRANSLATION NOT FOUND] Sixième Mouvement: La Rafale de Fumée Noire",
+                    "windBreathingSeventhFormGaleSuddenGusts": "[TRANSLATION NOT FOUND] Septième Mouvement: Vent Puissant - Bourrasque de Tengu",
+                    "windBreathingEighthFormPrimaryGaleSlash": "[TRANSLATION NOT FOUND] Huitième Mouvement: Frappe de la Première Bourrasque",
+                    "windBreathingNinthFormIdatenTyphoon": "[TRANSLATION NOT FOUND] Neuvième Mouvement: Typhon de Skanda"
                 }
             },
             "water": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de l'Eau",
+                "name": "[TRANSLATION NOT FOUND] Souffle de l'Eau",
                 "techniques": {
-                    "waterBreathingFirstFormWaterSurfaceSlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Entaille de l'Eau Calme",
-                    "waterBreathingSecondFormWaterWheel": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: La Roue d'Eau",
-                    "waterBreathingSecondFormImprovedLateralWaterWheel": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: La Roue d'Eau - Variation horizontal",
-                    "waterBreathingThirdFormFlowingDance": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: Danse des Courants",
-                    "waterBreathingFourthFormStrikingTide": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: La Marée Déferlante",
-                    "waterBreathingFourthFormStrikingTideTurbulent": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Fourth Form: Striking Tide, Turbulent",
-                    "waterBreathingFifthFormBlessedRainAfterTheDrought": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Averse Providentielle",
-                    "waterBreathingSixthFormWhirlpool": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième Mouvement: Tourbillon",
-                    "waterBreathingSixthFormWhirlpoolFlow": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième et Troisième Mouvement Combinés: Tourbillon Dansant",
-                    "waterBreathingSeventhFormDropRippleThrust": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Septième Mouvement: Goutte de Rosée Troublant l'Eau Dormante",
-                    "waterBreathingSeventhFormDropRippleThrustCurve": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Septième Mouvement: Goutte de Rosée Troublant l'Eau Dormante - En Crochet",
-                    "waterBreathingEighthFormWaterfallBasin": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Huitième Mouvement: Impact de la Cascade",
-                    "waterBreathingNinthFormSplashingWaterFlowTurbulent": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Neuvième Mouvement: Embruns des Flots Déchaînés",
-                    "waterBreathingTenthFormConstantFlux": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Dixième Mouvement: Les Vicissitudes de la Vie",
-                    "waterBreathingEleventhFormDead Calm": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Onzième Mouvement: Accalmie",
-                    "waterBreathingThirdFormFlowingDanceShadowsOfDawn": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Third Form: Flowing Dance, Shadows of Dawn",
-                    "waterBreathingEighthFormWaterfallBasinDestruction": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Eighth Form: Waterfall Basin, Destruction",
-                    "waterBreathingNinthFormSplashingWaterFlow": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow",
-                    "waterBreathingNinthFormSplashingWaterFlowFlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow, Flash",
-                    "waterBreathingNinthFormSplashingWaterFlowTurbulentEffervescence": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow, Turbulent Effervescence",
-                    "waterBreathingEleventhFormDeadCalmTidalWaves": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Eleventh Form: Dead Calm, Tidal Waves"
+                    "waterBreathingFirstFormWaterSurfaceSlash": "[TRANSLATION NOT FOUND] Premier Mouvement: Entaille de l'Eau Calme",
+                    "waterBreathingSecondFormWaterWheel": "[TRANSLATION NOT FOUND] Deuxième Mouvement: La Roue d'Eau",
+                    "waterBreathingSecondFormImprovedLateralWaterWheel": "[TRANSLATION NOT FOUND] Deuxième Mouvement: La Roue d'Eau - Variation horizontal",
+                    "waterBreathingThirdFormFlowingDance": "[TRANSLATION NOT FOUND] Troisième Mouvement: Danse des Courants",
+                    "waterBreathingFourthFormStrikingTide": "[TRANSLATION NOT FOUND] Quatrième Mouvement: La Marée Déferlante",
+                    "waterBreathingFourthFormStrikingTideTurbulent": "[TRANSLATION NOT FOUND] Fourth Form: Striking Tide, Turbulent",
+                    "waterBreathingFifthFormBlessedRainAfterTheDrought": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Averse Providentielle",
+                    "waterBreathingSixthFormWhirlpool": "[TRANSLATION NOT FOUND] Sixième Mouvement: Tourbillon",
+                    "waterBreathingSixthFormWhirlpoolFlow": "[TRANSLATION NOT FOUND] Sixième et Troisième Mouvement Combinés: Tourbillon Dansant",
+                    "waterBreathingSeventhFormDropRippleThrust": "[TRANSLATION NOT FOUND] Septième Mouvement: Goutte de Rosée Troublant l'Eau Dormante",
+                    "waterBreathingSeventhFormDropRippleThrustCurve": "[TRANSLATION NOT FOUND] Septième Mouvement: Goutte de Rosée Troublant l'Eau Dormante - En Crochet",
+                    "waterBreathingEighthFormWaterfallBasin": "[TRANSLATION NOT FOUND] Huitième Mouvement: Impact de la Cascade",
+                    "waterBreathingNinthFormSplashingWaterFlowTurbulent": "[TRANSLATION NOT FOUND] Neuvième Mouvement: Embruns des Flots Déchaînés",
+                    "waterBreathingTenthFormConstantFlux": "[TRANSLATION NOT FOUND] Dixième Mouvement: Les Vicissitudes de la Vie",
+                    "waterBreathingEleventhFormDead Calm": "[TRANSLATION NOT FOUND] Onzième Mouvement: Accalmie",
+                    "waterBreathingThirdFormFlowingDanceShadowsOfDawn": "[TRANSLATION NOT FOUND] Third Form: Flowing Dance, Shadows of Dawn",
+                    "waterBreathingEighthFormWaterfallBasinDestruction": "[TRANSLATION NOT FOUND] Eighth Form: Waterfall Basin, Destruction",
+                    "waterBreathingNinthFormSplashingWaterFlow": "[TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow",
+                    "waterBreathingNinthFormSplashingWaterFlowFlash": "[TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow, Flash",
+                    "waterBreathingNinthFormSplashingWaterFlowTurbulentEffervescence": "[TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow, Turbulent Effervescence",
+                    "waterBreathingEleventhFormDeadCalmTidalWaves": "[TRANSLATION NOT FOUND] Eleventh Form: Dead Calm, Tidal Waves"
                 }
             },
             "insect": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de l'Insecte",
+                "name": "[TRANSLATION NOT FOUND] Souffle de l'Insecte",
                 "techniques": {
-                    "insectBreathingButterflyDanceCaprice": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Danse des Papillons: Papillonnage",
-                    "insectBreathingDanceOfTheBeeStingTrueFlutter": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Danse de la Piqûre d'Abeille: Battement Véritable",
-                    "insectBreathingDanceOfTheDragonflyCompoundEyeHexagon": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Danse de la Libellule: Œil à Facettes Hexagonales",
-                    "insectBreathingDanceOfTheCentipedeHundredLeggedZigzag": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Danse du Myriapode: Zigzag Centipède",
-                    "insectBreathingSwiftThrust": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Swift Thrust",
-                    "insectBreathingRisingThrust": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Rising Thrust",
-                    "insectBreathingSixfoldThrust": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixfold Thrust",
-                    "insectBreathingButterflyDanceCapriceIllusoryLight": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Butterfly Dance: Caprice, Illusory Light"
+                    "insectBreathingButterflyDanceCaprice": "[TRANSLATION NOT FOUND] Danse des Papillons: Papillonnage",
+                    "insectBreathingDanceOfTheBeeStingTrueFlutter": "[TRANSLATION NOT FOUND] Danse de la Piqûre d'Abeille: Battement Véritable",
+                    "insectBreathingDanceOfTheDragonflyCompoundEyeHexagon": "[TRANSLATION NOT FOUND] Danse de la Libellule: Œil à Facettes Hexagonales",
+                    "insectBreathingDanceOfTheCentipedeHundredLeggedZigzag": "[TRANSLATION NOT FOUND] Danse du Myriapode: Zigzag Centipède",
+                    "insectBreathingSwiftThrust": "[TRANSLATION NOT FOUND] Swift Thrust",
+                    "insectBreathingRisingThrust": "[TRANSLATION NOT FOUND] Rising Thrust",
+                    "insectBreathingSixfoldThrust": "[TRANSLATION NOT FOUND] Sixfold Thrust",
+                    "insectBreathingButterflyDanceCapriceIllusoryLight": "[TRANSLATION NOT FOUND] Butterfly Dance: Caprice, Illusory Light"
                 }
             },
             "serpent": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle du Serpent",
+                "name": "[TRANSLATION NOT FOUND] Souffle du Serpent",
                 "techniques": {
-                    "serpentBreathingFirstFormWindingSerpentSlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Frappe du Serpent Recroquevillé",
-                    "serpentBreathingSecondFormVenomFangsOfTheNarrowHead": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Le Crochet Empoisonné du Petit Serpent",
-                    "serpentBreathingThirdFormCoilChoke": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: Constriction",
-                    "serpentBreathingFourthFormTwinHeadedReptile": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: Serpent Bicéphale",
-                    "serpentBreathingFifthFormSlitheringSerpent": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Ondulations du Serpent"
+                    "serpentBreathingFirstFormWindingSerpentSlash": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe du Serpent Recroquevillé",
+                    "serpentBreathingSecondFormVenomFangsOfTheNarrowHead": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Le Crochet Empoisonné du Petit Serpent",
+                    "serpentBreathingThirdFormCoilChoke": "[TRANSLATION NOT FOUND] Troisième Mouvement: Constriction",
+                    "serpentBreathingFourthFormTwinHeadedReptile": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Serpent Bicéphale",
+                    "serpentBreathingFifthFormSlitheringSerpent": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Ondulations du Serpent"
                 }
             },
             "moon": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de la Lune",
+                "name": "[TRANSLATION NOT FOUND] Souffle de la Lune",
                 "techniques": {
-                    "moonBreathingFirstFormDarkMoonEveningPalace": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Lune Sombre - Sanctuaire Nocturne",
-                    "moonBreathingSecondFormPearlFlowerMoonGazing": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Fleur de Nacre au Clair de Lune",
-                    "moonBreathingThirdFormLoathsomeMoonChains": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: La Lune Meurtrière de l'Abandon - Chaîne",
-                    "moonBreathingFifthFormMoonSpiritCalamitousEddy": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Vortex Maudit de la Lune Spectrale",
-                    "moonBreathingSixthFormPerpetualNightLonelyMoonIncessant": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième Mouvement: La Lune Solitaire dans l'Obscurité Éternelle - L'Avici",
-                    "moonBreathingSeventhFormMirrorOfMisfortuneMoonlit": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Septième Mouvement: Miroir du Malheur - Reflet de la Lune",
-                    "moonBreathingEighthFormMoonDragonRingTail": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Huitième Mouvement: Ouroboros Lunaire",
-                    "moonBreathingNinthFormWaningMoonSwaths": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Neuvième Mouvement: Lune Décroissante - Le Cycle Perpétuel",
-                    "moonBreathingTenthFormDrillingSlashesMoonThroughBambooLeaves": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Dixième Mouvement: Frappe du Cycle Transperçant - La Lune de Lierre",
-                    "moonBreathingFourteenthFormCatastropheTenmanCrescentMoon": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatorzième Mouvement: Le Croissant de Lune de Tenman",
-                    "moonBreathingSixteenthFormMoonBowHalfMoon": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Seizième Mouvement: Arc-en-Ciel Lunaire - Fragments Sélénites"
+                    "moonBreathingFirstFormDarkMoonEveningPalace": "[TRANSLATION NOT FOUND] Premier Mouvement: Lune Sombre - Sanctuaire Nocturne",
+                    "moonBreathingSecondFormPearlFlowerMoonGazing": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Fleur de Nacre au Clair de Lune",
+                    "moonBreathingThirdFormLoathsomeMoonChains": "[TRANSLATION NOT FOUND] Troisième Mouvement: La Lune Meurtrière de l'Abandon - Chaîne",
+                    "moonBreathingFifthFormMoonSpiritCalamitousEddy": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Vortex Maudit de la Lune Spectrale",
+                    "moonBreathingSixthFormPerpetualNightLonelyMoonIncessant": "[TRANSLATION NOT FOUND] Sixième Mouvement: La Lune Solitaire dans l'Obscurité Éternelle - L'Avici",
+                    "moonBreathingSeventhFormMirrorOfMisfortuneMoonlit": "[TRANSLATION NOT FOUND] Septième Mouvement: Miroir du Malheur - Reflet de la Lune",
+                    "moonBreathingEighthFormMoonDragonRingTail": "[TRANSLATION NOT FOUND] Huitième Mouvement: Ouroboros Lunaire",
+                    "moonBreathingNinthFormWaningMoonSwaths": "[TRANSLATION NOT FOUND] Neuvième Mouvement: Lune Décroissante - Le Cycle Perpétuel",
+                    "moonBreathingTenthFormDrillingSlashesMoonThroughBambooLeaves": "[TRANSLATION NOT FOUND] Dixième Mouvement: Frappe du Cycle Transperçant - La Lune de Lierre",
+                    "moonBreathingFourteenthFormCatastropheTenmanCrescentMoon": "[TRANSLATION NOT FOUND] Quatorzième Mouvement: Le Croissant de Lune de Tenman",
+                    "moonBreathingSixteenthFormMoonBowHalfMoon": "[TRANSLATION NOT FOUND] Seizième Mouvement: Arc-en-Ciel Lunaire - Fragments Sélénites"
                 }
             },
             "stone": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de la Roche",
+                "name": "[TRANSLATION NOT FOUND] Souffle de la Roche",
                 "techniques": {
-                    "stoneBreathingFirstFormSerpentiniteBipolar": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Serpentinite - Tenaille Polarisée",
-                    "stoneBreathingSecondFormUpperSmash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Fracasser la Voûte Céleste",
-                    "stoneBreathingThirdFormStoneSkin": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: Peau de Pierre",
-                    "stoneBreathingFourthFormVolcanicRockRapidConquest": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: Rhyolite - Conquête Rapide",
-                    "stoneBreathingFifthFormArcsOfJustice": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: La Roue de Pierre de la Justice"
+                    "stoneBreathingFirstFormSerpentiniteBipolar": "[TRANSLATION NOT FOUND] Premier Mouvement: Serpentinite - Tenaille Polarisée",
+                    "stoneBreathingSecondFormUpperSmash": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Fracasser la Voûte Céleste",
+                    "stoneBreathingThirdFormStoneSkin": "[TRANSLATION NOT FOUND] Troisième Mouvement: Peau de Pierre",
+                    "stoneBreathingFourthFormVolcanicRockRapidConquest": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Rhyolite - Conquête Rapide",
+                    "stoneBreathingFifthFormArcsOfJustice": "[TRANSLATION NOT FOUND] Cinquième Mouvement: La Roue de Pierre de la Justice"
                 }
             },
             "mist": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de la Brume",
+                "name": "[TRANSLATION NOT FOUND] Souffle de la Brume",
                 "techniques": {
-                    "mistBreathingFirstFormLowCloudsDistantHaze": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Mouvement: Nuages Bas et Brouillard Distant",
-                    "mistBreathingSecondFormEightLayeredMist": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Mouvement: Brume Stratifiée",
-                    "mistBreathingThirdFormScatteringMistSplash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Mouvement: Explosion Désembuante",
-                    "mistBreathingFourthFormShiftingFlowSlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Mouvement: Coup de Sabre Advectif",
-                    "mistBreathingFifthFormSeaOfCloudsAndHaze": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Mouvement: Brume de Mer",
-                    "mistBreathingSixthFormLunarDispersingMist": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième Mouvement: Brume au Clair de Lune",
-                    "mistBreathingSeventhFormObscuringClouds": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Septième mouvement: Brouillard"
+                    "mistBreathingFirstFormLowCloudsDistantHaze": "[TRANSLATION NOT FOUND] Premier Mouvement: Nuages Bas et Brouillard Distant",
+                    "mistBreathingSecondFormEightLayeredMist": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Brume Stratifiée",
+                    "mistBreathingThirdFormScatteringMistSplash": "[TRANSLATION NOT FOUND] Troisième Mouvement: Explosion Désembuante",
+                    "mistBreathingFourthFormShiftingFlowSlash": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Coup de Sabre Advectif",
+                    "mistBreathingFifthFormSeaOfCloudsAndHaze": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Brume de Mer",
+                    "mistBreathingSixthFormLunarDispersingMist": "[TRANSLATION NOT FOUND] Sixième Mouvement: Brume au Clair de Lune",
+                    "mistBreathingSeventhFormObscuringClouds": "[TRANSLATION NOT FOUND] Septième mouvement: Brouillard"
                 }
             },
             "beast": {
-                "name": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Souffle de la Bête",
+                "name": "[TRANSLATION NOT FOUND] Souffle de la Bête",
                 "techniques": {
-                    "beastBreathingFirstFangPierce": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Premier Croc: Perforation",
-                    "beastBreathingSecondFangSlice": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Deuxième Croc: Lacération",
-                    "beastBreathingThirdFangDevour": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Troisième Croc: Déchiquetage",
-                    "beastBreathingFourthFangSliceNDice": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Quatrième Croc: Dilacération",
-                    "beastBreathingFifthFangCrazyCutting": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Cinquième Croc: Mutilation Furieuse",
-                    "beastBreathingSixthFangPalisadeBite": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Sixième Croc: Morsure Irrégulière",
-                    "beastBreathingSeventhFormSpatialAwareness": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Septième Croc: Détection",
-                    "beastBreathingEighthFormExplosiveRush": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Huitième Croc: Charge du Sanglier",
-                    "beastBreathingNinthFangExtendingBendySlash": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Neuvième Croc: Taillade Ondulante Divine",
-                    "beastBreathingTenthFangWhirlingFangs": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Dixième Croc: Les Crocs Tournoyants",
-                    "beastBreathingSuddenThrowingStrike": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] La Frappe Lancée",
-                    "beastBreathingBoarRush": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Boar Rush",
-                    "beastBreathingThirdFangDevourRush": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Third Fang: Devour Rush"
+                    "beastBreathingFirstFangPierce": "[TRANSLATION NOT FOUND] Premier Croc: Perforation",
+                    "beastBreathingSecondFangSlice": "[TRANSLATION NOT FOUND] Deuxième Croc: Lacération",
+                    "beastBreathingThirdFangDevour": "[TRANSLATION NOT FOUND] Troisième Croc: Déchiquetage",
+                    "beastBreathingFourthFangSliceNDice": "[TRANSLATION NOT FOUND] Quatrième Croc: Dilacération",
+                    "beastBreathingFifthFangCrazyCutting": "[TRANSLATION NOT FOUND] Cinquième Croc: Mutilation Furieuse",
+                    "beastBreathingSixthFangPalisadeBite": "[TRANSLATION NOT FOUND] Sixième Croc: Morsure Irrégulière",
+                    "beastBreathingSeventhFormSpatialAwareness": "[TRANSLATION NOT FOUND] Septième Croc: Détection",
+                    "beastBreathingEighthFormExplosiveRush": "[TRANSLATION NOT FOUND] Huitième Croc: Charge du Sanglier",
+                    "beastBreathingNinthFangExtendingBendySlash": "[TRANSLATION NOT FOUND] Neuvième Croc: Taillade Ondulante Divine",
+                    "beastBreathingTenthFangWhirlingFangs": "[TRANSLATION NOT FOUND] Dixième Croc: Les Crocs Tournoyants",
+                    "beastBreathingSuddenThrowingStrike": "[TRANSLATION NOT FOUND] La Frappe Lancée",
+                    "beastBreathingBoarRush": "[TRANSLATION NOT FOUND] Boar Rush",
+                    "beastBreathingThirdFangDevourRush": "[TRANSLATION NOT FOUND] Third Fang: Devour Rush"
                 }
             }
         },
@@ -1154,10 +1155,10 @@
         },
         "rpgAssets": {
             "aptitudes": {
-                "strength": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Force",
-                "speed": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Vitesse",
-                "defense": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Défense",
-                "agility": "[TRANSLATION NOT FOUND] [TRANSLATION NOT FOUND] Agilité"
+                "strength": "[TRANSLATION NOT FOUND] Force",
+                "speed": "[TRANSLATION NOT FOUND] Vitesse",
+                "defense": "[TRANSLATION NOT FOUND] Défense",
+                "agility": "[TRANSLATION NOT FOUND] Agilité"
             }
         },
         "_id": "fr"

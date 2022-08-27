@@ -3,7 +3,7 @@ class Util {
         this.client = client;
     }
 
-    ensureLang(source, obj) {
+    ensureLang(source, obj, indicate) {
         for (const key in source) {
             if (source[key] instanceof Object && !(source instanceof String)) {
                 if (key in obj) obj[key] = this.ensureLang(source[key], obj[key]);
@@ -13,11 +13,13 @@ class Util {
                 obj[key] = source[key];
             }
             else if (obj[key] === source[key]) {
-                obj[key] = `[TRANSLATION NOT FOUND] ${source[key]}`;
+                if (indicate.value) obj[key] = `${indicate.equalString} ${obj[key]}`;
             }
         }
         for (const key2 in obj) {
-            if (!(key2 in source)) obj[key2] = `[UNEXPECTED TRANSLATION] ${obj[key2]}`;
+            if (!(key2 in source)) {
+                if (indicate.value) obj[key2] = `${indicate.notInString} ${obj[key2]}`;
+            }
         }
 
         return obj;
@@ -174,6 +176,7 @@ class Util {
     }
 
     catchError(error) {
+        console.log(this.client);
         this.client.log("Catched error:", error.stack);
         this.client.log("................");
     }

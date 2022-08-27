@@ -9,12 +9,7 @@ class LanguageManager {
         this.languages = fs.readdirSync(dir).map(languageDir => new Language(languageDir));
 
         const french = this.getLang("fr");
-        const Json = {
-            " ----": "__________________________",
-            "_TUTORIEL": "Use this JSON to find bad translated files. Just search for \"[TRANSLATION NOT FOUND]\", and navigate !",
-            "TUTORIEL_": "You can also search [UNEXPECTED TRANSLATION] to find the translations that are not necessary.",
-            "---- ": "__________________________",
-        };
+        const Json = {};
         for (const lang of this.languages) {
             for (const frenchDir of french.jsonDir) {
                 if (!lang.jsonDir.includes(frenchDir)) {
@@ -23,9 +18,10 @@ class LanguageManager {
                 }
             }
 
-            lang.json = new Util(this.client).ensureLang(french.json, lang.json);
+            const cacheJson = lang.json;
+            lang.json = new Util(this.client).ensureLang(french.json, cacheJson);
             lang.json._id = lang.lang;
-            Json[lang.lang] = lang.json;
+            Json[lang.lang] = new Util(this.client).ensureLang(french.json, cacheJson);
         }
         fs.writeFileSync("./src/languages/rendered.json", JSON.stringify(Json, null, 4), "utf-8");
     }

@@ -50,8 +50,8 @@
         },
         "panels": {
             "identifier_name": "Tester's Panel",
+            "identifier_description": "Panel which includes useful informations about the bot.",
             "tester": {
-                "identifier_description": "Panel which includes useful informations about the bot.",
                 "pages": {
                     "0": {
                         "label": "User informations",
