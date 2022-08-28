@@ -1,0 +1,10 @@
+{
+    "adventurer": {
+        "id": "adventurer",
+        "type": "enchantedGrimoire",
+        "lifespan": 259200,
+        "effects": [
+            { "id": "experienceBoosted", "strength": "15" }
+        ]
+    }
+}

@@ -1,4 +1,4 @@
-const Command = require("../../base/Command");
+const Command = require("../../Command");
 
 async function alertQuest(client, type, datas, quest) {
 

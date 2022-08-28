@@ -57,6 +57,8 @@ class Base extends Command {
         const userIDB = await this.client.inventoryDb.get(userId);
         const userADB = await this.client.activityDb.get(userId);
 
+        console.log(userPDB);
+
         this.client.RPGAssets.getBreath(this.lang._id, userPDB.breath.id);
 
         let userStatsObject = {};

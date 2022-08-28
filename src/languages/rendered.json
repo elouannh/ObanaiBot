@@ -1,13 +1,9 @@
 {
-    " ----": "__________________________",
-    "_TUTORIEL": "Use this JSON to find bad translated files. Just search for \"[TRANSLATION NOT FOUND]\", and navigate !",
-    "TUTORIEL_": "You can also search [UNEXPECTED TRANSLATION] to find the translations that are not necessary.",
-    "---- ": "__________________________",
     "en": {
         "commands": {
             "staff-panel": {
                 "strings": {
-                    "owner_grade": "[TRANSLATION NOT FOUND] Owner",
+                    "owner_grade": "[=] Owner",
                     "admin_grade": "Administrator",
                     "tester_grade": "Tester",
                     "owner_panel": "Owner's Panel",
@@ -29,7 +25,7 @@
                     "total_members": "Total of members",
                     "cached_users": "Cached users",
                     "players": "Players",
-                    "version": "[TRANSLATION NOT FOUND] Version",
+                    "version": "[=] Version",
                     "no_permissions": "You don't have permissions to access to this panel.",
                     "actual_bot_status": "Actual bot status",
                     "already_set": "The bot is already set",
@@ -55,9 +51,9 @@
                     "is_not_vipplus": "Le joueur %PLAYER **isn't plus VIP(+)** in the bot."
                 },
                 "panels": {
-                    "identifier_name": "USELESSTester's Panel",
-                    "identifier_description": "USELESSPanel which includes useful informations about the bot.",
                     "tester": {
+                        "identifier_name": "Tester's Panel",
+                        "identifier_description": "Panel which includes useful informations about the bot.",
                         "pages": {
                             "0": {
                                 "label": "User informations",
@@ -86,9 +82,7 @@
                                     }
                                 }
                             }
-                        },
-                        "identifier_name": "Panel Testeur",
-                        "identifier_description": "Panel contenant des informations utiles sur le bot."
+                        }
                     },
                     "admin": {
                         "identifier_name": "Administrator's Panel",
@@ -140,7 +134,7 @@
                                 }
                             },
                             "2": {
-                                "label": "[TRANSLATION NOT FOUND] VIPs/VIPs(+)",
+                                "label": "[=] VIPs/VIPs(+)",
                                 "description": "Administrator's panel for managing VIPs and VIPs(+).",
                                 "embeds": {
                                     "0": {
@@ -185,8 +179,8 @@
                     }
                 },
                 "rows": {
-                    "page": "[TRANSLATION NOT FOUND] Page...",
-                    "panel": "[TRANSLATION NOT FOUND] Panel...",
+                    "page": "[=] Page...",
+                    "panel": "[=] Panel...",
                     "universal": {
                         "leave_panel": "Leave panel"
                     },
@@ -196,7 +190,7 @@
                             "inputs": {
                                 "0": {
                                     "label": "Enter the ID",
-                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                    "placeholder": "[=] ID"
                                 }
                             }
                         },
@@ -205,7 +199,7 @@
                             "inputs": {
                                 "0": {
                                     "label": "Enter the ID",
-                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                    "placeholder": "[=] ID"
                                 }
                             }
                         },
@@ -214,11 +208,11 @@
                             "inputs": {
                                 "0": {
                                     "label": "(VIP) Enter the ID",
-                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                    "placeholder": "[=] ID"
                                 },
                                 "1": {
                                     "label": "(VIP(+)) Enter the ID",
-                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                    "placeholder": "[=] ID"
                                 }
                             }
                         },
@@ -227,11 +221,11 @@
                             "inputs": {
                                 "0": {
                                     "label": "(VIP) Enter the ID",
-                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                    "placeholder": "[=] ID"
                                 },
                                 "1": {
                                     "label": "(VIP(+)) Enter the ID",
-                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
+                                    "placeholder": "[=] ID"
                                 }
                             }
                         },
@@ -239,8 +233,8 @@
                             "title": "Execute code",
                             "inputs": {
                                 "0": {
-                                    "label": "[TRANSLATION NOT FOUND] Code (JavaScript):",
-                                    "placeholder": "[TRANSLATION NOT FOUND] console.log(\"Hello world\");"
+                                    "label": "[=] Code (JavaScript):",
+                                    "placeholder": "[=] console.log(\"Hello world\");"
                                 }
                             }
                         }
@@ -249,10 +243,10 @@
             },
             "base": {
                 "strings": {
-                    "profile_aptitudes": "[TRANSLATION NOT FOUND] Aptitudes",
-                    "level": "[TRANSLATION NOT FOUND] Niveau",
-                    "total_experience": "[TRANSLATION NOT FOUND] Expérience totale",
-                    "level_experience": "[TRANSLATION NOT FOUND] Expérience de niveau"
+                    "profile_aptitudes": "[=] Aptitudes",
+                    "level": "[=] Niveau",
+                    "total_experience": "[=] Expérience totale",
+                    "level_experience": "[=] Expérience de niveau"
                 },
                 "panels": {
                     "player": {
@@ -260,13 +254,13 @@
                             "0": {
                                 "embeds": {
                                     "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Statistiques de %PLAYER",
+                                        "title": "[=] Statistiques de %PLAYER",
                                         "fields": {
                                             "0": {
-                                                "name": "[TRANSLATION NOT FOUND] Aptitudes"
+                                                "name": "[=] Aptitudes"
                                             },
                                             "1": {
-                                                "name": "[TRANSLATION NOT FOUND] Niveau"
+                                                "name": "[=] Niveau"
                                             }
                                         }
                                     }
@@ -279,13 +273,13 @@
                             "0": {
                                 "embeds": {
                                     "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Inventaire de %PLAYER",
+                                        "title": "[=] Inventaire de %PLAYER",
                                         "fields": {
                                             "0": {
-                                                "name": "[TRANSLATION NOT FOUND] Ressources"
+                                                "name": "[=] Ressources"
                                             },
                                             "1": {
-                                                "name": "[TRANSLATION NOT FOUND] Objets de quête"
+                                                "name": "[=] Objets de quête"
                                             }
                                         }
                                     }
@@ -298,10 +292,10 @@
                             "0": {
                                 "embeds": {
                                     "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Activité de %PLAYER",
+                                        "title": "[=] Activité de %PLAYER",
                                         "fields": {
                                             "0": {
-                                                "name": "[TRANSLATION NOT FOUND] Activité en cours"
+                                                "name": "[=] Activité en cours"
                                             }
                                         }
                                     }
@@ -314,10 +308,10 @@
                             "0": {
                                 "embeds": {
                                     "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Badges de %PLAYER",
+                                        "title": "[=] Badges de %PLAYER",
                                         "fields": {
                                             "0": {
-                                                "name": "[TRANSLATION NOT FOUND] Badges"
+                                                "name": "[=] Badges"
                                             }
                                         }
                                     }
@@ -330,10 +324,10 @@
                             "0": {
                                 "embeds": {
                                     "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Corbeau de %PLAYER",
+                                        "title": "[=] Corbeau de %PLAYER",
                                         "fields": {
                                             "0": {
-                                                "name": "[TRANSLATION NOT FOUND] Corbeau actif"
+                                                "name": "[=] Corbeau actif"
                                             }
                                         }
                                     }
@@ -346,10 +340,10 @@
                             "0": {
                                 "embeds": {
                                     "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Armes de %PLAYER",
+                                        "title": "[=] Armes de %PLAYER",
                                         "fields": {
                                             "0": {
-                                                "name": "[TRANSLATION NOT FOUND] Arme équipée"
+                                                "name": "[=] Arme équipée"
                                             }
                                         }
                                     }
@@ -359,808 +353,229 @@
                     }
                 },
                 "rows": {
-                    "page": "[TRANSLATION NOT FOUND] Page...",
-                    "panel": "[TRANSLATION NOT FOUND] Panel...",
+                    "page": "[=] Page...",
+                    "panel": "[=] Panel...",
                     "universal": {
-                        "leave_panel": "[TRANSLATION NOT FOUND] Quitter le panel",
-                        "player_panel": "[TRANSLATION NOT FOUND] Statistiques",
-                        "inventory_panel": "[TRANSLATION NOT FOUND] Inventaire",
-                        "activity_panel": "[TRANSLATION NOT FOUND] Activité",
-                        "badges_panel": "[TRANSLATION NOT FOUND] Badges",
-                        "crow_panel": "[TRANSLATION NOT FOUND] Corbeau",
-                        "weapons_panel": "[TRANSLATION NOT FOUND] Armes"
+                        "leave_panel": "[=] Quitter le panel",
+                        "player_panel": "[=] Statistiques",
+                        "inventory_panel": "[=] Inventaire",
+                        "activity_panel": "[=] Activité",
+                        "badges_panel": "[=] Badges",
+                        "crow_panel": "[=] Corbeau",
+                        "weapons_panel": "[=] Armes"
                     }
                 }
             }
         },
         "breathingStyles": {
             "flower": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de la Fleur",
+                "name": "[=] Souffle de la Fleur",
                 "techniques": {
-                    "flowerBreathingSecondFormHonorable Shadow Plum": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Esprit du Prunier",
-                    "flowerBreathingFourthFormCrimsonHanagoromo": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Hanagoromo Pourpre",
-                    "flowerBreathingFifthFormPeoniesOfFutility": "[TRANSLATION NOT FOUND] Cinquième Mouvement: La Pivoine Futile",
-                    "flowerBreathingSixthFormWhirlingPeach": "[TRANSLATION NOT FOUND] Sixième Mouvement: Tourbillon de Pêche",
-                    "flowerBreathingFinalFormEquinoctialVermilionEye": "[TRANSLATION NOT FOUND] Mouvement Final: Les Yeux du Lycoris"
+                    "flowerBreathingSecondFormHonorable Shadow Plum": "[=] Deuxième Mouvement: Esprit du Prunier",
+                    "flowerBreathingFourthFormCrimsonHanagoromo": "[=] Quatrième Mouvement: Hanagoromo Pourpre",
+                    "flowerBreathingFifthFormPeoniesOfFutility": "[=] Cinquième Mouvement: La Pivoine Futile",
+                    "flowerBreathingSixthFormWhirlingPeach": "[=] Sixième Mouvement: Tourbillon de Pêche",
+                    "flowerBreathingFinalFormEquinoctialVermilionEye": "[=] Mouvement Final: Les Yeux du Lycoris"
                 }
             },
             "love": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de l'Amour",
+                "name": "[=] Souffle de l'Amour",
                 "techniques": {
-                    "loveBreathingFirstFormShiversOfFirstLove": "[TRANSLATION NOT FOUND] Premier Mouvement: Les Frissons du Premier Amour",
-                    "loveBreathingSecondFormLovePangs": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Amour Anxiogène",
-                    "loveBreathingThirdFormCatLoveShower": "[TRANSLATION NOT FOUND] Troisième Mouvement: Toilette de Chaton Mignon",
-                    "loveBreathingFifthFormSwayingLoveWildClaw": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Attachement Hésitant - Ongles Mal Vernis",
-                    "loveBreathingSixthFormCatLeggedWindsOfLove": "[TRANSLATION NOT FOUND] Sixième Mouvement: Un Amour de Patte de Chaton"
+                    "loveBreathingFirstFormShiversOfFirstLove": "[=] Premier Mouvement: Les Frissons du Premier Amour",
+                    "loveBreathingSecondFormLovePangs": "[=] Deuxième Mouvement: Amour Anxiogène",
+                    "loveBreathingThirdFormCatLoveShower": "[=] Troisième Mouvement: Toilette de Chaton Mignon",
+                    "loveBreathingFifthFormSwayingLoveWildClaw": "[=] Cinquième Mouvement: Attachement Hésitant - Ongles Mal Vernis",
+                    "loveBreathingSixthFormCatLeggedWindsOfLove": "[=] Sixième Mouvement: Un Amour de Patte de Chaton"
                 }
             },
             "flame": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de la Flamme",
+                "name": "[=] Souffle de la Flamme",
                 "techniques": {
-                    "flameBreathingFirstFormUnknowingFire": "[TRANSLATION NOT FOUND] Premier Mouvement: Mer de Flammes",
-                    "flameBreathingSecondFormRisingScorchingSun": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Flammes du Soleil Ascendant",
-                    "flameBreathingThirdFormBlazingUniverse": "[TRANSLATION NOT FOUND] Troisième Mouvement: Univers de Flammes",
-                    "flameBreathingFourthFormBloomingFlameUndulation:": "[TRANSLATION NOT FOUND] Quatrième Mouvement: La Vague Flamboyante",
-                    "flameBreathingFifthFormFlameTiger": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Tigre de Flammes",
-                    "flameBreathingNinthFormRengoku": "[TRANSLATION NOT FOUND] Neuvième Mouvement: Purgatoire"
+                    "flameBreathingFirstFormUnknowingFire": "[=] Premier Mouvement: Mer de Flammes",
+                    "flameBreathingSecondFormRisingScorchingSun": "[=] Deuxième Mouvement: Flammes du Soleil Ascendant",
+                    "flameBreathingThirdFormBlazingUniverse": "[=] Troisième Mouvement: Univers de Flammes",
+                    "flameBreathingFourthFormBloomingFlameUndulation:": "[=] Quatrième Mouvement: La Vague Flamboyante",
+                    "flameBreathingFifthFormFlameTiger": "[=] Cinquième Mouvement: Tigre de Flammes",
+                    "flameBreathingNinthFormRengoku": "[=] Neuvième Mouvement: Purgatoire"
                 }
             },
             "sun": {
-                "name": "[TRANSLATION NOT FOUND] Souffle du Soleil",
+                "name": "[=] Souffle du Soleil",
                 "techniques": {
-                    "sunBreathingDance": "[TRANSLATION NOT FOUND] Valse",
-                    "sunBreathingDancingFlash": "[TRANSLATION NOT FOUND] Valse Foudroyante",
-                    "sunBreathingClearBlueSky": "[TRANSLATION NOT FOUND] Paradis Bleu",
-                    "sunBreathingRagingSun": "[TRANSLATION NOT FOUND] Miroir Brûlant Écarlate",
-                    "sunBreathingBurningBonesSummerSun": "[TRANSLATION NOT FOUND] Le Soleil qui Réduit les Os en Cendres",
-                    "sunBreathingSettingSunTransformation": "[TRANSLATION NOT FOUND] Le Coucher de Soleil",
-                    "sunBreathingSolarHeatHaze": "[TRANSLATION NOT FOUND] Chaleur Ondulante",
-                    "sunBreathingBeneficentRadiance": "[TRANSLATION NOT FOUND] Rai de Lumière",
-                    "sunBreathingSunflowerThrust": "[TRANSLATION NOT FOUND] Estoc Brillant du Soleil",
-                    "sunBreathingDragonSunHaloHeadDance": "[TRANSLATION NOT FOUND] Halo Solaire Danse Draconique",
-                    "sunBreathingFireWheel": "[TRANSLATION NOT FOUND] Char Enflammé",
-                    "sunBreathingFakeRainbow": "[TRANSLATION NOT FOUND] Arc-en-Ciel Parhélique",
-                    "sunBreathingFlameDance": "[TRANSLATION NOT FOUND] Valse Enflammée",
-                    "sunBreathingThirteenthForm": "[TRANSLATION NOT FOUND] Treizième Mouvement",
-                    "sunBreathingCrossSlash": "[TRANSLATION NOT FOUND] Cross Slash",
-                    "sunBreathingScorchingRush": "[TRANSLATION NOT FOUND] Scorching Rush",
-                    "sunBreathingPhoenixFlash": "[TRANSLATION NOT FOUND] Phoenix Flash"
+                    "sunBreathingDance": "[=] Valse",
+                    "sunBreathingDancingFlash": "[=] Valse Foudroyante",
+                    "sunBreathingClearBlueSky": "[=] Paradis Bleu",
+                    "sunBreathingRagingSun": "[=] Miroir Brûlant Écarlate",
+                    "sunBreathingBurningBonesSummerSun": "[=] Le Soleil qui Réduit les Os en Cendres",
+                    "sunBreathingSettingSunTransformation": "[=] Le Coucher de Soleil",
+                    "sunBreathingSolarHeatHaze": "[=] Chaleur Ondulante",
+                    "sunBreathingBeneficentRadiance": "[=] Rai de Lumière",
+                    "sunBreathingSunflowerThrust": "[=] Estoc Brillant du Soleil",
+                    "sunBreathingDragonSunHaloHeadDance": "[=] Halo Solaire Danse Draconique",
+                    "sunBreathingFireWheel": "[=] Char Enflammé",
+                    "sunBreathingFakeRainbow": "[=] Arc-en-Ciel Parhélique",
+                    "sunBreathingFlameDance": "[=] Valse Enflammée",
+                    "sunBreathingThirteenthForm": "[=] Treizième Mouvement",
+                    "sunBreathingCrossSlash": "[=] Cross Slash",
+                    "sunBreathingScorchingRush": "[=] Scorching Rush",
+                    "sunBreathingPhoenixFlash": "[=] Phoenix Flash"
                 }
             },
             "sound": {
-                "name": "[TRANSLATION NOT FOUND] Souffle du Son",
+                "name": "[=] Souffle du Son",
                 "techniques": {
-                    "soundBreathingFirstFormRoar": "[TRANSLATION NOT FOUND] Premier Mouvement: Tonnerre",
-                    "soundBreathingFourthFormConstantResoundingSlashes": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Le Glas Mortel d'Avici",
-                    "soundBreathingFifthFormString Performance": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Symphonie Stridente",
-                    "soundBreathingRisingKick": "[TRANSLATION NOT FOUND] Rising Kick",
-                    "soundBreathingFifthFormStringPerformanceBurstingBloom": "[TRANSLATION NOT FOUND] Fifth Form: String Performance, Bursting Bloom"
+                    "soundBreathingFirstFormRoar": "[=] Premier Mouvement: Tonnerre",
+                    "soundBreathingFourthFormConstantResoundingSlashes": "[=] Quatrième Mouvement: Le Glas Mortel d'Avici",
+                    "soundBreathingFifthFormString Performance": "[=] Cinquième Mouvement: Symphonie Stridente",
+                    "soundBreathingRisingKick": "[=] Rising Kick",
+                    "soundBreathingFifthFormStringPerformanceBurstingBloom": "[=] Fifth Form: String Performance, Bursting Bloom"
                 }
             },
             "thunder": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de la Foudre",
+                "name": "[=] Souffle de la Foudre",
                 "techniques": {
-                    "thunderBreathingFirstFormThunderclapAndFlash": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante",
-                    "thunderBreathingFirstFormThunderclapAndFlashSixfold": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Six Coups",
-                    "thunderBreathingFirstFormThunderclapAndFlashEightfold": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Huit Coups",
-                    "thunderBreathingFirstFormThunderclapAndFlashGodspeed": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Vitesse Divine",
-                    "thunderBreathingSecondFormRiceSpirit": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Éclair Foudroyant",
-                    "thunderBreathingThirdFormThunderSwarm": "[TRANSLATION NOT FOUND] Troisième Mouvement: Nuée d'Éclairs",
-                    "thunderBreathingFourthFormDistantThunder": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Orage Lointain",
-                    "thunderBreathingFifthFormHeatLightning": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Éclair de Chaleur",
-                    "thunderBreathingSixthFormRumbleAndFlash": "[TRANSLATION NOT FOUND] Sixième Mouvement: Tonnerre et Foudre",
-                    "thunderBreathingSeventhFormHonoikazuchiNoKami": "[TRANSLATION NOT FOUND] Septième Mouvements: Dieu du Feu Céleste",
-                    "thunderBreathingAirSpin": "[TRANSLATION NOT FOUND] Air Spin",
-                    "thunderBreathingFirstFormThunderclapAndFlashPrime": "[TRANSLATION NOT FOUND] First Form: Thunderclap and Flash, Prime"
+                    "thunderBreathingFirstFormThunderclapAndFlash": "[=] Premier Mouvement: Frappe Foudroyante",
+                    "thunderBreathingFirstFormThunderclapAndFlashSixfold": "[=] Premier Mouvement: Frappe Foudroyante - Six Coups",
+                    "thunderBreathingFirstFormThunderclapAndFlashEightfold": "[=] Premier Mouvement: Frappe Foudroyante - Huit Coups",
+                    "thunderBreathingFirstFormThunderclapAndFlashGodspeed": "[=] Premier Mouvement: Frappe Foudroyante - Vitesse Divine",
+                    "thunderBreathingSecondFormRiceSpirit": "[=] Deuxième Mouvement: Éclair Foudroyant",
+                    "thunderBreathingThirdFormThunderSwarm": "[=] Troisième Mouvement: Nuée d'Éclairs",
+                    "thunderBreathingFourthFormDistantThunder": "[=] Quatrième Mouvement: Orage Lointain",
+                    "thunderBreathingFifthFormHeatLightning": "[=] Cinquième Mouvement: Éclair de Chaleur",
+                    "thunderBreathingSixthFormRumbleAndFlash": "[=] Sixième Mouvement: Tonnerre et Foudre",
+                    "thunderBreathingSeventhFormHonoikazuchiNoKami": "[=] Septième Mouvements: Dieu du Feu Céleste",
+                    "thunderBreathingAirSpin": "[=] Air Spin",
+                    "thunderBreathingFirstFormThunderclapAndFlashPrime": "[=] First Form: Thunderclap and Flash, Prime"
                 }
             },
             "wind": {
-                "name": "[TRANSLATION NOT FOUND] Souffle du Vent",
+                "name": "[=] Souffle du Vent",
                 "techniques": {
-                    "windBreathingFirstFormDustWhirlwindCutter": "[TRANSLATION NOT FOUND] Premier Mouvement: Tourbillon de Poussière - Tranche",
-                    "windBreathingSecondFormClawsPurifyingWind": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Griffes de Vent Purificatrices",
-                    "windBreathingThirdFormCleanStormWindTree": "[TRANSLATION NOT FOUND] Troisième Mouvement: Arbre Ondulant dans la Brise Montagnarde",
-                    "windBreathingFourthFormRisingDustStorm": "[TRANSLATION NOT FOUND] Quatrième Mouvement: La Tempête de Poussière Levante",
-                    "windBreathingFifthFormColdMountainWind": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Tempête Hivernale",
-                    "windBreathingSixthFormBlackWindMountainMist": "[TRANSLATION NOT FOUND] Sixième Mouvement: La Rafale de Fumée Noire",
-                    "windBreathingSeventhFormGaleSuddenGusts": "[TRANSLATION NOT FOUND] Septième Mouvement: Vent Puissant - Bourrasque de Tengu",
-                    "windBreathingEighthFormPrimaryGaleSlash": "[TRANSLATION NOT FOUND] Huitième Mouvement: Frappe de la Première Bourrasque",
-                    "windBreathingNinthFormIdatenTyphoon": "[TRANSLATION NOT FOUND] Neuvième Mouvement: Typhon de Skanda"
+                    "windBreathingFirstFormDustWhirlwindCutter": "[=] Premier Mouvement: Tourbillon de Poussière - Tranche",
+                    "windBreathingSecondFormClawsPurifyingWind": "[=] Deuxième Mouvement: Griffes de Vent Purificatrices",
+                    "windBreathingThirdFormCleanStormWindTree": "[=] Troisième Mouvement: Arbre Ondulant dans la Brise Montagnarde",
+                    "windBreathingFourthFormRisingDustStorm": "[=] Quatrième Mouvement: La Tempête de Poussière Levante",
+                    "windBreathingFifthFormColdMountainWind": "[=] Cinquième Mouvement: Tempête Hivernale",
+                    "windBreathingSixthFormBlackWindMountainMist": "[=] Sixième Mouvement: La Rafale de Fumée Noire",
+                    "windBreathingSeventhFormGaleSuddenGusts": "[=] Septième Mouvement: Vent Puissant - Bourrasque de Tengu",
+                    "windBreathingEighthFormPrimaryGaleSlash": "[=] Huitième Mouvement: Frappe de la Première Bourrasque",
+                    "windBreathingNinthFormIdatenTyphoon": "[=] Neuvième Mouvement: Typhon de Skanda"
                 }
             },
             "water": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de l'Eau",
+                "name": "[=] Souffle de l'Eau",
                 "techniques": {
-                    "waterBreathingFirstFormWaterSurfaceSlash": "[TRANSLATION NOT FOUND] Premier Mouvement: Entaille de l'Eau Calme",
-                    "waterBreathingSecondFormWaterWheel": "[TRANSLATION NOT FOUND] Deuxième Mouvement: La Roue d'Eau",
-                    "waterBreathingSecondFormImprovedLateralWaterWheel": "[TRANSLATION NOT FOUND] Deuxième Mouvement: La Roue d'Eau - Variation horizontal",
-                    "waterBreathingThirdFormFlowingDance": "[TRANSLATION NOT FOUND] Troisième Mouvement: Danse des Courants",
-                    "waterBreathingFourthFormStrikingTide": "[TRANSLATION NOT FOUND] Quatrième Mouvement: La Marée Déferlante",
-                    "waterBreathingFourthFormStrikingTideTurbulent": "[TRANSLATION NOT FOUND] Fourth Form: Striking Tide, Turbulent",
-                    "waterBreathingFifthFormBlessedRainAfterTheDrought": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Averse Providentielle",
-                    "waterBreathingSixthFormWhirlpool": "[TRANSLATION NOT FOUND] Sixième Mouvement: Tourbillon",
-                    "waterBreathingSixthFormWhirlpoolFlow": "[TRANSLATION NOT FOUND] Sixième et Troisième Mouvement Combinés: Tourbillon Dansant",
-                    "waterBreathingSeventhFormDropRippleThrust": "[TRANSLATION NOT FOUND] Septième Mouvement: Goutte de Rosée Troublant l'Eau Dormante",
-                    "waterBreathingSeventhFormDropRippleThrustCurve": "[TRANSLATION NOT FOUND] Septième Mouvement: Goutte de Rosée Troublant l'Eau Dormante - En Crochet",
-                    "waterBreathingEighthFormWaterfallBasin": "[TRANSLATION NOT FOUND] Huitième Mouvement: Impact de la Cascade",
-                    "waterBreathingNinthFormSplashingWaterFlowTurbulent": "[TRANSLATION NOT FOUND] Neuvième Mouvement: Embruns des Flots Déchaînés",
-                    "waterBreathingTenthFormConstantFlux": "[TRANSLATION NOT FOUND] Dixième Mouvement: Les Vicissitudes de la Vie",
-                    "waterBreathingEleventhFormDead Calm": "[TRANSLATION NOT FOUND] Onzième Mouvement: Accalmie",
-                    "waterBreathingThirdFormFlowingDanceShadowsOfDawn": "[TRANSLATION NOT FOUND] Third Form: Flowing Dance, Shadows of Dawn",
-                    "waterBreathingEighthFormWaterfallBasinDestruction": "[TRANSLATION NOT FOUND] Eighth Form: Waterfall Basin, Destruction",
-                    "waterBreathingNinthFormSplashingWaterFlow": "[TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow",
-                    "waterBreathingNinthFormSplashingWaterFlowFlash": "[TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow, Flash",
-                    "waterBreathingNinthFormSplashingWaterFlowTurbulentEffervescence": "[TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow, Turbulent Effervescence",
-                    "waterBreathingEleventhFormDeadCalmTidalWaves": "[TRANSLATION NOT FOUND] Eleventh Form: Dead Calm, Tidal Waves"
+                    "waterBreathingFirstFormWaterSurfaceSlash": "[=] Premier Mouvement: Entaille de l'Eau Calme",
+                    "waterBreathingSecondFormWaterWheel": "[=] Deuxième Mouvement: La Roue d'Eau",
+                    "waterBreathingSecondFormImprovedLateralWaterWheel": "[=] Deuxième Mouvement: La Roue d'Eau - Variation horizontal",
+                    "waterBreathingThirdFormFlowingDance": "[=] Troisième Mouvement: Danse des Courants",
+                    "waterBreathingFourthFormStrikingTide": "[=] Quatrième Mouvement: La Marée Déferlante",
+                    "waterBreathingFourthFormStrikingTideTurbulent": "[=] Fourth Form: Striking Tide, Turbulent",
+                    "waterBreathingFifthFormBlessedRainAfterTheDrought": "[=] Cinquième Mouvement: Averse Providentielle",
+                    "waterBreathingSixthFormWhirlpool": "[=] Sixième Mouvement: Tourbillon",
+                    "waterBreathingSixthFormWhirlpoolFlow": "[=] Sixième et Troisième Mouvement Combinés: Tourbillon Dansant",
+                    "waterBreathingSeventhFormDropRippleThrust": "[=] Septième Mouvement: Goutte de Rosée Troublant l'Eau Dormante",
+                    "waterBreathingSeventhFormDropRippleThrustCurve": "[=] Septième Mouvement: Goutte de Rosée Troublant l'Eau Dormante - En Crochet",
+                    "waterBreathingEighthFormWaterfallBasin": "[=] Huitième Mouvement: Impact de la Cascade",
+                    "waterBreathingNinthFormSplashingWaterFlowTurbulent": "[=] Neuvième Mouvement: Embruns des Flots Déchaînés",
+                    "waterBreathingTenthFormConstantFlux": "[=] Dixième Mouvement: Les Vicissitudes de la Vie",
+                    "waterBreathingEleventhFormDead Calm": "[=] Onzième Mouvement: Accalmie",
+                    "waterBreathingThirdFormFlowingDanceShadowsOfDawn": "[=] Third Form: Flowing Dance, Shadows of Dawn",
+                    "waterBreathingEighthFormWaterfallBasinDestruction": "[=] Eighth Form: Waterfall Basin, Destruction",
+                    "waterBreathingNinthFormSplashingWaterFlow": "[=] Ninth Form: Splashing Water Flow",
+                    "waterBreathingNinthFormSplashingWaterFlowFlash": "[=] Ninth Form: Splashing Water Flow, Flash",
+                    "waterBreathingNinthFormSplashingWaterFlowTurbulentEffervescence": "[=] Ninth Form: Splashing Water Flow, Turbulent Effervescence",
+                    "waterBreathingEleventhFormDeadCalmTidalWaves": "[=] Eleventh Form: Dead Calm, Tidal Waves"
                 }
             },
             "insect": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de l'Insecte",
+                "name": "[=] Souffle de l'Insecte",
                 "techniques": {
-                    "insectBreathingButterflyDanceCaprice": "[TRANSLATION NOT FOUND] Danse des Papillons: Papillonnage",
-                    "insectBreathingDanceOfTheBeeStingTrueFlutter": "[TRANSLATION NOT FOUND] Danse de la Piqûre d'Abeille: Battement Véritable",
-                    "insectBreathingDanceOfTheDragonflyCompoundEyeHexagon": "[TRANSLATION NOT FOUND] Danse de la Libellule: Œil à Facettes Hexagonales",
-                    "insectBreathingDanceOfTheCentipedeHundredLeggedZigzag": "[TRANSLATION NOT FOUND] Danse du Myriapode: Zigzag Centipède",
-                    "insectBreathingSwiftThrust": "[TRANSLATION NOT FOUND] Swift Thrust",
-                    "insectBreathingRisingThrust": "[TRANSLATION NOT FOUND] Rising Thrust",
-                    "insectBreathingSixfoldThrust": "[TRANSLATION NOT FOUND] Sixfold Thrust",
-                    "insectBreathingButterflyDanceCapriceIllusoryLight": "[TRANSLATION NOT FOUND] Butterfly Dance: Caprice, Illusory Light"
+                    "insectBreathingButterflyDanceCaprice": "[=] Danse des Papillons: Papillonnage",
+                    "insectBreathingDanceOfTheBeeStingTrueFlutter": "[=] Danse de la Piqûre d'Abeille: Battement Véritable",
+                    "insectBreathingDanceOfTheDragonflyCompoundEyeHexagon": "[=] Danse de la Libellule: Œil à Facettes Hexagonales",
+                    "insectBreathingDanceOfTheCentipedeHundredLeggedZigzag": "[=] Danse du Myriapode: Zigzag Centipède",
+                    "insectBreathingSwiftThrust": "[=] Swift Thrust",
+                    "insectBreathingRisingThrust": "[=] Rising Thrust",
+                    "insectBreathingSixfoldThrust": "[=] Sixfold Thrust",
+                    "insectBreathingButterflyDanceCapriceIllusoryLight": "[=] Butterfly Dance: Caprice, Illusory Light"
                 }
             },
             "serpent": {
-                "name": "[TRANSLATION NOT FOUND] Souffle du Serpent",
+                "name": "[=] Souffle du Serpent",
                 "techniques": {
-                    "serpentBreathingFirstFormWindingSerpentSlash": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe du Serpent Recroquevillé",
-                    "serpentBreathingSecondFormVenomFangsOfTheNarrowHead": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Le Crochet Empoisonné du Petit Serpent",
-                    "serpentBreathingThirdFormCoilChoke": "[TRANSLATION NOT FOUND] Troisième Mouvement: Constriction",
-                    "serpentBreathingFourthFormTwinHeadedReptile": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Serpent Bicéphale",
-                    "serpentBreathingFifthFormSlitheringSerpent": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Ondulations du Serpent"
+                    "serpentBreathingFirstFormWindingSerpentSlash": "[=] Premier Mouvement: Frappe du Serpent Recroquevillé",
+                    "serpentBreathingSecondFormVenomFangsOfTheNarrowHead": "[=] Deuxième Mouvement: Le Crochet Empoisonné du Petit Serpent",
+                    "serpentBreathingThirdFormCoilChoke": "[=] Troisième Mouvement: Constriction",
+                    "serpentBreathingFourthFormTwinHeadedReptile": "[=] Quatrième Mouvement: Serpent Bicéphale",
+                    "serpentBreathingFifthFormSlitheringSerpent": "[=] Cinquième Mouvement: Ondulations du Serpent"
                 }
             },
             "moon": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de la Lune",
+                "name": "[=] Souffle de la Lune",
                 "techniques": {
-                    "moonBreathingFirstFormDarkMoonEveningPalace": "[TRANSLATION NOT FOUND] Premier Mouvement: Lune Sombre - Sanctuaire Nocturne",
-                    "moonBreathingSecondFormPearlFlowerMoonGazing": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Fleur de Nacre au Clair de Lune",
-                    "moonBreathingThirdFormLoathsomeMoonChains": "[TRANSLATION NOT FOUND] Troisième Mouvement: La Lune Meurtrière de l'Abandon - Chaîne",
-                    "moonBreathingFifthFormMoonSpiritCalamitousEddy": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Vortex Maudit de la Lune Spectrale",
-                    "moonBreathingSixthFormPerpetualNightLonelyMoonIncessant": "[TRANSLATION NOT FOUND] Sixième Mouvement: La Lune Solitaire dans l'Obscurité Éternelle - L'Avici",
-                    "moonBreathingSeventhFormMirrorOfMisfortuneMoonlit": "[TRANSLATION NOT FOUND] Septième Mouvement: Miroir du Malheur - Reflet de la Lune",
-                    "moonBreathingEighthFormMoonDragonRingTail": "[TRANSLATION NOT FOUND] Huitième Mouvement: Ouroboros Lunaire",
-                    "moonBreathingNinthFormWaningMoonSwaths": "[TRANSLATION NOT FOUND] Neuvième Mouvement: Lune Décroissante - Le Cycle Perpétuel",
-                    "moonBreathingTenthFormDrillingSlashesMoonThroughBambooLeaves": "[TRANSLATION NOT FOUND] Dixième Mouvement: Frappe du Cycle Transperçant - La Lune de Lierre",
-                    "moonBreathingFourteenthFormCatastropheTenmanCrescentMoon": "[TRANSLATION NOT FOUND] Quatorzième Mouvement: Le Croissant de Lune de Tenman",
-                    "moonBreathingSixteenthFormMoonBowHalfMoon": "[TRANSLATION NOT FOUND] Seizième Mouvement: Arc-en-Ciel Lunaire - Fragments Sélénites"
+                    "moonBreathingFirstFormDarkMoonEveningPalace": "[=] Premier Mouvement: Lune Sombre - Sanctuaire Nocturne",
+                    "moonBreathingSecondFormPearlFlowerMoonGazing": "[=] Deuxième Mouvement: Fleur de Nacre au Clair de Lune",
+                    "moonBreathingThirdFormLoathsomeMoonChains": "[=] Troisième Mouvement: La Lune Meurtrière de l'Abandon - Chaîne",
+                    "moonBreathingFifthFormMoonSpiritCalamitousEddy": "[=] Cinquième Mouvement: Vortex Maudit de la Lune Spectrale",
+                    "moonBreathingSixthFormPerpetualNightLonelyMoonIncessant": "[=] Sixième Mouvement: La Lune Solitaire dans l'Obscurité Éternelle - L'Avici",
+                    "moonBreathingSeventhFormMirrorOfMisfortuneMoonlit": "[=] Septième Mouvement: Miroir du Malheur - Reflet de la Lune",
+                    "moonBreathingEighthFormMoonDragonRingTail": "[=] Huitième Mouvement: Ouroboros Lunaire",
+                    "moonBreathingNinthFormWaningMoonSwaths": "[=] Neuvième Mouvement: Lune Décroissante - Le Cycle Perpétuel",
+                    "moonBreathingTenthFormDrillingSlashesMoonThroughBambooLeaves": "[=] Dixième Mouvement: Frappe du Cycle Transperçant - La Lune de Lierre",
+                    "moonBreathingFourteenthFormCatastropheTenmanCrescentMoon": "[=] Quatorzième Mouvement: Le Croissant de Lune de Tenman",
+                    "moonBreathingSixteenthFormMoonBowHalfMoon": "[=] Seizième Mouvement: Arc-en-Ciel Lunaire - Fragments Sélénites"
                 }
             },
             "stone": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de la Roche",
+                "name": "[=] Souffle de la Roche",
                 "techniques": {
-                    "stoneBreathingFirstFormSerpentiniteBipolar": "[TRANSLATION NOT FOUND] Premier Mouvement: Serpentinite - Tenaille Polarisée",
-                    "stoneBreathingSecondFormUpperSmash": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Fracasser la Voûte Céleste",
-                    "stoneBreathingThirdFormStoneSkin": "[TRANSLATION NOT FOUND] Troisième Mouvement: Peau de Pierre",
-                    "stoneBreathingFourthFormVolcanicRockRapidConquest": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Rhyolite - Conquête Rapide",
-                    "stoneBreathingFifthFormArcsOfJustice": "[TRANSLATION NOT FOUND] Cinquième Mouvement: La Roue de Pierre de la Justice"
+                    "stoneBreathingFirstFormSerpentiniteBipolar": "[=] Premier Mouvement: Serpentinite - Tenaille Polarisée",
+                    "stoneBreathingSecondFormUpperSmash": "[=] Deuxième Mouvement: Fracasser la Voûte Céleste",
+                    "stoneBreathingThirdFormStoneSkin": "[=] Troisième Mouvement: Peau de Pierre",
+                    "stoneBreathingFourthFormVolcanicRockRapidConquest": "[=] Quatrième Mouvement: Rhyolite - Conquête Rapide",
+                    "stoneBreathingFifthFormArcsOfJustice": "[=] Cinquième Mouvement: La Roue de Pierre de la Justice"
                 }
             },
             "mist": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de la Brume",
+                "name": "[=] Souffle de la Brume",
                 "techniques": {
-                    "mistBreathingFirstFormLowCloudsDistantHaze": "[TRANSLATION NOT FOUND] Premier Mouvement: Nuages Bas et Brouillard Distant",
-                    "mistBreathingSecondFormEightLayeredMist": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Brume Stratifiée",
-                    "mistBreathingThirdFormScatteringMistSplash": "[TRANSLATION NOT FOUND] Troisième Mouvement: Explosion Désembuante",
-                    "mistBreathingFourthFormShiftingFlowSlash": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Coup de Sabre Advectif",
-                    "mistBreathingFifthFormSeaOfCloudsAndHaze": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Brume de Mer",
-                    "mistBreathingSixthFormLunarDispersingMist": "[TRANSLATION NOT FOUND] Sixième Mouvement: Brume au Clair de Lune",
-                    "mistBreathingSeventhFormObscuringClouds": "[TRANSLATION NOT FOUND] Septième mouvement: Brouillard"
+                    "mistBreathingFirstFormLowCloudsDistantHaze": "[=] Premier Mouvement: Nuages Bas et Brouillard Distant",
+                    "mistBreathingSecondFormEightLayeredMist": "[=] Deuxième Mouvement: Brume Stratifiée",
+                    "mistBreathingThirdFormScatteringMistSplash": "[=] Troisième Mouvement: Explosion Désembuante",
+                    "mistBreathingFourthFormShiftingFlowSlash": "[=] Quatrième Mouvement: Coup de Sabre Advectif",
+                    "mistBreathingFifthFormSeaOfCloudsAndHaze": "[=] Cinquième Mouvement: Brume de Mer",
+                    "mistBreathingSixthFormLunarDispersingMist": "[=] Sixième Mouvement: Brume au Clair de Lune",
+                    "mistBreathingSeventhFormObscuringClouds": "[=] Septième mouvement: Brouillard"
                 }
             },
             "beast": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de la Bête",
+                "name": "[=] Souffle de la Bête",
                 "techniques": {
-                    "beastBreathingFirstFangPierce": "[TRANSLATION NOT FOUND] Premier Croc: Perforation",
-                    "beastBreathingSecondFangSlice": "[TRANSLATION NOT FOUND] Deuxième Croc: Lacération",
-                    "beastBreathingThirdFangDevour": "[TRANSLATION NOT FOUND] Troisième Croc: Déchiquetage",
-                    "beastBreathingFourthFangSliceNDice": "[TRANSLATION NOT FOUND] Quatrième Croc: Dilacération",
-                    "beastBreathingFifthFangCrazyCutting": "[TRANSLATION NOT FOUND] Cinquième Croc: Mutilation Furieuse",
-                    "beastBreathingSixthFangPalisadeBite": "[TRANSLATION NOT FOUND] Sixième Croc: Morsure Irrégulière",
-                    "beastBreathingSeventhFormSpatialAwareness": "[TRANSLATION NOT FOUND] Septième Croc: Détection",
-                    "beastBreathingEighthFormExplosiveRush": "[TRANSLATION NOT FOUND] Huitième Croc: Charge du Sanglier",
-                    "beastBreathingNinthFangExtendingBendySlash": "[TRANSLATION NOT FOUND] Neuvième Croc: Taillade Ondulante Divine",
-                    "beastBreathingTenthFangWhirlingFangs": "[TRANSLATION NOT FOUND] Dixième Croc: Les Crocs Tournoyants",
-                    "beastBreathingSuddenThrowingStrike": "[TRANSLATION NOT FOUND] La Frappe Lancée",
-                    "beastBreathingBoarRush": "[TRANSLATION NOT FOUND] Boar Rush",
-                    "beastBreathingThirdFangDevourRush": "[TRANSLATION NOT FOUND] Third Fang: Devour Rush"
+                    "beastBreathingFirstFangPierce": "[=] Premier Croc: Perforation",
+                    "beastBreathingSecondFangSlice": "[=] Deuxième Croc: Lacération",
+                    "beastBreathingThirdFangDevour": "[=] Troisième Croc: Déchiquetage",
+                    "beastBreathingFourthFangSliceNDice": "[=] Quatrième Croc: Dilacération",
+                    "beastBreathingFifthFangCrazyCutting": "[=] Cinquième Croc: Mutilation Furieuse",
+                    "beastBreathingSixthFangPalisadeBite": "[=] Sixième Croc: Morsure Irrégulière",
+                    "beastBreathingSeventhFormSpatialAwareness": "[=] Septième Croc: Détection",
+                    "beastBreathingEighthFormExplosiveRush": "[=] Huitième Croc: Charge du Sanglier",
+                    "beastBreathingNinthFangExtendingBendySlash": "[=] Neuvième Croc: Taillade Ondulante Divine",
+                    "beastBreathingTenthFangWhirlingFangs": "[=] Dixième Croc: Les Crocs Tournoyants",
+                    "beastBreathingSuddenThrowingStrike": "[=] La Frappe Lancée",
+                    "beastBreathingBoarRush": "[=] Boar Rush",
+                    "beastBreathingThirdFangDevourRush": "[=] Third Fang: Devour Rush"
                 }
             }
         },
         "rpgAssets": {
             "aptitudes": {
-                "strength": "[TRANSLATION NOT FOUND] Force",
-                "speed": "[TRANSLATION NOT FOUND] Vitesse",
-                "defense": "[TRANSLATION NOT FOUND] Défense",
-                "agility": "[TRANSLATION NOT FOUND] Agilité"
+                "strength": "[=] Force",
+                "speed": "[=] Vitesse",
+                "defense": "[=] Défense",
+                "agility": "[=] Agilité"
             }
         },
-        "_id": "en"
-    },
-    "fr": {
-        "breathingStyles": {
-            "flower": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de la Fleur",
-                "techniques": {
-                    "flowerBreathingSecondFormHonorable Shadow Plum": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Esprit du Prunier",
-                    "flowerBreathingFourthFormCrimsonHanagoromo": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Hanagoromo Pourpre",
-                    "flowerBreathingFifthFormPeoniesOfFutility": "[TRANSLATION NOT FOUND] Cinquième Mouvement: La Pivoine Futile",
-                    "flowerBreathingSixthFormWhirlingPeach": "[TRANSLATION NOT FOUND] Sixième Mouvement: Tourbillon de Pêche",
-                    "flowerBreathingFinalFormEquinoctialVermilionEye": "[TRANSLATION NOT FOUND] Mouvement Final: Les Yeux du Lycoris"
-                }
-            },
-            "love": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de l'Amour",
-                "techniques": {
-                    "loveBreathingFirstFormShiversOfFirstLove": "[TRANSLATION NOT FOUND] Premier Mouvement: Les Frissons du Premier Amour",
-                    "loveBreathingSecondFormLovePangs": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Amour Anxiogène",
-                    "loveBreathingThirdFormCatLoveShower": "[TRANSLATION NOT FOUND] Troisième Mouvement: Toilette de Chaton Mignon",
-                    "loveBreathingFifthFormSwayingLoveWildClaw": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Attachement Hésitant - Ongles Mal Vernis",
-                    "loveBreathingSixthFormCatLeggedWindsOfLove": "[TRANSLATION NOT FOUND] Sixième Mouvement: Un Amour de Patte de Chaton"
-                }
-            },
-            "flame": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de la Flamme",
-                "techniques": {
-                    "flameBreathingFirstFormUnknowingFire": "[TRANSLATION NOT FOUND] Premier Mouvement: Mer de Flammes",
-                    "flameBreathingSecondFormRisingScorchingSun": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Flammes du Soleil Ascendant",
-                    "flameBreathingThirdFormBlazingUniverse": "[TRANSLATION NOT FOUND] Troisième Mouvement: Univers de Flammes",
-                    "flameBreathingFourthFormBloomingFlameUndulation:": "[TRANSLATION NOT FOUND] Quatrième Mouvement: La Vague Flamboyante",
-                    "flameBreathingFifthFormFlameTiger": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Tigre de Flammes",
-                    "flameBreathingNinthFormRengoku": "[TRANSLATION NOT FOUND] Neuvième Mouvement: Purgatoire"
-                }
-            },
-            "sun": {
-                "name": "[TRANSLATION NOT FOUND] Souffle du Soleil",
-                "techniques": {
-                    "sunBreathingDance": "[TRANSLATION NOT FOUND] Valse",
-                    "sunBreathingDancingFlash": "[TRANSLATION NOT FOUND] Valse Foudroyante",
-                    "sunBreathingClearBlueSky": "[TRANSLATION NOT FOUND] Paradis Bleu",
-                    "sunBreathingRagingSun": "[TRANSLATION NOT FOUND] Miroir Brûlant Écarlate",
-                    "sunBreathingBurningBonesSummerSun": "[TRANSLATION NOT FOUND] Le Soleil qui Réduit les Os en Cendres",
-                    "sunBreathingSettingSunTransformation": "[TRANSLATION NOT FOUND] Le Coucher de Soleil",
-                    "sunBreathingSolarHeatHaze": "[TRANSLATION NOT FOUND] Chaleur Ondulante",
-                    "sunBreathingBeneficentRadiance": "[TRANSLATION NOT FOUND] Rai de Lumière",
-                    "sunBreathingSunflowerThrust": "[TRANSLATION NOT FOUND] Estoc Brillant du Soleil",
-                    "sunBreathingDragonSunHaloHeadDance": "[TRANSLATION NOT FOUND] Halo Solaire Danse Draconique",
-                    "sunBreathingFireWheel": "[TRANSLATION NOT FOUND] Char Enflammé",
-                    "sunBreathingFakeRainbow": "[TRANSLATION NOT FOUND] Arc-en-Ciel Parhélique",
-                    "sunBreathingFlameDance": "[TRANSLATION NOT FOUND] Valse Enflammée",
-                    "sunBreathingThirteenthForm": "[TRANSLATION NOT FOUND] Treizième Mouvement",
-                    "sunBreathingCrossSlash": "[TRANSLATION NOT FOUND] Cross Slash",
-                    "sunBreathingScorchingRush": "[TRANSLATION NOT FOUND] Scorching Rush",
-                    "sunBreathingPhoenixFlash": "[TRANSLATION NOT FOUND] Phoenix Flash"
-                }
-            },
-            "sound": {
-                "name": "[TRANSLATION NOT FOUND] Souffle du Son",
-                "techniques": {
-                    "soundBreathingFirstFormRoar": "[TRANSLATION NOT FOUND] Premier Mouvement: Tonnerre",
-                    "soundBreathingFourthFormConstantResoundingSlashes": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Le Glas Mortel d'Avici",
-                    "soundBreathingFifthFormString Performance": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Symphonie Stridente",
-                    "soundBreathingRisingKick": "[TRANSLATION NOT FOUND] Rising Kick",
-                    "soundBreathingFifthFormStringPerformanceBurstingBloom": "[TRANSLATION NOT FOUND] Fifth Form: String Performance, Bursting Bloom"
-                }
-            },
-            "thunder": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de la Foudre",
-                "techniques": {
-                    "thunderBreathingFirstFormThunderclapAndFlash": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante",
-                    "thunderBreathingFirstFormThunderclapAndFlashSixfold": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Six Coups",
-                    "thunderBreathingFirstFormThunderclapAndFlashEightfold": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Huit Coups",
-                    "thunderBreathingFirstFormThunderclapAndFlashGodspeed": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe Foudroyante - Vitesse Divine",
-                    "thunderBreathingSecondFormRiceSpirit": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Éclair Foudroyant",
-                    "thunderBreathingThirdFormThunderSwarm": "[TRANSLATION NOT FOUND] Troisième Mouvement: Nuée d'Éclairs",
-                    "thunderBreathingFourthFormDistantThunder": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Orage Lointain",
-                    "thunderBreathingFifthFormHeatLightning": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Éclair de Chaleur",
-                    "thunderBreathingSixthFormRumbleAndFlash": "[TRANSLATION NOT FOUND] Sixième Mouvement: Tonnerre et Foudre",
-                    "thunderBreathingSeventhFormHonoikazuchiNoKami": "[TRANSLATION NOT FOUND] Septième Mouvements: Dieu du Feu Céleste",
-                    "thunderBreathingAirSpin": "[TRANSLATION NOT FOUND] Air Spin",
-                    "thunderBreathingFirstFormThunderclapAndFlashPrime": "[TRANSLATION NOT FOUND] First Form: Thunderclap and Flash, Prime"
-                }
-            },
-            "wind": {
-                "name": "[TRANSLATION NOT FOUND] Souffle du Vent",
-                "techniques": {
-                    "windBreathingFirstFormDustWhirlwindCutter": "[TRANSLATION NOT FOUND] Premier Mouvement: Tourbillon de Poussière - Tranche",
-                    "windBreathingSecondFormClawsPurifyingWind": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Griffes de Vent Purificatrices",
-                    "windBreathingThirdFormCleanStormWindTree": "[TRANSLATION NOT FOUND] Troisième Mouvement: Arbre Ondulant dans la Brise Montagnarde",
-                    "windBreathingFourthFormRisingDustStorm": "[TRANSLATION NOT FOUND] Quatrième Mouvement: La Tempête de Poussière Levante",
-                    "windBreathingFifthFormColdMountainWind": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Tempête Hivernale",
-                    "windBreathingSixthFormBlackWindMountainMist": "[TRANSLATION NOT FOUND] Sixième Mouvement: La Rafale de Fumée Noire",
-                    "windBreathingSeventhFormGaleSuddenGusts": "[TRANSLATION NOT FOUND] Septième Mouvement: Vent Puissant - Bourrasque de Tengu",
-                    "windBreathingEighthFormPrimaryGaleSlash": "[TRANSLATION NOT FOUND] Huitième Mouvement: Frappe de la Première Bourrasque",
-                    "windBreathingNinthFormIdatenTyphoon": "[TRANSLATION NOT FOUND] Neuvième Mouvement: Typhon de Skanda"
-                }
-            },
-            "water": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de l'Eau",
-                "techniques": {
-                    "waterBreathingFirstFormWaterSurfaceSlash": "[TRANSLATION NOT FOUND] Premier Mouvement: Entaille de l'Eau Calme",
-                    "waterBreathingSecondFormWaterWheel": "[TRANSLATION NOT FOUND] Deuxième Mouvement: La Roue d'Eau",
-                    "waterBreathingSecondFormImprovedLateralWaterWheel": "[TRANSLATION NOT FOUND] Deuxième Mouvement: La Roue d'Eau - Variation horizontal",
-                    "waterBreathingThirdFormFlowingDance": "[TRANSLATION NOT FOUND] Troisième Mouvement: Danse des Courants",
-                    "waterBreathingFourthFormStrikingTide": "[TRANSLATION NOT FOUND] Quatrième Mouvement: La Marée Déferlante",
-                    "waterBreathingFourthFormStrikingTideTurbulent": "[TRANSLATION NOT FOUND] Fourth Form: Striking Tide, Turbulent",
-                    "waterBreathingFifthFormBlessedRainAfterTheDrought": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Averse Providentielle",
-                    "waterBreathingSixthFormWhirlpool": "[TRANSLATION NOT FOUND] Sixième Mouvement: Tourbillon",
-                    "waterBreathingSixthFormWhirlpoolFlow": "[TRANSLATION NOT FOUND] Sixième et Troisième Mouvement Combinés: Tourbillon Dansant",
-                    "waterBreathingSeventhFormDropRippleThrust": "[TRANSLATION NOT FOUND] Septième Mouvement: Goutte de Rosée Troublant l'Eau Dormante",
-                    "waterBreathingSeventhFormDropRippleThrustCurve": "[TRANSLATION NOT FOUND] Septième Mouvement: Goutte de Rosée Troublant l'Eau Dormante - En Crochet",
-                    "waterBreathingEighthFormWaterfallBasin": "[TRANSLATION NOT FOUND] Huitième Mouvement: Impact de la Cascade",
-                    "waterBreathingNinthFormSplashingWaterFlowTurbulent": "[TRANSLATION NOT FOUND] Neuvième Mouvement: Embruns des Flots Déchaînés",
-                    "waterBreathingTenthFormConstantFlux": "[TRANSLATION NOT FOUND] Dixième Mouvement: Les Vicissitudes de la Vie",
-                    "waterBreathingEleventhFormDead Calm": "[TRANSLATION NOT FOUND] Onzième Mouvement: Accalmie",
-                    "waterBreathingThirdFormFlowingDanceShadowsOfDawn": "[TRANSLATION NOT FOUND] Third Form: Flowing Dance, Shadows of Dawn",
-                    "waterBreathingEighthFormWaterfallBasinDestruction": "[TRANSLATION NOT FOUND] Eighth Form: Waterfall Basin, Destruction",
-                    "waterBreathingNinthFormSplashingWaterFlow": "[TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow",
-                    "waterBreathingNinthFormSplashingWaterFlowFlash": "[TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow, Flash",
-                    "waterBreathingNinthFormSplashingWaterFlowTurbulentEffervescence": "[TRANSLATION NOT FOUND] Ninth Form: Splashing Water Flow, Turbulent Effervescence",
-                    "waterBreathingEleventhFormDeadCalmTidalWaves": "[TRANSLATION NOT FOUND] Eleventh Form: Dead Calm, Tidal Waves"
-                }
-            },
-            "insect": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de l'Insecte",
-                "techniques": {
-                    "insectBreathingButterflyDanceCaprice": "[TRANSLATION NOT FOUND] Danse des Papillons: Papillonnage",
-                    "insectBreathingDanceOfTheBeeStingTrueFlutter": "[TRANSLATION NOT FOUND] Danse de la Piqûre d'Abeille: Battement Véritable",
-                    "insectBreathingDanceOfTheDragonflyCompoundEyeHexagon": "[TRANSLATION NOT FOUND] Danse de la Libellule: Œil à Facettes Hexagonales",
-                    "insectBreathingDanceOfTheCentipedeHundredLeggedZigzag": "[TRANSLATION NOT FOUND] Danse du Myriapode: Zigzag Centipède",
-                    "insectBreathingSwiftThrust": "[TRANSLATION NOT FOUND] Swift Thrust",
-                    "insectBreathingRisingThrust": "[TRANSLATION NOT FOUND] Rising Thrust",
-                    "insectBreathingSixfoldThrust": "[TRANSLATION NOT FOUND] Sixfold Thrust",
-                    "insectBreathingButterflyDanceCapriceIllusoryLight": "[TRANSLATION NOT FOUND] Butterfly Dance: Caprice, Illusory Light"
-                }
-            },
-            "serpent": {
-                "name": "[TRANSLATION NOT FOUND] Souffle du Serpent",
-                "techniques": {
-                    "serpentBreathingFirstFormWindingSerpentSlash": "[TRANSLATION NOT FOUND] Premier Mouvement: Frappe du Serpent Recroquevillé",
-                    "serpentBreathingSecondFormVenomFangsOfTheNarrowHead": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Le Crochet Empoisonné du Petit Serpent",
-                    "serpentBreathingThirdFormCoilChoke": "[TRANSLATION NOT FOUND] Troisième Mouvement: Constriction",
-                    "serpentBreathingFourthFormTwinHeadedReptile": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Serpent Bicéphale",
-                    "serpentBreathingFifthFormSlitheringSerpent": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Ondulations du Serpent"
-                }
-            },
-            "moon": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de la Lune",
-                "techniques": {
-                    "moonBreathingFirstFormDarkMoonEveningPalace": "[TRANSLATION NOT FOUND] Premier Mouvement: Lune Sombre - Sanctuaire Nocturne",
-                    "moonBreathingSecondFormPearlFlowerMoonGazing": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Fleur de Nacre au Clair de Lune",
-                    "moonBreathingThirdFormLoathsomeMoonChains": "[TRANSLATION NOT FOUND] Troisième Mouvement: La Lune Meurtrière de l'Abandon - Chaîne",
-                    "moonBreathingFifthFormMoonSpiritCalamitousEddy": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Vortex Maudit de la Lune Spectrale",
-                    "moonBreathingSixthFormPerpetualNightLonelyMoonIncessant": "[TRANSLATION NOT FOUND] Sixième Mouvement: La Lune Solitaire dans l'Obscurité Éternelle - L'Avici",
-                    "moonBreathingSeventhFormMirrorOfMisfortuneMoonlit": "[TRANSLATION NOT FOUND] Septième Mouvement: Miroir du Malheur - Reflet de la Lune",
-                    "moonBreathingEighthFormMoonDragonRingTail": "[TRANSLATION NOT FOUND] Huitième Mouvement: Ouroboros Lunaire",
-                    "moonBreathingNinthFormWaningMoonSwaths": "[TRANSLATION NOT FOUND] Neuvième Mouvement: Lune Décroissante - Le Cycle Perpétuel",
-                    "moonBreathingTenthFormDrillingSlashesMoonThroughBambooLeaves": "[TRANSLATION NOT FOUND] Dixième Mouvement: Frappe du Cycle Transperçant - La Lune de Lierre",
-                    "moonBreathingFourteenthFormCatastropheTenmanCrescentMoon": "[TRANSLATION NOT FOUND] Quatorzième Mouvement: Le Croissant de Lune de Tenman",
-                    "moonBreathingSixteenthFormMoonBowHalfMoon": "[TRANSLATION NOT FOUND] Seizième Mouvement: Arc-en-Ciel Lunaire - Fragments Sélénites"
-                }
-            },
-            "stone": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de la Roche",
-                "techniques": {
-                    "stoneBreathingFirstFormSerpentiniteBipolar": "[TRANSLATION NOT FOUND] Premier Mouvement: Serpentinite - Tenaille Polarisée",
-                    "stoneBreathingSecondFormUpperSmash": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Fracasser la Voûte Céleste",
-                    "stoneBreathingThirdFormStoneSkin": "[TRANSLATION NOT FOUND] Troisième Mouvement: Peau de Pierre",
-                    "stoneBreathingFourthFormVolcanicRockRapidConquest": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Rhyolite - Conquête Rapide",
-                    "stoneBreathingFifthFormArcsOfJustice": "[TRANSLATION NOT FOUND] Cinquième Mouvement: La Roue de Pierre de la Justice"
-                }
-            },
-            "mist": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de la Brume",
-                "techniques": {
-                    "mistBreathingFirstFormLowCloudsDistantHaze": "[TRANSLATION NOT FOUND] Premier Mouvement: Nuages Bas et Brouillard Distant",
-                    "mistBreathingSecondFormEightLayeredMist": "[TRANSLATION NOT FOUND] Deuxième Mouvement: Brume Stratifiée",
-                    "mistBreathingThirdFormScatteringMistSplash": "[TRANSLATION NOT FOUND] Troisième Mouvement: Explosion Désembuante",
-                    "mistBreathingFourthFormShiftingFlowSlash": "[TRANSLATION NOT FOUND] Quatrième Mouvement: Coup de Sabre Advectif",
-                    "mistBreathingFifthFormSeaOfCloudsAndHaze": "[TRANSLATION NOT FOUND] Cinquième Mouvement: Brume de Mer",
-                    "mistBreathingSixthFormLunarDispersingMist": "[TRANSLATION NOT FOUND] Sixième Mouvement: Brume au Clair de Lune",
-                    "mistBreathingSeventhFormObscuringClouds": "[TRANSLATION NOT FOUND] Septième mouvement: Brouillard"
-                }
-            },
-            "beast": {
-                "name": "[TRANSLATION NOT FOUND] Souffle de la Bête",
-                "techniques": {
-                    "beastBreathingFirstFangPierce": "[TRANSLATION NOT FOUND] Premier Croc: Perforation",
-                    "beastBreathingSecondFangSlice": "[TRANSLATION NOT FOUND] Deuxième Croc: Lacération",
-                    "beastBreathingThirdFangDevour": "[TRANSLATION NOT FOUND] Troisième Croc: Déchiquetage",
-                    "beastBreathingFourthFangSliceNDice": "[TRANSLATION NOT FOUND] Quatrième Croc: Dilacération",
-                    "beastBreathingFifthFangCrazyCutting": "[TRANSLATION NOT FOUND] Cinquième Croc: Mutilation Furieuse",
-                    "beastBreathingSixthFangPalisadeBite": "[TRANSLATION NOT FOUND] Sixième Croc: Morsure Irrégulière",
-                    "beastBreathingSeventhFormSpatialAwareness": "[TRANSLATION NOT FOUND] Septième Croc: Détection",
-                    "beastBreathingEighthFormExplosiveRush": "[TRANSLATION NOT FOUND] Huitième Croc: Charge du Sanglier",
-                    "beastBreathingNinthFangExtendingBendySlash": "[TRANSLATION NOT FOUND] Neuvième Croc: Taillade Ondulante Divine",
-                    "beastBreathingTenthFangWhirlingFangs": "[TRANSLATION NOT FOUND] Dixième Croc: Les Crocs Tournoyants",
-                    "beastBreathingSuddenThrowingStrike": "[TRANSLATION NOT FOUND] La Frappe Lancée",
-                    "beastBreathingBoarRush": "[TRANSLATION NOT FOUND] Boar Rush",
-                    "beastBreathingThirdFangDevourRush": "[TRANSLATION NOT FOUND] Third Fang: Devour Rush"
-                }
-            }
-        },
-        "commands": {
-            "base": {
-                "strings": {
-                    "profile_aptitudes": "[TRANSLATION NOT FOUND] Aptitudes",
-                    "level": "[TRANSLATION NOT FOUND] Niveau",
-                    "total_experience": "[TRANSLATION NOT FOUND] Expérience totale",
-                    "level_experience": "[TRANSLATION NOT FOUND] Expérience de niveau"
-                },
-                "panels": {
-                    "player": {
-                        "pages": {
-                            "0": {
-                                "embeds": {
-                                    "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Statistiques de %PLAYER",
-                                        "fields": {
-                                            "0": {
-                                                "name": "[TRANSLATION NOT FOUND] Aptitudes"
-                                            },
-                                            "1": {
-                                                "name": "[TRANSLATION NOT FOUND] Niveau"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "inventory": {
-                        "pages": {
-                            "0": {
-                                "embeds": {
-                                    "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Inventaire de %PLAYER",
-                                        "fields": {
-                                            "0": {
-                                                "name": "[TRANSLATION NOT FOUND] Ressources"
-                                            },
-                                            "1": {
-                                                "name": "[TRANSLATION NOT FOUND] Objets de quête"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "activity": {
-                        "pages": {
-                            "0": {
-                                "embeds": {
-                                    "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Activité de %PLAYER",
-                                        "fields": {
-                                            "0": {
-                                                "name": "[TRANSLATION NOT FOUND] Activité en cours"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "badges": {
-                        "pages": {
-                            "0": {
-                                "embeds": {
-                                    "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Badges de %PLAYER",
-                                        "fields": {
-                                            "0": {
-                                                "name": "[TRANSLATION NOT FOUND] Badges"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "crow": {
-                        "pages": {
-                            "0": {
-                                "embeds": {
-                                    "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Corbeau de %PLAYER",
-                                        "fields": {
-                                            "0": {
-                                                "name": "[TRANSLATION NOT FOUND] Corbeau actif"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "weapons": {
-                        "pages": {
-                            "0": {
-                                "embeds": {
-                                    "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Armes de %PLAYER",
-                                        "fields": {
-                                            "0": {
-                                                "name": "[TRANSLATION NOT FOUND] Arme équipée"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "rows": {
-                    "page": "[TRANSLATION NOT FOUND] Page...",
-                    "panel": "[TRANSLATION NOT FOUND] Panel...",
-                    "universal": {
-                        "leave_panel": "[TRANSLATION NOT FOUND] Quitter le panel",
-                        "player_panel": "[TRANSLATION NOT FOUND] Statistiques",
-                        "inventory_panel": "[TRANSLATION NOT FOUND] Inventaire",
-                        "activity_panel": "[TRANSLATION NOT FOUND] Activité",
-                        "badges_panel": "[TRANSLATION NOT FOUND] Badges",
-                        "crow_panel": "[TRANSLATION NOT FOUND] Corbeau",
-                        "weapons_panel": "[TRANSLATION NOT FOUND] Armes"
-                    }
-                }
-            },
-            "staff-panel": {
-                "strings": {
-                    "owner_grade": "[TRANSLATION NOT FOUND] Owner",
-                    "admin_grade": "[TRANSLATION NOT FOUND] Administrateur",
-                    "tester_grade": "[TRANSLATION NOT FOUND] Testeur",
-                    "owner_panel": "[TRANSLATION NOT FOUND] Panel Owner",
-                    "admin_panel": "[TRANSLATION NOT FOUND] Panel Administrateur",
-                    "tester_panel": "[TRANSLATION NOT FOUND] Panel Testeur",
-                    "home_title": "[TRANSLATION NOT FOUND] Bienvenue sur le panel du personnel.",
-                    "your_grades": "[TRANSLATION NOT FOUND] Vos grades",
-                    "panels_accesses_message": "[TRANSLATION NOT FOUND] Vous avez donc accès aux panels ci-dessous",
-                    "panels_timeout_message": "[TRANSLATION NOT FOUND] Ce panel de navigation restera actif 2 minutes et se désactivera au bout de 30 secondes d'inactivité.",
-                    "api_ping": "[TRANSLATION NOT FOUND] Ping API",
-                    "server_ping": "[TRANSLATION NOT FOUND] Ping Serveur",
-                    "internal_server_1": "[TRANSLATION NOT FOUND] Serveur Interne 1",
-                    "internal_server_2": "[TRANSLATION NOT FOUND] Serveur Interne 2",
-                    "rpg_status": "[TRANSLATION NOT FOUND] Statut du RPG",
-                    "memory": "[TRANSLATION NOT FOUND] Mémoire",
-                    "capacity": "[TRANSLATION NOT FOUND] Capacité",
-                    "uptime": "[TRANSLATION NOT FOUND] En ligne depuis",
-                    "guilds": "[TRANSLATION NOT FOUND] Serveurs",
-                    "total_members": "[TRANSLATION NOT FOUND] Total de membres",
-                    "cached_users": "[TRANSLATION NOT FOUND] Utilisateurs dans le cache",
-                    "players": "[TRANSLATION NOT FOUND] Joueurs",
-                    "version": "[TRANSLATION NOT FOUND] Version",
-                    "no_permissions": "[TRANSLATION NOT FOUND] Il semblerait que vous n'ayez pas les permissions nécessaires pour accéder à cette page.",
-                    "actual_bot_status": "[TRANSLATION NOT FOUND] Statut actuel du bot",
-                    "already_set": "[TRANSLATION NOT FOUND] Le bot a déjà le statut",
-                    "set_online": "[TRANSLATION NOT FOUND] Le bot est désormais en **online** 🟢.",
-                    "set_maintenance": "[TRANSLATION NOT FOUND] Le bot est désormais en **maintenance** 🟡.",
-                    "set_disabled": "[TRANSLATION NOT FOUND] Le bot est désormais en **disabled** 🔴.",
-                    "auth_guilds": "[TRANSLATION NOT FOUND] Serveurs autorisés",
-                    "post_success": "[TRANSLATION NOT FOUND] `(Expire dans 24h)` La liste des serveurs a été générées sur ce lien **Paste.gg** :",
-                    "post_error": "[TRANSLATION NOT FOUND] Une erreur est survenue lors de la génération de la liste des serveurs.",
-                    "vip_players": "[TRANSLATION NOT FOUND] Joueurs VIPs",
-                    "vipplus_players": "[TRANSLATION NOT FOUND] Joueurs VIPs(+)",
-                    "is_already_authorized": "[TRANSLATION NOT FOUND] Le serveur `%GUILD` **est déjà autorisé**.",
-                    "is_authorized": "[TRANSLATION NOT FOUND] Le serveur `%GUILD` **est autorisé**.",
-                    "is_already_unauthorized": "[TRANSLATION NOT FOUND] Le serveur `%GUILD` **n'est actuellement pas autorisé**.",
-                    "is_unauthorized": "[TRANSLATION NOT FOUND] Le serveur `%GUILD` **n'est plus autorisé**.",
-                    "is_already_vip": "[TRANSLATION NOT FOUND] Le joueur %PLAYER **est déjà VIP** sur le bot.",
-                    "is_vip": "[TRANSLATION NOT FOUND] Le joueur %PLAYER **est désormais VIP** sur le bot.",
-                    "is_already_vipplus": "[TRANSLATION NOT FOUND] Le joueur %PLAYER **est déjà VIP(+)** sur le bot.",
-                    "is_vipplus": "[TRANSLATION NOT FOUND] Le joueur %PLAYER **est désormais VIP(+)** sur le bot.",
-                    "is_already_not_vip": "[TRANSLATION NOT FOUND] Le joueur %PLAYER **n'est pas VIP** sur le bot.",
-                    "is_not_vip": "[TRANSLATION NOT FOUND] Le joueur %PLAYER **n'est plus VIP** sur le bot.",
-                    "is_already_not_vipplus": "[TRANSLATION NOT FOUND] Le joueur %PLAYER **n'est pas VIP(+)** sur le bot.",
-                    "is_not_vipplus": "[TRANSLATION NOT FOUND] Le joueur %PLAYER **n'est plus VIP(+)** sur le bot."
-                },
-                "panels": {
-                    "tester": {
-                        "identifier_name": "[TRANSLATION NOT FOUND] Panel Testeur",
-                        "identifier_description": "[TRANSLATION NOT FOUND] Panel contenant des informations utiles sur le bot.",
-                        "pages": {
-                            "0": {
-                                "label": "[TRANSLATION NOT FOUND] Informations utilisateur",
-                                "description": "[TRANSLATION NOT FOUND] Informations relatives à l'utilisateur faisant la commande.",
-                                "embeds": {
-                                    "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Panel Testeur - Informations utilisateur"
-                                    }
-                                }
-                            },
-                            "1": {
-                                "label": "[TRANSLATION NOT FOUND] Statut du bot",
-                                "description": "[TRANSLATION NOT FOUND] Statut du bot ainsi que les processus en cours.",
-                                "embeds": {
-                                    "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Panel Testeur - Statut du bot"
-                                    }
-                                }
-                            },
-                            "2": {
-                                "label": "[TRANSLATION NOT FOUND] Informations du bot",
-                                "description": "[TRANSLATION NOT FOUND] Informations du bot ainsi que certaines données.",
-                                "embeds": {
-                                    "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Panel Testeur - Informations du bot"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "admin": {
-                        "identifier_name": "[TRANSLATION NOT FOUND] Panel Administrateur",
-                        "identifier_description": "[TRANSLATION NOT FOUND] Panel contenant des fonctions administratives.",
-                        "pages": {
-                            "0": {
-                                "label": "[TRANSLATION NOT FOUND] Changement de statut",
-                                "description": "[TRANSLATION NOT FOUND] Panel administrateur pour changer le statut du bot.",
-                                "embeds": {
-                                    "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Panel Administrateur - Changement de statut",
-                                        "description": "[TRANSLATION NOT FOUND] Interagissez avec les boutons ci-dessous.",
-                                        "fields": {
-                                            "0": {
-                                                "value": "[TRANSLATION NOT FOUND] Voir le statut actuel"
-                                            },
-                                            "1": {
-                                                "value": "[TRANSLATION NOT FOUND] Passer en ligne"
-                                            },
-                                            "2": {
-                                                "value": "[TRANSLATION NOT FOUND] Passer en maintenance"
-                                            },
-                                            "3": {
-                                                "value": "[TRANSLATION NOT FOUND] Passer en désactivé"
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "1": {
-                                "label": "[TRANSLATION NOT FOUND] Serveurs",
-                                "description": "[TRANSLATION NOT FOUND] Panel administrateur pour gérer les serveurs.",
-                                "embeds": {
-                                    "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Panel Administrateur - Serveurs",
-                                        "description": "[TRANSLATION NOT FOUND] Interagissez avec les boutons ci-dessous.",
-                                        "fields": {
-                                            "0": {
-                                                "value": "[TRANSLATION NOT FOUND] Voir la liste des serveurs"
-                                            },
-                                            "1": {
-                                                "value": "[TRANSLATION NOT FOUND] Ajoute des serveurs autorisés (- de 30 membres)"
-                                            },
-                                            "2": {
-                                                "value": "[TRANSLATION NOT FOUND] Supprimer des serveurs autorisés (- de 30 membres)"
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            "2": {
-                                "label": "[TRANSLATION NOT FOUND] VIPs/VIPs(+)",
-                                "description": "[TRANSLATION NOT FOUND] Panel administrateur pour gérer les VIPs et les VIPs(+).",
-                                "embeds": {
-                                    "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Panel Administrateur - VIPs/VIPs(+)",
-                                        "description": "[TRANSLATION NOT FOUND] Interagissez avec les boutons ci-dessous.",
-                                        "fields": {
-                                            "0": {
-                                                "value": "[TRANSLATION NOT FOUND] Voir la liste des VIPs/VIPs(+)"
-                                            },
-                                            "1": {
-                                                "value": "[TRANSLATION NOT FOUND] Ajouter des VIPs/VIPs(+)"
-                                            },
-                                            "2": {
-                                                "value": "[TRANSLATION NOT FOUND] Supprimer des VIPs/VIPs(+)"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "owner": {
-                        "identifier_name": "[TRANSLATION NOT FOUND] Panel Owner",
-                        "identifier_description": "[TRANSLATION NOT FOUND] Panel contenant des fonctions uniques pour l'owner du bot.",
-                        "pages": {
-                            "0": {
-                                "label": "[TRANSLATION NOT FOUND] Exécution de code",
-                                "description": "[TRANSLATION NOT FOUND] Panel pour exécuter du code depuis Discord.",
-                                "embeds": {
-                                    "0": {
-                                        "title": "[TRANSLATION NOT FOUND] Panel Owner - Exécution de code",
-                                        "description": "[TRANSLATION NOT FOUND] Interagissez avec les boutons ci-dessous.",
-                                        "fields": {
-                                            "0": {
-                                                "value": "[TRANSLATION NOT FOUND] Exécuter du code"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "rows": {
-                    "page": "[TRANSLATION NOT FOUND] Page...",
-                    "panel": "[TRANSLATION NOT FOUND] Panel...",
-                    "universal": {
-                        "leave_panel": "[TRANSLATION NOT FOUND] Quitter le panel"
-                    },
-                    "modals": {
-                        "add_auth_guilds": {
-                            "title": "[TRANSLATION NOT FOUND] Ajouter des serveurs autorisés",
-                            "inputs": {
-                                "0": {
-                                    "label": "[TRANSLATION NOT FOUND] Entrez l'identifiant",
-                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
-                                }
-                            }
-                        },
-                        "remove_auth_guilds": {
-                            "title": "[TRANSLATION NOT FOUND] Retirer des serveurs autorisés",
-                            "inputs": {
-                                "0": {
-                                    "label": "[TRANSLATION NOT FOUND] Entrez l'identifiant",
-                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
-                                }
-                            }
-                        },
-                        "add_vip": {
-                            "title": "[TRANSLATION NOT FOUND] Ajouter des VIPs/VIPs(+)",
-                            "inputs": {
-                                "0": {
-                                    "label": "[TRANSLATION NOT FOUND] (VIP) Entrez l'identifiant",
-                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
-                                },
-                                "1": {
-                                    "label": "[TRANSLATION NOT FOUND] (VIP(+)) Entrez l'identifiant",
-                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
-                                }
-                            }
-                        },
-                        "remove_vip": {
-                            "title": "[TRANSLATION NOT FOUND] Retirer des VIPs/VIPs(+)",
-                            "inputs": {
-                                "0": {
-                                    "label": "[TRANSLATION NOT FOUND] (VIP) Entrez l'identifiant",
-                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
-                                },
-                                "1": {
-                                    "label": "[TRANSLATION NOT FOUND] (VIP(+)) Entrez l'identifiant",
-                                    "placeholder": "[TRANSLATION NOT FOUND] ID"
-                                }
-                            }
-                        },
-                        "code_execute": {
-                            "title": "[TRANSLATION NOT FOUND] Exécuter du code",
-                            "inputs": {
-                                "0": {
-                                    "label": "[TRANSLATION NOT FOUND] Code (JavaScript):",
-                                    "placeholder": "[TRANSLATION NOT FOUND] console.log(\"Hello world\");"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "rpgAssets": {
-            "aptitudes": {
-                "strength": "[TRANSLATION NOT FOUND] Force",
-                "speed": "[TRANSLATION NOT FOUND] Vitesse",
-                "defense": "[TRANSLATION NOT FOUND] Défense",
-                "agility": "[TRANSLATION NOT FOUND] Agilité"
-            }
-        },
-        "_id": "fr"
+        "_id": "[x] en"
     }
 }

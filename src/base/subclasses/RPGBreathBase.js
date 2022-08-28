@@ -8,8 +8,6 @@ class RPGBreathBase {
         const datas = this.lang.json[this.id];
         this.name = datas.name;
         this.techniques = Object.entries(datas.techniques).map(e => new RPGTechniqueBase(this, e[0], e[1]));
-
-        console.log(this.techniques);
     }
 }
 

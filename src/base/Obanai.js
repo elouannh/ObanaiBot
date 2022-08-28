@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
 const { Client, escapeMarkdown, IntentsBitField, User, Snowflake } = require("discord.js");
-const PlayerDb = require("../structure/database/PlayerDb");
-const InventoryDb = require("../structure/database/InventoryDb");
-const SquadDb = require("../structure/database/SquadDb");
-const GuildDb = require("../structure/database/GuildDb");
-const ActivityDb = require("../structure/database/ActivityDb");
-const MapDb = require("../structure/database/MapDb");
-const QuestDb = require("../structure/database/QuestDb");
-const InternalServerManager = require("../structure/database/InternalServerManager");
-const ExternalServerDb = require("../structure/database/ExternalServerDb");
-const StatusDb = require("../structure/database/StatusDb");
+const PlayerDb = require("./database/PlayerDb");
+const InventoryDb = require("./database/InventoryDb");
+const SquadDb = require("./database/SquadDb");
+const GuildDb = require("./database/GuildDb");
+const ActivityDb = require("./database/ActivityDb");
+const MapDb = require("./database/MapDb");
+const QuestDb = require("./database/QuestDb");
+const InternalServerManager = require("./database/InternalServerManager");
+const ExternalServerDb = require("./database/ExternalServerDb");
+const StatusDb = require("./database/StatusDb");
 const CommandManager = require("./CommandManager");
 const EventManager = require("./EventManager");
 const Util = require("./Util");
@@ -81,9 +81,9 @@ class Obanai extends Client {
         this.externalServerDb = new ExternalServerDb(this);
         this.statusDb = new StatusDb(this);
 
-        const PlayerDbCallback = require("../structure/callbacks/PlayerDbCallback")(this);
-        const InventoryDbCallback = require("../structure/callbacks/InventoryDbCallback")(this);
-        const MapDbCallback = require("../structure/callbacks/MapDbCallback")(this);
+        const PlayerDbCallback = require("./database/callbacks/PlayerDbCallback")(this);
+        const InventoryDbCallback = require("./database/callbacks/InventoryDbCallback")(this);
+        const MapDbCallback = require("./database/callbacks/MapDbCallback")(this);
         this.playerDb.db.changed(PlayerDbCallback);
         this.inventoryDb.db.changed(InventoryDbCallback);
         this.mapDb.db.changed(MapDbCallback);

@@ -1,6 +1,6 @@
 const Command = require("../../base/Command");
 const map = require("../../elements/map.js");
-const alertQuest = require("../../structure/callbacks/AlertRequest");
+const alertQuest = require("../../base/database/callbacks/AlertRequest");
 
 class Inspect extends Command {
     constructor() {

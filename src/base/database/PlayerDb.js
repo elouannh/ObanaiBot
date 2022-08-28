@@ -2,6 +2,7 @@ const Enmap = require("enmap");
 const fs = require("fs");
 const calcCrowLevel = require("../../elements/calcCrowLevel");
 const calcPlayerLevel = require("../../elements/calcPlayerLevel");
+const Player = require("./subclasses/Player");
 
 class PlayerDb {
     constructor(client) {
@@ -41,67 +42,7 @@ class PlayerDb {
         const p = await this.ensure(id);
         const i = await this.client.inventoryDb.db.get(id);
 
-        for (const stat in p.stats) {
-            if (typeof p.statsLevel === "undefined") p.statsLevel = {};
-            p.statsLevel[stat] = p.stats[stat];
-            p.stats[stat] = this.client.util.round(p.stats[stat] * 10);
-        }
-
-        p.grimBoosts = {
-            strength: [0, 0],
-            defense: [0, 0],
-            agility: [0, 0],
-            speed: [0, 0],
-        };
-        if (i.active_grimoire !== null) {
-            const gr = require(`../../elements/grimoires/${i.active_grimoire}.json`);
-
-            if (gr.benefits.includes("stats_boost")) {
-                for (const stat in p.statsLevel) {
-                    p.grimBoosts[stat] = [
-                        this.client.util.round(p.stats[stat] * (gr.boost - 1)),
-                        this.client.util.round((gr.boost - 1) * 100),
-                    ];
-                }
-            }
-        }
-
-        const cat = require(`../../elements/categories/${p.category}`);
-        p.catBoosts = {
-            [cat.bonus[0]]: [0, 0],
-            [cat.bonus[1]]: [0, 0],
-        };
-        p.catBoosts[cat.bonus[0]] = [
-            this.client.util.round(p.stats[cat.bonus[0]] * (p.categoryLevel / 20)),
-            this.client.util.round((p.categoryLevel / 20) * 100),
-        ];
-        p.catBoosts[cat.bonus[1]] = [
-            this.client.util.round(p.stats[cat.bonus[1]] * (- p.categoryLevel / 50)),
-            this.client.util.round((- p.categoryLevel / 50) * 100),
-        ];
-
-        p.finalStats = { ...p.stats };
-        for (const stat in p.finalStats) {
-            let sum = p.finalStats[stat] + p.grimBoosts[stat][0];
-            if (stat in p.catBoosts) sum += p.catBoosts[stat][0];
-            p.finalStats[stat] = this.client.util.round(sum);
-        }
-
-        p.tournamentStats = { ...p.finalStats };
-        for (const stat in p.tournamentStats) {
-            p.tournamentStats[stat] = this.client.util.round(
-                this.client.util.round(p.finalStats[stat] / 30, 0) * 10,
-                0,
-            );
-        }
-
-        p.level = calcPlayerLevel(p.exp);
-        p.date = `${(p.created / 1000).toFixed(0)}`;
-
-        p.category = require(`../../elements/categories/${p.category}.json`);
-        p.breath = require(`../../elements/breaths/${p.breath}_style.json`);
-
-        return p;
+        return (await new Player(this.client, p, i));
     }
 
     async get(id) {

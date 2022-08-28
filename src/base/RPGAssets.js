@@ -32,7 +32,7 @@ class RPGAssets {
     }
 
     getBreath(lang, id) {
-        const breath = new RPGBreathBase(this.getLangDatas(lang, "breathingStyles"), id);
+        return new RPGBreathBase(this.getLangDatas(lang, "breathingStyles"), id);
     }
 }
 

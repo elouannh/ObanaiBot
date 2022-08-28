@@ -1,14 +1,10 @@
+const { escapeMarkdown } = require("discord.js");
+
 class MemberScanning {
     constructor(guild, args) {
         this.guild = guild;
         this.args = args;
         this.results = [];
-    }
-
-    clearMarkdown(str) {
-        const symbols = ["_", "*", "`"];
-        for (const symbol of symbols) str.replace(symbol, `\\${symbol}`);
-        return str;
     }
 
     async search() {
@@ -22,19 +18,19 @@ class MemberScanning {
         for (const member of members.map(e => e)) {
             let str = "";
             let add = false;
-            const nick = member.nickname === null ? null : this.clearMarkdown(String(member.nickname));
-            const name = this.clearMarkdown(String(member.user.username + " (#" + member.user.discriminator + ")"));
+            const nick = member.nickname === null ? null : escapeMarkdown(String(member.nickname));
+            const name = escapeMarkdown(String(member.user.username + " (#" + member.user.discriminator + ")"));
 
             if (nick !== null) {
                 if (nick.startsWith(this.args)) {
-                    const splitted = nick.split(this.args);
-                    str += `**${this.args}**${splitted.splice(1).join(this.args)} (${name})`;
+                    const split = nick.split(this.args);
+                    str += `**${this.args}**${split.splice(1).join(this.args)} (${name})`;
                     add = true;
                 }
             }
             else if (name.startsWith(this.args)) {
-                const splitted = name.split(this.args);
-                str += `**${this.args}**${splitted.splice(1).join(this.args)}`;
+                const split = name.split(this.args);
+                str += `**${this.args}**${split.splice(1).join(this.args)}`;
                 add = true;
             }
 

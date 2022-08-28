@@ -6,19 +6,42 @@ class Util {
     ensureLang(source, obj, indicate) {
         for (const key in source) {
             if (source[key] instanceof Object && !(source instanceof String)) {
+                if (key in obj) obj[key] = this.ensureLang(source[key], obj[key], indicate);
+                else obj[key] = source[key];
+            }
+            else if (!(key in obj)) {
+                if (indicate.value && !(obj[key].startsWith(indicate.addedString))) {
+                    obj[key] = `${indicate.addedString} ${source[key]}`;
+                }
+                else {
+                    obj[key] = source[key];
+                }
+            }
+            else if (obj[key] === source[key]) {
+                if (indicate.value && !(obj[key].startsWith(indicate.equalString))) {
+                    obj[key] = `${indicate.equalString} ${obj[key]}`;
+                }
+            }
+        }
+        for (const key2 in obj) {
+            if (!(key2 in source)) {
+                if (indicate.value && !(obj[key2].startsWith(indicate.notInString))) {
+                    obj[key2] = `${indicate.notInString} ${obj[key2]}`;
+                }
+            }
+        }
+
+        return obj;
+    }
+
+    ensureObj(source, obj) {
+        for (const key in source) {
+            if (source[key] instanceof Object && !(source instanceof String)) {
                 if (key in obj) obj[key] = this.ensureLang(source[key], obj[key]);
                 else obj[key] = source[key];
             }
             else if (!(key in obj)) {
                 obj[key] = source[key];
-            }
-            else if (obj[key] === source[key]) {
-                if (indicate.value) obj[key] = `${indicate.equalString} ${obj[key]}`;
-            }
-        }
-        for (const key2 in obj) {
-            if (!(key2 in source)) {
-                if (indicate.value) obj[key2] = `${indicate.notInString} ${obj[key2]}`;
             }
         }
 
@@ -176,7 +199,6 @@ class Util {
     }
 
     catchError(error) {
-        console.log(this.client);
         this.client.log("Catched error:", error.stack);
         this.client.log("................");
     }

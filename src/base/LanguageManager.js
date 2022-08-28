@@ -19,11 +19,21 @@ class LanguageManager {
             }
 
             const cacheJson = lang.json;
-            lang.json = new Util(this.client).ensureLang(french.json, cacheJson);
+            lang.json = new Util(this.client).ensureLang(french.json, cacheJson, { value: false });
             lang.json._id = lang.lang;
-            Json[lang.lang] = new Util(this.client).ensureLang(french.json, cacheJson);
+            if (lang.json._id !== "fr") {
+                Json[lang.lang] = new Util(this.client).ensureLang(
+                    french.json,
+                    cacheJson,
+                    { value: true, equalString: "[=]", notInString: "[x]", addedString: "[+]" },
+                );
+            }
         }
-        fs.writeFileSync("./src/languages/rendered.json", JSON.stringify(Json, null, 4), "utf-8");
+        fs.writeFileSync(
+            "./src/languages/rendered.json",
+            JSON.stringify(Json, null, 4),
+            "utf-8",
+        );
     }
 
     getLang(lang) {

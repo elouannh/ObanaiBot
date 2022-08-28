@@ -1,5 +1,5 @@
 const Command = require("../../base/Command");
-const MapDbCallback = require("../../structure/callbacks/MapDbCallback");
+const MapDbCallback = require("../../base/database/callbacks/MapDbCallback");
 const storyDatas = require("../../elements/storyDatas.json");
 const fs = require("fs");
 
