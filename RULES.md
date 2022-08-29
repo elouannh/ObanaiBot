@@ -22,7 +22,8 @@ Ces règles sont applicables au serveur Discord Obanai Support et sont sous la l
 
 - Vous devez respecter tout membre du serveur via vos propos. Tout propos haineux envers une personne, un groupe de personnes, une religion ou autre est totalement sanctionné.
 - Vous devez respecter les sujets des salons de ce serveur Discord. Tout abus sera sanctionné.
-- Utilisez le BSP (Bon Sens Paysan), c'est-à-dire qu'on vous demande d'être logique vis-à-vis de ce que vous faites sur le serveur. Si vous cherchez la définition exacte, c'est une expression (ou demandez à Myrly). Par exemple, si un modérateur vous reproche quelque chose de mal qui n'a pas été rajouté dans les règles, si vous savez que c'est mal, ne jouez pas aux bêtes et acceptez votre sanction.
+- Utilisez le BSP (Bon Sens Paysan), c'est-à-dire qu'on vous demande d'être logique vis-à-vis de ce que vous faites sur le serveur. Si vous cherchez la définition exacte, c'est une expression (ou demandez à Myrly).
+- Si un staff, un administrateur ou un owner vous demande de faire quelque chose qu'il a justifié lui, vous êtes dans l'obligation de l'écouter (pour éviter de se faire timeout bêtement). Si vous cherchez à en savoir plus, faites un ticket.
 - Des règles peuvent manquer à ce règlement, cependant si un modérateur juge nécessaire de sanctionner pour une règle non mentionnée ici, il en a le droit. Si vous souhaitez faire appel, créez un ticket (sauf si vous êtes banni, auquel cas vous devrez attendre la fin de votre sanction).
 - Comportez-vous de façon à ce que nous n'ayons pas le besoin de rajouter des règles à cette liste.
 - Je précise : ne soyez pas toxique envers les autres membres du serveur (c'est-à-dire ne provoquez pas inutilement quelqu'un). Ce n'est pas cool, et on sévira.
