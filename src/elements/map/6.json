@@ -7,7 +7,7 @@
     "Areas": [
         {
             "name": "Cour principale",
-            "biome": "landscaped_area",
+            "biome": "developed_area",
             "id": 0,
             "default": true
         }

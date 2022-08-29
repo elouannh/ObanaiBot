@@ -7,8 +7,8 @@ const BiomesEmojis = {
     "forest": "🌳",
     "dark_forest": "🍂",
     "dwelling": "🏠",
-    "landscaped_area": "🏙️",
-    "rocky_valley": "🏔️",
+    "developed_area": "🏙️",
+    "rockyArea": "🏔️",
 };
 
 module.exports = { Regions, BiomesEmojis };

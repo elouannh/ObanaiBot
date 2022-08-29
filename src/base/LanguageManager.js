@@ -15,17 +15,18 @@ class LanguageManager {
                 if (!lang.jsonDir.includes(frenchDir)) {
                     const replacedName = frenchDir.replace(".json", "");
                     lang.json[replacedName] = french.json[replacedName];
+                    lang.jsonRender[replacedName] = french.jsonRender[replacedName];
                 }
             }
-
-            const cacheJson = lang.json;
-            lang.json = new Util(this.client).ensureLang(french.json, cacheJson, { value: false });
             lang.json._id = lang.lang;
-            if (lang.json._id !== "fr") {
+
+            lang.json = new Util(this.client).ensureLang({ ...french.json }, { ...lang.json }, { value: "false" });
+
+            if (this.client.renderTranslations === "true" && lang.json._id !== "fr") {
                 Json[lang.lang] = new Util(this.client).ensureLang(
-                    french.json,
-                    cacheJson,
-                    { value: true, equalString: "[=]", notInString: "[x]", addedString: "[+]" },
+                    { ...french.jsonRender },
+                    { ...lang.jsonRender },
+                    { value: "true", equalString: "[=]", notInString: "[x]", addedString: "[+]" },
                 );
             }
         }

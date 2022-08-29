@@ -4,5 +4,377 @@
         "speed": "Vitesse",
         "defense": "Défense",
         "agility": "Agilité"
+    },
+    "breathingStyles": {
+        "flower": {
+            "name": "Souffle de la Fleur",
+            "techniques": {
+                "flowerBreathingSecondFormHonorable Shadow Plum": "Deuxième Mouvement: Esprit du Prunier",
+                "flowerBreathingFourthFormCrimsonHanagoromo": "Quatrième Mouvement: Hanagoromo Pourpre",
+                "flowerBreathingFifthFormPeoniesOfFutility": "Cinquième Mouvement: La Pivoine Futile",
+                "flowerBreathingSixthFormWhirlingPeach": "Sixième Mouvement: Tourbillon de Pêche",
+                "flowerBreathingFinalFormEquinoctialVermilionEye": "Mouvement Final: Les Yeux du Lycoris"
+            }
+        },
+        "love": {
+            "name": "Souffle de l'Amour",
+            "techniques": {
+                "loveBreathingFirstFormShiversOfFirstLove": "Premier Mouvement: Les Frissons du Premier Amour",
+                "loveBreathingSecondFormLovePangs": "Deuxième Mouvement: Amour Anxiogène",
+                "loveBreathingThirdFormCatLoveShower": "Troisième Mouvement: Toilette de Chaton Mignon",
+                "loveBreathingFifthFormSwayingLoveWildClaw": "Cinquième Mouvement: Attachement Hésitant - Ongles Mal Vernis",
+                "loveBreathingSixthFormCatLeggedWindsOfLove": "Sixième Mouvement: Un Amour de Patte de Chaton"
+            }
+        },
+        "flame": {
+            "name": "Souffle de la Flamme",
+            "techniques": {
+                "flameBreathingFirstFormUnknowingFire": "Premier Mouvement: Mer de Flammes",
+                "flameBreathingSecondFormRisingScorchingSun": "Deuxième Mouvement: Flammes du Soleil Ascendant",
+                "flameBreathingThirdFormBlazingUniverse": "Troisième Mouvement: Univers de Flammes",
+                "flameBreathingFourthFormBloomingFlameUndulation:": "Quatrième Mouvement: La Vague Flamboyante",
+                "flameBreathingFifthFormFlameTiger": "Cinquième Mouvement: Tigre de Flammes",
+                "flameBreathingNinthFormRengoku": "Neuvième Mouvement: Purgatoire"
+            }
+        },
+        "sun": {
+            "name": "Souffle du Soleil",
+            "techniques": {
+                "sunBreathingDance": "Valse",
+                "sunBreathingDancingFlash": "Valse Foudroyante",
+                "sunBreathingClearBlueSky": "Paradis Bleu",
+                "sunBreathingRagingSun": "Miroir Brûlant Écarlate",
+                "sunBreathingBurningBonesSummerSun": "Le Soleil qui Réduit les Os en Cendres",
+                "sunBreathingSettingSunTransformation": "Le Coucher de Soleil",
+                "sunBreathingSolarHeatHaze": "Chaleur Ondulante",
+                "sunBreathingBeneficentRadiance": "Rai de Lumière",
+                "sunBreathingSunflowerThrust": "Estoc Brillant du Soleil",
+                "sunBreathingDragonSunHaloHeadDance": "Halo Solaire Danse Draconique",
+                "sunBreathingFireWheel": "Char Enflammé",
+                "sunBreathingFakeRainbow": "Arc-en-Ciel Parhélique",
+                "sunBreathingFlameDance": "Valse Enflammée",
+                "sunBreathingThirteenthForm": "Treizième Mouvement",
+                "sunBreathingCrossSlash": "Cross Slash",
+                "sunBreathingScorchingRush": "Scorching Rush",
+                "sunBreathingPhoenixFlash": "Phoenix Flash"
+            }
+        },
+        "sound": {
+            "name": "Souffle du Son",
+            "techniques": {
+                "soundBreathingFirstFormRoar": "Premier Mouvement: Tonnerre",
+                "soundBreathingFourthFormConstantResoundingSlashes": "Quatrième Mouvement: Le Glas Mortel d'Avici",
+                "soundBreathingFifthFormString Performance": "Cinquième Mouvement: Symphonie Stridente",
+                "soundBreathingRisingKick": "Rising Kick",
+                "soundBreathingFifthFormStringPerformanceBurstingBloom": "Fifth Form: String Performance, Bursting Bloom"
+            }
+        },
+        "thunder": {
+            "name": "Souffle de la Foudre",
+            "techniques": {
+                "thunderBreathingFirstFormThunderclapAndFlash": "Premier Mouvement: Frappe Foudroyante",
+                "thunderBreathingFirstFormThunderclapAndFlashSixfold": "Premier Mouvement: Frappe Foudroyante - Six Coups",
+                "thunderBreathingFirstFormThunderclapAndFlashEightfold": "Premier Mouvement: Frappe Foudroyante - Huit Coups",
+                "thunderBreathingFirstFormThunderclapAndFlashGodspeed": "Premier Mouvement: Frappe Foudroyante - Vitesse Divine",
+                "thunderBreathingSecondFormRiceSpirit": "Deuxième Mouvement: Éclair Foudroyant",
+                "thunderBreathingThirdFormThunderSwarm": "Troisième Mouvement: Nuée d'Éclairs",
+                "thunderBreathingFourthFormDistantThunder": "Quatrième Mouvement: Orage Lointain",
+                "thunderBreathingFifthFormHeatLightning": "Cinquième Mouvement: Éclair de Chaleur",
+                "thunderBreathingSixthFormRumbleAndFlash": "Sixième Mouvement: Tonnerre et Foudre",
+                "thunderBreathingSeventhFormHonoikazuchiNoKami": "Septième Mouvements: Dieu du Feu Céleste",
+                "thunderBreathingAirSpin": "Air Spin",
+                "thunderBreathingFirstFormThunderclapAndFlashPrime": "First Form: Thunderclap and Flash, Prime"
+            }
+        },
+        "wind": {
+            "name": "Souffle du Vent",
+            "techniques": {
+                "windBreathingFirstFormDustWhirlwindCutter": "Premier Mouvement: Tourbillon de Poussière - Tranche",
+                "windBreathingSecondFormClawsPurifyingWind": "Deuxième Mouvement: Griffes de Vent Purificatrices",
+                "windBreathingThirdFormCleanStormWindTree": "Troisième Mouvement: Arbre Ondulant dans la Brise Montagnarde",
+                "windBreathingFourthFormRisingDustStorm": "Quatrième Mouvement: La Tempête de Poussière Levante",
+                "windBreathingFifthFormColdMountainWind": "Cinquième Mouvement: Tempête Hivernale",
+                "windBreathingSixthFormBlackWindMountainMist": "Sixième Mouvement: La Rafale de Fumée Noire",
+                "windBreathingSeventhFormGaleSuddenGusts": "Septième Mouvement: Vent Puissant - Bourrasque de Tengu",
+                "windBreathingEighthFormPrimaryGaleSlash": "Huitième Mouvement: Frappe de la Première Bourrasque",
+                "windBreathingNinthFormIdatenTyphoon": "Neuvième Mouvement: Typhon de Skanda"
+            }
+        },
+        "water": {
+            "name": "Souffle de l'Eau",
+            "techniques": {
+                "waterBreathingFirstFormWaterSurfaceSlash": "Premier Mouvement: Entaille de l'Eau Calme",
+                "waterBreathingSecondFormWaterWheel": "Deuxième Mouvement: La Roue d'Eau",
+                "waterBreathingSecondFormImprovedLateralWaterWheel": "Deuxième Mouvement: La Roue d'Eau - Variation horizontal",
+                "waterBreathingThirdFormFlowingDance": "Troisième Mouvement: Danse des Courants",
+                "waterBreathingFourthFormStrikingTide": "Quatrième Mouvement: La Marée Déferlante",
+                "waterBreathingFourthFormStrikingTideTurbulent": "Fourth Form: Striking Tide, Turbulent",
+                "waterBreathingFifthFormBlessedRainAfterTheDrought": "Cinquième Mouvement: Averse Providentielle",
+                "waterBreathingSixthFormWhirlpool": "Sixième Mouvement: Tourbillon",
+                "waterBreathingSixthFormWhirlpoolFlow": "Sixième et Troisième Mouvement Combinés: Tourbillon Dansant",
+                "waterBreathingSeventhFormDropRippleThrust": "Septième Mouvement: Goutte de Rosée Troublant l'Eau Dormante",
+                "waterBreathingSeventhFormDropRippleThrustCurve": "Septième Mouvement: Goutte de Rosée Troublant l'Eau Dormante - En Crochet",
+                "waterBreathingEighthFormWaterfallBasin": "Huitième Mouvement: Impact de la Cascade",
+                "waterBreathingNinthFormSplashingWaterFlowTurbulent": "Neuvième Mouvement: Embruns des Flots Déchaînés",
+                "waterBreathingTenthFormConstantFlux": "Dixième Mouvement: Les Vicissitudes de la Vie",
+                "waterBreathingEleventhFormDead Calm": "Onzième Mouvement: Accalmie",
+                "waterBreathingThirdFormFlowingDanceShadowsOfDawn": "Third Form: Flowing Dance, Shadows of Dawn",
+                "waterBreathingEighthFormWaterfallBasinDestruction": "Eighth Form: Waterfall Basin, Destruction",
+                "waterBreathingNinthFormSplashingWaterFlow": "Ninth Form: Splashing Water Flow",
+                "waterBreathingNinthFormSplashingWaterFlowFlash": "Ninth Form: Splashing Water Flow, Flash",
+                "waterBreathingNinthFormSplashingWaterFlowTurbulentEffervescence": "Ninth Form: Splashing Water Flow, Turbulent Effervescence",
+                "waterBreathingEleventhFormDeadCalmTidalWaves": "Eleventh Form: Dead Calm, Tidal Waves"
+            }
+        },
+        "insect": {
+            "name": "Souffle de l'Insecte",
+            "techniques": {
+                "insectBreathingButterflyDanceCaprice": "Danse des Papillons: Papillonnage",
+                "insectBreathingDanceOfTheBeeStingTrueFlutter": "Danse de la Piqûre d'Abeille: Battement Véritable",
+                "insectBreathingDanceOfTheDragonflyCompoundEyeHexagon": "Danse de la Libellule: Œil à Facettes Hexagonales",
+                "insectBreathingDanceOfTheCentipedeHundredLeggedZigzag": "Danse du Myriapode: Zigzag Centipède",
+                "insectBreathingSwiftThrust": "Swift Thrust",
+                "insectBreathingRisingThrust": "Rising Thrust",
+                "insectBreathingSixfoldThrust": "Sixfold Thrust",
+                "insectBreathingButterflyDanceCapriceIllusoryLight": "Butterfly Dance: Caprice, Illusory Light"
+            }
+        },
+        "serpent": {
+            "name": "Souffle du Serpent",
+            "techniques": {
+                "serpentBreathingFirstFormWindingSerpentSlash": "Premier Mouvement: Frappe du Serpent Recroquevillé",
+                "serpentBreathingSecondFormVenomFangsOfTheNarrowHead": "Deuxième Mouvement: Le Crochet Empoisonné du Petit Serpent",
+                "serpentBreathingThirdFormCoilChoke": "Troisième Mouvement: Constriction",
+                "serpentBreathingFourthFormTwinHeadedReptile": "Quatrième Mouvement: Serpent Bicéphale",
+                "serpentBreathingFifthFormSlitheringSerpent": "Cinquième Mouvement: Ondulations du Serpent"
+            }
+        },
+        "moon": {
+            "name": "Souffle de la Lune",
+            "techniques": {
+                "moonBreathingFirstFormDarkMoonEveningPalace": "Premier Mouvement: Lune Sombre - Sanctuaire Nocturne",
+                "moonBreathingSecondFormPearlFlowerMoonGazing": "Deuxième Mouvement: Fleur de Nacre au Clair de Lune",
+                "moonBreathingThirdFormLoathsomeMoonChains": "Troisième Mouvement: La Lune Meurtrière de l'Abandon - Chaîne",
+                "moonBreathingFifthFormMoonSpiritCalamitousEddy": "Cinquième Mouvement: Vortex Maudit de la Lune Spectrale",
+                "moonBreathingSixthFormPerpetualNightLonelyMoonIncessant": "Sixième Mouvement: La Lune Solitaire dans l'Obscurité Éternelle - L'Avici",
+                "moonBreathingSeventhFormMirrorOfMisfortuneMoonlit": "Septième Mouvement: Miroir du Malheur - Reflet de la Lune",
+                "moonBreathingEighthFormMoonDragonRingTail": "Huitième Mouvement: Ouroboros Lunaire",
+                "moonBreathingNinthFormWaningMoonSwaths": "Neuvième Mouvement: Lune Décroissante - Le Cycle Perpétuel",
+                "moonBreathingTenthFormDrillingSlashesMoonThroughBambooLeaves": "Dixième Mouvement: Frappe du Cycle Transperçant - La Lune de Lierre",
+                "moonBreathingFourteenthFormCatastropheTenmanCrescentMoon": "Quatorzième Mouvement: Le Croissant de Lune de Tenman",
+                "moonBreathingSixteenthFormMoonBowHalfMoon": "Seizième Mouvement: Arc-en-Ciel Lunaire - Fragments Sélénites"
+            }
+        },
+        "stone": {
+            "name": "Souffle de la Roche",
+            "techniques": {
+                "stoneBreathingFirstFormSerpentiniteBipolar": "Premier Mouvement: Serpentinite - Tenaille Polarisée",
+                "stoneBreathingSecondFormUpperSmash": "Deuxième Mouvement: Fracasser la Voûte Céleste",
+                "stoneBreathingThirdFormStoneSkin": "Troisième Mouvement: Peau de Pierre",
+                "stoneBreathingFourthFormVolcanicRockRapidConquest": "Quatrième Mouvement: Rhyolite - Conquête Rapide",
+                "stoneBreathingFifthFormArcsOfJustice": "Cinquième Mouvement: La Roue de Pierre de la Justice"
+            }
+        },
+        "mist": {
+            "name": "Souffle de la Brume",
+            "techniques": {
+                "mistBreathingFirstFormLowCloudsDistantHaze": "Premier Mouvement: Nuages Bas et Brouillard Distant",
+                "mistBreathingSecondFormEightLayeredMist": "Deuxième Mouvement: Brume Stratifiée",
+                "mistBreathingThirdFormScatteringMistSplash": "Troisième Mouvement: Explosion Désembuante",
+                "mistBreathingFourthFormShiftingFlowSlash": "Quatrième Mouvement: Coup de Sabre Advectif",
+                "mistBreathingFifthFormSeaOfCloudsAndHaze": "Cinquième Mouvement: Brume de Mer",
+                "mistBreathingSixthFormLunarDispersingMist": "Sixième Mouvement: Brume au Clair de Lune",
+                "mistBreathingSeventhFormObscuringClouds": "Septième mouvement: Brouillard"
+            }
+        },
+        "beast": {
+            "name": "Souffle de la Bête",
+            "techniques": {
+                "beastBreathingFirstFangPierce": "Premier Croc: Perforation",
+                "beastBreathingSecondFangSlice": "Deuxième Croc: Lacération",
+                "beastBreathingThirdFangDevour": "Troisième Croc: Déchiquetage",
+                "beastBreathingFourthFangSliceNDice": "Quatrième Croc: Dilacération",
+                "beastBreathingFifthFangCrazyCutting": "Cinquième Croc: Mutilation Furieuse",
+                "beastBreathingSixthFangPalisadeBite": "Sixième Croc: Morsure Irrégulière",
+                "beastBreathingSeventhFormSpatialAwareness": "Septième Croc: Détection",
+                "beastBreathingEighthFormExplosiveRush": "Huitième Croc: Charge du Sanglier",
+                "beastBreathingNinthFangExtendingBendySlash": "Neuvième Croc: Taillade Ondulante Divine",
+                "beastBreathingTenthFangWhirlingFangs": "Dixième Croc: Les Crocs Tournoyants",
+                "beastBreathingSuddenThrowingStrike": "La Frappe Lancée",
+                "beastBreathingBoarRush": "Boar Rush",
+                "beastBreathingThirdFangDevourRush": "Third Fang: Devour Rush"
+            }
+        }
+    },
+    "grimoires": {
+        "types": {
+            "temporaryGrimoire": "Grimoire temporaire",
+            "permanentGrimoire": "Grimoire permanent",
+            "consumableGrimoire": "Grimoire consommable"
+        },
+        "effects": {
+            "experienceBoost": "Bonus d'expérience",
+            "moneyBoost": "Bonus d'argent",
+            "baitingBoost": "Bonus d'appâtage",
+            "lootBoost": "Bonus de butin",
+            "statsBoost": "Bonus de statistiques",
+            "travelTimeBoost": "Bonus de temps de voyage",
+            "trainTimeBoost": "Bonus de temps d'entraînement"
+        },
+        "names": {
+            "adventurer": "Grimoire de l'Aventurier",
+            "economist": "Grimoire de l'Économiste",
+            "eternal": "Grimoire Éternel",
+            "falconer": "Grimoire du Fauconnier",
+            "fortunate": "Grimoire du Chanceux",
+            "mastery": "Grimoire de Maîtrise",
+            "warrior": "Grimoire du Guerrier"
+        },
+        "lifespans": {
+            "infinite": "Infini"
+        }
+    },
+    "kasugaiCrows": {
+        "effects": {
+            "experienceBoost": "Bonus d'expérience",
+            "moneyBoost": "Bonus d'argent",
+            "statsBoost": "Bonus de statistiques",
+            "travelTimeBoost": "Bonus de temps de voyage",
+            "trainTimeBoost": "Bonus de temps d'entraînement"
+        },
+        "names": {
+            "dove": "Colombe",
+            "evolvedCrow": "Corbeau Évolué",
+            "proudCrow": "Corbeau Orgueilleux",
+            "basicCrow": "Corbeau Basique",
+            "sparrow": "Moineau"
+        }
+    },
+    "map": {
+        "regions": {
+            "0": {
+                "name": "Mont Sagiri",
+                "areas": {
+                    "0": "Pied du mont",
+                    "1": "Sommet"
+                }
+            },
+            "1": {
+                "name": "Mont Urusai",
+                "areas": {
+                    "0": "Pied du mont",
+                    "1": "Sommet"
+                }
+            },
+            "2": {
+                "name": "Mont Fujikasane",
+                "areas": {
+                    "0": "Pied du mont",
+                    "1": "Sommet"
+                }
+            },
+            "3": {
+                "name": "Mont Natagumo",
+                "areas": {
+                    "0": "Pied du mont",
+                    "1": "Sommet"
+                }
+            },
+            "4": {
+                "name": "Nōka Familial",
+                "areas": {
+                    "0": "Jardin",
+                    "1": "Chambre principale",
+                    "2": "Champs",
+                    "3": "Forêt"
+                }
+            },
+            "5": {
+                "name": "QG des pourfendeurs",
+                "areas": {
+                    "0": "Cour principale"
+                }
+            },
+            "6": {
+                "name": "Domaine des Papillons",
+                "areas": {
+                    "0": "Cour principale"
+                }
+            },
+            "7": {
+                "name": "Village des forgerons",
+                "areas": {
+                    "0": "Place principale"
+                }
+            },
+            "8": {
+                "name": "Ville du train",
+                "areas": {
+                    "0": "Quais de gare"
+                }
+            },
+            "9": {
+                "name": "Quartier Yoshiwara",
+                "areas": {
+                    "0": "Ruelle principale",
+                    "1": "Machiya de Franky",
+                    "2": "Taverne de Makino",
+                    "3": "Ruelle secondaire"
+                }
+            },
+            "10": {
+                "name": "Quartier Asakusa",
+                "areas": {
+                    "0": "Ruelle principale"
+                }
+            },
+            "11": {
+                "name": "Village du marais",
+                "areas": {
+                    "0": "Place principale"
+                }
+            },
+            "12": {
+                "name": "Maison aux tambours",
+                "areas": {
+                    "0": "Extérieur de la maison"
+                }
+            }
+        },
+        "biomes": {
+            "meadow": "Prairie",
+            "forest": "Forêt",
+            "darkForest": "Forêt Sombre",
+            "blankArea": "Zone Vide",
+            "dwelling": "Habitation",
+            "developedArea": "Zone Aménagée",
+            "rockyArea": "Zone Rocheuse"
+        }
+    },
+    "materials": {
+        "grimoire": "Grimoire",
+        "leather": "Cuir",
+        "paper": "Papier",
+        "seed": "Graine",
+        "tamahagane": "Tamahagane",
+        "weaponBase": "Base d'arme",
+        "wood": "Bois",
+        "worm": "Ver"
+    },
+    "characters": {
+        "9'iota": {
+            "fullName": "Zero Two (9'iota)",
+            "firstName": "9'iota",
+            "lastName": "Zero Two",
+            "alias": "Zero Two",
+            "description": ""
+        },
+        "Minh": {
+            "fullName": "Yamamoto Minh",
+            "firstName": "Minh",
+            "lastName": "Yamamoto",
+            "alias": "Minh",
+            "description": ""
+        }
     }
 }

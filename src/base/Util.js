@@ -10,7 +10,7 @@ class Util {
                 else obj[key] = source[key];
             }
             else if (!(key in obj)) {
-                if (indicate.value && !(obj[key].startsWith(indicate.addedString))) {
+                if (indicate.value === "true" && !(obj[key].startsWith(indicate.addedString))) {
                     obj[key] = `${indicate.addedString} ${source[key]}`;
                 }
                 else {
@@ -18,14 +18,14 @@ class Util {
                 }
             }
             else if (obj[key] === source[key]) {
-                if (indicate.value && !(obj[key].startsWith(indicate.equalString))) {
+                if (indicate.value === "true" && !(obj[key].startsWith(indicate.equalString))) {
                     obj[key] = `${indicate.equalString} ${obj[key]}`;
                 }
             }
         }
         for (const key2 in obj) {
             if (!(key2 in source)) {
-                if (indicate.value && !(obj[key2].startsWith(indicate.notInString))) {
+                if (indicate.value === "true" && !(obj[key2].startsWith(indicate.notInString))) {
                     obj[key2] = `${indicate.notInString} ${obj[key2]}`;
                 }
             }

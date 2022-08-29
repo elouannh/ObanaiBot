@@ -64,7 +64,7 @@ class Player {
         rawDatas.playerDatas.date = `${(rawDatas.playerDatas.created / 1000).toFixed(0)}`;
 
         rawDatas.playerDatas.category = require(`../../../elements/categories/${rawDatas.playerDatas.category}.json`);
-        rawDatas.playerDatas.breath = client.RPGAssets.getBreath(rawDatas.playerDatas.lang, rawDatas.playerDatas.breath);
+        rawDatas.playerDatas.breath = client.RPGAssetsManager.getBreathingStyle(rawDatas.playerDatas.lang, rawDatas.playerDatas.breath);
 
         client.util.ensureObj(rawDatas.playerDatas, this);
 

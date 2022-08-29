@@ -56,10 +56,9 @@ class Base extends Command {
         const userPDB = await this.client.playerDb.load(userId);
         const userIDB = await this.client.inventoryDb.get(userId);
         const userADB = await this.client.activityDb.get(userId);
+        const userMDB = await this.client.mapDb.get(userId);
 
-        console.log(userPDB);
-
-        this.client.RPGAssets.getBreath(this.lang._id, userPDB.breath.id);
+        console.log(this.client.RPGAssetsManager.getMaterial(this.lang._id, "leather").getAreas);
 
         let userStatsObject = {};
         for (const statKey in userPDB.statsLevel) {

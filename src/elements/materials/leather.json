@@ -2,7 +2,7 @@
     "label": "leather",
     "name": "Cuir",
     "size": 20,
-    "areas": ["meadow", "landscaped_area"],
+    "areas": ["meadow", "developed_area"],
     "rarity": 20,
     "emoji": "🐄"
 }

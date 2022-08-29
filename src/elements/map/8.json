@@ -7,7 +7,7 @@
     "Areas": [
         {
             "name": "Gare",
-            "biome": "landscaped_area",
+            "biome": "developed_area",
             "id": 0,
             "default": true
         }

@@ -13,7 +13,7 @@
         },
         {
             "name": "Sommet de la montagne",
-            "biome": "rocky_valley",
+            "biome": "rockyArea",
             "id": 1,
             "default": false
         }

@@ -2,7 +2,7 @@
     "label": "tamahagane",
     "name": "Tamahagane",
     "size": 20,
-    "areas": ["rocky_valley"],
+    "areas": ["rockyArea"],
     "rarity": 25,
     "emoji": "🪨"
 }

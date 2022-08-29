@@ -19,10 +19,10 @@ const Package = require("../../package.json");
 const CollectionManager = require("./CollectionManager");
 const LanguageManager = require("./LanguageManager");
 const PasteGGClasses = require("./PasteGGManager");
-const RPGAssets = require("./RPGAssets");
+const RPGAssetsManager = require("./RPGAssetsManager");
 
 class Obanai extends Client {
-    constructor(token, registerSlash) {
+    constructor(token, registerSlash, renderTranslations) {
         super({
             intents: new IntentsBitField().add("GuildMessages", "GuildMembers", "Guilds"),
             failIfNotExists: false,
@@ -32,11 +32,12 @@ class Obanai extends Client {
         this.util = new Util(this);
         this.constants = Constants;
         this.registerSlash = registerSlash;
+        this.renderTranslations = renderTranslations;
         this.pasteGGManager = new PasteGGClasses.PasteGGManager(this);
         this.commandManager = new CommandManager(this);
         this.eventManager = new EventManager(this);
         this.languageManager = new LanguageManager(this);
-        this.RPGAssets = new RPGAssets(this, "elements");
+        this.RPGAssetsManager = new RPGAssetsManager(this, "assets");
         this.eventManager.loadFiles();
         this.config = config;
         this.bitfield = 274878286912n;

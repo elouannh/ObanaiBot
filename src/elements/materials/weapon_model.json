@@ -2,7 +2,7 @@
     "label": "weapon_model",
     "name": "Modèle d'arme",
     "size": 200,
-    "areas": ["landscaped_area", "dwelling"],
+    "areas": ["developed_area", "dwelling"],
     "rarity": 1,
     "emoji": "📐"
 }

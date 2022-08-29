@@ -5,9 +5,12 @@ class Language {
         this.lang = lang;
         this.jsonDir = fs.readdirSync(`./src/languages/json/${this.lang}/`);
         this.json = {};
+        this.jsonRender = {};
 
         for (const fileName of this.jsonDir) {
-            this.json[fileName.replace(".json", "")] = require(`../languages/json/${this.lang}/${fileName}`);
+            for (const attr of ["json", "jsonRender"]) {
+                this[attr][fileName.replace(".json", "")] = require(`../languages/json/${this.lang}/${fileName}`);
+            }
         }
     }
 }

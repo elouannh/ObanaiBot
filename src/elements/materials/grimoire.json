@@ -2,7 +2,7 @@
     "label": "grimoire",
     "name": "Grimoire",
     "size": 200,
-    "areas": ["landscaped_area"],
+    "areas": ["developedArea"],
     "rarity": 1,
     "emoji": "📖"
 }

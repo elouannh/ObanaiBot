@@ -7,7 +7,7 @@
     "Areas": [
         {
             "name": "Ruelle principale",
-            "biome": "landscaped_area",
+            "biome": "developed_area",
             "id": 0,
             "default": true
         },
@@ -25,7 +25,7 @@
         },
         {
             "name": "Ruelle secondaire",
-            "biome": "landscaped_area",
+            "biome": "developed_area",
             "id": 3,
             "default": false
         }
