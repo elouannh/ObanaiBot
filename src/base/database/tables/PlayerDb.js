@@ -2,7 +2,7 @@ const Enmap = require("enmap");
 const fs = require("fs");
 const calcCrowLevel = require("../../../elements/calcCrowLevel");
 const calcPlayerLevel = require("../../../elements/calcPlayerLevel");
-const Player = require("../subclasses/Player");
+const PlayerValue = require("../subclasses/PlayerValue");
 const SQLiteTable = require("./SQLiteTable");
 
 function schema(id) {
@@ -30,10 +30,7 @@ class PlayerDb extends SQLiteTable {
     }
 
     async load(id) {
-        const p = await this.ensure(id);
-        const i = await this.client.inventoryDb.db.get(id);
-
-        return (await new Player(this.client, p, i));
+        return new PlayerValue(this.client, this.get(id), this.client.inventoryDb.db.get(id));
     }
 
     async createAdventure(id) {
