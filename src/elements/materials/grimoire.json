@@ -1,8 +1,0 @@
-{
-    "label": "grimoire",
-    "name": "Grimoire",
-    "size": 200,
-    "areas": ["developedArea"],
-    "rarity": 1,
-    "emoji": "📖"
-}

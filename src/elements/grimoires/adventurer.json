@@ -1,8 +1,0 @@
-{
-    "label": "adventurer",
-    "name": "Grimoire de l'aventurier",
-    "equippable": true,
-    "expiration": 259200,
-    "benefits": ["experience_gain"],
-    "boost": 1.15
-}

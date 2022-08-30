@@ -1,8 +1,0 @@
-{
-    "label": "worm",
-    "name": "Ver",
-    "size": 10,
-    "areas": ["forest", "dark_forest", "meadow"],
-    "rarity": 60,
-    "emoji": "🪱"
-}

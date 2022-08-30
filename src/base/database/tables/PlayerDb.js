@@ -1,24 +1,19 @@
-const Enmap = require("enmap");
-const fs = require("fs");
+const SQLiteTable = require("./SQLiteTable");
+const PlayerValue = require("../subclasses/PlayerValue");
 const calcCrowLevel = require("../../../elements/calcCrowLevel");
 const calcPlayerLevel = require("../../../elements/calcPlayerLevel");
-const PlayerValue = require("../subclasses/PlayerValue");
-const SQLiteTable = require("./SQLiteTable");
 
 function schema(id) {
     return {
         started: false,
         id: id,
-        lang: "fr",
         stats: {
             agility: 1,
             defense: 1,
             strength: 1,
             speed: 1,
         },
-        category: "slayer",
-        categoryLevel: 1,
-        breath: "water",
+        breathingStyle: "water",
         exp: 0,
         created: Date.now(),
     };

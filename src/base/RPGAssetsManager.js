@@ -92,6 +92,26 @@ class RPGAssetsManager {
 
         return new RPGText(this.getLangDatas(lang, "texts"), datas);
     }
+
+    getPlayerLevel(exp) {
+        const datas = {
+            level: 0,
+            exp: exp,
+            reached: exp,
+            required: 1000,
+            toReach: 1000,
+        };
+
+        while (datas.reached >= ((datas.level + 2) * 1000)) {
+            datas.reached -= ((datas.level + 2) * 1000);
+            datas.level++;
+        }
+
+        datas.required = ((datas.level + 2) * 1000);
+        datas.toReach = datas.required - datas.reached;
+
+        return datas;
+    }
 }
 
 module.exports = RPGAssetsManager;

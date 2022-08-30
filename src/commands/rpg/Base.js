@@ -58,7 +58,7 @@ class Base extends Command {
         const userADB = await this.client.activityDb.get(userId);
         const userMDB = await this.client.mapDb.get(userId);
 
-        console.log(userPDB);
+        console.log(this.client.RPGAssetsManager.getPlayerLevel(userPDB.exp));
 
         let userStatsObject = {};
         for (const statKey in userPDB.statsLevel) {

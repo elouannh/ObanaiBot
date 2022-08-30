@@ -1,5 +1,3 @@
-const calcPlayerLevel = require("../../../elements/calcPlayerLevel");
-
 class PlayerValue {
     constructor(client, playerDatas, inventoryDatas) {
         this.client = client;
@@ -63,7 +61,7 @@ class PlayerValue {
             );
         }
 
-        this.playerDatas.level = calcPlayerLevel(this.playerDatas.exp);
+        this.playerDatas.level = this.client.assetsManager.getPlayerLevel(this.playerDatas.exp);
         this.playerDatas.date = `${(this.playerDatas.created / 1000).toFixed(0)}`;
 
         this.playerDatas.category = require(`../../../elements/categories/${this.playerDatas.category}.json`);
