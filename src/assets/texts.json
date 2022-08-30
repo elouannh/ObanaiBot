@@ -1,0 +1,44 @@
+{
+    "chapter1": {
+        "chapterId": "chapter1",
+        "quest1": {
+            "questId": "quest1",
+            "dialog": {
+                "6": {
+                    "chapterId": "chapter1",
+                    "questId": "quest1",
+                    "id": "6",
+                    "type": "dialog"
+                },
+                "9": {
+                    "chapterId": "chapter1",
+                    "questId": "quest1",
+                    "id": "9",
+                    "type": "dialog"
+                }
+            }
+        },
+        "quest2": {
+            "questId": "quest2",
+            "dialog": {
+                "1": {
+                    "chapterId": "chapter1",
+                    "questId": "quest2",
+                    "id": "1",
+                    "type": "dialog"
+                }
+            }
+        },
+        "quest3": {
+            "questId": "quest3",
+            "dialog": {
+                "1": {
+                    "chapterId": "chapter1",
+                    "questId": "quest3",
+                    "id": "1",
+                    "type": "dialog"
+                }
+            }
+        }
+    }
+}

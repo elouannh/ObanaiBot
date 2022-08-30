@@ -362,19 +362,107 @@
         "worm": "Ver"
     },
     "characters": {
-        "9'iota": {
-            "fullName": "Zero Two (9'iota)",
-            "firstName": "9'iota",
-            "lastName": "Zero Two",
-            "alias": "Zero Two",
+        "0": {
+            "label": "Personnage principal",
             "description": ""
         },
-        "Minh": {
-            "fullName": "Yamamoto Minh",
-            "firstName": "Minh",
-            "lastName": "Yamamoto",
-            "alias": "Minh",
+        "1": {
+            "label": "Soeur de Min",
             "description": ""
+        },
+        "2": {
+            "label": "Pourfendeur de rang Mizunoto",
+            "description": ""
+        },
+        "3": {
+            "label": "Propriétaire de maison close",
+            "description": ""
+        },
+        "4": {
+            "label": "Pourfendeur de rang Kanoe",
+            "description": ""
+        },
+        "5": {
+            "label": "Enchanteur de grimoires",
+            "description": ""
+        },
+        "6": {
+            "label": "Pourfenduer de rang Tsuchinoto",
+            "description": ""
+        },
+        "7": {
+            "label": "Pourfendeur de rang Kinoe",
+            "description": ""
+        },
+        "8": {
+            "label": "Propriétaire de maison close",
+            "description": ""
+        },
+        "9": {
+            "label": "Forgeron",
+            "description": ""
+        },
+        "10": {
+            "label": "Kakushi",
+            "description": ""
+        },
+        "11": {
+            "label": "Assistant du Domaine des Papillons",
+            "description": ""
+        },
+        "12": {
+            "label": "Pourfendeur de rang Tsukinoto",
+            "description": ""
+        },
+        "13": {
+            "label": "Ancien formateur du Souffle du Vent",
+            "description": ""
+        },
+        "14": {
+            "label": "Oiran",
+            "description": ""
+        }
+    },
+    "texts": {
+        "chapter1": {
+            "quest1": {
+                "dialog": {
+                    "6": [
+                        "**Hime** - Il s'est réveillé tout à l'heure, il a paniqué et a baffoué quelques mots. Il disait qu'il faisait simplement son travail, lorsqu'un monstre bizarre lui aurait sauté dessus.",
+                        "**Vous** - Est-ce qu'on a la preuve qu'il dit vrai ? Il doit sûrement être dans les choux. Demandons-lui. Qui est-tu ? Pourquoi es-tu comme ça ?",
+                        "**???** - Je vous jure... Je travaillais... Et là... Il est venu et il m'a attaqué... Je suis Pierre. J'ai oublié de me présenter... Désolé !!",
+                        "**Vous** - Il a l'air d'être sous le choc. Laissons-le un peu pour l'instant, je vais aller voir dans la forêt si quelque chose cloche."
+                    ],
+                    "9": [
+                        "**Vous** - Elle est où ?? Qu'est-ce que t'as fait ?? Qu'est-ce que t'as vu ?? Réponds-moi !!",
+                        "**Pierre** - Je... sais pas... Hime-... Partie... Monst-...",
+                        "**Vous** - C'est tout ?\n\n***[vous constatez qu'il est coupé en deux sous la ceinture.]***\n\nIl est mort... C'est impossible..."
+                    ]
+                }
+            },
+            "quest2": {
+                "dialog": {
+                    "1": [
+                        "**Inconnu Étrange** - Tu as entendu parler des attaques récemment ?",
+                        "**Inconnu Agressif** - Ouais, j'en ai été informé par corbeau. C'est terrible, mais bon il faut être sacrément courageux pour vivre si éloigné de la vie urbaine.",
+                        "**Inconnu Étrange** - Tu sais très bien que la population croit aux démons comme si il s'agissait d'une légende, d'un mythe. Et cela n'aide pas; le gouvernement ne nous considère pas comme une armée officielle.",
+                        "**Inconnu Agressif** - Pas faux...\n\n***[L'inconnu s'assoupit, et vous en profitez pour pointer une lame derrière lui.]***",
+                        "**Inconnu Étrange** - Et ?? Qu'est-ce que tu fais toi ?? T'es qui ??\n\n***[Une énorme claque vous arrive à la figure, et vous assome sur le champs.]***",
+                        "**Inconnu Agressif** - Tu as exactement 10 secondes pour t'expliquer, ou ma lame se logera dans ta glotte.",
+                        "**Inconnu Étrange** - Eh, du calme. Ce n'est pas comme ça que nous, pourfendeurs, sommes censés raisonner les civils.\n\n***[Vous saisissez l'arme à pleines mains, et vous partez en courant en dehors de la taverne. Vous entendez les deux inconnus vous suivre en courant.]***"
+                    ]
+                }
+            },
+            "quest3": {
+                "dialog": {
+                    "1": [
+                        "**Franky** - Qu'est-ce que tu fais coincé ici ?",
+                        "**Vous** - Je suis recherché par deux hommes qui veulent ma peau, et je me suis caché dans ce tonneau afin de leur échapper... Mais vous m'avez emmené ici. Où sommes-nous ?",
+                        "**Franky** - T'es chez moi, mon grand ! Tu as déjà entendu parler des grimoires ? Je t'en parle rapidement, et je te laisse filer !",
+                        "Depuis des siècles, un homme anonyme a découvert que certains types d'objet pouvaient être enchantés en utilisant une synthétisation des matériaux. Ils permettent d'octroyer des avantages et des bonus à son utilisateur, comme le fait de marcher plus vite (et donc de voyager plus rapidement), de ne pas s'épuiser lors d'entrainement (et de s'entrainer donc plus vite), et de multiples autres avantages. Concernant leur enchantement, le rituel de synthétisation qui permet de sceller ces objets afin de leur octroyer leurs pouvoirs, il s'agit en réalité d'un talent héréditaire dont seulement... ma famille a le secret ! Et oui, l'homme ayant découvert ce procédé, c'est un de mes ancêtres ! Si tu veux gamin, un jour, ramène-moi un de ces objets que l'on nomme Grimoire. Attention, seulement les grimoires non enchantés peuvent le devenir (logique !). De plus, la synthétisation est complètement aléatoire, et on ne peut pas savoir à l'avance l'effet qui se produira."
+                    ]
+                }
+            }
         }
     }
 }

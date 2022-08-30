@@ -1,6 +1,6 @@
 const RPGAssetBase = require("./RPGAssetBase");
 
-class RPGBreathTechnique extends RPGAssetBase {
+class RPGBreathingStyleTechnique extends RPGAssetBase {
     constructor(breath, id, name) {
         super(breath.lang, id);
 
@@ -10,4 +10,4 @@ class RPGBreathTechnique extends RPGAssetBase {
     }
 }
 
-module.exports = RPGBreathTechnique;
+module.exports = RPGBreathingStyleTechnique;

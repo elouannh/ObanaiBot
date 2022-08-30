@@ -1,23 +1,167 @@
 {
-    "9'iota": {
-        "id": "9'iota"
+    "0": {
+        "id": "0",
+        "fullName": "Yamamoto Min",
+        "firstName": "Min",
+        "lastName": "Yamamoto",
+        "japaneseTranscription": {
+            "fullName": "山本・ミン",
+            "firstName": "ミン",
+            "lastName": "山本"
+        }
     },
-    "Minh": {
-        "id": "Minh"
+    "1": {
+        "id": "1",
+        "fullName": "Yamamoto Hime",
+        "firstName": "Hime",
+        "lastName": "Yamamoto",
+        "japaneseTranscription": {
+            "fullName": "山本・姫",
+            "firstName": "姫",
+            "lastName": "山本"
+        }
     },
-    "Hime": {
-        "id": "Hime"
+    "2": {
+        "id": "2",
+        "fullName": "Piēru",
+        "firstName": "Piēru",
+        "lastName": "",
+        "japaneseTranscription": {
+            "fullName": "ピエール",
+            "firstName": "ピエール",
+            "lastName": ""
+        }
     },
-    "Pierre": {
-        "id": "Pierre"
+    "3": {
+        "id": "3",
+        "fullName": "Fukuda Akuseru",
+        "firstName": "Akuseru",
+        "lastName": "Fukuda",
+        "jaapaneseTranscript": {
+            "fullName": "福田・アクセル",
+            "firstName": "アクセル",
+            "lastName": "福田"
+        }
     },
-    "Axel": {
-        "id": "Axel"
+    "4": {
+        "id": "4",
+        "fullName": "Ogawa Karurossu",
+        "firstName": "Karurossu",
+        "lastName": "Ogawa",
+        "japaneseTranscription": {
+            "fullName": "小川・カルロッス",
+            "firstName": "カルロッス",
+            "lastName": "小川"
+        }
     },
-    "Carlos": {
-        "id": "Carlos"
+    "5": {
+        "id": "5",
+        "fullName": "Furankī",
+        "firstName": "Furankī",
+        "lastName": "",
+        "japaneseTranscription": {
+            "fullName": "フランキー",
+            "firstName": "フランキー",
+            "lastName": ""
+        }
     },
-    "Franky": {
-        "id": "Franky"
+    "6": {
+        "id": "6",
+        "fullName": "Ishikawa Enzo",
+        "firstName": "Enzo",
+        "lastName": "Ishikawa",
+        "japaneseTranscription": {
+            "fullName": "石川・エンゾ",
+            "firstName": "エンゾ",
+            "lastName": "石川"
+        }
+    },
+    "7": {
+        "id": "7",
+        "fullName": "Kojima Eruan",
+        "firstName": "Eruan",
+        "lastName": "Kojima",
+        "japaneseTranscription": {
+            "fullName": "小島・エルアン",
+            "firstName": "エルアン",
+            "lastName": "小島"
+        }
+    },
+    "8": {
+        "id": "8",
+        "fullName": "Ishii Samu",
+        "firstName": "Samu",
+        "lastName": "Ishii",
+        "japaneseTranscription": {
+            "fullName": "石井・サム",
+            "firstName": "サム",
+            "lastName": "石井"
+        }
+    },
+    "9": {
+        "id": "9",
+        "fullName": "Nakajima Aruno",
+        "firstName": "Aruno",
+        "lastName": "Nakajima",
+        "japaneseTranscription": {
+            "fullName": "中島・アルノ",
+            "firstName": "アルノ",
+            "lastName": "中島"
+        }
+    },
+    "10": {
+        "id": "10",
+        "fullName": "Nakamura Makussu",
+        "firstName": "Makussu",
+        "lastName": "Nakamura",
+        "japaneseTranscription": {
+            "fullName": "中村・マクッス",
+            "firstName": "マクッス",
+            "lastName": "中村"
+        }
+    },
+    "11": {
+        "id": "11",
+        "fullName": "Harada Miruri",
+        "firstName": "Miruri",
+        "lastName": "Harada",
+        "japaneseTranscription": {
+            "fullName": "原田・ミルリ",
+            "firstName": "ミルリ",
+            "lastName": "原田"
+        }
+    },
+    "12": {
+        "id": "12",
+        "fullName": "Daimyo Matsuda",
+        "firstName": "",
+        "lastName": "Matsuda",
+        "japaneseTranscription": {
+            "fullName": "侯松田",
+            "firstName": "",
+            "lastName": "松田"
+        }
+    },
+    "13": {
+        "id": "13",
+        "fullName": "Mori Entarukume",
+        "firstName": "Entarukume",
+        "lastName": "Mori",
+        "japaneseTranscription": {
+            "fullName": "森・エンタルクメ",
+            "firstName": "エンタルクメ",
+            "lastName": "森"
+        }
+    },
+    "14": {
+        "id": "14",
+        "fullName": "Nakajima Kuremansu",
+        "firstName": "Kuremansu",
+        "lastName": "Nakajima",
+        "japaneseTranscription": {
+            "fullName": "中島・クレマンス",
+            "firstName": "クレマンス",
+            "lastName": "中島"
+        }
     }
 }
