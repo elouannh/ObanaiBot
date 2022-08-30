@@ -1,5 +1,5 @@
 const Enmap = require("enmap");
-const calcCrowLevel = require("../../elements/calcCrowLevel");
+const calcCrowLevel = require("../../../elements/calcCrowLevel");
 
 class InventoryDb {
     constructor(client) {
@@ -22,10 +22,10 @@ class InventoryDb {
             questItems: {},
             weapon: {
                 rarity: 1,
-                name:  `${require("../../elements/categories/slayer.json").weaponName} `
+                name:  `${require("../../../elements/categories/slayer.json").weaponName} `
                        +
-                       `${require("../../elements/categories/slayer.json").rarityNames[0]}`,
-                label:  `${require("../../elements/categories/slayer.json").weapon}`,
+                       `${require("../../../elements/categories/slayer.json").rarityNames[0]}`,
+                label:  `${require("../../../elements/categories/slayer.json").weapon}`,
             },
             weapons: [],
         };

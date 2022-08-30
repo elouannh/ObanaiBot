@@ -1,7 +1,7 @@
 const Enmap = require("enmap");
 const fs = require("fs");
 const { escapeMarkdown } = require("discord.js");
-const dailyQuests = fs.readdirSync("./src/quests/daily").map(q => require(`../../quests/daily/${q}`)(0));
+const dailyQuests = fs.readdirSync("./src/quests/daily").map(q => require(`../../../quests/daily/${q}`)(0));
 
 class InternalServerManager {
     constructor(client) {

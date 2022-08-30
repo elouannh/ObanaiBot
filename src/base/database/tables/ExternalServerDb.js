@@ -1,8 +1,8 @@
 /* eslint-disable no-case-declarations */
 const { escapeMarkdown } = require("discord.js");
 const Enmap = require("enmap");
-const Command = require("../Command");
-const badgesObjectives = require("../../elements/badgesObjectives.json");
+const Command = require("../../Command");
+const badgesObjectives = require("../../../elements/badgesObjectives.json");
 
 class ExternalServerDb {
     constructor(client) {

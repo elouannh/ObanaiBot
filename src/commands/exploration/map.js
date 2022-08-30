@@ -1,5 +1,5 @@
 const Command = require("../../base/Command");
-const MemberScanning = require("../../structure/tools/MemberScanning");
+
 const map = require("../../elements/map");
 
 class Map extends Command {

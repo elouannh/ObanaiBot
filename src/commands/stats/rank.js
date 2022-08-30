@@ -1,5 +1,5 @@
 const Command = require("../../base/Command");
-const MemberScanning = require("../../structure/tools/MemberScanning");
+
 const calcPlayerLevel = require("../../elements/calcPlayerLevel");
 
 class Rank extends Command {

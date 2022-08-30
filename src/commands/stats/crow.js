@@ -1,6 +1,6 @@
 const Command = require("../../base/Command");
 const calcCrowLevel = require("../../elements/calcCrowLevel");
-const MemberScanning = require("../../structure/tools/MemberScanning");
+
 
 class Crow extends Command {
     constructor() {

@@ -1,5 +1,5 @@
 const Command = require("../../base/Command");
-const MemberScanning = require("../../structure/tools/MemberScanning");
+
 
 class SquadKick extends Command {
     constructor() {
