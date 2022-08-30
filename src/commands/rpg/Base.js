@@ -12,7 +12,6 @@ const {
     User,
 } = require("discord.js");
 const Nav = require("../../base/Navigation");
-const calcPlayerLevel = require("../../elements/calcPlayerLevel");
 
 class Base extends Command {
     constructor() {

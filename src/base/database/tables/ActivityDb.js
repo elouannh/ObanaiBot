@@ -1,5 +1,4 @@
 const Enmap = require("enmap");
-const calcCrowLevel = require("../../../elements/calcCrowLevel");
 
 class ActivityDb {
     constructor(client) {

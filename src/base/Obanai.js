@@ -20,19 +20,23 @@ const CollectionManager = require("./CollectionManager");
 const LanguageManager = require("./LanguageManager");
 const PasteGGClasses = require("./PasteGGManager");
 const RPGAssetsManager = require("./RPGAssetsManager");
+const ProcessManager = require("./ProcessManager");
+const SQLiteTableMerger = require("./SQLiteTableMerger");
 
 class Obanai extends Client {
-    constructor(token, registerSlash, renderTranslations) {
+    constructor(token) {
         super({
             intents: new IntentsBitField().add("GuildMessages", "GuildMembers", "Guilds"),
             failIfNotExists: false,
         });
 
+        this.processManager = new ProcessManager();
         this.token = token;
         this.util = new Util(this);
         this.constants = Constants;
-        this.registerSlash = registerSlash;
-        this.renderTranslations = renderTranslations;
+        this.registerSlash = this.processManager.getArgv("registerSlash");
+        this.renderTranslations = this.processManager.getArgv("renderTranslations");
+        this.mergeSQLiteTables = this.processManager.getArgv("mergeSQLiteTables");
         this.pasteGGManager = new PasteGGClasses.PasteGGManager(this);
         this.commandManager = new CommandManager(this);
         this.eventManager = new EventManager(this);
@@ -47,30 +51,8 @@ class Obanai extends Client {
         this.version = Package.version;
         this.maxRequests = 30;
 
-        const callbackFunction = function(manager, key) {
-            const map = manager.get(key).entries();
-            const finalReq = [];
-            for (const [entryKey, entryValue] of map) {
-                finalReq.push([entryKey, entryValue]);
-            }
-            return finalReq.map(e => Object.assign({}, { name: e[0], ts: e[1] }));
-        };
-        const dateNowFunction = function() { return Date.now(); };
-
-        this.requestsManager = new CollectionManager(
-            this,
-            "requests",
-            callbackFunction,
-            dateNowFunction,
-            dateNowFunction,
-        );
-        this.cooldownsManager = new CollectionManager(
-            this,
-            "cooldowns",
-            callbackFunction,
-            dateNowFunction,
-            () => 0,
-        );
+        this.requestsManager = new CollectionManager(this, "requests", this.util.callbackFunction, Date.now, Date.now);
+        this.cooldownsManager = new CollectionManager(this, "cooldowns", this.util.callbackFunction, Date.now, () => 0);
 
         this.playerDb = new PlayerDb(this);
         this.activityDb = new ActivityDb(this);
@@ -90,6 +72,7 @@ class Obanai extends Client {
         this.mapDb.db.changed(MapDbCallback);
 
         this.internalServerManager = new InternalServerManager(this);
+        this.SQLiteTableMerger = new SQLiteTableMerger(this);
 
         setInterval(() => this.log("................"), 900_000);
     }

@@ -3,6 +3,15 @@ class Util {
         this.client = client;
     }
 
+    callbackFunction(manager, key) {
+        const map = manager.get(key).entries();
+        const finalReq = [];
+        for (const [entryKey, entryValue] of map) {
+            finalReq.push([entryKey, entryValue]);
+        }
+        return finalReq.map(e => Object.assign({}, { name: e[0], ts: e[1] }));
+    }
+
     ensureLang(source, obj, indicate) {
         for (const key in source) {
             if (source[key] instanceof Object && !(source instanceof String)) {

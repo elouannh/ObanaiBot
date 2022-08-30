@@ -1,7 +1,5 @@
 const SQLiteTable = require("./SQLiteTable");
 const PlayerValue = require("../subclasses/PlayerValue");
-const calcCrowLevel = require("../../../elements/calcCrowLevel");
-const calcPlayerLevel = require("../../../elements/calcPlayerLevel");
 
 function schema(id) {
     return {
