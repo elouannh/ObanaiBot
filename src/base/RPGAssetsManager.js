@@ -1,4 +1,3 @@
-const fs = require("fs");
 const RPGBreathingStyle = require("./subclasses/RPGBreathingStyle");
 const RPGGrimoire = require("./subclasses/RPGGrimoire");
 const RPGKasugaiCrow = require("./subclasses/RPGKasugaiCrow");
@@ -6,6 +5,8 @@ const RPGMapRegion = require("./subclasses/RPGMapRegion");
 const RPGMaterial = require("./subclasses/RPGMaterial");
 const RPGCharacter = require("./subclasses/RPGCharacter");
 const RPGText = require("./subclasses/RPGText");
+const RPGWeapon = require("./subclasses/RPGWeapon");
+const RPGPlayerLevel = require("./subclasses/RPGPlayerLevel");
 
 class RPGAssetsManager {
     constructor(client, dir) {
@@ -19,6 +20,7 @@ class RPGAssetsManager {
         this.materials = require(`../${this.dir}/materials.json`);
         this.characters = require(`../${this.dir}/characters.json`);
         this.texts = require(`../${this.dir}/texts.json`);
+        this.weapons = require(`../${this.dir}/weapons.json`);
     }
 
     getLangDatas(lang, file = null) {
@@ -94,23 +96,14 @@ class RPGAssetsManager {
     }
 
     getPlayerLevel(exp) {
-        const datas = {
-            level: 0,
-            exp: exp,
-            reached: exp,
-            required: 1000,
-            toReach: 1000,
-        };
+        if (exp < 0) exp = 0;
+        return new RPGPlayerLevel(exp);
+    }
 
-        while (datas.reached >= ((datas.level + 2) * 1000)) {
-            datas.reached -= ((datas.level + 2) * 1000);
-            datas.level++;
-        }
-
-        datas.required = ((datas.level + 2) * 1000);
-        datas.toReach = datas.required - datas.reached;
-
-        return datas;
+    getWeapon(lang, weaponId, weaponRarity) {
+        if (!(weaponId in this.weapons.types)) return "Invalid Weapon ID";
+        if (!(weaponRarity in this.weapons.rarities)) return "Invalid Weapon Rarity ID";
+        return new RPGWeapon(this.getLangDatas(lang, "weapons"), weaponId, weaponRarity);
     }
 }
 

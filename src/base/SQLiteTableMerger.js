@@ -9,7 +9,11 @@ class SQLiteTableMerger {
     }
 
     merge() {
-        console.log("test");
+        /**
+         *
+         * ANY MERGER
+         *
+         * */
     }
 }
 

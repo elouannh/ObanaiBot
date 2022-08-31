@@ -1,10 +1,11 @@
 const SQLiteTable = require("./SQLiteTable");
-const PlayerValue = require("../subclasses/PlayerValue");
+const PlayerDatas = require("../subclasses/PlayerDatas");
 
 function schema(id) {
     return {
         started: false,
         id: id,
+        lang: "fr",
         stats: {
             agility: 1,
             defense: 1,
@@ -23,7 +24,7 @@ class PlayerDb extends SQLiteTable {
     }
 
     async load(id) {
-        return new PlayerValue(this.client, this.get(id), this.client.inventoryDb.db.get(id));
+        return new PlayerDatas(this.client, this.get(id), this.client.inventoryDb.db.get(id));
     }
 
     async createAdventure(id) {

@@ -208,8 +208,10 @@ class Util {
     }
 
     catchError(error) {
-        this.client.log("Catched error:", error.stack);
-        this.client.log("................");
+        const time = this.dateRender(new Date(), true);
+        console.log(`${time} || Catched error:`);
+        console.log(error.stack);
+        console.log(`${time} ||................`);
     }
 
     async evalCode(code) {
