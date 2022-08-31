@@ -1,5 +1,3 @@
-const map = require("../../../elements/map.js");
-
 class InspectArea {
     constructor(text, item, itemName, itemCategory, quantity, region, area) {
         this.type = "inspect_area";

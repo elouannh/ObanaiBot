@@ -1,5 +1,5 @@
 const RPGBreathingStyle = require("./subclasses/RPGBreathingStyle");
-const RPGGrimoire = require("./subclasses/RPGGrimoire");
+const RPGEnchantedGrimoire = require("./subclasses/RPGEnchantedGrimoire");
 const RPGKasugaiCrow = require("./subclasses/RPGKasugaiCrow");
 const RPGMapRegion = require("./subclasses/RPGMapRegion");
 const RPGMaterial = require("./subclasses/RPGMaterial");
@@ -14,7 +14,7 @@ class RPGAssetsManager {
         this.dir = dir;
 
         this.breathingStyles = require(`../${this.dir}/breathingStyles.json`);
-        this.grimoires = require(`../${this.dir}/grimoires.json`);
+        this.enchantedGrimoires = require(`../${this.dir}/enchantedGrimoires.json`);
         this.kasugaiCrows = require(`../${this.dir}/kasugaiCrows.json`);
         this.map = require(`../${this.dir}/map.json`);
         this.materials = require(`../${this.dir}/materials.json`);
@@ -40,9 +40,9 @@ class RPGAssetsManager {
         return new RPGBreathingStyle(this.getLangDatas(lang, "breathingStyles"), id);
     }
 
-    getGrimoire(lang, id) {
-        if (!(id in this.grimoires)) return "Invalid Grimoire ID";
-        return new RPGGrimoire(this.getLangDatas(lang, "grimoires"), id, this.grimoires[id]);
+    getEnchantedGrimoire(lang, id) {
+        if (!(id in this.enchantedGrimoires)) return "Invalid Grimoire ID";
+        return new RPGEnchantedGrimoire(this.getLangDatas(lang, "enchantedGrimoires"), id, this.enchantedGrimoires[id]);
     }
 
     getKasugaiCrow(lang, id) {

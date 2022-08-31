@@ -72,7 +72,7 @@ class Obanai extends Client {
         this.mapDb.db.changed(MapDbCallback);
 
         this.internalServerManager = new InternalServerManager(this);
-        this.SQLiteTableMerger = new SQLiteTableMerger(this);
+        this.SQLiteTableMerger = new SQLiteTableMerger(this, "inventoryDb", "playerDb");
 
         setInterval(() => this.log("................"), 900_000);
     }

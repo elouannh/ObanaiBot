@@ -1,8 +1,6 @@
 const SlayerQuest = require("../../bases/SlayerQuest");
 const VoyageTo = require("../../bases/objectives/VoyageTo");
 const Talk = require("../../bases/superobjectives/Talk");
-const pnj6 = require("../../../elements/pnjs/pnj6.json");
-const texts = require("../../../elements/texts/c1_q3.json");
 
 module.exports = step => {
     const q = [

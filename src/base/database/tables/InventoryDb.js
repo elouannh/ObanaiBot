@@ -1,9 +1,34 @@
-const Enmap = require("enmap");
+const SQLiteTable = require("./SQLiteTable");
 
-class InventoryDb {
+function schema(id) {
+    return {
+        id: id,
+        wallet: 0,
+        kasugaiCrow: {
+            id: null,
+            exp: 0,
+            hunger: 100,
+        },
+        enchantedGrimoire: {
+            id: null,
+            activeSince: 0,
+        },
+        weapon: {
+            id: "katana",
+            rarity: 3,
+        },
+        items: {
+            enchantedGrimoires: {},
+            materials: {},
+            questItems: {},
+            weapons: {},
+        },
+    };
+}
+
+class InventoryDb extends SQLiteTable {
     constructor(client) {
-        this.client = client;
-        this.db = new Enmap({ name: "inventoryDb" });
+        super(client, "inventoryDb", schema);
     }
 
     model(id) {

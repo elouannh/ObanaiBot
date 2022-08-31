@@ -1,5 +1,3 @@
-const map = require("../../../elements/map.js");
-
 class Talk {
     constructor(target, targetId, text, region, area) {
         this.type = "talk";

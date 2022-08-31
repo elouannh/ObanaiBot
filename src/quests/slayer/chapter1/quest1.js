@@ -4,9 +4,6 @@ const InspectArea = require("../../bases/superobjectives/InspectArea");
 const CollectKItems = require("../../bases/objectives/CollectKItems");
 const GiveKItems = require("../../bases/superobjectives/GiveKItems");
 const Talk = require("../../bases/superobjectives/Talk");
-const pnj2 = require("../../../elements/pnjs/pnj2.json");
-const pnj3 = require("../../../elements/pnjs/pnj3.json");
-const texts = require("../../../elements/texts/c1_q1.json");
 
 module.exports = step => {
     const q = [

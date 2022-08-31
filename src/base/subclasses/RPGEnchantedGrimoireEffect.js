@@ -1,6 +1,6 @@
 const RPGAssetBase = require("./RPGAssetBase");
 
-class RPGGrimoireEffect extends RPGAssetBase {
+class RPGEnchantedGrimoireEffect extends RPGAssetBase {
     constructor(grimoire, grimoireEffect, name) {
         super(grimoire.lang, grimoireEffect.id);
 
@@ -9,4 +9,4 @@ class RPGGrimoireEffect extends RPGAssetBase {
     }
 }
 
-module.exports = RPGGrimoireEffect;
+module.exports = RPGEnchantedGrimoireEffect;

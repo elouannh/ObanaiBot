@@ -206,7 +206,7 @@
             }
         }
     },
-    "grimoires": {
+    "enchantedGrimoires": {
         "types": {
             "temporaryGrimoire": "Grimoire temporaire",
             "permanentGrimoire": "Grimoire permanent",

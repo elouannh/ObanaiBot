@@ -1,5 +1,3 @@
-const map = require("../../../elements/map");
-
 class VoyageTo {
     constructor(region, area) {
         this.type = "voyage_to";

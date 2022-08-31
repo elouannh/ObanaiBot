@@ -1,5 +1,3 @@
-const map = require("../../../elements/map.js");
-
 class GiveKItems {
     constructor(target, targetId, item, itemName, itemCategory, quantity, region, area) {
         this.type = "give_k_items";
