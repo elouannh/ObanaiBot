@@ -106,7 +106,7 @@ class ExternalServerDb {
                     cmd.init(this.client,
                         {
                             author: this.client.users.fetch(id),
-                            channel: this.client.lastChannel.get(id),
+                            channel: this.client.lastChannels.get(id),
                         },
                     []);
                     await cmd.ctx.reply(

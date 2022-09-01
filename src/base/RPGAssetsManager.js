@@ -7,6 +7,7 @@ const RPGCharacter = require("./subclasses/RPGCharacter");
 const RPGText = require("./subclasses/RPGText");
 const RPGWeapon = require("./subclasses/RPGWeapon");
 const RPGPlayerLevel = require("./subclasses/RPGPlayerLevel");
+const RPGQuestItem = require("./subclasses/RPGQuestItem");
 
 class RPGAssetsManager {
     constructor(client, dir) {
@@ -21,6 +22,7 @@ class RPGAssetsManager {
         this.characters = require(`../${this.dir}/characters.json`);
         this.texts = require(`../${this.dir}/texts.json`);
         this.weapons = require(`../${this.dir}/weapons.json`);
+        this.questItems = require(`../${this.dir}/questItems.json`);
     }
 
     getLangDatas(lang, file = null) {
@@ -104,6 +106,11 @@ class RPGAssetsManager {
         if (!(weaponId in this.weapons.types)) return "Invalid Weapon ID";
         if (!(weaponRarity in this.weapons.rarities)) return "Invalid Weapon Rarity ID";
         return new RPGWeapon(this.getLangDatas(lang, "weapons"), weaponId, weaponRarity);
+    }
+
+    getQuestItem(lang, id) {
+        if (!(id in this.questItems)) return "Invalid Quest Item ID";
+        return new RPGQuestItem(this.getLangDatas(lang, "itemQuests"), id);
     }
 }
 

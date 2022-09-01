@@ -361,6 +361,10 @@
         "wood": "Bois",
         "worm": "Ver"
     },
+    "questItems": {
+        "remainsOfPierre": "Dépouille de Pierre",
+        "himeHairStrand": "Mèche de cheveux d'Hime"
+    },
     "characters": {
         "0": {
             "label": "Personnage principal",

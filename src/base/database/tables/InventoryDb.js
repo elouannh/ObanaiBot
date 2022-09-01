@@ -28,30 +28,14 @@ function schema(id) {
 
 class InventoryDb extends SQLiteTable {
     constructor(client) {
-        super(client, "inventoryDb", schema);
+        super(client, "inventory", schema);
     }
 
     model(id) {
         const datas = {
             id: id,
-            yens: 1000,
-            kasugai_crow: null,
-            kasugai_crow_exp: 0,
-            active_grimoire: null,
-            active_grimoire_since: 0,
-            grimoires: {
-                "mastery": 1,
-            },
             materials: {},
             questItems: {},
-            weapon: {
-                rarity: 1,
-                name:  `${require("../../../elements/categories/slayer.json").weaponName} `
-                       +
-                       `${require("../../../elements/categories/slayer.json").rarityNames[0]}`,
-                label:  `${require("../../../elements/categories/slayer.json").weapon}`,
-            },
-            weapons: [],
         };
 
         return datas;

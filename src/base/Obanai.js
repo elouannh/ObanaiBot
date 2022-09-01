@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const { Client, escapeMarkdown, IntentsBitField, User, Snowflake } = require("discord.js");
+const { Client, escapeMarkdown, IntentsBitField, User, Snowflake, Collection } = require("discord.js");
 const PlayerDb = require("./database/tables/PlayerDb");
 const InventoryDb = require("./database/tables/InventoryDb");
 const SquadDb = require("./database/tables/SquadDb");
@@ -24,15 +24,15 @@ const ProcessManager = require("./ProcessManager");
 const SQLiteTableMerger = require("./SQLiteTableMerger");
 
 class Obanai extends Client {
-    constructor(token) {
+    constructor() {
         super({
             intents: new IntentsBitField().add("GuildMessages", "GuildMembers", "Guilds"),
             failIfNotExists: false,
         });
-
         this.processManager = new ProcessManager();
-        this.token = token;
+        this.token = require("../../token.json").token;
         this.util = new Util(this);
+        this.log("Starting bot process...");
         this.constants = Constants;
         this.registerSlash = this.processManager.getArgv("registerSlash");
         this.renderTranslations = this.processManager.getArgv("renderTranslations");
@@ -67,14 +67,16 @@ class Obanai extends Client {
         const PlayerDbCallback = require("./database/callbacks/PlayerDbCallback")(this);
         const InventoryDbCallback = require("./database/callbacks/InventoryDbCallback")(this);
         const MapDbCallback = require("./database/callbacks/MapDbCallback")(this);
-        this.playerDb.db.changed(PlayerDbCallback);
-        this.inventoryDb.db.changed(InventoryDbCallback);
-        this.mapDb.db.changed(MapDbCallback);
+        // this.playerDb.db.changed(PlayerDbCallback);
+        // this.inventoryDb.db.changed(InventoryDbCallback);
+        // this.mapDb.db.changed(MapDbCallback);
 
         this.internalServerManager = new InternalServerManager(this);
-        this.SQLiteTableMerger = new SQLiteTableMerger(this, "inventoryDb", "playerDb");
+        this.SQLiteTableMerger = new SQLiteTableMerger(this, "playerDb", "inventoryDb");
+        this.lastChannels = new Collection();
 
         setInterval(() => this.log("................"), 900_000);
+        this.launch();
     }
 
     async getUser(id, secureValue) {

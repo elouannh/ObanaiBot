@@ -22,7 +22,7 @@ async function alertQuest(client, type, datas, quest) {
             cmd.init(client,
                 {
                     author: client.users.fetch(datas.id),
-                    channel: client.lastChannel.get(datas.id),
+                    channel: client.lastChannels.get(datas.id),
                 },
             []);
             await client.playerDb.earnExp(datas.id, Math.floor(Math.random() * 150) + 100, cmd);
@@ -54,7 +54,7 @@ async function alertQuest(client, type, datas, quest) {
             cmd.init(client,
                 {
                     author: client.users.fetch(datas.id),
-                    channel: client.lastChannel.get(datas.id),
+                    channel: client.lastChannels.get(datas.id),
                 },
             []);
             await cmd.ctx.reply(

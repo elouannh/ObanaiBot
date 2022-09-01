@@ -56,7 +56,7 @@ class InteractionCreate extends Event {
             return this.interaction.channel.send("Le bot est actuellement surchargé, veuillez réessayer plus tard.");
         }
 
-        this.client.lastChannel.set(this.interaction.user.id, this.interaction.channel);
+        this.client.lastChannels.set(this.interaction.user.id, this.interaction.channel);
         this.client.requestsManager.add(this.interaction.user.id, { key: cmd.infos.name, value : Date.now() });
         await cmd.run();
         this.client.requestsManager.remove(this.interaction.user.id, cmd.infos.name);

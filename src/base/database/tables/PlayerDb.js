@@ -20,7 +20,7 @@ function schema(id) {
 
 class PlayerDb extends SQLiteTable {
     constructor(client) {
-        super(client, "playerDb", schema);
+        super(client, "player", schema);
     }
 
     async load(id) {
