@@ -46,7 +46,7 @@ class Util {
     ensureObj(source, obj) {
         for (const key in source) {
             if (source[key] instanceof Object && !(source instanceof String)) {
-                if (key in obj) obj[key] = this.ensureLang(source[key], obj[key]);
+                if (key in obj) obj[key] = this.ensureObj(source[key], obj[key]);
                 else obj[key] = source[key];
             }
             else if (!(key in obj)) {

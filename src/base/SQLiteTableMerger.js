@@ -12,9 +12,9 @@ class SQLiteTableMerger {
 
     merge() {
         if (!this.ignoreTables.includes("playerDb")) {
-            const playdb = new Enmap({ name: "playerDb" }).array();
+            const dbs = { a: new Enmap({ name: "player" }), b: new Enmap({ name: "playerDb" }) };
 
-            for (const player of playdb) {
+            for (const player of dbs.b.array()) {
                 const id = player.id;
                 this.client.playerDb.db.set(id, player);
                 this.client.playerDb.db.set(id, player.breath || "water", "breathingStyle");
@@ -24,9 +24,9 @@ class SQLiteTableMerger {
             }
         }
         if (!this.ignoreTables.includes("inventoryDb")) {
-            const invdb = new Enmap({ name: "inventoryDb" }).array();
+            const dbs = { a: new Enmap({ name: "inventory" }), b: new Enmap({ name: "inventoryDb" }) };
 
-            for (const player of invdb) {
+            for (const player of dbs.b.array()) {
                 const id = player.id;
                 this.client.inventoryDb.db.set(id, player);
                 this.client.inventoryDb.db.set(id, player.yens, "wallet");
@@ -36,11 +36,14 @@ class SQLiteTableMerger {
                     exp: player.kasugai_crow_exp || player.kasugaiCrow?.exp || 0,
                     hunger: player.kasugaiCrow?.hunger || 100,
                 };
+                if (newCrow.id === "kasugai_evolved") newCrow.id = "evolvedCrow";
+                if (newCrow.id === "kasugai_proud") newCrow.id = "proudCrow";
+                if (newCrow.id === "kasugai_simple") newCrow.id = "basicCrow";
                 this.client.inventoryDb.db.set(id, newCrow, "kasugaiCrow");
                 this.client.inventoryDb.db.delete(id, "kasugai_crow");
                 this.client.inventoryDb.db.delete(id, "kasugai_crow_exp");
                 const newGrimoire = {
-                    id: player.active_grimoire || player.enchantedGrimoire?.id || "",
+                    id: player.active_grimoire || player.enchantedGrimoire?.id || null,
                     activeSince: player.active_grimoire_since || player.enchantedGrimoire?.activeSince || 0,
                 };
                 this.client.inventoryDb.db.set(id, newGrimoire, "enchantedGrimoire");
@@ -71,12 +74,13 @@ class SQLiteTableMerger {
                         }
                     }
                 }
+                if (this.client.RPGAssetsManager.getKasugaiCrow(player.kasugaiCrow?.id || "basic_crow")?.length !== undefined) console.log("X", player.kasugaiCrow?.id || "basic_crow");
                 for (let mat in player.materials) {
                     const key = mat;
                     if (mat === "weapon_model") mat = "weaponBase";
                     items.materials[mat] = player.materials[key];
                 }
-                for (const mat in items.questItems) {
+                for (let mat in items.questItems) {
                     const key = mat;
                     if (mat === "hime_hair") mat = "himeHairStrand";
                     if (mat === "pierre_body") mat = "remainsOfPierre";

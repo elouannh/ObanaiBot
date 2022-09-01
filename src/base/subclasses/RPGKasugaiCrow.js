@@ -7,7 +7,7 @@ class RPGKasugaiCrow extends RPGAssetBase {
 
         const datas = kasugaiCrowDatas;
         this.name = this.lang.json.names[this.id];
-        this.effects = datas.effects.map(e => new RPGKasugaiCrowEffect(this, e.id, this.lang.json.effects[e.id]));
+        this.effects = datas.effects.map(e => new RPGKasugaiCrowEffect(this, e, this.lang.json.effects[e.id]));
     }
 }
 

@@ -53,11 +53,10 @@ class Base extends Command {
         userId = (await this.client.getUser(userId, user)).userId;
 
         const userPDB = await this.client.playerDb.load(userId);
-        const userIDB = await this.client.inventoryDb.get(userId);
+        const userIDB = await this.client.inventoryDb.load(userId);
+        console.log(userIDB);
         const userADB = await this.client.activityDb.get(userId);
         const userMDB = await this.client.mapDb.get(userId);
-
-        console.log(this.client.RPGAssetsManager.getPlayerLevel(userPDB.exp));
 
         let userStatsObject = {};
         for (const statKey in userPDB.statsLevel) {
@@ -71,19 +70,6 @@ class Base extends Command {
                     + ` (${userPDB.grimBoosts[statKey][1]}%)`
                     + `${this.consts.emojis.rpg.objects.enchantedGrimoire}*`;
             }
-
-            if (statKey in userPDB.catBoosts) {
-                if (userPDB.catBoosts[statKey][0] > 0) {
-                    userStatsObject[statKey] += ` *+ **${userPDB.catBoosts[statKey][0]}**`
-                        + ` (${userPDB.catBoosts[statKey][1]}%)`
-                        + `${this.consts.emojis.rpg.symbols.category}*`;
-                }
-                else {
-                    userStatsObject[statKey] += ` *- **${this.client.util.positive(userPDB.catBoosts[statKey][0])}**`
-                        + ` (${userPDB.catBoosts[statKey][1]}%)`
-                        + `${this.consts.emojis.rpg.symbols.category}*`;
-                }
-            }
         }
         userStatsObject = Object.values(userStatsObject).join("\n");
         const userRank = `${this.lang.strings.level}: **${userPDB.level.level}** | `
@@ -93,9 +79,6 @@ class Base extends Command {
             + `**/${this.client.util.intRender(userPDB.level.required, " ")}`;
 
         let userInventoryObjects = {};
-        for (const mat in userIDB.materials) {
-            const matFile = require(`../../elements/materials/${mat}`);
-        }
 
         const playerFields = [
             {
