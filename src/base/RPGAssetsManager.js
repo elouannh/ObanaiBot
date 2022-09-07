@@ -47,9 +47,27 @@ class RPGAssetsManager {
         return new RPGEnchantedGrimoire(this.getLangDatas(lang, "enchantedGrimoires"), id, this.enchantedGrimoires[id]);
     }
 
+    loadEnchantedGrimoire(lang, enchantedGrimoireDatas) {
+        if (!(enchantedGrimoireDatas.id in this.enchantedGrimoires)) return "Invalid Grimoire ID";
+        return new RPGEnchantedGrimoire(
+            this.getLangDatas(lang, "enchantedGrimoires"),
+            enchantedGrimoireDatas.id,
+            Object.assign(this.enchantedGrimoires[enchantedGrimoireDatas.id], { "activeSince": enchantedGrimoireDatas.activeSince }),
+        );
+    }
+
     getKasugaiCrow(lang, id) {
         if (!(id in this.kasugaiCrows)) return "Invalid Kasugai Crow ID";
         return new RPGKasugaiCrow(this.getLangDatas(lang, "kasugaiCrows"), id, this.kasugaiCrows[id]);
+    }
+
+    loadKasugaiCrow(lang, kasugaiCrowDatas) {
+        if (!(kasugaiCrowDatas.id in this.kasugaiCrows)) return "Invalid Kasugai Crow ID";
+        return new RPGKasugaiCrow(
+            this.getLangDatas(lang, "kasugaiCrows"),
+            kasugaiCrowDatas.id,
+            Object.assign(this.kasugaiCrows[kasugaiCrowDatas.id], { "exp": kasugaiCrowDatas.exp, "hunger": kasugaiCrowDatas.hunger }),
+        );
     }
 
     getMapRegion(lang, id) {

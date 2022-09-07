@@ -1,7 +1,7 @@
 {
     "base": {
         "strings": {
-            "profile_aptitudes": "Aptitudes",
+            "profile_statistics": "statistics",
             "level": "Niveau",
             "total_experience": "Expérience totale",
             "level_experience": "Expérience de niveau"
@@ -15,7 +15,7 @@
                                 "title": "Statistiques de %PLAYER",
                                 "fields": {
                                     "0": {
-                                        "name": "Aptitudes"
+                                        "name": "statistics"
                                     },
                                     "1": {
                                         "name": "Niveau"

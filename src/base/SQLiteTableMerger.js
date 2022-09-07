@@ -1,4 +1,5 @@
 const Enmap = require("enmap");
+const fs = require("fs");
 
 class SQLiteTableMerger {
     constructor(client, ...ignoreTables) {
@@ -51,7 +52,7 @@ class SQLiteTableMerger {
                 this.client.inventoryDb.db.delete(id, "active_grimoire_since");
                 const newWeapon = {
                     id: "katana",
-                    rarity: player.weapon.rarity || 3,
+                    rarity: String(player.weapon.rarity) || "3",
                 };
                 this.client.inventoryDb.db.set(id, newWeapon, "weapon");
                 const items = {
@@ -61,7 +62,7 @@ class SQLiteTableMerger {
                     weapons: {},
                 };
                 for (const wp of player.weapons) {
-                    if ("rarity" in (wp || {})) {
+                    if ("rarity" in (wp ?? {})) {
                         if ((items.weapons["katana"] ?? "null") instanceof Object) {
                             if (items.weapons["katana"][String(wp.rarity)] instanceof Number) {
                                 items.weapons["katana"][String(wp.rarity)] += 1;
@@ -73,8 +74,10 @@ class SQLiteTableMerger {
                             };
                         }
                     }
+                    else {
+                        console.log(wp);
+                    }
                 }
-                if (this.client.RPGAssetsManager.getKasugaiCrow(player.kasugaiCrow?.id || "basic_crow")?.length !== undefined) console.log("X", player.kasugaiCrow?.id || "basic_crow");
                 for (let mat in player.materials) {
                     const key = mat;
                     if (mat === "weapon_model") mat = "weaponBase";

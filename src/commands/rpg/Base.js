@@ -54,14 +54,14 @@ class Base extends Command {
 
         const userPDB = await this.client.playerDb.load(userId);
         const userIDB = await this.client.inventoryDb.load(userId);
-        console.log(userIDB);
-        const userADB = await this.client.activityDb.get(userId);
+        const userADB = await this.client.activityDb.load(userId);
+        console.log(userADB);
         const userMDB = await this.client.mapDb.get(userId);
 
         let userStatsObject = {};
         for (const statKey in userPDB.statsLevel) {
             userStatsObject[statKey] = `${this.consts.emojis.rpg.stats[statKey]} `
-                + `» **${this.lang.rpgAssets.aptitudes[statKey]} | `
+                + `» **${this.lang.rpgAssets.statistics[statKey]} | `
                 + `\`${this.client.util.intRender(userPDB.finalStats[statKey])}\`**\n`
                 + `*(${this.lang.strings.level} ${userPDB.statsLevel[statKey]}) **${userPDB.stats[statKey]}***`;
 

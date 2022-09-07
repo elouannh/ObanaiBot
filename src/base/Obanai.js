@@ -1,14 +1,12 @@
 /* eslint-disable no-unused-vars */
-const { Client, escapeMarkdown, IntentsBitField, User, Snowflake, Collection } = require("discord.js");
+const { Client, escapeMarkdown, IntentsBitField, User, Snowflake, Collection, EmbedBuilder } = require("discord.js");
 const PlayerDb = require("./database/tables/PlayerDb");
 const InventoryDb = require("./database/tables/InventoryDb");
 const SquadDb = require("./database/tables/SquadDb");
-const GuildDb = require("./database/tables/GuildDb");
 const ActivityDb = require("./database/tables/ActivityDb");
 const MapDb = require("./database/tables/MapDb");
 const QuestDb = require("./database/tables/QuestDb");
 const InternalServerManager = require("./database/tables/InternalServerManager");
-const ExternalServerDb = require("./database/tables/ExternalServerDb");
 const StatusDb = require("./database/tables/StatusDb");
 const CommandManager = require("./CommandManager");
 const EventManager = require("./EventManager");
@@ -58,10 +56,8 @@ class Obanai extends Client {
         this.activityDb = new ActivityDb(this);
         this.inventoryDb = new InventoryDb(this);
         this.squadDb = new SquadDb(this);
-        this.guildDb = new GuildDb(this);
         this.mapDb = new MapDb(this);
         this.questDb = new QuestDb(this);
-        this.externalServerDb = new ExternalServerDb(this);
         this.statusDb = new StatusDb(this);
 
         const PlayerDbCallback = require("./database/callbacks/PlayerDbCallback")(this);
@@ -72,11 +68,24 @@ class Obanai extends Client {
         // this.mapDb.db.changed(MapDbCallback);
 
         this.internalServerManager = new InternalServerManager(this);
-        this.SQLiteTableMerger = new SQLiteTableMerger(this, "playerDb", "inventoryDb");
+        this.SQLiteTableMerger = new SQLiteTableMerger(this, "playerDb", "inventoryDb", "activityD");
         this.lastChannels = new Collection();
 
         setInterval(() => this.log("................"), 900_000);
         this.launch();
+    }
+
+    async throwError(error, origin) {
+        const channel = this.guilds.cache.get(this.config.testing).channels.cache.get(this.config.channels.errors);
+        await channel.send({
+            embeds: [
+                new EmbedBuilder()
+                    .setTitle(`❌ An error occured ! - \`${origin}\``)
+                    .setDescription(`\`\`\`xl\n\n${error.stack.substring(0, 3982)}\`\`\``)
+                    .setColor("#FF0000")
+                    .setTimestamp(),
+            ],
+        }).catch(this.util.catchError);
     }
 
     async getUser(id, secureValue) {
@@ -109,45 +118,6 @@ class Obanai extends Client {
     launch(token = "") {
         if (token.length > 0) this.login(token);
         else this.login(this.token);
-    }
-
-    supportLog(title, description, fields, style) {
-        const embed = new SuperEmbed();
-        embed.setFields(fields)
-             .setStyle(style)
-             .setEmoji("📰")
-             .setTitle(title)
-             .setDescription(description);
-
-        if (this.user.id === "958433246050406440") {
-            const channel = this.guilds.cache.get(this.config.support).channels.cache.get(this.config.channels.logs);
-            channel.send({ embeds: [embed.embed] });
-        }
-        else {
-            // this.log("[AUTO] supportLog()");
-            // this.log(`title: ${escapeMarkdown(title)} | description: ${description.replace("```diff\n", "").replace("```", "").replace("\n", " ⁂ ")}`);
-        }
-    }
-
-    supportProgress(addOrRemove, guild) {
-        const embed = new SuperEmbed();
-        embed.setStyle(addOrRemove === "add" ? "success" : "error")
-             .setEmoji(addOrRemove === "add" ? "🎉" : "🚪")
-             .setTitle(addOrRemove === "add" ? "Un serveur a ajouté le bot !" : "Un serveur a retiré le bot...")
-             .setDescription(
-                `**Serveur**: \`${escapeMarkdown(guild.name)}\`\n**Membres**: \`${guild.memberCount}\`\n\n`
-                +
-                `*Stats actuelles:*\n\n**Nombre de serveurs**: \`${this.guilds.cache.size}\``,
-             );
-
-        if (this.user.id === "958433246050406440") {
-            const channel = this.guilds.cache.get(this.config.support).channels.cache.get(this.config.channels.progress);
-            channel.send({ embeds: [embed.embed] });
-        }
-        else {
-            // this.log("[AUTO] supportLog()");
-            // this.log(`title: ${escapeMarkdown(title)} | description: ${description.replace("```diff\n", "").replace("```", "").replace("\n", " ⁂ ")}`);
-        }
     }
 
     addRole(id, serv, roleId) {

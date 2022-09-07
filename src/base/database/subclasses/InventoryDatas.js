@@ -11,16 +11,57 @@ class InventoryDatas extends TableDatas {
     }
 
     load() {
-        const kasugaiCrow = this.client.RPGAssetsManager.getKasugaiCrow(this.lang, this.datas.kasugaiCrow.id);
-        kasugaiCrow["exp"] = this.datas.kasugaiCrow.exp;
-        kasugaiCrow["hunger"] = this.datas.kasugaiCrow.hunger;
-        this.datas.kasugaiCrow = kasugaiCrow;
-
-        const enchantedGrimoire = this.client.RPGAssetsManager.getEnchantedGrimoire(this.lang, this.datas.enchantedGrimoire.id);
-        enchantedGrimoire["activeSince"] = this.datas.enchantedGrimoire.activeSince;
-        this.datas.enchantedGrimoire = enchantedGrimoire;
-
+        this.datas.kasugaiCrow = this.client.RPGAssetsManager.loadKasugaiCrow(this.lang, this.datas.kasugaiCrow);
+        this.datas.enchantedGrimoire = this.client.RPGAssetsManager.loadEnchantedGrimoire(this.lang, this.datas.enchantedGrimoire);
         this.datas.weapon = this.client.RPGAssetsManager.getWeapon(this.lang, this.datas.weapon.id, this.datas.weapon.rarity);
+
+        const newItems = this.datas.items;
+
+        for (const enchantedGrimoireKey in this.datas.items.enchantedGrimoires) {
+            const enchantedGrimoireAmount = newItems.enchantedGrimoires[enchantedGrimoireKey];
+            const enchantedGrimoireList = [];
+            for (let i = 0; i < enchantedGrimoireAmount; i++) {
+                enchantedGrimoireList.push(this.client.RPGAssetsManager.getEnchantedGrimoire(this.lang, enchantedGrimoireKey));
+            }
+            newItems.enchantedGrimoires[enchantedGrimoireKey] = { list: enchantedGrimoireList, amount: enchantedGrimoireAmount };
+        }
+
+        for (const materialKey in this.datas.items.materials) {
+            const materialAmount = newItems.materials[materialKey];
+            const materialList = [];
+            for (let i = 0; i < materialAmount; i++) {
+                materialList.push(this.client.RPGAssetsManager.getMaterial(this.lang, materialKey));
+            }
+            newItems.materials[materialKey] = { list: materialList, amount: materialAmount };
+        }
+
+        for (const questItemKey in this.datas.items.questItems) {
+            const questItemAmount = newItems.questItems[questItemKey];
+            const questItemList = [];
+            for (let i = 0; i < questItemAmount; i++) {
+                questItemList.push(this.client.RPGAssetsManager.getQuestItem(this.lang, questItemKey));
+            }
+            newItems.questItems[questItemKey] = { list: questItemList, amount: questItemAmount };
+        }
+
+        for (const weaponKey in this.datas.items.weapons) {
+            for (const weaponRarityKey in this.datas.items.weapons[weaponKey]) {
+                const weaponAmount = newItems.weapons[weaponKey][weaponRarityKey];
+                const weaponList = [];
+                for (let i = 0; i < weaponAmount; i++) {
+                    weaponList.push(this.client.RPGAssetsManager.getWeapon(this.lang, weaponKey, weaponRarityKey));
+                }
+
+                newItems.weapons[weaponKey][weaponRarityKey] = weaponAmount;
+
+                if ("list" in newItems.weapons) for (const weapon of weaponList) newItems.weapons.list.push(weapon);
+                else newItems.weapons.list = weaponList;
+            }
+        }
+        if ("list" in newItems.weapons) newItems.weapons.list = newItems.weapons.list.sort((a, b) => b.rarity - a.rarity);
+        newItems.weapons.totalAmount = newItems.weapons?.list?.length || 0;
+
+        this.datas.items = newItems;
     }
 }
 

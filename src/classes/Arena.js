@@ -294,8 +294,8 @@ class Arena {
 
         const variables = {
             "atk": {
-                strength: Math.ceil(pattacking.datas.aptitudes.strength / 30) * 10,
-                defense: Math.ceil(pattacking.datas.aptitudes.defense / 30) * 10,
+                strength: Math.ceil(pattacking.datas.statistics.strength / 30) * 10,
+                defense: Math.ceil(pattacking.datas.statistics.defense / 30) * 10,
                 dmg: 0,
                 col: 0,
                 hazardRate: 5,
@@ -303,8 +303,8 @@ class Arena {
                 mvt: pattacking.datas.breath.attack[atk],
             },
             "def": {
-                strength: Math.ceil(pdefending.datas.aptitudes.strength / 30) * 10,
-                defense: Math.ceil(pdefending.datas.aptitudes.defense / 30) * 10,
+                strength: Math.ceil(pdefending.datas.statistics.strength / 30) * 10,
+                defense: Math.ceil(pdefending.datas.statistics.defense / 30) * 10,
                 dmg: 0,
                 col: 0,
                 hazardRate: 5,
@@ -353,8 +353,8 @@ class Arena {
                 break;
         }
 
-        const fh1 = Math.random() * 100 < (variables.atk.hazardRate / (pattacking.datas.aptitudes.agility * 0.02));
-        const fh2 = Math.random() * 100 < (variables.def.hazardRate / (pdefending.datas.aptitudes.agility * 0.02));
+        const fh1 = Math.random() * 100 < (variables.atk.hazardRate / (pattacking.datas.statistics.agility * 0.02));
+        const fh2 = Math.random() * 100 < (variables.def.hazardRate / (pdefending.datas.statistics.agility * 0.02));
         let fd1 = Math.ceil((variables.atk.dmg / variables.def.col) * (11 + Math.random()));
         let fd2 = Math.ceil((variables.def.dmg / variables.atk.col) * (11 + Math.random()));
 
@@ -395,7 +395,7 @@ class Arena {
                 this.teams[pdefending.team.id].players[pdefending.number].counterRate = variables.def.counterRate;
                 const dodged = Math.floor(Math.random() * 100)
                                <=
-                               (pdefending.datas.aptitudes.speed / pattacking.datas.aptitudes.speed) * 10;
+                               (pdefending.datas.statistics.speed / pattacking.datas.statistics.speed) * 10;
 
                 if (!dodged) {
                     this.teams[pdefending.team.id].hurtPlayer(pdefending.number, fd1);
