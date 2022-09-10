@@ -2,9 +2,9 @@ const Enmap = require("enmap");
 const fs = require("fs");
 
 class SQLiteTableMerger {
-    constructor(client, ...ignoreTables) {
+    constructor(client, ...tables) {
         this.client = client;
-        this.ignoreTables = [...ignoreTables];
+        this.tables = [...tables];
 
         if (this.client.mergeSQLiteTables === "true") {
             this.merge();
@@ -12,19 +12,19 @@ class SQLiteTableMerger {
     }
 
     merge() {
-        if (!this.ignoreTables.includes("playerDb")) {
-            const dbs = { a: new Enmap({ name: "player" }), b: new Enmap({ name: "playerDb" }) };
-
-            for (const player of dbs.b.array()) {
-                const id = player.id;
-                this.client.playerDb.db.set(id, player);
-                this.client.playerDb.db.set(id, player.breath || "water", "breathingStyle");
-                this.client.playerDb.db.delete(id, "breath");
-                this.client.playerDb.db.delete(id, "category");
-                this.client.playerDb.db.delete(id, "categoryLevel");
-            }
+        if (this.tables.includes("activityDb")) {
+            const dbs = { a: new Enmap({ name: "activity" }), b: new Enmap({ name: "activityDb" }) };
+            dbs.b.destroy();
         }
-        if (!this.ignoreTables.includes("inventoryDb")) {
+        if (this.tables.includes("externalServerDb")) {
+            const dbs = { a: new Enmap({ name: "externalServer" }), b: new Enmap({ name: "externalServerDb" }) };
+            dbs.b.destroy();
+        }
+        if (this.tables.includes("guildDb")) {
+            const dbs = { a: new Enmap({ name: "guild" }), b: new Enmap({ name: "guildDb" }) };
+            dbs.b.destroy();
+        }
+        if (this.tables.includes("inventoryDb")) {
             const dbs = { a: new Enmap({ name: "inventory" }), b: new Enmap({ name: "inventoryDb" }) };
 
             for (const player of dbs.b.array()) {
@@ -74,9 +74,6 @@ class SQLiteTableMerger {
                             };
                         }
                     }
-                    else {
-                        console.log(wp);
-                    }
                 }
                 for (let mat in player.materials) {
                     const key = mat;
@@ -95,6 +92,36 @@ class SQLiteTableMerger {
                 this.client.inventoryDb.db.delete(id, "materials");
                 this.client.inventoryDb.db.delete(id, "questItems");
             }
+
+            dbs.b.destroy();
+        }
+        if (this.tables.includes("mapDb")) {
+            const dbs = { a: new Enmap({ name: "map" }), b: new Enmap({ name: "mapDb" }) };
+            dbs.b.destroy();
+        }
+        if (this.tables.includes("playerDb")) {
+            const dbs = { a: new Enmap({ name: "player" }), b: new Enmap({ name: "playerDb" }) };
+
+            for (const player of dbs.b.array()) {
+                const id = player.id;
+                this.client.playerDb.db.set(id, player);
+                this.client.playerDb.db.set(id, player.stats, "statistics");
+                this.client.playerDb.db.delete(id, "stats");
+                this.client.playerDb.db.set(id, player.breath || "water", "breathingStyle");
+                this.client.playerDb.db.delete(id, "breath");
+                this.client.playerDb.db.delete(id, "category");
+                this.client.playerDb.db.delete(id, "categoryLevel");
+            }
+
+            dbs.b.destroy();
+        }
+        if (this.tables.includes("questDb")) {
+            const dbs = { a: new Enmap({ name: "quest" }), b: new Enmap({ name: "questDb" }) };
+            dbs.b.destroy();
+        }
+        if (this.tables.includes("squadDb")) {
+            const dbs = { a: new Enmap({ name: "squad" }), b: new Enmap({ name: "squadDb" }) };
+            dbs.b.destroy();
         }
     }
 }

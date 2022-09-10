@@ -1,9 +1,14 @@
 {
     "statistics": {
-        "strength": "Force",
-        "speed": "Vitesse",
-        "defense": "Défense",
-        "agility": "Agilité"
+        "names": {
+            "strength": "Force",
+            "speed": "Vitesse",
+            "defense": "Défense",
+            "agility": "Agilité"
+        },
+        "levels": {
+            "max": "Niveau max atteint (100)"
+        }
     },
     "breathingStyles": {
         "flower": {
@@ -217,7 +222,7 @@
             "moneyBoost": "Bonus d'argent",
             "baitingBoost": "Bonus d'appâtage",
             "lootBoost": "Bonus de butin",
-            "statsBoost": "Bonus de statistiques",
+            "statisticsBoost": "Bonus de statistiques",
             "travelTimeBoost": "Bonus de temps de voyage",
             "trainTimeBoost": "Bonus de temps d'entraînement"
         },
@@ -238,7 +243,7 @@
         "effects": {
             "experienceBoost": "Bonus d'expérience",
             "moneyBoost": "Bonus d'argent",
-            "statsBoost": "Bonus de statistiques",
+            "statisticsBoost": "Bonus de statistiques",
             "travelTimeBoost": "Bonus de temps de voyage",
             "trainTimeBoost": "Bonus de temps d'entraînement"
         },

@@ -18,8 +18,6 @@ class Ready extends Event {
 			],
 			status: "online",
 		});
-
-		await client.internalServerManager.sync_p2p();
 	}
 }
 

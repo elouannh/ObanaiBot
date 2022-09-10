@@ -24,7 +24,7 @@
         "id": "basicCrow",
         "rarity": "1",
         "effects": [
-            { "id": "statsBoost", "maxStrength": 10 }
+            { "id": "statisticsBoost", "maxStrength": 10 }
         ]
     },
     "sparrow": {

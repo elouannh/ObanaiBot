@@ -158,20 +158,10 @@
             "auth_guilds": "Serveurs autorisés",
             "post_success": "`(Expire dans 24h)` La liste des serveurs a été générées sur ce lien **Paste.gg** :",
             "post_error": "Une erreur est survenue lors de la génération de la liste des serveurs.",
-            "vip_players": "Joueurs VIPs",
-            "vipplus_players": "Joueurs VIPs(+)",
             "is_already_authorized": "Le serveur `%GUILD` **est déjà autorisé**.",
             "is_authorized": "Le serveur `%GUILD` **est autorisé**.",
             "is_already_unauthorized": "Le serveur `%GUILD` **n'est actuellement pas autorisé**.",
-            "is_unauthorized": "Le serveur `%GUILD` **n'est plus autorisé**.",
-            "is_already_vip": "Le joueur %PLAYER **est déjà VIP** sur le bot.",
-            "is_vip": "Le joueur %PLAYER **est désormais VIP** sur le bot.",
-            "is_already_vipplus": "Le joueur %PLAYER **est déjà VIP(+)** sur le bot.",
-            "is_vipplus": "Le joueur %PLAYER **est désormais VIP(+)** sur le bot.",
-            "is_already_not_vip": "Le joueur %PLAYER **n'est pas VIP** sur le bot.",
-            "is_not_vip": "Le joueur %PLAYER **n'est plus VIP** sur le bot.",
-            "is_already_not_vipplus": "Le joueur %PLAYER **n'est pas VIP(+)** sur le bot.",
-            "is_not_vipplus": "Le joueur %PLAYER **n'est plus VIP(+)** sur le bot."
+            "is_unauthorized": "Le serveur `%GUILD` **n'est plus autorisé**."
         },
         "panels": {
             "tester": {
@@ -255,27 +245,6 @@
                                 }
                             }
                         }
-                    },
-                    "2": {
-                        "label": "VIPs/VIPs(+)",
-                        "description": "Panel administrateur pour gérer les VIPs et les VIPs(+).",
-                        "embeds": {
-                            "0": {
-                                "title": "Panel Administrateur - VIPs/VIPs(+)",
-                                "description": "Interagissez avec les boutons ci-dessous.",
-                                "fields": {
-                                    "0": {
-                                        "value": "Voir la liste des VIPs/VIPs(+)"
-                                    },
-                                    "1": {
-                                        "value": "Ajouter des VIPs/VIPs(+)"
-                                    },
-                                    "2": {
-                                        "value": "Supprimer des VIPs/VIPs(+)"
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             },
@@ -322,32 +291,6 @@
                     "inputs": {
                         "0": {
                             "label": "Entrez l'identifiant",
-                            "placeholder": "ID"
-                        }
-                    }
-                },
-                "add_vip": {
-                    "title": "Ajouter des VIPs/VIPs(+)",
-                    "inputs": {
-                        "0": {
-                            "label": "(VIP) Entrez l'identifiant",
-                            "placeholder": "ID"
-                        },
-                        "1": {
-                            "label": "(VIP(+)) Entrez l'identifiant",
-                            "placeholder": "ID"
-                        }
-                    }
-                },
-                "remove_vip": {
-                    "title": "Retirer des VIPs/VIPs(+)",
-                    "inputs": {
-                        "0": {
-                            "label": "(VIP) Entrez l'identifiant",
-                            "placeholder": "ID"
-                        },
-                        "1": {
-                            "label": "(VIP(+)) Entrez l'identifiant",
                             "placeholder": "ID"
                         }
                     }

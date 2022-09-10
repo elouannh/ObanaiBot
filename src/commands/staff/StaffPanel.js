@@ -222,40 +222,6 @@ class StaffPanel extends Command {
                                         .setStyle("Secondary"),
                                 ),
                         ]),
-                    new Nav.Page()
-                        .setIdentifier(
-                            new Nav.Identifier()
-                                .setLabel(this.lang.panels.admin.pages["2"].label)
-                                .setValue("admin_vip")
-                                .setDescription(this.lang.panels.admin.pages["2"].description),
-                        )
-                        .setEmbeds([
-                            new EmbedBuilder()
-                                .setTitle(`${this.consts.emojis.systems.grades.admin} | ${this.lang.panels.admin.pages["2"].embeds["0"].title}`)
-                                .setDescription(`${this.lang.panels.admin.pages["2"].embeds["0"].description}\n\u200B`)
-                                .setFields([
-                                    { name: `» ${this.consts.emojis.systems.symbols.list} «`, value: this.lang.panels.admin.pages["2"].embeds["0"].fields["0"].value, inline: true },
-                                    { name: `» ${this.consts.emojis.systems.symbols.add} «`, value: this.lang.panels.admin.pages["2"].embeds["0"].fields["1"].value, inline: true },
-                                    { name: `» ${this.consts.emojis.systems.symbols.remove} «`, value: this.lang.panels.admin.pages["2"].embeds["0"].fields["2"].value, inline: true },
-                                ]),
-                        ])
-                        .setComponents([
-                            new ActionRowBuilder()
-                                .setComponents(
-                                    new ButtonBuilder()
-                                        .setEmoji(this.consts.emojis.systems.symbols.list)
-                                        .setCustomId("vip_list")
-                                        .setStyle("Secondary"),
-                                    new ButtonBuilder()
-                                        .setEmoji(this.consts.emojis.systems.symbols.add)
-                                        .setCustomId("add_vip")
-                                        .setStyle("Secondary"),
-                                    new ButtonBuilder()
-                                        .setEmoji(this.consts.emojis.systems.symbols.remove)
-                                        .setCustomId("remove_vip")
-                                        .setStyle("Secondary"),
-                                ),
-                        ]),
                 ])
                 .setComponents([
                     new ActionRowBuilder()
@@ -273,11 +239,6 @@ class StaffPanel extends Command {
                                         value: "admin_guilds",
                                         label: this.lang.panels.admin.pages["1"].label,
                                         description: this.lang.panels.admin.pages["1"].description,
-                                    },
-                                    {
-                                        value: "admin_vip",
-                                        label: this.lang.panels.admin.pages["2"].label,
-                                        description: this.lang.panels.admin.pages["2"].description,
                                     },
                                 ]),
                         ),
@@ -475,20 +436,7 @@ class StaffPanel extends Command {
                         }).catch(this.client.util.catchError);
                     }
                 }
-                else if (inter.customId === "vip_list") {
-                    await inter.deferUpdate()
-                        .catch(this.client.util.catchError);
-                    const players = await this.client.externalServerDb.players();
-                    const playersInfos = `**» ${this.lang.strings.vip_players}**:\n`
-                        + `${players.cache.vips.map(p => inlineCode(p)).join(" / ")}\n\n`
-                        + `**» ${this.lang.strings.vipplus_players}**:\n`
-                        + players.cache.vipplus.map(p => inlineCode(p)).join(" / ");
-                    inter.followUp({
-                        content: playersInfos,
-                        ephemeral: true,
-                    }).catch(this.client.util.catchError);
-                }
-                else if (["add_auth_guilds", "remove_auth_guilds", "add_vip", "remove_vip"].includes(inter.customId)) {
+                else if (["add_auth_guilds", "remove_auth_guilds"].includes(inter.customId)) {
                     let modalResponse = undefined;
                     if (inter.customId === "add_auth_guilds") {
                         const modal = new ModalBuilder()
@@ -524,72 +472,6 @@ class StaffPanel extends Command {
                                         .setPlaceholder(this.lang.rows.modals.remove_auth_guilds.inputs[0].placeholder)
                                         .setMinLength(18)
                                         .setMaxLength(19)
-                                        .setStyle(TextInputStyle.Short),
-                                ),
-                            );
-
-                        await inter.showModal(modal).catch(this.client.util.catchError);
-                        modalResponse = await inter.awaitModalSubmit({
-                            filter: modalSubmitted => modalSubmitted.user.id === this.interaction.user.id,
-                            time: 15_000,
-                        }).catch(this.client.util.catchError);
-                    }
-                    else if (inter.customId === "add_vip") {
-                        const modal = new ModalBuilder()
-                            .setTitle(this.lang.rows.modals.add_vip.title)
-                            .setCustomId("modal_add_vip")
-                            .setComponents(
-                                new ActionRowBuilder().setComponents(
-                                    new TextInputBuilder()
-                                        .setLabel(this.lang.rows.modals.add_vip.inputs[0].label)
-                                        .setCustomId("vip_added")
-                                        .setPlaceholder(this.lang.rows.modals.add_vip.inputs[0].placeholder)
-                                        .setMinLength(18)
-                                        .setMaxLength(19)
-                                        .setRequired(false)
-                                        .setStyle(TextInputStyle.Short),
-                                ),
-                                new ActionRowBuilder().setComponents(
-                                    new TextInputBuilder()
-                                        .setLabel(this.lang.rows.modals.add_vip.inputs[1].label)
-                                        .setCustomId("vipplus_added")
-                                        .setPlaceholder(this.lang.rows.modals.add_vip.inputs[1].placeholder)
-                                        .setMinLength(18)
-                                        .setMaxLength(19)
-                                        .setRequired(false)
-                                        .setStyle(TextInputStyle.Short),
-                                ),
-                            );
-
-                        await inter.showModal(modal).catch(this.client.util.catchError);
-                        modalResponse = await inter.awaitModalSubmit({
-                            filter: modalSubmitted => modalSubmitted.user.id === this.interaction.user.id,
-                            time: 15_000,
-                        }).catch(this.client.util.catchError);
-                    }
-                    else if (inter.customId === "remove_vip") {
-                        const modal = new ModalBuilder()
-                            .setTitle(this.lang.rows.modals.remove_vip.title)
-                            .setCustomId("modal_remove_vip")
-                            .setComponents(
-                                new ActionRowBuilder().setComponents(
-                                    new TextInputBuilder()
-                                        .setLabel(this.lang.rows.modals.remove_vip.inputs[0].label)
-                                        .setCustomId("vip_removed")
-                                        .setPlaceholder(this.lang.rows.modals.remove_vip.inputs[0].placeholder)
-                                        .setMinLength(18)
-                                        .setMaxLength(19)
-                                        .setRequired(false)
-                                        .setStyle(TextInputStyle.Short),
-                                ),
-                                new ActionRowBuilder().setComponents(
-                                    new TextInputBuilder()
-                                        .setLabel(this.lang.rows.modals.remove_vip.inputs[1].label)
-                                        .setCustomId("vipplus_removed")
-                                        .setPlaceholder(this.lang.rows.modals.remove_vip.inputs[1].placeholder)
-                                        .setMinLength(18)
-                                        .setMaxLength(19)
-                                        .setRequired(false)
                                         .setStyle(TextInputStyle.Short),
                                 ),
                             );
@@ -638,108 +520,6 @@ class StaffPanel extends Command {
                                     this.client.internalServerManager.datas.authServers.filter(s => s !== guildIDField),
                                     "authServers",
                                 );
-                            }
-                        }
-                        else if (modalResponse.customId === "modal_add_vip") {
-                            const [vip, vipplus] = [
-                                modalResponse.fields.getTextInputValue("vip_added") ?? "",
-                                modalResponse.fields.getTextInputValue("vipplus_added") ?? "",
-                            ];
-
-                            let message = "";
-
-                            if (vip.length > 2) {
-                                const playerDatas = await this.client.externalServerDb.get(vip);
-                                if (playerDatas.grades.includes("vip")) {
-                                    message += `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.is_already_vip.replace(
-                                        "%PLAYER",
-                                        escapeMarkdown(this.client.users.fetch(vip)?.username ?? vip),
-                                    )}`;
-                                }
-                                else {
-                                    message += `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.is_vip.replace(
-                                        "%PLAYER",
-                                        escapeMarkdown(this.client.users.fetch(vip)?.username ?? vip),
-                                    )}`;
-                                    this.client.externalServerDb.db.push(vip, "vip", "grades");
-                                }
-                            }
-                            if (vipplus.length > 2) {
-                                const playerDatas = await this.client.externalServerDb.get(vipplus);
-                                if (message.length > 4) message += "\n\n";
-                                if (playerDatas.grades.includes("vip+")) {
-                                    message += `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.is_already_vipplus.replace(
-                                        "%PLAYER",
-                                        escapeMarkdown(this.client.users.fetch(vipplus)?.username ?? vipplus),
-                                    )}`;
-                                }
-                                else {
-                                    message += `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.is_vipplus.replace(
-                                        "%PLAYER",
-                                        escapeMarkdown(this.client.users.fetch(vipplus)?.username ?? vipplus),
-                                    )}`;
-                                    this.client.externalServerDb.db.push(vipplus, "vip+", "grades");
-                                }
-                            }
-
-                            if (message.length > 10) {
-                                modalResponse.reply({
-                                    content: message,
-                                    ephemeral: true,
-                                }).catch(this.client.util.catchError);
-                            }
-                        }
-                        else if (modalResponse.customId === "modal_remove_vip") {
-                            const [vip, vipplus] = [
-                                modalResponse.fields.getTextInputValue("vip_removed") ?? "",
-                                modalResponse.fields.getTextInputValue("vipplus_removed") ?? "",
-                            ];
-
-                            let message = "";
-
-                            if (vip.length > 2) {
-                                const playerDatas = await this.client.externalServerDb.get(vip);
-                                if (!playerDatas.grades.includes("vip")) {
-                                    message += `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.is_already_not_vip.replace(
-                                        "%PLAYER",
-                                        escapeMarkdown(this.client.users.fetch(vip)?.username ?? vip),
-                                    )}`;
-                                }
-                                else {
-                                    message += `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.is_not_vip.replace(
-                                        "%PLAYER",
-                                        escapeMarkdown(this.client.users.fetch(vip)?.username ?? vip),
-                                    )}`;
-                                    this.client.externalServerDb.db.set(
-                                        vip,
-                                        playerDatas.grades.filter(g => g !== "vip"),
-                                        "grades",
-                                    );
-                                }
-                            }
-                            if (vipplus.length > 2) {
-                                const playerDatas = await this.client.externalServerDb.get(vipplus);
-                                if (message.length > 4) message += "\n\n";
-                                if (!playerDatas.grades.includes("vip+")) {
-                                    message += `${this.consts.emojis.systems.symbols.warning} ${this.lang.strings.is_already_not_vipplus.replace(
-                                        "%PLAYER",
-                                        escapeMarkdown(this.client.users.fetch(vipplus)?.username ?? vipplus),
-                                    )}`;
-                                }
-                                else {
-                                    message += `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.is_not_vipplus.replace(
-                                        "%PLAYER",
-                                        escapeMarkdown(this.client.users.fetch(vipplus)?.username ?? vipplus),
-                                    )}`;
-                                    this.client.externalServerDb.db.push(vipplus, "vip+", "grades");
-                                }
-                            }
-
-                            if (message.length > 10) {
-                                modalResponse.reply({
-                                    content: message,
-                                    ephemeral: true,
-                                }).catch(this.client.util.catchError);
                             }
                         }
                     }

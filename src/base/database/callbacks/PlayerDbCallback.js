@@ -28,8 +28,8 @@ module.exports = client => {
                 }
 
 
-                for (const subKey in oldValue.stats) {
-                    if (newValue?.stats[subKey] > oldValue.stats[subKey]) {
+                for (const subKey in oldValue.statistics) {
+                    if (newValue?.statistics[subKey] > oldValue.statistics[subKey]) {
                         if (dq.objective.type === "train_stat") {
                             const quests = qDatas[qKey].filter(q => q.id !== dq.id);
                             await UpdateQuest(quests, qKey, dq, client, key, newValue, dq.objective.stat === subKey);

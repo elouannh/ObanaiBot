@@ -24,7 +24,7 @@
             { "id": "moneyBoost", "strength": "10" },
             { "id": "baitingBoost", "strength": "10" },
             { "id": "lootBoost", "strength": "10" },
-            { "id": "statsBoost", "strength": "10" },
+            { "id": "statisticsBoost", "strength": "10" },
             { "id": "travelTimeBoost", "strength": "10" },
             { "id": "trainTimeBoost", "strength": "10" }
         ]
@@ -56,7 +56,7 @@
         "type": "temporaryGrimoire",
         "lifespan": 259200,
         "effects": [
-            { "id": "statsBoost", "strength": "15" }
+            { "id": "statisticsBoost", "strength": "15" }
         ]
     }
 }

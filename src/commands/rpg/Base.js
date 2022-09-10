@@ -2,14 +2,7 @@ const Command = require("../../base/Command");
 const {
     EmbedBuilder,
     ActionRowBuilder,
-    SelectMenuBuilder,
     ButtonBuilder,
-    inlineCode,
-    ModalBuilder,
-    TextInputStyle,
-    TextInputBuilder,
-    escapeMarkdown,
-    User,
 } = require("discord.js");
 const Nav = require("../../base/Navigation");
 
@@ -55,23 +48,23 @@ class Base extends Command {
         const userPDB = await this.client.playerDb.load(userId);
         const userIDB = await this.client.inventoryDb.load(userId);
         const userADB = await this.client.activityDb.load(userId);
-        console.log(userADB);
+        console.log(userADB.forge.forgingSlots);
         const userMDB = await this.client.mapDb.get(userId);
 
-        let userStatsObject = {};
-        for (const statKey in userPDB.statsLevel) {
-            userStatsObject[statKey] = `${this.consts.emojis.rpg.stats[statKey]} `
+        let userstatisticsObject = {};
+        for (const statKey in userPDB.statisticsLevel) {
+            userstatisticsObject[statKey] = `${this.consts.emojis.rpg.statistics[statKey]} `
                 + `» **${this.lang.rpgAssets.statistics[statKey]} | `
-                + `\`${this.client.util.intRender(userPDB.finalStats[statKey])}\`**\n`
-                + `*(${this.lang.strings.level} ${userPDB.statsLevel[statKey]}) **${userPDB.stats[statKey]}***`;
+                + `\`${this.client.util.intRender(userPDB.finalstatistics[statKey])}\`**\n`
+                + `*(${this.lang.strings.level} ${userPDB.statisticsLevel[statKey]}) **${userPDB.statistics[statKey]}***`;
 
             if (userPDB.grimBoosts[statKey][0] > 0) {
-                userStatsObject[statKey] += ` *+ **${userPDB.grimBoosts[statKey][0]}**`
+                userstatisticsObject[statKey] += ` *+ **${userPDB.grimBoosts[statKey][0]}**`
                     + ` (${userPDB.grimBoosts[statKey][1]}%)`
                     + `${this.consts.emojis.rpg.objects.enchantedGrimoire}*`;
             }
         }
-        userStatsObject = Object.values(userStatsObject).join("\n");
+        userstatisticsObject = Object.values(userstatisticsObject).join("\n");
         const userRank = `${this.lang.strings.level}: **${userPDB.level.level}** | `
             + `${this.lang.strings.total_experience}: ⭐ **${this.client.util.intRender(userPDB.exp, " ")}**`
             + `\n${this.lang.strings.level_experience}: ⭐ **`
@@ -83,7 +76,7 @@ class Base extends Command {
         const playerFields = [
             {
                 name: `» ${this.lang.panels.player.pages["0"].embeds["0"].fields["0"].name} «`,
-                value: `\u200b\n${userStatsObject}`,
+                value: `\u200b\n${userstatisticsObject}`,
                 inline: true,
             },
             {
@@ -103,13 +96,6 @@ class Base extends Command {
             {
                 name: `» ${this.lang.panels.activity.pages["0"].embeds["0"].fields["0"].name} «`,
                 value: "\u200b\nactivity",
-                inline: true,
-            },
-        ];
-        const badgesFields = [
-            {
-                name: `» ${this.lang.panels.badges.pages["0"].embeds["0"].fields["0"].name} «`,
-                value: "\u200b\nbadges",
                 inline: true,
             },
         ];
@@ -156,15 +142,6 @@ class Base extends Command {
                                 .setFields(activityFields),
                         ]),
                 ]),
-            "badges_panel": new Nav.Panel()
-                .setPages([
-                    new Nav.Page()
-                        .setEmbeds([
-                            new EmbedBuilder()
-                                .setTitle(this.lang.panels.badges.pages["0"].embeds["0"].title)
-                                .setFields(badgesFields),
-                        ]),
-                ]),
             "crow_panel": new Nav.Panel()
                 .setPages([
                     new Nav.Page()
@@ -202,14 +179,6 @@ class Base extends Command {
                         .setCustomId("activity_panel")
                         // .setLabel(this.lang.rows.universal.activity_panel)
                         .setEmoji(this.consts.emojis.rpg.symbols.activity)
-                        .setStyle("Secondary"),
-                ),
-            new ActionRowBuilder()
-                .setComponents(
-                    new ButtonBuilder()
-                        .setCustomId("badges_panel")
-                        // .setLabel(this.lang.rows.universal.badges_panel)
-                        .setEmoji(this.consts.emojis.rpg.symbols.badges)
                         .setStyle("Secondary"),
                     new ButtonBuilder()
                         .setCustomId("crow_panel")

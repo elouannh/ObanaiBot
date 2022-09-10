@@ -22,6 +22,10 @@ class RPGMapRegion extends RPGAssetBase {
     getArea(id) {
         return this.areas.filter(e => e.id === id)[0];
     }
+
+    getDistanceTo(region) {
+        return Math.sqrt(Math.pow(this.coordinates.x - region.coordinates.x, 2) + Math.pow(this.coordinates.y - region.coordinates.y, 2));
+    }
 }
 
 module.exports = RPGMapRegion;

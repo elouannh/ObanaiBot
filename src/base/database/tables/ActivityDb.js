@@ -7,12 +7,19 @@ function schema(id) {
         training: {
             currentlyTraining: false,
             startedDate: 0,
-            stats: null,
+            statistic: null,
         },
         travel: {
             currentlyTraveling: false,
             startedDate: 0,
-            destination: 0,
+            departurePoint: {
+                region: null,
+                area: null,
+            },
+            destination: {
+                regionId: null,
+                areaId: null,
+            },
         },
         forge: {
             forgingSlots: {
@@ -51,7 +58,7 @@ class ActivityDb extends SQLiteTable {
     }
 
     async load(id) {
-        return new ActivityDatas(this.client, this.get(id));
+        return new ActivityDatas(this.client, this.get(id), this.client.playerDb.getLang(id));
     }
 
 }

@@ -8,6 +8,7 @@ const RPGText = require("./subclasses/RPGText");
 const RPGWeapon = require("./subclasses/RPGWeapon");
 const RPGPlayerLevel = require("./subclasses/RPGPlayerLevel");
 const RPGQuestItem = require("./subclasses/RPGQuestItem");
+const RPGStatistic = require("./subclasses/RPGStatistic");
 
 class RPGAssetsManager {
     constructor(client, dir) {
@@ -23,6 +24,7 @@ class RPGAssetsManager {
         this.texts = require(`../${this.dir}/texts.json`);
         this.weapons = require(`../${this.dir}/weapons.json`);
         this.questItems = require(`../${this.dir}/questItems.json`);
+        this.statistics = require(`../${this.dir}/statistics.json`);
     }
 
     getLangDatas(lang, file = null) {
@@ -129,6 +131,17 @@ class RPGAssetsManager {
     getQuestItem(lang, id) {
         if (!(id in this.questItems)) return "Invalid Quest Item ID";
         return new RPGQuestItem(this.getLangDatas(lang, "itemQuests"), id);
+    }
+
+    getStatistic(lang, statisticId, statisticLevel) {
+        if (!(statisticId in this.statistics.names)) return "Invalid Statistic ID";
+        if (Number(statisticLevel) < 0 || Number(statisticLevel) > 100) return "Invalid Statistic Level";
+        return new RPGStatistic(
+            this.getLangDatas(lang, "statistics"),
+            statisticId,
+            statisticLevel,
+            this.statistics.trainingTimes[String(statisticLevel + (statisticLevel === 100 ? 0 : 1))],
+        );
     }
 }
 

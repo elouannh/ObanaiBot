@@ -1,7 +1,7 @@
 module.exports = {
     emojis: {
         rpg: {
-            stats: {
+            statistics: {
                 agility: "🍃",
                 strength: "🦁",
                 defense: "🪖",
