@@ -9,6 +9,7 @@
     "support": "922404341107798036",
     "testing": "958430837068681236",
     "rpg": {
-        "minutesPerDistanceUnit": 10
+        "minutesPerDistanceUnit": 5,
+        "minutesOfForgingPerRarity": 120
     }
 }

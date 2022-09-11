@@ -48,8 +48,8 @@ class Base extends Command {
         const userPDB = await this.client.playerDb.load(userId);
         const userIDB = await this.client.inventoryDb.load(userId);
         const userADB = await this.client.activityDb.load(userId);
-        console.log(userADB.forge.forgingSlots);
-        const userMDB = await this.client.mapDb.get(userId);
+        const userMDB = await this.client.mapDb.load(userId);
+        console.log(userMDB);
 
         let userstatisticsObject = {};
         for (const statKey in userPDB.statisticsLevel) {

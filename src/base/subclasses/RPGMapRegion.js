@@ -8,6 +8,8 @@ class RPGMapRegion extends RPGAssetBase {
         this.mapRegionDatas = mapRegionDatas;
         const areasLang = this.lang.json.regions[this.id].areas;
 
+        this.name = this.lang.json.regions[this.id].name;
+
         this.coordinates = { x: this.mapRegionDatas.x, y: this.mapRegionDatas.y };
         this.paths = this.mapRegionDatas.paths;
 

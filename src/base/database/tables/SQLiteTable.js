@@ -1,11 +1,11 @@
 const Enmap = require("enmap");
 
-function schema(...args) {
+function schema_(...args) {
     return { ...args };
 }
 
 class SQLiteTable {
-    constructor(client, name, schema = schema) {
+    constructor(client, name, schema = schema_) {
         this.client = client;
         this.db = new Enmap({ name });
         this.schema = schema;

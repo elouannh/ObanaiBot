@@ -13,8 +13,8 @@ function schema(id) {
             currentlyTraveling: false,
             startedDate: 0,
             departurePoint: {
-                region: null,
-                area: null,
+                regionId: null,
+                areaId: null,
             },
             destination: {
                 regionId: null,
@@ -25,6 +25,7 @@ function schema(id) {
             forgingSlots: {
                 "0": {
                     id: "0",
+                    startedDate: 0,
                     currentlyForging: false,
                     weapon: {
                         "id": null,
@@ -33,6 +34,7 @@ function schema(id) {
                 },
                 "1": {
                     id: "1",
+                    startedDate: 0,
                     currentlyForging: false,
                     weapon: {
                         "id": null,
@@ -41,6 +43,7 @@ function schema(id) {
                 },
                 "2": {
                     id: "2",
+                    startedDate: 0,
                     currentlyForging: false,
                     weapon: {
                         "id": null,
