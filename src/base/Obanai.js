@@ -6,8 +6,7 @@ const SquadDb = require("./database/tables/SquadDb");
 const ActivityDb = require("./database/tables/ActivityDb");
 const MapDb = require("./database/tables/MapDb");
 const QuestDb = require("./database/tables/QuestDb");
-const InternalServerManager = require("./database/tables/InternalServerManager");
-const StatusDb = require("./database/tables/StatusDb");
+const InternalServerManager = require("./InternalServerManager");
 const CommandManager = require("./CommandManager");
 const EventManager = require("./EventManager");
 const Util = require("./Util");
@@ -58,7 +57,6 @@ class Obanai extends Client {
         this.squadDb = new SquadDb(this);
         this.mapDb = new MapDb(this);
         this.questDb = new QuestDb(this);
-        this.statusDb = new StatusDb(this);
 
         const PlayerDbCallback = require("./database/callbacks/PlayerDbCallback")(this);
         const InventoryDbCallback = require("./database/callbacks/InventoryDbCallback")(this);

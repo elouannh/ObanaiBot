@@ -34,7 +34,7 @@ class StaffPanel extends Command {
     async run() {
         const userGrade = this.client.internalServerManager.userRank(this.interaction.user.id);
         const status = await this.client.internalServerManager.status(this.timestamp);
-        const infos = await this.client.statusDb.infos();
+        const infos = await this.client.internalServerManager.infos();
 
         const renderPanel = rendered => {
             return userGrade.allGrades.includes(rendered[0].split("_")[0]) ? `**${rendered[1]}**` : `~~${rendered[1]}~~`;
@@ -347,7 +347,7 @@ class StaffPanel extends Command {
             else if (inter.isButton()) {
                 const guilds = await this.client.internalServerManager.guilds();
                 const tempoStatus = [
-                    this.client.statusDb.datas.mode,
+                    this.client.internalServerManager.datas.mode,
                     await this.client.internalServerManager.status(this.interaction),
                 ];
                 if (inter.customId === "leave_panel") {
@@ -373,7 +373,7 @@ class StaffPanel extends Command {
                         }).catch(this.client.util.catchError);
                     }
                     else {
-                        this.client.statusDb.setOnline();
+                        this.client.internalServerManager.setOnline();
                         inter.followUp({
                             content: `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.set_online}`,
                             ephemeral: true,
@@ -390,7 +390,7 @@ class StaffPanel extends Command {
                         }).catch(this.client.util.catchError);
                     }
                     else {
-                        this.client.statusDb.setMaintenance();
+                        this.client.internalServerManager.setMaintenance();
                         inter.followUp({
                             content: `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.set_maintenance}`,
                             ephemeral: true,
@@ -407,7 +407,7 @@ class StaffPanel extends Command {
                         }).catch(this.client.util.catchError);
                     }
                     else {
-                        this.client.statusDb.setDisabled();
+                        this.client.internalServerManager.setDisabled();
                         inter.followUp({
                             content: `${this.consts.emojis.systems.symbols.check} ${this.lang.strings.set_disabled}`,
                             ephemeral: true,

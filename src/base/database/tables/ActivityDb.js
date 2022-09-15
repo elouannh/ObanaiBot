@@ -1,4 +1,4 @@
-const SQLiteTable = require("./SQLiteTable");
+const SQLiteTable = require("../../SQLiteTable");
 const ActivityDatas = require("../subclasses/ActivityDatas");
 
 function schema(id) {

@@ -186,7 +186,7 @@ class Command {
     async clientStatusReady() {
         let ready = true;
 
-        const clientStatus = this.client.statusDb.datas;
+        const clientStatus = this.client.internalServerManager.datas;
 
         switch (clientStatus.mode) {
             case "online":
