@@ -45,11 +45,13 @@ class Base extends Command {
         else if (this.interaction.type === 2) userId = this.client.users.cache.get(this.interaction.targetId);
         userId = (await this.client.getUser(userId, user)).userId;
 
+        const sq = await this.client.squadDb.load("test");
+        console.log(sq);
+
         const userPDB = await this.client.playerDb.load(userId);
         const userIDB = await this.client.inventoryDb.load(userId);
         const userADB = await this.client.activityDb.load(userId);
         const userMDB = await this.client.mapDb.load(userId);
-        console.log(userMDB);
 
         let userstatisticsObject = {};
         for (const statKey in userPDB.statisticsLevel) {

@@ -14,7 +14,7 @@ function schema(id) {
         },
         breathingStyle: "water",
         exp: 0,
-        created: Date.now(),
+        creationDate: Date.now(),
     };
 }
 
@@ -24,7 +24,7 @@ class PlayerDb extends SQLiteTable {
     }
 
     async load(id) {
-        return new PlayerDatas(this.client, this.get(id), this.client.inventoryDb.db.get(id));
+        return new PlayerDatas(this.client, this.get(id), this.client.inventoryDb.get(id));
     }
 
     getLang(id) {

@@ -12,7 +12,7 @@ class InternalServerManager {
         this.readyOrNot = ["0", "0"];
         this.processing = [[false, false], [false, false]];
 
-        this.launcher();
+        // this.launcher();
     }
 
     model() {

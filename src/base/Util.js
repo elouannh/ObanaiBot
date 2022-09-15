@@ -69,6 +69,12 @@ class Util {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    camelCase(string) {
+        return string.replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => {
+            return index === 0 ? word.toLowerCase() : word.toUpperCase();
+        }).replace(/\s+/g, "");
+    }
+
     intRender(int, sep = " ") {
         return int.toString().replace(/\B(?=(\d{3})+(?!\d))/g, sep);
     }
@@ -95,41 +101,7 @@ class Util {
         return `${datas.day}/${datas.month}/${datas.year}` + (full ? ` ${datas.hour}:${datas.min}:${datas.sec}` : "");
     }
 
-    nameGenerator() {
-        const names = {
-            "m": {
-                "s": {
-                    "names": ["du Pourfendeur", "du Démon", "du Forgeron", "du Kimono", "du Corbeau"],
-                    "adjectives": ["Légendaire", "Infini", "Surpuissant", "Démoniaque"],
-                },
-                "p": {
-                    "names": ["des Pourfendeurs", "des Démons", "des Forgerons", "des Kimonos", "des Corbeaux"],
-                    "adjectives": ["Légendaires", "Infinis", "Surpuissants", "Démoniaques"],
-                },
-            },
-            "f": {
-                "s": {
-                    "names": ["de la Pourfendeuse", "de la Démone", "de la Forgeronne", "de l'Épée"],
-                    "adjectives": ["Légendaire", "Infinie", "Surpuissante", "Démoniaque"],
-                },
-                "p": {
-                    "names": ["des Pourfendeuses", "des Démones", "des Forgeronnes", "des Épées"],
-                    "adjectives": ["Légendaires", "Infinies", "Surpuissantes", "Démoniaques"],
-                },
-            },
-        };
-        let quote = "";
-
-        const genre = ["m", "f"][Math.floor(Math.random() * 2)];
-        const singOrPl = ["s", "p"][Math.floor(Math.random() * 2)];
-        const exp = names.words[genre][singOrPl];
-        let sentence = `Escouade ${exp.names.at(Math.floor(Math.random() * exp.names.length))}`;
-        sentence += `${exp.adjectives.at(Math.floor(Math.random() * exp.adjectives.length))}`;
-
-        quote = names.quotes[Math.floor(Math.random() * names.quotes.length)];
-
-        return { sentence, quote };
-    }
+    randomSquadNameGenerator() {}
 
     convertDate(milisecs, short = false) {
         const datas = {
@@ -201,10 +173,6 @@ class Util {
         datas.unchanged = secondArray.filter(element => firstArray.includes(element));
 
         return datas;
-    }
-
-    blankField() {
-        return { name: "\u200B", value: "\u200B" };
     }
 
     catchError(error) {

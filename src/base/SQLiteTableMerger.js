@@ -31,7 +31,6 @@ class SQLiteTableMerger {
                 const id = player.id;
                 this.client.inventoryDb.db.set(id, player);
                 this.client.inventoryDb.db.set(id, player.yens, "wallet");
-                this.client.inventoryDb.db.delete(id, "yens");
                 const newCrow = {
                     id: player.kasugai_crow || player.kasugaiCrow?.id || "basicCrow",
                     exp: player.kasugai_crow_exp || player.kasugaiCrow?.exp || 0,
@@ -41,15 +40,11 @@ class SQLiteTableMerger {
                 if (newCrow.id === "kasugai_proud") newCrow.id = "proudCrow";
                 if (newCrow.id === "kasugai_simple") newCrow.id = "basicCrow";
                 this.client.inventoryDb.db.set(id, newCrow, "kasugaiCrow");
-                this.client.inventoryDb.db.delete(id, "kasugai_crow");
-                this.client.inventoryDb.db.delete(id, "kasugai_crow_exp");
                 const newGrimoire = {
                     id: player.active_grimoire || player.enchantedGrimoire?.id || null,
                     activeSince: player.active_grimoire_since || player.enchantedGrimoire?.activeSince || 0,
                 };
                 this.client.inventoryDb.db.set(id, newGrimoire, "enchantedGrimoire");
-                this.client.inventoryDb.db.delete(id, "active_grimoire");
-                this.client.inventoryDb.db.delete(id, "active_grimoire_since");
                 const newWeapon = {
                     id: "katana",
                     rarity: String(player.weapon.rarity) || "3",
@@ -87,10 +82,6 @@ class SQLiteTableMerger {
                     items.questItems[mat] = player.questItems[key];
                 }
                 this.client.inventoryDb.db.set(id, items, "items");
-                this.client.inventoryDb.db.delete(id, "grimoires");
-                this.client.inventoryDb.db.delete(id, "weapons");
-                this.client.inventoryDb.db.delete(id, "materials");
-                this.client.inventoryDb.db.delete(id, "questItems");
             }
 
             dbs.b.destroy();
@@ -106,11 +97,8 @@ class SQLiteTableMerger {
                 const id = player.id;
                 this.client.playerDb.db.set(id, player);
                 this.client.playerDb.db.set(id, player.stats, "statistics");
-                this.client.playerDb.db.delete(id, "stats");
                 this.client.playerDb.db.set(id, player.breath || "water", "breathingStyle");
-                this.client.playerDb.db.delete(id, "breath");
-                this.client.playerDb.db.delete(id, "category");
-                this.client.playerDb.db.delete(id, "categoryLevel");
+                this.client.playerDb.db.set(id, player.created || Date.now(), "creationDate");
             }
 
             dbs.b.destroy();

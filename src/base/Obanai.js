@@ -68,8 +68,15 @@ class Obanai extends Client {
         // this.mapDb.db.changed(MapDbCallback);
 
         this.internalServerManager = new InternalServerManager(this);
-        this.SQLiteTableMerger = new SQLiteTableMerger(this, "activityDb", "playerDb", "inventoryDb");
+        this.SQLiteTableMerger = new SQLiteTableMerger(this, "activityDb", "playerDb", "inventoryDb", "squadDb", "mapDb", "questDb");
         this.lastChannels = new Collection();
+
+        const dbs = Object.values(this).map(e => e?.constructor?.name).filter(e => typeof e === "string").filter(e => e.endsWith("Db"));
+        const dbslist = {};
+        for (const db of dbs) {
+            dbslist[this.util.camelCase(db)] = this[this.util.camelCase(db)];
+        }
+        this.dbs = dbslist;
 
         setInterval(() => this.log("................"), 900_000);
         this.launch();

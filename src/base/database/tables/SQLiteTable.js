@@ -11,22 +11,29 @@ class SQLiteTable {
         this.schema = schema;
     }
 
-    ensure(key) {
+    ensureInDeep(key) {
         return this.db.ensure(key, this.schema(key));
     }
 
+    ensure(key) {
+        if (!this.db.has(key)) return Object.assign(this.schema(key), { schemaInstance: true });
+
+        return this.client.util.ensureObj(this.schema(key), this.db.get(key));
+    }
+
     get(key) {
-        this.ensure(key);
-        return this.db.get(key);
+        return this.ensure(key);
     }
 
     set(key, ...args) {
-        this.ensure(key);
+        if (!this.db.has(key)) return;
+        this.ensureInDeep(key);
         return this.db.set(key, ...args);
     }
 
-    delete(...args) {
-        return this.db.delete(...args);
+    delete(key, ...args) {
+        if (!this.db.has(key)) return;
+        return this.db.delete(key, ...args);
     }
 }
 
