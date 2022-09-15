@@ -38,7 +38,7 @@ class SquadDb extends SQLiteTable {
     }
 
     async load(id) {
-        return new SquadDatas(this.client, this.get(id));
+        return new SquadDatas(this.client, this.get(id), this.client.playerDb.getLang(id));
     }
 }
 

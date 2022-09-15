@@ -1,10 +1,10 @@
-const TableDatas = require("./TableDatas");
+const TableDatas = require("../../TableDatas");
 
 class SquadDatas extends TableDatas {
-    constructor(client, playerDatas) {
+    constructor(client, playerDatas, lang) {
         super(client, playerDatas);
 
-        this.lang = this.datas.lang;
+        this.lang = lang;
 
         this.load();
         this.overwrite();

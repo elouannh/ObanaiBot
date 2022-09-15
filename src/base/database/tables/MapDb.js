@@ -16,7 +16,7 @@ class MapDb extends SQLiteTable {
     }
 
     async load(id) {
-        return new MapDatas(this.client, this.get(id));
+        return new MapDatas(this.client, this.get(id), this.client.playerDb.getLang(id));
     }
 }
 

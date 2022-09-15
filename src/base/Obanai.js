@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const { Client, escapeMarkdown, IntentsBitField, User, Snowflake, Collection, EmbedBuilder } = require("discord.js");
+const { Client, IntentsBitField, User, Collection, EmbedBuilder } = require("discord.js");
 const PlayerDb = require("./database/tables/PlayerDb");
 const InventoryDb = require("./database/tables/InventoryDb");
 const SquadDb = require("./database/tables/SquadDb");

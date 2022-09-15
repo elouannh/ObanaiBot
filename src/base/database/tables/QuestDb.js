@@ -1,38 +1,34 @@
-const Enmap = require("enmap");
+const SQLiteTable = require("../../SQLiteTable");
+const QuestDatas = require("../subclasses/QuestDatas");
 
-class QuestDb {
+function schema(id) {
+    return {
+        id: id,
+        currentQuests: {
+            dailyQuests: {},
+            sideQuests: {},
+            slayerQuest: {},
+        },
+        completedQuests: {
+            dailyQuests: {},
+            sideQuests: {},
+            slayerQuest: {},
+        },
+        storyProgression: {
+            volume: 0,
+            chapter: 0,
+            quest: 0,
+        },
+    };
+}
+
+class QuestDb extends SQLiteTable {
     constructor(client) {
-        this.client = client;
-        this.db = new Enmap({ name: "questDb" });
+        super(client, "quest", schema);
     }
 
-    model(id) {
-        const datas = {
-            id: id,
-            daily: [],
-            slayer: [],
-            world: [],
-            storyProgress: {
-                "chapter": 0,
-                "quest": 1,
-                "step": 0,
-            },
-        };
-
-        return datas;
-    }
-
-    async ensure(id) {
-        const p = this.model(id);
-        this.db.ensure(id, p);
-
-        return this.db.get(id);
-    }
-
-    async get(id) {
-        this.ensure(id);
-
-        return this.db.get(id);
+    async load(id) {
+        return new QuestDatas(this.client, this.get(id), this.client.playerDb.getLang(id));
     }
 }
 

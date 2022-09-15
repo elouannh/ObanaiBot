@@ -1,4 +1,4 @@
-const TableDatas = require("./TableDatas");
+const TableDatas = require("../../TableDatas");
 
 class InventoryDatas extends TableDatas {
     constructor(client, inventoryDatas, lang) {

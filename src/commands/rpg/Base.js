@@ -45,7 +45,7 @@ class Base extends Command {
         else if (this.interaction.type === 2) userId = this.client.users.cache.get(this.interaction.targetId);
         userId = (await this.client.getUser(userId, user)).userId;
 
-        const sq = await this.client.squadDb.load("test");
+        const sq = await this.client.questDb.load(userId);
         console.log(sq);
 
         const userPDB = await this.client.playerDb.load(userId);
