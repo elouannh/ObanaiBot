@@ -33,7 +33,7 @@ class Base extends Command {
             category: "RPG",
             cooldown: 5,
             finishRequest: ["base"],
-            private: "none",
+            authorizationBitField: 0b000,
             permissions: 0n,
         });
     }

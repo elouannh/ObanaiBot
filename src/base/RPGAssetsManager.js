@@ -4,7 +4,6 @@ const RPGKasugaiCrow = require("./subclasses/RPGKasugaiCrow");
 const RPGMapRegion = require("./subclasses/RPGMapRegion");
 const RPGMaterial = require("./subclasses/RPGMaterial");
 const RPGCharacter = require("./subclasses/RPGCharacter");
-const RPGText = require("./subclasses/RPGText");
 const RPGWeapon = require("./subclasses/RPGWeapon");
 const RPGPlayerLevel = require("./subclasses/RPGPlayerLevel");
 const RPGQuestItem = require("./subclasses/RPGQuestItem");
@@ -21,7 +20,6 @@ class RPGAssetsManager {
         this.map = require(`../${this.dir}/map.json`);
         this.materials = require(`../${this.dir}/materials.json`);
         this.characters = require(`../${this.dir}/characters.json`);
-        this.texts = require(`../${this.dir}/texts.json`);
         this.weapons = require(`../${this.dir}/weapons.json`);
         this.questItems = require(`../${this.dir}/questItems.json`);
         this.statistics = require(`../${this.dir}/statistics.json`);
@@ -96,25 +94,6 @@ class RPGAssetsManager {
     getCharacter(lang, id) {
         if (!(id in this.characters)) return "Invalid Character ID";
         return new RPGCharacter(this.getLangDatas(lang, "characters"), id, this.characters[id]);
-    }
-
-    getText(lang, chapterId, questId, type, textId) {
-        const fullIds = {
-            "chapterId": `chapter${chapterId}`,
-            "questId": `quest${questId}`,
-        };
-        let datas = this.texts;
-
-        if (!(fullIds.chapterId in datas)) return "Invalid Chapter ID";
-        datas = datas[fullIds.chapterId];
-        if (!(fullIds.questId in datas)) return "Invalid Quest ID";
-        datas = datas[fullIds.questId];
-        if (!(type in datas)) return "Invalid Text Type";
-        datas = datas[type];
-        if (!(textId in datas)) return "Invalid Text ID";
-        datas = datas[textId];
-
-        return new RPGText(this.getLangDatas(lang, "texts"), datas);
     }
 
     getPlayerLevel(exp) {
