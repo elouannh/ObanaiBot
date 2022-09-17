@@ -1,7 +1,8 @@
 const { Collection } = require("discord.js");
 
 class ProcessManager {
-    constructor() {
+    constructor(client) {
+        this.client = client;
         this.process = process;
         this.argv = new Collection();
 

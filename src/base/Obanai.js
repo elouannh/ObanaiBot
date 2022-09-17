@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 const { Client, IntentsBitField, User, Collection, EmbedBuilder } = require("discord.js");
 const PlayerDb = require("./database/tables/PlayerDb");
 const InventoryDb = require("./database/tables/InventoryDb");
@@ -15,10 +14,11 @@ const config = require("../config.json");
 const Package = require("../../package.json");
 const CollectionManager = require("./CollectionManager");
 const LanguageManager = require("./LanguageManager");
-const PasteGGClasses = require("./PasteGGManager");
+const { PasteGGManager } = require("./PasteGGManager");
 const RPGAssetsManager = require("./RPGAssetsManager");
 const ProcessManager = require("./ProcessManager");
 const SQLiteTableMerger = require("./SQLiteTableMerger");
+const Duration = require("./Duration");
 
 class Obanai extends Client {
     constructor() {
@@ -26,30 +26,30 @@ class Obanai extends Client {
             intents: new IntentsBitField().add("GuildMessages", "GuildMembers", "Guilds"),
             failIfNotExists: false,
         });
-        this.processManager = new ProcessManager();
-        this.token = require("../../token.json").token;
         this.util = new Util(this);
         this.log("Starting bot process...");
-        this.constants = Constants;
-        this.registerSlash = this.processManager.getArgv("registerSlash");
-        this.renderTranslations = this.processManager.getArgv("renderTranslations");
-        this.mergeSQLiteTables = this.processManager.getArgv("mergeSQLiteTables");
-        this.pasteGGManager = new PasteGGClasses.PasteGGManager(this);
+
+        this.internalServerManager = new InternalServerManager(this);
+        this.pasteGGManager = new PasteGGManager(this);
         this.commandManager = new CommandManager(this);
         this.eventManager = new EventManager(this);
         this.languageManager = new LanguageManager(this);
         this.RPGAssetsManager = new RPGAssetsManager(this, "assets");
-        this.eventManager.loadFiles();
-        this.config = config;
-        this.bitfield = 274878286912n;
+        this.requestsManager = new CollectionManager(
+            this, "requests", this.util.callbackFunction, Date.now,
+        );
+        this.cooldownsManager = new CollectionManager(
+            this, "cooldowns", this.util.callbackFunction, () => 0,
+        );
+        this.lastChannelsManager = new CollectionManager(
+            this, "lastChannels", this.util.callbackFunction, () => null,
+        );
+        this.processManager = new ProcessManager(this);
+        this.registerSlash = this.processManager.getArgv("registerSlash");
+        this.renderTranslations = this.processManager.getArgv("renderTranslations");
+        this.mergeSQLiteTables = this.processManager.getArgv("mergeSQLiteTables");
 
-        this.prefix = "!";
-        this.color = "#2f3136";
-        this.version = Package.version;
-        this.maxRequests = 30;
-
-        this.requestsManager = new CollectionManager(this, "requests", this.util.callbackFunction, Date.now, Date.now);
-        this.cooldownsManager = new CollectionManager(this, "cooldowns", this.util.callbackFunction, Date.now, () => 0);
+        this.mainLanguage = this.languageManager.getLang("fr");
 
         this.playerDb = new PlayerDb(this);
         this.activityDb = new ActivityDb(this);
@@ -58,26 +58,21 @@ class Obanai extends Client {
         this.mapDb = new MapDb(this);
         this.questDb = new QuestDb(this);
 
-        const PlayerDbCallback = require("./database/callbacks/PlayerDbCallback")(this);
-        const InventoryDbCallback = require("./database/callbacks/InventoryDbCallback")(this);
-        const MapDbCallback = require("./database/callbacks/MapDbCallback")(this);
-        // this.playerDb.db.changed(PlayerDbCallback);
-        // this.inventoryDb.db.changed(InventoryDbCallback);
-        // this.mapDb.db.changed(MapDbCallback);
+        this.SQLiteTableMerger = new SQLiteTableMerger(
+            this, "activityDb", "playerDb", "inventoryDb", "squadDb", "mapDb", "questDb",
+        );
 
-        this.internalServerManager = new InternalServerManager(this);
-        this.SQLiteTableMerger = new SQLiteTableMerger(this, "activityDb", "playerDb", "inventoryDb", "squadDb", "mapDb", "questDb");
-        this.lastChannels = new Collection();
+        this.duration = Duration;
+        this.constants = Constants;
+        this.config = config;
+        this.bitfield = 274878286912n;
+        this.version = Package.version;
+        this.maxRequests = 30;
 
-        const dbs = Object.values(this).map(e => e?.constructor?.name).filter(e => typeof e === "string").filter(e => e.endsWith("Db"));
-        const dbslist = {};
-        for (const db of dbs) {
-            dbslist[this.util.camelCase(db)] = this[this.util.camelCase(db)];
-        }
-        this.dbs = dbslist;
-
+        this.token = require("../../token.json").token;
+        this.eventManager.loadFiles();
+        void this.launch();
         setInterval(() => this.log("................"), 900_000);
-        this.launch();
     }
 
     async throwError(error, origin) {
@@ -85,7 +80,9 @@ class Obanai extends Client {
         await channel.send({
             embeds: [
                 new EmbedBuilder()
-                    .setTitle(`❌ An error occured ! - \`${origin}\``)
+                    .setTitle(`❌ ${
+                        this.languageManager.getLang("fr").json.systems.client.error_occured
+                    } - \`${origin}\``)
                     .setDescription(`\`\`\`xl\n\n${error.stack.substring(0, 3982)}\`\`\``)
                     .setColor("#FF0000")
                     .setTimestamp(),
@@ -121,41 +118,9 @@ class Obanai extends Client {
     }
 
     launch(token = "") {
-        if (token.length > 0) this.login(token);
-        else this.login(this.token);
+        if (token.length > 0) return this.login(token);
+        else return this.login(this.token);
     }
-
-    addRole(id, serv, roleId) {
-        if (this.user.id === "958433246050406440") {
-            try {
-                serv.members.cache.get(id)?.roles?.add(roleId);
-            }
-            catch {
-                "que dalle";
-            }
-        }
-        else {
-            // this.log("[AUTO] addRole()");
-            // this.log(`user: ${id} | serv: ${serv} | roleId: ${roleId}`);
-        }
-    }
-
-    removeRole(id, serv, roleId) {
-        if (this.user.id === "958433246050406440") {
-            try {
-                serv.members.cache.get(id)?.roles?.remove(roleId);
-            }
-            catch {
-                "que dalle";
-            }
-        }
-        else {
-            // this.log("[AUTO] removeRole()");
-            // this.log(`user: ${id} | serv: ${serv} | roleId: ${roleId}`);
-        }
-    }
-
-
 }
 
 module.exports = Obanai;

@@ -1,0 +1,15 @@
+{
+    "command": {
+        "default_reply": "Ceci est une réponse par défaut.",
+        "cooldown_reply": "Veuillez patienter %TIME avant de pouvoir interagir de nouveau.",
+        "requests_reply": "Vous avez déjà des commandes en cours d'exécution. Veuillez terminer leurs interactions.",
+        "no_user_permissions_reply": "Vous n'avez pas les permissions requises pour utiliser cette commande.",
+        "no_client_permissions_reply": "Je n'ai pas les permissions requises pour utiliser cette commande.",
+        "necessaries_permissions_reply": "Liste des permissions nécessaires",
+        "client_in_maintenance": "Le bot est actuellement en maintenance.",
+        "no_user_authorization_reply": "Vous n'êtes pas autorisé à utiliser cette commande."
+    },
+    "client": {
+        "error_occured": "Une erreur est survenue."
+    }
+}
