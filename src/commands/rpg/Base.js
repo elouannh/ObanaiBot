@@ -67,11 +67,7 @@ class Base extends Command {
             }
         }
         userstatisticsObject = Object.values(userstatisticsObject).join("\n");
-        const userRank = `${this.lang.strings.level}: **${userPDB.level.level}** | `
-            + `${this.lang.strings.total_experience}: ⭐ **${this.client.util.intRender(userPDB.exp, " ")}**`
-            + `\n${this.lang.strings.level_experience}: ⭐ **`
-            + `${this.client.util.intRender(userPDB.level.tempExp, " ")}`
-            + `**/${this.client.util.intRender(userPDB.level.required, " ")}`;
+        const userRank = "";
 
         let userInventoryObjects = {};
 
@@ -117,7 +113,7 @@ class Base extends Command {
         ];
 
         const pages = {
-            "player_panel": new Nav.Panel()
+            "playerPanel": new Nav.Panel()
                 .setPages([
                     new Nav.Page()
                         .setEmbeds([
@@ -126,7 +122,7 @@ class Base extends Command {
                                 .setFields(playerFields),
                         ]),
                 ]),
-            "inventory_panel": new Nav.Panel()
+            "inventoryPanel": new Nav.Panel()
                 .setPages([
                     new Nav.Page()
                         .setEmbeds([
@@ -135,7 +131,7 @@ class Base extends Command {
                                 .setFields(inventoryFields),
                         ]),
                 ]),
-            "activity_panel": new Nav.Panel()
+            "activityPanel": new Nav.Panel()
                 .setPages([
                     new Nav.Page()
                         .setEmbeds([
@@ -144,7 +140,7 @@ class Base extends Command {
                                 .setFields(activityFields),
                         ]),
                 ]),
-            "crow_panel": new Nav.Panel()
+            "crowPanel": new Nav.Panel()
                 .setPages([
                     new Nav.Page()
                         .setEmbeds([
@@ -153,7 +149,7 @@ class Base extends Command {
                                 .setFields(crowFields),
                         ]),
                 ]),
-            "weapons_panel": new Nav.Panel()
+            "weaponsPanel": new Nav.Panel()
                 .setPages([
                     new Nav.Page()
                         .setEmbeds([
@@ -168,43 +164,38 @@ class Base extends Command {
             new ActionRowBuilder()
                 .setComponents(
                     new ButtonBuilder()
-                        .setCustomId("player_panel")
-                        // .setLabel(this.lang.rows.universal.player_panel)
+                        .setCustomId("playerPanel")
                         .setEmoji(this.consts.emojis.rpg.symbols.player)
                         .setStyle("Secondary"),
                     new ButtonBuilder()
-                        .setCustomId("inventory_panel")
-                        // .setLabel(this.lang.rows.universal.inventory_panel)
+                        .setCustomId("inventoryPanel")
                         .setEmoji(this.consts.emojis.rpg.symbols.inventory)
                         .setStyle("Secondary"),
                     new ButtonBuilder()
-                        .setCustomId("activity_panel")
-                        // .setLabel(this.lang.rows.universal.activity_panel)
+                        .setCustomId("activityPanel")
                         .setEmoji(this.consts.emojis.rpg.symbols.activity)
                         .setStyle("Secondary"),
                     new ButtonBuilder()
-                        .setCustomId("crow_panel")
-                        // .setLabel(this.lang.rows.universal.crow_panel)
+                        .setCustomId("crowPanel")
                         .setEmoji(this.consts.emojis.rpg.symbols.crow)
                         .setStyle("Secondary"),
                     new ButtonBuilder()
-                        .setCustomId("weapons_panel")
-                        // .setLabel(this.lang.rows.universal.weapons_panel)
+                        .setCustomId("weaponsPanel")
                         .setEmoji(this.consts.emojis.rpg.symbols.weapons)
                         .setStyle("Secondary"),
                 ),
             new ActionRowBuilder()
                 .setComponents(
                     new ButtonBuilder()
-                        .setCustomId("leave_panel")
-                        .setLabel(this.lang.rows.universal.leave_panel)
+                        .setCustomId("leavePanel")
+                        .setLabel(this.lang.rows.universal.leavePanel)
                         .setStyle("Danger"),
                 ),
         ];
 
         const panel = await this.interaction.reply({
-            embeds: pages.player_panel.pages["0"].embeds,
-            components: pages.player_panel.components.concat(universalRows),
+            embeds: pages.playerPanel.pages["0"].embeds,
+            components: pages.playerPanel.components.concat(universalRows),
         }).catch(this.client.util.catchError);
         if (panel === undefined) return;
         const navigation = panel.createMessageComponentCollector({
@@ -213,11 +204,11 @@ class Base extends Command {
             dispose: true,
         });
 
-        let currentPanel = "player_panel";
+        let currentPanel = "playerPanel";
 
         navigation.on("collect", async inter => {
             if (inter.isButton()) {
-                if (inter.customId.endsWith("_panel") && inter.customId !== "leave_panel") {
+                if (inter.customId.endsWith("_panel") && inter.customId !== "leavePanel") {
                     await inter.deferUpdate()
                         .catch(this.client.util.catchError);
 
@@ -231,7 +222,7 @@ class Base extends Command {
                         components: newComponents,
                     }).catch(this.client.util.catchError);
                 }
-                else if (inter.customId === "leave_panel") {
+                else if (inter.customId === "leavePanel") {
                     await inter.deferUpdate()
                         .catch(this.client.util.catchError);
                     navigation.stop();

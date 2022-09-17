@@ -81,7 +81,7 @@ class Obanai extends Client {
             embeds: [
                 new EmbedBuilder()
                     .setTitle(`❌ ${
-                        this.languageManager.getLang("fr").json.systems.client.error_occured
+                        this.languageManager.getLang("fr").json.systems.client.errorOccurred
                     } - \`${origin}\``)
                     .setDescription(`\`\`\`xl\n\n${error.stack.substring(0, 3982)}\`\`\``)
                     .setColor("#FF0000")

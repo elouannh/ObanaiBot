@@ -1,5 +1,4 @@
 const Event = require("../base/Event");
-const { EmbedBuilder } = require("discord.js");
 
 class InteractionCreate extends Event {
     constructor() {
@@ -66,13 +65,13 @@ class InteractionCreate extends Event {
                 await cmd.run();
             }
             catch (err) {
-                await this.interaction.reply({ content: ":x: **An error occured.**" }).catch(this.client.util.catchError);
+                await this.interaction.reply({ content: ":x: **An error occurred.**" }).catch(this.client.util.catchError);
                 await this.client.throwError(err, "Origin: @InteractionCreate.Command");
             }
             this.client.requestsManager.remove(this.interaction.user.id, cmd.infos.name);
         }
         catch (err) {
-            await this.interaction.reply({ content: ":x: **An error occured.**" }).catch(this.client.util.catchError);
+            await this.interaction.reply({ content: ":x: **An error occurred.**" }).catch(this.client.util.catchError);
             await this.client.throwError(err, "Origin: @Event.InteractionCreate");
         }
     }

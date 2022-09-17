@@ -1,10 +1,6 @@
 {
     "base": {
         "strings": {
-            "profile_statistics": "statistics",
-            "level": "Niveau",
-            "total_experience": "Expérience totale",
-            "level_experience": "Expérience de niveau"
         },
         "panels": {
             "player": {
@@ -114,13 +110,12 @@
             "page": "Page...",
             "panel": "Panel...",
             "universal": {
-                "leave_panel": "Quitter le panel",
-                "player_panel": "Statistiques",
-                "inventory_panel": "Inventaire",
-                "activity_panel": "Activité",
-                "badges_panel": "Badges",
-                "crow_panel": "Corbeau",
-                "weapons_panel": "Armes"
+                "leavePanel": "Quitter le panel",
+                "playerPanel": "Statistiques",
+                "inventoryPanel": "Inventaire",
+                "activityPanel": "Activité",
+                "crowPanel": "Corbeau",
+                "weaponsPanel": "Armes"
             }
         }
     },

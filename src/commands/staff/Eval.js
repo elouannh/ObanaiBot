@@ -29,12 +29,12 @@ class Base extends Command {
     async run() {
         const modal = new ModalBuilder()
             .setTitle(this.lang.rows.title)
-            .setCustomId("modal_code_execute")
+            .setCustomId("modalCodeExecute")
             .setComponents(
                 new ActionRowBuilder().setComponents(
                     new TextInputBuilder()
                         .setLabel(this.lang.rows.label)
-                        .setCustomId("code_input")
+                        .setCustomId("codeInput")
                         .setPlaceholder(this.lang.rows.placeholder)
                         .setRequired(true)
                         .setStyle(TextInputStyle.Paragraph),
@@ -48,7 +48,7 @@ class Base extends Command {
         }).catch(this.client.util.catchError);
 
         if (modalSubmit !== undefined) {
-            const codeInput = modalSubmit.fields.getTextInputValue("code_input") ?? "";
+            const codeInput = modalSubmit.fields.getTextInputValue("codeInput") ?? "";
 
             const resp = await this.client.util.evalCode(codeInput, this);
             modalSubmit.reply({

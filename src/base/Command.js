@@ -45,7 +45,7 @@ class Command {
     }
 
     async exe() {
-        await this.interaction.reply({ content: this.lang.systems.command.default_reply }).catch(this.client.util.catchError);
+        await this.interaction.reply({ content: this.lang.systems.command.defaultReply }).catch(this.client.util.catchError);
     }
 
     async cooldownReady(forExecuting) {
@@ -58,7 +58,7 @@ class Command {
         if (tStamp < readyForRun) {
             ready = false;
             await this.interaction.reply({
-                content: this.lang.systems.command.cooldown_reply.replace(
+                content: this.lang.systems.command.cooldownReply.replace(
                     "%TIME",
                     new this.client.duration(readyForRun, this.lang._id).convert(readyForRun - tStamp),
                 ),
@@ -85,7 +85,7 @@ class Command {
         if (notFinished.length > 0) {
             ready = false;
             await this.interaction.reply({
-                content: `🛠️ ${this.lang.systems.command.requests_reply}\n\n${
+                content: `🛠️ ${this.lang.systems.command.requestsReply}\n\n${
                     notFinished.map(e => `» **\`${e.name}\`** - <t:${(e.ts / 1000).toFixed(0)}:F>`)
                 }`,
             }).catch(this.client.util.catchError);
@@ -104,9 +104,9 @@ class Command {
         if (!hasPerms) {
             const missingPermissions = requiredPermissions.filter(p => !userPermissions.includes(p));
             await this.interaction.reply({
-                content: `${this.lang.systems.command.no_user_permissions_reply}`
+                content: `${this.lang.systems.command.noUserPermissionsReady}`
                 +
-                `\n${this.lang.systems.command.necessaries_permissions_reply}:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
+                `\n${this.lang.systems.command.necessariesPermissionsReply}:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
             }).catch(this.client.util.catchError);
         }
         return hasPerms;
@@ -124,9 +124,9 @@ class Command {
             const missingPermissions = clientBitfield.filter(p => !clientPermissions.includes(p));
             if (clientMember.has(2048n)) {
                 await this.interaction.reply({
-                    content: `${this.lang.systems.command.no_client_permissions_reply}`
+                    content: `${this.lang.systems.command.noClientPermissionsReply}`
                         +
-                        `\n${this.lang.systems.command.necessaries_permissions_reply}:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
+                        `\n${this.lang.systems.command.necessariesPermissionsReply}:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
                 }).catch(this.client.util.catchError);
             }
         }
@@ -142,7 +142,7 @@ class Command {
         if (Number(userBitField) < Number(commandBitField)) {
             ready = false;
             await this.interaction.reply({
-                content: this.lang.systems.command.no_user_authorization_reply,
+                content: this.lang.systems.command.noUserAuthorizationReply,
             }).catch(this.client.util.catchError);
         }
 
@@ -161,7 +161,7 @@ class Command {
             ready = false;
             if (Number(replyMode) === 1) {
                 await this.interaction.reply({
-                    content: this.lang.systems.command.client_in_maintenance,
+                    content: this.lang.systems.command.clientInMaintenance,
                 }).catch(this.client.util.catchError);
             }
         }
