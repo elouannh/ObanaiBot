@@ -29,6 +29,10 @@ class Obanai extends Client {
         this.util = new Util(this);
         this.log("Starting bot process...");
 
+        this.processManager = new ProcessManager(this);
+        this.registerSlash = this.processManager.getArgv("registerSlash");
+        this.renderTranslations = this.processManager.getArgv("renderTranslations");
+        this.mergeSQLiteTables = this.processManager.getArgv("mergeSQLiteTables");
         this.internalServerManager = new InternalServerManager(this);
         this.pasteGGManager = new PasteGGManager(this);
         this.commandManager = new CommandManager(this);
@@ -44,10 +48,6 @@ class Obanai extends Client {
         this.lastChannelsManager = new CollectionManager(
             this, "lastChannels", this.util.callbackFunction, () => null,
         );
-        this.processManager = new ProcessManager(this);
-        this.registerSlash = this.processManager.getArgv("registerSlash");
-        this.renderTranslations = this.processManager.getArgv("renderTranslations");
-        this.mergeSQLiteTables = this.processManager.getArgv("mergeSQLiteTables");
 
         this.mainLanguage = this.languageManager.getLang("fr");
 
