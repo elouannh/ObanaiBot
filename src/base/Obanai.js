@@ -1,4 +1,4 @@
-const { Client, IntentsBitField, User, Collection, EmbedBuilder } = require("discord.js");
+const { Client, IntentsBitField, User, EmbedBuilder } = require("discord.js");
 const PlayerDb = require("./database/tables/PlayerDb");
 const InventoryDb = require("./database/tables/InventoryDb");
 const SquadDb = require("./database/tables/SquadDb");
@@ -10,8 +10,6 @@ const CommandManager = require("./CommandManager");
 const EventManager = require("./EventManager");
 const Util = require("./Util");
 const Constants = require("./Constants");
-const config = require("../config.json");
-const Package = require("../../package.json");
 const CollectionManager = require("./CollectionManager");
 const LanguageManager = require("./LanguageManager");
 const { PasteGGManager } = require("./PasteGGManager");
@@ -19,6 +17,8 @@ const RPGAssetsManager = require("./RPGAssetsManager");
 const ProcessManager = require("./ProcessManager");
 const SQLiteTableMerger = require("./SQLiteTableMerger");
 const Duration = require("./Duration");
+const config = require("../config.json");
+const _package = require("../../package.json");
 
 class Obanai extends Client {
     constructor() {
@@ -66,7 +66,7 @@ class Obanai extends Client {
         this.constants = Constants;
         this.config = config;
         this.bitfield = 274878286912n;
-        this.version = Package.version;
+        this.version = _package.version;
         this.maxRequests = 30;
 
         this.token = require("../../token.json").token;
