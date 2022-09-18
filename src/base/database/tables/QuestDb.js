@@ -1,5 +1,5 @@
 const SQLiteTable = require("../../SQLiteTable");
-const QuestDatas = require("../subclasses/QuestDatas");
+const QuestDatas = require("../dataclasses/QuestDatas");
 
 function schema(id) {
     return {

@@ -1,5 +1,4 @@
 const Enmap = require("enmap");
-const fs = require("fs");
 
 class SQLiteTableMerger {
     constructor(client, ...tables) {
@@ -110,6 +109,9 @@ class SQLiteTableMerger {
         if (this.tables.includes("squadDb")) {
             const dbs = { a: new Enmap({ name: "squad" }), b: new Enmap({ name: "squadDb" }) };
             dbs.b.destroy();
+        }
+        if (this.tables.includes("internalServerManager")) {
+            new Enmap({ name: "internalServerManager" }).destroy();
         }
     }
 }

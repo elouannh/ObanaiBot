@@ -1,12 +1,13 @@
-const SQLiteTableChangeListener = require('./SQLiteTableChangeListener');
+const SQLiteTableChangeListener = require("../../SQLiteTableChangeListener");
 
 class ActivityListener extends SQLiteTableChangeListener {
     constructor(client) {
-        super(client, client.activityDb);
+        super(client);
     }
 
-    async listener() {
-        console.log("ActivityListener:", this.changes);
+    async listener(key, before, after) {
+        console.log("ActivityListener");
+        console.log("HEYYYY");
     }
 }
 

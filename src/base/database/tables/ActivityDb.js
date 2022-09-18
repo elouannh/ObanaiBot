@@ -1,5 +1,6 @@
 const SQLiteTable = require("../../SQLiteTable");
-const ActivityDatas = require("../subclasses/ActivityDatas");
+const ActivityDatas = require("../dataclasses/ActivityDatas");
+const ActivityListener = require("../listeners/ActivityListener");
 
 function schema(id) {
     return {
@@ -57,7 +58,7 @@ function schema(id) {
 
 class ActivityDb extends SQLiteTable {
     constructor(client) {
-        super(client, "activity", schema);
+        super(client, "activity", schema, ActivityListener);
     }
 
     async load(id) {

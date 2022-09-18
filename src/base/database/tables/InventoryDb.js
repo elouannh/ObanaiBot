@@ -1,5 +1,5 @@
 const SQLiteTable = require("../../SQLiteTable");
-const InventoryDatas = require("../subclasses/InventoryDatas");
+const InventoryDatas = require("../dataclasses/InventoryDatas");
 
 function schema(id) {
     return {

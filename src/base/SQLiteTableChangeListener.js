@@ -1,11 +1,6 @@
 class SQLiteTableChangeListener {
-    constructor(client, table) {
+    constructor(client) {
         this.client = client;
-        this.table = table;
-
-        this.table.changed((key, before, after) => {
-
-        });
     }
 
     propertyAccess(obj, path) {
@@ -20,7 +15,7 @@ class SQLiteTableChangeListener {
         }
     }
 
-    async listener(before, after) {
+    async listener(key, before, after) {
         return { ...before, ...after };
     }
 }

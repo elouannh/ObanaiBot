@@ -1,14 +1,16 @@
 const Enmap = require("enmap");
+const SQLiteTableChangeListener = require("./SQLiteTableChangeListener");
 
 function schema_(...args) {
     return { ...args };
 }
 
 class SQLiteTable {
-    constructor(client, name, schema = schema_) {
+    constructor(client, name, schema = schema_, listenerClass = SQLiteTableChangeListener) {
         this.client = client;
         this.db = new Enmap({ name });
         this.schema = schema;
+        this.db.changed(new listenerClass(client, this).listener);
     }
 
     ensureInDeep(key) {
@@ -26,8 +28,7 @@ class SQLiteTable {
     }
 
     set(key, ...args) {
-        if (!this.db.has(key)) return;
-        this.ensureInDeep(key);
+        if (!this.db.has(key)) return this.ensureInDeep(key);
         return this.db.set(key, ...args);
     }
 

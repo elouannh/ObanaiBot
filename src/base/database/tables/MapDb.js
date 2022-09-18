@@ -1,5 +1,5 @@
 const SQLiteTable = require("../../SQLiteTable");
-const MapDatas = require("../subclasses/MapDatas");
+const MapDatas = require("../dataclasses/MapDatas");
 
 function schema(id) {
     return {

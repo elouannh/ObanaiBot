@@ -59,7 +59,15 @@ class Obanai extends Client {
         this.questDb = new QuestDb(this);
 
         this.SQLiteTableMerger = new SQLiteTableMerger(
-            this, "activityDb", "playerDb", "inventoryDb", "squadDb", "mapDb", "questDb",
+            this,
+            "activityDb",
+            "playerDb",
+            "inventoryDb",
+            "squadDb",
+            "mapDb",
+            "questDb",
+            "externalServerDb",
+            "internalServerManager",
         );
 
         this.duration = Duration;
@@ -72,6 +80,7 @@ class Obanai extends Client {
         this.token = require("../../token.json").token;
         this.eventManager.loadFiles();
         void this.launch();
+
         setInterval(() => this.log("................"), 900_000);
     }
 
