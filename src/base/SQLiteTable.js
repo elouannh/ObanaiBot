@@ -10,7 +10,10 @@ class SQLiteTable {
         this.client = client;
         this.db = new Enmap({ name });
         this.schema = schema;
-        this.db.changed(new listenerClass(client, this).listener);
+        this.db.changed(async (key, oldValue, newValue) => {
+            const listener = new listenerClass(this.client);
+            await listener.listener(key, oldValue, newValue, listener.refreshChanges(oldValue, newValue));
+        });
     }
 
     ensureInDeep(key) {

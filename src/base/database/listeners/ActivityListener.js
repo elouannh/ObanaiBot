@@ -5,9 +5,7 @@ class ActivityListener extends SQLiteTableChangeListener {
         super(client);
     }
 
-    async listener(key, before, after) {
-        console.log("ActivityListener");
-        console.log("HEYYYY");
+    async listener(key, before, after, changes) {
     }
 }
 
