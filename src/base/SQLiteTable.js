@@ -1,5 +1,6 @@
 const Enmap = require("enmap");
 const SQLiteTableChangeListener = require("./SQLiteTableChangeListener");
+const SQLiteTableChangeGroup = require("./SQLiteTableChangeGroup");
 
 function schema_(...args) {
     return { ...args };
@@ -12,7 +13,9 @@ class SQLiteTable {
         this.schema = schema;
         this.db.changed(async (key, oldValue, newValue) => {
             const listener = new listenerClass(this.client);
-            await listener.listener(key, oldValue, newValue, listener.refreshChanges(oldValue, newValue));
+            await listener.listener(
+                key, oldValue, newValue, new SQLiteTableChangeGroup(listener.refreshChanges(oldValue, newValue)),
+            );
         });
     }
 

@@ -5,10 +5,6 @@ class SQLiteTableChangeListener {
         this.client = client;
     }
 
-    propertyAccess(obj, path) {
-        return path.split(".").reduce((prev, curr) => prev ? prev[curr] : undefined, obj);
-    }
-
     refreshChanges(before, after) {
         if (typeof after === "string") {
             if (before !== after) before = new SQLiteTableChange(before, after);

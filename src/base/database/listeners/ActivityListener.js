@@ -6,6 +6,7 @@ class ActivityListener extends SQLiteTableChangeListener {
     }
 
     async listener(key, before, after, changes) {
+
     }
 }
 
