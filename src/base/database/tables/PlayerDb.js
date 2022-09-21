@@ -6,6 +6,7 @@ function schema(id) {
         started: false,
         id: id,
         lang: "fr",
+        characterId: "0",
         statistics: {
             agility: 1,
             defense: 1,
