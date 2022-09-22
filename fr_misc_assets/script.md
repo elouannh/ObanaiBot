@@ -32,7 +32,7 @@ pas derrière vous.
 
 Un homme, vêtu d'un haori blanc et noir, dont le visage était bandé, jusqu'au nez, portant un serpent blanc autour de
 son cou et un katana à la main, se tenait devant vous. Il vous regardait d'un air mauvais, et vous demanda :
-- Où est-il ? Il est où le petit démon ?!
+- Où est-il ? Il est où le démon ?!
 - Je... je ne sais pas de quoi vous parlez.
 - Mmf. Laisse tomber. Les morveux(ses) ne comprendront jamais rien. Tu es un Matagi, n'est-ce pas ?
 - Oui, je suis un Matagi.
