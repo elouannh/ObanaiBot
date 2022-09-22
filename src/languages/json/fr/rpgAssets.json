@@ -367,20 +367,19 @@
         "worm": "Ver"
     },
     "questItems": {
-        "remainsOfPierre": "Dépouille de Pierre",
-        "himeHairStrand": "Mèche de cheveux d'Hime"
+        "test": "Test"
     },
     "characters": {
         "0": {
-            "label": "Personnage principal",
+            "label": "Frère de Yamamoto Minori",
             "description": ""
         },
         "1": {
-            "label": "Soeur de Min",
+            "label": "Soeur de Yamamoto Kenta",
             "description": ""
         },
         "2": {
-            "label": "Pourfendeur de rang Mizunoto",
+            "label": "Formateur",
             "description": ""
         },
         "3": {
