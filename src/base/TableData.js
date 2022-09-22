@@ -1,7 +1,7 @@
-class TableDatas {
-    constructor(client, datas) {
+class TableData {
+    constructor(client, data) {
         this.client = client;
-        this.datas = datas;
+        this.data = data;
     }
 
     load() {
@@ -9,13 +9,13 @@ class TableDatas {
     }
 
     overwrite() {
-        const datas = this.datas;
+        const data = this.data;
         for (const key in this) {
             if (typeof this[key] !== "function") delete this[key];
         }
-        Object.assign(this, datas);
+        Object.assign(this, data);
     }
 
 }
 
-module.exports = TableDatas;
+module.exports = TableData;

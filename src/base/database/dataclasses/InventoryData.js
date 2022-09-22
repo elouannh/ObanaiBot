@@ -1,8 +1,8 @@
-const TableDatas = require("../../TableDatas");
+const TableData = require("../../TableData");
 
-class InventoryDatas extends TableDatas {
-    constructor(client, inventoryDatas, lang) {
-        super(client, inventoryDatas);
+class InventoryData extends TableData {
+    constructor(client, inventoryData, lang) {
+        super(client, inventoryData);
 
         this.lang = lang;
 
@@ -11,13 +11,13 @@ class InventoryDatas extends TableDatas {
     }
 
     load() {
-        this.datas.kasugaiCrow = this.client.RPGAssetsManager.loadKasugaiCrow(this.lang, this.datas.kasugaiCrow);
-        this.datas.enchantedGrimoire = this.client.RPGAssetsManager.loadEnchantedGrimoire(this.lang, this.datas.enchantedGrimoire);
-        this.datas.weapon = this.client.RPGAssetsManager.getWeapon(this.lang, this.datas.weapon.id, this.datas.weapon.rarity);
+        this.data.kasugaiCrow = this.client.RPGAssetsManager.loadKasugaiCrow(this.lang, this.data.kasugaiCrow);
+        this.data.enchantedGrimoire = this.client.RPGAssetsManager.loadEnchantedGrimoire(this.lang, this.data.enchantedGrimoire);
+        this.data.weapon = this.client.RPGAssetsManager.getWeapon(this.lang, this.data.weapon.id, this.data.weapon.rarity);
 
-        const newItems = this.datas.items;
+        const newItems = this.data.items;
 
-        for (const enchantedGrimoireKey in this.datas.items.enchantedGrimoires) {
+        for (const enchantedGrimoireKey in this.data.items.enchantedGrimoires) {
             const enchantedGrimoireAmount = newItems.enchantedGrimoires[enchantedGrimoireKey];
             const enchantedGrimoireList = [];
             for (let i = 0; i < enchantedGrimoireAmount; i++) {
@@ -26,7 +26,7 @@ class InventoryDatas extends TableDatas {
             newItems.enchantedGrimoires[enchantedGrimoireKey] = { list: enchantedGrimoireList, amount: enchantedGrimoireAmount };
         }
 
-        for (const materialKey in this.datas.items.materials) {
+        for (const materialKey in this.data.items.materials) {
             const materialAmount = newItems.materials[materialKey];
             const materialList = [];
             for (let i = 0; i < materialAmount; i++) {
@@ -35,7 +35,7 @@ class InventoryDatas extends TableDatas {
             newItems.materials[materialKey] = { list: materialList, amount: materialAmount };
         }
 
-        for (const questItemKey in this.datas.items.questItems) {
+        for (const questItemKey in this.data.items.questItems) {
             const questItemAmount = newItems.questItems[questItemKey];
             const questItemList = [];
             for (let i = 0; i < questItemAmount; i++) {
@@ -44,8 +44,8 @@ class InventoryDatas extends TableDatas {
             newItems.questItems[questItemKey] = { list: questItemList, amount: questItemAmount };
         }
 
-        for (const weaponKey in this.datas.items.weapons) {
-            for (const weaponRarityKey in this.datas.items.weapons[weaponKey]) {
+        for (const weaponKey in this.data.items.weapons) {
+            for (const weaponRarityKey in this.data.items.weapons[weaponKey]) {
                 const weaponAmount = newItems.weapons[weaponKey][weaponRarityKey];
                 const weaponList = [];
                 for (let i = 0; i < weaponAmount; i++) {
@@ -61,8 +61,8 @@ class InventoryDatas extends TableDatas {
         if ("list" in newItems.weapons) newItems.weapons.list = newItems.weapons.list.sort((a, b) => b.rarity - a.rarity);
         newItems.weapons.totalAmount = newItems.weapons?.list?.length || 0;
 
-        this.datas.items = newItems;
+        this.data.items = newItems;
     }
 }
 
-module.exports = InventoryDatas;
+module.exports = InventoryData;

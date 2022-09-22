@@ -1,14 +1,14 @@
 const RPGAssetBase = require("./RPGAssetBase");
 
 class RPGCharacter extends RPGAssetBase {
-    constructor(lang, id, characterDatas) {
+    constructor(lang, id, characterData) {
         super(lang, id);
 
-        const datas = characterDatas;
-        this.fullName = datas.fullName;
-        this.firstName = datas.firstName;
-        this.lastName = datas.lastName;
-        this.japaneseTranscription = datas.japaneseTranscription;
+        const data = characterData;
+        this.fullName = data.fullName;
+        this.firstName = data.firstName;
+        this.lastName = data.lastName;
+        this.japaneseTranscription = data.japaneseTranscription;
 
         this.label = this.lang.json[this.id].label;
         this.description = this.lang.json[this.id].description;

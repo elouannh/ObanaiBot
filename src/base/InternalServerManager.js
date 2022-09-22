@@ -76,6 +76,15 @@ class InternalServerManager extends SQLiteTable {
         }
         return bitfield;
     }
+
+    async questGenerator() {
+        const players = this.client.playerDb.db.array();
+
+        for (const player of players) {
+            this.client.questDb.ensureInDeep(player.id);
+            const quest = this.client.questDb.get(player.id);
+        }
+    }
 }
 
 module.exports = InternalServerManager;

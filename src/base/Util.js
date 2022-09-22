@@ -84,7 +84,7 @@ class Util {
     }
 
     dateRender(date, full) {
-        const datas = {
+        const data = {
             day: String(date.getDate()),
             month: String(date.getMonth() + 1),
             year: String(date.getFullYear()),
@@ -93,28 +93,28 @@ class Util {
             sec: String(date.getSeconds()),
         };
 
-        if (datas.day.length < 2) datas.day = "0" + datas.day;
-        if (datas.month.length < 2) datas.month = "0" + datas.month;
-        if (datas.hour.length < 2) datas.hour = "0" + datas.hour;
-        if (datas.min.length < 2) datas.min = "0" + datas.min;
-        if (datas.sec.length < 2) datas.sec = "0" + datas.sec;
-        return `${datas.day}/${datas.month}/${datas.year}` + (full ? ` ${datas.hour}:${datas.min}:${datas.sec}` : "");
+        if (data.day.length < 2) data.day = "0" + data.day;
+        if (data.month.length < 2) data.month = "0" + data.month;
+        if (data.hour.length < 2) data.hour = "0" + data.hour;
+        if (data.min.length < 2) data.min = "0" + data.min;
+        if (data.sec.length < 2) data.sec = "0" + data.sec;
+        return `${data.day}/${data.month}/${data.year}` + (full ? ` ${data.hour}:${data.min}:${data.sec}` : "");
     }
 
     randomSquadNameGenerator() {}
 
     compareArrays(firstArray = [], secondArray = []) {
-        const datas = {
+        const data = {
             added: [],
             removed: [],
             unchanged: [],
         };
 
-        datas.added = secondArray.filter(element => !firstArray.includes(element));
-        datas.removed = firstArray.filter(element => !secondArray.includes(element));
-        datas.unchanged = secondArray.filter(element => firstArray.includes(element));
+        data.added = secondArray.filter(element => !firstArray.includes(element));
+        data.removed = firstArray.filter(element => !secondArray.includes(element));
+        data.unchanged = secondArray.filter(element => firstArray.includes(element));
 
-        return datas;
+        return data;
     }
 
     catchError(error) {

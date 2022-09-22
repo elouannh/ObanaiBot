@@ -25,54 +25,54 @@ class RPGAssetsManager {
         this.statistics = require(`../${this.dir}/statistics.json`);
     }
 
-    getLangDatas(lang, file = null) {
+    getLangData(lang, file = null) {
         const langFile = this.client.languageManager.getLang(lang).json.rpgAssets;
-        const datas = {
+        const data = {
             id: lang,
             json: langFile,
         };
 
-        if (file !== null && file in langFile) datas.json = langFile[file];
+        if (file !== null && file in langFile) data.json = langFile[file];
 
-        return datas;
+        return data;
     }
 
     getBreathingStyle(lang, id) {
         if (!(id in this.breathingStyles)) return "Invalid Breathing Style ID";
-        return new RPGBreathingStyle(this.getLangDatas(lang, "breathingStyles"), id);
+        return new RPGBreathingStyle(this.getLangData(lang, "breathingStyles"), id);
     }
 
     getEnchantedGrimoire(lang, id) {
         if (!(id in this.enchantedGrimoires)) return "Invalid Grimoire ID";
-        return new RPGEnchantedGrimoire(this.getLangDatas(lang, "enchantedGrimoires"), id, this.enchantedGrimoires[id]);
+        return new RPGEnchantedGrimoire(this.getLangData(lang, "enchantedGrimoires"), id, this.enchantedGrimoires[id]);
     }
 
-    loadEnchantedGrimoire(lang, enchantedGrimoireDatas) {
-        if (!(enchantedGrimoireDatas.id in this.enchantedGrimoires)) return "Invalid Grimoire ID";
+    loadEnchantedGrimoire(lang, enchantedGrimoireData) {
+        if (!(enchantedGrimoireData.id in this.enchantedGrimoires)) return "Invalid Grimoire ID";
         return new RPGEnchantedGrimoire(
-            this.getLangDatas(lang, "enchantedGrimoires"),
-            enchantedGrimoireDatas.id,
-            Object.assign(this.enchantedGrimoires[enchantedGrimoireDatas.id], { "activeSince": enchantedGrimoireDatas.activeSince }),
+            this.getLangData(lang, "enchantedGrimoires"),
+            enchantedGrimoireData.id,
+            Object.assign(this.enchantedGrimoires[enchantedGrimoireData.id], { "activeSince": enchantedGrimoireData.activeSince }),
         );
     }
 
     getKasugaiCrow(lang, id) {
         if (!(id in this.kasugaiCrows)) return "Invalid Kasugai Crow ID";
-        return new RPGKasugaiCrow(this.getLangDatas(lang, "kasugaiCrows"), id, this.kasugaiCrows[id]);
+        return new RPGKasugaiCrow(this.getLangData(lang, "kasugaiCrows"), id, this.kasugaiCrows[id]);
     }
 
-    loadKasugaiCrow(lang, kasugaiCrowDatas) {
-        if (!(kasugaiCrowDatas.id in this.kasugaiCrows)) return "Invalid Kasugai Crow ID";
+    loadKasugaiCrow(lang, kasugaiCrowData) {
+        if (!(kasugaiCrowData.id in this.kasugaiCrows)) return "Invalid Kasugai Crow ID";
         return new RPGKasugaiCrow(
-            this.getLangDatas(lang, "kasugaiCrows"),
-            kasugaiCrowDatas.id,
-            Object.assign(this.kasugaiCrows[kasugaiCrowDatas.id], { "exp": kasugaiCrowDatas.exp, "hunger": kasugaiCrowDatas.hunger }),
+            this.getLangData(lang, "kasugaiCrows"),
+            kasugaiCrowData.id,
+            Object.assign(this.kasugaiCrows[kasugaiCrowData.id], { "exp": kasugaiCrowData.exp, "hunger": kasugaiCrowData.hunger }),
         );
     }
 
     getMapRegion(lang, id) {
         if (!(id in this.map.regions)) return "Invalid Map Region ID";
-        return new RPGMapRegion(this.getLangDatas(lang, "map"), id, this.map.regions.filter(e => e.id === id)[0]);
+        return new RPGMapRegion(this.getLangData(lang, "map"), id, this.map.regions.filter(e => e.id === id)[0]);
     }
 
     getMaterial(lang, id) {
@@ -80,9 +80,9 @@ class RPGAssetsManager {
         return new RPGMaterial(
             this,
             {
-                materials: this.getLangDatas(lang, "materials"),
+                materials: this.getLangData(lang, "materials"),
                 biomes: {
-                    json: this.getLangDatas(lang, "map").json.biomes,
+                    json: this.getLangData(lang, "map").json.biomes,
                 },
                 _id: lang,
             },
@@ -93,7 +93,7 @@ class RPGAssetsManager {
 
     getCharacter(lang, id) {
         if (!(id in this.characters)) return "Invalid Character ID";
-        return new RPGCharacter(this.getLangDatas(lang, "characters"), id, this.characters[id]);
+        return new RPGCharacter(this.getLangData(lang, "characters"), id, this.characters[id]);
     }
 
     getPlayerLevel(exp) {
@@ -104,19 +104,19 @@ class RPGAssetsManager {
     getWeapon(lang, weaponId, weaponRarity) {
         if (!(weaponId in this.weapons.types)) return "Invalid Weapon ID";
         if (!(weaponRarity in this.weapons.rarities)) return "Invalid Weapon Rarity ID";
-        return new RPGWeapon(this.getLangDatas(lang, "weapons"), weaponId, weaponRarity);
+        return new RPGWeapon(this.getLangData(lang, "weapons"), weaponId, weaponRarity);
     }
 
     getQuestItem(lang, id) {
         if (!(id in this.questItems)) return "Invalid Quest Item ID";
-        return new RPGQuestItem(this.getLangDatas(lang, "itemQuests"), id);
+        return new RPGQuestItem(this.getLangData(lang, "itemQuests"), id);
     }
 
     getStatistic(lang, statisticId, statisticLevel) {
         if (!(statisticId in this.statistics.names)) return "Invalid Statistic ID";
         if (Number(statisticLevel) < 0 || Number(statisticLevel) > 100) return "Invalid Statistic Level";
         return new RPGStatistic(
-            this.getLangDatas(lang, "statistics"),
+            this.getLangData(lang, "statistics"),
             statisticId,
             statisticLevel,
             this.statistics.trainingTimes[String(statisticLevel + (statisticLevel === 100 ? 0 : 1))],

@@ -1,5 +1,5 @@
 const SQLiteTable = require("../../SQLiteTable");
-const MapDatas = require("../dataclasses/MapDatas");
+const MapData = require("../dataclasses/MapData");
 
 function schema(id) {
     return {
@@ -16,7 +16,7 @@ class MapDb extends SQLiteTable {
     }
 
     async load(id) {
-        return new MapDatas(this.client, this.get(id), this.client.playerDb.getLang(id));
+        return new MapData(this.client, this.get(id), this.client.playerDb.getLang(id));
     }
 }
 

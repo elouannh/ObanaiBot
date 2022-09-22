@@ -1,5 +1,5 @@
 const SQLiteTable = require("../../SQLiteTable");
-const SquadDatas = require("../dataclasses/SquadDatas");
+const SquadData = require("../dataclasses/SquadData");
 
 function schema(id) {
     return {
@@ -29,16 +29,16 @@ class SquadDb extends SQLiteTable {
     }
 
     async create(squadName, founder) {
-        const squadDatas = this.schema(this.idGenerator());
-        squadDatas.members["0"] = founder;
-        squadDatas.details = { squadName, founder, owner: founder };
-        this.ensureInDeep(squadDatas.id, squadDatas);
+        const squadData = this.schema(this.idGenerator());
+        squadData.members["0"] = founder;
+        squadData.details = { squadName, founder, owner: founder };
+        this.ensureInDeep(squadData.id, squadData);
 
-        return this.get(squadDatas.id);
+        return this.get(squadData.id);
     }
 
     async load(id) {
-        return new SquadDatas(this.client, this.get(id), this.client.playerDb.getLang(id));
+        return new SquadData(this.client, this.get(id), this.client.playerDb.getLang(id));
     }
 }
 

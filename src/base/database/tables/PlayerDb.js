@@ -1,5 +1,5 @@
 const SQLiteTable = require("../../SQLiteTable");
-const PlayerDatas = require("../dataclasses/PlayerDatas");
+const PlayerData = require("../dataclasses/PlayerData");
 
 function schema(id) {
     return {
@@ -25,7 +25,7 @@ class PlayerDb extends SQLiteTable {
     }
 
     async load(id) {
-        return new PlayerDatas(this.client, this.get(id), this.client.inventoryDb.get(id));
+        return new PlayerData(this.client, this.get(id), this.client.inventoryDb.get(id));
     }
 
     getLang(id) {

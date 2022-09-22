@@ -1,5 +1,5 @@
 const SQLiteTable = require("../../SQLiteTable");
-const QuestDatas = require("../dataclasses/QuestDatas");
+const QuestData = require("../dataclasses/QuestData");
 
 function schema(id) {
     return {
@@ -28,7 +28,7 @@ class QuestDb extends SQLiteTable {
     }
 
     async load(id) {
-        return new QuestDatas(this.client, this.get(id), this.client.playerDb.getLang(id));
+        return new QuestData(this.client, this.get(id), this.client.playerDb.getLang(id));
     }
 }
 

@@ -62,16 +62,16 @@ class Duration {
     }
 
     convert(render = "short") {
-        const datas = {};
+        const data = {};
         let ms = this.ms;
         for (let i = 0; i < this.format.length;) {
             const unit = this.format[i];
             const duration = this.units.durations[unit];
             const max = this.units.max[unit];
-            if (datas[unit] === undefined) datas[unit] = 0;
+            if (data[unit] === undefined) data[unit] = 0;
 
-            if (ms >= duration && datas[unit] !== max) {
-                datas[unit]++;
+            if (ms >= duration && data[unit] !== max) {
+                data[unit]++;
                 ms -= duration;
                 continue;
             }
@@ -80,15 +80,15 @@ class Duration {
                 const lastDuration = this.units.durations[lastUnit];
 
                 const amountToAdd = Math.floor(ms / lastDuration);
-                datas[lastUnit] += amountToAdd;
+                data[lastUnit] += amountToAdd;
                 ms = Math.floor(ms - (amountToAdd * lastDuration));
             }
 
             i++;
         }
 
-        if (render === "short") return this.format.map(e => `${datas[e]}${this.units[this.lang][e][Number(datas[e] > 1) + 2]}`).join(" ");
-        if (render === "long") return this.format.map(e => `${datas[e]} ${this.units[this.lang][e][Number(datas[e] > 1)]}`).join(" ");
+        if (render === "short") return this.format.map(e => `${data[e]}${this.units[this.lang][e][Number(data[e] > 1) + 2]}`).join(" ");
+        if (render === "long") return this.format.map(e => `${data[e]} ${this.units[this.lang][e][Number(data[e] > 1)]}`).join(" ");
     }
 }
 
