@@ -32,7 +32,7 @@ class Base extends Command {
             dmPermission: true,
             category: "RPG",
             cooldown: 5,
-            finishRequest: ["base"],
+            completedRequests: ["base"],
             authorizationBitField: 0b000,
             permissions: 0n,
         });

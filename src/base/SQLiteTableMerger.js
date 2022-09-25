@@ -74,12 +74,6 @@ class SQLiteTableMerger {
                     if (mat === "weapon_model") mat = "weaponBase";
                     items.materials[mat] = player.materials[key];
                 }
-                for (let mat in items.questItems) {
-                    const key = mat;
-                    if (mat === "hime_hair") mat = "himeHairStrand";
-                    if (mat === "pierre_body") mat = "remainsOfPierre";
-                    items.questItems[mat] = player.questItems[key];
-                }
                 this.client.inventoryDb.db.set(id, items, "items");
             }
 

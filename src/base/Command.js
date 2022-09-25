@@ -13,7 +13,7 @@ class Command {
         dmPermission: true,
         category: "Staff",
         cooldown: 5,
-        finishRequest: ["command"],
+        completedRequests: ["command"],
         authorizationBitField: 0b000,
         permissions: 0n,
     }) {

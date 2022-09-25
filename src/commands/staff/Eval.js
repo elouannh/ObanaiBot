@@ -20,7 +20,7 @@ class Base extends Command {
             dmPermission: true,
             category: "Staff",
             cooldown: 3,
-            finishRequest: [],
+            completedRequests: [],
             authorizationBitField: 0b100,
             permissions: 0n,
         });
