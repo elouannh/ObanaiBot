@@ -2,9 +2,21 @@
     "dailyQuests": {},
     "sideQuests": {},
     "slayerQuests": {
-        "arc0": {
-            "id": "slayerQuests.arc0",
-            "quests": ""
+        "tomes": {
+            "0": {
+                "id": 0,
+                "arcs": {
+                    "0": {
+                        "id": "slayer.tome0.arc0.0",
+                        "objectives": {
+                            "0": "trainStatistic"
+                        },
+                        "rewards": {
+                            "0": { "type": "exp", "amount": 100 }
+                        }
+                    }
+                }
+            }
         }
     }
 }

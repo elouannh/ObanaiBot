@@ -1,8 +1,14 @@
 const RPGAssetBase = require("./RPGAssetBase");
 
 class RPGQuest extends RPGAssetBase {
-    constructor(lang, id) {
+    constructor(lang, id, questData, userData) {
         super(lang, id);
+
+        const data = questData;
+        this.id = data.id;
+        this.tome = data.tome ?? null;
+        this.arc = data.arc ?? null;
+        this.objectives = data.objectives;
     }
 }
 

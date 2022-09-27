@@ -15,8 +15,8 @@ function schema(id) {
             slayerQuest: {},
         },
         storyProgression: {
-            volume: 0,
-            chapter: 0,
+            tome: 0,
+            arc: 0,
             quest: 0,
         },
     };
