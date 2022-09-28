@@ -89,7 +89,8 @@ class SQLiteTableMerger {
             for (const player of dbs.b.array()) {
                 const id = player.id;
                 this.client.playerDb.db.set(id, player);
-                this.client.playerDb.db.set(id, player.stats, "statistics");
+                const stats = { strength: player.stats.strength, defense: player.stats.defense };
+                this.client.playerDb.db.set(id, stats, "statistics");
                 this.client.playerDb.db.set(id, player.breath || "water", "breathingStyle");
                 this.client.playerDb.db.set(id, player.created || Date.now(), "creationDate");
             }

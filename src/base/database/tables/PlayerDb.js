@@ -8,12 +8,10 @@ function schema(id) {
         lang: "fr",
         characterId: "0",
         statistics: {
-            agility: 1,
             defense: 1,
             strength: 1,
-            speed: 1,
         },
-        breathingStyle: "water",
+        breathingStyle: null,
         exp: 0,
         creationDate: Date.now(),
     };

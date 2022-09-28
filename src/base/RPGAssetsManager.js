@@ -8,6 +8,7 @@ const RPGWeapon = require("./subclasses/RPGWeapon");
 const RPGPlayerLevel = require("./subclasses/RPGPlayerLevel");
 const RPGQuestItem = require("./subclasses/RPGQuestItem");
 const RPGStatistic = require("./subclasses/RPGStatistic");
+const RPGQuest = require("./subclasses/RPGQuest");
 
 class RPGAssetsManager {
     constructor(client, dir) {
@@ -23,6 +24,7 @@ class RPGAssetsManager {
         this.weapons = require(`../${this.dir}/weapons.json`);
         this.questItems = require(`../${this.dir}/questItems.json`);
         this.statistics = require(`../${this.dir}/statistics.json`);
+        this.quests = require(`../${this.dir}/quests.json`);
     }
 
     getLangData(lang, file = null) {
@@ -121,6 +123,21 @@ class RPGAssetsManager {
             statisticLevel,
             this.statistics.trainingTimes[String(statisticLevel + (statisticLevel === 100 ? 0 : 1))],
         );
+    }
+
+    getQuest(lang, id) {
+        if (id.startsWith("slayer")) {
+            const [tome, arc, quest] = id.split(".").slice(1);
+            if (!(tome in this.quests.slayerQuests.tomes)) return "Invalid Slayer Quest Tome ID";
+            if (!(arc in this.quests.slayerQuests.tomes[tome].arcs)) return "Invalid Slayer Quest Arc ID";
+            if (!(quest in this.quests.slayerQuests.tomes[tome].arcs[arc].quests)) return "Invalid Slayer Quest ID";
+
+            return new RPGQuest(
+                this.getLangData(lang, "quests"),
+                id,
+                this.quests.slayerQuests.tomes[tome].arcs[arc].quests[quest],
+            );
+        }
     }
 }
 

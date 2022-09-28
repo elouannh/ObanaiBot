@@ -11,7 +11,13 @@ class QuestData extends TableData {
     }
 
     load() {
-        return 0;
+        for (const questsType in this.data.currentQuests) {
+            const questsTypeBranches = this.data.currentQuests[questsType];
+            for (const branchQuest in questsTypeBranches) {
+                const quest = questsTypeBranches[branchQuest];
+                console.log(this.client.RPGAssetsManager.getQuest(this.lang, quest.id));
+            }
+        }
     }
 }
 
