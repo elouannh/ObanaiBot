@@ -135,7 +135,7 @@ class RPGAssetsManager {
             return new RPGQuest(
                 this.getLangData(lang, "quests"),
                 id,
-                this.quests.slayerQuests.tomes[tome].arcs[arc].quests[quest],
+                Object.assign(this.quests.slayerQuests.tomes[tome].arcs[arc].quests[quest], { tome, arc, quest }),
             );
         }
     }
