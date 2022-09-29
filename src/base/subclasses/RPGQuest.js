@@ -10,13 +10,9 @@ class RPGQuest extends RPGAssetBase {
             tome: questData.tome ?? null,
             arc: questData.arc ?? null,
             quest: questData.quest ?? null,
-            objectives: questData.objectives,
+            objectives: Object.entries(questData.objectives).map(([key, value]) => new RPGQuestObjective(this.lang, key, value)),
             rewards: questData.rewards,
         };
-        for (const obj in this.questData.objectives) {
-            const objective = this.questData.objectives[obj];
-            this.questData.objectives[obj] = new RPGQuestObjective(lang, obj, objective.type);
-        }
 
         this.overwrite();
     }
