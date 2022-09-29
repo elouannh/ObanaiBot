@@ -5,6 +5,8 @@ class RPGQuest extends RPGAssetBase {
     constructor(lang, id, questData) {
         super(lang, id);
 
+        console.log(Object.entries(questData.objectives).map(([key, value]) => [key, value]));
+
         this.questData = {
             id: questData.id,
             tome: questData.tome ?? null,
