@@ -1,14 +1,11 @@
 const RPGAssetBase = require("./RPGAssetBase");
-const TrainStatistic = require("./rpg_quest_objectives/TrainStatistic");
-
-const objectives = {
-    trainStatistic: TrainStatistic,
-};
 
 class RPGQuestObjective extends RPGAssetBase {
     constructor(lang, id, type) {
+        const objectives = {
+            trainStatistic: require("./rpg_quest_objectives/TrainStatistic"),
+        };
         super(lang, id);
-
 
         this.data = {
             type,
@@ -19,11 +16,7 @@ class RPGQuestObjective extends RPGAssetBase {
     }
 
     overwrite() {
-        const data = this.data;
-        for (const key in this) {
-            if (typeof this[key] !== "function") delete this[key];
-        }
-        Object.assign(this, data);
+        Object.assign(this, this.data.objective);
     }
 }
 
