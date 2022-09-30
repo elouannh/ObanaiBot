@@ -46,7 +46,6 @@ class Base extends Command {
         userId = (await this.client.getUser(userId, user)).userId;
 
         const sq = await this.client.questDb.load(userId);
-        console.log(sq);
 
         const userPDB = await this.client.playerDb.load(userId);
         const userIDB = await this.client.inventoryDb.load(userId);

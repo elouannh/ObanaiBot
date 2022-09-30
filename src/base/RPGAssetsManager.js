@@ -125,7 +125,7 @@ class RPGAssetsManager {
         );
     }
 
-    getQuest(lang, id) {
+    getQuest(lang, id, questData = null) {
         if (id.startsWith("slayer")) {
             const [tome, arc, quest] = id.split(".").slice(1);
             if (!(tome in this.quests.slayerQuests.tomes)) return "Invalid Slayer Quest Tome ID";
@@ -136,6 +136,7 @@ class RPGAssetsManager {
                 this.getLangData(lang, "quests"),
                 id,
                 Object.assign(this.quests.slayerQuests.tomes[tome].arcs[arc].quests[quest], { tome, arc, quest }),
+                questData,
             );
         }
     }

@@ -1,8 +1,10 @@
-const RPGQuestObjective = require("../RPGQuestObjective");
+class TrainStatistic {
+    constructor(lang, id, objectiveDatas) {
+        this.lang = lang;
+        this.id = id;
+        this.objectiveDatas = objectiveDatas;
 
-class TrainStatistic extends RPGQuestObjective {
-    constructor(lang, id) {
-        super(lang, id, "trainStatistic");
+        console.log(objectiveDatas);
     }
 }
 

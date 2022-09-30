@@ -2,19 +2,29 @@ const RPGAssetBase = require("./RPGAssetBase");
 const RPGQuestObjective = require("./RPGQuestObjective");
 
 class RPGQuest extends RPGAssetBase {
-    constructor(lang, id, questData) {
+    constructor(lang, id, questData, userData) {
         super(lang, id);
-
-        console.log(Object.entries(questData.objectives).map(([key, value]) => [key, value]));
 
         this.questData = {
             id: questData.id,
             tome: questData.tome ?? null,
             arc: questData.arc ?? null,
             quest: questData.quest ?? null,
-            objectives: Object.entries(questData.objectives).map(([key, value]) => new RPGQuestObjective(this.lang, key, value)),
+            objectives: [],
             rewards: questData.rewards,
         };
+        for (let objective in questData.objectives) {
+            if (userData !== null) {
+                const userProgress = userData.objectives[objective];
+                const additionalData = Object.assign(
+                    questData.objectives[objective].additionalData, userProgress.additionalData,
+                );
+                Object.assign(questData.objectives[objective], userProgress);
+                Object.assign(questData.objectives[objective].additionalData, additionalData);
+            }
+            objective = questData.objectives[objective];
+            this.questData.objectives.push(new RPGQuestObjective(lang, objective.type, objective));
+        }
 
         this.overwrite();
     }

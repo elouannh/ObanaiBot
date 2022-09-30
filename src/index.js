@@ -20,6 +20,7 @@ const datas = {
 obanai.questDb.set("539842701592494111", {}, "currentQuests.slayerQuest");
 obanai.questDb.set("539842701592494111", { "main": datas }, "currentQuests.slayerQuest");
 
+
 obanai.questDb.load("539842701592494111").then((data) => {
-    console.log(data.currentQuests.slayerQuest.main.objectives.map(e => e.objectiveData));
+    console.log(data.currentQuests.slayerQuest.main.objectives);
 });

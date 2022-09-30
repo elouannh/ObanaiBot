@@ -15,7 +15,7 @@ class QuestData extends TableData {
             const questsTypeBranches = this.data.currentQuests[questsType];
             for (const branchQuest in questsTypeBranches) {
                 const quest = questsTypeBranches[branchQuest];
-                questsTypeBranches[branchQuest] = this.client.RPGAssetsManager.getQuest(this.lang, quest.id);
+                questsTypeBranches[branchQuest] = this.client.RPGAssetsManager.getQuest(this.lang, quest.id, quest);
             }
         }
     }
