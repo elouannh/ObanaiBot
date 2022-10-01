@@ -2,35 +2,29 @@
     "dailyQuests": {},
     "sideQuests": {},
     "slayerQuests": {
-        "tomes": {
+        "0": {
             "0": {
-                "arcs": {
-                    "0": {
-                        "quests": {
-                            "0": {
-                                "id": "slayer.0.0.0",
-                                "objectives": {
-                                    "0": {
-                                        "type": "trainStatistic",
-                                        "additionalData": {
-                                            "statistic": "strength",
-                                            "levelToReach": 4
-                                        }
-                                    },
-                                    "1": {
-                                        "type": "trainStatistic",
-                                        "additionalData": {
-                                            "statistic": "defense",
-                                            "levelToReach": 7
-                                        }
-                                    }
-                                },
-                                "rewards": {
-                                    "0": { "type": "exp", "amount": 100 },
-                                    "1": { "type": "exp", "amount": 200 }
-                                }
+                "0": {
+                    "id": "slayer.0.0.0",
+                    "objectives": {
+                        "0": {
+                            "type": "trainStatistic",
+                            "additionalData": {
+                                "statistic": "strength",
+                                "levelToReach": 4
+                            }
+                        },
+                        "1": {
+                            "type": "trainStatistic",
+                            "additionalData": {
+                                "statistic": "defense",
+                                "levelToReach": 7
                             }
                         }
+                    },
+                    "rewards": {
+                        "0": { "0": { "type": "exp", "amount": 100 }},
+                        "1": { "0": { "type": "exp", "amount": 200 }}
                     }
                 }
             }

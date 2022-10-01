@@ -11,7 +11,7 @@ class RPGQuest extends RPGAssetBase {
             arc: questData.arc ?? null,
             quest: questData.quest ?? null,
             objectives: [],
-            rewards: questData.rewards,
+            rewards: [],
         };
         for (let objective in questData.objectives) {
             if (userData !== null) {
@@ -24,6 +24,9 @@ class RPGQuest extends RPGAssetBase {
             }
             objective = questData.objectives[objective];
             this.questData.objectives.push(new RPGQuestObjective(lang, objective.type, objective));
+        }
+        for (const reward in questData.rewards) {
+            this.questData.rewards.push(Object.values(questData.rewards[reward]));
         }
 
         this.overwrite();
