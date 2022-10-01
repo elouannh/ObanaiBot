@@ -2,25 +2,25 @@ const { ActivityType } = require("discord.js");
 const Event = require("../base/Event");
 
 class Ready extends Event {
-	constructor() {
+	constructor(client) {
 		super({
 			name: "ready",
 			once: true,
-		});
+		}, client);
 	}
 
-	async exe(client) {
-		await client.commandManager.loadFiles();
-		client.log(`Bot connecté en tant que ${client.user.tag} !`);
+	async exe() {
+		await this.client.commandManager.loadFiles();
+		this.client.log(`Bot connecté en tant que ${this.client.user.tag} !`);
 
 		try {
 			let statusIndex = 0;
 			setInterval(() => {
 				const activities = [
 					{ name: "🌐 Multilingue/Multilingual", type: ActivityType.Competing },
-					{ name: `Version ${client.version}`, type: ActivityType.Watching },
+					{ name: `Version ${this.client.version}`, type: ActivityType.Watching },
 				];
-				client.user.setPresence({
+				this.client.user.setPresence({
 					activities: [activities[statusIndex]],
 					status: "online",
 				});
@@ -28,15 +28,13 @@ class Ready extends Event {
 			}, 15_000);
 
 			try {
-				await client.internalServerManager.questGenerator();
+				await this.client.internalServerManager.questGenerator();
 			}
 			catch (err) {
-				await this.interaction.reply({ content: ":x: **An error occurred.**" }).catch(this.client.util.catchError);
-				await this.client.throwError(err, "Origin: @Read.InternalServerManager");
+				await this.client.throwError(err, "Origin: @Ready.InternalServerManager");
 			}
 		}
 		catch (err) {
-			await this.interaction.reply({ content: ":x: **An error occurred.**" }).catch(this.client.util.catchError);
 			await this.client.throwError(err, "Origin: @Event.Ready");
 		}
 	}

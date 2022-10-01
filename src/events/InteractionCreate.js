@@ -1,19 +1,17 @@
 const Event = require("../base/Event");
 
 class InteractionCreate extends Event {
-    constructor() {
+    constructor(client) {
         super({
             name: "interactionCreate",
             once: false,
-        });
-        this.client = null;
+        }, client);
         this.interaction = null;
     }
 
-    async exe(client, interaction) {
+    async exe(interaction) {
         if (interaction.user.bot) return;
 
-        this.client = client;
         this.interaction = interaction;
 
         if (this.interaction.isChatInputCommand()) {

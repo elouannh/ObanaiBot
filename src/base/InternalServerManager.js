@@ -82,11 +82,12 @@ class InternalServerManager extends SQLiteTable {
 
         for (const player of players) {
             this.client.questDb.ensureInDeep(player.id);
-            const quest = this.client.questDb.get(player.id);
+            const questData = await this.client.questDb.load(player.id);
 
-            console.log(quest);
-
-            const currentQuests = quest.currentQuests;
+            if (questData.currentQuests.slayerAmount === 0) {
+                const userQuest = questData.storyProgression;
+                this.client.questDb.setSlayerQuest(player.id, userQuest.tome, userQuest.arc, userQuest.quest);
+            }
         }
     }
 }

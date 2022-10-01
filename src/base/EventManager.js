@@ -9,7 +9,7 @@ class EventManager {
     loadFiles() {
         const eventFolder = fs.readdirSync(this.dir);
         eventFolder.forEach(async file => {
-            const event = new (require(`../events/${file}`))();
+            const event = new (require(`../events/${file}`))(this.client);
             let method = "on";
             if (event.eventInfos.once) method += "ce";
 

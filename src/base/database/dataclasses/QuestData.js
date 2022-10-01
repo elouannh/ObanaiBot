@@ -11,13 +11,18 @@ class QuestData extends TableData {
     }
 
     load() {
-        for (const questsType in this.data.currentQuests) {
-            const questsTypeBranches = this.data.currentQuests[questsType];
-            for (const branchQuest in questsTypeBranches) {
-                const quest = questsTypeBranches[branchQuest];
-                questsTypeBranches[branchQuest] = this.client.RPGAssetsManager.getQuest(this.lang, quest.id, quest);
+        for (const questType in this.data.currentQuests) {
+            const questsInType = this.data.currentQuests[questType];
+            const questsTypeArray = [];
+            for (const questId in questsInType) {
+                const quest = questsInType[questId];
+                questsTypeArray.push(this.client.RPGAssetsManager.getQuest(this.lang, quest.id, quest));
             }
+            this.data.currentQuests[questType] = questsTypeArray;
         }
+        this.data.currentQuests.dailyAmount = this.data.currentQuests.dailyQuests.length;
+        this.data.currentQuests.sideAmount = this.data.currentQuests.sideQuests.length;
+        this.data.currentQuests.slayerAmount = this.data.currentQuests.slayerQuest.length;
     }
 }
 
