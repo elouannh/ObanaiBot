@@ -5,5 +5,5 @@ obanai.internalServerManager.set("main", ["539842701592494111"], "staff.administ
 obanai.internalServerManager.set("main", ["539842701592494111"], "staff.moderators");
 
 obanai.questDb.load("539842701592494111").then((data) => {
-    console.log(data);
+    // console.log(data);
 });
