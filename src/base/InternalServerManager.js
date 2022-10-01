@@ -79,10 +79,13 @@ class InternalServerManager extends SQLiteTable {
 
     async questGenerator() {
         const players = this.client.playerDb.db.array();
+        console.log(players);
 
         for (const player of players) {
+            console.log(player);
             this.client.questDb.ensureInDeep(player.id);
             const quest = this.client.questDb.get(player.id);
+            console.log(quest);
         }
     }
 }

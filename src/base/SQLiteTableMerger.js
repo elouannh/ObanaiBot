@@ -28,8 +28,8 @@ class SQLiteTableMerger {
 
             for (const player of dbs.b.array()) {
                 const id = player.id;
-                this.client.inventoryDb.db.set(id, player);
-                this.client.inventoryDb.db.set(id, player.yens, "wallet");
+                dbs.a.set(id, player);
+                dbs.a.set(id, player.yens, "wallet");
                 const newCrow = {
                     id: player.kasugai_crow || player.kasugaiCrow?.id || "basicCrow",
                     exp: player.kasugai_crow_exp || player.kasugaiCrow?.exp || 0,
@@ -38,17 +38,17 @@ class SQLiteTableMerger {
                 if (newCrow.id === "kasugai_evolved") newCrow.id = "evolvedCrow";
                 if (newCrow.id === "kasugai_proud") newCrow.id = "proudCrow";
                 if (newCrow.id === "kasugai_simple") newCrow.id = "basicCrow";
-                this.client.inventoryDb.db.set(id, newCrow, "kasugaiCrow");
+                dbs.a.set(id, newCrow, "kasugaiCrow");
                 const newGrimoire = {
                     id: player.active_grimoire || player.enchantedGrimoire?.id || null,
                     activeSince: player.active_grimoire_since || player.enchantedGrimoire?.activeSince || 0,
                 };
-                this.client.inventoryDb.db.set(id, newGrimoire, "enchantedGrimoire");
+                dbs.a.set(id, newGrimoire, "enchantedGrimoire");
                 const newWeapon = {
                     id: "katana",
                     rarity: String(player.weapon.rarity) || "3",
                 };
-                this.client.inventoryDb.db.set(id, newWeapon, "weapon");
+                dbs.a.set(id, newWeapon, "weapon");
                 const items = {
                     enchantedGrimoires: player.grimoires,
                     materials: {},
@@ -74,7 +74,7 @@ class SQLiteTableMerger {
                     if (mat === "weapon_model") mat = "weaponBase";
                     items.materials[mat] = player.materials[key];
                 }
-                this.client.inventoryDb.db.set(id, items, "items");
+                dbs.a.set(id, items, "items");
             }
 
             dbs.b.destroy();
@@ -86,13 +86,15 @@ class SQLiteTableMerger {
         if (this.tables.includes("playerDb")) {
             const dbs = { a: new Enmap({ name: "player" }), b: new Enmap({ name: "playerDb" }) };
 
+            console.log(dbs.b.array());
+
             for (const player of dbs.b.array()) {
                 const id = player.id;
-                this.client.playerDb.db.set(id, player);
+                dbs.a.set(id, player);
                 const stats = { strength: player.stats.strength, defense: player.stats.defense };
-                this.client.playerDb.db.set(id, stats, "statistics");
-                this.client.playerDb.db.set(id, player.breath || "water", "breathingStyle");
-                this.client.playerDb.db.set(id, player.created || Date.now(), "creationDate");
+                dbs.a.set(id, stats, "statistics");
+                dbs.a.set(id, player.breath || "water", "breathingStyle");
+                dbs.a.set(id, player.created || Date.now(), "creationDate");
             }
 
             dbs.b.destroy();

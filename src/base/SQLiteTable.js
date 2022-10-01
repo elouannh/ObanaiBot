@@ -11,12 +11,14 @@ class SQLiteTable {
         this.client = client;
         this.db = new Enmap({ name });
         this.schema = schema;
-        this.db.changed(async (key, oldValue, newValue) => {
-            const listener = new listenerClass(this.client);
-            await listener.listener(
-                key, oldValue, newValue, new SQLiteTableChangeGroup(listener.refreshChanges(oldValue, newValue)),
-            );
-        });
+        if (this.client.mergeSQLiteTables !== "true") {
+            this.db.changed(async (key, oldValue, newValue) => {
+                const listener = new listenerClass(this.client);
+                await listener.listener(
+                    key, oldValue, newValue, new SQLiteTableChangeGroup(listener.refreshChanges(oldValue, newValue)),
+                );
+            });
+        }
     }
 
     ensureInDeep(key) {
