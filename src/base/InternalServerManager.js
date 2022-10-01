@@ -71,6 +71,10 @@ class InternalServerManager extends SQLiteTable {
         return this.main.status.mode;
     }
 
+    get lastDailyQuestGeneration() {
+        return this.main.delays.dailyQuestGeneration;
+    }
+
     userBitField(userId) {
         let bitfield = "0b";
         for (const grade of ["owners", "administrators", "moderators"]) {
@@ -93,11 +97,13 @@ class InternalServerManager extends SQLiteTable {
             }
 
             if (questData.currentQuests.dailyAmount === 0) {
-                const quests = Object.keys(this.client.RPGAssetsManager.quests.dailyQuests)
-                    .sort(() => Math.random() - 0.5)
-                    .slice(0, 2);
-                this.client.questDb.setDailyQuest(player.id, quests[0], "0");
-                this.client.questDb.setDailyQuest(player.id, quests[1], "1");
+                if (this.lastDailyQuestGeneration + 86400000 < Date.now()) {
+                    const quests = Object.keys(this.client.RPGAssetsManager.quests.dailyQuests)
+                        .sort(() => Math.random() - 0.5)
+                        .slice(0, 2);
+
+                    for (let i = 0; i < 2; i++) this.client.questDb.setDailyQuest(player.id, quests[i], `${i}`);
+                }
             }
         }
     }
