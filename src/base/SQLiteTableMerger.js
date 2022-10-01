@@ -28,7 +28,7 @@ class SQLiteTableMerger {
 
             for (const player of dbs.b.array()) {
                 const id = player.id;
-                dbs.a.set(id, player);
+                this.client.inventoryDb.ensureInDeep(id);
                 dbs.a.set(id, player.yens, "wallet");
                 const newCrow = {
                     id: player.kasugai_crow || player.kasugaiCrow?.id || "basicCrow",
@@ -77,6 +77,8 @@ class SQLiteTableMerger {
                 dbs.a.set(id, items, "items");
             }
 
+            console.log(dbs.a.array());
+
             dbs.b.destroy();
         }
         if (this.tables.includes("mapDb")) {
@@ -86,11 +88,12 @@ class SQLiteTableMerger {
         if (this.tables.includes("playerDb")) {
             const dbs = { a: new Enmap({ name: "player" }), b: new Enmap({ name: "playerDb" }) };
 
-            console.log(dbs.b.array());
-
             for (const player of dbs.b.array()) {
                 const id = player.id;
-                dbs.a.set(id, player);
+                this.client.playerDb.ensureInDeep(id);
+                dbs.a.set(id, player.started, "started");
+                dbs.a.set(id, player.id, "id");
+                dbs.a.set(id, player.lang, "lang");
                 const stats = { strength: player.stats.strength, defense: player.stats.defense };
                 dbs.a.set(id, stats, "statistics");
                 dbs.a.set(id, player.breath || "water", "breathingStyle");
