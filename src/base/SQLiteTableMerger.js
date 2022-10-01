@@ -77,8 +77,6 @@ class SQLiteTableMerger {
                 dbs.a.set(id, items, "items");
             }
 
-            console.log(dbs.a.array());
-
             dbs.b.destroy();
         }
         if (this.tables.includes("mapDb")) {
