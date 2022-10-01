@@ -23,7 +23,7 @@ const _package = require("../../package.json");
 class Obanai extends Client {
     constructor() {
         super({
-            intents: new IntentsBitField().add("GuildMessages", "GuildMembers", "Guilds"),
+            intents: new IntentsBitField().add("Guilds"),
             failIfNotExists: false,
         });
         this.util = new Util(this);

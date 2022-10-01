@@ -12,12 +12,19 @@ class Ready extends Event {
 	async exe(client) {
 		await client.commandManager.loadFiles();
 		client.log(`Bot connecté en tant que ${client.user.tag} !`);
-		client.user.setPresence({
-			activities: [
-				{ name: `version ${client.version}`, type: ActivityType.Watching },
-			],
-			status: "online",
-		});
+
+		let statusIndex = 0;
+		setInterval(() => {
+			const activities = [
+				{ name: "🌐 Multilingue/Multilingual", type: ActivityType.Competing },
+				{ name: `Version ${client.version}`, type: ActivityType.Watching },
+			];
+			client.user.setPresence({
+				activities: [activities[statusIndex]],
+				status: "online",
+			});
+			statusIndex += (statusIndex === (activities.length - 1) ? -statusIndex : 1);
+		}, 15_000);
 	}
 }
 
