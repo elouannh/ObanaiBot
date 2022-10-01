@@ -125,8 +125,6 @@ class InternalServerManager extends SQLiteTable {
         let delay = 86400000 - (Date.now() - this.lastDailyQuestGeneration);
         if (Date.now() - this.lastDailyQuestGeneration > 86400000) delay = 0;
 
-        console.log(delay);
-
         setTimeout(async () => {
             this.setLastDailyQuestGeneration(Date.now());
             await this.dailyQuestGenerator();
