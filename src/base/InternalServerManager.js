@@ -14,6 +14,9 @@ function schema() {
             latency: 0,
             mode: "0b0000",
         },
+        delays: {
+            dailyQuestGeneration: Date.now() - 86400000,
+        },
     };
 }
 
@@ -87,6 +90,14 @@ class InternalServerManager extends SQLiteTable {
             if (questData.currentQuests.slayerAmount === 0) {
                 const userQuest = questData.storyProgression;
                 this.client.questDb.setSlayerQuest(player.id, userQuest.tome, userQuest.arc, userQuest.quest);
+            }
+
+            if (questData.currentQuests.dailyAmount === 0) {
+                const quests = Object.keys(this.client.RPGAssetsManager.quests.dailyQuests)
+                    .sort(() => Math.random() - 0.5)
+                    .slice(0, 2);
+                this.client.questDb.setDailyQuest(player.id, quests[0], "0");
+                this.client.questDb.setDailyQuest(player.id, quests[1], "1");
             }
         }
     }

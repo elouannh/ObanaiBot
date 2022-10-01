@@ -54,6 +54,17 @@ class QuestDb extends SQLiteTable {
             `currentQuests.slayerQuest.${branch}`,
         );
     }
+
+    setDailyQuest(id, questId, branch = "0") {
+        const dailyQuestId = `daily.${questId}`;
+        const dailyQuest = this.client.RPGAssetsManager.getQuest(this.client.playerDb.getLang(id), dailyQuestId);
+
+        this.set(
+            id,
+            dailyQuest,
+            `currentQuests.dailyQuests.${branch}`,
+        );
+    }
 }
 
 module.exports = QuestDb;

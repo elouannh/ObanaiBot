@@ -139,6 +139,16 @@ class RPGAssetsManager {
                 questData,
             );
         }
+        else if (id.startsWith("daily")) {
+            const questId = id.split(".")[1];
+
+            return new RPGQuest(
+                this.getLangData(lang, "quests"),
+                id,
+                this.quests.dailyQuests[questId],
+                questData,
+            );
+        }
     }
 }
 
