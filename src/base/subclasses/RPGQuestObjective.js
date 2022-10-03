@@ -7,8 +7,10 @@ class RPGQuestObjective extends RPGAssetBase {
         this.data = {
             type: questObjectiveDatas.type,
             additionalData: questObjectiveDatas.additionalData,
-            completed: questObjectiveDatas.completed,
-            rewardsCollected: questObjectiveDatas.rewardsCollected,
+            user: {
+                completed: questObjectiveDatas.completed,
+                rewardsCollected: questObjectiveDatas.rewardsCollected,
+            },
         };
 
         this.overwrite();

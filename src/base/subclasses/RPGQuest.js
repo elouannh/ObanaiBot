@@ -28,6 +28,7 @@ class RPGQuest extends RPGAssetBase {
         for (const reward in questData.rewards) {
             this.questData.rewards.push(Object.values(questData.rewards[reward]));
         }
+        this.questData.completed = !(this.questData.objectives.map(objective => objective.user.completed).includes(false));
 
         this.overwrite();
     }

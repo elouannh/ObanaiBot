@@ -11,32 +11,20 @@ class QuestData extends TableData {
     }
 
     load() {
-        for (const questType in this.data.currentQuests) {
-            const questsInType = this.data.currentQuests[questType];
-            const questsTypeArray = [];
-            for (const questId in questsInType) {
-                const quest = questsInType[questId];
-                questsTypeArray.push(this.client.RPGAssetsManager.getQuest(this.lang, quest.id, quest));
+        for (const collection of ["currentQuests", "completedQuests"]) {
+            for (const questType in this.data[collection]) {
+                const questsInType = this.data[collection][questType];
+                const questsTypeArray = [];
+                for (const questId in questsInType) {
+                    const quest = questsInType[questId];
+                    questsTypeArray.push(this.client.RPGAssetsManager.getQuest(this.lang, quest.id, quest));
+                }
+                this.data[collection][questType] = questsTypeArray;
             }
-            this.data.currentQuests[questType] = questsTypeArray;
+            this.data[collection].dailyAmount = this.data[collection].dailyQuests.length;
+            this.data[collection].sideAmount = this.data[collection].sideQuests.length;
+            this.data[collection].slayerAmount = this.data[collection].slayerQuest.length;
         }
-        this.data.currentQuests.dailyAmount = this.data.currentQuests.dailyQuests.length;
-        this.data.currentQuests.sideAmount = this.data.currentQuests.sideQuests.length;
-        this.data.currentQuests.slayerAmount = this.data.currentQuests.slayerQuest.length;
-
-        for (const questType in this.data.completedQuests) {
-            const questsInType = this.data.completedQuests[questType];
-            const questsTypeArray = [];
-            for (const questId in questsInType) {
-                const quest = questsInType[questId];
-                questsTypeArray.push(this.client.RPGAssetsManager.getQuest(this.lang, quest.id, quest));
-            }
-            this.data.completedQuests[questType] = questsTypeArray;
-        }
-        this.data.completedQuests.dailyAmount = this.data.completedQuests.dailyQuests.length;
-        this.data.completedQuests.sideAmount = this.data.completedQuests.sideQuests.length;
-        this.data.completedQuests.slayerAmount = this.data.completedQuests.slayerQuest.length;
-
     }
 }
 

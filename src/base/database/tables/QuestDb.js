@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 const SQLiteTable = require("../../SQLiteTable");
 const QuestData = require("../dataclasses/QuestData");
 
@@ -64,6 +65,58 @@ class QuestDb extends SQLiteTable {
             dailyQuest,
             `currentQuests.dailyQuests.${branch}`,
         );
+    }
+
+    async refreshSlayerQuestObjectives(id) {
+        const userQuestData = await this.load(id);
+        if (userQuestData.schemaInstance) return;
+
+        const slayerQuest = userQuestData.currentQuests.slayerQuest[0];
+        if (slayerQuest === null) return;
+
+        const objectives = slayerQuest.objectives;
+        const accomplishedObjectives = {
+            "alreadyAccomplished": [],
+            "newlyAccomplished": [],
+            "notYetCompleted": [],
+        };
+
+        const userData = {};
+
+        for (let i = 0; i < objectives.length; i++) {
+            const o = objectives[i];
+            let completedInDepth = false;
+
+            switch (o.type) {
+                case "trainStatistic":
+                    if (!("player" in userData)) userData["player"] = await this.client.playerDb.load(id);
+
+                    const statistic = o.additionalData.statistic;
+                    const userStatistic = userData["player"].statistics[statistic];
+
+                    if (userStatistic >= o.additionalData.levelToReach) completedInDepth = true;
+                    break;
+                default:
+                    break;
+            }
+
+            const binaryCondition = `0b${Number(o.user.completed)}${Number(completedInDepth)}`;
+            switch (binaryCondition) {
+                case "0b00":
+                    accomplishedObjectives.notYetCompleted.push(i);
+                    break;
+                case "0b01":
+                    accomplishedObjectives.newlyAccomplished.push(i);
+                    break;
+                case "0b10":
+                case "0b11":
+                    accomplishedObjectives.alreadyAccomplished.push(i);
+                    break;
+                default:
+                    break;
+            }
+
+        }
     }
 }
 
