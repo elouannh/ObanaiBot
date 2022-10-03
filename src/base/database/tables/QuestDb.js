@@ -67,6 +67,14 @@ class QuestDb extends SQLiteTable {
         );
     }
 
+    setSlayerQuestObjectiveAccomplished(id, objectiveId) {
+        this.set(
+            id,
+            true,
+            `currentQuests.slayerQuest.main.objectives.${objectiveId}.completed`,
+        );
+    }
+
     async refreshSlayerQuestObjectives(id) {
         const userQuestData = await this.load(id);
         if (userQuestData.schemaInstance) return;
@@ -75,11 +83,7 @@ class QuestDb extends SQLiteTable {
         if (slayerQuest === null) return;
 
         const objectives = slayerQuest.objectives;
-        const accomplishedObjectives = {
-            "alreadyAccomplished": [],
-            "newlyAccomplished": [],
-            "notYetCompleted": [],
-        };
+        const newlyAccomplished = [];
 
         const userData = {};
 
@@ -94,29 +98,18 @@ class QuestDb extends SQLiteTable {
                     const statistic = o.additionalData.statistic;
                     const userStatistic = userData["player"].statistics[statistic];
 
-                    if (userStatistic >= o.additionalData.levelToReach) completedInDepth = true;
+                    if (userStatistic.level >= o.additionalData.levelToReach) {
+                        completedInDepth = true;
+                        this.setSlayerQuestObjectiveAccomplished(id, String(i));
+                    }
                     break;
                 default:
                     break;
             }
 
-            const binaryCondition = `0b${Number(o.user.completed)}${Number(completedInDepth)}`;
-            switch (binaryCondition) {
-                case "0b00":
-                    accomplishedObjectives.notYetCompleted.push(i);
-                    break;
-                case "0b01":
-                    accomplishedObjectives.newlyAccomplished.push(i);
-                    break;
-                case "0b10":
-                case "0b11":
-                    accomplishedObjectives.alreadyAccomplished.push(i);
-                    break;
-                default:
-                    break;
-            }
-
+            if (completedInDepth) newlyAccomplished.push(i);
         }
+        console.log(newlyAccomplished);
     }
 }
 
