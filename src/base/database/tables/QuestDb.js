@@ -109,7 +109,12 @@ class QuestDb extends SQLiteTable {
 
             if (completedInDepth) newlyAccomplished.push(i);
         }
-        console.log(newlyAccomplished);
+
+        return newlyAccomplished;
+    }
+
+    async getSlayerQuestRewards(id, objectiveIds) {
+
     }
 }
 
