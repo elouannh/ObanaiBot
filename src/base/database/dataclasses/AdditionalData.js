@@ -9,10 +9,6 @@ class AdditionalData extends TableData {
         this.load();
         this.overwrite();
     }
-
-    load() {
-
-    }
 }
 
 module.exports = AdditionalData;
