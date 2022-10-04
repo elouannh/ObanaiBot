@@ -83,16 +83,8 @@ class QuestDb extends SQLiteTable {
         );
     }
 
-    async refreshSlayerQuestObjectives(id) {
-        const userQuestData = await this.load(id);
-        if (userQuestData.schemaInstance) return;
-
-        const slayerQuest = userQuestData.currentQuests.slayerQuest[0];
-        if (slayerQuest === null) return;
-
-        const objectives = slayerQuest.objectives;
+    async refreshQuestObjectives(id, objectives) {
         const newlyAccomplished = [];
-
         const userData = {};
 
         for (let i = 0; i < objectives.length; i++) {
@@ -121,14 +113,7 @@ class QuestDb extends SQLiteTable {
         return newlyAccomplished;
     }
 
-    async getSlayerQuestRewards(id, objectiveIds) {
-        const userQuestData = await this.load(id);
-        if (userQuestData.schemaInstance) return;
-
-        const slayerQuest = userQuestData.currentQuests.slayerQuest[0];
-        if (slayerQuest === null) return;
-
-        const [objectives, rewards] = [slayerQuest.objectives, slayerQuest.rewards];
+    async getQuestRewards(id, objectiveIds, objectives, rewards) {
         for (let i = 0; i < objectives.length; i++) {
             const o = objectives[i];
             const r = rewards[i];
@@ -149,6 +134,28 @@ class QuestDb extends SQLiteTable {
                 this.setSlayerQuestRewardCollected(id, String(i));
             }
         }
+    }
+
+    async refreshSlayerQuestObjectives(id) {
+        const userQuestData = await this.load(id);
+        if (userQuestData.schemaInstance) return;
+
+        const slayerQuest = userQuestData.currentQuests.slayerQuest[0];
+        if (slayerQuest === null) return;
+
+        const objectives = slayerQuest.objectives;
+        await this.refreshQuestObjectives(id, objectives);
+    }
+
+    async getSlayerQuestRewards(id, objectiveIds) {
+        const userQuestData = await this.load(id);
+        if (userQuestData.schemaInstance) return;
+
+        const slayerQuest = userQuestData.currentQuests.slayerQuest[0];
+        if (slayerQuest === null) return;
+
+        const [objectives, rewards] = [slayerQuest.objectives, slayerQuest.rewards];
+        await this.getQuestRewards(id, objectiveIds, objectives, rewards);
     }
 
     async updateSlayerQuest(id) {
