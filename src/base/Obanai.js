@@ -5,16 +5,17 @@ const SquadDb = require("./database/tables/SquadDb");
 const ActivityDb = require("./database/tables/ActivityDb");
 const MapDb = require("./database/tables/MapDb");
 const QuestDb = require("./database/tables/QuestDb");
+const AdditionalDb = require("./database/tables/AdditionalDb");
 const InternalServerManager = require("./InternalServerManager");
 const CommandManager = require("./CommandManager");
 const EventManager = require("./EventManager");
-const Util = require("./Util");
-const Constants = require("./Constants");
 const CollectionManager = require("./CollectionManager");
 const LanguageManager = require("./LanguageManager");
 const { PasteGGManager } = require("./PasteGGManager");
 const RPGAssetsManager = require("./RPGAssetsManager");
 const ProcessManager = require("./ProcessManager");
+const Util = require("./Util");
+const Constants = require("./Constants");
 const SQLiteTableMerger = require("./SQLiteTableMerger");
 const Duration = require("./Duration");
 const config = require("../config.json");
@@ -57,6 +58,7 @@ class Obanai extends Client {
         this.squadDb = new SquadDb(this);
         this.mapDb = new MapDb(this);
         this.questDb = new QuestDb(this);
+        this.additionalDb = new AdditionalDb(this);
 
         this.SQLiteTableMerger = new SQLiteTableMerger(
             this,
