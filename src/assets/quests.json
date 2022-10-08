@@ -2,7 +2,7 @@
     "dailyQuests": {
         "0": {
             "id": "daily.0",
-            "type": "trainStatistic",
+            "type": "reachStatisticLevel",
             "additionalData": {
                 "statistic": "strength",
                 "levelToReach": 4
@@ -10,7 +10,7 @@
         },
         "1": {
             "id": "daily.1",
-            "type": "trainStatistic",
+            "type": "reachStatisticLevel",
             "additionalData": {
                 "statistic": "strength",
                 "levelToReach": 4
@@ -18,7 +18,7 @@
         },
         "2": {
             "id": "daily.2",
-            "type": "trainStatistic",
+            "type": "reachStatisticLevel",
             "additionalData": {
                 "statistic": "strength",
                 "levelToReach": 4
@@ -33,14 +33,14 @@
                     "id": "slayer.0.0.0",
                     "objectives": {
                         "0": {
-                            "type": "trainStatistic",
+                            "type": "reachStatisticLevel",
                             "additionalData": {
                                 "statistic": "strength",
                                 "levelToReach": 4
                             }
                         },
                         "1": {
-                            "type": "trainStatistic",
+                            "type": "reachStatisticLevel",
                             "additionalData": {
                                 "statistic": "defense",
                                 "levelToReach": 7

@@ -92,7 +92,7 @@ class QuestDb extends SQLiteTable {
             let completedInDepth = false;
 
             switch (o.type) {
-                case "trainStatistic":
+                case "reachStatisticLevel":
                     if (!("player" in userData)) userData["player"] = await this.client.playerDb.load(id);
 
                     const statistic = o.additionalData.statistic;
@@ -102,6 +102,8 @@ class QuestDb extends SQLiteTable {
                         completedInDepth = true;
                         this.setSlayerQuestObjectiveAccomplished(id, String(i));
                     }
+                    break;
+                case "reachDestination":
                     break;
                 default:
                     break;
