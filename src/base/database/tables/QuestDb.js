@@ -98,18 +98,46 @@ class QuestDb extends SQLiteTable {
                     const statistic = o.additionalData.statistic;
                     const userStatistic = userData["player"].statistics[statistic];
 
-                    if (userStatistic.level >= o.additionalData.levelToReach) {
-                        completedInDepth = true;
-                        this.setSlayerQuestObjectiveAccomplished(id, String(i));
-                    }
+                    if (userStatistic.level >= o.additionalData.levelToReach) completedInDepth = true;
                     break;
                 case "reachDestination":
+                    if (!("map" in userData)) userData["map"] = await this.client.mapDb.load(id);
+
+                    const { region, area } = o.additionalData;
+                    const userRegion = userData["map"].region;
+                    const userArea = userData["map"].region;
+
+                    if (userRegion.id === region && userArea.id === area) completedInDepth = true;
+                    break;
+                case "haveMoney":
+                    if (!("inventory" in userData)) userData["inventory"] = await this.client.inventoryDb.load(id);
+
+                    const userMoney = userData["inventory"].wallet;
+
+                    if (userMoney >= o.additionalData.amountToReach) completedInDepth = true;
+                    break;
+                case "haveExperience":
+                    if (!("player" in userData)) userData["player"] = await this.client.playerDb.load(id);
+
+                    const userExperience = userData["player"].level;
+
+                    if (userExperience.exp >= o.additionalData.amountToReach) completedInDepth = true;
+                    break;
+                case "haveKasugaiCrowExperience":
+                    if (!("inventory" in userData)) userData["inventory"] = await this.client.inventoryDb.load(id);
+
+                    const userKasugaiCrowExperience = userData["inventory"].kasugaiCrow.exp;
+
+                    if (userKasugaiCrowExperience >= o.additionalData.amountToReach) completedInDepth = true;
                     break;
                 default:
                     break;
             }
 
-            if (completedInDepth) newlyAccomplished.push(i);
+            if (completedInDepth) {
+                this.setSlayerQuestObjectiveAccomplished(id, String(i));
+                newlyAccomplished.push(i);
+            }
         }
 
         return newlyAccomplished;
