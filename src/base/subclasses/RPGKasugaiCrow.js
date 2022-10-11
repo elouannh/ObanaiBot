@@ -2,7 +2,7 @@ const RPGAssetBase = require("./RPGAssetBase");
 const RPGKasugaiCrowEffect = require("./RPGKasugaiCrowEffect");
 
 class RPGKasugaiCrow extends RPGAssetBase {
-    constructor(lang, id, kasugaiCrowdata) {
+    constructor(lang, id, kasugaiCrowData) {
         super(lang, id);
 
         const data = kasugaiCrowData;

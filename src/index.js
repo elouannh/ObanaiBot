@@ -1,7 +1,5 @@
 const obanai = new (require("./base/Obanai"))();
 
-obanai.questDb.load("539842701592494111").then(() => {
-    // console.log(data.currentQuests.slayerQuest[0].objectives);
+obanai.inventoryDb.load("583697022545297408").then((data) => {
+    console.log(data.items.materials);
 });
-
-obanai.questDb.updateSlayerQuest("539842701592494111").then(() => null);
