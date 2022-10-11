@@ -2,17 +2,9 @@ const Command = require("../../base/Command");
 const {
     EmbedBuilder,
     ActionRowBuilder,
-    SelectMenuBuilder,
     ButtonBuilder,
-    inlineCode,
-    ModalBuilder,
-    TextInputStyle,
-    TextInputBuilder,
-    escapeMarkdown,
-    User,
 } = require("discord.js");
 const Nav = require("../../base/Navigation");
-const calcPlayerLevel = require("../../elements/calcPlayerLevel");
 
 class Base extends Command {
     constructor() {
@@ -40,8 +32,8 @@ class Base extends Command {
             dmPermission: true,
             category: "RPG",
             cooldown: 5,
-            finishRequest: ["base"],
-            private: "none",
+            completedRequests: ["base"],
+            authorizationBitField: 0b000,
             permissions: 0n,
         });
     }
@@ -53,55 +45,35 @@ class Base extends Command {
         else if (this.interaction.type === 2) userId = this.client.users.cache.get(this.interaction.targetId);
         userId = (await this.client.getUser(userId, user)).userId;
 
+        const sq = await this.client.questDb.load(userId);
+
         const userPDB = await this.client.playerDb.load(userId);
-        const userIDB = await this.client.inventoryDb.get(userId);
-        const userADB = await this.client.activityDb.get(userId);
-        const userMDB = await this.client.mapDb.get(userId);
+        const userIDB = await this.client.inventoryDb.load(userId);
+        const userADB = await this.client.activityDb.load(userId);
+        const userMDB = await this.client.mapDb.load(userId);
 
-        console.log(this.client.RPGAssetsManager.getText(this.lang._id, "1", "1", "dialog", "6"));
-
-        let userStatsObject = {};
-        for (const statKey in userPDB.statsLevel) {
-            userStatsObject[statKey] = `${this.consts.emojis.rpg.stats[statKey]} `
-                + `» **${this.lang.rpgAssets.aptitudes[statKey]} | `
-                + `\`${this.client.util.intRender(userPDB.finalStats[statKey])}\`**\n`
-                + `*(${this.lang.strings.level} ${userPDB.statsLevel[statKey]}) **${userPDB.stats[statKey]}***`;
+        let userstatisticsObject = {};
+        for (const statKey in userPDB.statisticsLevel) {
+            userstatisticsObject[statKey] = `${this.consts.emojis.rpg.statistics[statKey]} `
+                + `» **${this.lang.rpgAssets.statistics[statKey]} | `
+                + `\`${this.client.util.intRender(userPDB.finalstatistics[statKey])}\`**\n`
+                + `*(${this.lang.strings.level} ${userPDB.statisticsLevel[statKey]}) **${userPDB.statistics[statKey]}***`;
 
             if (userPDB.grimBoosts[statKey][0] > 0) {
-                userStatsObject[statKey] += ` *+ **${userPDB.grimBoosts[statKey][0]}**`
+                userstatisticsObject[statKey] += ` *+ **${userPDB.grimBoosts[statKey][0]}**`
                     + ` (${userPDB.grimBoosts[statKey][1]}%)`
                     + `${this.consts.emojis.rpg.objects.enchantedGrimoire}*`;
             }
-
-            if (statKey in userPDB.catBoosts) {
-                if (userPDB.catBoosts[statKey][0] > 0) {
-                    userStatsObject[statKey] += ` *+ **${userPDB.catBoosts[statKey][0]}**`
-                        + ` (${userPDB.catBoosts[statKey][1]}%)`
-                        + `${this.consts.emojis.rpg.symbols.category}*`;
-                }
-                else {
-                    userStatsObject[statKey] += ` *- **${this.client.util.positive(userPDB.catBoosts[statKey][0])}**`
-                        + ` (${userPDB.catBoosts[statKey][1]}%)`
-                        + `${this.consts.emojis.rpg.symbols.category}*`;
-                }
-            }
         }
-        userStatsObject = Object.values(userStatsObject).join("\n");
-        const userRank = `${this.lang.strings.level}: **${userPDB.level.level}** | `
-            + `${this.lang.strings.total_experience}: ⭐ **${this.client.util.intRender(userPDB.exp, " ")}**`
-            + `\n${this.lang.strings.level_experience}: ⭐ **`
-            + `${this.client.util.intRender(userPDB.level.tempExp, " ")}`
-            + `**/${this.client.util.intRender(userPDB.level.required, " ")}`;
+        userstatisticsObject = Object.values(userstatisticsObject).join("\n");
+        const userRank = "";
 
         let userInventoryObjects = {};
-        for (const mat in userIDB.materials) {
-            const matFile = require(`../../elements/materials/${mat}`);
-        }
 
         const playerFields = [
             {
                 name: `» ${this.lang.panels.player.pages["0"].embeds["0"].fields["0"].name} «`,
-                value: `\u200b\n${userStatsObject}`,
+                value: `\u200b\n${userstatisticsObject}`,
                 inline: true,
             },
             {
@@ -124,13 +96,6 @@ class Base extends Command {
                 inline: true,
             },
         ];
-        const badgesFields = [
-            {
-                name: `» ${this.lang.panels.badges.pages["0"].embeds["0"].fields["0"].name} «`,
-                value: "\u200b\nbadges",
-                inline: true,
-            },
-        ];
         const crowFields = [
             {
                 name: `» ${this.lang.panels.crow.pages["0"].embeds["0"].fields["0"].name} «`,
@@ -147,7 +112,7 @@ class Base extends Command {
         ];
 
         const pages = {
-            "player_panel": new Nav.Panel()
+            "playerPanel": new Nav.Panel()
                 .setPages([
                     new Nav.Page()
                         .setEmbeds([
@@ -156,7 +121,7 @@ class Base extends Command {
                                 .setFields(playerFields),
                         ]),
                 ]),
-            "inventory_panel": new Nav.Panel()
+            "inventoryPanel": new Nav.Panel()
                 .setPages([
                     new Nav.Page()
                         .setEmbeds([
@@ -165,7 +130,7 @@ class Base extends Command {
                                 .setFields(inventoryFields),
                         ]),
                 ]),
-            "activity_panel": new Nav.Panel()
+            "activityPanel": new Nav.Panel()
                 .setPages([
                     new Nav.Page()
                         .setEmbeds([
@@ -174,16 +139,7 @@ class Base extends Command {
                                 .setFields(activityFields),
                         ]),
                 ]),
-            "badges_panel": new Nav.Panel()
-                .setPages([
-                    new Nav.Page()
-                        .setEmbeds([
-                            new EmbedBuilder()
-                                .setTitle(this.lang.panels.badges.pages["0"].embeds["0"].title)
-                                .setFields(badgesFields),
-                        ]),
-                ]),
-            "crow_panel": new Nav.Panel()
+            "crowPanel": new Nav.Panel()
                 .setPages([
                     new Nav.Page()
                         .setEmbeds([
@@ -192,7 +148,7 @@ class Base extends Command {
                                 .setFields(crowFields),
                         ]),
                 ]),
-            "weapons_panel": new Nav.Panel()
+            "weaponsPanel": new Nav.Panel()
                 .setPages([
                     new Nav.Page()
                         .setEmbeds([
@@ -207,51 +163,38 @@ class Base extends Command {
             new ActionRowBuilder()
                 .setComponents(
                     new ButtonBuilder()
-                        .setCustomId("player_panel")
-                        // .setLabel(this.lang.rows.universal.player_panel)
+                        .setCustomId("playerPanel")
                         .setEmoji(this.consts.emojis.rpg.symbols.player)
                         .setStyle("Secondary"),
                     new ButtonBuilder()
-                        .setCustomId("inventory_panel")
-                        // .setLabel(this.lang.rows.universal.inventory_panel)
+                        .setCustomId("inventoryPanel")
                         .setEmoji(this.consts.emojis.rpg.symbols.inventory)
                         .setStyle("Secondary"),
                     new ButtonBuilder()
-                        .setCustomId("activity_panel")
-                        // .setLabel(this.lang.rows.universal.activity_panel)
+                        .setCustomId("activityPanel")
                         .setEmoji(this.consts.emojis.rpg.symbols.activity)
                         .setStyle("Secondary"),
-                ),
-            new ActionRowBuilder()
-                .setComponents(
                     new ButtonBuilder()
-                        .setCustomId("badges_panel")
-                        // .setLabel(this.lang.rows.universal.badges_panel)
-                        .setEmoji(this.consts.emojis.rpg.symbols.badges)
-                        .setStyle("Secondary"),
-                    new ButtonBuilder()
-                        .setCustomId("crow_panel")
-                        // .setLabel(this.lang.rows.universal.crow_panel)
+                        .setCustomId("crowPanel")
                         .setEmoji(this.consts.emojis.rpg.symbols.crow)
                         .setStyle("Secondary"),
                     new ButtonBuilder()
-                        .setCustomId("weapons_panel")
-                        // .setLabel(this.lang.rows.universal.weapons_panel)
+                        .setCustomId("weaponsPanel")
                         .setEmoji(this.consts.emojis.rpg.symbols.weapons)
                         .setStyle("Secondary"),
                 ),
             new ActionRowBuilder()
                 .setComponents(
                     new ButtonBuilder()
-                        .setCustomId("leave_panel")
-                        .setLabel(this.lang.rows.universal.leave_panel)
+                        .setCustomId("leavePanel")
+                        .setLabel(this.lang.rows.universal.leavePanel)
                         .setStyle("Danger"),
                 ),
         ];
 
         const panel = await this.interaction.reply({
-            embeds: pages.player_panel.pages["0"].embeds,
-            components: pages.player_panel.components.concat(universalRows),
+            embeds: pages.playerPanel.pages["0"].embeds,
+            components: pages.playerPanel.components.concat(universalRows),
         }).catch(this.client.util.catchError);
         if (panel === undefined) return;
         const navigation = panel.createMessageComponentCollector({
@@ -260,11 +203,11 @@ class Base extends Command {
             dispose: true,
         });
 
-        let currentPanel = "player_panel";
+        let currentPanel = "playerPanel";
 
         navigation.on("collect", async inter => {
             if (inter.isButton()) {
-                if (inter.customId.endsWith("_panel") && inter.customId !== "leave_panel") {
+                if (inter.customId.endsWith("_panel") && inter.customId !== "leavePanel") {
                     await inter.deferUpdate()
                         .catch(this.client.util.catchError);
 
@@ -278,7 +221,7 @@ class Base extends Command {
                         components: newComponents,
                     }).catch(this.client.util.catchError);
                 }
-                else if (inter.customId === "leave_panel") {
+                else if (inter.customId === "leavePanel") {
                     await inter.deferUpdate()
                         .catch(this.client.util.catchError);
                     navigation.stop();

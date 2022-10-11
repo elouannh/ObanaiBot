@@ -2,12 +2,8 @@ class Event {
     constructor(eventInfos = {
         name: "ready",
         once: true,
-    }) {
+    }, client) {
         this.eventInfos = eventInfos;
-        this.client = null;
-    }
-
-    init(client) {
         this.client = client;
     }
 

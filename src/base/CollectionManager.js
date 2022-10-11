@@ -1,7 +1,7 @@
 const { Collection } = require("discord.js");
 
 class CollectionManager {
-    constructor(client, name, callback, addValue, defaultValue) {
+    constructor(client, name, callback, defaultValue) {
         this.client = client;
         this.name = name;
         this.collection = new Collection();

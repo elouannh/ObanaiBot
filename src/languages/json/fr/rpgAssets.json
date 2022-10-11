@@ -1,15 +1,20 @@
 {
-    "aptitudes": {
-        "strength": "Force",
-        "speed": "Vitesse",
-        "defense": "Défense",
-        "agility": "Agilité"
+    "statistics": {
+        "names": {
+            "strength": "Force",
+            "speed": "Vitesse",
+            "defense": "Défense",
+            "agility": "Agilité"
+        },
+        "levels": {
+            "max": "Niveau max atteint (100)"
+        }
     },
     "breathingStyles": {
         "flower": {
             "name": "Souffle de la Fleur",
             "techniques": {
-                "flowerBreathingSecondFormHonorable Shadow Plum": "Deuxième Mouvement: Esprit du Prunier",
+                "flowerBreathingSecondFormHonorableShadowPlum": "Deuxième Mouvement: Esprit du Prunier",
                 "flowerBreathingFourthFormCrimsonHanagoromo": "Quatrième Mouvement: Hanagoromo Pourpre",
                 "flowerBreathingFifthFormPeoniesOfFutility": "Cinquième Mouvement: La Pivoine Futile",
                 "flowerBreathingSixthFormWhirlingPeach": "Sixième Mouvement: Tourbillon de Pêche",
@@ -206,7 +211,7 @@
             }
         }
     },
-    "grimoires": {
+    "enchantedGrimoires": {
         "types": {
             "temporaryGrimoire": "Grimoire temporaire",
             "permanentGrimoire": "Grimoire permanent",
@@ -217,7 +222,7 @@
             "moneyBoost": "Bonus d'argent",
             "baitingBoost": "Bonus d'appâtage",
             "lootBoost": "Bonus de butin",
-            "statsBoost": "Bonus de statistiques",
+            "statisticsBoost": "Bonus de statistiques",
             "travelTimeBoost": "Bonus de temps de voyage",
             "trainTimeBoost": "Bonus de temps d'entraînement"
         },
@@ -238,7 +243,7 @@
         "effects": {
             "experienceBoost": "Bonus d'expérience",
             "moneyBoost": "Bonus d'argent",
-            "statsBoost": "Bonus de statistiques",
+            "statisticsBoost": "Bonus de statistiques",
             "travelTimeBoost": "Bonus de temps de voyage",
             "trainTimeBoost": "Bonus de temps d'entraînement"
         },
@@ -361,17 +366,20 @@
         "wood": "Bois",
         "worm": "Ver"
     },
+    "questItems": {
+        "test": "Test"
+    },
     "characters": {
         "0": {
-            "label": "Personnage principal",
+            "label": "Frère de Yamamoto Minori",
             "description": ""
         },
         "1": {
-            "label": "Soeur de Min",
+            "label": "Soeur de Yamamoto Kenta",
             "description": ""
         },
         "2": {
-            "label": "Pourfendeur de rang Mizunoto",
+            "label": "Formateur",
             "description": ""
         },
         "3": {
@@ -423,46 +431,28 @@
             "description": ""
         }
     },
-    "texts": {
-        "chapter1": {
-            "quest1": {
-                "dialog": {
-                    "6": [
-                        "**Hime** - Il s'est réveillé tout à l'heure, il a paniqué et a baffoué quelques mots. Il disait qu'il faisait simplement son travail, lorsqu'un monstre bizarre lui aurait sauté dessus.",
-                        "**Vous** - Est-ce qu'on a la preuve qu'il dit vrai ? Il doit sûrement être dans les choux. Demandons-lui. Qui est-tu ? Pourquoi es-tu comme ça ?",
-                        "**???** - Je vous jure... Je travaillais... Et là... Il est venu et il m'a attaqué... Je suis Pierre. J'ai oublié de me présenter... Désolé !!",
-                        "**Vous** - Il a l'air d'être sous le choc. Laissons-le un peu pour l'instant, je vais aller voir dans la forêt si quelque chose cloche."
-                    ],
-                    "9": [
-                        "**Vous** - Elle est où ?? Qu'est-ce que t'as fait ?? Qu'est-ce que t'as vu ?? Réponds-moi !!",
-                        "**Pierre** - Je... sais pas... Hime-... Partie... Monst-...",
-                        "**Vous** - C'est tout ?\n\n***[vous constatez qu'il est coupé en deux sous la ceinture.]***\n\nIl est mort... C'est impossible..."
-                    ]
-                }
-            },
-            "quest2": {
-                "dialog": {
-                    "1": [
-                        "**Inconnu Étrange** - Tu as entendu parler des attaques récemment ?",
-                        "**Inconnu Agressif** - Ouais, j'en ai été informé par corbeau. C'est terrible, mais bon il faut être sacrément courageux pour vivre si éloigné de la vie urbaine.",
-                        "**Inconnu Étrange** - Tu sais très bien que la population croit aux démons comme si il s'agissait d'une légende, d'un mythe. Et cela n'aide pas; le gouvernement ne nous considère pas comme une armée officielle.",
-                        "**Inconnu Agressif** - Pas faux...\n\n***[L'inconnu s'assoupit, et vous en profitez pour pointer une lame derrière lui.]***",
-                        "**Inconnu Étrange** - Et ?? Qu'est-ce que tu fais toi ?? T'es qui ??\n\n***[Une énorme claque vous arrive à la figure, et vous assome sur le champs.]***",
-                        "**Inconnu Agressif** - Tu as exactement 10 secondes pour t'expliquer, ou ma lame se logera dans ta glotte.",
-                        "**Inconnu Étrange** - Eh, du calme. Ce n'est pas comme ça que nous, pourfendeurs, sommes censés raisonner les civils.\n\n***[Vous saisissez l'arme à pleines mains, et vous partez en courant en dehors de la taverne. Vous entendez les deux inconnus vous suivre en courant.]***"
-                    ]
-                }
-            },
-            "quest3": {
-                "dialog": {
-                    "1": [
-                        "**Franky** - Qu'est-ce que tu fais coincé ici ?",
-                        "**Vous** - Je suis recherché par deux hommes qui veulent ma peau, et je me suis caché dans ce tonneau afin de leur échapper... Mais vous m'avez emmené ici. Où sommes-nous ?",
-                        "**Franky** - T'es chez moi, mon grand ! Tu as déjà entendu parler des grimoires ? Je t'en parle rapidement, et je te laisse filer !",
-                        "Depuis des siècles, un homme anonyme a découvert que certains types d'objet pouvaient être enchantés en utilisant une synthétisation des matériaux. Ils permettent d'octroyer des avantages et des bonus à son utilisateur, comme le fait de marcher plus vite (et donc de voyager plus rapidement), de ne pas s'épuiser lors d'entrainement (et de s'entrainer donc plus vite), et de multiples autres avantages. Concernant leur enchantement, le rituel de synthétisation qui permet de sceller ces objets afin de leur octroyer leurs pouvoirs, il s'agit en réalité d'un talent héréditaire dont seulement... ma famille a le secret ! Et oui, l'homme ayant découvert ce procédé, c'est un de mes ancêtres ! Si tu veux gamin, un jour, ramène-moi un de ces objets que l'on nomme Grimoire. Attention, seulement les grimoires non enchantés peuvent le devenir (logique !). De plus, la synthétisation est complètement aléatoire, et on ne peut pas savoir à l'avance l'effet qui se produira."
-                    ]
-                }
-            }
+    "weapons": {
+        "types": {
+            "poisonousKatana": "Katana Empoisonné",
+            "spikedFlailWithAxe": "Fléau à pointes & Hache",
+            "flexibleKatana": "Katana Flexible",
+            "whippingKatana": "Katana-Fouet",
+            "fleshyDemonicKatana": "Katana Démoniaque Charnu",
+            "twinSword": "Épées Jumelles",
+            "doubleShredderKatanas": "Doubles Katanas Déchiqueteurs",
+            "katana": "Katana"
+        },
+        "rarities": {
+            "0": "Commun",
+            "1": "Rare",
+            "2": "Très Rare",
+            "3": "Précieux",
+            "4": "Épique",
+            "5": "Mystique",
+            "6": "Légendaire",
+            "7": "Exceptionnel",
+            "8": "Enchanté",
+            "9": "Démoniaque"
         }
     }
 }

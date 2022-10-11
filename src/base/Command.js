@@ -1,46 +1,28 @@
 const { PermissionsBitField } = require("discord.js");
-const fs = require("fs");
 const Language = require("./Language");
-
-const sections = {
-    "Commandes Globales": ["Utilitaire"],
-    "Commandes du RPG Demon Slayer": ["Combats", "Escouades", "Exploration", "Quêtes", "Stats"],
-    "Commandes du Personnel": ["Testing", "Admin", "Owner"],
-};
 
 class Command {
     constructor(infos = {
-        adminOnly: false,
-        category: "",
-        cooldown: 10,
-        description: "",
-        finishRequest: [],
-        name: "",
-        private: "none",
+        name: "command",
+        description: "Description par défaut de la commande.",
+        descriptionLocalizations: {
+            "en-US": "Default command description.",
+        },
+        options: [],
+        type: [1],
+        dmPermission: true,
+        category: "Staff",
+        cooldown: 5,
+        completedRequests: ["command"],
+        authorizationBitField: 0b000,
         permissions: 0n,
     }) {
         this.infos = infos;
         this.client = null;
         this.interaction = null;
         this.consts = null;
-        this.timestamp = Date.now();
+        this.instancedAt = Date.now();
         this.lang = new Language("fr").json["commands"][this.infos.name] ?? {};
-        this.rpgCommand = false;
-
-        if (this.infos.finishRequest === "ADVENTURE") {
-            this.rpgCommand = true;
-            const req = [];
-
-            fs.readdirSync("./src/commands")
-                .filter(cat => sections["Commandes du RPG Demon Slayer"].includes(cat))
-                .forEach(folder => {
-                    const files = fs.readdirSync(`./src/commands/${folder}`);
-
-                    files.forEach(file => req.push(file.replace(".js", "")));
-                });
-
-            this.infos.finishRequest = req;
-        }
     }
 
     init(client, interaction, lang) {
@@ -63,7 +45,7 @@ class Command {
     }
 
     async exe() {
-        await this.interaction.reply("this is a default reply.");
+        await this.interaction.reply({ content: this.lang.systems.command.defaultReply }).catch(this.client.util.catchError);
     }
 
     async cooldownReady(forExecuting) {
@@ -75,11 +57,12 @@ class Command {
 
         if (tStamp < readyForRun) {
             ready = false;
-            await this.interaction.reply(
-                ` ⏳ Veuillez patienter \`${this.client.util.convertDate(readyForRun - tStamp, true).string}\``
-                +
-                " avant de refaire cette commande.",
-            );
+            await this.interaction.reply({
+                content: this.lang.systems.command.cooldownReply.replace(
+                    "%TIME",
+                    new this.client.duration(readyForRun, this.lang._id).convert(readyForRun - tStamp),
+                ),
+            }).catch(this.client.util.catchError);
         }
         else {
             this.client.cooldownsManager.add(this.interaction.user.id, { key: this.infos.name, value: Date.now() });
@@ -101,9 +84,11 @@ class Command {
 
         if (notFinished.length > 0) {
             ready = false;
-            await this.interaction.reply(`🛠️ Vous avez déjà des commandes en cours d'execution qui doivent se terminer:\n\n${
-                notFinished.map(e => `» **\`${e.name}\`** - <t:${(e.ts / 1000).toFixed(0)}:F>`)
-            }`);
+            await this.interaction.reply({
+                content: `🛠️ ${this.lang.systems.command.requestsReply}\n\n${
+                    notFinished.map(e => `» **\`${e.name}\`** - <t:${(e.ts / 1000).toFixed(0)}:F>`)
+                }`,
+            }).catch(this.client.util.catchError);
         }
 
         return ready;
@@ -118,11 +103,11 @@ class Command {
 
         if (!hasPerms) {
             const missingPermissions = requiredPermissions.filter(p => !userPermissions.includes(p));
-            await this.interaction.reply(
-                "L'exécution de cette commande require des permissions, et il semblerait que vous ne les ayez pas."
+            await this.interaction.reply({
+                content: `${this.lang.systems.command.noUserPermissionsReady}`
                 +
-                `\nPermissions nécessaires:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
-            );
+                `\n${this.lang.systems.command.necessariesPermissionsReply}:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
+            }).catch(this.client.util.catchError);
         }
         return hasPerms;
     }
@@ -138,46 +123,27 @@ class Command {
         if (!hasPerms) {
             const missingPermissions = clientBitfield.filter(p => !clientPermissions.includes(p));
             if (clientMember.has(2048n)) {
-                await this.interaction.reply(
-                    "L'exécution de cette commande require des permissions, et il semblerait que je ne les ai pas."
-                    +
-                    `\nPermissions nécessaires:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
-                );
+                await this.interaction.reply({
+                    content: `${this.lang.systems.command.noClientPermissionsReply}`
+                        +
+                        `\n${this.lang.systems.command.necessariesPermissionsReply}:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
+                }).catch(this.client.util.catchError);
             }
         }
         return hasPerms;
     }
 
-    async commandPrivateReady() {
+    async authorizationsReady() {
         let ready = true;
 
-        switch (this.infos.private) {
-            case "none":
-                break;
-            case "testers":
-                if (!this.client.internalServerManager.staffs.includes(this.interaction.user.id)) {
-                    ready = false;
-                }
-                break;
-            case "admins":
-                if (
-                    !this.client.internalServerManager.admins.concat(this.client.internalServerManager.owners)
-                                                             .includes(this.interaction.user.id)
-                ) {
-                    ready = false;
-                }
-                break;
-            case "owners":
-                if (!this.client.internalServerManager.owners.includes(this.interaction.user.id)) {
-                    ready = false;
-                }
-                break;
-        }
+        const userBitField = this.client.internalServerManager.userBitField(this.interaction.user.id);
+        const commandBitField = `0b${parseInt(String(this.infos.authorizationBitField), 2)}`;
 
-        if (!ready) {
-            await this.interaction.reply(
-                "L'accès à cette commande est limitée, et vous semblez ne pas avoir les autorisations pour l'exécuter.",
-            );
+        if (Number(userBitField) < Number(commandBitField)) {
+            ready = false;
+            await this.interaction.reply({
+                content: this.lang.systems.command.noUserAuthorizationReply,
+            }).catch(this.client.util.catchError);
         }
 
         return ready;
@@ -186,43 +152,18 @@ class Command {
     async clientStatusReady() {
         let ready = true;
 
-        const clientStatus = this.client.statusDb.datas;
+        const userBitField = this.client.internalServerManager.userBitField(this.interaction.user.id);
+        const statusMode = this.client.internalServerManager.statusMode;
+        const statusBitField = `0b${parseInt(statusMode.replace("0b", "").slice(1), 2)}`;
+        const replyMode = `0b${parseInt(statusMode.replace("0b", "")[0], 2)}`;
 
-        switch (clientStatus.mode) {
-            case "online":
-                break;
-            case "maintenance":
-                if (this.infos.private === "none") {
-                    if (!this.client.internalServerManager.staffs.includes(this.interaction.user.id)) {
-                        ready = false;
-                        await this.interaction.reply(
-                            "Le bot est actuellement en maintenance. Plus d'informations ici: "
-                            +
-                            "**https://bit.ly/obanaihelp**.",
-                        );
-                    }
-                    else if (this.infos.private === "none") {
-                        ready = false;
-                        await this.interaction.reply(
-                            "Le bot est actuellement en maintenance. Plus d'informations ici: "
-                            +
-                            "**https://bit.ly/obanaihelp**.",
-                        );
-                    }
-                }
-                break;
-            case "disabled":
-                if (!this.client.internalServerManager.staffs.includes(this.interaction.user.id)) {
-                    ready = false;
-                }
-                else if (this.client.internalServerManager.owners.includes(this.interaction.user.id)) {
-                    ready = true;
-                }
-                else if (this.infos.private === "none") {
-                    ready = false;
-                    this.interaction.reply("❌");
-                }
-                break;
+        if (Number(userBitField) < Number(statusBitField)) {
+            ready = false;
+            if (Number(replyMode) === 1) {
+                await this.interaction.reply({
+                    content: this.lang.systems.command.clientInMaintenance,
+                }).catch(this.client.util.catchError);
+            }
         }
 
         return ready;

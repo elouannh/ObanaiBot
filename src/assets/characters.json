@@ -1,35 +1,35 @@
 {
     "0": {
         "id": "0",
-        "fullName": "Yamamoto Min",
-        "firstName": "Min",
+        "fullName": "Yamamoto Kenta",
+        "firstName": "Kenta",
         "lastName": "Yamamoto",
         "japaneseTranscription": {
-            "fullName": "山本・ミン",
-            "firstName": "ミン",
+            "fullName": "山本・健太",
+            "firstName": "健太",
             "lastName": "山本"
         }
     },
     "1": {
         "id": "1",
-        "fullName": "Yamamoto Hime",
-        "firstName": "Hime",
+        "fullName": "Yamamoto Minori",
+        "firstName": "Minori",
         "lastName": "Yamamoto",
         "japaneseTranscription": {
-            "fullName": "山本・姫",
-            "firstName": "姫",
+            "fullName": "山本・里",
+            "firstName": "里",
             "lastName": "山本"
         }
     },
     "2": {
         "id": "2",
-        "fullName": "Piēru",
-        "firstName": "Piēru",
-        "lastName": "",
+        "fullName": "Ono Yoshinori",
+        "firstName": "Yoshinori",
+        "lastName": "Ono",
         "japaneseTranscription": {
-            "fullName": "ピエール",
-            "firstName": "ピエール",
-            "lastName": ""
+            "fullName": "小野・義則",
+            "firstName": "義則",
+            "lastName": "小野"
         }
     },
     "3": {

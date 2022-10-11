@@ -1,0 +1,62 @@
+{
+    "adventurer": {
+        "id": "adventurer",
+        "type": "temporaryGrimoire",
+        "lifespan": 259200,
+        "effects": [
+            { "id": "experienceBoost", "strength": "15" }
+        ]
+    },
+    "economist": {
+        "id": "economist",
+        "type": "temporaryGrimoire",
+        "lifespan": 259200,
+        "effects": [
+            { "id": "moneyBoost", "strength": "15" }
+        ]
+    },
+    "eternal": {
+        "id": "eternal",
+        "type": "permanentGrimoire",
+        "lifespan": "infinite",
+        "effects": [
+            { "id": "experienceBoost", "strength": "10" },
+            { "id": "moneyBoost", "strength": "10" },
+            { "id": "baitingBoost", "strength": "10" },
+            { "id": "lootBoost", "strength": "10" },
+            { "id": "statisticsBoost", "strength": "10" },
+            { "id": "travelTimeBoost", "strength": "10" },
+            { "id": "trainTimeBoost", "strength": "10" }
+        ]
+    },
+    "falconer": {
+        "id": "falconer",
+        "type": "temporaryGrimoire",
+        "lifespan": 259200,
+        "effects": [
+            { "id": "baitingBoost", "strength": "15" }
+        ]
+    },
+    "fortunate": {
+        "id": "fortunate",
+        "type": "temporaryGrimoire",
+        "lifespan": 259200,
+        "effects": [
+            { "id": "lootBoost", "strength": "15" }
+        ]
+    },
+    "mastery": {
+        "id": "mastery",
+        "type": "consumableGrimoire",
+        "lifespan": "none",
+        "effects": []
+    },
+    "warrior": {
+        "id": "warrior",
+        "type": "temporaryGrimoire",
+        "lifespan": 259200,
+        "effects": [
+            { "id": "statisticsBoost", "strength": "15" }
+        ]
+    }
+}

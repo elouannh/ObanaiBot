@@ -1,7 +1,7 @@
 {
     "grimoire": {
         "id": "grimoire",
-        "rarity": 1,
+        "lootRate": "1",
         "size": 200,
         "biomes": [
             "developedArea"
@@ -9,7 +9,7 @@
     },
     "leather": {
         "id": "leather",
-        "rarity": 20,
+        "lootRate": "20",
         "size": 20,
         "biomes": [
             "meadow",
@@ -18,7 +18,7 @@
     },
     "paper": {
         "id": "paper",
-        "rarity": 60,
+        "lootRate": "60",
         "size": 10,
         "biomes": [
             "dwelling"
@@ -26,7 +26,7 @@
     },
     "seed": {
         "id": "seed",
-        "rarity": 80,
+        "lootRate": "80",
         "size": 4,
         "biomes": [
             "meadow"
@@ -34,7 +34,7 @@
     },
     "tamahagane": {
         "id": "tamahagane",
-        "rarity": 25,
+        "lootRate": "25",
         "size": 20,
         "biomes": [
             "rockyArea"
@@ -42,7 +42,7 @@
     },
     "weaponBase": {
         "id": "weaponBase",
-        "rarity": 1,
+        "lootRate": "1",
         "size": 200,
         "biomes": [
             "developedArea",
@@ -51,7 +51,7 @@
     },
     "wood": {
         "id": "wood",
-        "rarity": 80,
+        "lootRate": "80",
         "size": 20,
         "biomes": [
             "forest",
@@ -60,7 +60,7 @@
     },
     "worm": {
         "id": "worm",
-        "rarity": 60,
+        "lootRate": "60",
         "size": 10,
         "biomes": [
             "forest",

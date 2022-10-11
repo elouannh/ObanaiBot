@@ -1,0 +1,58 @@
+{
+    "dailyQuests": {
+        "0": {
+            "id": "daily.0",
+            "type": "reachStatisticLevel",
+            "additionalData": {
+                "statistic": "strength",
+                "levelToReach": 4
+            }
+        },
+        "1": {
+            "id": "daily.1",
+            "type": "reachStatisticLevel",
+            "additionalData": {
+                "statistic": "strength",
+                "levelToReach": 4
+            }
+        },
+        "2": {
+            "id": "daily.2",
+            "type": "reachStatisticLevel",
+            "additionalData": {
+                "statistic": "strength",
+                "levelToReach": 4
+            }
+        }
+    },
+    "sideQuests": {},
+    "slayerQuests": {
+        "0": {
+            "0": {
+                "0": {
+                    "id": "slayer.0.0.0",
+                    "objectives": {
+                        "0": {
+                            "type": "reachStatisticLevel",
+                            "additionalData": {
+                                "statistic": "strength",
+                                "levelToReach": 4
+                            }
+                        },
+                        "1": {
+                            "type": "reachStatisticLevel",
+                            "additionalData": {
+                                "statistic": "defense",
+                                "levelToReach": 7
+                            }
+                        }
+                    },
+                    "rewards": {
+                        "0": { "0": { "type": "exp", "amount": 100 }},
+                        "1": { "0": { "type": "exp", "amount": 200 }}
+                    }
+                }
+            }
+        }
+    }
+}

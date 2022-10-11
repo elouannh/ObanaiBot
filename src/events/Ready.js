@@ -1,0 +1,43 @@
+const { ActivityType } = require("discord.js");
+const Event = require("../base/Event");
+
+class Ready extends Event {
+	constructor(client) {
+		super({
+			name: "ready",
+			once: true,
+		}, client);
+	}
+
+	async exe() {
+		await this.client.commandManager.loadFiles();
+		this.client.log(`Bot connecté en tant que ${this.client.user.tag} !`);
+
+		try {
+			let statusIndex = 0;
+			setInterval(() => {
+				const activities = [
+					{ name: "🌐 Multilingue/Multilingual", type: ActivityType.Competing },
+					{ name: `Version ${this.client.version}`, type: ActivityType.Watching },
+				];
+				this.client.user.setPresence({
+					activities: [activities[statusIndex]],
+					status: "online",
+				});
+				statusIndex += (statusIndex === (activities.length - 1) ? -statusIndex : 1);
+			}, 15_000);
+
+			try {
+				await this.client.internalServerManager.questGenerator();
+			}
+			catch (err) {
+				await this.client.throwError(err, "Origin: @Ready.InternalServerManager");
+			}
+		}
+		catch (err) {
+			await this.client.throwError(err, "Origin: @Event.Ready");
+		}
+	}
+}
+
+module.exports = Ready;

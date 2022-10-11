@@ -1,8 +1,0 @@
-{
-    "label": "paper",
-    "name": "Papier",
-    "size": 10,
-    "areas": ["dwelling"],
-    "rarity": 60,
-    "emoji": "📃"
-}

@@ -2,16 +2,16 @@ const RPGAssetBase = require("./RPGAssetBase");
 const RPGMapRegionAreaBiome = require("./RPGMapRegionAreaBiome");
 
 class RPGMaterial extends RPGAssetBase {
-    constructor(assetsManager, lang, id, materialDatas) {
+    constructor(assetsManager, lang, id, materialData) {
         super(lang, id);
 
         this.assetsManager = assetsManager;
 
-        const datas = materialDatas;
-        this.size = datas.size;
-        this.biomes = datas.biomes.map(e => new RPGMapRegionAreaBiome(this, e, this.lang.biomes.json[e]));
+        const data = materialData;
+        this.size = data.size;
+        this.biomes = data.biomes.map(e => new RPGMapRegionAreaBiome(this, e, this.lang.biomes.json[e]));
         this.name = this.lang.materials.json[this.id];
-        this.rarity = datas.rarity;
+        this.rarity = data.rarity;
     }
 
     get getAreas() {

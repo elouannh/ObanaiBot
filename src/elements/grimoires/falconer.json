@@ -1,8 +1,0 @@
-{
-    "label": "falconer",
-    "name": "Grimoire du fauconnier",
-    "equippable": true,
-    "expiration": 259200,
-    "benefits": ["kasugai_crows_rarity_boost"],
-    "boost": 2
-}

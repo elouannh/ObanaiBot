@@ -1,8 +1,0 @@
-{
-    "label": "economist",
-    "name": "Grimoire de l'économiste",
-    "equippable": true,
-    "expiration": 259200,
-    "benefits": ["yens_gain"],
-    "boost": 1.20
-}
