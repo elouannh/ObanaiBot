@@ -85,7 +85,15 @@ class QuestDb extends SQLiteTable {
 
     async refreshQuestObjectives(id, objectives) {
         const newlyAccomplished = [];
-        const userData = {};
+        const userData = {
+            player: await this.client.playerDb.load(id),
+            activity: await this.client.activityDb.load(id),
+            inventory: await this.client.inventoryDb.load(id),
+            squad: await this.client.squadDb.load(id),
+            map: await this.client.mapDb.load(id),
+            quest: await this.client.questDb.load(id),
+            additional: await this.client.additionalDb.load(id),
+        };
 
         for (let i = 0; i < objectives.length; i++) {
             const o = objectives[i];
@@ -93,42 +101,94 @@ class QuestDb extends SQLiteTable {
 
             switch (o.type) {
                 case "reachStatisticLevel":
-                    if (!("player" in userData)) userData["player"] = await this.client.playerDb.load(id);
-
                     const statistic = o.additionalData.statistic;
-                    const userStatistic = userData["player"].statistics[statistic];
+                    const userStatistic = userData.player.statistics[statistic];
 
                     if (userStatistic.level >= o.additionalData.levelToReach) completedInDepth = true;
                     break;
                 case "reachDestination":
-                    if (!("map" in userData)) userData["map"] = await this.client.mapDb.load(id);
-
                     const { region, area } = o.additionalData;
-                    const userRegion = userData["map"].region;
-                    const userArea = userData["map"].region;
+                    const userRegion = userData.map.region;
+                    const userArea = userData.map.region;
 
                     if (userRegion.id === region && userArea.id === area) completedInDepth = true;
                     break;
                 case "haveMoney":
-                    if (!("inventory" in userData)) userData["inventory"] = await this.client.inventoryDb.load(id);
-
-                    const userMoney = userData["inventory"].wallet;
+                    const userMoney = userData.inventory.wallet;
 
                     if (userMoney >= o.additionalData.amountToReach) completedInDepth = true;
                     break;
                 case "haveExperience":
-                    if (!("player" in userData)) userData["player"] = await this.client.playerDb.load(id);
-
-                    const userExperience = userData["player"].level;
+                    const userExperience = userData.player.level;
 
                     if (userExperience.exp >= o.additionalData.amountToReach) completedInDepth = true;
                     break;
                 case "haveKasugaiCrowExperience":
-                    if (!("inventory" in userData)) userData["inventory"] = await this.client.inventoryDb.load(id);
-
-                    const userKasugaiCrowExperience = userData["inventory"].kasugaiCrow.exp;
+                    const userKasugaiCrowExperience = userData.inventory.kasugaiCrow.exp;
 
                     if (userKasugaiCrowExperience >= o.additionalData.amountToReach) completedInDepth = true;
+                    break;
+                case "haveKasugaiCrow":
+                    if ("kasugaiCrow" in o.additionalData) {
+                        completedInDepth = userData.inventory.kasugaiCrow.id === o.additionalData.kasugaiCrow;
+                    }
+                    else {
+                        completedInDepth = userData.inventory.kasugaiCrow.id !== null;
+                    }
+                    break;
+                case "beWithoutKasugaiCrow":
+                    completedInDepth = userData.inventory.kasugaiCrow.id === null;
+                    break;
+                case "haveEquippedEnchantedGrimoire":
+                    if ("enchantedGrimoire" in o.additionalData) {
+                        completedInDepth = userData.inventory.equippedGrimoire.id === o.additionalData.enchantedGrimoire;
+                    }
+                    else {
+                        completedInDepth = userData.inventory.equippedGrimoire.id !== null;
+                    }
+                    break;
+                case "haveEquippedWeapon":
+                    if ("weapon" in o.additionalData) {
+                        completedInDepth = userData.inventory.equippedWeapon.id === o.additionalData.weapon;
+                    }
+                    else {
+                        completedInDepth = userData.inventory.equippedWeapon.id !== null;
+                    }
+                    break;
+                case "beUnarmed":
+                    completedInDepth = userData.inventory.weapon.id === null;
+                    break;
+                case "haveABeingForgedWeapon":
+                    if ("weapon" in o.additionalData) {
+                        completedInDepth = userData.activity.forgingSlots.map(s => s.weapon.id).includes(o.additionalData.weapon);
+                    }
+                    else {
+                        completedInDepth = userData.activity.forgingSlots.length > 0;
+                    }
+                    break;
+                case "haveWeapon":
+                    if ("weapon" in o.additionalData) {
+                        completedInDepth = userData.inventory.items.weapons.map(w => w.id).includes(o.additionalData.weapon);
+                    }
+                    else {
+                        completedInDepth = userData.inventory.items.weapons.length > 0;
+                    }
+                    break;
+                case "haveMaterials":
+                    const amountToReach = o.additionalData.amountToReach;
+                    completedInDepth = o.additionalData.material in userData.inventory.items.materials
+                        ? (userData.inventory.items.materials[o.additionalData.material] >= amountToReach)
+                        : false;
+                    break;
+                case "haveMasteredBreathingStyle":
+                    if ("breathingStyle" in o.additionalData) {
+                        const breathingStyle = o.additionalData.breathingStyle;
+
+                        completedInDepth = userData.player.breathingStyle === breathingStyle;
+                    }
+                    else {
+                        completedInDepth = userData.player.breathingStyle !== null;
+                    }
                     break;
                 default:
                     break;

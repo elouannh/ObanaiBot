@@ -11,8 +11,14 @@ class InventoryData extends TableData {
     }
 
     load() {
-        this.data.kasugaiCrow = this.client.RPGAssetsManager.loadKasugaiCrow(this.lang, this.data.kasugaiCrow);
-        this.data.enchantedGrimoire = this.client.RPGAssetsManager.loadEnchantedGrimoire(this.lang, this.data.enchantedGrimoire);
+        if (this.data.kasugaiCrow.id !== null) {
+            this.data.kasugaiCrow = this.client.RPGAssetsManager.loadKasugaiCrow(this.lang, this.data.kasugaiCrow);
+        }
+        if (this.data.enchantedGrimoire.id !== null) {
+            this.data.enchantedGrimoire = this.client.RPGAssetsManager.loadEnchantedGrimoire(
+                this.lang, this.data.enchantedGrimoire,
+            );
+        }
         this.data.weapon = this.client.RPGAssetsManager.getWeapon(this.lang, this.data.weapon.id, this.data.weapon.rarity);
 
         const newItems = this.data.items;
@@ -28,11 +34,7 @@ class InventoryData extends TableData {
 
         for (const materialKey in this.data.items.materials) {
             const materialAmount = newItems.materials[materialKey];
-            const materialList = [];
-            for (let i = 0; i < materialAmount; i++) {
-                materialList.push(this.client.RPGAssetsManager.getMaterial(this.lang, materialKey));
-            }
-            newItems.materials[materialKey] = { list: materialList, amount: materialAmount };
+            newItems.materials[materialKey] = { material: this.client.RPGAssetsManager.getMaterial(this.lang, materialKey), amount: materialAmount };
         }
 
         for (const questItemKey in this.data.items.questItems) {
