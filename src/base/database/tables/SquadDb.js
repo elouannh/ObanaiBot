@@ -40,6 +40,20 @@ class SquadDb extends SQLiteTable {
     async load(id) {
         return new SquadData(this.client, this.get(id), this.client.playerDb.getLang(id));
     }
+
+    async loadUser(id) {
+        const squad = this.db.find(sq => Object.values(sq.members).includes(id))?.at(0) ?? null;
+
+        if (squad === null) return null;
+
+        return await this.load(squad.id);
+    }
+
+    async foundByUser(id) {
+        const squads = this.db.filter(sq => Object.values(sq.members).includes(id));
+
+        return Array.from(squads);
+    }
 }
 
 module.exports = SquadDb;
