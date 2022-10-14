@@ -235,7 +235,7 @@ class QuestDb extends SQLiteTable {
                     let tutorialStep = true;
                     let tutorialAmount = true;
                     if (o.additionalData.step in userData.additional.rpg.tutorialProgress) {
-
+                        console.log("test");
                     }
                     completedInDepth = tutorialStep && tutorialAmount;
                     break;
