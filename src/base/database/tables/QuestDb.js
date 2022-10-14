@@ -89,7 +89,7 @@ class QuestDb extends SQLiteTable {
             player: await this.client.playerDb.load(id),
             activity: await this.client.activityDb.load(id),
             inventory: await this.client.inventoryDb.load(id),
-            squad: await this.client.squadDb.load(id),
+            squad: await this.client.squadDb.loadUser(id),
             map: await this.client.mapDb.load(id),
             quest: await this.client.questDb.load(id),
             additional: await this.client.additionalDb.load(id),
@@ -189,6 +189,57 @@ class QuestDb extends SQLiteTable {
                     else {
                         completedInDepth = userData.player.breathingStyle !== null;
                     }
+                    break;
+                case "beSquadMember":
+                    if ("squad" in o.additionalData) {
+                        const squad = o.additionalData.squad;
+
+                        completedInDepth = userData.squad !== null
+                            ? (userData.squad.id === squad) : false;
+                    }
+                    else {
+                        completedInDepth = userData.squad !== null;
+                    }
+                    break;
+                case "haveFoundSquad":
+                    const squadsFound = await this.client.squadDb.foundByUser(id);
+                    let squadsIncluded = true;
+                    let squadsAmountReached = true;
+                    if ("squads" in o.additionalData) {
+                        for (const squad in o.additionalData.squads) {
+                            if (squadsIncluded && !squadsFound.includes(squad)) squadsIncluded = false;
+                        }
+
+                        completedInDepth = squadsIncluded && squadsAmountReached;
+                    }
+                    if ("amount" in o.additionalData) {
+                        squadsAmountReached = squadsFound.length >= o.additionalData.amount;
+                    }
+                    else {
+                        squadsAmountReached = squadsFound.length > 0;
+                    }
+                    completedInDepth = squadsIncluded && squadsAmountReached;
+                    break;
+                case "leadSquad":
+                    if ("squad" in o.additionalData) {
+                        const squad = o.additionalData.squad;
+
+                        completedInDepth = userData.squad !== null
+                            ? (userData.squad.id === squad && userData.squad.details.owner.id === id) : false;
+                    }
+                    else {
+                        completedInDepth = userData.squad !== null ? (userData.squad.details.owner.id === id) : false;
+                    }
+                    break;
+                case "haveProgressedTutorial":
+                    let tutorialStep = true;
+                    let tutorialAmount = true;
+                    if (o.additionalData.step in userData.additional.rpg.tutorialProgress) {
+
+                    }
+                    completedInDepth = tutorialStep && tutorialAmount;
+                    break;
+                case "ranCommand":
                     break;
                 default:
                     break;
