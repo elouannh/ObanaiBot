@@ -232,14 +232,26 @@ class QuestDb extends SQLiteTable {
                     }
                     break;
                 case "haveProgressedTutorial":
-                    let tutorialStep = true;
+                    const tutorialStep = o.additionalData.step in userData.additional.rpg.tutorialProgress;
                     let tutorialAmount = true;
-                    if (o.additionalData.step in userData.additional.rpg.tutorialProgress) {
-                        console.log("test 2");
+                    if (tutorialStep) {
+                        const userProgress = userData.additional.rpg.tutorialProgress[o.additionalData.step];
+                        if ("amount" in o.additionalData) {
+                            tutorialAmount = userProgress >= o.additionalData.amount;
+                        }
                     }
                     completedInDepth = tutorialStep && tutorialAmount;
                     break;
                 case "ranCommand":
+                    const commandId = o.additionalData.command in userData.additional.rpg.commandsAmount;
+                    let commandAmount = true;
+                    if (commandId) {
+                        const userProgress = userData.additional.rpg.commandsAmount[o.additionalData.command];
+                        if ("amount" in o.additionalData) {
+                            commandAmount = userProgress >= o.additionalData.amount;
+                        }
+                    }
+                    completedInDepth = commandId && commandAmount;
                     break;
                 default:
                     break;
