@@ -11,7 +11,7 @@ class SQLiteTable {
         this.client = client;
         this.db = new Enmap({ name });
         this.schema = schema;
-        if (this.client.mergeSQLiteTables !== "true") {
+        if (this.client.env.MERGE_SQLITE_TABLES === "0") {
             this.db.changed(async (key, oldValue, newValue) => {
                 const listener = new listenerClass(this.client);
                 await listener.listener(
