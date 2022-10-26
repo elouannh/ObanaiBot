@@ -5,7 +5,7 @@ class SQLiteTableMerger {
         this.client = client;
         this.tables = [...tables];
 
-        if (this.client.mergeSQLiteTables === "true") {
+        if (this.client.env.MERGE_SQLITE_TABLES === "1") {
             this.merge();
         }
     }

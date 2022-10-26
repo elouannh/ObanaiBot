@@ -64,7 +64,7 @@ class CommandManager {
             }
         });
 
-        if (this.client.registerSlash === "true") {
+        if (this.client.env.REGISTER_SLASH === "1") {
             this.client.application.commands.set(slashCommands.concat(contextCommands));
             for (const guild of this.client.guilds.cache.values()) {
                 guild.commands.set([], guild.id);

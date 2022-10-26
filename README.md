@@ -44,9 +44,9 @@ For the bot to work, you need to add a token.json file in the root of the projec
 npm run bot
 ```
 
-You can add the following parameters to the command:
+Modify the values in the .env file to change the different actions to do.
 ```
-registerSlash - Register the slash commands
-renderTranslations - Render the translations and permit you to see if the translation file is correct
-mergeSQLiteTables - Merge the old SQLiteTables structure into the new one
+REGISTER_SLASH - Register the slash commands
+RENDER_TRANSLATIONS - Render the translations and permit you to see if the translation file is correct
+MERGE_SQLITE_TABLES - Merge the old SQLiteTables structure into the new one
 ```

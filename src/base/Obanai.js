@@ -13,7 +13,6 @@ const CollectionManager = require("./CollectionManager");
 const LanguageManager = require("./LanguageManager");
 const { PasteGGManager } = require("./PasteGGManager");
 const RPGAssetsManager = require("./RPGAssetsManager");
-const ProcessManager = require("./ProcessManager");
 const Util = require("./Util");
 const Constants = require("./Constants");
 const SQLiteTableMerger = require("./SQLiteTableMerger");
@@ -30,10 +29,8 @@ class Obanai extends Client {
         this.util = new Util(this);
         this.log("Starting bot process...");
 
-        this.processManager = new ProcessManager(this);
-        this.registerSlash = this.processManager.getArgv("registerSlash");
-        this.renderTranslations = this.processManager.getArgv("renderTranslations");
-        this.mergeSQLiteTables = this.processManager.getArgv("mergeSQLiteTables");
+        this.env = { ...process.env };
+
         this.internalServerManager = new InternalServerManager(this);
         this.pasteGGManager = new PasteGGManager(this);
         this.commandManager = new CommandManager(this);

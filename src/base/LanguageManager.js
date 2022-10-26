@@ -22,7 +22,7 @@ class LanguageManager {
 
             lang.json = new Util(this.client).ensureLang({ ...french.json }, { ...lang.json }, { value: "false" });
 
-            if (this.client.renderTranslations === "true" && lang.json._id !== "fr") {
+            if (this.client.env.RENDER_TRANSLATIONS === "1" && lang.json._id !== "fr") {
                 Json[lang.lang] = new Util(this.client).ensureLang(
                     { ...french.jsonRender },
                     { ...lang.jsonRender },
