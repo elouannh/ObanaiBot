@@ -32,6 +32,13 @@ class QuestDb extends SQLiteTable {
         return new QuestData(this.client, this.get(id), this.client.playerDb.getLang(id));
     }
 
+    /**
+     * Sets the current daily quest for the user. The branch designs if it's the 1st or 2nd quest.
+     * @param {String} id The user ID
+     * @param {String} questId The quest ID to set
+     * @param {String} branch The branch (e.g. "0" or "1")
+     * @return {void}
+     */
     setDailyQuest(id, questId, branch = "0") {
         const dailyQuestId = `daily.${questId}`;
         const dailyQuest = this.client.RPGAssetsManager.getQuest(this.client.playerDb.getLang(id), dailyQuestId);
@@ -43,6 +50,15 @@ class QuestDb extends SQLiteTable {
         );
     }
 
+    /**
+     * Sets the current slayer (main) quest for the user. The branch designs where the quest is located, keep "main" to avoid problems.
+     * @param {String} id The user ID
+     * @param {String} tome The tome ID
+     * @param {String} arc The arc ID
+     * @param {String} quest The quest ID to set
+     * @param {String} branch The branch (set "main" to avoid problems)
+     * @return {void}
+     */
     setSlayerQuest(id, tome, arc, quest, branch = "main") {
         const slayerQuestId = `slayer.${tome}.${arc}.${quest}`;
         const questData = this.client.RPGAssetsManager.getQuest(this.client.playerDb.getLang(id), slayerQuestId);
@@ -67,6 +83,12 @@ class QuestDb extends SQLiteTable {
         );
     }
 
+    /**
+     * Functions that modify the slayer quest: mark an objective as completed.
+     * @param {String} id The user ID
+     * @param {String} objectiveId The objective ID of the quest
+     * @return {void}
+     */
     setSlayerQuestObjectiveAccomplished(id, objectiveId) {
         this.set(
             id,
@@ -75,6 +97,12 @@ class QuestDb extends SQLiteTable {
         );
     }
 
+    /**
+     * Functions that modify the slayer quest: set that the rewards for a completed objective has been collected.
+     * @param {String} id The user ID
+     * @param {String} objectiveId The objective ID of the quest
+     * @return {void}
+     */
     setSlayerQuestRewardCollected(id, objectiveId) {
         this.set(
             id,
@@ -83,6 +111,13 @@ class QuestDb extends SQLiteTable {
         );
     }
 
+    /**
+     * Verify if the user has completed the objectives of a quest, and returns the completed objectives.
+     * It sets the objectives as completed if they are directly with this.setSlayerQuestObjectiveAccomplished method.
+     * @param {String} id The user ID
+     * @param {String[]} objectives The list of objectives
+     * @returns {Promise<Object[]>}
+     */
     async refreshQuestObjectives(id, objectives) {
         const newlyAccomplished = [];
         const userData = {
@@ -266,6 +301,14 @@ class QuestDb extends SQLiteTable {
         return newlyAccomplished;
     }
 
+    /**
+     * Drop the rewards of specified objectives. Set rewards as collected directly in the database.
+     * @param {String} id The user ID
+     * @param {String} objectiveIds The list of ids of the objectives to drop rewards for
+     * @param {String} objectives The list of objectives
+     * @param {String} rewards The list of rewards
+     * @returns {Promise<void>}
+     */
     async getQuestRewards(id, objectiveIds, objectives, rewards) {
         for (let i = 0; i < objectives.length; i++) {
             const o = objectives[i];
@@ -289,17 +332,28 @@ class QuestDb extends SQLiteTable {
         }
     }
 
+    /**
+     * Verify if the slayer quest is completed.
+     * @param {string} id The user ID
+     * @returns {Promise<Object[]>}
+     */
     async refreshSlayerQuestObjectives(id) {
         const userQuestData = await this.load(id);
-        if (userQuestData.schemaInstance) return;
+        if (userQuestData.schemaInstance) return null;
 
         const slayerQuest = userQuestData.currentQuests.slayerQuest[0];
-        if (slayerQuest === null) return;
+        if (slayerQuest === null) return null;
 
         const objectives = slayerQuest.objectives;
-        await this.refreshQuestObjectives(id, objectives);
+        return await this.refreshQuestObjectives(id, objectives);
     }
 
+    /**
+     * Verify if the slayer quest is completed and get the slayer quest rewards.
+     * @param {String} id The user ID
+     * @param {String[]} objectiveIds The list of ids of the objectives to drop rewards for
+     * @returns {Promise<void>}
+     */
     async getSlayerQuestRewards(id, objectiveIds) {
         const userQuestData = await this.load(id);
         if (userQuestData.schemaInstance) return;
@@ -311,6 +365,12 @@ class QuestDb extends SQLiteTable {
         await this.getQuestRewards(id, objectiveIds, objectives, rewards);
     }
 
+    /**
+     * Verify if the slayer quest is completed and get the slayer quest rewards. Concat all functions into one:
+     * WE NEED TO CALL THIS IN THE LISTENER.
+     * @param {String} id The user ID
+     * @returns {Promise<void>}
+     */
     async updateSlayerQuest(id) {
         const refreshSlayerQuestObjectives = await this.refreshSlayerQuestObjectives(id);
         if (refreshSlayerQuestObjectives.length > 0) {
