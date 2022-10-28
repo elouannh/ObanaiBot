@@ -116,7 +116,7 @@ class QuestDb extends SQLiteTable {
      * It sets the objectives as completed if they are directly with this.setSlayerQuestObjectiveAccomplished method.
      * @param {String} id The user ID
      * @param {Object[]} objectives The list of objectives
-     * @returns {Promise<String[]>} The list of completed objectives
+     * @returns {Promise<String[]>} The list of completed objectives ids
      */
     async refreshQuestObjectives(id, objectives) {
         const newlyAccomplished = [];
@@ -335,7 +335,7 @@ class QuestDb extends SQLiteTable {
     /**
      * Verify if the slayer quest is completed.
      * @param {string} id The user ID
-     * @returns {Promise<String[]>} The list of completed objectives
+     * @returns {Promise<String[]>} The list of completed objectives ids
      */
     async refreshSlayerQuestObjectives(id) {
         const userQuestData = await this.load(id);
