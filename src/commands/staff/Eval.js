@@ -5,7 +5,6 @@ const {
     TextInputStyle,
     TextInputBuilder,
 } = require("discord.js");
-const Nav = require("../../base/Navigation");
 
 class Base extends Command {
     constructor() {
@@ -35,7 +34,7 @@ class Base extends Command {
                     new TextInputBuilder()
                         .setLabel(this.lang.rows.label)
                         .setCustomId("codeInput")
-                        .setPlaceholder(this.lang.rows.placeholder)
+                        .setPlaceholder(this.lang.modalPlaceholder)
                         .setRequired(true)
                         .setStyle(TextInputStyle.Paragraph),
                 ),

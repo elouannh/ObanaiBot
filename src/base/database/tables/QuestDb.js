@@ -341,9 +341,10 @@ class QuestDb extends SQLiteTable {
         const userQuestData = await this.load(id);
         if (userQuestData.schemaInstance) return null;
 
-        const slayerQuest = userQuestData.currentQuests.slayerQuest[0];
+        const slayerQuest = userQuestData.currentQuests.slayerQuest?.at(0) || null;
         if (slayerQuest === null) return null;
 
+        console.log(slayerQuest);
         const objectives = slayerQuest.objectives;
         return await this.refreshQuestObjectives(id, objectives);
     }
@@ -373,6 +374,7 @@ class QuestDb extends SQLiteTable {
      */
     async updateSlayerQuest(id) {
         const refreshSlayerQuestObjectives = await this.refreshSlayerQuestObjectives(id);
+        if (refreshSlayerQuestObjectives === null) return;
         if (refreshSlayerQuestObjectives.length > 0) {
             await this.getSlayerQuestRewards(id, refreshSlayerQuestObjectives);
         }

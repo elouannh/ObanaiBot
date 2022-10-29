@@ -415,7 +415,7 @@
             "description": ""
         },
         "11": {
-            "label": "Assistant du Domaine des Papillons",
+            "label": "Ancien formateur du Souffle du Vent",
             "description": ""
         },
         "12": {
@@ -423,11 +423,15 @@
             "description": ""
         },
         "13": {
-            "label": "Ancien formateur du Souffle du Vent",
+            "label": "Assistant du Domaine des Papillons",
             "description": ""
         },
         "14": {
             "label": "Oiran",
+            "description": ""
+        },
+        "15": {
+            "label": "Joueuse de Shamisen",
             "description": ""
         }
     },

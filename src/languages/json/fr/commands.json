@@ -1,7 +1,5 @@
 {
     "base": {
-        "strings": {
-        },
         "panels": {
             "player": {
                 "pages": {
@@ -120,10 +118,8 @@
         }
     },
     "eval": {
-        "rows": {
-            "title": "Code à exécuter",
-            "label": "JavaScript ES6, automatiquement asynchrone",
-            "placeholder": "return \"Arnaud le gay\";"
-        }
+        "modalTitle": "Code à exécuter",
+        "modalLabel": "JavaScript ES6, automatiquement asynchrone",
+        "modalPlaceholder": "return \"Arnaud le gay\";"
     }
 }

@@ -26,6 +26,25 @@ class PlayerDb extends SQLiteTable {
         return new PlayerData(this.client, this.get(id), this.client.inventoryDb.get(id));
     }
 
+    /**
+     * Create a new player in all the databases.
+     * @param {String} id The player ID
+     * @returns {Promise<void>}
+     */
+    async create(id) {
+        await this.client.activityDb.ensureInDeep(id);
+        await this.client.additionalDb.ensureInDeep(id);
+        await this.client.inventoryDb.ensureInDeep(id);
+        await this.client.mapDb.ensureInDeep(id);
+        await this.client.questDb.ensureInDeep(id);
+        await this.client.squadDb.ensureInDeep(id);
+    }
+
+    /**
+     * Get the language of the player.
+     * @param {String} id The player ID
+     * @returns {String}
+     */
     getLang(id) {
         return this.get(id).lang;
     }

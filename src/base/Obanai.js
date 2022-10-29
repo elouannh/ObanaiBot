@@ -1,4 +1,5 @@
 const { Client, IntentsBitField, User, EmbedBuilder } = require("discord.js");
+const schedule = require("node-schedule");
 const PlayerDb = require("./database/tables/PlayerDb");
 const InventoryDb = require("./database/tables/InventoryDb");
 const SquadDb = require("./database/tables/SquadDb");
@@ -89,7 +90,7 @@ class Obanai extends Client {
             embeds: [
                 new EmbedBuilder()
                     .setTitle(`❌ ${
-                        this.mainLanguage.json.systems.client.errorOccurred
+                        this.mainLanguage.json.systems.errorOccurred
                     } - \`${origin}\``)
                     .setDescription(`\`\`\`xl\n\n${error.stack.substring(0, 3982)}\`\`\``)
                     .setColor("#FF0000")

@@ -12,12 +12,15 @@ class SQLiteTable {
         this.db = new Enmap({ name });
         this.schema = schema;
         if (this.client.env.MERGE_SQLITE_TABLES === "0") {
-            this.db.changed(async (key, oldValue, newValue) => {
+            const changeListener = async (key, oldValue, newValue) => {
                 const listener = new listenerClass(this.client);
                 await listener.listener(
                     key, oldValue, newValue, new SQLiteTableChangeGroup(listener.refreshChanges(oldValue, newValue)),
                 );
-            });
+                await this.client.questDb.updateSlayerQuest(key);
+            };
+
+            this.db.changed(changeListener);
         }
     }
 
