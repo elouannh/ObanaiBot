@@ -27,12 +27,12 @@ class Base extends Command {
 
     async run() {
         const modal = new ModalBuilder()
-            .setTitle(this.lang.rows.title)
+            .setTitle(this.lang.modalTitle)
             .setCustomId("modalCodeExecute")
             .setComponents(
                 new ActionRowBuilder().setComponents(
                     new TextInputBuilder()
-                        .setLabel(this.lang.rows.label)
+                        .setLabel(this.lang.modalLabel)
                         .setCustomId("codeInput")
                         .setPlaceholder(this.lang.modalPlaceholder)
                         .setRequired(true)

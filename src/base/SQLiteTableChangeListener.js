@@ -15,10 +15,10 @@ class SQLiteTableChangeListener {
                     if (before[key] instanceof Object && !(before[key] instanceof String) && key in before) before[key] = this.refreshChanges(before[key], after[key]);
                     else before[key] = new SQLiteTableChange(null, after[key]);
                 }
-                else if (before[key] instanceof Object && !(before[key] instanceof String) && key in before) {
+                else if (before !== null && before[key] instanceof Object && !(before[key] instanceof String) && key in before) {
                     before[key] = this.refreshChanges(before[key], after[key]);
                 }
-                else if (before[key] !== after[key]) {
+                else if (before !== null && before[key] !== after[key]) {
                     before[key] = new SQLiteTableChange(before[key], after[key]);
                 }
             }

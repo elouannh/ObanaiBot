@@ -1,6 +1,7 @@
 const Enmap = require("enmap");
 const SQLiteTableChangeListener = require("./SQLiteTableChangeListener");
 const SQLiteTableChangeGroup = require("./SQLiteTableChangeGroup");
+const fs = require("fs");
 
 function schema_(...args) {
     return { ...args };
@@ -13,15 +14,17 @@ class SQLiteTable {
         this.schema = schema;
         if (this.client.env.MERGE_SQLITE_TABLES === "0") {
             const changeListener = async (key, oldValue, newValue) => {
+                if (oldValue === newValue) return;
                 const listener = new listenerClass(this.client);
                 await listener.listener(
                     key, oldValue, newValue, new SQLiteTableChangeGroup(listener.refreshChanges(oldValue, newValue)),
                 );
-                await this.client.playerDb.create(key);
-                await this.client.questDb.updateSlayerQuest(key);
             };
-
-            this.db.changed(changeListener);
+            const dbListeners = fs.readdirSync("./src/base/database/listeners").map(e => e
+                    .replace("Listener.js", "")
+                    .toLowerCase(),
+                );
+            if (dbListeners.includes(name)) this.db.changed(changeListener);
         }
     }
 

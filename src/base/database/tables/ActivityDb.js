@@ -1,5 +1,6 @@
 const SQLiteTable = require("../../SQLiteTable");
 const ActivityData = require("../dataclasses/ActivityData");
+const ActivityListener = require("../listeners/ActivityListener");
 
 function schema(id) {
     return {
@@ -57,13 +58,12 @@ function schema(id) {
 
 class ActivityDb extends SQLiteTable {
     constructor(client) {
-        super(client, "activity", schema);
+        super(client, "activity", schema, ActivityListener);
     }
 
     async load(id) {
         return new ActivityData(this.client, this.get(id), this.client.playerDb.getLang(id));
     }
-
 }
 
 module.exports = ActivityDb;
