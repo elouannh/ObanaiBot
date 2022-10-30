@@ -11,7 +11,7 @@ class Ready extends Event {
 
 	async exe() {
 		this.client.commandManager.loadFiles();
-		this.client.log(`Bot connecté en tant que ${this.client.user.tag} !`);
+		this.client.util.timelog(`Bot connecté en tant que ${this.client.chalk.bold(this.client.user.tag)} !`);
 
 		try {
 			let statusIndex = 0;

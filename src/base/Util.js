@@ -73,7 +73,7 @@ class Util {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    dateRender(date, full) {
+    dateRender(date, form) {
         const data = {
             day: String(date.getDate()),
             month: String(date.getMonth() + 1),
@@ -88,18 +88,22 @@ class Util {
         if (data.hour.length < 2) data.hour = "0" + data.hour;
         if (data.min.length < 2) data.min = "0" + data.min;
         if (data.sec.length < 2) data.sec = "0" + data.sec;
-        return `${data.day}/${data.month}/${data.year}` + (full ? ` ${data.hour}:${data.min}:${data.sec}` : "");
+        return form
+            .replace("day", data.day)
+            .replace("month", data.month)
+            .replace("year", data.year)
+            .replace("hour", data.hour)
+            .replace("min", data.min)
+            .replace("sec", data.sec);
     }
 
-    timelog(message) {
-        const time = this.dateRender(new Date(), true);
-        console.log(`${time} || ${message}`);
+    timelog(message, mainColor = this.client.chalk.greenBright) {
+        const time = this.dateRender(new Date(), "[month/day] [hour:min:sec]");
+        console.log(mainColor(`${time}  |  ${message}`));
     }
 
     catchError(error) {
-        this.timelog(`Error: ${error}`);
-        console.log(error.stack);
-        this.timelog("................");
+        this.timelog(`Error: ${error.stack}`, this.client.chalk.redBright);
     }
 
     async evalCode(code) {

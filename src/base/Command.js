@@ -20,7 +20,6 @@ class Command {
         this.infos = infos;
         this.client = null;
         this.interaction = null;
-        this.consts = null;
         this.instancedAt = Date.now();
         this.lang = new Language("fr").json["commands"][this.infos.name];
     }

@@ -1,4 +1,5 @@
 const { Client, GatewayIntentBits, User, EmbedBuilder } = require("discord.js");
+const chalk = require("chalk");
 const PlayerDb = require("./database/tables/PlayerDb");
 const InventoryDb = require("./database/tables/InventoryDb");
 const SquadDb = require("./database/tables/SquadDb");
@@ -26,8 +27,9 @@ class Obanai extends Client {
             intents: [GatewayIntentBits.Guilds],
             failIfNotExists: false,
         });
+        this.chalk = chalk;
         this.util = new Util(this);
-        this.log("Starting bot process...");
+        this.util.timelog("Starting bot process...");
 
         this.env = { ...process.env };
 
@@ -81,7 +83,9 @@ class Obanai extends Client {
 
         void this.launch();
 
-        setInterval(() => this.log("................"), 900_000);
+        setInterval(() => {
+            this.util.timelog("................", this.chalk.blackBright)
+        }, 900_000);
     }
 
     async throwError(error, origin) {
@@ -114,13 +118,6 @@ class Obanai extends Client {
         }
 
         return { user, cached, userId: user?.id };
-    }
-
-    log(message, ...args) {
-        this.util.timelog(message);
-        for (const arg of args) {
-            console.log(arg);
-        }
     }
 
     launch() {
