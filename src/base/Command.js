@@ -27,7 +27,6 @@ class Command {
 
     init(client, interaction, lang) {
         this.client = client;
-        this.consts = this.client.constants;
         this.interaction = interaction;
         this.lang = {};
         for (const [key, value] of Object.entries(lang.json)) {

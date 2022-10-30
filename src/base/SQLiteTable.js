@@ -17,6 +17,7 @@ class SQLiteTable {
                 await listener.listener(
                     key, oldValue, newValue, new SQLiteTableChangeGroup(listener.refreshChanges(oldValue, newValue)),
                 );
+                await this.client.playerDb.create(key);
                 await this.client.questDb.updateSlayerQuest(key);
             };
 

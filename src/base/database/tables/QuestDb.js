@@ -129,6 +129,7 @@ class QuestDb extends SQLiteTable {
             quest: await this.client.questDb.load(id),
             additional: await this.client.additionalDb.load(id),
         };
+        console.log(userData);
 
         for (let i = 0; i < objectives.length; i++) {
             const o = objectives[i];
@@ -344,7 +345,6 @@ class QuestDb extends SQLiteTable {
         const slayerQuest = userQuestData.currentQuests.slayerQuest?.at(0) || null;
         if (slayerQuest === null) return null;
 
-        console.log(slayerQuest);
         const objectives = slayerQuest.objectives;
         return await this.refreshQuestObjectives(id, objectives);
     }

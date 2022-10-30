@@ -1,5 +1,4 @@
 const { Client, IntentsBitField, User, EmbedBuilder } = require("discord.js");
-const schedule = require("node-schedule");
 const PlayerDb = require("./database/tables/PlayerDb");
 const InventoryDb = require("./database/tables/InventoryDb");
 const SquadDb = require("./database/tables/SquadDb");
@@ -15,7 +14,7 @@ const LanguageManager = require("./LanguageManager");
 const { PasteGGManager } = require("./PasteGGManager");
 const RPGAssetsManager = require("./RPGAssetsManager");
 const Util = require("./Util");
-const Constants = require("./Constants");
+const Enumerations = require("./Enumerations");
 const SQLiteTableMerger = require("./SQLiteTableMerger");
 const Duration = require("./Duration");
 const config = require("../config.json");
@@ -32,7 +31,6 @@ class Obanai extends Client {
 
         this.env = { ...process.env };
 
-        this.internalServerManager = new InternalServerManager(this);
         this.pasteGGManager = new PasteGGManager(this);
         this.commandManager = new CommandManager(this);
         this.eventManager = new EventManager(this);
@@ -57,6 +55,7 @@ class Obanai extends Client {
         this.mapDb = new MapDb(this);
         this.questDb = new QuestDb(this);
         this.additionalDb = new AdditionalDb(this);
+        this.internalServerManager = new InternalServerManager(this);
 
         this.SQLiteTableMerger = new SQLiteTableMerger(
             this,
@@ -71,7 +70,7 @@ class Obanai extends Client {
         );
 
         this.duration = Duration;
-        this.constants = Constants;
+        this.enums = Enumerations;
         this.config = config;
         this.bitfield = 274878286912n;
         this.version = _package.version;

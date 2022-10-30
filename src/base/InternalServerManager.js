@@ -1,5 +1,4 @@
 const SQLiteTable = require("./SQLiteTable");
-const schedule = require("node-schedule");
 
 function schema() {
     return {
@@ -15,6 +14,9 @@ function schema() {
             latency: 0,
             mode: "0b0000",
         },
+        delays: {
+            dailyQuestGenerator: 0,
+        },
     };
 }
 
@@ -26,6 +28,10 @@ class InternalServerManager extends SQLiteTable {
     get main() {
         this.ensureInDeep("main");
         return this.get("main");
+    }
+
+    get delays() {
+        return this.main.delays;
     }
 
     get owners() {
@@ -110,8 +116,19 @@ class InternalServerManager extends SQLiteTable {
     }
 
     async questGenerator() {
-        schedule.scheduleJob("0 * * * *", this.slayerQuestGenerator);
-        schedule.scheduleJob("0 0 2 * *", this.dailyQuestGenerator);
+        setInterval(async () => {
+            await this.slayerQuestGenerator();
+        }, 10_000);
+
+        const lastRefresh = (Date.now() - this.delays.dailyQuestGenerator);
+        const timeLeft = (86_400_000 - lastRefresh);
+        setTimeout(async () => {
+            await this.dailyQuestGenerator();
+
+            setInterval(async () => {
+                await this.dailyQuestGenerator();
+            }, 86_400_000);
+        }, timeLeft);
     }
 }
 

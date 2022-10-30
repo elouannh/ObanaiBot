@@ -6,6 +6,6 @@
     "noClientPermissionsReply": "Je n'ai pas les permissions requises pour utiliser cette commande.",
     "necessariesPermissionsReply": "Liste des permissions nécessaires",
     "clientInMaintenance": "Le bot est actuellement en maintenance.",
-    "noUserAuthorizationReply": "Vous n'êtes pas autorisé à utiliser cette commande."
+    "noUserAuthorizationReply": "Vous n'êtes pas autorisé à utiliser cette commande.",
     "errorOccurred": "Une erreur est survenue."
 }
