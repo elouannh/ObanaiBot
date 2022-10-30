@@ -1,35 +1,26 @@
 module.exports = {
     Rpg: {
         Statistics: {
-            agility: "🍃",
-            strength: "🦁",
-            defense: "🪖",
-            speed: "🥏",
+            Agility: "🍃",
+            Strength: "🦁",
+            Defense: "🪖",
+            Speed: "🥏",
         },
     },
-    systems: {
-        grades: {
-            tester: "🔬",
-            admin: "🔑",
-            owner: "👘",
+    Systems: {
+        Grades: {
+            Tester: "🔬",
+            Admin: "🔑",
+            Owner: "👘",
         },
-        symbols: {
-            check: "✅",
-            cross: "❌",
-            edit: "📝",
-            people: "👥",
-            unlock: "🔓",
-            lock: "🔒",
-            list: "📋",
-            add: "➕",
-            remove: "➖",
-            execute: "🔨",
-            warning: "⚠️",
+        Symbols: {
+            Check: "✅",
+            Cross: "❌",
         },
-        status: {
-            online: "🟢",
-            maintenance: "🟡",
-            disabled: "🔴",
+        Status: {
+            Online: "🟢",
+            Maintenance: "🚧",
+            Disabled: "❗",
         },
     },
 };
