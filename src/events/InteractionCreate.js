@@ -1,9 +1,10 @@
+const { Events } = require("discord.js");
 const Event = require("../base/Event");
 
 class InteractionCreate extends Event {
     constructor(client) {
         super({
-            name: "interactionCreate",
+            name: Events.InteractionCreate,
             once: false,
         }, client);
         this.interaction = null;
@@ -11,13 +12,12 @@ class InteractionCreate extends Event {
 
     async exe(interaction) {
         if (interaction.user.bot) return;
-
         this.interaction = interaction;
 
-        if (this.interaction.isChatInputCommand()) {
+        if (this.interaction?.isChatInputCommand()) {
             await this.executeCommand();
         }
-        else if (this.interaction.isContextMenuCommand()) {
+        else if (this.interaction?.isContextMenuCommand()) {
             this.interaction.commandName = this.interaction.commandName.toLowerCase();
             await this.executeCommand();
         }

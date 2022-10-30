@@ -1,10 +1,11 @@
+const { Events } = require("discord.js");
 const Event = require("../base/Event");
 
 class Ready extends Event {
     constructor() {
         super({
-            name: "ready",
-            once: true,
+            name: Events.Error,
+            on: true,
         });
     }
 

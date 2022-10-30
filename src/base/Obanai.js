@@ -1,4 +1,4 @@
-const { Client, IntentsBitField, User, EmbedBuilder } = require("discord.js");
+const { Client, GatewayIntentBits, User, EmbedBuilder } = require("discord.js");
 const PlayerDb = require("./database/tables/PlayerDb");
 const InventoryDb = require("./database/tables/InventoryDb");
 const SquadDb = require("./database/tables/SquadDb");
@@ -23,7 +23,7 @@ const _package = require("../../package.json");
 class Obanai extends Client {
     constructor() {
         super({
-            intents: new IntentsBitField().add("Guilds"),
+            intents: [GatewayIntentBits.Guilds],
             failIfNotExists: false,
         });
         this.util = new Util(this);
@@ -78,7 +78,8 @@ class Obanai extends Client {
 
         this.token = require("../../token.json").token;
         this.eventManager.loadFiles();
-        void this.launch();
+
+        this.launch();
 
         setInterval(() => this.log("................"), 900_000);
     }
@@ -125,9 +126,8 @@ class Obanai extends Client {
         }
     }
 
-    launch(token = "") {
-        if (token.length > 0) return this.login(token);
-        else return this.login(this.token);
+    launch() {
+        return this.login(this.token);
     }
 }
 

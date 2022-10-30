@@ -5,10 +5,10 @@ const {
     ButtonBuilder,
 } = require("discord.js");
 
-class Base extends Command {
+class Profile extends Command {
     constructor() {
         super({
-            name: "base",
+            name: "profile",
             description: "Commande permettant d'afficher les informations d'un joueur.",
             descriptionLocalizations: {
                 "en-US": "Command to display player informations.",
@@ -16,9 +16,9 @@ class Base extends Command {
             options: [
                 {
                     type: 6,
-                    name: "base",
+                    name: "user",
                     nameLocalizations: {
-                        "en-US": "base",
+                        "en-US": "user",
                     },
                     description: "Joueur dont vous souhaitez afficher les informations.",
                     descriptionLocalizations: {
@@ -31,7 +31,7 @@ class Base extends Command {
             dmPermission: true,
             category: "RPG",
             cooldown: 5,
-            completedRequests: ["base"],
+            completedRequests: ["profile"],
             authorizationBitField: 0b000,
             permissions: 0n,
         });
@@ -46,4 +46,4 @@ class Base extends Command {
     }
 }
 
-module.exports = Base;
+module.exports = Profile;
