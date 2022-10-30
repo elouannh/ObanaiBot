@@ -1,5 +1,5 @@
 const Command = require("../../base/Command");
-// const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 class Profile extends Command {
     constructor() {
@@ -13,9 +13,6 @@ class Profile extends Command {
                 {
                     type: 6,
                     name: "user",
-                    nameLocalizations: {
-                        "en-US": "user",
-                    },
                     description: "Joueur dont vous souhaitez afficher les informations.",
                     descriptionLocalizations: {
                         "en-US": "Player whose informations you want to display.",
@@ -34,8 +31,14 @@ class Profile extends Command {
     }
 
     async run() {
-        const user = this.getUserFromInteraction(this.interaction.type);
-        console.log(user);
+        const user = await this.getUserFromInteraction(this.interaction.type);
+        if (!(await this.client.playerDb.exists(user.id))) await this.client.playerDb.create(user.id);
+        const player = await this.client.playerDb.load(user.id);
+
+        const embed = new EmbedBuilder()
+            .setColor(this.client.enums.Colors.Blurple)
+            .setTitle(this.lang.commands.profile.mainTitle);
+        await this.interaction.reply({ embeds: [embed] }).catch(this.client.util.catchError);
     }
 }
 

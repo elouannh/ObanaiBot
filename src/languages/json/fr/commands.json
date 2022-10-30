@@ -1,5 +1,6 @@
 {
-    "base": {
+    "profile": {
+        "mainTitle": "titre de test"
     },
     "eval": {
         "modalTitle": "Code à exécuter",

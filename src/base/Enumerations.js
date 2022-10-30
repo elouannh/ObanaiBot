@@ -23,4 +23,7 @@ module.exports = {
             Disabled: "❗",
         },
     },
+    Colors: {
+        Blurple: 0x5865f2,
+    },
 };

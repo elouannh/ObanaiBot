@@ -84,7 +84,7 @@ class Obanai extends Client {
         void this.launch();
 
         setInterval(() => {
-            this.util.timelog("................", this.chalk.blackBright)
+            this.util.timelog("................", this.chalk.blackBright);
         }, 900_000);
     }
 
@@ -117,7 +117,7 @@ class Obanai extends Client {
             this.util.catchError(err);
         }
 
-        return { user, cached, userId: user?.id };
+        return Object.assign(user, { cached });
     }
 
     launch() {

@@ -44,10 +44,11 @@ class CommandManager {
                     if (option.type === 6) {
                         const userOption = new SlashCommandUserOption()
                             .setName(option.name)
-                            .setNameLocalizations(option.nameLocalizations)
                             .setDescription(option.description)
                             .setDescriptionLocalizations(option.descriptionLocalizations)
                             .setRequired(option.required);
+
+                        if (option.nameLocalizations) userOption.setNameLocalizations(option.nameLocalizations);
 
                         build.addUserOption(userOption);
                     }

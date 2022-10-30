@@ -27,19 +27,7 @@ class Command {
     init(client, interaction, lang) {
         this.client = client;
         this.interaction = interaction;
-        this.lang = {};
-        for (const [key, value] of Object.entries(lang.json)) {
-            if (key === "commands") {
-                for (const [key2, value2] of Object.entries(value)) {
-                    if (key2 === this.infos.name) {
-                        for (const [key3, value3] of Object.entries(value2)) this.lang[key3] = value3;
-                    }
-                }
-            }
-            else {
-                this.lang[key] = value;
-            }
-        }
+        this.lang = lang.json;
     }
 
     async exe() {
@@ -170,9 +158,9 @@ class Command {
     async getUserFromInteraction(interactionType) {
         const user = this.interaction.user;
         let userId = user.id;
-        if (interactionType === 1) userId = this.interaction.options?.get("joueur")?.user?.id;
-        else if (interactionType === 2) userId = this.client.users.cache.get(this.interaction.targetId);
-        return (await this.client.getUser(userId, user)).userId;
+        if (interactionType === 1) userId = this.interaction.options?.get("joueur")?.user?.id || userId;
+        else if (interactionType === 2) userId = this.client.users.cache.get(this.interaction.targetId) || userId;
+        return await this.client.getUser(userId, user);
     }
 }
 

@@ -41,6 +41,26 @@ class PlayerDb extends SQLiteTable {
     }
 
     /**
+     * Returns if a player exists in the database.
+     * @param {String} id The player ID
+     * @returns {Promise<boolean>}
+     */
+    async exists(id) {
+        for (const db of [
+            this,
+            this.client.activityDb,
+            this.client.additionalDb,
+            this.client.inventoryDb,
+            this.client.mapDb,
+            this.client.questDb,
+            this.client.squadDb,
+        ]) {
+            if ((await db.get(id))?.schemaInstance) return false;
+        }
+        return true;
+    }
+
+    /**
      * Get the language of the player.
      * @param {String} id The player ID
      * @returns {String}
