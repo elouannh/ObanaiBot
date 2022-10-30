@@ -1,9 +1,5 @@
 const Command = require("../../base/Command");
-const {
-    EmbedBuilder,
-    ActionRowBuilder,
-    ButtonBuilder,
-} = require("discord.js");
+// const Discord = require("discord.js");
 
 class Profile extends Command {
     constructor() {
@@ -38,11 +34,8 @@ class Profile extends Command {
     }
 
     async run() {
-        const user = this.interaction.user;
-        let userId = user.id;
-        if (this.interaction.type === 1) userId = this.interaction.options?.get("joueur")?.user?.id;
-        else if (this.interaction.type === 2) userId = this.client.users.cache.get(this.interaction.targetId);
-        userId = (await this.client.getUser(userId, user)).userId;
+        const user = this.getUserFromInteraction(this.interaction.type);
+        console.log(user);
     }
 }
 

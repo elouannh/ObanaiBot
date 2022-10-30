@@ -79,7 +79,7 @@ class Obanai extends Client {
         this.token = require("../../token.json").token;
         this.eventManager.loadFiles();
 
-        this.launch();
+        void this.launch();
 
         setInterval(() => this.log("................"), 900_000);
     }
@@ -101,18 +101,16 @@ class Obanai extends Client {
 
     async getUser(id, secureValue) {
         let user = secureValue;
-        let cached = true;
+        let cached = false;
 
         try {
-            if (!((await this.users.fetch(id)) instanceof User)) {
-                cached = false;
-            }
-            else {
+            if ((await this.users.fetch(id) instanceof User)) {
                 user = await this.users.fetch(id);
+                cached = true;
             }
         }
-        catch {
-            cached = false;
+        catch (err) {
+            this.util.catchError(err);
         }
 
         return { user, cached, userId: user?.id };

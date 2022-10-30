@@ -4,7 +4,7 @@ class PasteGGFile {
         this.content = {
             format: "text",
             highlight_language: "javascript",
-            value: "console.log(\"Hello world !\");"
+            value: "console.log(\"Hello world !\");",
         };
     }
 

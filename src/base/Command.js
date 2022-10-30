@@ -167,6 +167,14 @@ class Command {
 
         return ready;
     }
+
+    async getUserFromInteraction(interactionType) {
+        const user = this.interaction.user;
+        let userId = user.id;
+        if (interactionType === 1) userId = this.interaction.options?.get("joueur")?.user?.id;
+        else if (interactionType === 2) userId = this.client.users.cache.get(this.interaction.targetId);
+        return (await this.client.getUser(userId, user)).userId;
+    }
 }
 
 module.exports = Command;
