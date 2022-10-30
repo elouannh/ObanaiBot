@@ -33,7 +33,14 @@ class Profile extends Command {
     async run() {
         const user = await this.getUserFromInteraction(this.interaction.type);
         if (!(await this.client.playerDb.exists(user.id))) await this.client.playerDb.create(user.id);
+
+        const activity = await this.client.activityDb.load(user.id);
+        const additional = await this.client.additionalDb.load(user.id);
+        const inventory = await this.client.inventoryDb.load(user.id);
+        const map = await this.client.mapDb.load(user.id);
         const player = await this.client.playerDb.load(user.id);
+        const quest = await this.client.questDb.load(user.id);
+        const squad = await this.client.squadDb.load(user.id);
 
         const embed = new EmbedBuilder()
             .setColor(this.client.enums.Colors.Blurple)
