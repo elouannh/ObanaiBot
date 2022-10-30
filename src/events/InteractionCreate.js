@@ -60,6 +60,8 @@ class InteractionCreate extends Event {
             );
             this.client.requestsManager.add(this.interaction.user.id, { key: cmd.infos.name, value: Date.now() });
             try {
+                this.client.additionalDb.incrementCommand(String(cmd.interaction.user.id), cmd.infos.name);
+                this.client.util.timelog(`[Command] ${cmd.infos.name} - ${cmd.interaction.user.tag} (${cmd.interaction.user.id})`, this.client.chalk.yellowBright);
                 await cmd.run();
             }
             catch (err) {
