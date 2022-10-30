@@ -57,22 +57,12 @@ class Util {
         return obj;
     }
 
-    positive(int) {
-        return Math.sqrt(int * int);
-    }
-
     round(int, digits = 0) {
         return Number(int.toFixed(digits));
     }
 
     capitalize(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
-    camelCase(string) {
-        return string.replace(/(^\w|[A-Z]|\b\w)/g, (word, index) => {
-            return index === 0 ? word.toLowerCase() : word.toUpperCase();
-        }).replace(/\s+/g, "");
     }
 
     intRender(int, sep = " ") {
@@ -83,7 +73,7 @@ class Util {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    dateRender(date, full) {
+    dateRender(date, form) {
         const data = {
             day: String(date.getDate()),
             month: String(date.getMonth() + 1),
@@ -98,34 +88,26 @@ class Util {
         if (data.hour.length < 2) data.hour = "0" + data.hour;
         if (data.min.length < 2) data.min = "0" + data.min;
         if (data.sec.length < 2) data.sec = "0" + data.sec;
-        return `${data.day}/${data.month}/${data.year}` + (full ? ` ${data.hour}:${data.min}:${data.sec}` : "");
+        return form
+            .replace("day", data.day)
+            .replace("month", data.month)
+            .replace("year", data.year)
+            .replace("hour", data.hour)
+            .replace("min", data.min)
+            .replace("sec", data.sec);
     }
 
-    randomSquadNameGenerator() {}
-
-    compareArrays(firstArray = [], secondArray = []) {
-        const data = {
-            added: [],
-            removed: [],
-            unchanged: [],
-        };
-
-        data.added = secondArray.filter(element => !firstArray.includes(element));
-        data.removed = firstArray.filter(element => !secondArray.includes(element));
-        data.unchanged = secondArray.filter(element => firstArray.includes(element));
-
-        return data;
+    timelog(message, mainColor = this.client.chalk.greenBright) {
+        const time = this.dateRender(new Date(), "[month/day] [hour:min:sec]");
+        console.log(mainColor(`${time}  |  ${message}`));
     }
 
     catchError(error) {
-        const time = this.dateRender(new Date(), true);
-        console.log(`${time} || Catched error:`);
-        console.log(error.stack);
-        console.log(`${time} ||................`);
+        this.timelog(`Error: ${error.stack}`, this.client.chalk.redBright);
     }
 
     async evalCode(code) {
-        code = `(async () => {\n${code}})();`;
+        code = `(async () => {\n${code.replace("")}\n})();`;
         const clean = text => {
             if (typeof text === "string") {
                 return text.replace(/`/g, "`" + String.fromCharCode(8203))

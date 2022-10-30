@@ -20,32 +20,18 @@ class Command {
         this.infos = infos;
         this.client = null;
         this.interaction = null;
-        this.consts = null;
         this.instancedAt = Date.now();
-        this.lang = new Language("fr").json["commands"][this.infos.name] ?? {};
+        this.lang = new Language("fr").json["commands"][this.infos.name];
     }
 
     init(client, interaction, lang) {
         this.client = client;
-        this.consts = this.client.constants;
         this.interaction = interaction;
-        this.lang = {};
-        for (const [key, value] of Object.entries(lang.json)) {
-            if (key === "commands") {
-                for (const [key2, value2] of Object.entries(value)) {
-                    if (key2 === this.infos.name) {
-                        for (const [key3, value3] of Object.entries(value2)) this.lang[key3] = value3;
-                    }
-                }
-            }
-            else {
-                this.lang[key] = value;
-            }
-        }
+        this.lang = lang.json;
     }
 
     async exe() {
-        await this.interaction.reply({ content: this.lang.systems.command.defaultReply }).catch(this.client.util.catchError);
+        await this.interaction.reply({ content: this.lang.systems.defaultReply }).catch(this.client.util.catchError);
     }
 
     async cooldownReady(forExecuting) {
@@ -58,7 +44,7 @@ class Command {
         if (tStamp < readyForRun) {
             ready = false;
             await this.interaction.reply({
-                content: this.lang.systems.command.cooldownReply.replace(
+                content: this.lang.systems.cooldownReply.replace(
                     "%TIME",
                     new this.client.duration(readyForRun, this.lang._id).convert(readyForRun - tStamp),
                 ),
@@ -85,7 +71,7 @@ class Command {
         if (notFinished.length > 0) {
             ready = false;
             await this.interaction.reply({
-                content: `🛠️ ${this.lang.systems.command.requestsReply}\n\n${
+                content: `🛠️ ${this.lang.systems.requestsReply}\n\n${
                     notFinished.map(e => `» **\`${e.name}\`** - <t:${(e.ts / 1000).toFixed(0)}:F>`)
                 }`,
             }).catch(this.client.util.catchError);
@@ -104,9 +90,9 @@ class Command {
         if (!hasPerms) {
             const missingPermissions = requiredPermissions.filter(p => !userPermissions.includes(p));
             await this.interaction.reply({
-                content: `${this.lang.systems.command.noUserPermissionsReady}`
+                content: `${this.lang.systems.noUserPermissionsReady}`
                 +
-                `\n${this.lang.systems.command.necessariesPermissionsReply}:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
+                `\n${this.lang.systems.necessariesPermissionsReply}:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
             }).catch(this.client.util.catchError);
         }
         return hasPerms;
@@ -124,9 +110,9 @@ class Command {
             const missingPermissions = clientBitfield.filter(p => !clientPermissions.includes(p));
             if (clientMember.has(2048n)) {
                 await this.interaction.reply({
-                    content: `${this.lang.systems.command.noClientPermissionsReply}`
+                    content: `${this.lang.systems.noClientPermissionsReply}`
                         +
-                        `\n${this.lang.systems.command.necessariesPermissionsReply}:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
+                        `\n${this.lang.systems.necessariesPermissionsReply}:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
                 }).catch(this.client.util.catchError);
             }
         }
@@ -142,7 +128,7 @@ class Command {
         if (Number(userBitField) < Number(commandBitField)) {
             ready = false;
             await this.interaction.reply({
-                content: this.lang.systems.command.noUserAuthorizationReply,
+                content: this.lang.systems.noUserAuthorizationReply,
             }).catch(this.client.util.catchError);
         }
 
@@ -161,12 +147,20 @@ class Command {
             ready = false;
             if (Number(replyMode) === 1) {
                 await this.interaction.reply({
-                    content: this.lang.systems.command.clientInMaintenance,
+                    content: this.lang.systems.clientInMaintenance,
                 }).catch(this.client.util.catchError);
             }
         }
 
         return ready;
+    }
+
+    async getUserFromInteraction(interactionType) {
+        const user = this.interaction.user;
+        let userId = user.id;
+        if (interactionType === 1) userId = this.interaction.options?.get("joueur")?.user?.id || userId;
+        else if (interactionType === 2) userId = this.client.users.cache.get(this.interaction.targetId) || userId;
+        return await this.client.getUser(userId, user);
     }
 }
 

@@ -64,7 +64,6 @@ class ActivityDb extends SQLiteTable {
     async load(id) {
         return new ActivityData(this.client, this.get(id), this.client.playerDb.getLang(id));
     }
-
 }
 
 module.exports = ActivityDb;

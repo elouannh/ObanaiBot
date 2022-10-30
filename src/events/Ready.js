@@ -1,17 +1,17 @@
-const { ActivityType } = require("discord.js");
+const { ActivityType, Events } = require("discord.js");
 const Event = require("../base/Event");
 
 class Ready extends Event {
 	constructor(client) {
 		super({
-			name: "ready",
+			name: Events.ClientReady,
 			once: true,
 		}, client);
 	}
 
 	async exe() {
-		await this.client.commandManager.loadFiles();
-		this.client.log(`Bot connecté en tant que ${this.client.user.tag} !`);
+		this.client.commandManager.loadFiles();
+		this.client.util.timelog(`Bot connecté en tant que ${this.client.chalk.bold(this.client.user.tag)} !`);
 
 		try {
 			let statusIndex = 0;

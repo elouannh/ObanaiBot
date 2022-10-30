@@ -44,10 +44,11 @@ class CommandManager {
                     if (option.type === 6) {
                         const userOption = new SlashCommandUserOption()
                             .setName(option.name)
-                            .setNameLocalizations(option.nameLocalizations)
                             .setDescription(option.description)
                             .setDescriptionLocalizations(option.descriptionLocalizations)
                             .setRequired(option.required);
+
+                        if (option.nameLocalizations) userOption.setNameLocalizations(option.nameLocalizations);
 
                         build.addUserOption(userOption);
                     }
@@ -65,9 +66,9 @@ class CommandManager {
         });
 
         if (this.client.env.REGISTER_SLASH === "1") {
-            this.client.application.commands.set(slashCommands.concat(contextCommands));
+            void this.client.application.commands.set(slashCommands.concat(contextCommands));
             for (const guild of this.client.guilds.cache.values()) {
-                guild.commands.set([], guild.id);
+                void guild.commands.set([], guild.id);
             }
         }
     }

@@ -1,4 +1,5 @@
-const { Client, IntentsBitField, User, EmbedBuilder } = require("discord.js");
+const { Client, GatewayIntentBits, User, EmbedBuilder } = require("discord.js");
+const chalk = require("chalk");
 const PlayerDb = require("./database/tables/PlayerDb");
 const InventoryDb = require("./database/tables/InventoryDb");
 const SquadDb = require("./database/tables/SquadDb");
@@ -14,7 +15,7 @@ const LanguageManager = require("./LanguageManager");
 const { PasteGGManager } = require("./PasteGGManager");
 const RPGAssetsManager = require("./RPGAssetsManager");
 const Util = require("./Util");
-const Constants = require("./Constants");
+const Enumerations = require("./Enumerations");
 const SQLiteTableMerger = require("./SQLiteTableMerger");
 const Duration = require("./Duration");
 const config = require("../config.json");
@@ -23,15 +24,15 @@ const _package = require("../../package.json");
 class Obanai extends Client {
     constructor() {
         super({
-            intents: new IntentsBitField().add("Guilds"),
+            intents: [GatewayIntentBits.Guilds],
             failIfNotExists: false,
         });
+        this.chalk = chalk;
         this.util = new Util(this);
-        this.log("Starting bot process...");
+        this.util.timelog("Starting bot process...");
 
         this.env = { ...process.env };
 
-        this.internalServerManager = new InternalServerManager(this);
         this.pasteGGManager = new PasteGGManager(this);
         this.commandManager = new CommandManager(this);
         this.eventManager = new EventManager(this);
@@ -56,6 +57,7 @@ class Obanai extends Client {
         this.mapDb = new MapDb(this);
         this.questDb = new QuestDb(this);
         this.additionalDb = new AdditionalDb(this);
+        this.internalServerManager = new InternalServerManager(this);
 
         this.SQLiteTableMerger = new SQLiteTableMerger(
             this,
@@ -70,7 +72,7 @@ class Obanai extends Client {
         );
 
         this.duration = Duration;
-        this.constants = Constants;
+        this.enums = Enumerations;
         this.config = config;
         this.bitfield = 274878286912n;
         this.version = _package.version;
@@ -78,9 +80,12 @@ class Obanai extends Client {
 
         this.token = require("../../token.json").token;
         this.eventManager.loadFiles();
+
         void this.launch();
 
-        setInterval(() => this.log("................"), 900_000);
+        setInterval(() => {
+            this.util.timelog("................", this.chalk.blackBright);
+        }, 900_000);
     }
 
     async throwError(error, origin) {
@@ -89,7 +94,7 @@ class Obanai extends Client {
             embeds: [
                 new EmbedBuilder()
                     .setTitle(`❌ ${
-                        this.mainLanguage.json.systems.client.errorOccurred
+                        this.mainLanguage.json.systems.errorOccurred
                     } - \`${origin}\``)
                     .setDescription(`\`\`\`xl\n\n${error.stack.substring(0, 3982)}\`\`\``)
                     .setColor("#FF0000")
@@ -100,34 +105,23 @@ class Obanai extends Client {
 
     async getUser(id, secureValue) {
         let user = secureValue;
-        let cached = true;
+        let cached = false;
 
         try {
-            if (!((await this.users.fetch(id)) instanceof User)) {
-                cached = false;
-            }
-            else {
+            if ((await this.users.fetch(id) instanceof User)) {
                 user = await this.users.fetch(id);
+                cached = true;
             }
         }
-        catch {
-            cached = false;
+        catch (err) {
+            this.util.catchError(err);
         }
 
-        return { user, cached, userId: user?.id };
+        return Object.assign(user, { cached });
     }
 
-    log(message, ...args) {
-        const time = this.util.dateRender(new Date(), true);
-        console.log(`${time} || ${message}`);
-        for (const arg of args) {
-            console.log(arg);
-        }
-    }
-
-    launch(token = "") {
-        if (token.length > 0) return this.login(token);
-        else return this.login(this.token);
+    launch() {
+        return this.login(this.token);
     }
 }
 

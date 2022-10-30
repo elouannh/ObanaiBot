@@ -115,181 +115,212 @@ class QuestDb extends SQLiteTable {
      * Verify if the user has completed the objectives of a quest, and returns the completed objectives.
      * It sets the objectives as completed if they are directly with this.setSlayerQuestObjectiveAccomplished method.
      * @param {String} id The user ID
-     * @param {String[]} objectives The list of objectives
-     * @returns {Promise<Object[]>}
+     * @param {Object[]} objectives The list of objectives
+     * @param {String} tableFocused The SQLite table focused
+     * @returns {Promise<String[]>} The list of completed objectives ids
      */
-    async refreshQuestObjectives(id, objectives) {
+    async refreshQuestObjectives(id, objectives, tableFocused) {
         const newlyAccomplished = [];
-        const userData = {
-            player: await this.client.playerDb.load(id),
-            activity: await this.client.activityDb.load(id),
-            inventory: await this.client.inventoryDb.load(id),
-            squad: await this.client.squadDb.loadUser(id),
-            map: await this.client.mapDb.load(id),
-            quest: await this.client.questDb.load(id),
-            additional: await this.client.additionalDb.load(id),
-        };
+        let data = null;
 
         for (let i = 0; i < objectives.length; i++) {
             const o = objectives[i];
             let completedInDepth = false;
 
-            switch (o.type) {
-                case "reachStatisticLevel":
-                    const statistic = o.additionalData.statistic;
-                    const userStatistic = userData.player.statistics[statistic];
-
-                    if (userStatistic.level >= o.additionalData.levelToReach) completedInDepth = true;
-                    break;
-                case "reachDestination":
-                    const { region, area } = o.additionalData;
-                    const userRegion = userData.map.region;
-                    const userArea = userData.map.region;
-
-                    if (userRegion.id === region && userArea.id === area) completedInDepth = true;
-                    break;
-                case "haveMoney":
-                    const userMoney = userData.inventory.wallet;
-
-                    if (userMoney >= o.additionalData.amountToReach) completedInDepth = true;
-                    break;
-                case "haveExperience":
-                    const userExperience = userData.player.level;
-
-                    if (userExperience.exp >= o.additionalData.amountToReach) completedInDepth = true;
-                    break;
-                case "haveKasugaiCrowExperience":
-                    const userKasugaiCrowExperience = userData.inventory.kasugaiCrow.exp;
-
-                    if (userKasugaiCrowExperience >= o.additionalData.amountToReach) completedInDepth = true;
-                    break;
-                case "haveKasugaiCrow":
-                    if ("kasugaiCrow" in o.additionalData) {
-                        completedInDepth = userData.inventory.kasugaiCrow.id === o.additionalData.kasugaiCrow;
-                    }
-                    else {
-                        completedInDepth = userData.inventory.kasugaiCrow.id !== null;
-                    }
-                    break;
-                case "beWithoutKasugaiCrow":
-                    completedInDepth = userData.inventory.kasugaiCrow.id === null;
-                    break;
-                case "haveEquippedEnchantedGrimoire":
-                    if ("enchantedGrimoire" in o.additionalData) {
-                        completedInDepth = userData.inventory.equippedGrimoire.id === o.additionalData.enchantedGrimoire;
-                    }
-                    else {
-                        completedInDepth = userData.inventory.equippedGrimoire.id !== null;
-                    }
-                    break;
-                case "haveEquippedWeapon":
-                    if ("weapon" in o.additionalData) {
-                        completedInDepth = userData.inventory.equippedWeapon.id === o.additionalData.weapon;
-                    }
-                    else {
-                        completedInDepth = userData.inventory.equippedWeapon.id !== null;
-                    }
-                    break;
-                case "beUnarmed":
-                    completedInDepth = userData.inventory.weapon.id === null;
-                    break;
-                case "haveABeingForgedWeapon":
-                    if ("weapon" in o.additionalData) {
-                        completedInDepth = userData.activity.forgingSlots.map(s => s.weapon.id).includes(o.additionalData.weapon);
-                    }
-                    else {
-                        completedInDepth = userData.activity.forgingSlots.length > 0;
-                    }
-                    break;
-                case "haveWeapon":
-                    if ("weapon" in o.additionalData) {
-                        completedInDepth = userData.inventory.items.weapons.map(w => w.id).includes(o.additionalData.weapon);
-                    }
-                    else {
-                        completedInDepth = userData.inventory.items.weapons.length > 0;
-                    }
-                    break;
-                case "haveMaterials":
-                    const amountToReach = o.additionalData.amountToReach;
-                    completedInDepth = o.additionalData.material in userData.inventory.items.materials
-                        ? (userData.inventory.items.materials[o.additionalData.material] >= amountToReach)
-                        : false;
-                    break;
-                case "haveMasteredBreathingStyle":
-                    if ("breathingStyle" in o.additionalData) {
-                        const breathingStyle = o.additionalData.breathingStyle;
-
-                        completedInDepth = userData.player.breathingStyle === breathingStyle;
-                    }
-                    else {
-                        completedInDepth = userData.player.breathingStyle !== null;
-                    }
-                    break;
-                case "beSquadMember":
-                    if ("squad" in o.additionalData) {
-                        const squad = o.additionalData.squad;
-
-                        completedInDepth = userData.squad !== null
-                            ? (userData.squad.id === squad) : false;
-                    }
-                    else {
-                        completedInDepth = userData.squad !== null;
-                    }
-                    break;
-                case "haveFoundSquad":
-                    const squadsFound = await this.client.squadDb.foundByUser(id);
-                    let squadsIncluded = true;
-                    let squadsAmountReached = true;
-                    if ("squads" in o.additionalData) {
-                        for (const squad in o.additionalData.squads) {
-                            if (squadsIncluded && !squadsFound.includes(squad)) squadsIncluded = false;
+            if (tableFocused === "activityDb") {
+                if (data === null) data = await this.client.activityDb.load(id);
+                switch (o.type) {
+                    case "haveABeingForgedWeapon":
+                        if ("weapon" in o.additionalData) {
+                            completedInDepth = data.forgingSlots.map(s => s.weapon.id).includes(o.additionalData.weapon);
                         }
+                        else {
+                            completedInDepth = data.forgingSlots.length > 0;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if (tableFocused === "additionalDb") {
+                if (data === null) await this.client.additionalDb.load(id);
+                switch (o.type) {
+                    case "haveProgressedTutorial":
+                        const tutorialStep = o.additionalData.step in data.rpg.tutorialProgress;
+                        let tutorialAmount = true;
+                        if (tutorialStep) {
+                            const userProgress = data.rpg.tutorialProgress[o.additionalData.step];
+                            if ("amount" in o.additionalData) {
+                                tutorialAmount = userProgress >= o.additionalData.amount;
+                            }
+                        }
+                        completedInDepth = tutorialStep && tutorialAmount;
+                        break;
+                    case "ranCommand":
+                        const commandId = o.additionalData.command in data.rpg.commandsAmount;
+                        let commandAmount = true;
+                        if (commandId) {
+                            const userProgress = data.rpg.commandsAmount[o.additionalData.command];
+                            if ("amount" in o.additionalData) {
+                                commandAmount = userProgress >= o.additionalData.amount;
+                            }
+                        }
+                        completedInDepth = commandId && commandAmount;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if (tableFocused === "inventoryDb") {
+                if (data === null) await this.client.inventoryDb.load(id);
+                switch (o.type) {
+                    case "haveMoney":
+                        const userMoney = data.wallet;
 
+                        if (userMoney >= o.additionalData.amountToReach) completedInDepth = true;
+                        break;
+                    case "haveKasugaiCrowExperience":
+                        const userKasugaiCrowExperience = data.kasugaiCrow.exp;
+
+                        if (userKasugaiCrowExperience >= o.additionalData.amountToReach) completedInDepth = true;
+                        break;
+                    case "haveKasugaiCrow":
+                        if ("kasugaiCrow" in o.additionalData) {
+                            completedInDepth = data.kasugaiCrow.id === o.additionalData.kasugaiCrow;
+                        }
+                        else {
+                            completedInDepth = data.kasugaiCrow.id !== null;
+                        }
+                        break;
+                    case "beWithoutKasugaiCrow":
+                        completedInDepth = data.kasugaiCrow.id === null;
+                        break;
+                    case "haveEquippedEnchantedGrimoire":
+                        if ("enchantedGrimoire" in o.additionalData) {
+                            completedInDepth = data.equippedGrimoire.id === o.additionalData.enchantedGrimoire;
+                        }
+                        else {
+                            completedInDepth = data.equippedGrimoire.id !== null;
+                        }
+                        break;
+                    case "haveEquippedWeapon":
+                        if ("weapon" in o.additionalData) {
+                            completedInDepth = data.equippedWeapon.id === o.additionalData.weapon;
+                        }
+                        else {
+                            completedInDepth = data.equippedWeapon.id !== null;
+                        }
+                        break;
+                    case "beUnarmed":
+                        completedInDepth = data.weapon.id === null;
+                        break;
+                    case "haveWeapon":
+                        if ("weapon" in o.additionalData) {
+                            completedInDepth = data.items.weapons.map(w => w.id).includes(o.additionalData.weapon);
+                        }
+                        else {
+                            completedInDepth = data.items.weapons.length > 0;
+                        }
+                        break;
+                    case "haveMaterials":
+                        const amountToReach = o.additionalData.amountToReach;
+                        completedInDepth = o.additionalData.material in data.items.materials
+                            ? (data.items.materials[o.additionalData.material] >= amountToReach)
+                            : false;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if (tableFocused === "mapDb") {
+                if (data === null) data = await this.client.mapDb.load(id);
+                switch (o.type) {
+                    case "reachDestination":
+                        const { region, area } = o.additionalData;
+                        const userRegion = data.region;
+                        const userArea = data.region;
+
+                        if (userRegion.id === region && userArea.id === area) completedInDepth = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if (tableFocused === "playerDb") {
+                if (data === null) data = await this.client.playerDb.load(id);
+                switch (o.type) {
+                    case "reachStatisticLevel":
+                        const statistic = o.additionalData.statistic;
+                        const userStatistic = data.statistics[statistic];
+
+                        if (userStatistic.level >= o.additionalData.levelToReach) completedInDepth = true;
+                        break;
+                    case "haveExperience":
+                        const userExperience = data.level;
+
+                        if (userExperience.exp >= o.additionalData.amountToReach) completedInDepth = true;
+                        break;
+                    case "haveMasteredBreathingStyle":
+                        if ("breathingStyle" in o.additionalData) {
+                            const breathingStyle = o.additionalData.breathingStyle;
+
+                            completedInDepth = data.breathingStyle === breathingStyle;
+                        }
+                        else {
+                            completedInDepth = data.breathingStyle !== null;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if (tableFocused === "squadDb") {
+                if (data === null) data = await this.client.squadDb.load(id);
+                switch (o.type) {
+                    case "beSquadMember":
+                        if ("squad" in o.additionalData) {
+                            const squad = o.additionalData.squad;
+
+                            completedInDepth = data !== null
+                                ? (data.id === squad) : false;
+                        }
+                        else {
+                            completedInDepth = data !== null;
+                        }
+                        break;
+                    case "haveFoundSquad":
+                        const squadsFound = await this.client.squadDb.foundByUser(id);
+                        let squadsIncluded = true;
+                        let squadsAmountReached = true;
+                        if ("squads" in o.additionalData) {
+                            for (const squad in o.additionalData.squads) {
+                                if (squadsIncluded && !squadsFound.includes(squad)) squadsIncluded = false;
+                            }
+
+                            completedInDepth = squadsIncluded && squadsAmountReached;
+                        }
+                        if ("amount" in o.additionalData) {
+                            squadsAmountReached = squadsFound.length >= o.additionalData.amount;
+                        }
+                        else {
+                            squadsAmountReached = squadsFound.length > 0;
+                        }
                         completedInDepth = squadsIncluded && squadsAmountReached;
-                    }
-                    if ("amount" in o.additionalData) {
-                        squadsAmountReached = squadsFound.length >= o.additionalData.amount;
-                    }
-                    else {
-                        squadsAmountReached = squadsFound.length > 0;
-                    }
-                    completedInDepth = squadsIncluded && squadsAmountReached;
-                    break;
-                case "leadSquad":
-                    if ("squad" in o.additionalData) {
-                        const squad = o.additionalData.squad;
+                        break;
+                    case "leadSquad":
+                        if ("squad" in o.additionalData) {
+                            const squad = o.additionalData.squad;
 
-                        completedInDepth = userData.squad !== null
-                            ? (userData.squad.id === squad && userData.squad.details.owner.id === id) : false;
-                    }
-                    else {
-                        completedInDepth = userData.squad !== null ? (userData.squad.details.owner.id === id) : false;
-                    }
-                    break;
-                case "haveProgressedTutorial":
-                    const tutorialStep = o.additionalData.step in userData.additional.rpg.tutorialProgress;
-                    let tutorialAmount = true;
-                    if (tutorialStep) {
-                        const userProgress = userData.additional.rpg.tutorialProgress[o.additionalData.step];
-                        if ("amount" in o.additionalData) {
-                            tutorialAmount = userProgress >= o.additionalData.amount;
+                            completedInDepth = data !== null
+                                ? (data.id === squad && data.details.owner.id === id) : false;
                         }
-                    }
-                    completedInDepth = tutorialStep && tutorialAmount;
-                    break;
-                case "ranCommand":
-                    const commandId = o.additionalData.command in userData.additional.rpg.commandsAmount;
-                    let commandAmount = true;
-                    if (commandId) {
-                        const userProgress = userData.additional.rpg.commandsAmount[o.additionalData.command];
-                        if ("amount" in o.additionalData) {
-                            commandAmount = userProgress >= o.additionalData.amount;
+                        else {
+                            completedInDepth = data !== null ? (data.details.owner.id === id) : false;
                         }
-                    }
-                    completedInDepth = commandId && commandAmount;
-                    break;
-                default:
-                    break;
+                        break;
+                    default:
+                        break;
+                }
             }
 
             if (completedInDepth) {
@@ -297,14 +328,13 @@ class QuestDb extends SQLiteTable {
                 newlyAccomplished.push(i);
             }
         }
-
         return newlyAccomplished;
     }
 
     /**
      * Drop the rewards of specified objectives. Set rewards as collected directly in the database.
      * @param {String} id The user ID
-     * @param {String} objectiveIds The list of ids of the objectives to drop rewards for
+     * @param {String[]} objectiveIds The list of ids of the objectives to drop rewards for
      * @param {String} objectives The list of objectives
      * @param {String} rewards The list of rewards
      * @returns {Promise<void>}
@@ -335,17 +365,18 @@ class QuestDb extends SQLiteTable {
     /**
      * Verify if the slayer quest is completed.
      * @param {string} id The user ID
-     * @returns {Promise<Object[]>}
+     * @param {String} tableFocused The SQLite table focused
+     * @returns {Promise<String[]>} The list of completed objectives ids
      */
-    async refreshSlayerQuestObjectives(id) {
+    async refreshSlayerQuestObjectives(id, tableFocused) {
         const userQuestData = await this.load(id);
         if (userQuestData.schemaInstance) return null;
 
-        const slayerQuest = userQuestData.currentQuests.slayerQuest[0];
+        const slayerQuest = userQuestData.currentQuests.slayerQuest?.at(0) || null;
         if (slayerQuest === null) return null;
 
         const objectives = slayerQuest.objectives;
-        return await this.refreshQuestObjectives(id, objectives);
+        return await this.refreshQuestObjectives(id, objectives, tableFocused);
     }
 
     /**
@@ -369,10 +400,12 @@ class QuestDb extends SQLiteTable {
      * Verify if the slayer quest is completed and get the slayer quest rewards. Concat all functions into one:
      * WE NEED TO CALL THIS IN THE LISTENER.
      * @param {String} id The user ID
+     * @param {String} tableFocused The SQLite table focused
      * @returns {Promise<void>}
      */
-    async updateSlayerQuest(id) {
-        const refreshSlayerQuestObjectives = await this.refreshSlayerQuestObjectives(id);
+    async updateSlayerQuest(id, tableFocused) {
+        const refreshSlayerQuestObjectives = await this.refreshSlayerQuestObjectives(id, tableFocused);
+        if (refreshSlayerQuestObjectives === null) return;
         if (refreshSlayerQuestObjectives.length > 0) {
             await this.getSlayerQuestRewards(id, refreshSlayerQuestObjectives);
         }

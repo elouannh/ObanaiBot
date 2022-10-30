@@ -50,7 +50,7 @@ class ActivityData extends TableData {
 
             this.data.travel.endedDate = this.client.util.round(
                 this.data.travel.startedDate
-                + (this.data.travel.distance * this.client.config.rpg.minutesPerDistanceUnit * 60 * 1000)
+                + (this.data.travel.distance * this.client.config.rpg.minutesPerDistanceUnit * 60 * 1000),
             );
         }
         else {

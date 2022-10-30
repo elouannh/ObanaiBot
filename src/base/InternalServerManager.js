@@ -15,7 +15,7 @@ function schema() {
             mode: "0b0000",
         },
         delays: {
-            dailyQuestGeneration: Date.now() - 86400000,
+            dailyQuestGenerator: 0,
         },
     };
 }
@@ -28,6 +28,10 @@ class InternalServerManager extends SQLiteTable {
     get main() {
         this.ensureInDeep("main");
         return this.get("main");
+    }
+
+    get delays() {
+        return this.main.delays;
     }
 
     get owners() {
@@ -71,14 +75,6 @@ class InternalServerManager extends SQLiteTable {
         return this.main.status.mode;
     }
 
-    get lastDailyQuestGeneration() {
-        return this.main.delays.dailyQuestGeneration;
-    }
-
-    setLastDailyQuestGeneration(date = Date.now()) {
-        this.set("main", date, "delays.dailyQuestGeneration");
-    }
-
     userBitField(userId) {
         let bitfield = "0b";
         for (const grade of ["owners", "administrators", "moderators"]) {
@@ -120,22 +116,20 @@ class InternalServerManager extends SQLiteTable {
     }
 
     async questGenerator() {
-        setInterval(async () => this.slayerQuestGenerator(), 600_000);
+        setInterval(async () => {
+            await this.slayerQuestGenerator();
+        }, 10_000);
 
-        let delay = 86400000 - (Date.now() - this.lastDailyQuestGeneration);
-        if (Date.now() - this.lastDailyQuestGeneration > 86400000) delay = 0;
-
+        const lastRefresh = (Date.now() - this.delays.dailyQuestGenerator);
+        const timeLeft = (86_400_000 - lastRefresh);
         setTimeout(async () => {
-            this.setLastDailyQuestGeneration(Date.now());
             await this.dailyQuestGenerator();
 
             setInterval(async () => {
-                this.setLastDailyQuestGeneration(Date.now());
                 await this.dailyQuestGenerator();
-            }, 86400000);
-        }, delay);
+            }, 86_400_000);
+        }, timeLeft);
     }
-
 }
 
 module.exports = InternalServerManager;

@@ -1,6 +1,6 @@
 class Event {
     constructor(eventInfos = {
-        name: "ready",
+        name: "",
         once: true,
     }, client) {
         this.eventInfos = eventInfos;
@@ -8,7 +8,7 @@ class Event {
     }
 
     async exe() {
-        console.log("default event (without configuration/implementation)");
+        this.client.util.timelog(this.client.chalk.red("Default event (without configuration/implementation)."));
     }
 }
 

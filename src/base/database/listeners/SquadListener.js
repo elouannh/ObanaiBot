@@ -1,6 +1,6 @@
 const SQLiteTableChangeListener = require("../../SQLiteTableChangeListener");
 
-class ActivityListener extends SQLiteTableChangeListener {
+class SquadListener extends SQLiteTableChangeListener {
     constructor(client) {
         super(client);
     }
@@ -8,9 +8,9 @@ class ActivityListener extends SQLiteTableChangeListener {
     // eslint-disable-next-line no-unused-vars
     async listener(key, before, after, changes) {
         if (before !== after) {
-            await this.client.questDb.updateSlayerQuest(key, "activityDb");
+            await this.client.questDb.updateSlayerQuest(key, "squadDb");
         }
     }
 }
 
-module.exports = ActivityListener;
+module.exports = SquadListener;

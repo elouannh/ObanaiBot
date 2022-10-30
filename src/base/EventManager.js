@@ -8,12 +8,15 @@ class EventManager {
 
     loadFiles() {
         const eventFolder = fs.readdirSync(this.dir);
-        eventFolder.forEach(async file => {
+        eventFolder.forEach(file => {
             const event = new (require(`../events/${file}`))(this.client);
             let method = "on";
             if (event.eventInfos.once) method += "ce";
 
-            this.client[method](event.eventInfos.name, (...args) => event.exe(this.client, ...args));
+            this.client[method](event.eventInfos.name, (...args) => {
+                this.client.util.timelog(`Event ${event.eventInfos.name} triggered`, this.client.chalk.blueBright);
+                event.exe(...args);
+            });
         });
     }
 }

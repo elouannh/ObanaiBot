@@ -74,7 +74,7 @@ class RPGAssetsManager {
 
     getMapRegion(lang, id) {
         if (!(id in this.map.regions)) return "Invalid Map Region ID";
-        return new RPGMapRegion(this.getLangData(lang, "map"), id, this.map.regions[id][0]);
+        return new RPGMapRegion(this.getLangData(lang, "map"), id, this.map.regions[id]);
     }
 
     getMaterial(lang, id) {

@@ -36,8 +36,17 @@ class InventoryDb extends SQLiteTable {
         return new InventoryData(this.client, this.get(id), this.client.playerDb.getLang(id));
     }
 
+    /**
+     * Add money to the wallet of the player
+     * @param {String} id The user ID
+     * @param {Number} amount The amount to add
+     * @returns {Number} The new wallet amount
+     */
     addMoney(id, amount) {
-        this.set(id, this.get(id).wallet + amount, "wallet");
+        const previousAmount = this.get(id).wallet;
+        const newAmount = previousAmount + amount;
+        this.set(id, newAmount, "wallet");
+        return newAmount;
     }
 
 }
