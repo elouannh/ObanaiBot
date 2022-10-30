@@ -57,22 +57,12 @@ class Util {
         return obj;
     }
 
-    positive(int) {
-        return Math.sqrt(int * int);
-    }
-
     round(int, digits = 0) {
         return Number(int.toFixed(digits));
     }
 
     capitalize(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
-    camelCase(string) {
-        return string.replace(/(^\w|[A-Z]|\b\w)/g, (word, index) => {
-            return index === 0 ? word.toLowerCase() : word.toUpperCase();
-        }).replace(/\s+/g, "");
     }
 
     intRender(int, sep = " ") {
@@ -101,31 +91,19 @@ class Util {
         return `${data.day}/${data.month}/${data.year}` + (full ? ` ${data.hour}:${data.min}:${data.sec}` : "");
     }
 
-    randomSquadNameGenerator() {}
-
-    compareArrays(firstArray = [], secondArray = []) {
-        const data = {
-            added: [],
-            removed: [],
-            unchanged: [],
-        };
-
-        data.added = secondArray.filter(element => !firstArray.includes(element));
-        data.removed = firstArray.filter(element => !secondArray.includes(element));
-        data.unchanged = secondArray.filter(element => firstArray.includes(element));
-
-        return data;
+    timelog(message) {
+        const time = this.dateRender(new Date(), true);
+        console.log(`${time} || ${message}`);
     }
 
     catchError(error) {
-        const time = this.dateRender(new Date(), true);
-        console.log(`${time} || Catched error:`);
+        this.timelog(`Error: ${error}`);
         console.log(error.stack);
-        console.log(`${time} ||................`);
+        this.timelog("................");
     }
 
     async evalCode(code) {
-        code = `(async () => {\n${code}})();`;
+        code = `(async () => {\n${code.replace("")}\n})();`;
         const clean = text => {
             if (typeof text === "string") {
                 return text.replace(/`/g, "`" + String.fromCharCode(8203))

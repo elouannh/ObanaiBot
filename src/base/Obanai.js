@@ -119,8 +119,7 @@ class Obanai extends Client {
     }
 
     log(message, ...args) {
-        const time = this.util.dateRender(new Date(), true);
-        console.log(`${time} || ${message}`);
+        this.util.timelog(message);
         for (const arg of args) {
             console.log(arg);
         }
