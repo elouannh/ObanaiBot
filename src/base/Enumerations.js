@@ -1,17 +1,15 @@
 module.exports = {
     Rpg: {
         Statistics: {
-            Agility: "🍃",
             Strength: "🦁",
             Defense: "🪖",
-            Speed: "🥏",
         },
         Databases: {
             Activity: "🥏",
             Additional: "📊",
             Inventory: "🎒",
             Map: "🌍",
-            Player: "🥷",
+            Player: "👺",
             Quest: "📜",
             Squad: "🥋",
         },

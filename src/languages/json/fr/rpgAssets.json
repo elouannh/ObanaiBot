@@ -2,9 +2,7 @@
     "statistics": {
         "names": {
             "strength": "Force",
-            "speed": "Vitesse",
-            "defense": "Défense",
-            "agility": "Agilité"
+            "defense": "Défense"
         },
         "levels": {
             "max": "Niveau max atteint (100)"

@@ -1,6 +1,17 @@
 {
     "profile": {
-        "mainTitle": "titre de test"
+        "activityTitle": "Activité - %PLAYER",
+        "activityButton": "Activité",
+        "additionalTitle": "Informations supplémentaires - %PLAYER",
+        "additionalButton": "Informations supplémentaires",
+        "inventoryTitle": "Inventaire - %PLAYER",
+        "inventoryButton": "Inventaire",
+        "mapTitle": "Carte - %PLAYER",
+        "mapButton": "Carte",
+        "playerTitle": "Profil - %PLAYER",
+        "playerButton": "Profil",
+        "characterChosen": "Personnage choisi: %CHARACTER",
+        "statisticsName": "Statistiques"
     },
     "eval": {
         "modalTitle": "Code à exécuter",

@@ -7,5 +7,7 @@
     "necessariesPermissionsReply": "Liste des permissions nécessaires",
     "clientInMaintenance": "Le bot est actuellement en maintenance.",
     "noUserAuthorizationReply": "Vous n'êtes pas autorisé à utiliser cette commande.",
-    "errorOccurred": "Une erreur est survenue."
+    "errorOccurred": "Une erreur est survenue.",
+    "playerNotFound": "Ce joueur est introuvable.",
+    "playerNotFoundAlreadyPlayed": "Ce joueur est introuvable, mais il semblerait qu'il ait déjà joué à une version antérieure. Si il s'agit de vous, faites la commande `/continue`."
 }

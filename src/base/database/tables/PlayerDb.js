@@ -3,10 +3,10 @@ const PlayerData = require("../dataclasses/PlayerData");
 
 function schema(id) {
     return {
-        started: false,
+        alreadyPlayed: false,
         id: id,
         lang: "fr",
-        characterId: "0",
+        characterId: null,
         statistics: {
             defense: 1,
             strength: 1,
@@ -29,15 +29,17 @@ class PlayerDb extends SQLiteTable {
     /**
      * Create a new player in all the databases.
      * @param {String} id The player ID
+     * @param {String} characterId The pnj ID of the user for the RPG game
      * @returns {Promise<void>}
      */
-    async create(id) {
+    async create(id, characterId = "0") {
         await this.client.activityDb.ensureInDeep(id);
         await this.client.additionalDb.ensureInDeep(id);
         await this.client.inventoryDb.ensureInDeep(id);
         await this.client.mapDb.ensureInDeep(id);
         await this.client.questDb.ensureInDeep(id);
         await this.client.squadDb.ensureInDeep(id);
+        await this.set(id, characterId, "characterId");
     }
 
     /**
