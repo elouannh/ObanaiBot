@@ -28,7 +28,7 @@ class Obanai extends Client {
             failIfNotExists: false,
         });
         this.chalk = chalk;
-        this.util = new Util(this);
+        this.util = Util;
         this.util.timelog("Starting bot process...");
 
         this.env = { ...process.env };

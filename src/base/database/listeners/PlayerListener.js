@@ -5,8 +5,7 @@ class PlayerListener extends SQLiteTableChangeListener {
         super(client);
     }
 
-    // eslint-disable-next-line no-unused-vars
-    async listener(key, before, after, changes) {
+    async listener(key, before, after) {
         if (before !== after) {
             await this.client.questDb.updateSlayerQuest(key, "playerDb");
         }

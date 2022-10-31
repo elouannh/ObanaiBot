@@ -13,9 +13,9 @@ class RPGEnchantedGrimoire extends RPGAssetBase {
         this.effects = data.effects.map(e => new RPGGrimoireEffect(this, e, this.lang.json.effects[e.id]));
 
         if (typeof data.lifespan !== "number") this.lifespan = this.lang.json.lifespans.infinite;
-        else this.lifespan = new Util(null).convertDate(data.lifespan * 1000);
+        else this.lifespan = Util.convertDate(data.lifespan * 1000);
 
-        if ("activeSince" in data) this.activeSince = String(new Util(null).round(data.activeSince / 1000, 0));
+        if ("activeSince" in data) this.activeSince = String(Util.round(data.activeSince / 1000, 0));
     }
 }
 

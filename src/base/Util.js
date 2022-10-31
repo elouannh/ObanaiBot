@@ -1,8 +1,6 @@
-class Util {
-    constructor(client) {
-        this.client = client;
-    }
+const chalk = require("chalk");
 
+module.exports = {
     callbackFunction(manager, key) {
         const map = manager.get(key).entries();
         const finalReq = [];
@@ -10,8 +8,7 @@ class Util {
             finalReq.push([entryKey, entryValue]);
         }
         return finalReq.map(e => Object.assign({}, { name: e[0], ts: e[1] }));
-    }
-
+    },
     ensureLang(source, obj, indicate) {
         for (const key in source) {
             if (source[key] instanceof Object && !(source instanceof String)) {
@@ -41,8 +38,7 @@ class Util {
         }
 
         return obj;
-    }
-
+    },
     ensureObj(source, obj) {
         for (const key in source) {
             if (source[key] instanceof Object && !(source instanceof String)) {
@@ -55,24 +51,19 @@ class Util {
         }
 
         return obj;
-    }
-
+    },
     round(int, digits = 0) {
         return Number(int.toFixed(digits));
-    }
-
+    },
     capitalize(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
+    },
     intRender(int, sep = " ") {
         return int.toString().replace(/\B(?=(\d{3})+(?!\d))/g, sep);
-    }
-
+    },
     delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
+    },
     dateRender(date, form) {
         const data = {
             day: String(date.getDate()),
@@ -95,16 +86,29 @@ class Util {
             .replace("hour", data.hour)
             .replace("min", data.min)
             .replace("sec", data.sec);
-    }
+    },
 
-    timelog(message, mainColor = this.client.chalk.greenBright) {
+    timelog(message, mainColor = chalk.greenBright) {
         const time = this.dateRender(new Date(), "[month/day] [hour:min:sec]");
         console.log(mainColor(`${time}  |  ${message}`));
-    }
+    },
 
     catchError(error) {
-        this.timelog(`Error: ${error.stack}`, this.client.chalk.redBright);
-    }
+        const date = new Date();
+        const data = {
+            day: String(date.getDate()),
+            month: String(date.getMonth() + 1),
+            hour: String(date.getHours()),
+            min: String(date.getMinutes()),
+            sec: String(date.getSeconds()),
+        };
+        if (data.day.length < 2) data.day = "0" + data.day;
+        if (data.month.length < 2) data.month = "0" + data.month;
+        if (data.hour.length < 2) data.hour = "0" + data.hour;
+        if (data.min.length < 2) data.min = "0" + data.min;
+        if (data.sec.length < 2) data.sec = "0" + data.sec;
+        console.log(chalk.redBright(`[${data.month}/${data.day}] [${data.hour}:${data.hour}:${data.sec}]  |  Error: ${error.stack}`));
+    },
 
     async evalCode(code) {
         code = `(async () => {\n${code.replace("")}\n})();`;
@@ -136,7 +140,5 @@ class Util {
         }
 
         return response;
-    }
-}
-
-module.exports = Util;
+    },
+};

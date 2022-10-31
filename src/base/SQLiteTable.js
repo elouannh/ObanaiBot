@@ -16,9 +16,7 @@ class SQLiteTable {
             const changeListener = async (key, oldValue, newValue) => {
                 if (oldValue === newValue) return;
                 const listener = new listenerClass(this.client);
-                await listener.listener(
-                    key, oldValue, newValue, new SQLiteTableChangeGroup(listener.refreshChanges(oldValue, newValue)),
-                );
+                await listener.listener(key, oldValue, newValue);
             };
             const dbListeners = fs.readdirSync("./src/base/database/listeners").map(e => e
                     .replace("Listener.js", "")

@@ -6,6 +6,15 @@ module.exports = {
             Defense: "🪖",
             Speed: "🥏",
         },
+        Databases: {
+            Activity: "🥏",
+            Additional: "📊",
+            Inventory: "🎒",
+            Map: "🌍",
+            Player: "🥷",
+            Quest: "📜",
+            Squad: "🥋",
+        },
     },
     Systems: {
         Grades: {
