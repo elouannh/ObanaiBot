@@ -11,7 +11,9 @@
         "playerTitle": "Profil - %PLAYER",
         "playerButton": "Profil",
         "characterChosen": "Personnage choisi: %CHARACTER",
-        "statisticsName": "Statistiques"
+        "statisticsName": "Statistiques",
+        "breathingStyleName": "Style de souffle",
+        "expName": "Niveau d'expérience"
     },
     "eval": {
         "modalTitle": "Code à exécuter",

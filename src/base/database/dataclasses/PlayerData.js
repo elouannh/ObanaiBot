@@ -27,11 +27,10 @@ class PlayerData extends TableData {
         this.data.character = this.client.RPGAssetsManager.getCharacter(this.lang, this.data.characterId);
         this.data.level = this.client.RPGAssetsManager.getPlayerLevel(this.data.exp);
         this.data.date = `${(this.data.creationDate / 1000).toFixed(0)}`;
-        this.data.breath = this.client.RPGAssetsManager.getBreathingStyle(this.data.lang, this.data.breathingStyle);
+        this.data.breathingStyle = this.client.RPGAssetsManager.getBreathingStyle(this.data.lang, this.data.breathingStyle);
         delete this.data.characterId;
         delete this.data.exp;
         delete this.data.creationDate;
-        delete this.data.breathingStyle;
     }
 }
 

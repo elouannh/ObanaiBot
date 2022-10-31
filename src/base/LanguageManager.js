@@ -5,8 +5,8 @@ const Util = require("./Util");
 class LanguageManager {
     constructor(client) {
         this.client = client;
-        const dir = "./src/languages/json/";
-        this.languages = fs.readdirSync(dir).map(languageDir => new Language(languageDir));
+        const dir = "./src/languages/";
+        this.languages = fs.readdirSync(dir).filter(f => !f.endsWith(".json")).map(languageDir => new Language(languageDir));
 
         const french = this.getLang("fr");
         const Json = {};
