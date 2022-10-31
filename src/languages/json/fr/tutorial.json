@@ -1,0 +1,15 @@
+{
+    "beginning": {
+        "0": [
+            "Vous faites pour la première fois la commande `/profile`. Ici, vous pourrez voir différentes informations sur le profil d'un joueur, où le votre.",
+            "Cette commande est exécutable depuis le chat, ou en faisant clic droit sur un utilisateur.",
+            "Cette commande affiche diverses informations:\n**Votre profil de pourfendeur, votre inventaire, la carte, vos activités, et quelques données supplémentaires.**"
+        ],
+        "1": [
+            "Vous voilà sur la page du profil. Ici apparaissent vos statistiques, le personnage que vous avez choisit, votre niveau d'expérience, et votre souffle."
+        ],
+        "2": [
+
+        ]
+    }
+}
