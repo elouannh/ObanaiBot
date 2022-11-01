@@ -118,7 +118,7 @@ class AdditionalDb extends SQLiteTable {
 
         let i = 0;
         const message = await interaction.channel.send({
-            content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**\n\n${tutorial.step.array[i]}`,
+            content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**\n\n\`${i + 1}/${tutorial.step.array.length}\`| ${tutorial.step.array[i]}`,
             components,
         }).catch(this.client.util.catchError);
         const collector = message.createMessageComponentCollector({
@@ -138,7 +138,7 @@ class AdditionalDb extends SQLiteTable {
                 else {
                     await inter.deferUpdate().catch(this.client.util.catchError);
                     await message.edit({
-                        content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**\n\n${tutorial.step.array[i]}`,
+                        content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**\n\n\`${i + 1}/${tutorial.step.array.length}\`| ${tutorial.step.array[i]}`,
                         components,
                     }).catch(this.client.util.catchError);
                 }

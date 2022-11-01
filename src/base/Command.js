@@ -134,7 +134,7 @@ class Command {
         let ready = true;
 
         const userBitField = this.client.internalServerManager.userBitField(this.interaction.user.id);
-        const commandBitField = `0b${parseInt(String(this.infos.authorizationBitField), 2)}`;
+        const commandBitField = this.infos.authorizationBitField;
 
         if (Number(userBitField) < Number(commandBitField)) {
             ready = false;

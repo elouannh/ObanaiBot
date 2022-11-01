@@ -25,7 +25,7 @@ class Profile extends Command {
             category: "RPG",
             cooldown: 15,
             completedRequests: ["profile"],
-            authorizationBitField: 0b000,
+            authorizationBitField: 0b100,
             permissions: 0n,
         });
     }
@@ -33,16 +33,16 @@ class Profile extends Command {
     async run() {
         await this.interaction.deferReply().catch(this.client.util.catchError);
         const user = await this.getUserFromInteraction(this.interaction.type);
-        // if (!(await this.client.playerDb.exists(user.id))) {
-        //     if (this.client.playerDb.get(user.id).alreadyPlayed) {
-        //         return await this.interaction.reply({
-        //             content: this.lang.systems.playerNotFoundAlreadyPlayed,
-        //             ephemeral: true,
-        //         }).catch(this.client.util.catchError);
-        //     }
-        //     return await this.interaction.reply({ content: this.lang.systems.playerNotFound, ephemeral: true })
-        //         .catch(this.client.util.catchError);
-        // }
+        if (!(await this.client.playerDb.exists(user.id))) {
+            if (this.client.playerDb.get(user.id).alreadyPlayed) {
+                return await this.interaction.reply({
+                    content: this.lang.systems.playerNotFoundAlreadyPlayed,
+                    ephemeral: true,
+                }).catch(this.client.util.catchError);
+            }
+            return await this.interaction.reply({ content: this.lang.systems.playerNotFound, ephemeral: true })
+                .catch(this.client.util.catchError);
+        }
 
         const player = await this.client.playerDb.load(user.id);
         const inventory = await this.client.inventoryDb.load(user.id);
@@ -53,7 +53,7 @@ class Profile extends Command {
         const playerImage = await this.client.playerDb.getImage(player);
 
         const embeds = {
-            playerEmbed: new EmbedBuilder()
+            player: new EmbedBuilder()
                 .setTitle(
                     `⟪ ${this.client.enums.Rpg.Databases.Player} ⟫ `
                     + this.lang.commands.profile.playerTitle.replace("%PLAYER", `\`${user.tag}\``),
@@ -61,30 +61,37 @@ class Profile extends Command {
                 .setDescription(`\`Thème: \`**\`${playerImage.name}\`**`)
                 .setImage("attachment://profile-player.png")
                 .setColor(this.client.enums.Colors.Blurple),
-            inventoryEmbed: new EmbedBuilder()
+            inventory: new EmbedBuilder()
                 .setTitle(
                     `⟪ ${this.client.enums.Rpg.Databases.Inventory} ⟫ `
                     + this.lang.commands.profile.inventoryTitle.replace("%PLAYER", `\`${user.tag}\``),
                 )
                 .setColor(this.client.enums.Colors.Blurple),
-            activityEmbed: new EmbedBuilder()
+            activity: new EmbedBuilder()
                 .setTitle(
                     `⟪ ${this.client.enums.Rpg.Databases.Activity} ⟫ `
                     + this.lang.commands.profile.activityTitle.replace("%PLAYER", `\`${user.tag}\``),
                 )
                 .setColor(this.client.enums.Colors.Blurple),
-            mapEmbed: new EmbedBuilder()
+            map: new EmbedBuilder()
                 .setTitle(
                     `⟪ ${this.client.enums.Rpg.Databases.Map} ⟫ `
                     + this.lang.commands.profile.mapTitle.replace("%PLAYER", `\`${user.tag}\``),
                 )
                 .setColor(this.client.enums.Colors.Blurple),
-            additionalEmbed: new EmbedBuilder()
+            additional: new EmbedBuilder()
                 .setTitle(
                     `⟪ ${this.client.enums.Rpg.Databases.Additional} ⟫ `
                     + this.lang.commands.profile.additionalTitle.replace("%PLAYER", `\`${user.tag}\``),
                 )
                 .setColor(this.client.enums.Colors.Blurple),
+        };
+        const attachments = {
+            player: playerImage.attachment,
+            inventory: null,
+            activity: null,
+            map: null,
+            additional: null,
         };
 
         const buttons = [
@@ -116,9 +123,9 @@ class Profile extends Command {
         await this.client.additionalDb.showBeginningTutorial(user.id, "profileCommand", this.interaction);
 
         const profilePanel = await this.interaction.editReply({
-            embeds: [embeds.playerEmbed],
+            embeds: [embeds.player],
             components: [new ActionRowBuilder().setComponents(buttons)],
-            files: [playerImage.attachment],
+            files: attachments.player === null ? [] : [attachments.player],
         }).catch(this.client.util.catchError);
 
         await this.client.additionalDb.showBeginningTutorial(user.id, "profilePlayer", this.interaction);
@@ -128,6 +135,17 @@ class Profile extends Command {
             idle: 60_000,
         });
         collector.on("collect", async interaction => {
+            console.log(attachments);
+            console.log(profilePanel.attachments);
+            const embedAttachment = profilePanel.embeds[0]?.data?.image?.url;
+            // await profilePanel.removeAttachments().catch(this.client.util.catchError);
+            // register the attachment URL in the attachments object
+            if (typeof attachments[lastPanel.toLowerCase()] !== "string" && attachments[lastPanel.toLowerCase()] !== null) {
+                attachments[lastPanel.toLowerCase()] = embedAttachment;
+                embeds[lastPanel.toLowerCase()].setImage(embedAttachment);
+            }
+
+            // update the buttons (blurple animation)
             buttons[buttons.map(e => e.data.custom_id).indexOf(lastPanel)] = new ButtonBuilder()
                 .setStyle(ButtonStyle.Secondary)
                 .setEmoji(this.client.enums.Rpg.Databases[lastPanel])
@@ -138,15 +156,19 @@ class Profile extends Command {
                 .setEmoji(this.client.enums.Rpg.Databases[interaction.customId])
                 .setCustomId(interaction.customId);
 
-            lastPanel = interaction.customId;
-            await this.client.additionalDb.showBeginningTutorial(user.id, `profile${lastPanel}`, this.interaction);
+            // show the tutorial
+            await this.client.additionalDb.showBeginningTutorial(user.id, `profile${interaction.customId}`, this.interaction);
 
+            await interaction.deferUpdate().catch(this.client.util.catchError);
+
+            // update the panel
             await this.interaction.editReply({
                 embeds: [embeds[interaction.customId.toLowerCase()]],
                 components: [new ActionRowBuilder().setComponents(buttons)],
+                files: attachments[interaction.customId.toLowerCase()] === null ? [] : [attachments[interaction.customId.toLowerCase()]],
             }).catch(this.client.util.catchError);
 
-            await interaction.deferUpdate().catch(this.client.util.catchError);
+            lastPanel = interaction.customId;
         });
         collector.on("end", async () => {
             await this.interaction.editReply({ components: [] }).catch(this.client.util.catchError);
