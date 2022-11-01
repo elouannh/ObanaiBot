@@ -10,6 +10,7 @@ class RPGCharacter extends RPGAssetBase {
         this.lastName = data.lastName;
         this.japaneseTranscription = data.japaneseTranscription;
 
+        this.gender = this.lang.json.genders[data.gender];
         this.label = this.lang.json[this.id].label;
         this.description = this.lang.json[this.id].description;
     }

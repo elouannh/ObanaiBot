@@ -1,5 +1,7 @@
 const SQLiteTable = require("../../SQLiteTable");
 const PlayerData = require("../dataclasses/PlayerData");
+const Canvas = require("@napi-rs/canvas");
+const { AttachmentBuilder } = require("discord.js");
 
 function schema(id) {
     return {
@@ -69,6 +71,33 @@ class PlayerDb extends SQLiteTable {
      */
     getLang(id) {
         return this.get(id).lang;
+    }
+
+    /**
+     * @typedef {Object} ThemeAttachment
+     * @property {String} name The theme name
+     * @property {AttachmentBuilder} attachment The theme attachment
+     */
+    /**
+     * Get the player image attachment.
+     * @param {PlayerData} playerData The player data
+     * @returns {Promise<ThemeAttachment>}
+     */
+    async getImage(playerData) {
+        const profileThemeData = this.client.additionalDb.getTheme(playerData.id, "profile");
+        const theme = this.client.enums.Themes[profileThemeData];
+        const canvas = Canvas.createCanvas(800, 450);
+        const context = canvas.getContext("2d");
+
+        const background = await Canvas.loadImage(theme.BackgroundImage);
+        context.filter = "blur(10px)";
+
+        context.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+        return {
+            name: profileThemeData,
+            attachment: new AttachmentBuilder(await canvas.encode("png"), { name: "profile-player.png" }),
+        };
     }
 }
 

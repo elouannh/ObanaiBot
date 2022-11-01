@@ -368,6 +368,10 @@
         "test": "Test"
     },
     "characters": {
+        "genders": {
+            "male": "Homme",
+            "female": "Femme"
+        },
         "0": {
             "label": "Frère de Yamamoto Minori",
             "description": ""

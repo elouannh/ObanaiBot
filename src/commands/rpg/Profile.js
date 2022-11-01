@@ -1,6 +1,5 @@
 const Command = require("../../base/Command");
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
-const
 
 class Profile extends Command {
     constructor() {
@@ -24,7 +23,7 @@ class Profile extends Command {
             type: [1, 2],
             dmPermission: true,
             category: "RPG",
-            cooldown: 5,
+            cooldown: 15,
             completedRequests: ["profile"],
             authorizationBitField: 0b000,
             permissions: 0n,
@@ -32,6 +31,7 @@ class Profile extends Command {
     }
 
     async run() {
+        await this.interaction.deferReply().catch(this.client.util.catchError);
         const user = await this.getUserFromInteraction(this.interaction.type);
         // if (!(await this.client.playerDb.exists(user.id))) {
         //     if (this.client.playerDb.get(user.id).alreadyPlayed) {
@@ -50,37 +50,16 @@ class Profile extends Command {
         const map = await this.client.mapDb.load(user.id);
         const additional = await this.client.additionalDb.load(user.id);
 
+        const playerImage = await this.client.playerDb.getImage(player);
+
         const embeds = {
             playerEmbed: new EmbedBuilder()
                 .setTitle(
                     `⟪ ${this.client.enums.Rpg.Databases.Player} ⟫ `
                     + this.lang.commands.profile.playerTitle.replace("%PLAYER", `\`${user.tag}\``),
                 )
-                .setDescription(
-                    this.lang.commands.profile.characterChosen
-                        .replace("%CHARACTER", `**${player.character.fullName}** (${player.character.label})`),
-                )
-                .setFields(
-                    {
-                        name: `${this.lang.commands.profile.statisticsName}`,
-                        value:
-                            `>>> ${this.client.enums.Rpg.Statistics.Strength} ${this.lang.rpgAssets.statistics.names.strength} `
-                            + `**\`${player.statistics.strength.amount}\`**`
-                            + `\n${this.client.enums.Rpg.Statistics.Defense} ${this.lang.rpgAssets.statistics.names.defense} `
-                            + `**\`${player.statistics.defense.amount}\`**`,
-                        inline: true,
-                    },
-                    {
-                        name: `${this.lang.commands.profile.breathingStyleName}`,
-                        value: `>>> ${player.breathingStyle.name}`,
-                        inline: true,
-                    },
-                    {
-                        name: `${this.lang.commands.profile.expName}`,
-                        value: `>>> Niveau: ${player.level.level}`,
-                        inline: true,
-                    },
-                )
+                .setDescription(`\`Thème: \`**\`${playerImage.name}\`**`)
+                .setImage("attachment://profile-player.png")
                 .setColor(this.client.enums.Colors.Blurple),
             inventoryEmbed: new EmbedBuilder()
                 .setTitle(
@@ -136,9 +115,10 @@ class Profile extends Command {
 
         await this.client.additionalDb.showBeginningTutorial(user.id, "profileCommand", this.interaction);
 
-        const profilePanel = await this.interaction.reply({
+        const profilePanel = await this.interaction.editReply({
             embeds: [embeds.playerEmbed],
             components: [new ActionRowBuilder().setComponents(buttons)],
+            files: [playerImage.attachment],
         }).catch(this.client.util.catchError);
 
         await this.client.additionalDb.showBeginningTutorial(user.id, "profilePlayer", this.interaction);
@@ -147,7 +127,6 @@ class Profile extends Command {
             filter: interaction => interaction.user.id === this.interaction.user.id,
             idle: 60_000,
         });
-
         collector.on("collect", async interaction => {
             buttons[buttons.map(e => e.data.custom_id).indexOf(lastPanel)] = new ButtonBuilder()
                 .setStyle(ButtonStyle.Secondary)

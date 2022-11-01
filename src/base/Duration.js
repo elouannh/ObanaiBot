@@ -1,32 +1,12 @@
 class Duration {
-    constructor(ms, lang = "fr") {
+    constructor(ms, lang) {
         this.ms = ms;
-        this.lang = lang in this.units ? lang : "en";
+        this.units = lang;
         this.stringFormat = "%w %d %h %m %s %ms";
     }
 
-    get units() {
+    get times() {
         return {
-            "fr": {
-                "y": ["an", "ans", "a", "a"],
-                "mo": ["mois", "mois", "mo", "mo"],
-                "w": ["semaine", "semaines", "sem", "sem"],
-                "d": ["jour", "jours", "j", "j"],
-                "h": ["heure", "heures", "h", "h"],
-                "m": ["minute", "minutes", "min", "mins"],
-                "s": ["seconde", "secondes", "s", "s"],
-                "ms": ["milliseconde", "millisecondes", "ms", "ms"],
-            },
-            "en": {
-                "y": ["year", "years", "y", "y"],
-                "mo": ["month", "months", "mo", "mo"],
-                "w": ["week", "weeks", "w", "w"],
-                "d": ["day", "days", "d", "d"],
-                "h": ["hour", "hours", "h", "h"],
-                "m": ["minute", "minutes", "min", "mins"],
-                "s": ["second", "seconds", "s", "s"],
-                "ms": ["millisecond", "milliseconds", "ms", "ms"],
-            },
             "durations": {
                 "y": 31536000000,
                 "mo": 2592000000,
@@ -61,13 +41,13 @@ class Duration {
         return this.stringFormat.split(" ").map(e => e.replace("%", ""));
     }
 
-    convert(render = "short") {
+    convert(render = "short", ignoreZero = false) {
         const data = {};
         let ms = this.ms;
         for (let i = 0; i < this.format.length;) {
             const unit = this.format[i];
-            const duration = this.units.durations[unit];
-            const max = this.units.max[unit];
+            const duration = this.times.durations[unit];
+            const max = this.times.max[unit];
             if (data[unit] === undefined) data[unit] = 0;
 
             if (ms >= duration && data[unit] !== max) {
@@ -77,7 +57,7 @@ class Duration {
             }
             else if (i === this.format.length - 1) {
                 const lastUnit = this.format[this.format.length - 1];
-                const lastDuration = this.units.durations[lastUnit];
+                const lastDuration = this.times.durations[lastUnit];
 
                 const amountToAdd = Math.floor(ms / lastDuration);
                 data[lastUnit] += amountToAdd;
@@ -87,8 +67,14 @@ class Duration {
             i++;
         }
 
-        if (render === "short") return this.format.map(e => `${data[e]}${this.units[this.lang][e][Number(data[e] > 1) + 2]}`).join(" ");
-        if (render === "long") return this.format.map(e => `${data[e]} ${this.units[this.lang][e][Number(data[e] > 1)]}`).join(" ");
+        return this.format
+            .filter(e => ignoreZero ? data[e] > 0 : true)
+            .map(e =>
+                `${data[e]}${render === "short" ? "" : " "}`
+                +
+                `${this.units[e][Number(data[e] > 1) + (render === "short" ? 2 : 0)]}`,
+            )
+            .join(" ");
     }
 }
 

@@ -49,7 +49,7 @@ class Base extends Command {
         if (modalSubmit !== undefined) {
             const codeInput = modalSubmit.fields.getTextInputValue("codeInput") ?? "";
 
-            const resp = await this.client.util.evalCode(codeInput, this);
+            const resp = await this.client.evalCode(codeInput, this);
             modalSubmit.reply({
                 content: resp,
                 ephemeral: false,

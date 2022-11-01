@@ -1,4 +1,12 @@
 module.exports = {
+    Themes: {
+        Default: {
+            Name: "Default",
+            BackgroundImage: "https://i.imgur.com/ZLzJwCk.png",
+            Color: 0x000000,
+            Accent: 0x5865f2,
+        },
+    },
     Rpg: {
         Statistics: {
             Strength: "🦁",

@@ -21,12 +21,14 @@ class Command {
         this.client = null;
         this.interaction = null;
         this.instancedAt = Date.now();
+        this.mention = "";
         this.lang = new Language("fr").json["commands"][this.infos.name];
     }
 
     init(client, interaction, lang) {
         this.client = client;
         this.interaction = interaction;
+        this.mention = `<@${this.interaction.user.id}>, `;
         this.lang = lang.json;
     }
 
@@ -43,11 +45,16 @@ class Command {
 
         if (tStamp < readyForRun) {
             ready = false;
+
+            const timeLeftString = new this.client.duration(readyForRun - tStamp, this.lang.systems.timeUnits);
+            timeLeftString.setFormat("y", "mo", "w", "d", "h", "m", "s");
+
             await this.interaction.reply({
                 content: this.lang.systems.cooldownReply.replace(
                     "%TIME",
-                    new this.client.duration(readyForRun, this.lang._id).convert(readyForRun - tStamp),
+                    `**${timeLeftString.convert("long", true)}**`,
                 ),
+                ephemeral: true,
             }).catch(this.client.util.catchError);
         }
         else {
@@ -66,7 +73,8 @@ class Command {
     async requestReady(user = undefined) {
         let ready = true;
 
-        const notFinished = this.client.requestsManager.has(user ?? this.interaction.user.id);
+        const notFinished = this.client.requestsManager.has(user ?? this.interaction.user.id)
+            .filter(e => this.infos.completedRequests.includes(e.name));
 
         if (notFinished.length > 0) {
             ready = false;
@@ -74,6 +82,7 @@ class Command {
                 content: `🛠️ ${this.lang.systems.requestsReply}\n\n${
                     notFinished.map(e => `» **\`${e.name}\`** - <t:${(e.ts / 1000).toFixed(0)}:F>`)
                 }`,
+                ephemeral: true,
             }).catch(this.client.util.catchError);
         }
 
@@ -93,6 +102,7 @@ class Command {
                 content: `${this.lang.systems.noUserPermissionsReady}`
                 +
                 `\n${this.lang.systems.necessariesPermissionsReply}:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
+                ephemeral: true,
             }).catch(this.client.util.catchError);
         }
         return hasPerms;
@@ -113,6 +123,7 @@ class Command {
                     content: `${this.lang.systems.noClientPermissionsReply}`
                         +
                         `\n${this.lang.systems.necessariesPermissionsReply}:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
+                    ephemeral: true,
                 }).catch(this.client.util.catchError);
             }
         }
@@ -129,6 +140,7 @@ class Command {
             ready = false;
             await this.interaction.reply({
                 content: this.lang.systems.noUserAuthorizationReply,
+                ephemeral: true,
             }).catch(this.client.util.catchError);
         }
 
@@ -148,6 +160,7 @@ class Command {
             if (Number(replyMode) === 1) {
                 await this.interaction.reply({
                     content: this.lang.systems.clientInMaintenance,
+                    ephemeral: true,
                 }).catch(this.client.util.catchError);
             }
         }

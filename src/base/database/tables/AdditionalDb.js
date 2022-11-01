@@ -5,9 +5,16 @@ const { Message, ChatInputCommandInteraction, ActionRowBuilder, ButtonBuilder, B
 function schema(id) {
     return {
         id: id,
+        demonBlood: 0,
         rpg: {
             commandsAmount: {},
             tutorialProgress: {},
+        },
+        themes: {
+            unlocked: [],
+            equipped: {
+                profile: "Default",
+            },
         },
     };
 }
@@ -151,6 +158,17 @@ class AdditionalDb extends SQLiteTable {
      */
     async showBeginningTutorial(id, tutorialStepName, interaction) {
         await this.showTutorial(id, this.getUserTutorial(id, "beginning", tutorialStepName), interaction);
+    }
+
+    /**
+     * Get the theme of the user.
+     * @param {String} id The user ID
+     * @param {String} location The theme ID
+     * @returns {String}
+     */
+    getTheme(id, location) {
+        const data = this.get(id);
+        return data.themes.equipped[location];
     }
 
 }
