@@ -103,6 +103,7 @@ class PlayerDb extends SQLiteTable {
     /**
      * @typedef {Object} ThemeAttachment
      * @property {String} name The theme name
+     * @property {Buffer} buffer The canvas Buffer
      * @property {AttachmentBuilder} attachment The theme attachment
      */
     /**
@@ -113,17 +114,30 @@ class PlayerDb extends SQLiteTable {
     async getImage(playerData) {
         const profileThemeData = this.client.additionalDb.getTheme(playerData.id, "profile");
         const theme = this.client.enums.Themes[profileThemeData];
+
+        Canvas.GlobalFonts.registerFromPath("./assets/fonts/BreeSerif-Regular.ttf", "Bree");
+
         const canvas = Canvas.createCanvas(800, 450);
         const context = canvas.getContext("2d");
 
         const background = await Canvas.loadImage(theme.BackgroundImage);
         context.filter = "blur(10px)";
-
         context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
+        context.filter = "none";
+        const avatar = (await this.client.getUser(playerData.id, {}))?.avatarURL()
+            ?? theme[`Default${this.client.util.capitalize(playerData.character.gender)}`];
+        const userAvatar = await Canvas.loadImage(await this.client.util.getRoundImage(avatar));
+        context.drawImage(userAvatar, 12, 16, 119, 119);
+
+        const cleanKnyLogo = await Canvas.loadImage(theme.Border);
+        context.drawImage(cleanKnyLogo, 0, 0, 150, 150);
+
+        const buffer = await canvas.encode("png");
         return {
             name: profileThemeData,
-            attachment: new AttachmentBuilder(await canvas.encode("png"), { name: "profile-player.png" }),
+            buffer,
+            attachment: new AttachmentBuilder(buffer, { name: "profile-player.png" }),
         };
     }
 }

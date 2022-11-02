@@ -1,4 +1,6 @@
 const chalk = require("chalk");
+const Canvas = require("@napi-rs/canvas");
+const fs = require("fs");
 
 module.exports = {
     callbackFunction(manager, key) {
@@ -87,12 +89,24 @@ module.exports = {
             .replace("min", data.min)
             .replace("sec", data.sec);
     },
-
     timelog(message, mainColor = chalk.greenBright) {
         const time = this.dateRender(new Date(), "[month/day] [hour:min:sec]");
         console.log(mainColor(`${time}  |  ${message}`));
     },
 
+    async getRoundImage(link) {
+        const image = await Canvas.loadImage(link);
+        const canvas = Canvas.createCanvas(image.width, image.height);
+        const context = canvas.getContext("2d");
+
+        context.arc(image.width / 2, image.width / 2, image.width / 2, 0, Math.PI * 2, true);
+        context.closePath();
+        context.clip();
+
+        context.drawImage(image, 0, 0, image.width, image.height);
+
+        return await canvas.encode("png");
+    },
     catchError(error) {
         const date = new Date();
         const data = {
