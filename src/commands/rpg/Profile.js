@@ -31,7 +31,6 @@ class Profile extends Command {
     }
 
     async run() {
-        await this.interaction.deferReply().catch(this.client.util.catchError);
         const user = await this.getUserFromInteraction(this.interaction.type);
         if (!(await this.client.playerDb.exists(user.id))) {
             if (this.client.playerDb.get(user.id).alreadyPlayed) {
@@ -43,6 +42,7 @@ class Profile extends Command {
             return await this.interaction.reply({ content: this.lang.systems.playerNotFound, ephemeral: true })
                 .catch(this.client.util.catchError);
         }
+        await this.interaction.deferReply().catch(this.client.util.catchError);
 
         const player = await this.client.playerDb.load(user.id);
         const inventory = await this.client.inventoryDb.load(user.id);

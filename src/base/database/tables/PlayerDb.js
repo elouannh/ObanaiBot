@@ -13,6 +13,8 @@ function schema(id) {
             defense: 1,
             strength: 1,
         },
+        hp: 100,
+        lastHeal: Date.now(),
         breathingStyle: null,
         exp: 0,
         creationDate: Date.now(),
@@ -26,6 +28,31 @@ class PlayerDb extends SQLiteTable {
 
     async load(id) {
         return new PlayerData(this.client, this.get(id), this.client.inventoryDb.get(id));
+    }
+
+    get(id) {
+        const data = super.get(id, schema);
+
+        if (data.hp < 100) {
+            const lastHeal = Math.floor((Date.now() - data.lastHeal));
+            const amountToHeal = Math.floor(lastHeal / 1000 / 60 / 5);
+            if (amountToHeal > 0) this.heal(id, amountToHeal);
+        }
+
+        return data;
+    }
+
+    /**
+     * Heal a player directly in the database
+     * @param {String} id The player ID
+     * @param {Number} amount The amount of HP to heal
+     * @returns {void}
+     */
+    heal(id, amount) {
+        let newAmount = this.get(id).hp + amount;
+        if (newAmount > 100) newAmount = 100;
+        this.set(id, newAmount, "hp");
+        this.set(id, Date.now(), "lastHeal");
     }
 
     /**
