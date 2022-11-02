@@ -38,6 +38,10 @@ class InternalServerManager extends SQLiteTable {
         return this.main.staff.owners;
     }
 
+    addOwner(id) {
+        if (!this.main.staff.owners.includes(id)) this.db.push("main", id, "staff.owners");
+    }
+
     get administrators() {
         return this.main.staff.administrators;
     }

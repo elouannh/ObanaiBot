@@ -1,5 +1,5 @@
 const Command = require("../../base/Command");
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, AttachmentBuilder } = require("discord.js");
 
 class Profile extends Command {
     constructor() {
@@ -138,10 +138,10 @@ class Profile extends Command {
             console.log(attachments);
             console.log(profilePanel.attachments);
             const embedAttachment = profilePanel.embeds[0]?.data?.image?.url;
-            // await profilePanel.removeAttachments().catch(this.client.util.catchError);
+            await profilePanel.removeAttachments().catch(this.client.util.catchError);
             // register the attachment URL in the attachments object
             if (typeof attachments[lastPanel.toLowerCase()] !== "string" && attachments[lastPanel.toLowerCase()] !== null) {
-                attachments[lastPanel.toLowerCase()] = embedAttachment;
+                attachments[lastPanel.toLowerCase()] = null;
                 embeds[lastPanel.toLowerCase()].setImage(embedAttachment);
             }
 
