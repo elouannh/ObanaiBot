@@ -25,7 +25,7 @@ class Profile extends Command {
             category: "RPG",
             cooldown: 15,
             completedRequests: ["profile"],
-            authorizationBitField: 0b100,
+            authorizationBitField: 0b000,
             permissions: 0n,
         });
     }
@@ -120,7 +120,9 @@ class Profile extends Command {
 
         let lastPanel = "Player";
 
-        await this.client.additionalDb.showBeginningTutorial(user.id, "profileCommand", this.interaction);
+        if (this.interaction.user.id === user.id) {
+            await this.client.additionalDb.showBeginningTutorial(user.id, "profileCommand", this.interaction);
+        }
 
         const profilePanel = await this.interaction.editReply({
             embeds: [embeds.player],
@@ -128,8 +130,9 @@ class Profile extends Command {
             files: attachments.player === null ? [] : [attachments.player],
         }).catch(this.client.util.catchError);
 
-        await this.client.additionalDb.showBeginningTutorial(user.id, "profilePlayer", this.interaction);
-
+        if (this.interaction.user.id === user.id) {
+            await this.client.additionalDb.showBeginningTutorial(user.id, "profilePlayer", this.interaction);
+        }
         const collector = profilePanel.createMessageComponentCollector({
             filter: interaction => interaction.user.id === this.interaction.user.id,
             idle: 60_000,
@@ -157,7 +160,10 @@ class Profile extends Command {
                 .setCustomId(interaction.customId);
 
             // show the tutorial
-            await this.client.additionalDb.showBeginningTutorial(user.id, `profile${interaction.customId}`, this.interaction);
+
+            if (this.interaction.user.id === user.id) {
+                await this.client.additionalDb.showBeginningTutorial(user.id, `profile${interaction.customId}`, this.interaction);
+            }
 
             await interaction.deferUpdate().catch(this.client.util.catchError);
 

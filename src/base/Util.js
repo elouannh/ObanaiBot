@@ -1,8 +1,20 @@
 const chalk = require("chalk");
 const Canvas = require("@napi-rs/canvas");
-const fs = require("fs");
+// eslint-disable-next-line no-unused-vars
+const CollectionManager = require("./CollectionManager");
 
 module.exports = {
+    /**
+     * @typedef {Object} Request
+     * @property {String} name The request name
+     * @property {Number} ts The timestamp of the request
+     */
+    /**
+     * A callback function for the cooldownsManager class.
+     * @param {CollectionManager} manager
+     * @param {String} key The user ID
+     * @returns {Request[]}
+     */
     callbackFunction(manager, key) {
         const map = manager.get(key).entries();
         const finalReq = [];
@@ -11,6 +23,20 @@ module.exports = {
         }
         return finalReq.map(e => Object.assign({}, { name: e[0], ts: e[1] }));
     },
+    /**
+     * @typedef {Object} EnsureIndicator
+     * @property {String} value The value if we write in the render.json file
+     * @property {String} addedString The string to write if a new value is added
+     * @property {String} equalString The string to write if a value is equal to the source
+     * @property {String} notInString The string to write if a value is removed
+     */
+    /**
+     * Returns the targeted objected with the source properties. Useful for languages.
+     * @param {Object|null} source The source object
+     * @param {Object|null} obj The object to ensure
+     * @param {EnsureIndicator} indicate The indicate to show in the render.json file the translations error
+     * @returns {*}
+     */
     ensureLang(source, obj, indicate) {
         for (const key in source) {
             if (source[key] instanceof Object && !(source instanceof String)) {
@@ -41,6 +67,12 @@ module.exports = {
 
         return obj;
     },
+    /**
+     * Returns the targeted objected with the source properties.
+     * @param {Object|null} source The source object
+     * @param {Object|null} obj The object to ensure
+     * @returns {*}
+     */
     ensureObj(source, obj) {
         for (const key in source) {
             if (source[key] instanceof Object && !(source instanceof String)) {
@@ -54,6 +86,12 @@ module.exports = {
 
         return obj;
     },
+    /**
+     * Equals to the <String>.toFixed() method but returns a Number.
+     * @param {Number} int The number to round
+     * @param {Number} digits The amount of digits to fix
+     * @returns {number}
+     */
     round(int, digits = 0) {
         return Number(int.toFixed(digits));
     },
@@ -93,7 +131,129 @@ module.exports = {
         const time = this.dateRender(new Date(), "[month/day] [hour:min:sec]");
         console.log(mainColor(`${time}  |  ${message}`));
     },
+    /**
+     * Return the cropped image.
+     * @param {Buffer} buffer The image buffer
+     * @param {Number} width The width of the cropped image
+     * @param {Number} height The height of the cropped image
+     * @returns {Promise<Buffer>}
+     */
+    async cropImage(buffer, width, height) {
+        const canvas = Canvas.createCanvas(width, height);
+        const context = canvas.getContext("2d");
+        const image = await Canvas.loadImage(buffer);
+        context.drawImage(image, 0, 0, width, height);
+        return await canvas.encode("png");
+    },
+    /**
+     * @typedef {Array[]} XCorner
+     * @property {Array<Integer, Integer>} 0 The central vertex of the corner, a couple of X and Y coordinates
+     * @property {Array<Integer, Integer>} 1 The the left vertex of the corner, a couple of X and Y coordinates
+     * @property {Array<Integer, Integer>} 2 The the right vertex of the corner, a couple of X and Y coordinates
+     */
+    /**
+     * Return a corner into a progress bar. Specify the different limits, and returns three points: the first is the
+     * main, and the two following are the two others at each extremity.
+     * @param {Number} space The space between the two extremities
+     * @param {Number} minX The minimum X value
+     * @param {Number} maxX The maximum X value
+     * @param {Number} minY The minimum Y value
+     * @param {Number} maxY The maximum Y value
+     * @returns {XCorner}
+     */
+    generateXCorner(space, minX, maxX, minY, maxY) {
+        let x = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+        x = Math.min(Math.max(x, minX + space), maxX - space);
 
+        return [[x, maxY], [x - space, minY], [x + space, minY]];
+    },
+    /**
+     * Return a random number between a minimum and a maximum.
+     * @param {Number} min The minimum value
+     * @param {Number} max The maximum value
+     * @returns {Number}
+     */
+    random(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    },
+    /**
+     * Return a Buffer that contains a progress bar with the given percentage.
+     * @param {Number} percent The percentage of the progress bar
+     * @param {Number} width The width of the progress bar
+     * @param {Number} height The height of the progress bar
+     * @param {String|Canvas.Image} fill The fill of the progress bar
+     * @param {String|Canvas.Image} bg The background of the progress bar
+     * @param {String} line The stroke line
+     * @returns {Promise<Buffer>}
+     */
+    async getProgressBar(percent, width, height, fill, bg, line) {
+        const canvas = Canvas.createCanvas(width, height);
+        const context = canvas.getContext("2d");
+
+        const widthPercent = width / 100;
+        const heightPercent = height / 100;
+        const lw = 2;
+        context.lineWidth = lw;
+
+        const firstTopCorner = this.generateXCorner(
+            this.random(10, 30),
+            lw,
+            width / 2,
+            lw,
+            heightPercent * this.random(10, 30),
+        );
+        const secondTopCorner = this.generateXCorner(
+            this.random(10, 30),
+            width / 2,
+            width - lw,
+            lw,
+            heightPercent * this.random(10, 30),
+        );
+        const thirdCorner = this.generateXCorner(
+            this.random(10, 30),
+            lw,
+            width - lw,
+            height - lw,
+            height - lw - heightPercent * this.random(10, 30),
+        );
+
+        const points = [
+            [lw, lw],
+            firstTopCorner[1], firstTopCorner[0], firstTopCorner[2], secondTopCorner[1], secondTopCorner[0], secondTopCorner[2],
+            [width - lw, lw],
+            [width - lw, height - lw], thirdCorner[2], thirdCorner[0], thirdCorner[1], [lw, height - lw], [lw, lw],
+        ];
+
+        context.beginPath();
+        context.strokeStyle = "#000000";
+        for (const point of points) context.lineTo(...point);
+        context.closePath();
+        context.clip();
+
+        if (bg instanceof Canvas.Image) {
+            const image = await Canvas.loadImage(bg);
+            context.drawImage(image, lw, lw, width - lw, height - lw);
+        }
+        else {
+            context.fillStyle = bg;
+            context.fillRect(lw, lw, width - lw, height - lw);
+        }
+        if (fill instanceof Canvas.Image) {
+            const image = await Canvas.loadImage(fill);
+            context.drawImage(image, lw, lw, width - lw, height - lw);
+        }
+        else {
+            context.fillStyle = fill;
+            context.fillRect(lw, lw, (width * percent) - lw, height- lw);
+        }
+        context.stroke();
+        return await canvas.encode("png");
+    },
+    /**
+     * Return a Buffer that contains the image with the given link, but in a perfect circle.
+     * @param {String} link The image link
+     * @returns {Promise<Buffer>}
+     */
     async getRoundImage(link) {
         const image = await Canvas.loadImage(link);
         const canvas = Canvas.createCanvas(image.width, image.height);
@@ -107,6 +267,11 @@ module.exports = {
 
         return await canvas.encode("png");
     },
+    /**
+     * Catch an error and log it (in a beautiful bright red).
+     * @param {Error} error The error instance
+     * @returns {void}
+     */
     catchError(error) {
         const date = new Date();
         const data = {

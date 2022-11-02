@@ -120,8 +120,8 @@ class PlayerDb extends SQLiteTable {
         const canvas = Canvas.createCanvas(800, 450);
         const context = canvas.getContext("2d");
 
-        const background = await Canvas.loadImage(theme.BackgroundImage);
         context.filter = "blur(10px)";
+        const background = await Canvas.loadImage(theme.BackgroundImage);
         context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
         context.filter = "none";
@@ -132,6 +132,14 @@ class PlayerDb extends SQLiteTable {
 
         const cleanKnyLogo = await Canvas.loadImage(theme.Border);
         context.drawImage(cleanKnyLogo, 0, 0, 150, 150);
+
+
+        const progressBar = await Canvas.loadImage(
+            await this.client.util.getProgressBar(
+                (playerData.hp - 50) / 100, 500, 50, theme.Accent, theme.BackgroundColor, theme.BackgroundColor,
+            ),
+        );
+        context.drawImage(progressBar, 250, 50, 500, 50);
 
         const buffer = await canvas.encode("png");
         return {
