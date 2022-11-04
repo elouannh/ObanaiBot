@@ -5,6 +5,12 @@
         },
         "defense": {
             "id": "defense"
+        },
+        "weaponControl": {
+            "id": "weaponControl"
+        },
+        "smartness": {
+            "id": "smartness"
         }
     },
     "trainingTimes": {

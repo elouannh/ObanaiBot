@@ -1,5 +1,5 @@
 const chalk = require("chalk");
-const Canvas = require("@napi-rs/canvas");
+const Canvas = require("canvas");
 // eslint-disable-next-line no-unused-vars
 const CollectionManager = require("./CollectionManager");
 
@@ -95,15 +95,37 @@ module.exports = {
     round(int, digits = 0) {
         return Number(int.toFixed(digits));
     },
+    /**
+     * Returns the capitalization of a string.
+     * @param {String} string The string to capitalize
+     * @returns {string}
+     */
     capitalize(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     },
+    /**
+     * Separate digits of a number with a given separator.
+     * @param {Number} int The number to separate
+     * @param {String} sep The separator
+     * @returns {string}
+     */
     intRender(int, sep = " ") {
         return int.toString().replace(/\B(?=(\d{3})+(?!\d))/g, sep);
     },
+    /**
+     * Wait a given amount of miliseconds.
+     * @param {Number} ms The amount in ms to wait
+     * @returns {Promise<unknown>}
+     */
     delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     },
+    /**
+     * Returns the current date in a given format, in a string.
+     * @param {Date} date The date
+     * @param {String} form The format of the date
+     * @returns {String}
+     */
     dateRender(date, form) {
         const data = {
             day: String(date.getDate()),
@@ -127,9 +149,15 @@ module.exports = {
             .replace("min", data.min)
             .replace("sec", data.sec);
     },
-    timelog(message, mainColor = chalk.greenBright) {
+    /**
+     * Log something with the time.
+     * @param {*} message The message to log
+     * @param {String} mainColor The color to print in
+     * @returns {void}
+     */
+    timelog(message, mainColor = "greenBright") {
         const time = this.dateRender(new Date(), "[month/day] [hour:min:sec]");
-        console.log(mainColor(`${time}  |  ${message}`));
+        console.log(chalk[mainColor](`${time}  |  ${message}`));
     },
     /**
      * Return the cropped image.
@@ -143,7 +171,7 @@ module.exports = {
         const context = canvas.getContext("2d");
         const image = await Canvas.loadImage(buffer);
         context.drawImage(image, 0, 0, width, height);
-        return await canvas.encode("png");
+        return canvas.toBuffer();
     },
     /**
      * @typedef {Array[]} XCorner
@@ -168,6 +196,77 @@ module.exports = {
         return [[x, maxY], [x - space, minY], [x + space, minY]];
     },
     /**
+     * Return a corner into a progress bar. Specify the different limits, and returns three points: the first is the
+     * main, and the two following are the two others at each extremity.
+     * @param {Number} space The space between the two extremities
+     * @param {Number} minX The minimum X value
+     * @param {Number} maxX The maximum X value
+     * @param {Number} minY The minimum Y value
+     * @param {Number} maxY The maximum Y value
+     * @returns {XCorner}
+     */
+    generateYCorner(space, minX, maxX, minY, maxY) {
+        let y = Math.floor(Math.random() * (maxY - minY)) + minY;
+        y = Math.min(Math.max(y, minY + space), maxY - space);
+
+        return [[maxX, y], [minX, y - space], [minX, y + space]];
+    },
+    /**
+     * Generate a vertical straight bar with two random corners.
+     * @param width
+     * @param height
+     * @param color
+     * @param border
+     * @param borderWidth
+     */
+    verticalBar(width, height, color, border, borderWidth) {
+        const canvas = Canvas.createCanvas(width, height);
+        const context = canvas.getContext("2d");
+        const lw = borderWidth;
+
+        const widthPercent = width / 100;
+
+        const leftCorner = this.generateYCorner(
+            this.random(2, 5),
+            lw,
+            widthPercent * this.random(30, 40),
+            lw,
+            height - lw,
+        );
+        const rightCorner = this.generateYCorner(
+            this.random(2, 5),
+            width - lw,
+            width - lw - widthPercent * this.random(30, 40),
+            lw,
+            height - lw,
+        );
+
+        const points = [
+            [lw, lw], [width - lw, lw],
+            rightCorner[1], rightCorner[0], rightCorner[2],
+            [width - lw, height - lw], [lw, height - lw],
+            leftCorner[2], leftCorner[0], leftCorner[1],
+            [lw, lw],
+        ];
+
+        context.beginPath();
+        context.strokeStyle = border;
+        for (const point of points) context.lineTo(...point);
+        context.closePath();
+        context.clip();
+
+        context.fillStyle = color;
+        context.fillRect(0, 0, width, height);
+
+        context.fillStyle = border;
+        context.fillRect(0, 0, width, 1);
+        context.fillRect(0, height - 1, width, 1);
+
+        context.stroke();
+
+        return canvas.toBuffer();
+    },
+    /**
      * Return a random number between a minimum and a maximum.
      * @param {Number} min The minimum value
      * @param {Number} max The maximum value
@@ -175,6 +274,73 @@ module.exports = {
      */
     random(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
+    },
+    /**
+     * Generate a text with a 3D effect only using fillText method.
+     * @param {Canvas.NodeCanvasRenderingContext2D} context The context to fill in
+     * @param {String} text The text to fill
+     * @param {String} color The color of the text
+     * @param {String} shadow The color of the shadow
+     * @param {String} font The font of the text
+     * @param {Number} size The size of the text
+     * @param {Number} x The X position of the text
+     * @param {Number} y The Y position of the text
+     */
+    text3D(context, text, color, shadow, font, size, x, y) {
+        context.fillStyle = shadow;
+        context.textAlign = "left";
+        context.font = `${size}px ${font}`;
+        context.fillText(text, x - 1, y);
+        context.fillText(text, x, y + 1);
+        context.fillText(text, x, y + 1);
+        context.fillText(text, x + 1, y);
+        context.fillStyle = color;
+        context.fillText(text, x, y);
+    },
+    /**
+     * Generate a pie graph.
+     * @param {Number[]} parts The percents of the graph
+     * @param {String[]} colors The different colors tu use (it does a loop)
+     * @param {Number} width The width of the graph
+     * @param {String} fillStyle The fill style of the graph
+     * @param {String} borderStyle The border style of the graph
+     * @param {Number} borderWidth The border width of the graph
+     * @returns {Promise<Buffer>}
+     */
+    async circleGraph(parts, colors, width, fillStyle, borderStyle, borderWidth) {
+        const canvas = Canvas.createCanvas(width, width);
+        const context = canvas.getContext("2d");
+
+        let i = 0;
+        let lastStartAngle = -Math.PI / 2;
+        for (const part of parts) {
+            context.beginPath();
+            context.fillStyle = colors[i];
+            context.strokeStyle = borderStyle;
+            context.lineWidth = borderWidth;
+            context.moveTo(width / 2, width / 2);
+            context.arc(width / 2, width / 2, width / 2 - borderWidth, lastStartAngle, lastStartAngle + (part * Math.PI * 2), false);
+            lastStartAngle = lastStartAngle + (part * Math.PI * 2);
+            context.fill();
+            context.stroke();
+            context.closePath();
+            context.restore();
+            i++;
+            if (i >= colors.length) i = 0;
+        }
+        context.beginPath();
+        context.moveTo(width / 2, width / 2);
+        context.arc(width / 2, width / 2, width / 4, 0, Math.PI * 2, false);
+        context.fillStyle = borderStyle;
+        context.fill();
+        context.closePath();
+        context.beginPath();
+        context.moveTo(width / 2, width / 2);
+        context.arc(width / 2, width / 2, width / 4 - borderWidth, 0, Math.PI * 2, false);
+        context.fillStyle = fillStyle;
+        context.fill();
+        context.closePath();
+        return canvas.toBuffer();
     },
     /**
      * Return a Buffer that contains a progress bar with the given percentage.
@@ -190,7 +356,6 @@ module.exports = {
         const canvas = Canvas.createCanvas(width, height);
         const context = canvas.getContext("2d");
 
-        const widthPercent = width / 100;
         const heightPercent = height / 100;
         const lw = 2;
         context.lineWidth = lw;
@@ -225,7 +390,7 @@ module.exports = {
         ];
 
         context.beginPath();
-        context.strokeStyle = "#000000";
+        context.strokeStyle = line;
         for (const point of points) context.lineTo(...point);
         context.closePath();
         context.clip();
@@ -247,7 +412,7 @@ module.exports = {
             context.fillRect(lw, lw, (width * percent) - lw, height- lw);
         }
         context.stroke();
-        return await canvas.encode("png");
+        return canvas.toBuffer();
     },
     /**
      * Return a Buffer that contains the image with the given link, but in a perfect circle.
@@ -255,6 +420,7 @@ module.exports = {
      * @returns {Promise<Buffer>}
      */
     async getRoundImage(link) {
+        if (link.endsWith(".webp")) link = link.replace(".webp", ".png");
         const image = await Canvas.loadImage(link);
         const canvas = Canvas.createCanvas(image.width, image.height);
         const context = canvas.getContext("2d");
@@ -265,7 +431,7 @@ module.exports = {
 
         context.drawImage(image, 0, 0, image.width, image.height);
 
-        return await canvas.encode("png");
+        return canvas.toBuffer();
     },
     /**
      * Catch an error and log it (in a beautiful bright red).

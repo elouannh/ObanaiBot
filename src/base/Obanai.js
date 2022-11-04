@@ -84,7 +84,7 @@ class Obanai extends Client {
         void this.launch();
 
         setInterval(() => {
-            this.util.timelog("................", this.chalk.blackBright);
+            this.util.timelog("................", "blackBright");
         }, 900_000);
     }
 

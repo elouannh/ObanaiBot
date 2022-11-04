@@ -2,7 +2,9 @@
     "statistics": {
         "names": {
             "strength": "Force",
-            "defense": "Défense"
+            "defense": "Défense",
+            "weaponControl": "Maîtrise d'arme",
+            "smartness": "Intelligence"
         },
         "levels": {
             "max": "Niveau max atteint (100)"
@@ -460,5 +462,10 @@
             "8": "Enchanté",
             "9": "Démoniaque"
         }
+    },
+    "concepts": {
+        "hp": "PV",
+        "level": "Niv.",
+        "stats": "Statistiques"
     }
 }

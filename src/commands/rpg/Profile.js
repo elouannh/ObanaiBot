@@ -138,8 +138,6 @@ class Profile extends Command {
             idle: 60_000,
         });
         collector.on("collect", async interaction => {
-            console.log(attachments);
-            console.log(profilePanel.attachments);
             const embedAttachment = profilePanel.embeds[0]?.data?.image?.url;
             await profilePanel.removeAttachments().catch(this.client.util.catchError);
             // register the attachment URL in the attachments object
