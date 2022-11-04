@@ -5,8 +5,8 @@ const Util = require("./Util");
 class LanguageManager {
     constructor(client) {
         this.client = client;
-        const dir = "./src/languages/json/";
-        this.languages = fs.readdirSync(dir).map(languageDir => new Language(languageDir));
+        const dir = "./src/languages/";
+        this.languages = fs.readdirSync(dir).filter(f => !f.endsWith(".json")).map(languageDir => new Language(languageDir));
 
         const french = this.getLang("fr");
         const Json = {};
@@ -20,10 +20,10 @@ class LanguageManager {
             }
             lang.json._id = lang.lang;
 
-            lang.json = new Util(this.client).ensureLang({ ...french.json }, { ...lang.json }, { value: "false" });
+            lang.json = Util.ensureLang({ ...french.json }, { ...lang.json }, { value: "false" });
 
             if (this.client.env.RENDER_TRANSLATIONS === "1" && lang.json._id !== "fr") {
-                Json[lang.lang] = new Util(this.client).ensureLang(
+                Json[lang.lang] = Util.ensureLang(
                     { ...french.jsonRender },
                     { ...lang.jsonRender },
                     { value: "true", equalString: "[=]", notInString: "[x]", addedString: "[+]" },

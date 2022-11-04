@@ -1,0 +1,27 @@
+{
+    "defaultReply": "Ceci est une réponse par défaut.",
+    "cooldownReply": "Veuillez patienter %TIME avant de pouvoir interagir de nouveau.",
+    "requestsReply": "Vous avez déjà des commandes en cours d'exécution. Veuillez terminer leurs interactions.",
+    "noUserPermissionsReady": "Vous n'avez pas les permissions requises pour utiliser cette commande.",
+    "noClientPermissionsReply": "Je n'ai pas les permissions requises pour utiliser cette commande.",
+    "necessariesPermissionsReply": "Liste des permissions nécessaires",
+    "clientInMaintenance": "Le bot est actuellement en maintenance.",
+    "noUserAuthorizationReply": "Vous n'êtes pas autorisé à utiliser cette commande.",
+    "errorOccurred": "Une erreur est survenue.",
+    "playerNotFound": "Ce joueur est introuvable. Si il s'agit de vous, vous pouvez commencer votre aventure avec `/start`.",
+    "playerNotFoundAlreadyPlayed": "Ce joueur est introuvable, mais il semblerait qu'il ait déjà joué à une version antérieure. Si il s'agit de vous, faites la commande `/start`.",
+    "tutorialNext": "Suivant",
+    "tutorialEnd": "Ce tutoriel est terminé. Amusez-vous bien ! :D",
+    "playerAlreadyExists": "Vous avez déjà commencé votre aventure.",
+    "choiceIgnored": "Vous avez oublié de répondre. Veuillez réessayer cette commande.",
+    "timeUnits": {
+        "y": ["an", "ans", "a", "a"],
+        "mo": ["mois", "mois", "mo", "mo"],
+        "w": ["semaine", "semaines", "sem", "sem"],
+        "d": ["jour", "jours", "j", "j"],
+        "h": ["heure", "heures", "h", "h"],
+        "m": ["minute", "minutes", "min", "mins"],
+        "s": ["seconde", "secondes", "s", "s"],
+        "ms": ["milliseconde", "millisecondes", "ms", "ms"]
+    }
+}

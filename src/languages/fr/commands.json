@@ -1,0 +1,40 @@
+{
+    "profile": {
+        "activityTitle": "Activité - %PLAYER",
+        "activityButton": "Activité",
+        "additionalTitle": "Informations supplémentaires - %PLAYER",
+        "additionalButton": "Informations supplémentaires",
+        "inventoryTitle": "Inventaire - %PLAYER",
+        "inventoryButton": "Inventaire",
+        "mapTitle": "Carte - %PLAYER",
+        "mapButton": "Carte",
+        "playerTitle": "Profil - %PLAYER",
+        "playerButton": "Profil",
+        "characterChosen": "Personnage choisi: %CHARACTER",
+        "statisticsName": "Statistiques",
+        "breathingStyleName": "Style de souffle",
+        "expName": "Niveau d'expérience"
+    },
+    "eval": {
+        "modalTitle": "Code à exécuter",
+        "modalLabel": "JavaScript ES6, automatiquement asynchrone",
+        "modalPlaceholder": "return \"Arnaud le gay\";"
+    },
+    "start": {
+        "startIntroduction": "**ObanaiBot - Démarrez votre aventure**",
+        "storyIntroduction": "Vous êtes un Matagi; un chasseur traditionnel des montagnes du nord du pays, dans la région du Tōhoku. Tout se déroule durant l'ère Taishō (1912-1926). Depuis quelques temps, sortir dehors est devenu dangereux. Des créatures étranges ont commencé à apparaître et les gens les appellent « Démons ». Cependant, votre âme guerrière et déterminée refuse de croire à des histoires nées de légendes urbaines. Vous décidez donc de partir à la recherche de ces créatures et de les chasser ; persuadé(e) qu'elles n'existent pas...",
+        "tosAccept": "Pour **commencer votre aventure**, vous devez accepter les __Conditions Générales d'Utilisation d'ObanaiBot__, le __Code de conduite (Règlement) du serveur support__, et les __Terms of Service de Discord__.",
+        "tosMenuPlaceholder": "Acceptez les documents ici.",
+        "botTosAccept": "Accepter les ToS d'ObanaiBot",
+        "botCofAccept": "Accepter le Code de Conduite d'ObanaiBit",
+        "discordTosAccept": "Accepter les ToS Discord",
+        "discordTosDescription": "En vous inscrivant sur Discord vous les acceptez.",
+        "tosAccepted": "Vous avez accepté de nous rejoindre ! Votre profil de joueur est en création.\nIl est temps de **choisir votre personnage !**",
+        "characterChoice": "Choisissez parmi les deux choix ci-dessous. **Attention, ce choix est __définitif__ !**",
+        "joinTheSupport": "Si vous avez toute autre question, n'hésitez pas à rejoindre notre serveur Discord:\nhttps://discord.gg/8GDpnYvRrC",
+        "tosDeclined": "Vous avez refusé les documents. Veuillez réessayer plus tard.",
+        "characterMenuPlaceholder": "Choisissez votre personnage.",
+        "characterChosen": "Vous avez donc choisi **%CHAR**. Vous pouvez désormais commencer à jouer au bot; essayez de faire la commande `/profile` pour tester !",
+        "thereIsTutorial": "Il y a des tutoriels disponibles tout au long de votre aventure qui vous expliqueront comment fonctionne le bot. Bon jeu !"
+    }
+}

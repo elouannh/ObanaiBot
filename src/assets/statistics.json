@@ -3,14 +3,14 @@
         "strength": {
             "id": "strength"
         },
-        "speed": {
-            "id": "speed"
-        },
         "defense": {
             "id": "defense"
         },
-        "agility": {
-            "id": "agility"
+        "weaponControl": {
+            "id": "weaponControl"
+        },
+        "smartness": {
+            "id": "smartness"
         }
     },
     "trainingTimes": {

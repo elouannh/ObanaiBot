@@ -38,6 +38,10 @@ class InternalServerManager extends SQLiteTable {
         return this.main.staff.owners;
     }
 
+    addOwner(id) {
+        if (!this.main.staff.owners.includes(id)) this.db.push("main", id, "staff.owners");
+    }
+
     get administrators() {
         return this.main.staff.administrators;
     }
@@ -118,7 +122,7 @@ class InternalServerManager extends SQLiteTable {
     async questGenerator() {
         setInterval(async () => {
             await this.slayerQuestGenerator();
-        }, 10_000);
+        }, 600_000);
 
         const lastRefresh = (Date.now() - this.delays.dailyQuestGenerator);
         const timeLeft = (86_400_000 - lastRefresh);

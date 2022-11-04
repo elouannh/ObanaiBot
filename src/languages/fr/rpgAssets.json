@@ -2,9 +2,9 @@
     "statistics": {
         "names": {
             "strength": "Force",
-            "speed": "Vitesse",
             "defense": "Défense",
-            "agility": "Agilité"
+            "weaponControl": "Maîtrise d'arme",
+            "smartness": "Intelligence"
         },
         "levels": {
             "max": "Niveau max atteint (100)"
@@ -370,6 +370,10 @@
         "test": "Test"
     },
     "characters": {
+        "genders": {
+            "male": "Homme",
+            "female": "Femme"
+        },
         "0": {
             "label": "Frère de Yamamoto Minori",
             "description": ""
@@ -458,5 +462,10 @@
             "8": "Enchanté",
             "9": "Démoniaque"
         }
+    },
+    "concepts": {
+        "hp": "PV",
+        "level": "Niv.",
+        "stats": "Statistiques"
     }
 }

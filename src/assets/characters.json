@@ -4,6 +4,7 @@
         "fullName": "Yamamoto Kenta",
         "firstName": "Kenta",
         "lastName": "Yamamoto",
+        "gender": "male",
         "japaneseTranscription": {
             "fullName": "山本・健太",
             "firstName": "健太",
@@ -15,6 +16,7 @@
         "fullName": "Yamamoto Minori",
         "firstName": "Minori",
         "lastName": "Yamamoto",
+        "gender": "female",
         "japaneseTranscription": {
             "fullName": "山本・里",
             "firstName": "里",
@@ -26,6 +28,7 @@
         "fullName": "Ono Yoshinori",
         "firstName": "Yoshinori",
         "lastName": "Ono",
+        "gender": "female",
         "japaneseTranscription": {
             "fullName": "小野・義則",
             "firstName": "義則",
@@ -37,6 +40,7 @@
         "fullName": "Fukuda Akuseru",
         "firstName": "Akuseru",
         "lastName": "Fukuda",
+        "gender": "male",
         "jaapaneseTranscript": {
             "fullName": "福田・アクセル",
             "firstName": "アクセル",
@@ -48,6 +52,7 @@
         "fullName": "Ogawa Karurossu",
         "firstName": "Karurossu",
         "lastName": "Ogawa",
+        "gender": "male",
         "japaneseTranscription": {
             "fullName": "小川・カルロッス",
             "firstName": "カルロッス",
@@ -59,6 +64,7 @@
         "fullName": "Furankī",
         "firstName": "Furankī",
         "lastName": "",
+        "gender": "male",
         "japaneseTranscription": {
             "fullName": "フランキー",
             "firstName": "フランキー",
@@ -70,6 +76,7 @@
         "fullName": "Ishikawa Enzo",
         "firstName": "Enzo",
         "lastName": "Ishikawa",
+        "gender": "male",
         "japaneseTranscription": {
             "fullName": "石川・エンゾ",
             "firstName": "エンゾ",
@@ -81,6 +88,7 @@
         "fullName": "Kojima Eruan",
         "firstName": "Eruan",
         "lastName": "Kojima",
+        "gender": "male",
         "japaneseTranscription": {
             "fullName": "小島・エルアン",
             "firstName": "エルアン",
@@ -92,6 +100,7 @@
         "fullName": "Ishii Samu",
         "firstName": "Samu",
         "lastName": "Ishii",
+        "gender": "male",
         "japaneseTranscription": {
             "fullName": "石井・サム",
             "firstName": "サム",
@@ -103,6 +112,7 @@
         "fullName": "Nakajima Aruno",
         "firstName": "Aruno",
         "lastName": "Nakajima",
+        "gender": "male",
         "japaneseTranscription": {
             "fullName": "中島・アルノ",
             "firstName": "アルノ",
@@ -114,6 +124,7 @@
         "fullName": "Nakamura Makussu",
         "firstName": "Makussu",
         "lastName": "Nakamura",
+        "gender": "male",
         "japaneseTranscription": {
             "fullName": "中村・マクッス",
             "firstName": "マクッス",
@@ -125,6 +136,7 @@
         "fullName": "Harada Miruri",
         "firstName": "Miruri",
         "lastName": "Harada",
+        "gender": "male",
         "japaneseTranscription": {
             "fullName": "原田・ミルリ",
             "firstName": "ミルリ",
@@ -136,6 +148,7 @@
         "fullName": "Daimyo Matsuda",
         "firstName": "",
         "lastName": "Matsuda",
+        "gender": "male",
         "japaneseTranscription": {
             "fullName": "侯松田",
             "firstName": "",
@@ -147,6 +160,7 @@
         "fullName": "Mori Entarukume",
         "firstName": "Entarukume",
         "lastName": "Mori",
+        "gender": "male",
         "japaneseTranscription": {
             "fullName": "森・エンタルクメ",
             "firstName": "エンタルクメ",
@@ -158,6 +172,7 @@
         "fullName": "Nakajima Kuremansu",
         "firstName": "Kuremansu",
         "lastName": "Nakajima",
+        "gender": "female",
         "japaneseTranscription": {
             "fullName": "中島・クレマンス",
             "firstName": "クレマンス",
@@ -169,6 +184,7 @@
         "fullName": "Sugiyama Inessu",
         "firstName": "Inessu",
         "lastName": "Sugiyama",
+        "gender": "female",
         "japaneseTranscription": {
             "fullName": "杉山・イネス",
             "firstName": "イネス",

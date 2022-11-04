@@ -112,10 +112,16 @@ class QuestDb extends SQLiteTable {
     }
 
     /**
+     * @typedef {Object} QuestObjective
+     * @property {Boolean} completed
+     * @property {Boolean} rewardsCollected
+     * @property {Object} additionalData
+     */
+    /**
      * Verify if the user has completed the objectives of a quest, and returns the completed objectives.
      * It sets the objectives as completed if they are directly with this.setSlayerQuestObjectiveAccomplished method.
      * @param {String} id The user ID
-     * @param {Object[]} objectives The list of objectives
+     * @param {QuestObjective[]} objectives The list of objectives
      * @param {String} tableFocused The SQLite table focused
      * @returns {Promise<String[]>} The list of completed objectives ids
      */
@@ -146,15 +152,14 @@ class QuestDb extends SQLiteTable {
                 if (data === null) await this.client.additionalDb.load(id);
                 switch (o.type) {
                     case "haveProgressedTutorial":
-                        const tutorialStep = o.additionalData.step in data.rpg.tutorialProgress;
-                        let tutorialAmount = true;
-                        if (tutorialStep) {
-                            const userProgress = data.rpg.tutorialProgress[o.additionalData.step];
-                            if ("amount" in o.additionalData) {
-                                tutorialAmount = userProgress >= o.additionalData.amount;
+                        const tutorialId = o.additionalData.tutorial in data.rpg.tutorialProgress;
+                        let tutorialProgress = false;
+                        if (tutorialId) {
+                            if (o.additionalData.step in tutorialId) {
+                                tutorialProgress = data.rpg.tutorialProgress[tutorialId] === true;
                             }
                         }
-                        completedInDepth = tutorialStep && tutorialAmount;
+                        completedInDepth = tutorialId && tutorialProgress;
                         break;
                     case "ranCommand":
                         const commandId = o.additionalData.command in data.rpg.commandsAmount;

@@ -5,7 +5,7 @@ class RPGStatistic extends RPGAssetBase {
     constructor(lang, id, statisticLevel, statisticTrainingTimeForNextLevel) {
         super(lang, id);
 
-        this.util = new Util(null);
+        this.util = Util;
         this.name = this.lang.json.names[this.id];
         this.level = statisticLevel;
         this.amount = this.util.round(this.level * 10);

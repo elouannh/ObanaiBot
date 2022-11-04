@@ -14,7 +14,7 @@ class EventManager {
             if (event.eventInfos.once) method += "ce";
 
             this.client[method](event.eventInfos.name, (...args) => {
-                this.client.util.timelog(`Event ${event.eventInfos.name} triggered`, this.client.chalk.blueBright);
+                this.client.util.timelog(`Event ${event.eventInfos.name} triggered`, "blueBright");
                 event.exe(...args);
             });
         });

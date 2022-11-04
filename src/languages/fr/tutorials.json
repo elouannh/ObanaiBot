@@ -1,0 +1,43 @@
+{
+    "beginning": {
+        "name": "Tutoriel de départ",
+        "profileCommand": {
+            "name": "Commande `profile`",
+            "array": [
+                "Vous faites pour la première fois la commande `/profile`. Ici, vous pourrez voir différentes informations sur le profil d'un joueur, où le votre.",
+                "Cette commande est exécutable depuis le chat, ou en faisant clic droit sur un utilisateur.\nhttps://i.imgur.com/TK15nr0.png\nhttps://i.imgur.com/EiIRviN.png",
+                "Cette commande affiche diverses informations:\n**Votre profil de pourfendeur, votre inventaire, la carte, vos activités, et quelques données supplémentaires.**"
+            ]
+        },
+        "profilePlayer": {
+            "name": "Page `profil`",
+            "array": [
+                "Vous voilà sur la page du profil. Ici apparaissent vos statistiques, le personnage que vous avez choisit, votre niveau d'expérience, et votre souffle."
+            ]
+        },
+        "profileInventory": {
+            "name": "Page `inventaire`",
+            "array": [
+                "Ici, votre inventaire s'affiche. Vous pouvez y voir votre arme, votre corbeau de liaison, votre porte-monnaie, votre grimoire enchanté, et vos différents matériaux."
+            ]
+        },
+        "profileActivity": {
+            "name": "Page `activité`",
+            "array": [
+                "À cet endroit vous trouverez les informations relatives à votre activité: les armes que vous forgez, vos entrainements en cours, etc."
+            ]
+        },
+        "profileMap": {
+            "name": "Page `carte`",
+            "array": [
+                "Sur cette page vous trouverez la carte du monde de la région où vous vous situez. Vous pouvez utiliser la commande `/map` afin d'en savoir plus sur la carte."
+            ]
+        },
+        "profileAdditional": {
+            "name": "Page `infos supplémentaires`",
+            "array": [
+                "Ici, certaines données supplémentaires seront affichées. Vous pourrez voir les commandes que vous avez exécutées, votre progression dans le tutoriel..."
+            ]
+        }
+    }
+}
