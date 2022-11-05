@@ -20,8 +20,9 @@ module.exports = {
             HeartImage: "./src/assets/images/themes/HeartDefault.png",
             MaskImage: "./src/assets/images/themes/MaskDefault.png",
             StatsImage: "./src/assets/images/themes/StatsDefault.png",
-            PieGraphColors: ["#3CA057", "#DAD2BD", "#551919", "#672D34"],
-            PieGraphFill: "#FFFFFF",
+            PolarGraphFill: "#3CA057",
+            PolarGraphForm: "circular",
+            PolarGraphLabelShadow: "#FFFFFF",
         },
     },
     Rpg: {

@@ -257,18 +257,25 @@ class PlayerDb extends SQLiteTable {
 
         const percent = 1 / (playerData.statistics.strength.amount + playerData.statistics.defense.amount + playerData.statistics.weaponControl.amount + playerData.statistics.smartness.amount);
         const graph = await Canvas.loadImage(
-            await this.client.util.circleGraph(
+            await this.client.util.polarGraph(
                 [
                     playerData.statistics.strength.amount * percent,
                     playerData.statistics.defense.amount * percent,
                     playerData.statistics.weaponControl.amount * percent,
                     playerData.statistics.smartness.amount * percent,
                 ],
-                theme.PieGraphColors,
+                [
+                    playerData.statistics.strength.amount,
+                    playerData.statistics.defense.amount,
+                    playerData.statistics.weaponControl.amount,
+                    playerData.statistics.smartness.amount,
+                ],
+                theme.PolarGraphFill,
                 180,
-                theme.PieGraphFill,
                 theme.BorderColor,
-                2,
+                5,
+                theme.PolarGraphForm,
+                theme.PolarGraphLabelShadow,
             ),
         );
         context.drawImage(graph, 550, 250, 180, 180);

@@ -364,6 +364,111 @@ module.exports = {
         return canvas.toBuffer();
     },
     /**
+     * @typedef {Array<Number, Number>} Point
+     * @property {Number} 0 The X position
+     * @property {Number} 1 The Y position
+     */
+    /**
+     * @typedef {Object} Line
+     * @property {Number} coefficient The coefficient of the line
+     * @property {Number} origin The origin of the line
+     */
+    /**
+     * Get the coefficient of a line. Get also the Y intercept.
+     * @param {Point} point1 The first point
+     * @param {Point} point2 The second point
+     * @returns {Line} The coefficient and the Y intercept
+     */
+    getLine(point1, point2) {
+        if (point1[0] === point2[0]) return { coefficient: Infinity, origin: point1[0] };
+        if (point1[1] === point2[1]) return { coefficient: 0, origin: point1[1] };
+        const coefficient = (point2[1] - point1[1]) / (point2[0] - point1[0]);
+        const origin = point1[1] - coefficient * point1[0];
+        return { coefficient, origin };
+    },
+    /**
+     * @typedef {"linear"|"circular"} ScaleStyle
+     */
+    /**
+     * Generate a polar graph.
+     * @param {Number[]} parts The percents of the graph
+     * @param {Number[]} values The values of the graph
+     * @param {String} colors The different colors tu use (it does a loop)
+     * @param {Number} width The width of the graph
+     * @param {String} lineStyle The line style of the graph that link the points
+     * @param {Number} scales The amount of scales
+     * @param {ScaleStyle} scaleStyle The style of the scales
+     * @param {String} labelShadow The color of the shadow of the labels
+     * @returns {Promise<Buffer>}
+     */
+    async polarGraph(parts, values, color, width, lineStyle, scales, scaleStyle, labelShadow) {
+        const canvas = Canvas.createCanvas(width, width);
+        const context = canvas.getContext("2d");
+
+        const segmentAngle = (Math.PI * 2) / parts.length;
+        const elts = {
+            extremities: [[width / 2, 0]],
+            lines: [],
+            parts: [],
+        };
+        for (let i = 0; i < parts.length; i++) {
+            const A = elts.extremities[elts.extremities.length - 1];
+            elts.extremities.push(
+                [
+                    A[0] * Math.cos(segmentAngle) + A[1] * Math.sin(segmentAngle),
+                    -A[0] * Math.sin(segmentAngle) + A[1] * Math.cos(segmentAngle),
+                ],
+            );
+            elts.lines.push(
+                this.getLine([width / 2, width / 2], elts.extremities[elts.extremities.length - 1]),
+            );
+        }
+        context.beginPath();
+        const maxPart = Math.max(...parts);
+        for (let i = 0; i < parts.length; i++) {
+            const length = parts[i] / maxPart;
+            const pt = elts.extremities[i];
+            elts.parts.push([pt[0] * length + width / 2, pt[1] * length + width / 2]);
+            context.lineTo(elts.parts[i][0], elts.parts[i][1]);
+        }
+        context.closePath();
+        context.fillStyle = color;
+        context.fill();
+        context.beginPath();
+        const maxValue = Math.max(...values);
+        const scalePercent = 1 / scales;
+        for (let scaleI = scales; scaleI > 0; scaleI--) {
+            for (const pt of elts.extremities.slice(0, elts.extremities.length - 1)) {
+                const sWidth = (pt[0] * scaleI * scalePercent + width / 2) ;
+                const sHeight = (pt[1] * scaleI * scalePercent + width / 2);
+                context.moveTo(width / 2, width / 2);
+                context.lineTo(sWidth, sHeight);
+            }
+            context.moveTo(width / 2, width / 2);
+            if (scaleStyle === "linear") {
+                for (const pt of elts.extremities) {
+                    const sWidth = (pt[0] * scaleI * scalePercent + width / 2);
+                    const sHeight = (pt[1] * scaleI * scalePercent + width / 2);
+                    context.lineTo(sWidth, sHeight);
+                }
+            }
+            else if (scaleStyle === "circular") {
+                context.arc(width / 2, width / 2, width / 2 * scaleI * scalePercent - 1, 0, Math.PI * 2, false);
+            }
+        }
+        for (let scaleI = scales; scaleI > 0; scaleI--) {
+            context.textAlign = "left";
+            context.textBaseline = "middle";
+            this.text3D(context, `${(scaleI * maxValue / scales)}`, lineStyle, labelShadow, "soft", 10, width / 2, width / 2 - (width / 2 * scaleI * scalePercent - 5));
+        }
+        context.closePath();
+        context.strokeStyle = lineStyle;
+        context.lineWidth = 1;
+        context.stroke();
+
+        return canvas.toBuffer();
+    },
+    /**
      * Return a Buffer that contains a progress bar with the given percentage.
      * @param {Number} percent The percentage of the progress bar
      * @param {Number} width The width of the progress bar
