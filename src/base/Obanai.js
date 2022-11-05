@@ -81,8 +81,6 @@ class Obanai extends Client {
         this.token = require("../../token.json").token;
         this.eventManager.loadFiles();
 
-        void this.launch();
-
         setInterval(() => {
             this.util.timelog("................", "blackBright");
         }, 900_000);

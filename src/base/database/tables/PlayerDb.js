@@ -38,7 +38,7 @@ class PlayerDb extends SQLiteTable {
 
         if (data.hp < 100) {
             const lastHeal = Math.floor((Date.now() - data.lastHeal));
-            const amountToHeal = Math.floor(lastHeal / 1000 / 60 / 5);
+            const amountToHeal = Math.floor(lastHeal / 1000 / 60 / 5 + data.hp);
             if (amountToHeal > 0) this.heal(id, amountToHeal);
         }
 
@@ -52,9 +52,8 @@ class PlayerDb extends SQLiteTable {
      * @returns {void}
      */
     heal(id, amount) {
-        let newAmount = this.get(id).hp + amount;
-        if (newAmount > 100) newAmount = 100;
-        this.set(id, Math.ceil(newAmount), "hp");
+        if (amount > 100) amount = 100;
+        this.set(id, Math.ceil(amount), "hp");
         this.set(id, Date.now(), "lastHeal");
     }
 
@@ -65,13 +64,28 @@ class PlayerDb extends SQLiteTable {
      * @returns {Promise<void>}
      */
     async create(id, characterId = "0") {
-        await this.client.activityDb.ensureInDeep(id);
-        await this.client.additionalDb.ensureInDeep(id);
-        await this.client.inventoryDb.ensureInDeep(id);
-        await this.client.mapDb.ensureInDeep(id);
-        await this.client.questDb.ensureInDeep(id);
-        await this.client.squadDb.ensureInDeep(id);
-        await this.set(id, characterId, "characterId");
+        this.ensureInDeep(id);
+        this.client.activityDb.ensureInDeep(id);
+        this.client.additionalDb.ensureInDeep(id);
+        this.client.inventoryDb.ensureInDeep(id);
+        this.client.mapDb.ensureInDeep(id);
+        this.client.questDb.ensureInDeep(id);
+        this.client.squadDb.ensureInDeep(id);
+        this.set(id, characterId, "characterId");
+    }
+
+    /**
+     * Delete the player from all the databases.
+     * @param {String} id The player ID
+     */
+    async delete(id) {
+        await this.client.activityDb.delete(id);
+        await this.client.additionalDb.delete(id);
+        await this.client.inventoryDb.delete(id);
+        await this.client.mapDb.delete(id);
+        await this.client.questDb.delete(id);
+        await this.client.squadDb.delete(id);
+        await this.delete(id);
     }
 
     /**
@@ -193,16 +207,16 @@ class PlayerDb extends SQLiteTable {
 
         const statsImage = await Canvas.loadImage(theme.StatsImage);
         const statsSize = 30;
-        context.drawImage(statsImage, 210, 260, statsSize, statsSize);
+        context.drawImage(statsImage, 200, 260, statsSize, statsSize);
         const statsText1 = `${lang.concepts.stats}`;
-        this.client.util.text3D(context, statsText1, theme.Accent, theme.Color, "Display", 35, 250, 275);
+        this.client.util.text3D(context, statsText1, theme.Accent, theme.Color, "Display", 35, 240, 275);
 
         const separator = await Canvas.loadImage(
             await this.client.util.verticalBar(
                 10, 120, theme.Accent, theme.BorderColor, 2,
             ),
         );
-        context.drawImage(separator, 220, 310, 10, 120);
+        context.drawImage(separator, 200, 310, 10, 120);
 
         const statText1_0 = `${lang.statistics.names.strength}: `;
         const statText1_1 = `${playerData.statistics.strength.amount} `;
@@ -224,54 +238,87 @@ class PlayerDb extends SQLiteTable {
         context.textBaseline = "bottom";
         context.font = "22px Display";
         const placement = 29;
-        context.fillText(statText1_0, 250, 308 + placement);
-        context.fillText(statText2_0, 250, 308 + placement * 2);
-        context.fillText(statText3_0, 250, 308 + placement * 3);
-        context.fillText(statText4_0, 250, 308 + placement * 4);
+        context.fillText(statText1_0, 230, 308 + placement);
+        context.fillText(statText2_0, 230, 308 + placement * 2);
+        context.fillText(statText3_0, 230, 308 + placement * 3);
+        context.fillText(statText4_0, 230, 308 + placement * 4);
         const s1_0Length = context.measureText(statText1_0).width;
         const s2_0Length = context.measureText(statText2_0).width;
         const s3_0Length = context.measureText(statText3_0).width;
         const s4_0Length = context.measureText(statText4_0).width;
-        this.client.util.text3D(context, statText1_1, theme.Accent, theme.Color, "Main", 28, 255 + s1_0Length, 308 + placement);
-        this.client.util.text3D(context, statText2_1, theme.Accent, theme.Color, "Main", 28, 255 + s2_0Length, 308 + placement * 2);
-        this.client.util.text3D(context, statText3_1, theme.Accent, theme.Color, "Main", 28, 255 + s3_0Length, 308 + placement * 3);
-        this.client.util.text3D(context, statText4_1, theme.Accent, theme.Color, "Main", 28, 255 + s4_0Length, 308 + placement * 4);
+        this.client.util.text3D(context, statText1_1, theme.Accent, theme.Color, "Main", 28, 235 + s1_0Length, 308 + placement);
+        this.client.util.text3D(context, statText2_1, theme.Accent, theme.Color, "Main", 28, 235 + s2_0Length, 308 + placement * 2);
+        this.client.util.text3D(context, statText3_1, theme.Accent, theme.Color, "Main", 28, 235 + s3_0Length, 308 + placement * 3);
+        this.client.util.text3D(context, statText4_1, theme.Accent, theme.Color, "Main", 28, 235 + s4_0Length, 308 + placement * 4);
         const s1_1Length = context.measureText(statText1_1).width;
         const s2_1Length = context.measureText(statText2_1).width;
         const s3_1Length = context.measureText(statText3_1).width;
         const s4_1Length = context.measureText(statText4_1).width;
         context.fillStyle = theme.Color;
         context.font = "15px Soft";
-        context.fillText(statText1_2, 260 + s1_0Length + s1_1Length, 308 + placement);
-        context.fillText(statText2_2, 260 + s2_0Length + s2_1Length, 308 + placement * 2);
-        context.fillText(statText3_2, 260 + s3_0Length + s3_1Length, 308 + placement * 3);
-        context.fillText(statText4_2, 260 + s4_0Length + s4_1Length, 308 + placement * 4);
+        context.fillText(statText1_2, 240 + s1_0Length + s1_1Length, 308 + placement);
+        context.fillText(statText2_2, 240 + s2_0Length + s2_1Length, 308 + placement * 2);
+        context.fillText(statText3_2, 240 + s3_0Length + s3_1Length, 308 + placement * 3);
+        context.fillText(statText4_2, 240 + s4_0Length + s4_1Length, 308 + placement * 4);
         const s1_2Length = context.measureText(statText1_2).width;
         const s2_2Length = context.measureText(statText2_2).width;
         const s3_2Length = context.measureText(statText3_2).width;
         const s4_2Length = context.measureText(statText4_2).width;
-        context.fillText(statText1_3, 260 + s1_0Length + s1_1Length + s1_2Length, 308 + placement);
-        context.fillText(statText2_3, 260 + s2_0Length + s2_1Length + s2_2Length, 308 + placement * 2);
-        context.fillText(statText3_3, 260 + s3_0Length + s3_1Length + s3_2Length, 308 + placement * 3);
-        context.fillText(statText4_3, 260 + s4_0Length + s4_1Length + s4_2Length, 308 + placement * 4);
+        context.fillText(statText1_3, 240 + s1_0Length + s1_1Length + s1_2Length, 308 + placement);
+        context.fillText(statText2_3, 240 + s2_0Length + s2_1Length + s2_2Length, 308 + placement * 2);
+        context.fillText(statText3_3, 240 + s3_0Length + s3_1Length + s3_2Length, 308 + placement * 3);
+        context.fillText(statText4_3, 240 + s4_0Length + s4_1Length + s4_2Length, 308 + placement * 4);
+
+        const maxValue = Math.max(
+            playerData.statistics.strength.amount,
+            playerData.statistics.defense.amount,
+            playerData.statistics.weaponControl.amount,
+            playerData.statistics.smartness.amount,
+        );
+        const minValue = Math.min(
+            playerData.statistics.strength.amount,
+            playerData.statistics.defense.amount,
+            playerData.statistics.weaponControl.amount,
+            playerData.statistics.smartness.amount,
+        );
 
         const percent = 1 / (playerData.statistics.strength.amount + playerData.statistics.defense.amount + playerData.statistics.weaponControl.amount + playerData.statistics.smartness.amount);
         const graph = await Canvas.loadImage(
-            await this.client.util.circleGraph(
+            await this.client.util.polarGraph(
                 [
                     playerData.statistics.strength.amount * percent,
                     playerData.statistics.defense.amount * percent,
                     playerData.statistics.weaponControl.amount * percent,
                     playerData.statistics.smartness.amount * percent,
                 ],
-                theme.PieGraphColors,
-                180,
-                theme.PieGraphFill,
+                [
+                    playerData.statistics.strength.amount,
+                    playerData.statistics.defense.amount,
+                    playerData.statistics.weaponControl.amount,
+                    playerData.statistics.smartness.amount,
+                ],
+                theme.PolarGraphFill,
+                150,
                 theme.BorderColor,
-                2,
+                ((maxValue - minValue) / 15),
+                theme.PolarGraphForm,
+                theme.PolarGraphLabelShadow,
             ),
         );
-        context.drawImage(graph, 550, 250, 180, 180);
+        context.drawImage(graph, 570, 270, 150, 150);
+        context.fillStyle = theme.Color;
+        context.font = "15px Soft";
+        context.textBaseline = "middle";
+        context.textAlign = "left";
+        context.fillText(lang.statistics.abbreviations.strength, 725, 340);
+        context.textAlign = "right";
+        context.fillText(lang.statistics.abbreviations.weaponControl, 565, 340);
+        context.textAlign = "center";
+        context.fillText(lang.statistics.abbreviations.smartness, 645, 430);
+        context.fillText(lang.statistics.abbreviations.defense, 645, 260);
+
+        const mascot = await Canvas.loadImage(theme.MascotImage);
+        context.drawImage(mascot, 0, 230, 190, 220);
 
         const buffer = canvas.toBuffer();
         return {
