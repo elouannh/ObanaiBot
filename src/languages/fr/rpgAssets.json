@@ -6,6 +6,12 @@
             "weaponControl": "Maîtrise d'arme",
             "smartness": "Intelligence"
         },
+        "abbreviations": {
+            "strength": "Fo.",
+            "defense": "Def.",
+            "weaponControl": "M. A.",
+            "smartness": "Int."
+        },
         "levels": {
             "max": "Niveau max atteint (100)"
         }
