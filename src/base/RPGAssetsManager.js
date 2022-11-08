@@ -9,6 +9,7 @@ const RPGPlayerLevel = require("./subclasses/RPGPlayerLevel");
 const RPGQuestItem = require("./subclasses/RPGQuestItem");
 const RPGStatistic = require("./subclasses/RPGStatistic");
 const RPGQuest = require("./subclasses/RPGQuest");
+const RPGPlayerHealth = require("./subclasses/RPGPlayerHealth");
 
 class RPGAssetsManager {
     constructor(client, dir) {
@@ -101,6 +102,10 @@ class RPGAssetsManager {
     getPlayerLevel(exp) {
         if (exp < 0) exp = 0;
         return new RPGPlayerLevel(exp);
+    }
+
+    getPlayerHealth(amount, lastHeal) {
+        return new RPGStatistic("health", amount, lastHeal);
     }
 
     getWeapon(lang, weaponId, weaponRarity) {

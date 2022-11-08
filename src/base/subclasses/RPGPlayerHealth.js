@@ -1,4 +1,4 @@
-class RPGHealth {
+class RPGPlayerHealth {
     constructor(amount, lastHeal) {
         this.amount = amount;
         this.lastRegen = lastHeal;
@@ -10,4 +10,4 @@ class RPGHealth {
     }
 }
 
-module.exports = RPGHealth;
+module.exports = RPGPlayerHealth;
