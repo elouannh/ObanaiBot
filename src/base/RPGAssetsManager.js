@@ -105,7 +105,7 @@ class RPGAssetsManager {
     }
 
     getPlayerHealth(amount, lastHeal) {
-        return new RPGStatistic("health", amount, lastHeal);
+        return new RPGPlayerHealth(amount, lastHeal);
     }
 
     getWeapon(lang, weaponId, weaponRarity) {
