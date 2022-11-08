@@ -165,7 +165,7 @@ class PlayerDb extends SQLiteTable {
 
         const progressBar = await Canvas.loadImage(
             await this.client.util.getProgressBar(
-                playerData.hp / 100, 500, 50, theme.HPColor, theme.NotFilledColor, theme.BorderColor,
+                playerData.health.amount / 100, 500, 50, theme.HPColor, theme.NotFilledColor, theme.BorderColor,
             ),
         );
         context.drawImage(progressBar, 250, 50, 500, 50);

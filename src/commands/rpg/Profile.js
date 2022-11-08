@@ -52,8 +52,6 @@ class Profile extends Command {
 
         console.log(player);
 
-        return;
-
         const playerImage = await this.client.playerDb.getImage(player);
 
         const embeds = {
@@ -63,7 +61,20 @@ class Profile extends Command {
                     + this.lang.commands.profile.playerTitle.replace("%PLAYER", `\`${user.tag}\``),
                 )
                 .setDescription(`\`Thème: \`**\`${playerImage.name}\`**`)
-                .setImage("attachment://profile-player.png")
+                .addFields(
+                    {
+                        name: "Souffle",
+                        value: player.breathingStyle === null ? "Aucun souffle."
+                            : `${player.breathingStyle.name}, ${player.breathingStyle.techniques.length} techniques.`,
+                    },
+                    {
+                        name: "Régénération de vie",
+                        value: (player.health.lastRegen === player.health.fullRegen ?
+                                "terminée il y a: " : "en cours, se termine dans: ")
+                            + `<t:${player.health.fullRegenString}:R>`,
+                    },
+                )
+                // .setImage("attachment://profile-player.png")
                 .setColor(this.client.enums.Colors.Blurple),
             inventory: new EmbedBuilder()
                 .setTitle(
@@ -91,7 +102,8 @@ class Profile extends Command {
                 .setColor(this.client.enums.Colors.Blurple),
         };
         const attachments = {
-            player: playerImage.attachment,
+            // player: playerImage.attachment,
+            player: null,
             inventory: null,
             activity: null,
             map: null,

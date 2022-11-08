@@ -16,6 +16,7 @@ class PlayerData extends TableData {
             this.data.statistics[stat] = this.client.RPGAssetsManager.getStatistic(this.data.lang, stat, this.data.statistics[stat]);
         }
 
+
         if (this.inventoryData.enchantedGrimoire.id !== null) {
             const grimoire = this.client.RPGAssetsManager.getEnchantedGrimoire(this.lang, this.inventoryData.enchantedGrimoire.id);
 
@@ -29,7 +30,11 @@ class PlayerData extends TableData {
         this.data.character = this.client.RPGAssetsManager.getCharacter(this.lang, this.data.characterId);
         this.data.level = this.client.RPGAssetsManager.getPlayerLevel(this.data.exp);
         this.data.date = `${(this.data.creationDate / 1000).toFixed(0)}`;
-        this.data.breathingStyle = this.client.RPGAssetsManager.getBreathingStyle(this.data.lang, this.data.breathingStyle);
+        if (this.data.breathingStyle !== null) {
+            this.data.breathingStyle = this.client.RPGAssetsManager.getBreathingStyle(
+                this.data.lang, this.data.breathingStyle,
+            );
+        }
 
         delete this.data.characterId;
         delete this.data.exp;
