@@ -50,6 +50,8 @@ class Profile extends Command {
         const map = await this.client.mapDb.load(user.id);
         const additional = await this.client.additionalDb.load(user.id);
 
+        console.log(player);
+
         const playerImage = await this.client.playerDb.getImage(player);
 
         const embeds = {
@@ -59,6 +61,19 @@ class Profile extends Command {
                     + this.lang.commands.profile.playerTitle.replace("%PLAYER", `\`${user.tag}\``),
                 )
                 .setDescription(`\`Thème: \`**\`${playerImage.name}\`**`)
+                .addFields(
+                    {
+                        name: this.lang.commands.profile.breathingStyle,
+                        value: player.breathingStyle === null ? this.lang.commands.profile.anyStyle
+                            : `${player.breathingStyle.name}, ${player.breathingStyle.techniques.length} ${this.lang.commands.profile.techniques}`,
+                    },
+                    {
+                        name: this.lang.commands.profile.lifeRegeneration,
+                        value: (player.health.lastRegen === player.health.fullRegen ?
+                                this.lang.commands.profile.finishedAt : this.lang.commands.profile.remaining)
+                            + `<t:${player.health.fullRegenString}:R>`,
+                    },
+                )
                 .setImage("attachment://profile-player.png")
                 .setColor(this.client.enums.Colors.Blurple),
             inventory: new EmbedBuilder()

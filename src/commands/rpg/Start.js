@@ -26,7 +26,40 @@ class Profile extends Command {
                 .catch(this.client.util.catchError);
         }
 
-        const tosAcceptMessage = await this.interaction.reply({
+        const languagesOptions = this.langManager.languages.map(lang => Object.assign(
+            {}, { label: lang.langName, value: lang.lang, emoji: lang.getFlag },
+        ));
+
+        const langChoice = await this.interaction.reply({
+            content: this.mention + this.lang.commands.start.languageChoice
+                + "\n\n"
+                + this.langManager.multilang("commands", "start", "languageDemonstration"),
+            components: [
+                new ActionRowBuilder()
+                    .addComponents(
+                        new SelectMenuBuilder()
+                            .setCustomId("languageChoice")
+                            .setPlaceholder(this.lang.commands.start.languageMenuPlaceholder)
+                            .addOptions(languagesOptions),
+                    ),
+
+            ],
+        }).catch(this.client.util.catchError);
+
+        const langResponse = await langChoice.awaitMessageComponent({
+            filter: inter => inter.user.id === this.interaction.user.id,
+            time: 60_000,
+        }).catch(this.client.util.catchError);
+
+        if (!langResponse) {
+            return await this.interaction.editReply({
+                content: this.mention + this.lang.systems.choiceIgnored, components: [],
+            }).catch(this.client.util.catchError);
+        }
+        await langResponse.deferUpdate().catch(this.client.util.catchError);
+        const langChoosen = langResponse.values[0];
+
+        const tosAcceptMessage = await this.interaction.editReply({
             content: this.mention + `${this.lang.commands.start.startIntroduction}\n\n`
                 + `\`\`\`${this.lang.commands.start.storyIntroduction}\`\`\`\n`
                 + `\n> ${this.lang.commands.start.tosAccept}\n`,
@@ -58,19 +91,19 @@ class Profile extends Command {
             ],
         }).catch(this.client.util.catchError);
 
-        const response = await tosAcceptMessage.awaitMessageComponent({
+        const tosResponse = await tosAcceptMessage.awaitMessageComponent({
             filter: inter => inter.user.id === this.interaction.user.id,
             time: 120_000,
         }).catch(this.client.util.catchError);
 
-        if (!response) {
+        if (!tosResponse) {
             return await this.interaction.editReply({
                 content: this.mention + this.lang.systems.choiceIgnored, components: [],
             }).catch(this.client.util.catchError);
         }
-        await response.deferUpdate().catch(this.client.util.catchError);
+        await tosResponse.deferUpdate().catch(this.client.util.catchError);
 
-        if (response.values?.length < 3) {
+        if (tosResponse.values?.length < 3) {
             return await this.interaction.editReply({
                 content: this.mention + this.lang.commands.start.tosDeclined, components: [],
             }).catch(this.client.util.catchError);
@@ -123,7 +156,7 @@ class Profile extends Command {
             content: this.mention + this.lang.commands.start.characterChosen.replace("%CHAR", chosen.fullName) + "\n\n" + this.lang.commands.start.joinTheSupport,
             components: [],
         }).catch(this.client.util.catchError);
-        await this.client.playerDb.create(this.interaction.user.id, chosen.id);
+        await this.client.playerDb.create(this.interaction.user.id, chosen.id, langChoosen);
     }
 }
 
