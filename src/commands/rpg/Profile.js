@@ -63,18 +63,18 @@ class Profile extends Command {
                 .setDescription(`\`Thème: \`**\`${playerImage.name}\`**`)
                 .addFields(
                     {
-                        name: "Souffle",
-                        value: player.breathingStyle === null ? "Aucun souffle."
-                            : `${player.breathingStyle.name}, ${player.breathingStyle.techniques.length} techniques.`,
+                        name: this.lang.commands.profile.breathingStyle,
+                        value: player.breathingStyle === null ? this.lang.commands.profile.anyStyle
+                            : `${player.breathingStyle.name}, ${player.breathingStyle.techniques.length} ${this.lang.commands.profile.techniques}`,
                     },
                     {
-                        name: "Régénération de vie",
+                        name: this.lang.commands.profile.lifeRegeneration,
                         value: (player.health.lastRegen === player.health.fullRegen ?
-                                "terminée il y a: " : "en cours, se termine dans: ")
+                                this.lang.commands.profile.finishedAt : this.lang.commands.profile.remaining)
                             + `<t:${player.health.fullRegenString}:R>`,
                     },
                 )
-                // .setImage("attachment://profile-player.png")
+                .setImage("attachment://profile-player.png")
                 .setColor(this.client.enums.Colors.Blurple),
             inventory: new EmbedBuilder()
                 .setTitle(
@@ -102,8 +102,7 @@ class Profile extends Command {
                 .setColor(this.client.enums.Colors.Blurple),
         };
         const attachments = {
-            // player: playerImage.attachment,
-            player: null,
+            player: playerImage.attachment,
             inventory: null,
             activity: null,
             map: null,

@@ -13,7 +13,13 @@
         "characterChosen": "Personnage choisi: %CHARACTER",
         "statisticsName": "Statistiques",
         "breathingStyleName": "Style de souffle",
-        "expName": "Niveau d'expérience"
+        "expName": "Niveau d'expérience",
+        "breathingStyle": "Style de souffle",
+        "anyStyle": "Aucun souffle",
+        "techniques": "Mouvements",
+        "lifeRegeneration": "Régénération de vie",
+        "finishedAt": "Terminé, il y a: ",
+        "remaining": "En cours, se termine dans: "
     },
     "eval": {
         "modalTitle": "Code à exécuter",
