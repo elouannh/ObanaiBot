@@ -63,7 +63,7 @@ class PlayerDb extends SQLiteTable {
      * @param {String} characterId The pnj ID of the user for the RPG game
      * @returns {Promise<void>}
      */
-    async create(id, characterId = "0") {
+    async create(id, characterId = "0", lang = "fr") {
         this.ensureInDeep(id);
         this.client.activityDb.ensureInDeep(id);
         this.client.additionalDb.ensureInDeep(id);
@@ -72,6 +72,7 @@ class PlayerDb extends SQLiteTable {
         this.client.questDb.ensureInDeep(id);
         this.client.squadDb.ensureInDeep(id);
         this.set(id, characterId, "characterId");
+        this.set(id, lang, "lang");
     }
 
     /**

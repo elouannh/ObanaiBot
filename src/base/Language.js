@@ -13,6 +13,22 @@ class Language {
             }
         }
     }
+
+    get getFlag() {
+        return {
+            "null": "❗",
+            "fr": "🇫🇷",
+            "en": "🇬🇧",
+        }[this.lang ?? "null"];
+    }
+
+    get langName() {
+        return {
+            "null": "No name",
+            "fr": "Français",
+            "en": "English",
+        }[this.lang ?? "null"];
+    }
 }
 
 module.exports = Language;

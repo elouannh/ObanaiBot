@@ -23,6 +23,7 @@ class Command {
         this.instancedAt = Date.now();
         this.mention = "";
         this.lang = new Language("fr").json["commands"][this.infos.name];
+        this.langManager = null;
     }
 
     init(client, interaction, lang) {
@@ -30,6 +31,7 @@ class Command {
         this.interaction = interaction;
         this.mention = `<@${this.interaction.user.id}>, `;
         this.lang = lang.json;
+        this.langManager = this.client.languageManager;
     }
 
     async exe() {

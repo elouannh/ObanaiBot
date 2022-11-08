@@ -5,8 +5,8 @@ const Util = require("./Util");
 class LanguageManager {
     constructor(client) {
         this.client = client;
-        const dir = "./src/languages/";
-        this.languages = fs.readdirSync(dir).filter(f => !f.endsWith(".json")).map(languageDir => new Language(languageDir));
+        this.dir = "./src/languages/";
+        this.languages = fs.readdirSync(this.dir).filter(f => !f.endsWith(".json")).map(languageDir => new Language(languageDir));
 
         const french = this.getLang("fr");
         const Json = {};
@@ -39,6 +39,28 @@ class LanguageManager {
 
     getLang(lang) {
         return this.languages.find(language => language.lang === lang) ?? new Language("fr");
+    }
+
+    multilang(...path) {
+        const languages = fs.readdirSync(this.dir).filter(f => !f.endsWith(".json")).map(languageDir => new Language(languageDir));
+        const finalStr = [];
+
+        for (const language of languages) {
+            let str = `${language.getFlag} \`${language.lang.toUpperCase()}\` | `;
+            let pathStr = language.json;
+            for (const p of path) {
+                if (pathStr[p] === undefined) {
+                    pathStr = null;
+                    break;
+                }
+                pathStr = pathStr[p];
+            }
+            if (pathStr === null) str += "❌";
+            else str += pathStr;
+            finalStr.push(str);
+        }
+
+        return finalStr.join("\n\n");
     }
 }
 

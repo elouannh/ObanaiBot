@@ -21,6 +21,9 @@
         "modalPlaceholder": "return \"Arnaud le gay\";"
     },
     "start": {
+        "languageChoice": "Commencez par sélectionner votre langage.",
+        "languageMenuPlaceholder": "Choix de la langue",
+        "languageDemonstration": "Je parlerai français pour cette aventure. Le pouvoir de la baguette ! (Ahah non sérieusement faut arrêter les clichés).",
         "startIntroduction": "**ObanaiBot - Démarrez votre aventure**",
         "storyIntroduction": "Vous êtes un Matagi; un chasseur traditionnel des montagnes du nord du pays, dans la région du Tōhoku. Tout se déroule durant l'ère Taishō (1912-1926). Depuis quelques temps, sortir dehors est devenu dangereux. Des créatures étranges ont commencé à apparaître et les gens les appellent « Démons ». Cependant, votre âme guerrière et déterminée refuse de croire à des histoires nées de légendes urbaines. Vous décidez donc de partir à la recherche de ces créatures et de les chasser ; persuadé(e) qu'elles n'existent pas...",
         "tosAccept": "Pour **commencer votre aventure**, vous devez accepter les __Conditions Générales d'Utilisation d'ObanaiBot__, le __Code de conduite (Règlement) du serveur support__, et les __Terms of Service de Discord__.",
