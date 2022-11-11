@@ -70,7 +70,6 @@ class PlayerDb extends SQLiteTable {
         this.client.inventoryDb.ensureInDeep(id);
         this.client.mapDb.ensureInDeep(id);
         this.client.questDb.ensureInDeep(id);
-        this.client.squadDb.ensureInDeep(id);
         this.set(id, characterId, "characterId");
         this.set(id, lang, "lang");
     }
@@ -85,7 +84,6 @@ class PlayerDb extends SQLiteTable {
         await this.client.inventoryDb.delete(id);
         await this.client.mapDb.delete(id);
         await this.client.questDb.delete(id);
-        await this.client.squadDb.delete(id);
         await this.delete(id);
     }
 
@@ -102,7 +100,6 @@ class PlayerDb extends SQLiteTable {
             this.client.inventoryDb,
             this.client.mapDb,
             this.client.questDb,
-            this.client.squadDb,
         ]) {
             if ((await db.get(id))?.schemaInstance) return false;
         }
@@ -173,7 +170,7 @@ class PlayerDb extends SQLiteTable {
         const heartImage = await Canvas.loadImage(theme.HeartImage);
         const heartSize = 75;
         context.drawImage(heartImage, 210, 50 - ((heartSize - 50) / 2), heartSize, heartSize);
-        const hpText1 = `${playerData.hp}/100 `;
+        const hpText1 = `${playerData.health.amount}/100 `;
         const hpText2 = `${lang.concepts.hp}`;
         context.textBaseline = "middle";
         context.fillStyle = theme.Color;
@@ -301,7 +298,7 @@ class PlayerDb extends SQLiteTable {
                 theme.PolarGraphFill,
                 150,
                 theme.BorderColor,
-                ((maxValue - minValue) / 15),
+                Math.min(Math.max(3, ((maxValue - minValue) / 15)), 5),
                 theme.PolarGraphForm,
                 theme.PolarGraphLabelShadow,
             ),

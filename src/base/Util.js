@@ -456,7 +456,7 @@ module.exports = {
                 context.arc(width / 2, width / 2, width / 2 * scaleI * scalePercent - 1, 0, Math.PI * 2, false);
             }
         }
-        for (let scaleI = scales; scaleI > 1; scaleI--) {
+        for (let scaleI = scales; scaleI > 0; scaleI--) {
             context.textAlign = "left";
             context.textBaseline = "middle";
             this.text3D(context, `${this.round(scaleI * maxValue / scales, 0)}`, lineStyle, labelShadow, "soft", 10, width / 2, width / 2 - (width / 2 * scaleI * scalePercent - 5));

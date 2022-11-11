@@ -32,7 +32,7 @@ class SquadDb extends SQLiteTable {
         const squadData = this.schema(this.idGenerator());
         squadData.members["0"] = founder;
         squadData.details = { squadName, founder, owner: founder };
-        this.ensureInDeep(squadData.id, squadData);
+        this.set(squadData.id, squadData);
 
         return this.get(squadData.id);
     }
@@ -53,6 +53,12 @@ class SquadDb extends SQLiteTable {
         const squads = this.db.filter(sq => Object.values(sq.members).includes(id));
 
         return Array.from(squads);
+    }
+
+    async hasSquad(id) {
+        const squads = this.db.find(sq => Object.values(sq.members).includes(id))?.at(0) ?? null;
+
+        return squads !== null;
     }
 }
 
