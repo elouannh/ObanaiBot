@@ -19,7 +19,12 @@
         "techniques": "Mouvements",
         "lifeRegeneration": "Régénération de vie",
         "finishedAt": "Terminé, il y a: ",
-        "remaining": "En cours, se termine dans: "
+        "remaining": "En cours, se termine dans: ",
+        "wallet": "Porte-monnaie",
+        "noCrow": "Aucun corbeau de liaison.",
+        "noGrimoire": "Aucun grimoire.",
+        "remainingTime": "Temps restant:",
+        "activeSince": "Grimoire actif depuis:"
     },
     "eval": {
         "modalTitle": "Code à exécuter",

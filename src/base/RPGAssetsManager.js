@@ -47,13 +47,17 @@ class RPGAssetsManager {
 
     getEnchantedGrimoire(lang, id) {
         if (!(id in this.enchantedGrimoires)) return "Invalid Grimoire ID";
-        return new RPGEnchantedGrimoire(this.getLangData(lang, "enchantedGrimoires"), id, this.enchantedGrimoires[id]);
+        return new RPGEnchantedGrimoire(
+            { json: this.client.languageManager.getLang(lang).json, id: lang },
+            id,
+            this.enchantedGrimoires[id],
+        );
     }
 
     loadEnchantedGrimoire(lang, enchantedGrimoireData) {
         if (!(enchantedGrimoireData.id in this.enchantedGrimoires)) return "Invalid Grimoire ID";
         return new RPGEnchantedGrimoire(
-            this.getLangData(lang, "enchantedGrimoires"),
+            { json: this.client.languageManager.getLang(lang).json, id: lang },
             enchantedGrimoireData.id,
             Object.assign(this.enchantedGrimoires[enchantedGrimoireData.id], { "activeSince": enchantedGrimoireData.activeSince }),
         );

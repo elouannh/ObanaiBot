@@ -1,7 +1,7 @@
 const SQLiteTable = require("../../SQLiteTable");
 const PlayerData = require("../dataclasses/PlayerData");
 const Canvas = require("canvas");
-const { AttachmentBuilder } = require("discord.js");
+const { AttachmentBuilder, EmbedBuilder, User } = require("discord.js");
 const StackBlur = require("stackblur-canvas");
 
 function schema(id) {
@@ -121,6 +121,38 @@ class PlayerDb extends SQLiteTable {
      * @property {Buffer} buffer The canvas Buffer
      * @property {AttachmentBuilder} attachment The theme attachment
      */
+    /**
+     * Get the embed of the player profile.
+     * @param {Object} lang The language object
+     * @param {PlayerData} playerData The player data
+     * @param {String} playerImageName The theme attachment
+     * @param {User} user The user
+     * @returns {Promise<EmbedBuilder>}
+     */
+    async getEmbed(lang, playerData, playerImageName, user) {
+        return new EmbedBuilder()
+            .setTitle(
+                `⟪ ${this.client.enums.Rpg.Databases.Player} ⟫ `
+                + lang.commands.profile.playerTitle.replace("%PLAYER", `\`${user.tag}\``),
+            )
+            .setDescription(`\`Thème: \`**\`${playerImageName}\`**`)
+            .addFields(
+                {
+                    name: this.lang.commands.profile.breathingStyle,
+                    value: playerData.breathingStyle === null ? this.lang.commands.profile.anyStyle
+                        : `${playerData.breathingStyle.name}, ${playerData.breathingStyle.techniques.length} ${this.lang.commands.profile.techniques}`,
+                },
+                {
+                    name: this.lang.commands.profile.lifeRegeneration,
+                    value: (playerData.health.lastRegen === playerData.health.fullRegen ?
+                            this.lang.commands.profile.finishedAt : this.lang.commands.profile.remaining)
+                        + `<t:${playerData.health.fullRegenString}:R>`,
+                },
+            )
+            .setImage("attachment://profile-player.png")
+            .setColor(this.client.enums.Colors.Blurple);
+    }
+
     /**
      * Get the player image attachment.
      * @param {PlayerData} playerData The player data

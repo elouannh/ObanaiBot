@@ -472,6 +472,10 @@
     "concepts": {
         "hp": "PV",
         "level": "Niv.",
-        "stats": "Statistiques"
+        "stats": "Statistiques",
+        "kasugaiCrow": "Corbeau Kasugai",
+        "kasugaiCrowEffects": "Effets du corbeau Kasugai",
+        "enchantedGrimoire": "Grimoire Enchanté",
+        "enchantedGrimoireEffects": "Effets du grimoire"
     }
 }

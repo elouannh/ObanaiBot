@@ -393,7 +393,7 @@ module.exports = {
      * Generate a polar graph.
      * @param {Number[]} parts The percents of the graph
      * @param {Number[]} values The values of the graph
-     * @param {String} colors The different colors tu use (it does a loop)
+     * @param {String} color The different colors tu use (it does a loop)
      * @param {Number} width The width of the graph
      * @param {String} lineStyle The line style of the graph that link the points
      * @param {Number} scales The amount of scales

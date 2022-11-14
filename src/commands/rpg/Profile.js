@@ -55,31 +55,36 @@ class Profile extends Command {
         const playerImage = await this.client.playerDb.getImage(player);
 
         const embeds = {
-            player: new EmbedBuilder()
-                .setTitle(
-                    `⟪ ${this.client.enums.Rpg.Databases.Player} ⟫ `
-                    + this.lang.commands.profile.playerTitle.replace("%PLAYER", `\`${user.tag}\``),
-                )
-                .setDescription(`\`Thème: \`**\`${playerImage.name}\`**`)
-                .addFields(
-                    {
-                        name: this.lang.commands.profile.breathingStyle,
-                        value: player.breathingStyle === null ? this.lang.commands.profile.anyStyle
-                            : `${player.breathingStyle.name}, ${player.breathingStyle.techniques.length} ${this.lang.commands.profile.techniques}`,
-                    },
-                    {
-                        name: this.lang.commands.profile.lifeRegeneration,
-                        value: (player.health.lastRegen === player.health.fullRegen ?
-                                this.lang.commands.profile.finishedAt : this.lang.commands.profile.remaining)
-                            + `<t:${player.health.fullRegenString}:R>`,
-                    },
-                )
-                .setImage("attachment://profile-player.png")
-                .setColor(this.client.enums.Colors.Blurple),
+            player: await this.client.playerDb.getEmbed(this.lang, player, playerImage.name, user),
             inventory: new EmbedBuilder()
                 .setTitle(
                     `⟪ ${this.client.enums.Rpg.Databases.Inventory} ⟫ `
                     + this.lang.commands.profile.inventoryTitle.replace("%PLAYER", `\`${user.tag}\``),
+                )
+                .setDescription(`${this.lang.commands.profile.wallet}: \`${inventory.wallet}\`¥`)
+                .addFields(
+                    {
+                        name: this.lang.rpgAssets.concepts.kasugaiCrow,
+                        value: inventory.kasugaiCrow.id === null ?
+                            this.lang.commands.profile.noCrow : inventory.kasugaiCrow.name,
+                        inline: true,
+                    },
+                    {
+                        name: this.lang.rpgAssets.concepts.enchantedGrimoire,
+                        value: inventory.enchantedGrimoire.id === null ?
+                            this.lang.commands.profile.noGrimoire
+                            : (`${inventory.enchantedGrimoire.name} | ${this.lang.commands.profile.remainingTime} `
+                            + `${inventory.enchantedGrimoire.lifespan}\n`
+                            + `__${this.lang.rpgAssets.concepts.enchantedGrimoireEffects}:__`
+                            + `\n${inventory.enchantedGrimoire.effects.map((effect) => `• ${effect}`).join("\n")}`),
+                        inline: true,
+                    },
+                    {
+                        name: this.lang.commands.profile.activeSince,
+                        value: inventory.enchantedGrimoire.id === null ? this.lang.commands.profile.noGrimoire
+                            : `<t:${inventory.activeSinceString}:R>`,
+                        inline: true,
+                    },
                 )
                 .setColor(this.client.enums.Colors.Blurple),
             activity: new EmbedBuilder()
@@ -102,7 +107,8 @@ class Profile extends Command {
                 .setColor(this.client.enums.Colors.Blurple),
         };
         const attachments = {
-            player: playerImage.attachment,
+            // player: playerImage.attachment,
+            player: null,
             inventory: null,
             activity: null,
             map: null,
