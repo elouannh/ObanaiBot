@@ -124,29 +124,29 @@ class PlayerDb extends SQLiteTable {
     /**
      * Get the embed of the player profile.
      * @param {Object} lang The language object
-     * @param {PlayerData} playerData The player data
-     * @param {String} playerImageName The theme attachment
+     * @param {PlayerData} data The player data
      * @param {User} user The user
+     * @param {String} playerImageName The theme attachment
      * @returns {Promise<EmbedBuilder>}
      */
-    async getEmbed(lang, playerData, playerImageName, user) {
+    async getEmbed(lang, data, user, playerImageName) {
         return new EmbedBuilder()
             .setTitle(
                 `⟪ ${this.client.enums.Rpg.Databases.Player} ⟫ `
-                + lang.commands.profile.playerTitle.replace("%PLAYER", `\`${user.tag}\``),
+                + lang.systems.embeds.playerTitle.replace("%PLAYER", `\`${user.tag}\``),
             )
             .setDescription(`\`Thème: \`**\`${playerImageName}\`**`)
             .addFields(
                 {
-                    name: this.lang.commands.profile.breathingStyle,
-                    value: playerData.breathingStyle === null ? this.lang.commands.profile.anyStyle
-                        : `${playerData.breathingStyle.name}, ${playerData.breathingStyle.techniques.length} ${this.lang.commands.profile.techniques}`,
+                    name: lang.commands.profile.breathingStyle,
+                    value: data.breathingStyle === null ? lang.commands.profile.anyStyle
+                        : `${data.breathingStyle.name}, ${data.breathingStyle.techniques.length} ${lang.commands.profile.techniques}`,
                 },
                 {
-                    name: this.lang.commands.profile.lifeRegeneration,
-                    value: (playerData.health.lastRegen === playerData.health.fullRegen ?
-                            this.lang.commands.profile.finishedAt : this.lang.commands.profile.remaining)
-                        + `<t:${playerData.health.fullRegenString}:R>`,
+                    name: lang.commands.profile.lifeRegeneration,
+                    value: (data.health.lastRegen === data.health.fullRegen ?
+                            lang.commands.profile.finishedAt : lang.commands.profile.remaining)
+                        + `<t:${data.health.fullRegenString}:R>`,
                 },
             )
             .setImage("attachment://profile-player.png")
