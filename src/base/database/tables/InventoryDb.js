@@ -10,6 +10,7 @@ function schema(id) {
             id: null,
             exp: 0,
             hunger: 100,
+            lastFeeding: Date.now(),
         },
         enchantedGrimoire: {
             id: null,
@@ -35,6 +36,29 @@ class InventoryDb extends SQLiteTable {
 
     async load(id) {
         return new InventoryData(this.client, this.get(id), this.client.playerDb.getLang(id));
+    }
+
+    get(id) {
+        const data = super.get(id, schema);
+
+        if (data.kasugaiCrow.id !== null) {
+            const lastFeeding = data.kasugaiCrow.lastFeeding;
+            const hungerGenerated = Math.floor(data.kasugaiCrow.hunger - (Date.now() - lastFeeding) / 1000 / 60 / 15);
+            if (hungerGenerated > 0) this.generateHunger(id, hungerGenerated);
+        }
+    }
+
+    /**
+     * Generate hunger for the Kasugai Crow.
+     * @param {String} id The player ID
+     * @param {Number} amount The amount of hunger to generate
+     * @returns {void}
+     */
+    generateHunger(id, amount) {
+        if (amount < 0) amount = 0;
+        else if (amount > 100) amount = 100;
+        this.set(id, Math.ceil(amount), "kasugaiCrow.hunger");
+        this.set(id, Date.now(), "kasugaiCrow.lastFeeding");
     }
 
     /**
@@ -64,6 +88,10 @@ class InventoryDb extends SQLiteTable {
                 + lang.rpgAssets.embeds.inventoryTitle.replace("%PLAYER", `\`${user.tag}\``),
             )
             .setColor(this.client.enums.Colors.Blurple);
+
+        if (data.kasugaiCrow.id !== null) {
+            console.log("foo");
+        }
 
         return embed;
     }

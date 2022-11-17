@@ -17,7 +17,7 @@ function schema(id) {
             smartness: 1,
         },
         hp: 100,
-        lastHeal: Date.now(),
+        lastHealing: Date.now(),
         breathingStyle: null,
         exp: 0,
         creationDate: Date.now(),
@@ -37,8 +37,8 @@ class PlayerDb extends SQLiteTable {
         const data = super.get(id, schema);
 
         if (data.hp < 100) {
-            const lastHeal = Math.floor((Date.now() - data.lastHeal));
-            const amountToHeal = Math.floor(lastHeal / 1000 / 60 / 5 + data.hp);
+            const lastHealing = Math.floor((Date.now() - data.lastHealing));
+            const amountToHeal = Math.floor(lastHealing / 1000 / 60 / 5 + data.hp);
             if (amountToHeal > 0) this.heal(id, amountToHeal);
         }
 
@@ -52,9 +52,10 @@ class PlayerDb extends SQLiteTable {
      * @returns {void}
      */
     heal(id, amount) {
-        if (amount > 100) amount = 100;
+        if (amount < 0) amount = 0;
+        else if (amount > 100) amount = 100;
         this.set(id, Math.ceil(amount), "hp");
-        this.set(id, Date.now(), "lastHeal");
+        this.set(id, Date.now(), "lastHealing");
     }
 
     /**
@@ -84,7 +85,7 @@ class PlayerDb extends SQLiteTable {
         await this.client.inventoryDb.delete(id);
         await this.client.mapDb.delete(id);
         await this.client.questDb.delete(id);
-        await this.delete(id);
+        await super.delete(id);
     }
 
     /**

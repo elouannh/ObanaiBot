@@ -26,7 +26,7 @@ class PlayerData extends TableData {
             }
         }
 
-        this.data.health = this.client.RPGAssetsManager.getPlayerHealth(this.data.hp, this.data.lastHeal);
+        this.data.health = this.client.RPGAssetsManager.getPlayerHealth(this.data.hp, this.data.lastHealing);
         this.data.character = this.client.RPGAssetsManager.getCharacter(this.lang, this.data.characterId);
         this.data.level = this.client.RPGAssetsManager.getPlayerLevel(this.data.exp);
         this.data.date = `${(this.data.creationDate / 1000).toFixed(0)}`;
@@ -40,7 +40,7 @@ class PlayerData extends TableData {
         delete this.data.exp;
         delete this.data.creationDate;
         delete this.data.hp;
-        delete this.data.lastHeal;
+        delete this.data.lastHealing;
     }
 }
 
