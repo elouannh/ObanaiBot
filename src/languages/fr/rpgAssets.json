@@ -477,5 +477,24 @@
         "kasugaiCrowEffects": "Effets du corbeau Kasugai",
         "enchantedGrimoire": "Grimoire Enchanté",
         "enchantedGrimoireEffects": "Effets du grimoire"
+    },
+    "embeds": {
+        "activityTitle": "Activité - %PLAYER",
+        "additionalTitle": "Informations supplémentaires - %PLAYER",
+        "inventoryTitle": "Inventaire - %PLAYER",
+        "mapTitle": "Carte - %PLAYER",
+        "playerTitle": "Profil - %PLAYER",
+        "characterChosen": "Personnage choisi: %CHARACTER",
+        "breathingStyle": "Style de souffle",
+        "anyStyle": "Aucun souffle",
+        "techniques": "Mouvements",
+        "lifeRegeneration": "Régénération de vie",
+        "finishedAt": "Terminé, il y a: ",
+        "remaining": "En cours, se termine dans: ",
+        "wallet": "Porte-monnaie",
+        "noCrow": "Aucun corbeau de liaison.",
+        "noGrimoire": "Aucun grimoire.",
+        "remainingTime": "Temps restant:",
+        "activeSince": "Grimoire actif depuis:"
     }
 }

@@ -4,22 +4,7 @@
         "additionalButton": "Informations supplémentaires",
         "inventoryButton": "Inventaire",
         "mapButton": "Carte",
-        "playerButton": "Profil",
-        "characterChosen": "Personnage choisi: %CHARACTER",
-        "statisticsName": "Statistiques",
-        "breathingStyleName": "Style de souffle",
-        "expName": "Niveau d'expérience",
-        "breathingStyle": "Style de souffle",
-        "anyStyle": "Aucun souffle",
-        "techniques": "Mouvements",
-        "lifeRegeneration": "Régénération de vie",
-        "finishedAt": "Terminé, il y a: ",
-        "remaining": "En cours, se termine dans: ",
-        "wallet": "Porte-monnaie",
-        "noCrow": "Aucun corbeau de liaison.",
-        "noGrimoire": "Aucun grimoire.",
-        "remainingTime": "Temps restant:",
-        "activeSince": "Grimoire actif depuis:"
+        "playerButton": "Profil"
     },
     "eval": {
         "modalTitle": "Code à exécuter",

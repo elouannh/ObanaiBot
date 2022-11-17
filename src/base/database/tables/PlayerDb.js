@@ -133,19 +133,19 @@ class PlayerDb extends SQLiteTable {
         return new EmbedBuilder()
             .setTitle(
                 `⟪ ${this.client.enums.Rpg.Databases.Player} ⟫ `
-                + lang.systems.embeds.playerTitle.replace("%PLAYER", `\`${user.tag}\``),
+                + lang.rpgAssets.embeds.playerTitle.replace("%PLAYER", `\`${user.tag}\``),
             )
             .setDescription(`\`Thème: \`**\`${playerImageName}\`**`)
             .addFields(
                 {
-                    name: lang.commands.profile.breathingStyle,
-                    value: data.breathingStyle === null ? lang.commands.profile.anyStyle
-                        : `${data.breathingStyle.name}, ${data.breathingStyle.techniques.length} ${lang.commands.profile.techniques}`,
+                    name: lang.rpgAssets.embeds.breathingStyle,
+                    value: data.breathingStyle === null ? lang.rpgAssets.embeds.anyStyle
+                        : `${data.breathingStyle.name}, ${data.breathingStyle.techniques.length} ${lang.rpgAssets.embeds.techniques}`,
                 },
                 {
-                    name: lang.commands.profile.lifeRegeneration,
+                    name: lang.rpgAssets.embeds.lifeRegeneration,
                     value: (data.health.lastRegen === data.health.fullRegen ?
-                            lang.commands.profile.finishedAt : lang.commands.profile.remaining)
+                            lang.rpgAssets.embeds.finishedAt : lang.rpgAssets.embeds.remaining)
                         + `<t:${data.health.fullRegenString}:R>`,
                 },
             )

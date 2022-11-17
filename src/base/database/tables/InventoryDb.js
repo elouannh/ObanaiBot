@@ -58,12 +58,14 @@ class InventoryDb extends SQLiteTable {
      * @returns {Promise<EmbedBuilder>}
      */
     async getEmbed(lang, data, user) {
-        return new EmbedBuilder()
+        const embed = new EmbedBuilder()
             .setTitle(
                 `⟪ ${this.client.enums.Rpg.Databases.Player} ⟫ `
-                + lang.systems.embeds.inventoryTitle.replace("%PLAYER", `\`${user.tag}\``),
+                + lang.rpgAssets.embeds.inventoryTitle.replace("%PLAYER", `\`${user.tag}\``),
             )
             .setColor(this.client.enums.Colors.Blurple);
+
+        return embed;
     }
 }
 

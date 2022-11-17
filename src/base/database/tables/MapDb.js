@@ -31,7 +31,7 @@ class MapDb extends SQLiteTable {
         return new EmbedBuilder()
             .setTitle(
                 `⟪ ${this.client.enums.Rpg.Databases.Player} ⟫ `
-                + lang.systems.embeds.mapTitle.replace("%PLAYER", `\`${user.tag}\``),
+                + lang.rpgAssets.embeds.mapTitle.replace("%PLAYER", `\`${user.tag}\``),
             )
             .setColor(this.client.enums.Colors.Blurple);
     }

@@ -23,12 +23,5 @@
         "m": ["minute", "minutes", "min", "mins"],
         "s": ["seconde", "secondes", "s", "s"],
         "ms": ["milliseconde", "millisecondes", "ms", "ms"]
-    },
-    "embeds": {
-        "activityTitle": "Activité - %PLAYER",
-        "additionalTitle": "Informations supplémentaires - %PLAYER",
-        "inventoryTitle": "Inventaire - %PLAYER",
-        "mapTitle": "Carte - %PLAYER",
-        "playerTitle": "Profil - %PLAYER"
     }
 }
