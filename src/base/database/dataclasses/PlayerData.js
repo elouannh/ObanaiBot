@@ -16,7 +16,6 @@ class PlayerData extends TableData {
             this.data.statistics[stat] = this.client.RPGAssetsManager.getStatistic(this.data.lang, stat, this.data.statistics[stat]);
         }
 
-
         if (this.inventoryData.enchantedGrimoire.id !== null) {
             const grimoire = this.client.RPGAssetsManager.getEnchantedGrimoire(this.lang, this.inventoryData.enchantedGrimoire.id);
 

@@ -43,9 +43,16 @@ class InventoryDb extends SQLiteTable {
 
         if (data.kasugaiCrow.id !== null) {
             const lastFeeding = data.kasugaiCrow.lastFeeding;
-            const hungerGenerated = Math.floor(data.kasugaiCrow.hunger - (Date.now() - lastFeeding) / 1000 / 60 / 15);
-            if (hungerGenerated > 0) this.generateHunger(id, hungerGenerated);
+            let hungerGenerated = Math.floor(data.kasugaiCrow.hunger - (Date.now() - lastFeeding) / 1000 / 60 / 15);
+
+            if (hungerGenerated < 0) hungerGenerated = 0;
+            else if (hungerGenerated > 100) hungerGenerated = 100;
+
+            this.generateHunger(id, hungerGenerated);
+            data.kasugaiCrow.hunger = hungerGenerated;
         }
+
+        return data;
     }
 
     /**
@@ -90,7 +97,24 @@ class InventoryDb extends SQLiteTable {
             .setColor(this.client.enums.Colors.Blurple);
 
         if (data.kasugaiCrow.id !== null) {
-            console.log("foo");
+            embed.addFields(
+                {
+                    name: lang.rpgAssets.concepts.kasugaiCrow,
+                    value: data.kasugaiCrow.name,
+                    inline: true,
+                },
+            );
+        }
+        else {
+            embed.addFields(
+                {
+                    name: lang.rpgAssets.concepts.kasugaiCrow,
+                    value: lang.rpgAssets.embeds.noCrow,
+                    inline: true,
+                },
+                { name: "\u200b", value: "\u200b", inline: true },
+                { name: "\u200b", value: "\u200b", inline: true },
+            );
         }
 
         return embed;

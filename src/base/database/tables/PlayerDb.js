@@ -38,8 +38,12 @@ class PlayerDb extends SQLiteTable {
 
         if (data.hp < 100) {
             const lastHealing = Math.floor((Date.now() - data.lastHealing));
-            const amountToHeal = Math.floor(lastHealing / 1000 / 60 / 5 + data.hp);
-            if (amountToHeal > 0) this.heal(id, amountToHeal);
+            let amountToHeal = Math.floor(lastHealing / 1000 / 60 / 5 + data.hp);
+
+            if (amountToHeal > 100) amountToHeal = 100;
+
+            this.heal(id, amountToHeal);
+            data.hp = amountToHeal;
         }
 
         return data;
@@ -62,6 +66,7 @@ class PlayerDb extends SQLiteTable {
      * Create a new player in all the databases.
      * @param {String} id The player ID
      * @param {String} characterId The pnj ID of the user for the RPG game
+     * @param {String<"fr" | "en">} lang The language of the player
      * @returns {Promise<void>}
      */
     async create(id, characterId = "0", lang = "fr") {
