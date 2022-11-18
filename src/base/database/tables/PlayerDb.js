@@ -154,6 +154,10 @@ class PlayerDb extends SQLiteTable {
                             lang.rpgAssets.embeds.finishedAt : lang.rpgAssets.embeds.remaining)
                         + `<t:${data.health.fullRegenString}:R>`,
                 },
+                {
+                    name: lang.rpgAssets.embeds.character,
+                    value: `${data.character.fullName} (${data.character.japaneseTranscription.fullName})`,
+                },
             )
             .setImage("attachment://profile-player.png")
             .setColor(this.client.enums.Colors.Blurple);
