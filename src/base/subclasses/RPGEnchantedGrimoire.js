@@ -8,13 +8,13 @@ class RPGEnchantedGrimoire extends RPGAssetBase {
         super(lang, id);
 
         const data = grimoireData;
-        this.name = this.lang.rpgAssets.enchantedGrimoires.names[this.id];
+        this.name = this.lang.json.rpgAssets.enchantedGrimoires.names[this.id];
         this.lifespan = data.lifespan;
-        this.type = this.lang.rpgAssets.enchantedGrimoires.types[data.type];
-        this.effects = data.effects.map(e => new RPGGrimoireEffect(this, e, this.lang.rpgAssets.enchantedGrimoires.effects[e.id]));
+        this.type = this.lang.json.rpgAssets.enchantedGrimoires.types[data.type];
+        this.effects = data.effects.map(e => new RPGGrimoireEffect(this, e, this.lang.json.rpgAssets.enchantedGrimoires.effects[e.id]));
 
-        if (typeof data.lifespan !== "number") this.lifespan = this.lang.rpgAssets.enchantedGrimoires.lifespans.infinite;
-        else this.lifespan = new Duration(data.lifespan * 1000, this.lang.systems.timeUnits).convert("long", true);
+        if (typeof data.lifespan !== "number") this.lifespan = this.lang.json.rpgAssets.enchantedGrimoires.lifespans.infinite;
+        else this.lifespan = new Duration(data.lifespan * 1000, this.lang.json.systems.timeUnits).convert("long", true);
 
         if ("activeSince" in data) this.activeSince = (data.activeSince / 1000).toFixed(0);
         else this.activeSince = null;

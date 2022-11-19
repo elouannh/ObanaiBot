@@ -42,7 +42,7 @@ class PlayerDb extends SQLiteTable {
 
             if (amountToHeal > 100) amountToHeal = 100;
 
-            this.heal(id, amountToHeal);
+            if (amountToHeal > 0) this.heal(id, amountToHeal);
             data.hp = amountToHeal;
         }
 

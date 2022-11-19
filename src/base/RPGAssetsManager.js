@@ -56,11 +56,11 @@ class RPGAssetsManager {
 
     loadEnchantedGrimoire(lang, enchantedGrimoireData) {
         if (!(enchantedGrimoireData.id in this.enchantedGrimoires)) return "Invalid Grimoire ID";
-        return new RPGEnchantedGrimoire(
-            { json: this.client.languageManager.getLang(lang).json, id: lang },
-            enchantedGrimoireData.id,
-            Object.assign(this.enchantedGrimoires[enchantedGrimoireData.id], { "activeSince": enchantedGrimoireData.activeSince }),
-        );
+
+        const grimoire = this.getEnchantedGrimoire(lang, enchantedGrimoireData.id);
+        grimoire["activeSince"] = enchantedGrimoireData.activeSince;
+
+        return grimoire;
     }
 
     getKasugaiCrow(lang, id) {
@@ -70,11 +70,12 @@ class RPGAssetsManager {
 
     loadKasugaiCrow(lang, kasugaiCrowData) {
         if (!(kasugaiCrowData.id in this.kasugaiCrows)) return "Invalid Kasugai Crow ID";
-        return new RPGKasugaiCrow(
-            this.getLangData(lang, "kasugaiCrows"),
-            kasugaiCrowData.id,
-            Object.assign(this.kasugaiCrows[kasugaiCrowData.id], { "exp": kasugaiCrowData.exp, "hunger": kasugaiCrowData.hunger }),
-        );
+
+        const crow = this.getKasugaiCrow(lang, kasugaiCrowData.id);
+        crow["hunger"] = kasugaiCrowData.hunger;
+        crow["lastFeeding"] = (kasugaiCrowData.lastFeeding / 1000).toFixed(0);
+
+        return crow;
     }
 
     getMapRegion(lang, id) {

@@ -12,6 +12,7 @@ class InventoryData extends TableData {
 
     load() {
         if (this.data.kasugaiCrow.id !== null) {
+            console.log(this.data);
             this.data.kasugaiCrow = this.client.RPGAssetsManager.loadKasugaiCrow(this.lang, this.data.kasugaiCrow);
         }
         if (this.data.enchantedGrimoire.id !== null) {

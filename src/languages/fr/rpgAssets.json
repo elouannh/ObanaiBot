@@ -474,7 +474,9 @@
         "level": "Niv.",
         "stats": "Statistiques",
         "kasugaiCrow": "Corbeau Kasugai",
-        "kasugaiCrowEffects": "Effets du corbeau Kasugai",
+        "kasugaiCrowHunger": "Faim du corbeau",
+        "kasugaiCrowLastFeeding": "Dernier nourrissage",
+        "kasugaiCrowEffects": "Effets du corbeau",
         "enchantedGrimoire": "Grimoire Enchanté",
         "enchantedGrimoireEffects": "Effets du grimoire"
     },
@@ -490,7 +492,9 @@
         "lifeRegeneration": "Régénération de vie",
         "finishedAt": "Terminé, il y a: ",
         "remaining": "En cours, se termine dans: ",
+        "character": "Personnage",
+        "wallet": "Porte-monnaie",
         "noCrow": "Aucun corbeau de liaison.",
-        "character": "Personnage"
+        "maxPercent": "Max"
     }
 }

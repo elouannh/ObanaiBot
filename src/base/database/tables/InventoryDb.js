@@ -8,9 +8,9 @@ function schema(id) {
         wallet: 0,
         kasugaiCrow: {
             id: null,
-            exp: 0,
             hunger: 100,
             lastFeeding: Date.now(),
+            lastHungerGenerated: Date.now(),
         },
         enchantedGrimoire: {
             id: null,
@@ -42,14 +42,19 @@ class InventoryDb extends SQLiteTable {
         const data = super.get(id, schema);
 
         if (data.kasugaiCrow.id !== null) {
-            const lastFeeding = data.kasugaiCrow.lastFeeding;
-            let hungerGenerated = Math.floor(data.kasugaiCrow.hunger - (Date.now() - lastFeeding) / 1000 / 60 / 15);
+            const lastHungerGenerated = data.kasugaiCrow.lastHungerGenerated;
+            const elapsedTime = Math.floor((Date.now() - lastHungerGenerated) / 1000 / 900);
 
-            if (hungerGenerated < 0) hungerGenerated = 0;
-            else if (hungerGenerated > 100) hungerGenerated = 100;
+            if (elapsedTime > 0) {
+                let hungerGenerated = data.kasugaiCrow.hunger - elapsedTime;
+                if (hungerGenerated < 0) hungerGenerated = 0;
+                else if (hungerGenerated > 100) hungerGenerated = 100;
 
-            this.generateHunger(id, hungerGenerated);
-            data.kasugaiCrow.hunger = hungerGenerated;
+                if (hungerGenerated > 0 && data.kasugaiCrow.hunger !== hungerGenerated) {
+                    this.generateKasugaiCrowHunger(id, hungerGenerated);
+                }
+                data.kasugaiCrow.hunger = hungerGenerated;
+            }
         }
 
         return data;
@@ -61,10 +66,23 @@ class InventoryDb extends SQLiteTable {
      * @param {Number} amount The amount of hunger to generate
      * @returns {void}
      */
-    generateHunger(id, amount) {
+    generateKasugaiCrowHunger(id, amount) {
         if (amount < 0) amount = 0;
         else if (amount > 100) amount = 100;
-        this.set(id, Math.ceil(amount), "kasugaiCrow.hunger");
+        this.set(id, Math.floor(amount), "kasugaiCrow.hunger");
+        this.set(id, Date.now(), "kasugaiCrow.lastHungerGenerated");
+    }
+
+    /**
+     * Feed the crow to increase its effects bonuses.
+     * @param {String} id The player ID
+     * @param {Number} amount The amount of hunger to decrease
+     * @returns {void}
+     */
+    feedKasugaiCrow(id, amount) {
+        if (amount < 0) amount = 0;
+        else if (amount > 100) amount = 100;
+        this.set(id, Math.floor(amount), "kasugaiCrow.hunger");
         this.set(id, Date.now(), "kasugaiCrow.lastFeeding");
     }
 
@@ -94,6 +112,12 @@ class InventoryDb extends SQLiteTable {
                 `⟪ ${this.client.enums.Rpg.Databases.Player} ⟫ `
                 + lang.rpgAssets.embeds.inventoryTitle.replace("%PLAYER", `\`${user.tag}\``),
             )
+            .addFields(
+                {
+                    name: lang.rpgAssets.embeds.wallet,
+                    value: ` ¥ ${this.client.util.intRender(data.wallet, ".")}`,
+                },
+            )
             .setColor(this.client.enums.Colors.Blurple);
 
         if (data.kasugaiCrow.id !== null) {
@@ -101,6 +125,20 @@ class InventoryDb extends SQLiteTable {
                 {
                     name: lang.rpgAssets.concepts.kasugaiCrow,
                     value: data.kasugaiCrow.name,
+                    inline: true,
+                },
+                {
+                    name: lang.rpgAssets.concepts.kasugaiCrowHunger,
+                    value: `\`${data.kasugaiCrow.hunger}\`% - `
+                        + `${lang.rpgAssets.concepts.kasugaiCrowLastFeeding}: <t:${data.kasugaiCrow.lastFeeding}:R>`,
+                    inline: true,
+                },
+                {
+                    name: lang.rpgAssets.concepts.kasugaiCrowEffects,
+                    value: data.kasugaiCrow.effects
+                        .map(e => `${e.name} - \`${e.maxStrength * data.kasugaiCrow.hunger / 100}\`% `
+                            + `(${lang.rpgAssets.embeds.maxPercent}: \`${e.maxStrength}\`%)`)
+                        .join("\n"),
                     inline: true,
                 },
             );
