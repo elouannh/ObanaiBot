@@ -45,6 +45,7 @@ class InventoryDb extends SQLiteTable {
             const lastHungerGenerated = data.kasugaiCrow.lastHungerGenerated;
             const elapsedTime = Math.floor((Date.now() - lastHungerGenerated) / 1000 / 900);
 
+
             if (elapsedTime > 0) {
                 let hungerGenerated = data.kasugaiCrow.hunger - elapsedTime;
                 if (hungerGenerated < 0) hungerGenerated = 0;
@@ -54,6 +55,7 @@ class InventoryDb extends SQLiteTable {
                     this.generateKasugaiCrowHunger(id, hungerGenerated);
                 }
                 data.kasugaiCrow.hunger = hungerGenerated;
+                data.kasugaiCrow.lastHungerGenerated = Date.now();
             }
         }
 
@@ -116,7 +118,14 @@ class InventoryDb extends SQLiteTable {
                 {
                     name: lang.rpgAssets.embeds.wallet,
                     value: ` ¥ ${this.client.util.intRender(data.wallet, ".")}`,
+                    inline: true,
                 },
+                {
+                    name: lang.rpgAssets.concepts.weapon,
+                    value: `${data.weapon.name} - **${data.weapon.rarityName}**`,
+                    inline: true,
+                },
+                { name: "\u200b", value: "\u200b", inline: false },
             )
             .setColor(this.client.enums.Colors.Blurple);
 
@@ -150,10 +159,82 @@ class InventoryDb extends SQLiteTable {
                     value: lang.rpgAssets.embeds.noCrow,
                     inline: true,
                 },
-                { name: "\u200b", value: "\u200b", inline: true },
-                { name: "\u200b", value: "\u200b", inline: true },
             );
         }
+
+        if (data.enchantedGrimoire.id !== null) {
+            embed.addFields(
+                {
+                    name: lang.rpgAssets.concepts.enchantedGrimoire,
+                    value: data.enchantedGrimoire.name,
+                    inline: true,
+                },
+                {
+                    name: lang.rpgAssets.embeds.lifespan,
+                    value: `${data.enchantedGrimoire.lifespan} |`
+                        + ` ${lang.rpgAssets.embeds.expirationDate}: <t:${data.enchantedGrimoire.expirationDate}:D>`,
+                    inline: true,
+                },
+                {
+                    name: lang.rpgAssets.concepts.enchantedGrimoireEffects,
+                    value: data.enchantedGrimoire.effects.map(e => `${e.name} - \`${e.strength}\`%`).join("\n"),
+                    inline: true,
+                },
+            );
+        }
+        else {
+            embed.addFields(
+                {
+                    name: lang.rpgAssets.concepts.enchantedGrimoire,
+                    value: lang.rpgAssets.embeds.noGrimoire,
+                    inline: true,
+                },
+            );
+        }
+
+        embed.addFields(
+            { name: "\u200b", value: "\u200b", inline: false },
+            {
+                name: lang.rpgAssets.embeds.grimoireStock,
+                value: Object.keys(data.items.enchantedGrimoires).length > 0 ?
+                    Object.values(data.items.enchantedGrimoires)
+                        .sort((a, b) => b.amount - a.amount)
+                        .map(g => `x\`${g.amount}\` ${g.list[0].name}`)
+                        .join("\n") :
+                    lang.rpgAssets.embeds.noGrimoire,
+                inline: true,
+            },
+            {
+                name: lang.rpgAssets.embeds.weaponStock,
+                value: data.items.weapons.totalAmount > 0 ?
+                    data.items.weapons.list.map(g => `${g.name} - **${g.rarityName}**`).join("\n") :
+                    lang.rpgAssets.embeds.noWeapon,
+                inline: true,
+            },
+            { name: "\u200b", value: "\u200b", inline: false },
+            {
+                name: lang.rpgAssets.concepts.materials,
+                value: Object.values(data.items.materials).length > 0 ?
+                    Object.values(data.items.materials)
+                        .sort((a, b) => b.amount - a.amount)
+                        .map(g => `x\`${g.amount}\` ${g.list[0].name}`)
+                        .join("\n") :
+                    lang.rpgAssets.embeds.noMaterial,
+                inline: true,
+            },
+            {
+                name: lang.rpgAssets.concepts.questItems,
+                    value: Object.values(data.items.questItems).length > 0 ?
+                Object.values(data.items.questItems)
+                    .sort((a, b) => b.amount - a.amount)
+                    .map(g => `x\`${g.amount}\` ${g.list[0].name}`)
+                    .join("\n") :
+                lang.rpgAssets.embeds.noQuestItem,
+                inline: true,
+            },
+        );
+
+        console.log(data.items);
 
         return embed;
     }

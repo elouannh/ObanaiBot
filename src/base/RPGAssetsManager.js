@@ -57,8 +57,15 @@ class RPGAssetsManager {
     loadEnchantedGrimoire(lang, enchantedGrimoireData) {
         if (!(enchantedGrimoireData.id in this.enchantedGrimoires)) return "Invalid Grimoire ID";
 
-        const grimoire = this.getEnchantedGrimoire(lang, enchantedGrimoireData.id);
-        grimoire["activeSince"] = enchantedGrimoireData.activeSince;
+        const grimoireData = this.enchantedGrimoires[enchantedGrimoireData.id];
+        const grimoire = this.getEnchantedGrimoire(lang, grimoireData.id);
+        grimoire["activeSince"] = (enchantedGrimoireData.activeSince / 1000).toFixed(0);
+        if (grimoireData.lifespan === "infinite") {
+            grimoire["expirationDate"] = "1671490";
+        }
+        else {
+            grimoire["expirationDate"] = ((enchantedGrimoireData.activeSince + (grimoireData.lifespan * 1000)) / 1000).toFixed(0);
+        }
 
         return grimoire;
     }
@@ -71,7 +78,8 @@ class RPGAssetsManager {
     loadKasugaiCrow(lang, kasugaiCrowData) {
         if (!(kasugaiCrowData.id in this.kasugaiCrows)) return "Invalid Kasugai Crow ID";
 
-        const crow = this.getKasugaiCrow(lang, kasugaiCrowData.id);
+        const crowData = this.kasugaiCrows[kasugaiCrowData.id];
+        const crow = this.getKasugaiCrow(lang, crowData.id);
         crow["hunger"] = kasugaiCrowData.hunger;
         crow["lastFeeding"] = (kasugaiCrowData.lastFeeding / 1000).toFixed(0);
 

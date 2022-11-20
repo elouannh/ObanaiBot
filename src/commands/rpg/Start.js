@@ -23,7 +23,7 @@ class Profile extends Command {
     async run() {
         if (await this.client.playerDb.exists(this.interaction.user.id)) {
             return await this.interaction.reply({ content: this.lang.systems.playerAlreadyExists, ephemeral: true })
-                .catch(this.client.util.catchError);
+                .catch(this.client.catchError);
         }
 
         const languagesOptions = this.langManager.languages.map(lang => Object.assign(
@@ -44,19 +44,19 @@ class Profile extends Command {
                     ),
 
             ],
-        }).catch(this.client.util.catchError);
+        }).catch(this.client.catchError);
 
         const langResponse = await langChoice.awaitMessageComponent({
             filter: inter => inter.user.id === this.interaction.user.id,
             time: 60_000,
-        }).catch(this.client.util.catchError);
+        }).catch(this.client.catchError);
 
         if (!langResponse) {
             return await this.interaction.editReply({
                 content: this.mention + this.lang.systems.choiceIgnored, components: [],
-            }).catch(this.client.util.catchError);
+            }).catch(this.client.catchError);
         }
-        await langResponse.deferUpdate().catch(this.client.util.catchError);
+        await langResponse.deferUpdate().catch(this.client.catchError);
         const langChoosen = langResponse.values[0];
 
         const tosAcceptMessage = await this.interaction.editReply({
@@ -89,24 +89,24 @@ class Profile extends Command {
                             ),
                     ),
             ],
-        }).catch(this.client.util.catchError);
+        }).catch(this.client.catchError);
 
         const tosResponse = await tosAcceptMessage.awaitMessageComponent({
             filter: inter => inter.user.id === this.interaction.user.id,
             time: 120_000,
-        }).catch(this.client.util.catchError);
+        }).catch(this.client.catchError);
 
         if (!tosResponse) {
             return await this.interaction.editReply({
                 content: this.mention + this.lang.systems.choiceIgnored, components: [],
-            }).catch(this.client.util.catchError);
+            }).catch(this.client.catchError);
         }
-        await tosResponse.deferUpdate().catch(this.client.util.catchError);
+        await tosResponse.deferUpdate().catch(this.client.catchError);
 
         if (tosResponse.values?.length < 3) {
             return await this.interaction.editReply({
                 content: this.mention + this.lang.commands.start.tosDeclined, components: [],
-            }).catch(this.client.util.catchError);
+            }).catch(this.client.catchError);
         }
 
         const firstCharacter = await this.client.RPGAssetsManager.getCharacter(this.lang._id, "0");
@@ -136,26 +136,26 @@ class Profile extends Command {
                             ),
                     ),
             ],
-        }).catch(this.client.util.catchError);
+        }).catch(this.client.catchError);
 
         const choice = await characterChoice.awaitMessageComponent({
             filter: inter => inter.user.id === this.interaction.user.id,
             time: 60_000,
-        }).catch(this.client.util.catchError);
+        }).catch(this.client.catchError);
 
         if (!choice) {
             return await this.interaction.editReply({
                 content: this.mention + this.lang.systems.choiceIgnored, components: [],
-            }).catch(this.client.util.catchError);
+            }).catch(this.client.catchError);
         }
 
-        await choice.deferUpdate().catch(this.client.util.catchError);
+        await choice.deferUpdate().catch(this.client.catchError);
         const chosen = eval(`${choice.values[0]}`);
 
         await this.interaction.editReply({
             content: this.mention + this.lang.commands.start.characterChosen.replace("%CHAR", chosen.fullName) + "\n\n" + this.lang.commands.start.joinTheSupport,
             components: [],
-        }).catch(this.client.util.catchError);
+        }).catch(this.client.catchError);
         await this.client.playerDb.create(this.interaction.user.id, chosen.id, langChoosen);
     }
 }

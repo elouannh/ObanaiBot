@@ -466,7 +466,8 @@
             "6": "Légendaire",
             "7": "Exceptionnel",
             "8": "Enchanté",
-            "9": "Démoniaque"
+            "9": "Démoniaque",
+            "10": "Limité"
         }
     },
     "concepts": {
@@ -478,7 +479,10 @@
         "kasugaiCrowLastFeeding": "Dernier nourrissage",
         "kasugaiCrowEffects": "Effets du corbeau",
         "enchantedGrimoire": "Grimoire Enchanté",
-        "enchantedGrimoireEffects": "Effets du grimoire"
+        "enchantedGrimoireEffects": "Effets du grimoire",
+        "weapon": "Arme",
+        "materials": "Matériaux",
+        "questItems": "Objets de quête"
     },
     "embeds": {
         "activityTitle": "Activité - %PLAYER",
@@ -495,6 +499,14 @@
         "character": "Personnage",
         "wallet": "Porte-monnaie",
         "noCrow": "Aucun corbeau de liaison.",
-        "maxPercent": "Max"
+        "maxPercent": "Max",
+        "noGrimoire": "Aucun grimoire enchanté.",
+        "lifespan": "Durée de vie",
+        "expirationDate": "Expire le",
+        "grimoireStock": "Réserve de grimoires",
+        "weaponStock": "Réserve d'armes",
+        "noWeapon": "Aucune arme.",
+        "noMaterial": "Aucun matériau.",
+        "noQuestItem": "Aucun objet de quête."
     }
 }

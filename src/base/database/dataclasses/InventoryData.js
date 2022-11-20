@@ -12,7 +12,6 @@ class InventoryData extends TableData {
 
     load() {
         if (this.data.kasugaiCrow.id !== null) {
-            console.log(this.data);
             this.data.kasugaiCrow = this.client.RPGAssetsManager.loadKasugaiCrow(this.lang, this.data.kasugaiCrow);
         }
         if (this.data.enchantedGrimoire.id !== null) {
@@ -35,7 +34,11 @@ class InventoryData extends TableData {
 
         for (const materialKey in this.data.items.materials) {
             const materialAmount = newItems.materials[materialKey];
-            newItems.materials[materialKey] = { material: this.client.RPGAssetsManager.getMaterial(this.lang, materialKey), amount: materialAmount };
+            const materialList = [];
+            for (let i = 0; i < materialAmount; i++) {
+                materialList.push(this.client.RPGAssetsManager.getMaterial(this.lang, materialKey));
+            }
+            newItems.materials[materialKey] = { list: materialList, amount: materialAmount };
         }
 
         for (const questItemKey in this.data.items.questItems) {
@@ -49,7 +52,7 @@ class InventoryData extends TableData {
 
         for (const weaponKey in this.data.items.weapons) {
             for (const weaponRarityKey in this.data.items.weapons[weaponKey]) {
-                const weaponAmount = newItems.weapons[weaponKey][weaponRarityKey];
+                const weaponAmount = this.data.items.weapons[weaponKey][weaponRarityKey];
                 const weaponList = [];
                 for (let i = 0; i < weaponAmount; i++) {
                     weaponList.push(this.client.RPGAssetsManager.getWeapon(this.lang, weaponKey, weaponRarityKey));
@@ -62,6 +65,7 @@ class InventoryData extends TableData {
             }
         }
         if ("list" in newItems.weapons) newItems.weapons.list = newItems.weapons.list.sort((a, b) => b.rarity - a.rarity);
+        else newItems.weapons.list = [];
         newItems.weapons.totalAmount = newItems.weapons?.list?.length || 0;
 
         this.data.items = newItems;

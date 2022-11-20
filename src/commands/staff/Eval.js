@@ -40,11 +40,11 @@ class Base extends Command {
                 ),
             );
 
-        await this.interaction.showModal(modal).catch(this.client.util.catchError);
+        await this.interaction.showModal(modal).catch(this.client.catchError);
         const modalSubmit = await this.interaction.awaitModalSubmit({
             filter: modalSubmitted => modalSubmitted.user.id === this.interaction.user.id,
             time: 300_000,
-        }).catch(this.client.util.catchError);
+        }).catch(this.client.catchError);
 
         if (modalSubmit !== undefined) {
             const codeInput = modalSubmit.fields.getTextInputValue("codeInput") ?? "";
@@ -53,7 +53,7 @@ class Base extends Command {
             modalSubmit.reply({
                 content: resp,
                 ephemeral: false,
-            }).catch(this.client.util.catchError);
+            }).catch(this.client.catchError);
         }
     }
 }

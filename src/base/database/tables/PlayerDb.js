@@ -44,6 +44,7 @@ class PlayerDb extends SQLiteTable {
 
             if (amountToHeal > 0) this.heal(id, amountToHeal);
             data.hp = amountToHeal;
+            data.lastHealing = Date.now();
         }
 
         return data;

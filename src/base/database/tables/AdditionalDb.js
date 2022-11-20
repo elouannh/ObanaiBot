@@ -120,7 +120,7 @@ class AdditionalDb extends SQLiteTable {
         const message = await interaction.channel.send({
             content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**\n\n\`${i + 1}/${tutorial.step.array.length}\`| ${tutorial.step.array[i]}`,
             components,
-        }).catch(this.client.util.catchError);
+        }).catch(this.client.catchError);
         const collector = message.createMessageComponentCollector({
             filter: inter => inter.user.id === id,
             idle: 60_000,
@@ -132,20 +132,20 @@ class AdditionalDb extends SQLiteTable {
                     await inter.reply({
                         content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**\n\n*${userLang.json.systems.tutorialEnd}*`,
                         ephemeral: true,
-                    }).catch(this.client.util.catchError);
+                    }).catch(this.client.catchError);
                     collector.stop();
                 }
                 else {
-                    await inter.deferUpdate().catch(this.client.util.catchError);
+                    await inter.deferUpdate().catch(this.client.catchError);
                     await message.edit({
                         content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**\n\n\`${i + 1}/${tutorial.step.array.length}\`| ${tutorial.step.array[i]}`,
                         components,
-                    }).catch(this.client.util.catchError);
+                    }).catch(this.client.catchError);
                 }
             }
         });
         collector.on("end", async () => {
-            await message.delete().catch(this.client.util.catchError);
+            await message.delete().catch(this.client.catchError);
         });
     }
 

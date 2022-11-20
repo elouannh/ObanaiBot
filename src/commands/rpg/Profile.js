@@ -37,12 +37,12 @@ class Profile extends Command {
                 return await this.interaction.reply({
                     content: this.lang.systems.playerNotFoundAlreadyPlayed,
                     ephemeral: true,
-                }).catch(this.client.util.catchError);
+                }).catch(this.client.catchError);
             }
             return await this.interaction.reply({ content: this.lang.systems.playerNotFound, ephemeral: true })
-                .catch(this.client.util.catchError);
+                .catch(this.client.catchError);
         }
-        await this.interaction.deferReply().catch(this.client.util.catchError);
+        await this.interaction.deferReply().catch(this.client.catchError);
 
         const player = await this.client.playerDb.load(user.id);
         const inventory = await this.client.inventoryDb.load(user.id);
@@ -103,7 +103,7 @@ class Profile extends Command {
             embeds: [embeds.player],
             components: [new ActionRowBuilder().setComponents(buttons)],
             files: attachments.player === null ? [] : [attachments.player],
-        }).catch(this.client.util.catchError);
+        }).catch(this.client.catchError);
 
         if (this.interaction.user.id === user.id) {
             await this.client.additionalDb.showBeginningTutorial(user.id, "profilePlayer", this.interaction);
@@ -114,7 +114,7 @@ class Profile extends Command {
         });
         collector.on("collect", async interaction => {
             const embedAttachment = profilePanel.embeds[0]?.data?.image?.url;
-            await profilePanel.removeAttachments().catch(this.client.util.catchError);
+            await profilePanel.removeAttachments().catch(this.client.catchError);
             // register the attachment URL in the attachments object
             if (typeof attachments[lastPanel.toLowerCase()] !== "string" && attachments[lastPanel.toLowerCase()] !== null) {
                 attachments[lastPanel.toLowerCase()] = null;
@@ -138,19 +138,19 @@ class Profile extends Command {
                 await this.client.additionalDb.showBeginningTutorial(user.id, `profile${interaction.customId}`, this.interaction);
             }
 
-            await interaction.deferUpdate().catch(this.client.util.catchError);
+            await interaction.deferUpdate().catch(this.client.catchError);
 
             // update the panel
             await this.interaction.editReply({
                 embeds: [embeds[interaction.customId.toLowerCase()]],
                 components: [new ActionRowBuilder().setComponents(buttons)],
                 files: attachments[interaction.customId.toLowerCase()] === null ? [] : [attachments[interaction.customId.toLowerCase()]],
-            }).catch(this.client.util.catchError);
+            }).catch(this.client.catchError);
 
             lastPanel = interaction.customId;
         });
         collector.on("end", async () => {
-            await this.interaction.editReply({ components: [] }).catch(this.client.util.catchError);
+            await this.interaction.editReply({ components: [] }).catch(this.client.catchError);
         });
     }
 }
