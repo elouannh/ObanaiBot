@@ -35,7 +35,7 @@ class Command {
     }
 
     async exe() {
-        await this.interaction.reply({ content: this.lang.systems.defaultReply }).catch(this.client.util.catchError);
+        await this.interaction.reply({ content: this.lang.systems.defaultReply }).catch(this.client.catchError);
     }
 
     async cooldownReady(forExecuting) {
@@ -57,7 +57,7 @@ class Command {
                     `**${timeLeftString.convert("long", true)}**`,
                 ),
                 ephemeral: true,
-            }).catch(this.client.util.catchError);
+            }).catch(this.client.catchError);
         }
         else {
             this.client.cooldownsManager.add(this.interaction.user.id, { key: this.infos.name, value: Date.now() });
@@ -85,7 +85,7 @@ class Command {
                     notFinished.map(e => `» **\`${e.name}\`** - <t:${(e.ts / 1000).toFixed(0)}:F>`)
                 }`,
                 ephemeral: true,
-            }).catch(this.client.util.catchError);
+            }).catch(this.client.catchError);
         }
 
         return ready;
@@ -105,7 +105,7 @@ class Command {
                 +
                 `\n${this.lang.systems.necessariesPermissionsReply}:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
                 ephemeral: true,
-            }).catch(this.client.util.catchError);
+            }).catch(this.client.catchError);
         }
         return hasPerms;
     }
@@ -126,7 +126,7 @@ class Command {
                         +
                         `\n${this.lang.systems.necessariesPermissionsReply}:\n\`\`\`${missingPermissions.join(" / ")}\`\`\``,
                     ephemeral: true,
-                }).catch(this.client.util.catchError);
+                }).catch(this.client.catchError);
             }
         }
         return hasPerms;
@@ -143,7 +143,7 @@ class Command {
             await this.interaction.reply({
                 content: this.lang.systems.noUserAuthorizationReply,
                 ephemeral: true,
-            }).catch(this.client.util.catchError);
+            }).catch(this.client.catchError);
         }
 
         return ready;
@@ -163,7 +163,7 @@ class Command {
                 await this.interaction.reply({
                     content: this.lang.systems.clientInMaintenance,
                     ephemeral: true,
-                }).catch(this.client.util.catchError);
+                }).catch(this.client.catchError);
             }
         }
 

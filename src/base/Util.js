@@ -160,27 +160,6 @@ module.exports = {
         console.log(chalk[mainColor](`${time}  |  ${message}`));
     },
     /**
-     * Catch an error and log it (in a beautiful bright red).
-     * @param {Error} error The error instance
-     * @returns {void}
-     */
-    catchError(error) {
-        const date = new Date();
-        const data = {
-            day: String(date.getDate()),
-            month: String(date.getMonth() + 1),
-            hour: String(date.getHours()),
-            min: String(date.getMinutes()),
-            sec: String(date.getSeconds()),
-        };
-        if (data.day.length < 2) data.day = "0" + data.day;
-        if (data.month.length < 2) data.month = "0" + data.month;
-        if (data.hour.length < 2) data.hour = "0" + data.hour;
-        if (data.min.length < 2) data.min = "0" + data.min;
-        if (data.sec.length < 2) data.sec = "0" + data.sec;
-        console.log(chalk.redBright(`[${data.month}/${data.day}] [${data.hour}:${data.hour}:${data.sec}]  |  Error: ${error.stack}`));
-    },
-    /**
      * Return the cropped image.
      * @param {Buffer} buffer The image buffer
      * @param {Number} width The width of the cropped image
@@ -393,7 +372,7 @@ module.exports = {
      * Generate a polar graph.
      * @param {Number[]} parts The percents of the graph
      * @param {Number[]} values The values of the graph
-     * @param {String} colors The different colors tu use (it does a loop)
+     * @param {String} color The different colors tu use (it does a loop)
      * @param {Number} width The width of the graph
      * @param {String} lineStyle The line style of the graph that link the points
      * @param {Number} scales The amount of scales
@@ -456,7 +435,7 @@ module.exports = {
                 context.arc(width / 2, width / 2, width / 2 * scaleI * scalePercent - 1, 0, Math.PI * 2, false);
             }
         }
-        for (let scaleI = scales; scaleI > 1; scaleI--) {
+        for (let scaleI = scales; scaleI > 0; scaleI--) {
             context.textAlign = "left";
             context.textBaseline = "middle";
             this.text3D(context, `${this.round(scaleI * maxValue / scales, 0)}`, lineStyle, labelShadow, "soft", 10, width / 2, width / 2 - (width / 2 * scaleI * scalePercent - 5));

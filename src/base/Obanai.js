@@ -86,6 +86,32 @@ class Obanai extends Client {
         }, 900_000);
     }
 
+    /**
+     * Catch an error and log it (in a beautiful bright red).
+     * @param {Error} error The error instance
+     * @returns {void}
+     */
+    catchError(error) {
+        const date = new Date();
+        const data = {
+            day: String(date.getDate()),
+            month: String(date.getMonth() + 1),
+            hour: String(date.getHours()),
+            min: String(date.getMinutes()),
+            sec: String(date.getSeconds()),
+        };
+        if (data.day.length < 2) data.day = "0" + data.day;
+        if (data.month.length < 2) data.month = "0" + data.month;
+        if (data.hour.length < 2) data.hour = "0" + data.hour;
+        if (data.min.length < 2) data.min = "0" + data.min;
+        if (data.sec.length < 2) data.sec = "0" + data.sec;
+        console.log(chalk.redBright(`[${data.month}/${data.day}] [${data.hour}:${data.hour}:${data.sec}]  |  Error: ${error.stack}`));
+
+        if (this.env.TEST_MODE === "1") {
+            console.log(error);
+        }
+    }
+
     async throwError(error, origin) {
         const channel = this.guilds.cache.get(this.config.testing).channels.cache.get(this.config.channels.errors);
         await channel.send({
@@ -98,7 +124,11 @@ class Obanai extends Client {
                     .setColor("#FF0000")
                     .setTimestamp(),
             ],
-        }).catch(this.util.catchError);
+        }).catch(this.catchError);
+
+        if (this.env.TEST_MODE === "1") {
+            console.log(error);
+        }
     }
 
     async getUser(id, secureValue) {
@@ -112,7 +142,7 @@ class Obanai extends Client {
             }
         }
         catch (err) {
-            this.util.catchError(err);
+            this.catchError(err);
         }
 
         return Object.assign(user, { cached });

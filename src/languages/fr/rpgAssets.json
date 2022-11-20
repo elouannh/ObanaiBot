@@ -466,12 +466,47 @@
             "6": "Légendaire",
             "7": "Exceptionnel",
             "8": "Enchanté",
-            "9": "Démoniaque"
+            "9": "Démoniaque",
+            "10": "Limité"
         }
     },
     "concepts": {
         "hp": "PV",
         "level": "Niv.",
-        "stats": "Statistiques"
+        "stats": "Statistiques",
+        "kasugaiCrow": "Corbeau Kasugai",
+        "kasugaiCrowHunger": "Faim du corbeau",
+        "kasugaiCrowLastFeeding": "Dernier nourrissage",
+        "kasugaiCrowEffects": "Effets du corbeau",
+        "enchantedGrimoire": "Grimoire Enchanté",
+        "enchantedGrimoireEffects": "Effets du grimoire",
+        "weapon": "Arme",
+        "materials": "Matériaux",
+        "questItems": "Objets de quête"
+    },
+    "embeds": {
+        "activityTitle": "Activité - %PLAYER",
+        "additionalTitle": "Informations supplémentaires - %PLAYER",
+        "inventoryTitle": "Inventaire - %PLAYER",
+        "mapTitle": "Carte - %PLAYER",
+        "playerTitle": "Profil - %PLAYER",
+        "breathingStyle": "Style de souffle",
+        "anyStyle": "Aucun souffle",
+        "techniques": "Mouvements",
+        "lifeRegeneration": "Régénération de vie",
+        "finishedAt": "Terminé, il y a: ",
+        "remaining": "En cours, se termine dans: ",
+        "character": "Personnage",
+        "wallet": "Porte-monnaie",
+        "noCrow": "Aucun corbeau de liaison.",
+        "maxPercent": "Max",
+        "noGrimoire": "Aucun grimoire enchanté.",
+        "lifespan": "Durée de vie",
+        "expirationDate": "Expire le",
+        "grimoireStock": "Réserve de grimoires",
+        "weaponStock": "Réserve d'armes",
+        "noWeapon": "Aucune arme.",
+        "noMaterial": "Aucun matériau.",
+        "noQuestItem": "Aucun objet de quête."
     }
 }

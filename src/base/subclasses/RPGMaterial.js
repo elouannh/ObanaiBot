@@ -9,8 +9,8 @@ class RPGMaterial extends RPGAssetBase {
 
         const data = materialData;
         this.size = data.size;
-        this.biomes = data.biomes.map(e => new RPGMapRegionAreaBiome(this, e, this.lang.biomes.json[e]));
-        this.name = this.lang.materials.json[this.id];
+        this.biomes = data.biomes.map(e => new RPGMapRegionAreaBiome(this, e, this.lang.json.biomes.json[e]));
+        this.name = this.lang.json.materials.json[this.id];
         this.rarity = data.rarity;
     }
 
@@ -18,7 +18,7 @@ class RPGMaterial extends RPGAssetBase {
         const areas = [];
         for (const biome of this.biomes) {
             for (let region of this.assetsManager.map.regions) {
-                region = this.assetsManager.getMapRegion(this.lang._id, region.id);
+                region = this.assetsManager.getMapRegion(this.lang.id, region.id);
                 const validAreas = region.areas.filter(e => e.biome.id === biome.id);
 
                 if (validAreas.length > 0) {

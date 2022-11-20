@@ -47,16 +47,27 @@ class RPGAssetsManager {
 
     getEnchantedGrimoire(lang, id) {
         if (!(id in this.enchantedGrimoires)) return "Invalid Grimoire ID";
-        return new RPGEnchantedGrimoire(this.getLangData(lang, "enchantedGrimoires"), id, this.enchantedGrimoires[id]);
+        return new RPGEnchantedGrimoire(
+            { json: this.client.languageManager.getLang(lang).json, id: lang },
+            id,
+            this.enchantedGrimoires[id],
+        );
     }
 
     loadEnchantedGrimoire(lang, enchantedGrimoireData) {
         if (!(enchantedGrimoireData.id in this.enchantedGrimoires)) return "Invalid Grimoire ID";
-        return new RPGEnchantedGrimoire(
-            this.getLangData(lang, "enchantedGrimoires"),
-            enchantedGrimoireData.id,
-            Object.assign(this.enchantedGrimoires[enchantedGrimoireData.id], { "activeSince": enchantedGrimoireData.activeSince }),
-        );
+
+        const grimoireData = this.enchantedGrimoires[enchantedGrimoireData.id];
+        const grimoire = this.getEnchantedGrimoire(lang, grimoireData.id);
+        grimoire["activeSince"] = (enchantedGrimoireData.activeSince / 1000).toFixed(0);
+        if (grimoireData.lifespan === "infinite") {
+            grimoire["expirationDate"] = "1671490";
+        }
+        else {
+            grimoire["expirationDate"] = ((enchantedGrimoireData.activeSince + (grimoireData.lifespan * 1000)) / 1000).toFixed(0);
+        }
+
+        return grimoire;
     }
 
     getKasugaiCrow(lang, id) {
@@ -66,11 +77,13 @@ class RPGAssetsManager {
 
     loadKasugaiCrow(lang, kasugaiCrowData) {
         if (!(kasugaiCrowData.id in this.kasugaiCrows)) return "Invalid Kasugai Crow ID";
-        return new RPGKasugaiCrow(
-            this.getLangData(lang, "kasugaiCrows"),
-            kasugaiCrowData.id,
-            Object.assign(this.kasugaiCrows[kasugaiCrowData.id], { "exp": kasugaiCrowData.exp, "hunger": kasugaiCrowData.hunger }),
-        );
+
+        const crowData = this.kasugaiCrows[kasugaiCrowData.id];
+        const crow = this.getKasugaiCrow(lang, crowData.id);
+        crow["hunger"] = kasugaiCrowData.hunger;
+        crow["lastFeeding"] = (kasugaiCrowData.lastFeeding / 1000).toFixed(0);
+
+        return crow;
     }
 
     getMapRegion(lang, id) {
@@ -104,8 +117,8 @@ class RPGAssetsManager {
         return new RPGPlayerLevel(exp);
     }
 
-    getPlayerHealth(amount, lastHeal) {
-        return new RPGPlayerHealth(amount, lastHeal);
+    getPlayerHealth(amount, lastHealing) {
+        return new RPGPlayerHealth(amount, lastHealing);
     }
 
     getWeapon(lang, weaponId, weaponRarity) {

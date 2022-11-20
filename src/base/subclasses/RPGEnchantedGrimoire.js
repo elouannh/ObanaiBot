@@ -1,21 +1,18 @@
 const RPGAssetBase = require("./RPGAssetBase");
 const RPGGrimoireEffect = require("./RPGEnchantedGrimoireEffect");
-const Util = require("../Util");
+const Duration = require("../Duration");
 
 class RPGEnchantedGrimoire extends RPGAssetBase {
     constructor(lang, id, grimoireData) {
         super(lang, id);
 
         const data = grimoireData;
-        this.name = this.lang.json.names[this.id];
-        this.lifespan = data.lifespan;
-        this.type = this.lang.json.types[data.type];
-        this.effects = data.effects.map(e => new RPGGrimoireEffect(this, e, this.lang.json.effects[e.id]));
+        this.name = this.lang.json.rpgAssets.enchantedGrimoires.names[this.id];
+        this.type = this.lang.json.rpgAssets.enchantedGrimoires.types[data.type];
+        this.effects = data.effects.map(e => new RPGGrimoireEffect(this, e, this.lang.json.rpgAssets.enchantedGrimoires.effects[e.id]));
 
-        if (typeof data.lifespan !== "number") this.lifespan = this.lang.json.lifespans.infinite;
-        else this.lifespan = Util.convertDate(data.lifespan * 1000);
-
-        if ("activeSince" in data) this.activeSince = String(Util.round(data.activeSince / 1000, 0));
+        if (typeof data.lifespan !== "number") this.lifespan = this.lang.json.rpgAssets.enchantedGrimoires.lifespans.infinite;
+        else this.lifespan = new Duration(data.lifespan * 1000, this.lang.json.systems.timeUnits).convert("long", true);
     }
 }
 

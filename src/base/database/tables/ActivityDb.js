@@ -1,6 +1,7 @@
 const SQLiteTable = require("../../SQLiteTable");
 const ActivityData = require("../dataclasses/ActivityData");
 const ActivityListener = require("../listeners/ActivityListener");
+const { EmbedBuilder } = require("discord.js");
 
 function schema(id) {
     return {
@@ -63,6 +64,22 @@ class ActivityDb extends SQLiteTable {
 
     async load(id) {
         return new ActivityData(this.client, this.get(id), this.client.playerDb.getLang(id));
+    }
+
+    /**
+     * Get the embed of the player profile.
+     * @param {Object} lang The language object
+     * @param {ActivityData} data The inventory data
+     * @param {User} user The user
+     * @returns {Promise<EmbedBuilder>}
+     */
+    async getEmbed(lang, data, user) {
+        return new EmbedBuilder()
+            .setTitle(
+                `⟪ ${this.client.enums.Rpg.Databases.Player} ⟫ `
+                + lang.rpgAssets.embeds.activityTitle.replace("%PLAYER", `\`${user.tag}\``),
+            )
+            .setColor(this.client.enums.Colors.Blurple);
     }
 }
 

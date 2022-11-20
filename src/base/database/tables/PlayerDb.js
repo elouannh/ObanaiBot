@@ -1,7 +1,7 @@
 const SQLiteTable = require("../../SQLiteTable");
 const PlayerData = require("../dataclasses/PlayerData");
 const Canvas = require("canvas");
-const { AttachmentBuilder } = require("discord.js");
+const { AttachmentBuilder, EmbedBuilder, User } = require("discord.js");
 const StackBlur = require("stackblur-canvas");
 
 function schema(id) {
@@ -17,7 +17,7 @@ function schema(id) {
             smartness: 1,
         },
         hp: 100,
-        lastHeal: Date.now(),
+        lastHealing: Date.now(),
         breathingStyle: null,
         exp: 0,
         creationDate: Date.now(),
@@ -37,9 +37,14 @@ class PlayerDb extends SQLiteTable {
         const data = super.get(id, schema);
 
         if (data.hp < 100) {
-            const lastHeal = Math.floor((Date.now() - data.lastHeal));
-            const amountToHeal = Math.floor(lastHeal / 1000 / 60 / 5 + data.hp);
+            const lastHealing = Math.floor((Date.now() - data.lastHealing));
+            let amountToHeal = Math.floor(lastHealing / 1000 / 60 / 5 + data.hp);
+
+            if (amountToHeal > 100) amountToHeal = 100;
+
             if (amountToHeal > 0) this.heal(id, amountToHeal);
+            data.hp = amountToHeal;
+            data.lastHealing = Date.now();
         }
 
         return data;
@@ -52,15 +57,17 @@ class PlayerDb extends SQLiteTable {
      * @returns {void}
      */
     heal(id, amount) {
-        if (amount > 100) amount = 100;
+        if (amount < 0) amount = 0;
+        else if (amount > 100) amount = 100;
         this.set(id, Math.ceil(amount), "hp");
-        this.set(id, Date.now(), "lastHeal");
+        this.set(id, Date.now(), "lastHealing");
     }
 
     /**
      * Create a new player in all the databases.
      * @param {String} id The player ID
      * @param {String} characterId The pnj ID of the user for the RPG game
+     * @param {String<"fr" | "en">} lang The language of the player
      * @returns {Promise<void>}
      */
     async create(id, characterId = "0", lang = "fr") {
@@ -70,7 +77,6 @@ class PlayerDb extends SQLiteTable {
         this.client.inventoryDb.ensureInDeep(id);
         this.client.mapDb.ensureInDeep(id);
         this.client.questDb.ensureInDeep(id);
-        this.client.squadDb.ensureInDeep(id);
         this.set(id, characterId, "characterId");
         this.set(id, lang, "lang");
     }
@@ -85,8 +91,7 @@ class PlayerDb extends SQLiteTable {
         await this.client.inventoryDb.delete(id);
         await this.client.mapDb.delete(id);
         await this.client.questDb.delete(id);
-        await this.client.squadDb.delete(id);
-        await this.delete(id);
+        await super.delete(id);
     }
 
     /**
@@ -102,7 +107,6 @@ class PlayerDb extends SQLiteTable {
             this.client.inventoryDb,
             this.client.mapDb,
             this.client.questDb,
-            this.client.squadDb,
         ]) {
             if ((await db.get(id))?.schemaInstance) return false;
         }
@@ -124,6 +128,42 @@ class PlayerDb extends SQLiteTable {
      * @property {Buffer} buffer The canvas Buffer
      * @property {AttachmentBuilder} attachment The theme attachment
      */
+    /**
+     * Get the embed of the player profile.
+     * @param {Object} lang The language object
+     * @param {PlayerData} data The player data
+     * @param {User} user The user
+     * @param {String} playerImageName The theme attachment
+     * @returns {Promise<EmbedBuilder>}
+     */
+    async getEmbed(lang, data, user, playerImageName) {
+        return new EmbedBuilder()
+            .setTitle(
+                `⟪ ${this.client.enums.Rpg.Databases.Player} ⟫ `
+                + lang.rpgAssets.embeds.playerTitle.replace("%PLAYER", `\`${user.tag}\``),
+            )
+            .setDescription(`\`Thème: \`**\`${playerImageName}\`**`)
+            .addFields(
+                {
+                    name: lang.rpgAssets.embeds.breathingStyle,
+                    value: data.breathingStyle === null ? lang.rpgAssets.embeds.anyStyle
+                        : `${data.breathingStyle.name}, ${data.breathingStyle.techniques.length} ${lang.rpgAssets.embeds.techniques}`,
+                },
+                {
+                    name: lang.rpgAssets.embeds.lifeRegeneration,
+                    value: (data.health.lastRegen === data.health.fullRegen ?
+                            lang.rpgAssets.embeds.finishedAt : lang.rpgAssets.embeds.remaining)
+                        + `<t:${data.health.fullRegenString}:R>`,
+                },
+                {
+                    name: lang.rpgAssets.embeds.character,
+                    value: `${data.character.fullName} (${data.character.japaneseTranscription.fullName})`,
+                },
+            )
+            .setImage("attachment://profile-player.png")
+            .setColor(this.client.enums.Colors.Blurple);
+    }
+
     /**
      * Get the player image attachment.
      * @param {PlayerData} playerData The player data
@@ -173,7 +213,7 @@ class PlayerDb extends SQLiteTable {
         const heartImage = await Canvas.loadImage(theme.HeartImage);
         const heartSize = 75;
         context.drawImage(heartImage, 210, 50 - ((heartSize - 50) / 2), heartSize, heartSize);
-        const hpText1 = `${playerData.hp}/100 `;
+        const hpText1 = `${playerData.health.amount}/100 `;
         const hpText2 = `${lang.concepts.hp}`;
         context.textBaseline = "middle";
         context.fillStyle = theme.Color;
@@ -301,7 +341,7 @@ class PlayerDb extends SQLiteTable {
                 theme.PolarGraphFill,
                 150,
                 theme.BorderColor,
-                ((maxValue - minValue) / 15),
+                Math.min(Math.max(3, ((maxValue - minValue) / 15)), 5),
                 theme.PolarGraphForm,
                 theme.PolarGraphLabelShadow,
             ),
