@@ -74,12 +74,63 @@ class ActivityDb extends SQLiteTable {
      * @returns {Promise<EmbedBuilder>}
      */
     async getEmbed(lang, data, user) {
-        return new EmbedBuilder()
+        const embed = new EmbedBuilder()
             .setTitle(
                 `⟪ ${this.client.enums.Rpg.Databases.Player} ⟫ `
                 + lang.rpgAssets.embeds.activityTitle.replace("%PLAYER", `\`${user.tag}\``),
             )
-            .setColor(this.client.enums.Colors.Blurple);
+            .setColor(this.client.enums.Colors.Blurple)
+            .addFields(
+                {
+                    name: lang.rpgAssets.concepts.training,
+                    value: data.training === null ? lang.rpgAssets.embeds.noTraining
+                        : `${data.training.statistic.name}, `
+                        + `${lang.rpgAssets.concepts.level} **${data.training.statistic.level}** \`>\` `
+                        + `${lang.rpgAssets.concepts.level} **${data.training.statistic.level + 1}**`
+                        + `\n__${lang.rpgAssets.embeds.ending}:__ `
+                        + `<t:${(data.training.endedDate / 1000).toFixed(0)}:R>`,
+                    inline: true,
+                },
+                {
+                    name: lang.rpgAssets.concepts.travel,
+                    value: data.travel === null ? lang.rpgAssets.embeds.noTravel
+                        : `__${lang.rpgAssets.embeds.circuit}__: `
+                        + `[**${data.travel.departurePoint.region.name}**, ${data.travel.departurePoint.area.name}] `
+                        + `\`>\` [**${data.travel.destination.region.name}**, ${data.travel.destination.area.name}]`
+                        + `\n__${lang.rpgAssets.embeds.ending}:__ `
+                        + `<t:${(data.travel.endedDate / 1000).toFixed(0)}:R>`,
+                    inline: true,
+                },
+                { name: "\u200b", value: "\u200b", inline: false },
+            );
+
+        console.log(data.forge.forgingSlots);
+
+        for (let i = 0; i < 3; i++) {
+            if (data.forge.forgingSlots.freeSlots.map(e => e.id).includes(String(i))) {
+                embed.addFields(
+                    {
+                        name: `${lang.rpgAssets.concepts.forge} - ${lang.rpgAssets.embeds.place} ${i + 1}`,
+                        value: `*${lang.rpgAssets.embeds.freeSlot}*`,
+                        inline: true,
+                    },
+                );
+            }
+            else {
+                const slot = data.forge.forgingSlots.occupiedSlots[i];
+                console.log(slot);
+                embed.addFields(
+                    {
+                        name: `${lang.rpgAssets.concepts.forge} - ${lang.rpgAssets.embeds.place} ${i + 1}`,
+                        value: `__${lang.rpgAssets.embeds.ending}:__ <t:${(slot.endedDate / 1000).toFixed(0)}:R>`
+                            + `\n__${lang.rpgAssets.concepts.weapon}:__ \`${slot.weapon.name}\` - **${slot.weapon.rarityName}**`,
+                        inline: true,
+                    },
+                );
+            }
+        }
+
+        return embed;
     }
 }
 

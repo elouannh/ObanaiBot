@@ -148,16 +148,19 @@ class PlayerDb extends SQLiteTable {
                     name: lang.rpgAssets.embeds.breathingStyle,
                     value: data.breathingStyle === null ? lang.rpgAssets.embeds.anyStyle
                         : `${data.breathingStyle.name}, ${data.breathingStyle.techniques.length} ${lang.rpgAssets.embeds.techniques}`,
+                    inline: true,
                 },
                 {
                     name: lang.rpgAssets.embeds.lifeRegeneration,
                     value: (data.health.lastRegen === data.health.fullRegen ?
                             lang.rpgAssets.embeds.finishedAt : lang.rpgAssets.embeds.remaining)
                         + `<t:${data.health.fullRegenString}:R>`,
+                    inline: true,
                 },
                 {
                     name: lang.rpgAssets.embeds.character,
                     value: `${data.character.fullName} (${data.character.japaneseTranscription.fullName})`,
+                    inline: true,
                 },
             )
             .setImage("attachment://profile-player.png")

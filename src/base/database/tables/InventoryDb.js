@@ -18,7 +18,7 @@ function schema(id) {
         },
         weapon: {
             id: "katana",
-            rarity: 3,
+            rarity: "3",
         },
         items: {
             enchantedGrimoires: {},
@@ -233,8 +233,6 @@ class InventoryDb extends SQLiteTable {
                 inline: true,
             },
         );
-
-        console.log(data.items);
 
         return embed;
     }

@@ -25,11 +25,11 @@ class ActivityData extends TableData {
         }
         if (this.data.travel.currentlyTraveling) {
             const departurePointRegion = this.client.RPGAssetsManager.getMapRegion(
-                this.lang, this.data.travel.departurePoint.region,
+                this.lang, this.data.travel.departurePoint.regionId,
             );
             this.data.travel.departurePoint = {
                 region: departurePointRegion,
-                area: departurePointRegion.getArea(this.data.travel.departurePoint.area),
+                area: departurePointRegion.getArea(this.data.travel.departurePoint.areaId),
             };
 
             const destinationRegion = this.client.RPGAssetsManager.getMapRegion(
@@ -40,12 +40,14 @@ class ActivityData extends TableData {
                 area: destinationRegion.getArea(this.data.travel.destination.areaId),
             };
 
+            delete this.data.travel.departurePoint.regionId;
+            delete this.data.travel.departurePoint.areaId;
             delete this.data.travel.destination.regionId;
             delete this.data.travel.destination.areaId;
 
             this.data.travel.distance = departurePointRegion.getDistanceTo(destinationRegion)
                 + destinationRegion.arrivalArea.getDistanceTo(
-                    destinationRegion.getArea(this.data.travel.destination.area.id),
+                    this.data.travel.destination.area,
                 );
 
             this.data.travel.endedDate = this.client.util.round(
@@ -68,7 +70,7 @@ class ActivityData extends TableData {
                     startedDate: this.data.forge.forgingSlots[forgeId].startedDate,
                     endedDate: this.data.forge.forgingSlots[forgeId].startedDate
                         + this.client.config.rpg.minutesOfForgingPerRarity
-                        * this.data.forge.forgingSlots[forgeId].weapon.rarity * 60 * 1000,
+                        * Number(this.data.forge.forgingSlots[forgeId].weapon.rarity) * 60 * 1000,
                     currentlyForging: this.data.forge.forgingSlots[forgeId].currentlyForging,
                     weapon: this.client.RPGAssetsManager.getWeapon(
                         this.lang,

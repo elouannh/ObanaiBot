@@ -58,8 +58,8 @@ class SQLiteTableMerger {
                 for (const wp of player.weapons) {
                     if ("rarity" in (wp ?? {})) {
                         if ((items.weapons["katana"] ?? "null") instanceof Object) {
-                            if (items.weapons["katana"][String(wp.rarity)] instanceof Number) {
-                                items.weapons["katana"][String(wp.rarity)] += 1;
+                            if (items.weapons["katana"][wp.rarity] instanceof Number) {
+                                items.weapons["katana"][wp.rarity] += 1;
                             }
                         }
                         else {
