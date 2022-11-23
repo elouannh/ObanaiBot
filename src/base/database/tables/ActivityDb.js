@@ -104,8 +104,6 @@ class ActivityDb extends SQLiteTable {
                 { name: "\u200b", value: "\u200b", inline: false },
             );
 
-        console.log(data.forge.forgingSlots);
-
         for (let i = 0; i < 3; i++) {
             if (data.forge.forgingSlots.freeSlots.map(e => e.id).includes(String(i))) {
                 embed.addFields(
@@ -118,7 +116,6 @@ class ActivityDb extends SQLiteTable {
             }
             else {
                 const slot = data.forge.forgingSlots.occupiedSlots[i];
-                console.log(slot);
                 embed.addFields(
                     {
                         name: `${lang.rpgAssets.concepts.forge} - ${lang.rpgAssets.embeds.place} ${i + 1}`,

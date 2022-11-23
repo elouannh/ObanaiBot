@@ -225,7 +225,6 @@ class AdditionalDb extends SQLiteTable {
      * @returns {Promise<EmbedBuilder>}
      */
     async getEmbed(lang, data, user) {
-        console.log(data.rpg);
         const themesAmount = Object.keys(data.themes.equipped).length;
         const unlockedThemesAmount = data.themes.unlocked.length;
 

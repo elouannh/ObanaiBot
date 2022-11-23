@@ -488,7 +488,11 @@
         "forge": "Forge",
         "demonBlood": "Sang de démon",
         "themes": "Thèmes",
-        "tutorialProgress": "Progression du tutoriel"
+        "tutorialProgress": "Progression du tutoriel",
+        "region": "Région",
+        "area": "Zone de région",
+        "biome": "Biome",
+        "exploration": "Exploration"
     },
     "embeds": {
         "activityTitle": "Activité - %PLAYER",
@@ -523,7 +527,8 @@
         "unlockedThemes": "Thèmes débloqués",
         "lockedThemes": "Thèmes bloqués",
         "percentUnlocked": "débloqués",
-        "executedCommands": "Commandes exécutées"
+        "executedCommands": "Commandes exécutées",
+        "noDataToDisplay": "Aucune donnée à afficher."
     },
     "themes": {
         "Default": "Défaut"
