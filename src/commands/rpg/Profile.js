@@ -50,11 +50,12 @@ class Profile extends Command {
         const map = await this.client.mapDb.load(user.id);
         const additional = await this.client.additionalDb.load(user.id);
 
-
         const playerImage = await this.client.playerDb.getImage(player);
 
         const embeds = {
-            player: await this.client.playerDb.getEmbed(this.lang, player, user, playerImage.name),
+            player: await this.client.playerDb.getEmbed(
+                this.lang, player, user, this.client.additionalDb.getThemeName(this.lang, playerImage.name),
+            ),
             inventory: await this.client.inventoryDb.getEmbed(this.lang, inventory, user),
             activity: await this.client.activityDb.getEmbed(this.lang, activity, user),
             map: await this.client.mapDb.getEmbed(this.lang, map, user),

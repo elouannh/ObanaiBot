@@ -485,7 +485,10 @@
         "questItems": "Objets de quête",
         "training": "Entraînement",
         "travel": "Voyage",
-        "forge": "Forge"
+        "forge": "Forge",
+        "demonBlood": "Sang de démon",
+        "themes": "Thèmes",
+        "tutorialProgress": "Progression du tutoriel"
     },
     "embeds": {
         "activityTitle": "Activité - %PLAYER",
@@ -516,6 +519,13 @@
         "noTravel": "Aucun voyage.",
         "circuit": "Trajet",
         "place": "Emplacement",
-        "freeSlot": "Emplacement libre"
+        "freeSlot": "Emplacement libre",
+        "unlockedThemes": "Thèmes débloqués",
+        "lockedThemes": "Thèmes bloqués",
+        "percentUnlocked": "débloqués",
+        "executedCommands": "Commandes exécutées"
+    },
+    "themes": {
+        "Default": "Défaut"
     }
 }

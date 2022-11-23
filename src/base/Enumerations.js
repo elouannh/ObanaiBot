@@ -36,6 +36,9 @@ module.exports = {
             Quest: "📜",
             Squad: "🥋",
         },
+        Concepts: {
+            DemonBlood: "🩸",
+        },
     },
     Systems: {
         Grades: {
