@@ -62,8 +62,7 @@ class Profile extends Command {
             additional: await this.client.additionalDb.getEmbed(this.lang, additional, user),
         };
         const attachments = {
-            // player: playerImage.attachment,
-            player: null,
+            player: playerImage.attachment,
             inventory: null,
             activity: null,
             map: null,
