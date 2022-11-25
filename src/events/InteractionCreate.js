@@ -58,14 +58,20 @@ class InteractionCreate extends Event {
             this.client.lastChannelsManager.add(
                 this.interaction.user.id, { key: "main", value: this.interaction.channel },
             );
+
+            const placeLink = await this.client.getPlaceLink(this.interaction.channel)
+                ?? `https://discord.com/channels/${this.interaction.guildId}/${this.interaction.channelId}`;
             this.client.requestsManager.add(
                 this.interaction.user.id,
                 {
                     key: cmd.infos.name,
-                    value: Date.now(),
-                    link: `https://discord.com/channels/${this.interaction.guildId}/${this.interaction.channelId}`,
+                    value: {
+                        ts: Date.now(),
+                        link: placeLink,
+                    },
                 },
             );
+
             try {
                 this.client.additionalDb.incrementCommand(String(cmd.interaction.user.id), cmd.infos.name);
                 this.client.util.timelog(`[Command] ${cmd.infos.name} - ${cmd.interaction.user.tag} (${cmd.interaction.user.id})`, "yellowBright");

@@ -162,6 +162,7 @@ class Profile extends Command {
             components: [],
         }).catch(this.client.catchError);
         await this.client.playerDb.create(this.interaction.user.id, chosen.id, langChoosen);
+        return this.end();
     }
 }
 

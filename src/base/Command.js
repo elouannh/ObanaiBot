@@ -89,7 +89,7 @@ class Command {
             await this.interaction.reply({
                 content: `🛠️ ${this.lang.systems.requestsReply}\n\n${
                     notFinished.map(
-                        e => `» **\`[${e.name}](${e.link})\`** - <t:${(e.ts / 1000).toFixed(0)}:F>`,
+                        e => `» [**\`${e.name}\`**](${e.link}) - <t:${(e.ts / 1000).toFixed(0)}:F>`,
                     ).join("\n")
                 }`,
                 ephemeral: true,

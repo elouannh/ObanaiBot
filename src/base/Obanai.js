@@ -1,4 +1,13 @@
-const { Client, GatewayIntentBits, User, EmbedBuilder } = require("discord.js");
+const {
+    Client,
+    GatewayIntentBits,
+    User,
+    EmbedBuilder,
+    TextChannel,
+    NewsChannel,
+    ThreadChannel,
+    GuildTextBasedChannel,
+} = require("discord.js");
 const chalk = require("chalk");
 const PlayerDb = require("./database/tables/PlayerDb");
 const InventoryDb = require("./database/tables/InventoryDb");
@@ -39,7 +48,7 @@ class Obanai extends Client {
         this.languageManager = new LanguageManager(this);
         this.RPGAssetsManager = new RPGAssetsManager(this, "assets");
         this.requestsManager = new CollectionManager(
-            this, "requests", this.util.callbackFunction, Date.now,
+            this, "requests", this.util.reqCallbackFunction, Date.now,
         );
         this.cooldownsManager = new CollectionManager(
             this, "cooldowns", this.util.callbackFunction, () => 0,
@@ -146,6 +155,21 @@ class Obanai extends Client {
         }
 
         return Object.assign(user, { cached });
+    }
+
+    /**
+     * Get the link of the message above the context.
+     * @param {GuildTextBasedChannel|TextChannel|ThreadChannel|NewsChannel} channel The channel instance
+     */
+    async getPlaceLink(channel) {
+        let link = null;
+        try {
+            link = `https://discord.com/channels/${channel.guildId}/${channel.id}/${channel.lastMessageId}`;
+        }
+        catch (err) {
+            this.catchError(err);
+        }
+        return link;
     }
 
     launch() {

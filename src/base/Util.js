@@ -10,7 +10,7 @@ module.exports = {
      * @property {Number} ts The timestamp of the request
      */
     /**
-     * A callback function for the cooldownsManager class.
+     * A callback function for the manager class.
      * @param {CollectionManager} manager
      * @param {String} key The user ID
      * @returns {Request[]}
@@ -22,6 +22,20 @@ module.exports = {
             finalReq.push([entryKey, entryValue]);
         }
         return finalReq.map(e => Object.assign({}, { name: e[0], ts: e[1] }));
+    },
+    /**
+     * A callback function for the requestsManager class.
+     * @param {CollectionManager} manager
+     * @param {String} key The user ID
+     * @returns {Request[]}
+     */
+    reqCallbackFunction(manager, key) {
+        const map = manager.get(key).entries();
+        const finalReq = [];
+        for (const [entryKey, entryValue] of map) {
+            finalReq.push([entryKey, entryValue]);
+        }
+        return finalReq.map(e => Object.assign({}, { name: e[0], ts: e[1].ts, link: e[1].link }));
     },
     /**
      * @typedef {Object} EnsureIndicator

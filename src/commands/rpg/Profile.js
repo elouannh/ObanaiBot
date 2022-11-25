@@ -153,6 +153,7 @@ class Profile extends Command {
         });
         collector.on("end", async () => {
             await this.interaction.editReply({ components: [] }).catch(this.client.catchError);
+            return this.end();
         });
     }
 }
