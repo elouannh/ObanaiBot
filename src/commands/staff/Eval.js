@@ -55,6 +55,8 @@ class Base extends Command {
                 ephemeral: false,
             }).catch(this.client.catchError);
         }
+
+        return this.end();
     }
 }
 

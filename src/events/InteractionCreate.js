@@ -58,7 +58,14 @@ class InteractionCreate extends Event {
             this.client.lastChannelsManager.add(
                 this.interaction.user.id, { key: "main", value: this.interaction.channel },
             );
-            this.client.requestsManager.add(this.interaction.user.id, { key: cmd.infos.name, value: Date.now() });
+            this.client.requestsManager.add(
+                this.interaction.user.id,
+                {
+                    key: cmd.infos.name,
+                    value: Date.now(),
+                    link: `https://discord.com/channels/${this.interaction.guildId}/${this.interaction.channelId}`,
+                },
+            );
             try {
                 this.client.additionalDb.incrementCommand(String(cmd.interaction.user.id), cmd.infos.name);
                 this.client.util.timelog(`[Command] ${cmd.infos.name} - ${cmd.interaction.user.tag} (${cmd.interaction.user.id})`, "yellowBright");
@@ -67,8 +74,8 @@ class InteractionCreate extends Event {
             catch (err) {
                 await this.interaction.channel.send({ content: ":x: **An error occurred.**" }).catch(this.client.catchError);
                 await this.client.throwError(err, "Origin: @InteractionCreate.Command");
+                this.client.requestsManager.remove(this.interaction.user.id, cmd.infos.name);
             }
-            this.client.requestsManager.remove(this.interaction.user.id, cmd.infos.name);
         }
         catch (err) {
             await this.interaction.channel.send({ content: ":x: **An error occurred.**" }).catch(this.client.catchError);

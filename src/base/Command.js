@@ -34,6 +34,11 @@ class Command {
         this.langManager = this.client.languageManager;
     }
 
+    end() {
+        this.client.requestsManager.remove(this.interaction.user.id, this.infos.name);
+        return void 0;
+    }
+
     async exe() {
         await this.interaction.reply({ content: this.lang.systems.defaultReply }).catch(this.client.catchError);
     }
@@ -75,14 +80,17 @@ class Command {
     async requestReady(user = undefined) {
         let ready = true;
 
-        const notFinished = this.client.requestsManager.has(user ?? this.interaction.user.id)
+        const notFinished = this.client.requestsManager
+            .has(user ?? this.interaction.user.id)
             .filter(e => this.infos.completedRequests.includes(e.name));
 
         if (notFinished.length > 0) {
             ready = false;
             await this.interaction.reply({
                 content: `🛠️ ${this.lang.systems.requestsReply}\n\n${
-                    notFinished.map(e => `» **\`${e.name}\`** - <t:${(e.ts / 1000).toFixed(0)}:F>`)
+                    notFinished.map(
+                        e => `» **\`[${e.name}](${e.link})\`** - <t:${(e.ts / 1000).toFixed(0)}:F>`,
+                    ).join("\n")
                 }`,
                 ephemeral: true,
             }).catch(this.client.catchError);

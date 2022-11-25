@@ -1,5 +1,5 @@
 const Command = require("../../base/Command");
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, AttachmentBuilder } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
 class Profile extends Command {
     constructor() {
@@ -34,13 +34,15 @@ class Profile extends Command {
         const user = await this.getUserFromInteraction(this.interaction.type);
         if (!(await this.client.playerDb.exists(user.id))) {
             if (this.client.playerDb.get(user.id).alreadyPlayed) {
-                return await this.interaction.reply({
+                await this.interaction.reply({
                     content: this.lang.systems.playerNotFoundAlreadyPlayed,
                     ephemeral: true,
                 }).catch(this.client.catchError);
+                return this.end();
             }
-            return await this.interaction.reply({ content: this.lang.systems.playerNotFound, ephemeral: true })
+            await this.interaction.reply({ content: this.lang.systems.playerNotFound, ephemeral: true })
                 .catch(this.client.catchError);
+            return this.end();
         }
         await this.interaction.deferReply().catch(this.client.catchError);
 
