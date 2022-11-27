@@ -18,7 +18,7 @@ function schema(id) {
         },
         weapon: {
             id: "katana",
-            rarity: 3,
+            rarity: "3",
         },
         items: {
             enchantedGrimoires: {},
@@ -41,6 +41,8 @@ class InventoryDb extends SQLiteTable {
     get(id) {
         const data = super.get(id, schema);
 
+        data.enchantedGrimoire = this.updateEnchantedGrimoire(id, data.enchantedGrimoire);
+
         if (data.kasugaiCrow.id !== null) {
             const lastHungerGenerated = data.kasugaiCrow.lastHungerGenerated;
             const elapsedTime = Math.floor((Date.now() - lastHungerGenerated) / 1000 / 900);
@@ -60,6 +62,33 @@ class InventoryDb extends SQLiteTable {
         }
 
         return data;
+    }
+
+    /**
+     * @typedef {Object} GrimoireObject
+     * @property {String|null} id The grimoire ID
+     * @property {Number} activeSince The timestamp when the grimoire was activated
+     */
+    /**
+     * Check if the active grimoire is expired. Removes it if it is, and returns the grimoire stored in the inventory.
+     * @param {String} id The user ID
+     * @param {GrimoireObject} grimoireObject The grimoire store
+     * @returns {GrimoireObject} The grimoire stored in the inventory
+     */
+    updateEnchantedGrimoire(id, grimoireObject) {
+        if (grimoireObject.id !== null) {
+            const grimoireInstance = this.client.RPGAssetsManager.loadEnchantedGrimoire(
+                this.client.playerDb.getLang(id), grimoireObject,
+            );
+            const expirationDate = Math.floor(Number(grimoireInstance.expirationDate) * 1000);
+
+            if (expirationDate < Date.now()) {
+                this.set(id, null, "enchantedGrimoire.id");
+                this.set(id, 0, "enchantedGrimoire.activeSince");
+                return { id: null, activeSince: 0 };
+            }
+        }
+        return grimoireObject;
     }
 
     /**
@@ -233,8 +262,6 @@ class InventoryDb extends SQLiteTable {
                 inline: true,
             },
         );
-
-        console.log(data.items);
 
         return embed;
     }

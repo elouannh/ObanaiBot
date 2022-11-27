@@ -482,7 +482,17 @@
         "enchantedGrimoireEffects": "Effets du grimoire",
         "weapon": "Arme",
         "materials": "Matériaux",
-        "questItems": "Objets de quête"
+        "questItems": "Objets de quête",
+        "training": "Entraînement",
+        "travel": "Voyage",
+        "forge": "Forge",
+        "demonBlood": "Sang de démon",
+        "themes": "Thèmes",
+        "tutorialProgress": "Progression du tutoriel",
+        "region": "Région",
+        "area": "Zone de région",
+        "biome": "Biome",
+        "exploration": "Exploration"
     },
     "embeds": {
         "activityTitle": "Activité - %PLAYER",
@@ -507,6 +517,20 @@
         "weaponStock": "Réserve d'armes",
         "noWeapon": "Aucune arme.",
         "noMaterial": "Aucun matériau.",
-        "noQuestItem": "Aucun objet de quête."
+        "noQuestItem": "Aucun objet de quête.",
+        "noTraining": "Aucun entraînement.",
+        "ending": "Fin dans",
+        "noTravel": "Aucun voyage.",
+        "circuit": "Trajet",
+        "place": "Emplacement",
+        "freeSlot": "Emplacement libre",
+        "unlockedThemes": "Thèmes débloqués",
+        "lockedThemes": "Thèmes bloqués",
+        "percentUnlocked": "débloqués",
+        "executedCommands": "Commandes exécutées",
+        "noDataToDisplay": "Aucune donnée à afficher."
+    },
+    "themes": {
+        "Default": "Défaut"
     }
 }

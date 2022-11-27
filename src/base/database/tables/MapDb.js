@@ -30,10 +30,33 @@ class MapDb extends SQLiteTable {
     async getEmbed(lang, data, user) {
         return new EmbedBuilder()
             .setTitle(
-                `⟪ ${this.client.enums.Rpg.Databases.Player} ⟫ `
+                `⟪ ${this.client.enums.Rpg.Databases.Map} ⟫ `
                 + lang.rpgAssets.embeds.mapTitle.replace("%PLAYER", `\`${user.tag}\``),
             )
-            .setColor(this.client.enums.Colors.Blurple);
+            .setColor(this.client.enums.Colors.Blurple)
+            .addFields(
+                {
+                    name: lang.rpgAssets.concepts.region,
+                    value: `${data.region.name}`,
+                    inline: true,
+                },
+                {
+                    name: lang.rpgAssets.concepts.area,
+                    value: `${data.area.name}\n__${lang.rpgAssets.concepts.biome}:__ **${data.area.biome.name}**`,
+                    inline: true,
+                },
+                { name: "\u200b", value: "\u200b", inline: false },
+                {
+                    name: lang.rpgAssets.concepts.exploration,
+                    value: Object.keys(data.exploration).length === 0 ? lang.rpgAssets.embeds.noDataToDisplay : "Soon.",
+                    inline: true,
+                },
+                {
+                    name: "\u200b",
+                    value: "```diff\n- Map image is currently unavailable for the following reason: the map is not yet drawn.```",
+                    inline: false,
+                },
+            );
     }
 }
 

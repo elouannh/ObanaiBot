@@ -1,5 +1,5 @@
 const Command = require("../../base/Command");
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, AttachmentBuilder } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
 class Profile extends Command {
     constructor() {
@@ -34,13 +34,15 @@ class Profile extends Command {
         const user = await this.getUserFromInteraction(this.interaction.type);
         if (!(await this.client.playerDb.exists(user.id))) {
             if (this.client.playerDb.get(user.id).alreadyPlayed) {
-                return await this.interaction.reply({
+                await this.interaction.reply({
                     content: this.lang.systems.playerNotFoundAlreadyPlayed,
                     ephemeral: true,
                 }).catch(this.client.catchError);
+                return this.end();
             }
-            return await this.interaction.reply({ content: this.lang.systems.playerNotFound, ephemeral: true })
+            await this.interaction.reply({ content: this.lang.systems.playerNotFound, ephemeral: true })
                 .catch(this.client.catchError);
+            return this.end();
         }
         await this.interaction.deferReply().catch(this.client.catchError);
 
@@ -50,19 +52,19 @@ class Profile extends Command {
         const map = await this.client.mapDb.load(user.id);
         const additional = await this.client.additionalDb.load(user.id);
 
-
         const playerImage = await this.client.playerDb.getImage(player);
 
         const embeds = {
-            player: await this.client.playerDb.getEmbed(this.lang, player, user, playerImage.name),
+            player: await this.client.playerDb.getEmbed(
+                this.lang, player, user, this.client.additionalDb.getThemeName(this.lang, playerImage.name),
+            ),
             inventory: await this.client.inventoryDb.getEmbed(this.lang, inventory, user),
             activity: await this.client.activityDb.getEmbed(this.lang, activity, user),
             map: await this.client.mapDb.getEmbed(this.lang, map, user),
             additional: await this.client.additionalDb.getEmbed(this.lang, additional, user),
         };
         const attachments = {
-            // player: playerImage.attachment,
-            player: null,
+            player: playerImage.attachment,
             inventory: null,
             activity: null,
             map: null,
@@ -151,6 +153,7 @@ class Profile extends Command {
         });
         collector.on("end", async () => {
             await this.interaction.editReply({ components: [] }).catch(this.client.catchError);
+            return this.end();
         });
     }
 }

@@ -64,7 +64,7 @@ class InventoryData extends TableData {
                 else newItems.weapons.list = weaponList;
             }
         }
-        if ("list" in newItems.weapons) newItems.weapons.list = newItems.weapons.list.sort((a, b) => b.rarity - a.rarity);
+        if ("list" in newItems.weapons) newItems.weapons.list = newItems.weapons.list.sort((a, b) => Number(b.rarity) - Number(a.rarity));
         else newItems.weapons.list = [];
         newItems.weapons.totalAmount = newItems.weapons?.list?.length || 0;
 

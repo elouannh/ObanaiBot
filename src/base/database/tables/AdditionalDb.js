@@ -11,7 +11,7 @@ function schema(id) {
             tutorialProgress: {},
         },
         themes: {
-            unlocked: [],
+            unlocked: ["Default"],
             equipped: {
                 profile: "Default",
             },
@@ -25,7 +25,9 @@ class AdditionalDb extends SQLiteTable {
     }
 
     async load(id) {
-        return new AdditionalData(this.client, this.get(id));
+        return new AdditionalData(
+            this.client, this.get(id), this.client.languageManager.getLang(this.client.playerDb.getLang(id)).json,
+        );
     }
 
     /**
@@ -172,6 +174,50 @@ class AdditionalDb extends SQLiteTable {
     }
 
     /**
+     * Get the theme name of the given user
+     * @param {Object} lang The language object
+     * @param {String} theme The theme ID
+     * @returns {String}
+     */
+    getThemeName(lang, theme) {
+        return lang.rpgAssets.themes[theme];
+    }
+
+    /**
+     * @typedef {Object} TutorialProgress
+     * @property {Number} completed The number of completed tutorials
+     * @property {Number} notCompleted The total number of not completed tutorials
+     * @property {Number} completedPercent The percent of tutorials completed
+     */
+    /**
+     * Get the tutorial progress of the given user
+     * @param {Object} lang The language object
+     * @param {String} id The user ID
+     * @returns {TutorialProgress}
+     */
+    getTutorialProgress(lang, id) {
+        const totalTutorials = { completed: 0, notCompleted: 0, completedPercent: 0 };
+        for (const key in lang.tutorials) {
+            const tutos = lang.tutorials[key];
+            for (const tutoKey in tutos) {
+                if (tutoKey === "name") continue;
+                const tutoFocused = tutos[tutoKey];
+                if (this.get(id)?.["rpg"]?.["tutorialProgress"]?.[key]?.[tutoKey] === true) {
+                    totalTutorials.completed += tutoFocused.array.length;
+                }
+                else {
+                    totalTutorials.notCompleted += tutoFocused.array.length;
+                }
+            }
+        }
+        totalTutorials.completedPercent = Math.ceil(
+            (totalTutorials.completed / (totalTutorials.completed + totalTutorials.notCompleted)) * 100,
+        );
+
+        return totalTutorials;
+    }
+
+    /**
      * Get the embed of the player profile.
      * @param {Object} lang The language object
      * @param {AdditionalData} data The inventory data
@@ -179,12 +225,52 @@ class AdditionalDb extends SQLiteTable {
      * @returns {Promise<EmbedBuilder>}
      */
     async getEmbed(lang, data, user) {
-        return new EmbedBuilder()
+        const themesAmount = Object.keys(data.themes.equipped).length;
+        const unlockedThemesAmount = data.themes.unlocked.length;
+
+        const embed = new EmbedBuilder()
             .setTitle(
                 `⟪ ${this.client.enums.Rpg.Databases.Player} ⟫ `
                 + lang.rpgAssets.embeds.additionalTitle.replace("%PLAYER", `\`${user.tag}\``),
             )
-            .setColor(this.client.enums.Colors.Blurple);
+            .setDescription(
+                `__${lang.rpgAssets.concepts.demonBlood}:__ `
+                + `\`${this.client.util.intRender(data.demonBlood, " ")}\``
+                + `${this.client.enums.Rpg.Concepts.DemonBlood}`,
+            )
+            .setColor(this.client.enums.Colors.Blurple)
+            .addFields(
+                {
+                    name: lang.rpgAssets.concepts.themes,
+                    value: `__${lang.rpgAssets.embeds.unlockedThemes}:__`
+                        + ` (\`${unlockedThemesAmount}\`) ${data.themes.unlocked.map(
+                        t => `\`${this.getThemeName(lang, t)}\``,
+                    ).join(", ")}`,
+                    inline: true,
+                },
+                {
+                    name: lang.rpgAssets.embeds.lockedThemes,
+                    value: `\`${themesAmount - unlockedThemesAmount}\` `
+                        + `(${Math.floor(unlockedThemesAmount / themesAmount * 100)}% `
+                        + `${lang.rpgAssets.embeds.percentUnlocked})`,
+                    inline: true,
+                },
+                { name: "\u200b", value: "\u200b", inline: false },
+                {
+                    name: lang.rpgAssets.embeds.executedCommands,
+                    value: `${Object.values(data.rpg.commandsAmount).reduce((a, b) => a + b, 0)}`,
+                    inline: true,
+                },
+                {
+                    name: lang.rpgAssets.concepts.tutorialProgress,
+                    value: `\`${data.rpg.tutorialProgressStats.completedPercent}\`% `
+                        + `(**${data.rpg.tutorialProgressStats.completed}**/`
+                        + `${data.rpg.tutorialProgressStats.completed + data.rpg.tutorialProgressStats.notCompleted})`,
+                    inline: true,
+                },
+            );
+
+        return embed;
     }
 }
 

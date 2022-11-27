@@ -22,8 +22,9 @@ class Profile extends Command {
 
     async run() {
         if (await this.client.playerDb.exists(this.interaction.user.id)) {
-            return await this.interaction.reply({ content: this.lang.systems.playerAlreadyExists, ephemeral: true })
+            await this.interaction.reply({ content: this.lang.systems.playerAlreadyExists, ephemeral: true })
                 .catch(this.client.catchError);
+            return this.end();
         }
 
         const languagesOptions = this.langManager.languages.map(lang => Object.assign(
@@ -52,9 +53,10 @@ class Profile extends Command {
         }).catch(this.client.catchError);
 
         if (!langResponse) {
-            return await this.interaction.editReply({
+             await this.interaction.editReply({
                 content: this.mention + this.lang.systems.choiceIgnored, components: [],
             }).catch(this.client.catchError);
+             return this.end();
         }
         await langResponse.deferUpdate().catch(this.client.catchError);
         const langChoosen = langResponse.values[0];
@@ -97,16 +99,18 @@ class Profile extends Command {
         }).catch(this.client.catchError);
 
         if (!tosResponse) {
-            return await this.interaction.editReply({
+            await this.interaction.editReply({
                 content: this.mention + this.lang.systems.choiceIgnored, components: [],
             }).catch(this.client.catchError);
+            return this.end();
         }
         await tosResponse.deferUpdate().catch(this.client.catchError);
 
         if (tosResponse.values?.length < 3) {
-            return await this.interaction.editReply({
+            await this.interaction.editReply({
                 content: this.mention + this.lang.commands.start.tosDeclined, components: [],
             }).catch(this.client.catchError);
+            return this.end();
         }
 
         const firstCharacter = await this.client.RPGAssetsManager.getCharacter(this.lang._id, "0");
@@ -144,9 +148,10 @@ class Profile extends Command {
         }).catch(this.client.catchError);
 
         if (!choice) {
-            return await this.interaction.editReply({
+            await this.interaction.editReply({
                 content: this.mention + this.lang.systems.choiceIgnored, components: [],
             }).catch(this.client.catchError);
+            return this.end();
         }
 
         await choice.deferUpdate().catch(this.client.catchError);
@@ -157,6 +162,7 @@ class Profile extends Command {
             components: [],
         }).catch(this.client.catchError);
         await this.client.playerDb.create(this.interaction.user.id, chosen.id, langChoosen);
+        return this.end();
     }
 }
 

@@ -9,6 +9,10 @@ class AdditionalData extends TableData {
         this.load();
         this.overwrite();
     }
+
+    load() {
+        this.data.rpg.tutorialProgressStats = this.client.additionalDb.getTutorialProgress(this.lang, this.data.id);
+    }
 }
 
 module.exports = AdditionalData;
