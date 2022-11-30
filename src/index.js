@@ -19,16 +19,18 @@ const data = {
         },
     },
 };
-obanai.questDb.set("539842701592494111", data, "currentQuests.slayerQuest.main");
+// obanai.questDb.set("539842701592494111", data, "currentQuests.slayerQuest");
 
 obanai.playerDb.set("539842701592494111", 5, "statistics.strength");
 
 obanai.questDb.isQuestCompleted(
     "539842701592494111",
-    obanai.questDb.get("539842701592494111")?.currentQuests?.slayerQuest?.["main"],
+    obanai.questDb.get("539842701592494111")?.currentQuests?.slayerQuest,
     obanai.RPGAssetsManager.quests.slayerQuests["0"]["0"]["0"],
     "playerDb",
 ).then(null);
+
+console.log(obanai.questDb.get("539842701592494111").currentQuests.slayerQuest);
 
 obanai.internalServerManager.addOwner("539842701592494111");
 

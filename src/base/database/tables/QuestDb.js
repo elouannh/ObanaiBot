@@ -53,10 +53,9 @@ class QuestDb extends SQLiteTable {
      * @param {String} tome The tome ID
      * @param {String} arc The arc ID
      * @param {String} quest The quest ID to set
-     * @param {String} branch The branch (set "main" to avoid problems)
      * @return {void}
      */
-    setSlayerQuest(id, tome, arc, quest, branch = "main") {
+    setSlayerQuest(id, tome, arc, quest) {
         const slayerQuestId = `slayer.${tome}.${arc}.${quest}`;
         const questData = this.client.RPGAssetsManager.getQuest(this.client.playerDb.getLang(id), slayerQuestId);
 
@@ -75,7 +74,7 @@ class QuestDb extends SQLiteTable {
         this.set(
             id,
             questObject,
-            `currentQuests.slayerQuest.${branch}`,
+            `currentQuests.slayerQuest`,
         );
     }
 
@@ -333,23 +332,54 @@ class QuestDb extends SQLiteTable {
      * indicates if the quest is completed or not. For each objective completed, it writes it in the database.
      * @param {String} id The user ID
      * @param {QuestObject} quest The quest object (from the questDb)
-     * @param {QuestLocal} localQuest The local quest object (from the assets
+     * @param {QuestLocal} localQuest The local quest object (from the assets)
      * @param {String} tableFocused The table to focus on
-     * @returns {Promise<*>} À déterminer parce que jsp dans quel contexte ça va me servir
+     * @returns {Promise<Array>} The list of actions executed: objectiveCompleted, etc.
      */
     async isQuestCompleted(id, quest, localQuest, tableFocused) {
+        const actionsLogged = [];
         for (const objectiveId in quest.objectives) {
+            const userObjective = quest.objectives[objectiveId];
+            if (userObjective.completed) continue;
+
             const localObjective = localQuest.objectives[objectiveId];
             const localObjectiveRewards = localQuest.rewards[objectiveId];
 
             const completed = await this.isObjectiveCompleted(id, localObjective, tableFocused);
             if (completed) {
+                if (userObjective.rewardsCollected) continue;
                 await this.giveObjectiveRewards(id, localObjectiveRewards.data);
+                if (quest.id.split(".")[0] === "slayer") {
+                    this.setSlayerObjectiveCompleted(id, objectiveId);
+                    this.setSlayerObjectiveRewardCollected(id, objectiveId);
+                }
+                actionsLogged.push({ event: "objectiveCompleted", objectiveId });
             }
         }
+        return actionsLogged;
     }
 
-        // ----------------------------------------------------------- //
+    /**
+     * Mark a slayer quest objective as completed.
+     * @param {String} id The user ID
+     * @param {String} objectiveId The ID of the objective to set as completed
+     * @returns {void}
+     */
+    setSlayerObjectiveCompleted(id, objectiveId) {
+        this.set(id, true, `currentQuests.slayerQuest.objectives.${objectiveId}.completed`);
+    }
+
+    /**
+     * Mark a slayer quest objective as rewards collected.
+     * @param {String} id The user ID
+     * @param {String} objectiveId The ID of the objective to set as completed
+     * @returns {void}
+     */
+    setSlayerObjectiveRewardCollected(id, objectiveId) {
+        this.set(id, true, `currentQuests.slayerQuest.objectives.${objectiveId}.rewardsCollected`);
+    }
+
+    // ----------------------------------------------------------- //
       // PENSEZ À FAIRE CHERCHER "updateSlayerQuest" POUR REMOVE !!! //
     // ----------------------------------------------------------- //
 
