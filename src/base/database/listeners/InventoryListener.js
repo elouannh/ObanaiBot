@@ -7,7 +7,7 @@ class InventoryListener extends SQLiteTableChangeListener {
 
     async listener(key, before, after) {
         if (before !== after) {
-            await this.client.questDb.updateSlayerQuest(key, "inventoryDb");
+            // await this.client.questDb.updateSlayerQuest(key, "inventoryDb");
         }
     }
 }

@@ -492,7 +492,10 @@
         "region": "Région",
         "area": "Zone de région",
         "biome": "Biome",
-        "exploration": "Exploration"
+        "exploration": "Exploration",
+        "slayerQuests": "Quêtes de pourfendeur",
+        "sideQuests": "Quêtes annexes",
+        "dailyQuests": "Quêtes journalières"
     },
     "embeds": {
         "activityTitle": "Activité - %PLAYER",

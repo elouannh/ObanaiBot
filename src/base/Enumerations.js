@@ -38,6 +38,9 @@ module.exports = {
         },
         Concepts: {
             DemonBlood: "🩸",
+            SlayerQuests: "🎴",
+            SideQuests: "👺",
+            DailyQuests: "📆",
         },
     },
     Systems: {
