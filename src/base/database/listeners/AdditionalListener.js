@@ -7,7 +7,7 @@ class AdditionalListener extends SQLiteTableChangeListener {
 
     async listener(key, before, after) {
         if (before !== after) {
-            // await this.client.questDb.updateSlayerQuest(key, "additionalDb");
+            // await this.client.questDb.verifyAllQuests(key, "additionalDb");
         }
     }
 }

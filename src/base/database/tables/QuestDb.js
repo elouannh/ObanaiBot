@@ -7,16 +7,17 @@ function schema(id) {
     return {
         id: id,
         currentQuests: {
-            dailyQuests: {},
-            sideQuests: {},
+            dailyQuest: {},
+            sideQuest: {},
             slayerQuest: {},
         },
         completedQuests: {
-            dailyQuests: {},
-            sideQuests: {},
+            dailyQuest: {},
+            sideQuest: {},
             slayerQuest: {},
         },
         storyProgression: [0, 0, null],
+        notifications: "dm",
     };
 }
 
@@ -30,20 +31,19 @@ class QuestDb extends SQLiteTable {
     }
 
     /**
-     * Sets the current daily quest for the user. The branch designs if it's the 1st or 2nd quest.
+     * Sets the current daily quest for the user.
      * @param {String} id The user ID
      * @param {String} questId The quest ID to set
-     * @param {String} branch The branch (e.g. "0" or "1")
      * @return {void}
      */
-    setDailyQuest(id, questId, branch = "0") {
+    setDailyQuest(id, questId) {
         const dailyQuestId = `daily.${questId}`;
         const dailyQuest = this.client.RPGAssetsManager.getQuest(this.client.playerDb.getLang(id), dailyQuestId);
 
         this.set(
             id,
             dailyQuest,
-            `currentQuests.dailyQuests.${branch}`,
+            "currentQuests.dailyQuest",
         );
     }
 
@@ -74,7 +74,7 @@ class QuestDb extends SQLiteTable {
         this.set(
             id,
             questObject,
-            `currentQuests.slayerQuest`,
+            "currentQuests.slayerQuest",
         );
     }
 
@@ -349,11 +349,12 @@ class QuestDb extends SQLiteTable {
             if (completed) {
                 if (userObjective.rewardsCollected) continue;
                 await this.giveObjectiveRewards(id, localObjectiveRewards.data);
-                if (quest.id.split(".")[0] === "slayer") {
-                    this.setSlayerObjectiveCompleted(id, objectiveId);
-                    this.setSlayerObjectiveRewardCollected(id, objectiveId);
-                }
+                this.setObjectiveCompleted(id, quest.id.split(".")[0], objectiveId);
+                this.setObjectiveRewardCollected(id, quest.id.split(".")[0], objectiveId);
                 actionsLogged.push({ event: "objectiveCompleted", objectiveId });
+            }
+            else {
+                actionsLogged.push({ event: "objectiveNotCompleted", objectiveId });
             }
         }
         return actionsLogged;
@@ -362,26 +363,74 @@ class QuestDb extends SQLiteTable {
     /**
      * Mark a slayer quest objective as completed.
      * @param {String} id The user ID
+     * @param {String} questCategory The quest type (daily/side/slayer)
      * @param {String} objectiveId The ID of the objective to set as completed
      * @returns {void}
      */
-    setSlayerObjectiveCompleted(id, objectiveId) {
-        this.set(id, true, `currentQuests.slayerQuest.objectives.${objectiveId}.completed`);
+    setObjectiveCompleted(id, questCategory, objectiveId) {
+        this.set(id, true, `currentQuests.${questCategory}Quest.objectives.${objectiveId}.completed`);
     }
 
     /**
      * Mark a slayer quest objective as rewards collected.
      * @param {String} id The user ID
+     * @param {String} questCategory The quest type (daily/side/slayer)
      * @param {String} objectiveId The ID of the objective to set as completed
      * @returns {void}
      */
-    setSlayerObjectiveRewardCollected(id, objectiveId) {
-        this.set(id, true, `currentQuests.slayerQuest.objectives.${objectiveId}.rewardsCollected`);
+    setObjectiveRewardCollected(id, questCategory, objectiveId) {
+        this.set(id, true, `currentQuests.${questCategory}Quest.objectives.${objectiveId}.rewardsCollected`);
     }
 
-    // ----------------------------------------------------------- //
-      // PENSEZ À FAIRE CHERCHER "updateSlayerQuest" POUR REMOVE !!! //
-    // ----------------------------------------------------------- //
+    /**
+     * @typedef {Object} VerifiedQuestActions
+     * @property {Boolean} dailyFinished If the daily quest is finished
+     * @property {Boolean} sideFinished If the side quest is finished
+     * @property {Boolean} slayerFinished If the slayer quest is finished
+     * @property {Object[]} dailyActions The list of actions executed for daily quest: objectiveCompleted, etc.
+     * @property {Object[]} sideActions The list of actions executed for side quest: objectiveCompleted, etc.
+     * @property {Object[]} slayerActions The list of actions executed for slayer quest: objectiveCompleted, etc.
+     */
+    /**
+     * Function that will verify each quests one by one to see if they are completed
+     * @param {String} id The user ID
+     * @param {String} tableFocused The table to focus on
+     * @returns {Promise<VerifiedQuestActions>}
+     */
+    async verifyAllQuests(id, tableFocused) {
+        const quests = await this.get(id);
+
+        const dailyQuest = quests.currentQuests.dailyQuest;
+        const dailyActions = dailyQuest === {} ? [] : await this.isQuestCompleted(
+            id,
+            dailyQuest,
+            this.client.RPGAssetsManager.quests.dailyQuest[dailyQuest.id],
+            tableFocused,
+        );
+
+        const sideQuest = quests.currentQuests.sideQuest;
+        const sideActions = sideQuest === {} ? [] : await this.isQuestCompleted(
+            id,
+            sideQuest,
+            this.client.RPGAssetsManager.quests[sideQuest.id],
+            tableFocused,
+        );
+
+        const slayerQuest = quests.currentQuests.slayerQuest;
+        const slayerActions = slayerQuest === {} ? [] : await this.isQuestCompleted(
+            id,
+            slayerQuest,
+            this.client.RPGAssetsManager.quests.slayerQuests[slayerQuest.id],
+            tableFocused,
+        );
+
+        return {
+            dailyFinished: dailyActions.length > 0 && dailyActions.every((action) => action.event === "objectiveCompleted"),
+            sideFinished: sideActions.length > 0 && sideActions.every((action) => action.event === "objectiveCompleted"),
+            slayerFinished: slayerActions.length > 0 && slayerActions.every((action) => action.event === "objectiveCompleted"),
+            dailyActions, sideActions, slayerActions,
+        };
+    }
 
     /**
      * Get the embed of the player profile.
@@ -400,15 +449,15 @@ class QuestDb extends SQLiteTable {
 
         const sideEmbed = new EmbedBuilder()
             .setTitle(
-                `⟪ ${this.client.enums.Rpg.Concepts.SideQuests} ⟫ `
-                + lang.rpgAssets.concepts.sideQuests + ` - \`${user.tag}\``,
+                `⟪ ${this.client.enums.Rpg.Concepts.sideQuest} ⟫ `
+                + lang.rpgAssets.concepts.sideQuest + ` - \`${user.tag}\``,
             )
             .setColor(this.client.enums.Colors.Blurple);
 
         const dailyEmbed = new EmbedBuilder()
             .setTitle(
-                `⟪ ${this.client.enums.Rpg.Concepts.DailyQuests} ⟫ `
-                + lang.rpgAssets.concepts.dailyQuests + ` - \`${user.tag}\``,
+                `⟪ ${this.client.enums.Rpg.Concepts.dailyQuest} ⟫ `
+                + lang.rpgAssets.concepts.dailyQuest + ` - \`${user.tag}\``,
             )
             .setColor(this.client.enums.Colors.Blurple);
 

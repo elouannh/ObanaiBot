@@ -21,8 +21,8 @@ class QuestData extends TableData {
                 }
                 this.data[collection][questType] = questsTypeArray;
             }
-            this.data[collection].dailyAmount = this.data[collection].dailyQuests.length;
-            this.data[collection].sideAmount = this.data[collection].sideQuests.length;
+            this.data[collection].dailyAmount = this.data[collection].dailyQuest.length;
+            this.data[collection].sideAmount = this.data[collection].sideQuest.length;
             this.data[collection].slayerAmount = this.data[collection].slayerQuest.length;
         }
     }

@@ -7,7 +7,7 @@ class PlayerListener extends SQLiteTableChangeListener {
 
     async listener(key, before, after) {
         if (before !== after) {
-            // await this.client.questDb.updateSlayerQuest(key, "playerDb");
+            // await this.client.questDb.verifyAllQuests(key, "playerDb");
         }
     }
 }

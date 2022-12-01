@@ -58,11 +58,11 @@ class Quests extends Command {
                 .setCustomId("Slayer"),
             new ButtonBuilder()
                 .setStyle(ButtonStyle.Secondary)
-                .setEmoji(this.client.enums.Rpg.Concepts.SideQuests)
+                .setEmoji(this.client.enums.Rpg.Concepts.sideQuest)
                 .setCustomId("Side"),
             new ButtonBuilder()
                 .setStyle(ButtonStyle.Secondary)
-                .setEmoji(this.client.enums.Rpg.Concepts.DailyQuests)
+                .setEmoji(this.client.enums.Rpg.Concepts.dailyQuest)
                 .setCustomId("Daily"),
         ];
 

@@ -163,7 +163,7 @@ class RPGAssetsManager {
             return new RPGQuest(
                 this.getLangData(lang, "quests"),
                 id,
-                this.quests.dailyQuests[questId],
+                this.quests.dailyQuest[questId],
                 questData,
             );
         }
