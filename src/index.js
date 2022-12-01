@@ -1,13 +1,7 @@
 require("dotenv").config();
-const fs = require("fs");
 const obanai = new (require("./base/Obanai"))();
+const main = require("./main");
 
-obanai.internalServerManager.addOwner("539842701592494111");
-
-obanai.inventoryDb.get("539842701592494111");
-
-// obanai.playerDb.load("539842701592494111").then((player) => {
-//     obanai.playerDb.getImage(player).then((image) => fs.writeFileSync("./image.png", image.buffer));
-// });
+void main(obanai);
 
 void obanai.launch();

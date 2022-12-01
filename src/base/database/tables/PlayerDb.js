@@ -123,6 +123,19 @@ class PlayerDb extends SQLiteTable {
     }
 
     /**
+     * Add xp to the player
+     * @param {String} id The user ID
+     * @param {Number} amount The amount to add
+     * @returns {Number} The new xp amount
+     */
+    addExp(id, amount) {
+        const previousAmount = this.get(id).exp;
+        const newAmount = previousAmount + amount;
+        this.set(id, newAmount, "exp");
+        return newAmount;
+    }
+
+    /**
      * @typedef {Object} ThemeAttachment
      * @property {String} name The theme name
      * @property {Buffer} buffer The canvas Buffer

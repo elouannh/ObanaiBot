@@ -88,49 +88,18 @@ class InternalServerManager extends SQLiteTable {
         return bitfield;
     }
 
-    async slayerQuestGenerator() {
-        const players = this.client.playerDb.db.array();
-
-        for (const player of players) {
-            this.client.questDb.ensureInDeep(player.id);
-            const questData = await this.client.questDb.load(player.id);
-
-            if (questData.currentQuests.slayerAmount === 0) {
-                const userQuest = questData.storyProgression;
-                this.client.questDb.setSlayerQuest(player.id, userQuest.tome, userQuest.arc, userQuest.quest);
-            }
-        }
-    }
-
-    async dailyQuestGenerator() {
-        const players = this.client.playerDb.db.array();
-
-        for (const player of players) {
-            this.client.questDb.ensureInDeep(player.id);
-            const questData = await this.client.questDb.load(player.id);
-
-            if (questData.currentQuests.dailyAmount === 0) {
-                const quests = Object.keys(this.client.RPGAssetsManager.quests.dailyQuests)
-                    .sort(() => Math.random() - 0.5)
-                    .slice(0, 2);
-
-                for (let i = 0; i < 2; i++) this.client.questDb.setDailyQuest(player.id, quests[i], `${i}`);
-            }
-        }
-    }
-
     async questGenerator() {
         setInterval(async () => {
-            await this.slayerQuestGenerator();
+            void null;
         }, 600_000);
 
         const lastRefresh = (Date.now() - this.delays.dailyQuestGenerator);
         const timeLeft = (86_400_000 - lastRefresh);
         setTimeout(async () => {
-            await this.dailyQuestGenerator();
+            void null;
 
             setInterval(async () => {
-                await this.dailyQuestGenerator();
+                void null;
             }, 86_400_000);
         }, timeLeft);
     }

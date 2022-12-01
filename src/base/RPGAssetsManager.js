@@ -143,30 +143,15 @@ class RPGAssetsManager {
         );
     }
 
-    getQuest(lang, id, questData = null) {
-        if (id.startsWith("slayer")) {
-            const [tome, arc, quest] = id.split(".").slice(1);
-            if (!(tome in this.quests.slayerQuests)) return "Invalid Slayer Quest Tome ID";
-            if (!(arc in this.quests.slayerQuests[tome])) return "Invalid Slayer Quest Arc ID";
-            if (!(quest in this.quests.slayerQuests[tome][arc])) return "Invalid Slayer Quest ID";
+    getQuest(lang, id) {
+        const questType = `${id.split(".")[0]}Quests`;
+        if (!(questType in this.quests)) return "Invalid Quest Type";
+        if (!(id in this.quests[questType])) return "Invalid Quest ID";
 
-            return new RPGQuest(
-                this.getLangData(lang, "quests"),
-                id,
-                Object.assign(this.quests.slayerQuests[tome][arc][quest], { tome, arc, quest }),
-                questData,
-            );
-        }
-        else if (id.startsWith("daily")) {
-            const questId = id.split(".")[1];
-
-            return new RPGQuest(
-                this.getLangData(lang, "quests"),
-                id,
-                this.quests.dailyQuests[questId],
-                questData,
-            );
-        }
+        return new RPGQuest(
+            this.getLangData(lang, "quests"),
+            id,
+        );
     }
 }
 

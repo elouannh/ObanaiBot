@@ -1,17 +1,8 @@
 const RPGAssetBase = require("./RPGAssetBase");
 
 class RPGQuestObjective extends RPGAssetBase {
-    constructor(lang, id, questObjectiveDatas) {
+    constructor(lang, id) {
         super(lang, id);
-
-        this.data = {
-            type: questObjectiveDatas.type,
-            additionalData: questObjectiveDatas.additionalData,
-            user: {
-                completed: questObjectiveDatas.completed,
-                rewardsCollected: questObjectiveDatas.rewardsCollected,
-            },
-        };
 
         this.overwrite();
     }
