@@ -3,7 +3,6 @@ module.exports = async obanai => {
 
     const exists = await obanai.playerDb.exists("539842701592494111");
     if (!exists) void await obanai.playerDb.create("539842701592494111", "0", "fr");
-
     const data = {
         id: "slayer.0.0.0",
         objectives: {
@@ -19,9 +18,10 @@ module.exports = async obanai => {
     };
     await obanai.questDb.set("539842701592494111", data, "currentQuests.slayerQuest");
 
-    const verified = await obanai.questDb.verifyAllQuests("539842701592494111", "playerDb");
+    const player = await obanai.questDb.get("539842701592494111");
+    console.log(obanai.RPGAssetsManager.getQuest("fr", "slayer.0.0.0"));
 
-    console.log(obanai.questDb.get("539842701592494111").currentQuests.slayerQuest);
+    // const verified = await obanai.questDb.verifyAllQuests("539842701592494111", "playerDb");
 
     obanai.internalServerManager.addOwner("539842701592494111");
 };
