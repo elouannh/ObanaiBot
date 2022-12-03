@@ -7,7 +7,7 @@ class SquadListener extends SQLiteTableChangeListener {
 
     async overListener(key, before, after) {
         if (before !== after) {
-            await this.client.questDb.verifyAllQuests(key, "squadDb");
+            await this.client.questDb.notifyQuests(key, "squadDb");
         }
     }
 }

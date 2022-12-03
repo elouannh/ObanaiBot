@@ -319,7 +319,7 @@ class QuestDb extends SQLiteTable {
         for (const [key, reward = objectiveRewards[key]] in objectiveRewards) {
             switch (reward.type) {
                 case "exp":
-                    void this.client.playerDb.addExp(id, reward.amount);
+                    void this.client.playerDb.addExp(id, reward.data.amount);
                     break;
                 default:
                     break;
@@ -338,6 +338,7 @@ class QuestDb extends SQLiteTable {
      */
     async isQuestCompleted(id, quest, localQuest, tableFocused) {
         const actionsLogged = [];
+        const rewardsToAdd = [];
         for (const objectiveId in quest.objectives) {
             const userObjective = quest.objectives[objectiveId];
             if (userObjective.completed) continue;
@@ -346,15 +347,27 @@ class QuestDb extends SQLiteTable {
             const localObjectiveRewards = localQuest.rewards[objectiveId];
 
             const completed = await this.isObjectiveCompleted(id, localObjective, tableFocused);
-            if (completed) {
-                if (userObjective.rewardsCollected) continue;
-                await this.giveObjectiveRewards(id, localObjectiveRewards.data);
+            if (
+                completed &&
+                !this.get(id).currentQuests[`${quest.id.split(".")[0]}Quest`].objectives[objectiveId].completed
+            ) {
+                if (
+                    userObjective.rewardsCollected ||
+                    this.get(id).currentQuests[`${quest.id.split(".")[0]}Quest`].objectives[objectiveId].rewardsCollected
+                ) continue;
+
+                rewardsToAdd.push(localObjectiveRewards.data);
                 this.setObjectiveCompleted(id, quest.id.split(".")[0], objectiveId);
                 this.setObjectiveRewardCollected(id, quest.id.split(".")[0], objectiveId);
                 actionsLogged.push({ event: "objectiveCompleted", objectiveId });
             }
             else {
                 actionsLogged.push({ event: "objectiveNotCompleted", objectiveId });
+            }
+        }
+        if (rewardsToAdd.length > 0) {
+            for (const reward of rewardsToAdd) {
+                await this.giveObjectiveRewards(id, reward);
             }
         }
         return actionsLogged;
@@ -430,6 +443,37 @@ class QuestDb extends SQLiteTable {
             slayerFinished: slayerActions.length > 0 && slayerActions.every((action) => action.event === "objectiveCompleted"),
             dailyActions, sideActions, slayerActions,
         };
+    }
+
+    /**
+     * Function that will notify if a quest is completed or not.
+     * @param {String} id The user ID
+     * @param {String} tableFocused The table to focus on
+     */
+    async notifyQuests(id, tableFocused) {
+        const lang = this.client.languageManager.getLang(this.client.playerDb.get(id));
+        const verified = await this.verifyAllQuests(id, tableFocused);
+        const userQuests = await this.get(id);
+
+        const embed = new EmbedBuilder()
+            .setColor(this.client.enums.Colors.Green);
+
+        if (
+            verified.slayerActions.length > 0 &&
+            !verified.slayerActions.every((action) => action.event === "objectiveNotCompleted")
+        ) {
+            const quest = this.client.RPGAssetsManager.getQuest(lang.id, userQuests.currentQuests.slayerQuest.id);
+            let name = lang.rpgAssets.quests.questCompleted;
+            let value = `**${lang.rpgAssets.concepts.quest}: ${quest.name}**`;
+            if (!verified.slayerFinished) {
+                name = lang.rpgAssets.quests.objectivesCompleted;
+                let value = `**${lang.rpgAssets.concepts.quest}: ${quest.name}**`;
+            }
+
+            embed.addFields({ name, value, inline: false });
+        }
+
+        return embed;
     }
 
     /**

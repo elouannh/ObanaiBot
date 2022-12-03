@@ -14,12 +14,13 @@ module.exports = async obanai => {
             },
         },
     };
-    // await obanai.questDb.set("539842701592494111", data, "currentQuests.slayerQuest");
+    await obanai.questDb.set("539842701592494111", data, "currentQuests.slayerQuest");
 
-    obanai.playerDb.set("539842701592494111", 7, "statistics.strength");
+    await obanai.playerDb.set("539842701592494111", 7, "statistics.strength");
+    await obanai.playerDb.set("539842701592494111", 8, "statistics.defense");
 
-    const player = await obanai.questDb.get("539842701592494111");
-    console.log(obanai.RPGAssetsManager.loadQuest("fr", "slayer.0.0.0", player.currentQuests.slayerQuest));
+    // const quest = await obanai.questDb.get("539842701592494111");
+
 
     obanai.internalServerManager.addOwner("539842701592494111");
 };

@@ -61,5 +61,10 @@ module.exports = {
     },
     Colors: {
         Blurple: 0x5865f2,
+        Green: 0x44c767,
+    },
+    Units: {
+        MinutesPerDistanceUnit: 5,
+        MinutesOfForgingPerRarity: 120,
     },
 };

@@ -7,6 +7,9 @@ const {
     NewsChannel,
     ThreadChannel,
     GuildTextBasedChannel,
+    DMChannel,
+    MessagePayload,
+    MessageCreateOptions,
 } = require("discord.js");
 const chalk = require("chalk");
 const PlayerDb = require("./database/tables/PlayerDb");
@@ -140,6 +143,12 @@ class Obanai extends Client {
         }
     }
 
+    /**
+     * Returns the user if the id is able to be fetched.
+     * @param {String} id The user ID
+     * @param {*} secureValue The value to be returned if the user is not found
+     * @returns {Promise<User & {cached: Boolean}>}
+     */
     async getUser(id, secureValue) {
         let user = secureValue;
         let cached = false;
@@ -160,6 +169,7 @@ class Obanai extends Client {
     /**
      * Get the link of the message above the context.
      * @param {GuildTextBasedChannel|TextChannel|ThreadChannel|NewsChannel} channel The channel instance
+     * @returns {Promise<String>}
      */
     async getPlaceLink(channel) {
         let link = null;
@@ -170,6 +180,45 @@ class Obanai extends Client {
             this.catchError(err);
         }
         return link;
+    }
+
+    /**
+     * Returns the channel if able to be fetched.
+     * @param {String} id The channel ID
+     * @param {*} secureValue The value to be returned if the channel is not found
+     * @returns {Promise<GuildTextBasedChannel|TextChannel|ThreadChannel|NewsChannel & {cached: Boolean}>}
+     */
+    async getChannel(id, secureValue) {
+        let channel = secureValue;
+        let cached = false;
+
+        try {
+            if (
+                (await this.channels.fetch(id) instanceof GuildTextBasedChannel)
+                || (await this.channels.fetch(id) instanceof TextChannel)
+                || (await this.channels.fetch(id) instanceof ThreadChannel)
+                || (await this.channels.fetch(id) instanceof NewsChannel)
+                || (await this.channels.fetch(id) instanceof DMChannel)
+            ) {
+                channel = await this.channels.fetch(id);
+                cached = true;
+            }
+        }
+        catch (err) {
+            this.catchError(err);
+        }
+
+        return Object.assign(channel, { cached });
+    }
+
+    /**
+     * Notify the user in a specific channel.
+     * @param {String} id The user ID
+     * @param {MessagePayload|MessageCreateOptions} payload The payload to send
+     * @returns {Promise<string>}
+     */
+    async notify(id, payload) {
+        const channel = await this.channels.fetch(this.config.channels.notifications);
     }
 
     launch() {

@@ -52,7 +52,7 @@ class ActivityData extends TableData {
 
             this.data.travel.endedDate = this.client.util.round(
                 this.data.travel.startedDate
-                + (this.data.travel.distance * this.client.config.rpg.minutesPerDistanceUnit * 60 * 1000),
+                + (this.data.travel.distance * this.client.enums.Units.MinutesPerDistanceUnit * 60 * 1000),
             );
         }
         else {
@@ -69,7 +69,7 @@ class ActivityData extends TableData {
                     id: forgeId,
                     startedDate: this.data.forge.forgingSlots[forgeId].startedDate,
                     endedDate: this.data.forge.forgingSlots[forgeId].startedDate
-                        + this.client.config.rpg.minutesOfForgingPerRarity
+                        + this.client.enums.Units.MinutesOfForgingPerRarity
                         * Number(this.data.forge.forgingSlots[forgeId].weapon.rarity) * 60 * 1000,
                     currentlyForging: this.data.forge.forgingSlots[forgeId].currentlyForging,
                     weapon: this.client.RPGAssetsManager.getWeapon(

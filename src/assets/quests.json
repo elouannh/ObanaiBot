@@ -29,7 +29,9 @@
                         "0": {
                             "id": "0",
                             "type": "exp",
-                            "amount": 100
+                            "data": {
+                                "amount": 100
+                            }
                         }
                     }
                 },
@@ -39,7 +41,9 @@
                         "0": {
                             "id": "0",
                             "type": "exp",
-                            "amount": 200
+                            "data": {
+                                "amount": 100
+                            }
                         }
                     }
                 }
