@@ -1,4 +1,5 @@
 const SQLiteTable = require("../../SQLiteTable");
+const SquadListener = require("../listeners/SquadListener");
 const SquadData = require("../dataclasses/SquadData");
 
 function schema(id) {
@@ -16,7 +17,7 @@ function schema(id) {
 
 class SquadDb extends SQLiteTable {
     constructor(client) {
-        super(client, "squad", schema);
+        super(client, "squad", schema, SquadListener);
     }
 
     idGenerator() {

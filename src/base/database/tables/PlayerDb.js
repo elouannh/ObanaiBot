@@ -1,5 +1,6 @@
 const SQLiteTable = require("../../SQLiteTable");
 const PlayerData = require("../dataclasses/PlayerData");
+const PlayerListener = require("../listeners/PlayerListener");
 const Canvas = require("canvas");
 const { AttachmentBuilder, EmbedBuilder, User } = require("discord.js");
 const StackBlur = require("stackblur-canvas");
@@ -26,7 +27,7 @@ function schema(id) {
 
 class PlayerDb extends SQLiteTable {
     constructor(client) {
-        super(client, "player", schema);
+        super(client, "player", schema, PlayerListener);
     }
 
     async load(id) {

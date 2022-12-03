@@ -409,7 +409,7 @@
             "description": ""
         },
         "7": {
-            "label": "Pourfendeur de rang Kinoe",
+            "label": "Joueur de Shamisen",
             "description": ""
         },
         "8": {
@@ -439,10 +439,6 @@
         "14": {
             "label": "Oiran",
             "description": ""
-        },
-        "15": {
-            "label": "Joueuse de Shamisen",
-            "description": ""
         }
     },
     "weapons": {
@@ -468,6 +464,19 @@
             "8": "Enchanté",
             "9": "Démoniaque",
             "10": "Limité"
+        }
+    },
+    "quests": {
+        "objectiveCompleted": "Objectif terminé",
+        "objectiveNotCompleted": "Objectif non terminé",
+        "slayer.0.0.0": {
+            "id": "slayer.0.0.0",
+            "name": "Chapitre 1 - Obanai Iguro",
+            "label": "Tome 0 - Arc 0 « L'étrange Shukuba »",
+            "objectives": {
+                "0": "Atteignez le niveau 4 en force.",
+                "1": "Renforcez votre défense au niveau 7."
+            }
         }
     },
     "concepts": {

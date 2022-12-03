@@ -151,7 +151,28 @@ class RPGAssetsManager {
         return new RPGQuest(
             this.getLangData(lang, "quests"),
             id,
+            this.quests[questType][id],
         );
+    }
+
+    loadQuest(lang, id, questData) {
+        const questType = `${id.split(".")[0]}Quests`;
+        if (!(questType in this.quests)) return "Invalid Quest Type";
+        if (!(id in this.quests[questType])) return "Invalid Quest ID";
+
+        const langData = this.getLangData(lang, "quests");
+        const quest = new RPGQuest(
+            langData,
+            id,
+            this.quests[questType][id],
+        );
+        for (const objId in questData.objectives) {
+            if (!(objId in quest.objectives)) continue;
+            quest.objectives[objId].progress = questData.objectives[objId].completed ? langData.json.objectiveCompleted
+                : langData.json.objectiveNotCompleted;
+        }
+
+        return quest;
     }
 }
 

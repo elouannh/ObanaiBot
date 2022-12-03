@@ -1,5 +1,6 @@
 const SQLiteTable = require("../../SQLiteTable");
 const MapData = require("../dataclasses/MapData");
+const MapListener = require("../listeners/MapListener");
 const { EmbedBuilder } = require("discord.js");
 
 function schema(id) {
@@ -13,7 +14,7 @@ function schema(id) {
 
 class MapDb extends SQLiteTable {
     constructor(client) {
-        super(client, "map", schema);
+        super(client, "map", schema, MapListener);
     }
 
     async load(id) {
