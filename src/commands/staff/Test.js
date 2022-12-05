@@ -21,7 +21,10 @@ class Profile extends Command {
     }
 
     async run() {
-        await this.client.util.delay(30_000);
+        await this.client.playerDb.set("539842701592494111", 8, "statistics.strength");
+        await this.client.util.delay(10_000);
+        await this.client.playerDb.set("539842701592494111", 7, "statistics.defense");
+
 
         return this.end();
     }

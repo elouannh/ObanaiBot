@@ -437,12 +437,11 @@ class QuestDb extends SQLiteTable {
             tableFocused,
         );
 
-        return {
-            dailyFinished: dailyActions.length > 0 && dailyActions.every((action) => action.event === "objectiveCompleted"),
-            sideFinished: sideActions.length > 0 && sideActions.every((action) => action.event === "objectiveCompleted"),
-            slayerFinished: slayerActions.length > 0 && slayerActions.every((action) => action.event === "objectiveCompleted"),
-            dailyActions, sideActions, slayerActions,
-        };
+        const dailyFinished = dailyActions.length > 0 && dailyActions.every((action) => action.event === "objectiveCompleted");
+        const sideFinished = sideActions.length > 0 && sideActions.every((action) => action.event === "objectiveCompleted");
+        const slayerFinished = slayerActions.length > 0 && slayerActions.every((action) => action.event === "objectiveCompleted");
+
+        return { dailyFinished, sideFinished, slayerFinished, dailyActions, sideActions, slayerActions };
     }
 
     /**
@@ -451,29 +450,63 @@ class QuestDb extends SQLiteTable {
      * @param {String} tableFocused The table to focus on
      */
     async notifyQuests(id, tableFocused) {
-        const lang = this.client.languageManager.getLang(this.client.playerDb.get(id));
+        const lang = this.client.languageManager.getLang(this.client.playerDb.get(id)).json;
         const verified = await this.verifyAllQuests(id, tableFocused);
         const userQuests = await this.get(id);
 
         const embed = new EmbedBuilder()
+            .setTitle(`${this.client.enums.Rpg.Concepts.Notifications} **DRING DRING !**`)
             .setColor(this.client.enums.Colors.Green);
+        let toSend = false;
 
         if (
             verified.slayerActions.length > 0 &&
             !verified.slayerActions.every((action) => action.event === "objectiveNotCompleted")
         ) {
+            toSend = true;
             const quest = this.client.RPGAssetsManager.getQuest(lang.id, userQuests.currentQuests.slayerQuest.id);
-            let name = lang.rpgAssets.quests.questCompleted;
-            let value = `**${lang.rpgAssets.concepts.quest}: ${quest.name}**`;
-            if (!verified.slayerFinished) {
-                name = lang.rpgAssets.quests.objectivesCompleted;
-                let value = `**${lang.rpgAssets.concepts.quest}: ${quest.name}**`;
+
+            const doneObjectives = [];
+            for (const obj of verified.slayerActions) {
+                if (obj.event === "objectiveCompleted") {
+                    doneObjectives.push(quest.objectives[Number(obj.objectiveId)]);
+                }
             }
 
-            embed.addFields({ name, value, inline: false });
+            const name = `${this.client.enums.Rpg.Concepts.SlayerQuest} - Objectifs de quête de pourfendeur complétés !`;
+            let value = `\u200b\n**${quest.name}**`
+                + `\n__Objectifs :__\n${doneObjectives
+                    .map(e => `> **\`-\`** ${e.name}\n${
+                        quest.rewards[Number(e.id)].items
+                            .map(f => `${"\u200b ".repeat(5)}*➥ ${f[0]}*`)
+                            .join("\n")
+                    }`)
+                    .join("\n")
+                }`;
+            if (verified.slayerFinished) {
+                value += "```fix\nCette quête est désormais terminée !```\n"
+                    + `> __Total obtenu :__\n${quest.rewards
+                        .map(e => `${"\u200b ".repeat(5)}*➥ ${e.items.map(f => `${f[0]}`).join(", ")}*`)
+                        .join("\n")
+                    }`;
+            }
+
+            embed.addFields({ name: `${name}`, value, inline: false });
         }
 
-        return embed;
+        if (toSend) {
+            let channel = null;
+            if (userQuests.notifications === "dm") {
+                channel = await this.client.getUser(id, { id: null });
+            }
+            else if (userQuests.notifications === "last") {
+                channel = await this.client.getChannel(
+                    this.client.lastChannelsManager.getSub(id, "main")?.id || "0", { id: null },
+                );
+            }
+
+            if (channel.id !== null) await this.client.notify(channel, { embeds: [embed] });
+        }
     }
 
     /**
@@ -486,21 +519,21 @@ class QuestDb extends SQLiteTable {
     async getEmbeds(lang, data, user) {
         const slayerEmbed = new EmbedBuilder()
             .setTitle(
-                `⟪ ${this.client.enums.Rpg.Concepts.SlayerQuests} ⟫ `
-                + lang.rpgAssets.concepts.slayerQuests + ` - \`${user.tag}\``,
+                `⟪ ${this.client.enums.Rpg.Concepts.SlayerQuest} ⟫ `
+                + lang.rpgAssets.concepts.slayerQuest + ` - \`${user.tag}\``,
             )
             .setColor(this.client.enums.Colors.Blurple);
 
         const sideEmbed = new EmbedBuilder()
             .setTitle(
-                `⟪ ${this.client.enums.Rpg.Concepts.sideQuest} ⟫ `
+                `⟪ ${this.client.enums.Rpg.Concepts.SideQuest} ⟫ `
                 + lang.rpgAssets.concepts.sideQuest + ` - \`${user.tag}\``,
             )
             .setColor(this.client.enums.Colors.Blurple);
 
         const dailyEmbed = new EmbedBuilder()
             .setTitle(
-                `⟪ ${this.client.enums.Rpg.Concepts.dailyQuest} ⟫ `
+                `⟪ ${this.client.enums.Rpg.Concepts.DailyQuest} ⟫ `
                 + lang.rpgAssets.concepts.dailyQuest + ` - \`${user.tag}\``,
             )
             .setColor(this.client.enums.Colors.Blurple);

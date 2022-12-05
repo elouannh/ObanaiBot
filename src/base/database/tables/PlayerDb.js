@@ -212,7 +212,7 @@ class PlayerDb extends SQLiteTable {
         context.stroke();
         context.restore();
 
-        const avatar = (await this.client.getUser(playerData.id, {}))?.avatarURL({ format: "png" })
+        const avatar = (await this.client.getUser(playerData.id, { id: null }))?.avatarURL({ format: "png" })
             ?? theme[`Default${this.client.util.capitalize(playerData.character.gender)}`];
 
         const userAvatar = await Canvas.loadImage(await this.client.util.getRoundImage(avatar));

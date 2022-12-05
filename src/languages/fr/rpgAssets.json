@@ -467,9 +467,6 @@
         }
     },
     "quests": {
-        "objectivesCompleted": "Objectif(s) terminé(s)",
-        "objectivesNotCompleted": "Objectif(s) non terminé(s)",
-        "questCompleted": "Quête terminée",
         "slayer.0.0.0": {
             "id": "slayer.0.0.0",
             "name": "Chapitre 1 - Obanai Iguro",
@@ -479,6 +476,10 @@
                 "1": "Renforcez votre défense au niveau 7."
             }
         }
+    },
+    "rewards": {
+        "undefined": "Inconnue",
+        "exp": "Expérience x**%AMOUNT**"
     },
     "concepts": {
         "hp": "PV",
@@ -503,7 +504,7 @@
         "area": "Zone de région",
         "biome": "Biome",
         "exploration": "Exploration",
-        "slayerQuests": "Quête de pourfendeur",
+        "slayerQuest": "Quête de pourfendeur",
         "sideQuest": "Quête annexe",
         "dailyQuest": "Quête journalière",
         "quest": "Quête"

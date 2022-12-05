@@ -4,10 +4,6 @@ const {
     User,
     EmbedBuilder,
     TextChannel,
-    NewsChannel,
-    ThreadChannel,
-    GuildTextBasedChannel,
-    DMChannel,
     MessagePayload,
     MessageCreateOptions,
 } = require("discord.js");
@@ -118,14 +114,10 @@ class Obanai extends Client {
         if (data.min.length < 2) data.min = "0" + data.min;
         if (data.sec.length < 2) data.sec = "0" + data.sec;
         console.log(chalk.redBright(`[${data.month}/${data.day}] [${data.hour}:${data.hour}:${data.sec}]  |  Error: ${error.stack}`));
-
-        if (this.env.TEST_MODE === "1") {
-            console.log(error);
-        }
     }
 
     async throwError(error, origin) {
-        const channel = this.guilds.cache.get(this.config.testing).channels.cache.get(this.config.channels.errors);
+        const channel = this.guilds.cache.get(this.config.testing).channels.cache.get(this.config.errorsChannel);
         await channel.send({
             embeds: [
                 new EmbedBuilder()
@@ -138,7 +130,7 @@ class Obanai extends Client {
             ],
         }).catch(this.catchError);
 
-        if (this.env.TEST_MODE === "1") {
+        if (this?.env?.TEST_MODE === "1") {
             console.log(error);
         }
     }
@@ -168,7 +160,7 @@ class Obanai extends Client {
 
     /**
      * Get the link of the message above the context.
-     * @param {GuildTextBasedChannel|TextChannel|ThreadChannel|NewsChannel} channel The channel instance
+     * @param {TextChannel} channel The channel instance
      * @returns {Promise<String>}
      */
     async getPlaceLink(channel) {
@@ -186,20 +178,14 @@ class Obanai extends Client {
      * Returns the channel if able to be fetched.
      * @param {String} id The channel ID
      * @param {*} secureValue The value to be returned if the channel is not found
-     * @returns {Promise<GuildTextBasedChannel|TextChannel|ThreadChannel|NewsChannel & {cached: Boolean}>}
+     * @returns {Promise<TextChannel & {cached: Boolean}>}
      */
     async getChannel(id, secureValue) {
         let channel = secureValue;
         let cached = false;
 
         try {
-            if (
-                (await this.channels.fetch(id) instanceof GuildTextBasedChannel)
-                || (await this.channels.fetch(id) instanceof TextChannel)
-                || (await this.channels.fetch(id) instanceof ThreadChannel)
-                || (await this.channels.fetch(id) instanceof NewsChannel)
-                || (await this.channels.fetch(id) instanceof DMChannel)
-            ) {
+            if ((await this.channels.fetch(id) instanceof Object)) {
                 channel = await this.channels.fetch(id);
                 cached = true;
             }
@@ -213,12 +199,12 @@ class Obanai extends Client {
 
     /**
      * Notify the user in a specific channel.
-     * @param {String} id The user ID
+     * @param {TextChannel} channel The channel instance
      * @param {MessagePayload|MessageCreateOptions} payload The payload to send
      * @returns {Promise<string>}
      */
-    async notify(id, payload) {
-        const channel = await this.channels.fetch(this.config.channels.notifications);
+    async notify(channel, payload) {
+        await channel.send(payload).catch(this.catchError);
     }
 
     launch() {
