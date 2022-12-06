@@ -445,6 +445,18 @@ class QuestDb extends SQLiteTable {
     }
 
     /**
+     * Updates the slayer progression.
+     * @param {String} id The user ID
+     * @param {String} volume The volume of the story
+     * @param {String} arc The arc of the story
+     * @param {String} chapter The chapter of the story
+     * @returns {void}
+     */
+    updateSlayerProgression(id, volume, arc, chapter) {
+        this.set(id, [volume, arc, chapter], "storyProgression");
+    }
+
+    /**
      * Deletes the quest of the user in the database and replaces it with an empty objectif.
      * @param {String} id The user ID
      * @param {String} questType The quest type: daily, side or slayer
@@ -466,7 +478,11 @@ class QuestDb extends SQLiteTable {
 
         if (verified.dailyFinished) this.deleteQuest(id, "daily");
         if (verified.sideFinished) this.deleteQuest(id, "side");
-        if (verified.slayerFinished) this.deleteQuest(id, "slayer");
+        if (verified.slayerFinished) {
+            const questId = this.get(id).currentQuests.slayerQuest.id;
+            this.updateSlayerProgression(id, ...questId.split(".").slice(1));
+            this.deleteQuest(id, "slayer");
+        }
     }
 
     /**
@@ -532,6 +548,22 @@ class QuestDb extends SQLiteTable {
 
             if (channel.id !== null) await this.client.notify(channel, { embeds: [embed] });
         }
+    }
+
+    /**
+     * Function that will return the index of the current user slayer quest into the all quests lists, and also the next.
+     * @param {String} id The user ID
+     * @returns {{index: Number, last: String, next: String}}
+     */
+    getSlayerProgress(id) {
+        const list = this.client.RPGAssetsManager.getSlayerQuestsIds();
+        const userQuest = this.get(id).storyProgression;
+
+        const index = list.indexOf(`slayer.${userQuest[0]}.${userQuest[1]}.${userQuest[2]}`);
+        const last = list[index];
+        const next = list[index + 1] || "none";
+
+        return { index, last, next };
     }
 
     /**

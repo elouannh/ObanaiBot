@@ -475,6 +475,24 @@
                 "0": "Atteignez le niveau 4 en force.",
                 "1": "Renforcez votre défense au niveau 7."
             }
+        },
+        "slayer.0.0.1": {
+            "id": "slayer.0.0.1",
+            "name": "Chapitre 2 - Obanai Iguro",
+            "label": "Tome 0 - Arc 0 « L'étrange Shukuba »",
+            "objectives": {
+                "0": "Atteignez le niveau 4 en force.",
+                "1": "Renforcez votre défense au niveau 7."
+            }
+        },
+        "slayer.0.0.2": {
+            "id": "slayer.0.0.2",
+            "name": "Chapitre 3 - Obanai Iguro",
+            "label": "Tome 0 - Arc 0 « L'étrange Shukuba »",
+            "objectives": {
+                "0": "Atteignez le niveau 4 en force.",
+                "1": "Renforcez votre défense au niveau 7."
+            }
         }
     },
     "rewards": {
