@@ -7,7 +7,7 @@ class AdditionalListener extends SQLiteTableChangeListener {
 
     async overListener(key, before, after) {
         if (before !== after) {
-            await this.client.questDb.notifyQuests(key, "additionalDb");
+            await this.client.questDb.questsCleanup(key, "additionalDb");
         }
     }
 }

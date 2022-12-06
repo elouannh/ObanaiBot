@@ -445,13 +445,38 @@ class QuestDb extends SQLiteTable {
     }
 
     /**
-     * Function that will notify if a quest is completed or not.
+     * Deletes the quest of the user in the database and replaces it with an empty objectif.
+     * @param {String} id The user ID
+     * @param {String} questType The quest type: daily, side or slayer
+     * @returns {void}
+     */
+    deleteQuest(id, questType) {
+        this.set(id, {}, `currentQuests.${questType}Quest`);
+    }
+
+    /**
+     * Verify quests, notify and delete them if they are completed.
      * @param {String} id The user ID
      * @param {String} tableFocused The table to focus on
+     * @returns {Promise<void>}
      */
-    async notifyQuests(id, tableFocused) {
-        const lang = this.client.languageManager.getLang(this.client.playerDb.get(id)).json;
+    async questsCleanup(id, tableFocused) {
         const verified = await this.verifyAllQuests(id, tableFocused);
+        await this.notifyQuests(id, verified);
+
+        if (verified.dailyFinished) this.deleteQuest(id, "daily");
+        if (verified.sideFinished) this.deleteQuest(id, "side");
+        if (verified.slayerFinished) this.deleteQuest(id, "slayer");
+    }
+
+    /**
+     * Function that will notify if a quest is completed or not.
+     * @param {String} id The user ID
+     * @param {VerifiedQuestActions} verified The table to focus on
+     * @returns {Promise<void>}
+     */
+    async notifyQuests(id, verified) {
+        const lang = this.client.languageManager.getLang(this.client.playerDb.get(id)).json;
         const userQuests = await this.get(id);
 
         const embed = new EmbedBuilder()
