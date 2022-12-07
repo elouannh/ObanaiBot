@@ -171,6 +171,7 @@ class RPGAssetsManager {
             quest.objectives[objId].progress = questData.objectives[objId].completed
                 ? this.client.enums.Systems.Symbols.Check
                 : this.client.enums.Systems.Symbols.Cross;
+            quest.objectives[objId].completed = questData.objectives[objId].completed;
         }
 
         return quest;

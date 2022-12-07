@@ -99,6 +99,9 @@ class InternalServerManager extends SQLiteTable {
             if (!questData.currentQuests.slayerQuest?.id) {
                 const progress = this.client.questDb.getSlayerProgress(player.id);
                 const quest = this.client.RPGAssetsManager.quests.slayerQuests[progress.next];
+
+                if (!quest) continue;
+
                 const [volume, arc, chapter] = quest.id.split(".").slice(1);
                 this.client.questDb.setSlayerQuest(player.id, volume, arc, chapter);
             }

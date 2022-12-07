@@ -519,7 +519,7 @@ class QuestDb extends SQLiteTable {
             const name = `${this.client.enums.Rpg.Concepts.SlayerQuest} `
                 + `- ${lang.rpgAssets.embeds.slayerQuestObjectivesCompleted}`;
             let value = `\u200b\n**${quest.name}**`
-                + `\n${lang.rpgAssets.embeds.objectives} :__\n${doneObjectives
+                + `\n__${lang.rpgAssets.embeds.objectives} :__\n${doneObjectives
                     .map(e => `> **\`-\`** ${e.name}\n${
                         quest.rewards[Number(e.id)].items
                             .map(f => `${"\u200b ".repeat(5)}*➥ ${f[0]}*`)
@@ -658,6 +658,38 @@ class QuestDb extends SQLiteTable {
             )
             .setColor(this.client.enums.Colors.Blurple);
 
+        if (data.currentQuests.slayerQuest.id) {
+            slayerEmbed.addFields(
+                {
+                    name: lang.rpgAssets.embeds.questName,
+                    value: data.currentQuests.slayerQuest.name,
+                    inline: true,
+                },
+                {
+                    name: lang.rpgAssets.embeds.questLabel,
+                    value: data.currentQuests.slayerQuest.label,
+                    inline: true,
+                },
+                {
+                    name: lang.rpgAssets.embeds.objectives,
+                    value: data.currentQuests.slayerQuest.objectives
+                        .map((e, i) => `\`[${e.progress}] ${i + 1}.\` *`
+                            + `${e.completed ? "~~" : "*"}${e.name}${e.completed ? "~~" : "*"}*\n${
+                            data.currentQuests.slayerQuest.rewards[i].items
+                                .map((f) => `${"\u200b ".repeat(5)}`
+                                    + `${e.completed ? "~~" : ""}*➥ ${f[0]}*${e.completed ? "~~" : ""}`,
+                                )
+                                .join("\n")
+                        }`)
+                        .join("\n\n"),
+                    inline: false,
+                },
+            );
+        }
+        else {
+            slayerEmbed.setDescription(lang.rpgAssets.embeds.noQuest);
+        }
+
         const sideEmbed = new EmbedBuilder()
             .setTitle(
                 `⟪ ${this.client.enums.Rpg.Concepts.SideQuest} ⟫ `
@@ -665,12 +697,76 @@ class QuestDb extends SQLiteTable {
             )
             .setColor(this.client.enums.Colors.Blurple);
 
+        if (data.currentQuests.sideQuest.id) {
+            sideEmbed.addFields(
+                {
+                    name: lang.rpgAssets.embeds.questName,
+                    value: data.currentQuests.sideQuest.name,
+                    inline: true,
+                },
+                {
+                    name: lang.rpgAssets.embeds.questLabel,
+                    value: data.currentQuests.sideQuest.label,
+                    inline: true,
+                },
+                {
+                    name: lang.rpgAssets.embeds.objectives,
+                    value: data.currentQuests.sideQuest.objectives
+                        .map((e, i) => `\`[${e.progress}] ${i + 1}.\` *`
+                            + `${e.completed ? "~~" : "*"}${e.name}${e.completed ? "~~" : "*"}*\n${
+                                data.currentQuests.sideQuest.rewards[i].items
+                                    .map((f) => `${"\u200b ".repeat(5)}`
+                                        + `${e.completed ? "~~" : ""}*➥ ${f[0]}*${e.completed ? "~~" : ""}`,
+                                    )
+                                    .join("\n")
+                            }`)
+                        .join("\n\n"),
+                    inline: false,
+                },
+            );
+        }
+        else {
+            slayerEmbed.setDescription(lang.rpgAssets.embeds.noQuest);
+        }
+
         const dailyEmbed = new EmbedBuilder()
             .setTitle(
                 `⟪ ${this.client.enums.Rpg.Concepts.DailyQuest} ⟫ `
                 + lang.rpgAssets.concepts.dailyQuest + ` - \`${user.tag}\``,
             )
             .setColor(this.client.enums.Colors.Blurple);
+
+        if (data.currentQuests.dailyQuest.id) {
+            dailyEmbed.addFields(
+                {
+                    name: lang.rpgAssets.embeds.questName,
+                    value: data.currentQuests.dailyQuest.name,
+                    inline: true,
+                },
+                {
+                    name: lang.rpgAssets.embeds.questLabel,
+                    value: data.currentQuests.dailyQuest.label,
+                    inline: true,
+                },
+                {
+                    name: lang.rpgAssets.embeds.objectives,
+                    value: data.currentQuests.dailyQuest.objectives
+                        .map((e, i) => `\`[${e.progress}] ${i + 1}.\` *`
+                            + `${e.completed ? "~~" : "*"}${e.name}${e.completed ? "~~" : "*"}*\n${
+                                data.currentQuests.dailyQuest.rewards[i].items
+                                    .map((f) => `${"\u200b ".repeat(5)}`
+                                        + `${e.completed ? "~~" : ""}*➥ ${f[0]}*${e.completed ? "~~" : ""}`,
+                                    )
+                                    .join("\n")
+                            }`)
+                        .join("\n\n"),
+                    inline: false,
+                },
+            );
+        }
+        else {
+            slayerEmbed.setDescription(lang.rpgAssets.embeds.noQuest);
+        }
 
         return [slayerEmbed, sideEmbed, dailyEmbed];
     }

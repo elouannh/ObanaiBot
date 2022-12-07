@@ -77,7 +77,7 @@ class Quests extends Command {
         ).catch(this.client.catchError);
         const collector = questsPanel.createMessageComponentCollector({
             filter: interaction => interaction.user.id === this.interaction.user.id,
-            idle: 60_000,
+            idle: 15_000,
         });
         collector.on("collect", async interaction => {
             const embedAttachment = questsPanel.embeds[0]?.data?.image?.url;

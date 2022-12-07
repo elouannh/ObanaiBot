@@ -550,7 +550,10 @@
         "dailyQuestObjectivesCompleted": "Objectifs de quête quotidienne terminés",
         "objectives": "Objectifs",
         "questNowCompleted": "Cette quête est maintenant terminée !",
-        "totalEarned": "Total obtenu"
+        "totalEarned": "Total obtenu",
+        "questName": "Nom de la quête",
+        "questLabel": "Étiquette de la quête",
+        "noQuest": "Aucune quête."
     },
     "themes": {
         "Default": "Défaut"
