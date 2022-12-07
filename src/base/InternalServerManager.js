@@ -88,9 +88,29 @@ class InternalServerManager extends SQLiteTable {
         return bitfield;
     }
 
+    async slayerQuestGenerator() {
+        const players = this.client.playerDb.db.array();
+        for (const player of players) {
+            let questData = this.client.questDb.get(player.id);
+            if (questData.schemaInstance) {
+                this.client.questDb.ensureInDeep(player.id);
+                questData = this.client.questDb.get(player.id);
+            }
+            if (!questData.currentQuests.slayerQuest?.id) {
+                const progress = this.client.questDb.getSlayerProgress(player.id);
+                const quest = this.client.RPGAssetsManager.quests.slayerQuests[progress.next];
+
+                if (!quest) continue;
+
+                const [volume, arc, chapter] = quest.id.split(".").slice(1);
+                this.client.questDb.setSlayerQuest(player.id, volume, arc, chapter);
+            }
+        }
+    }
+
     async questGenerator() {
         setInterval(async () => {
-            void null;
+            await this.slayerQuestGenerator();
         }, 600_000);
 
         const lastRefresh = (Date.now() - this.delays.dailyQuestGenerator);

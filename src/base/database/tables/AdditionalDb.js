@@ -1,5 +1,6 @@
 const SQLiteTable = require("../../SQLiteTable");
 const AdditionalData = require("../dataclasses/AdditionalData");
+const AdditionalListener = require("../listeners/AdditionalListener");
 const { Message, ChatInputCommandInteraction, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
 
 function schema(id) {
@@ -21,7 +22,7 @@ function schema(id) {
 
 class AdditionalDb extends SQLiteTable {
     constructor(client) {
-        super(client, "additional", schema);
+        super(client, "additional", schema, AdditionalListener);
     }
 
     async load(id) {

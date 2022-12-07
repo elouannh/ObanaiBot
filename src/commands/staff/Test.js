@@ -15,13 +15,13 @@ class Profile extends Command {
             category: "Staff",
             cooldown: 0,
             completedRequests: ["test"],
-            authorizationBitField: 0b000,
+            authorizationBitField: 0b100,
             permissions: 0n,
         });
     }
 
     async run() {
-        await this.client.util.delay(30_000);
+        await this.client.playerDb.set("539842701592494111", 8, "statistics.strength");
 
         return this.end();
     }

@@ -29,7 +29,16 @@
                         "0": {
                             "id": "0",
                             "type": "exp",
-                            "amount": 100
+                            "data": {
+                                "amount": 100
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "exp",
+                            "data": {
+                                "amount": 200
+                            }
                         }
                     }
                 },
@@ -39,11 +48,23 @@
                         "0": {
                             "id": "0",
                             "type": "exp",
-                            "amount": 200
+                            "data": {
+                                "amount": 100
+                            }
                         }
                     }
                 }
             }
+        },
+        "slayer.0.0.1": {
+            "id": "slayer.0.0.1",
+            "objectives": {},
+            "rewards": {}
+        },
+        "slayer.0.0.2": {
+            "id": "slayer.0.0.2",
+            "objectives": {},
+            "rewards": {}
         }
     }
 }

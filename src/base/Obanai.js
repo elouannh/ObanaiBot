@@ -4,9 +4,8 @@ const {
     User,
     EmbedBuilder,
     TextChannel,
-    NewsChannel,
-    ThreadChannel,
-    GuildTextBasedChannel,
+    MessagePayload,
+    MessageCreateOptions,
 } = require("discord.js");
 const chalk = require("chalk");
 const PlayerDb = require("./database/tables/PlayerDb");
@@ -115,14 +114,10 @@ class Obanai extends Client {
         if (data.min.length < 2) data.min = "0" + data.min;
         if (data.sec.length < 2) data.sec = "0" + data.sec;
         console.log(chalk.redBright(`[${data.month}/${data.day}] [${data.hour}:${data.hour}:${data.sec}]  |  Error: ${error.stack}`));
-
-        if (this.env.TEST_MODE === "1") {
-            console.log(error);
-        }
     }
 
     async throwError(error, origin) {
-        const channel = this.guilds.cache.get(this.config.testing).channels.cache.get(this.config.channels.errors);
+        const channel = this.guilds.cache.get(this.config.testing).channels.cache.get(this.config.errorsChannel);
         await channel.send({
             embeds: [
                 new EmbedBuilder()
@@ -135,11 +130,17 @@ class Obanai extends Client {
             ],
         }).catch(this.catchError);
 
-        if (this.env.TEST_MODE === "1") {
+        if (this?.env?.TEST_MODE === "1") {
             console.log(error);
         }
     }
 
+    /**
+     * Returns the user if the id is able to be fetched.
+     * @param {String} id The user ID
+     * @param {*} secureValue The value to be returned if the user is not found
+     * @returns {Promise<User & {cached: Boolean}>}
+     */
     async getUser(id, secureValue) {
         let user = secureValue;
         let cached = false;
@@ -159,7 +160,8 @@ class Obanai extends Client {
 
     /**
      * Get the link of the message above the context.
-     * @param {GuildTextBasedChannel|TextChannel|ThreadChannel|NewsChannel} channel The channel instance
+     * @param {TextChannel} channel The channel instance
+     * @returns {Promise<String>}
      */
     async getPlaceLink(channel) {
         let link = null;
@@ -170,6 +172,39 @@ class Obanai extends Client {
             this.catchError(err);
         }
         return link;
+    }
+
+    /**
+     * Returns the channel if able to be fetched.
+     * @param {String} id The channel ID
+     * @param {*} secureValue The value to be returned if the channel is not found
+     * @returns {Promise<TextChannel & {cached: Boolean}>}
+     */
+    async getChannel(id, secureValue) {
+        let channel = secureValue;
+        let cached = false;
+
+        try {
+            if ((await this.channels.fetch(id) instanceof Object)) {
+                channel = await this.channels.fetch(id);
+                cached = true;
+            }
+        }
+        catch (err) {
+            this.catchError(err);
+        }
+
+        return Object.assign(channel, { cached });
+    }
+
+    /**
+     * Notify the user in a specific channel.
+     * @param {TextChannel} channel The channel instance
+     * @param {MessagePayload|MessageCreateOptions} payload The payload to send
+     * @returns {Promise<string>}
+     */
+    async notify(channel, payload) {
+        await channel.send(payload).catch(this.catchError);
     }
 
     launch() {

@@ -1,5 +1,6 @@
 const SQLiteTable = require("../../SQLiteTable");
 const InventoryData = require("../dataclasses/InventoryData");
+const InventoryListener = require("../listeners/InventoryListener");
 const { EmbedBuilder } = require("discord.js");
 
 function schema(id) {
@@ -31,7 +32,7 @@ function schema(id) {
 
 class InventoryDb extends SQLiteTable {
     constructor(client) {
-        super(client, "inventory", schema);
+        super(client, "inventory", schema, InventoryListener);
     }
 
     async load(id) {

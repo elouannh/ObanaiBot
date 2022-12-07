@@ -1,15 +1,6 @@
 {
     "owner": "539842701592494111",
-    "channels": {
-        "uptime": "941393924654759996",
-        "logs": "927285371891511398",
-        "progress": "995302257094561803",
-        "errors": "1015932288510472272"
-    },
     "support": "922404341107798036",
     "testing": "958430837068681236",
-    "rpg": {
-        "minutesPerDistanceUnit": 5,
-        "minutesOfForgingPerRarity": 120
-    }
+    "errorsChannel": "1015932288510472272"
 }

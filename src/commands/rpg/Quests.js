@@ -53,16 +53,16 @@ class Quests extends Command {
         const buttons = [
             new ButtonBuilder()
                 .setStyle(ButtonStyle.Primary)
-                .setEmoji(this.client.enums.Rpg.Concepts.SlayerQuests)
-                .setLabel(this.lang.rpgAssets.concepts.slayerQuests)
+                .setEmoji(this.client.enums.Rpg.Concepts.SlayerQuest)
+                .setLabel(this.lang.rpgAssets.concepts.slayerQuest)
                 .setCustomId("Slayer"),
             new ButtonBuilder()
                 .setStyle(ButtonStyle.Secondary)
-                .setEmoji(this.client.enums.Rpg.Concepts.sideQuest)
+                .setEmoji(this.client.enums.Rpg.Concepts.SideQuest)
                 .setCustomId("Side"),
             new ButtonBuilder()
                 .setStyle(ButtonStyle.Secondary)
-                .setEmoji(this.client.enums.Rpg.Concepts.dailyQuest)
+                .setEmoji(this.client.enums.Rpg.Concepts.DailyQuest)
                 .setCustomId("Daily"),
         ];
 
@@ -77,7 +77,7 @@ class Quests extends Command {
         ).catch(this.client.catchError);
         const collector = questsPanel.createMessageComponentCollector({
             filter: interaction => interaction.user.id === this.interaction.user.id,
-            idle: 60_000,
+            idle: 15_000,
         });
         collector.on("collect", async interaction => {
             const embedAttachment = questsPanel.embeds[0]?.data?.image?.url;
@@ -91,12 +91,12 @@ class Quests extends Command {
             // update the buttons (blurple animation)
             buttons[buttons.map(e => e.data.custom_id).indexOf(lastPanel)] = new ButtonBuilder()
                 .setStyle(ButtonStyle.Secondary)
-                .setEmoji(this.client.enums.Rpg.Concepts[`${lastPanel}Quests`])
+                .setEmoji(this.client.enums.Rpg.Concepts[`${lastPanel}Quest`])
                 .setCustomId(lastPanel);
             buttons[buttons.map(e => e.data.custom_id).indexOf(interaction.customId)] = new ButtonBuilder()
                 .setStyle(ButtonStyle.Primary)
-                .setLabel(this.lang.rpgAssets.concepts[`${interaction.customId.toLowerCase()}Quests`])
-                .setEmoji(this.client.enums.Rpg.Concepts[`${interaction.customId}Quests`])
+                .setLabel(this.lang.rpgAssets.concepts[`${interaction.customId.toLowerCase()}Quest`])
+                .setEmoji(this.client.enums.Rpg.Concepts[`${interaction.customId}Quest`])
                 .setCustomId(interaction.customId);
 
             await interaction.deferUpdate().catch(this.client.catchError);

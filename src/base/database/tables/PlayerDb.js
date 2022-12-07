@@ -1,5 +1,6 @@
 const SQLiteTable = require("../../SQLiteTable");
 const PlayerData = require("../dataclasses/PlayerData");
+const PlayerListener = require("../listeners/PlayerListener");
 const Canvas = require("canvas");
 const { AttachmentBuilder, EmbedBuilder, User } = require("discord.js");
 const StackBlur = require("stackblur-canvas");
@@ -26,7 +27,7 @@ function schema(id) {
 
 class PlayerDb extends SQLiteTable {
     constructor(client) {
-        super(client, "player", schema);
+        super(client, "player", schema, PlayerListener);
     }
 
     async load(id) {
@@ -211,7 +212,7 @@ class PlayerDb extends SQLiteTable {
         context.stroke();
         context.restore();
 
-        const avatar = (await this.client.getUser(playerData.id, {}))?.avatarURL({ format: "png" })
+        const avatar = (await this.client.getUser(playerData.id, { id: null }))?.avatarURL({ format: "png" })
             ?? theme[`Default${this.client.util.capitalize(playerData.character.gender)}`];
 
         const userAvatar = await Canvas.loadImage(await this.client.util.getRoundImage(avatar));

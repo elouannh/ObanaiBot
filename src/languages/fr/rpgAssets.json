@@ -409,7 +409,7 @@
             "description": ""
         },
         "7": {
-            "label": "Pourfendeur de rang Kinoe",
+            "label": "Joueur de Shamisen",
             "description": ""
         },
         "8": {
@@ -439,10 +439,6 @@
         "14": {
             "label": "Oiran",
             "description": ""
-        },
-        "15": {
-            "label": "Joueuse de Shamisen",
-            "description": ""
         }
     },
     "weapons": {
@@ -470,6 +466,21 @@
             "10": "Limité"
         }
     },
+    "quests": {
+        "slayer.0.0.0": {
+            "id": "slayer.0.0.0",
+            "name": "Chapitre 1 - Obanai Iguro",
+            "label": "Tome 0 - Arc 0 « L'étrange Shukuba »",
+            "objectives": {
+                "0": "Atteignez le niveau 4 en force.",
+                "1": "Renforcez votre défense au niveau 7."
+            }
+        }
+    },
+    "rewards": {
+        "undefined": "Inconnue",
+        "exp": "Expérience x**%AMOUNT**"
+    },
     "concepts": {
         "hp": "PV",
         "level": "Niv.",
@@ -493,9 +504,11 @@
         "area": "Zone de région",
         "biome": "Biome",
         "exploration": "Exploration",
-        "slayerQuests": "Quête de pourfendeur",
+        "slayerQuest": "Quête de pourfendeur",
         "sideQuest": "Quête annexe",
-        "dailyQuest": "Quête journalière"
+        "dailyQuest": "Quête journalière",
+        "quest": "Quête",
+        "notificationsAlert": "DRING DRING !!"
     },
     "embeds": {
         "activityTitle": "Activité - %PLAYER",
@@ -531,7 +544,16 @@
         "lockedThemes": "Thèmes bloqués",
         "percentUnlocked": "débloqués",
         "executedCommands": "Commandes exécutées",
-        "noDataToDisplay": "Aucune donnée à afficher."
+        "noDataToDisplay": "Aucune donnée à afficher.",
+        "slayerQuestObjectivesCompleted": "Objectifs de quête de pourfendeur terminés",
+        "sideQuestObjectivesCompleted": "Objectifs de quête secondaire terminés",
+        "dailyQuestObjectivesCompleted": "Objectifs de quête quotidienne terminés",
+        "objectives": "Objectifs",
+        "questNowCompleted": "Cette quête est maintenant terminée !",
+        "totalEarned": "Total obtenu",
+        "questName": "Nom de la quête",
+        "questLabel": "Étiquette de la quête",
+        "noQuest": "Aucune quête."
     },
     "themes": {
         "Default": "Défaut"
