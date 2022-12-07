@@ -726,7 +726,7 @@ class QuestDb extends SQLiteTable {
             );
         }
         else {
-            slayerEmbed.setDescription(lang.rpgAssets.embeds.noQuest);
+            sideEmbed.setDescription(lang.rpgAssets.embeds.noQuest);
         }
 
         const dailyEmbed = new EmbedBuilder()
@@ -765,7 +765,7 @@ class QuestDb extends SQLiteTable {
             );
         }
         else {
-            slayerEmbed.setDescription(lang.rpgAssets.embeds.noQuest);
+            dailyEmbed.setDescription(lang.rpgAssets.embeds.noQuest);
         }
 
         return [slayerEmbed, sideEmbed, dailyEmbed];
