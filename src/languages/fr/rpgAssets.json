@@ -475,24 +475,6 @@
                 "0": "Atteignez le niveau 4 en force.",
                 "1": "Renforcez votre défense au niveau 7."
             }
-        },
-        "slayer.0.0.1": {
-            "id": "slayer.0.0.1",
-            "name": "Chapitre 2 - Obanai Iguro",
-            "label": "Tome 0 - Arc 0 « L'étrange Shukuba »",
-            "objectives": {
-                "0": "Atteignez le niveau 4 en force.",
-                "1": "Renforcez votre défense au niveau 7."
-            }
-        },
-        "slayer.0.0.2": {
-            "id": "slayer.0.0.2",
-            "name": "Chapitre 3 - Obanai Iguro",
-            "label": "Tome 0 - Arc 0 « L'étrange Shukuba »",
-            "objectives": {
-                "0": "Atteignez le niveau 4 en force.",
-                "1": "Renforcez votre défense au niveau 7."
-            }
         }
     },
     "rewards": {
@@ -525,7 +507,8 @@
         "slayerQuest": "Quête de pourfendeur",
         "sideQuest": "Quête annexe",
         "dailyQuest": "Quête journalière",
-        "quest": "Quête"
+        "quest": "Quête",
+        "notificationsAlert": "DRING DRING !!"
     },
     "embeds": {
         "activityTitle": "Activité - %PLAYER",
@@ -561,7 +544,13 @@
         "lockedThemes": "Thèmes bloqués",
         "percentUnlocked": "débloqués",
         "executedCommands": "Commandes exécutées",
-        "noDataToDisplay": "Aucune donnée à afficher."
+        "noDataToDisplay": "Aucune donnée à afficher.",
+        "slayerQuestObjectivesCompleted": "Objectifs de quête de pourfendeur terminés",
+        "sideQuestObjectivesCompleted": "Objectifs de quête secondaire terminés",
+        "dailyQuestObjectivesCompleted": "Objectifs de quête quotidienne terminés",
+        "objectives": "Objectifs",
+        "questNowCompleted": "Cette quête est maintenant terminée !",
+        "totalEarned": "Total obtenu"
     },
     "themes": {
         "Default": "Défaut"

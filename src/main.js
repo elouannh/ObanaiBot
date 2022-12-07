@@ -19,6 +19,7 @@ module.exports = async obanai => {
     await obanai.playerDb.set("539842701592494111", 1, "statistics.defense");
     await obanai.questDb.set("539842701592494111", "last", "notifications");
     await obanai.questDb.set("539842701592494111", data, "currentQuests.slayerQuest");
+    await obanai.questDb.set("539842701592494111", ["0", "0", null], "storyProgression");
 
     obanai.internalServerManager.addOwner("539842701592494111");
 };

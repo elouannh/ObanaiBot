@@ -16,7 +16,7 @@ function schema(id) {
             sideQuest: {},
             slayerQuest: {},
         },
-        storyProgression: [0, 0, null],
+        storyProgression: ["0", "0", null],
         notifications: "dm",
     };
 }
@@ -496,7 +496,9 @@ class QuestDb extends SQLiteTable {
         const userQuests = await this.get(id);
 
         const embed = new EmbedBuilder()
-            .setTitle(`${this.client.enums.Rpg.Concepts.Notifications} **DRING DRING !**`)
+            .setTitle(
+                `${this.client.enums.Rpg.Concepts.Notifications} **${lang.rpgAssets.concepts.notificationsAlert}**`,
+            )
             .setColor(this.client.enums.Colors.Green);
         let toSend = false;
 
@@ -514,9 +516,10 @@ class QuestDb extends SQLiteTable {
                 }
             }
 
-            const name = `${this.client.enums.Rpg.Concepts.SlayerQuest} - Objectifs de quête de pourfendeur complétés !`;
+            const name = `${this.client.enums.Rpg.Concepts.SlayerQuest} `
+                + `- ${lang.rpgAssets.embeds.slayerQuestObjectivesCompleted}`;
             let value = `\u200b\n**${quest.name}**`
-                + `\n__Objectifs :__\n${doneObjectives
+                + `\n${lang.rpgAssets.embeds.objectives} :__\n${doneObjectives
                     .map(e => `> **\`-\`** ${e.name}\n${
                         quest.rewards[Number(e.id)].items
                             .map(f => `${"\u200b ".repeat(5)}*➥ ${f[0]}*`)
@@ -525,8 +528,82 @@ class QuestDb extends SQLiteTable {
                     .join("\n")
                 }`;
             if (verified.slayerFinished) {
-                value += "```fix\nCette quête est désormais terminée !```\n"
-                    + `> __Total obtenu :__\n${quest.rewards
+                value += `\`\`\`fix\n${lang.rpgAssets.embeds.questNowCompleted} !\`\`\`\n`
+                    + `> __${lang.rpgAssets.embeds.totalEarned}:__\n${quest.rewards
+                        .map(e => `${"\u200b ".repeat(5)}*➥ ${e.items.map(f => `${f[0]}`).join(", ")}*`)
+                        .join("\n")
+                    }`;
+            }
+
+            embed.addFields({ name: `${name}`, value, inline: false });
+        }
+
+        if (
+            verified.sideActions.length > 0 &&
+            !verified.sideActions.every((action) => action.event === "objectiveNotCompleted")
+        ) {
+            if (toSend) embed.addFields({ name: "\u200b", value: "\u200b", inline: false });
+            toSend = true;
+            const quest = this.client.RPGAssetsManager.getQuest(lang.id, userQuests.currentQuests.sideQuest.id);
+
+            const doneObjectives = [];
+            for (const obj of verified.sideActions) {
+                if (obj.event === "objectiveCompleted") {
+                    doneObjectives.push(quest.objectives[Number(obj.objectiveId)]);
+                }
+            }
+
+            const name = `${this.client.enums.Rpg.Concepts.SideQuest} `
+                + `- ${lang.rpgAssets.embeds.sideQuestObjectivesCompleted}`;
+            let value = `\u200b\n**${quest.name}**`
+                + `\n${lang.rpgAssets.embeds.objectives} :__\n${doneObjectives
+                    .map(e => `> **\`-\`** ${e.name}\n${
+                        quest.rewards[Number(e.id)].items
+                            .map(f => `${"\u200b ".repeat(5)}*➥ ${f[0]}*`)
+                            .join("\n")
+                    }`)
+                    .join("\n")
+                }`;
+            if (verified.sideFinished) {
+                value += `\`\`\`fix\n${lang.rpgAssets.embeds.questNowCompleted} !\`\`\`\n`
+                    + `> __${lang.rpgAssets.embeds.totalEarned}:__\n${quest.rewards
+                        .map(e => `${"\u200b ".repeat(5)}*➥ ${e.items.map(f => `${f[0]}`).join(", ")}*`)
+                        .join("\n")
+                    }`;
+            }
+
+            embed.addFields({ name: `${name}`, value, inline: false });
+        }
+
+        if (
+            verified.dailyActions.length > 0 &&
+            !verified.dailyActions.every((action) => action.event === "objectiveNotCompleted")
+        ) {
+            if (toSend) embed.addFields({ name: "\u200b", value: "\u200b", inline: false });
+            toSend = true;
+            const quest = this.client.RPGAssetsManager.getQuest(lang.id, userQuests.currentQuests.dailyQuest.id);
+
+            const doneObjectives = [];
+            for (const obj of verified.dailyActions) {
+                if (obj.event === "objectiveCompleted") {
+                    doneObjectives.push(quest.objectives[Number(obj.objectiveId)]);
+                }
+            }
+
+            const name = `${this.client.enums.Rpg.Concepts.DailyQuest} `
+                + `- ${lang.rpgAssets.embeds.dailyQuestObjectivesCompleted}`;
+            let value = `\u200b\n**${quest.name}**`
+                + `\n${lang.rpgAssets.embeds.objectives} :__\n${doneObjectives
+                    .map(e => `> **\`-\`** ${e.name}\n${
+                        quest.rewards[Number(e.id)].items
+                            .map(f => `${"\u200b ".repeat(5)}*➥ ${f[0]}*`)
+                            .join("\n")
+                    }`)
+                    .join("\n")
+                }`;
+            if (verified.dailyActions) {
+                value += `\`\`\`fix\n${lang.rpgAssets.embeds.questNowCompleted} !\`\`\`\n`
+                    + `> __${lang.rpgAssets.embeds.totalEarned}:__\n${quest.rewards
                         .map(e => `${"\u200b ".repeat(5)}*➥ ${e.items.map(f => `${f[0]}`).join(", ")}*`)
                         .join("\n")
                     }`;
