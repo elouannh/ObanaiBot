@@ -10,15 +10,7 @@
                     "type": "reachStatisticLevel",
                     "additionalData": {
                         "statistic": "strength",
-                        "levelToReach": 4
-                    }
-                },
-                "1": {
-                    "id": "1",
-                    "type": "reachStatisticLevel",
-                    "additionalData": {
-                        "statistic": "defense",
-                        "levelToReach": 7
+                        "levelToReach": 10
                     }
                 }
             },
@@ -35,36 +27,54 @@
                         },
                         "1": {
                             "id": "1",
-                            "type": "exp",
+                            "type": "material",
                             "data": {
-                                "amount": 200
-                            }
-                        }
-                    }
-                },
-                "1": {
-                    "id": "1",
-                    "data": {
-                        "0": {
-                            "id": "0",
-                            "type": "exp",
-                            "data": {
+                                "material": "paper",
                                 "amount": 100
+                            }
+                        },
+                        "2": {
+                            "id": "2",
+                            "type": "questItem",
+                            "data": {
+                                "questItem": "magicKey",
+                                "amount": 1
+                            }
+                        },
+                        "3": {
+                            "id": "3",
+                            "type": "money",
+                            "data": {
+                                "amount": 125000
+                            }
+                        },
+                        "4": {
+                            "id": "4",
+                            "type": "enchantedGrimoire",
+                            "data": {
+                                "enchantedGrimoire": "adventurer",
+                                "amount": 2
+                            }
+                        },
+                        "5": {
+                            "id": "5",
+                            "type": "weapon",
+                            "data": {
+                                "weapon": "katana",
+                                "rarity": "4",
+                                "amount": 1
+                            }
+                        },
+                        "6": {
+                            "id": "6",
+                            "type": "theme",
+                            "data": {
+                                "theme": "Default"
                             }
                         }
                     }
                 }
             }
-        },
-        "slayer.0.0.1": {
-            "id": "slayer.0.0.1",
-            "objectives": {},
-            "rewards": {}
-        },
-        "slayer.0.0.2": {
-            "id": "slayer.0.0.2",
-            "objectives": {},
-            "rewards": {}
         }
     }
 }

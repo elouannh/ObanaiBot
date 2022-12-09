@@ -9,7 +9,7 @@ class RPGQuest extends RPGAssetBase {
         this.name = this.lang.json.quests[this.id].name;
         this.label = this.lang.json.quests[this.id].label;
         this.objectives = Object.values(questData.objectives).map(obj => new RPGQuestObjective(this.lang.json.quests[this.id], obj.id));
-        this.rewards = Object.values(questData.rewards).map(reward => new RPGQuestReward(this.lang.json.rewards, reward.id, reward));
+        this.rewards = Object.values(questData.rewards).map(reward => new RPGQuestReward(this.lang, reward.id, reward));
     }
 }
 
