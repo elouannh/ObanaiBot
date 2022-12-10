@@ -33,14 +33,24 @@ class CommandManager {
         const contextCommands = [];
 
         this.commands.forEach(cmd => {
-            if (new cmd().infos.type.includes(1)) {
-                const build = new SlashCommandBuilder()
-                    .setName(new cmd().infos.name)
-                    .setDescription(new cmd().infos.description.substring(0, 100))
-                    .setDescriptionLocalizations(new cmd().infos.descriptionLocalizations)
-                    .setDMPermission(new cmd().infos.dmPermission);
+            cmd = new cmd();
+            if (cmd.infos.type.includes(1)) {
+                let description = cmd.infos.description;
+                if (description.length > 100) description = description.slice(0, 97) + "...";
+                let descriptionLocalizations = cmd.infos.descriptionLocalizations;
+                for (const key in descriptionLocalizations) {
+                    if (descriptionLocalizations[key].length > 100) {
+                        descriptionLocalizations[key] = descriptionLocalizations[key].slice(0, 97) + "...";
+                    }
+                }
 
-                for (const option of new cmd().infos.options) {
+                const build = new SlashCommandBuilder()
+                    .setName(cmd.infos.name)
+                    .setDescription(description)
+                    .setDescriptionLocalizations(descriptionLocalizations)
+                    .setDMPermission(cmd.infos.dmPermission);
+
+                for (const option of cmd.infos.options) {
                     if (option.type === 6) {
                         const userOption = new SlashCommandUserOption()
                             .setName(option.name)
@@ -56,9 +66,9 @@ class CommandManager {
 
                 slashCommands.push(build.toJSON());
             }
-            if (new cmd().infos.type.includes(2)) {
+            if (cmd.infos.type.includes(2)) {
                 const build = new ContextMenuCommandBuilder()
-                    .setName(this.client.util.capitalize(new cmd().infos.name))
+                    .setName(this.client.util.capitalize(cmd.infos.name))
                     .setType(ApplicationCommandType.User);
 
                 contextCommands.push(build.toJSON());

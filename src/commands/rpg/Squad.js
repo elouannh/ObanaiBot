@@ -9,7 +9,7 @@ class Squad extends Command {
                 "en-US": "Allows the user to see his squad.",
             },
             options: [],
-            type: [1],
+            type: [1, 2],
             dmPermission: true,
             category: "RPG",
             cooldown: 20,
@@ -33,8 +33,9 @@ class Squad extends Command {
                 .catch(this.client.catchError);
             return this.end();
         }
+        // development
         await this.interaction.deferReply().catch(this.client.catchError);
-        await this.interaction.editReply({ content: this.lang.systems.currentlyInProgramming, ephemeral: true });
+        await this.interaction.editReply({ content: this.lang.systems.currentlyInDevelopment, ephemeral: true });
         return this.end();
     }
 }

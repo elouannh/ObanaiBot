@@ -34,7 +34,7 @@ class Lang extends Command {
             return this.end();
         }
         await this.interaction.deferReply().catch(this.client.catchError);
-        await this.interaction.editReply({ content: this.lang.systems.currentlyInProgramming, ephemeral: true });
+        await this.interaction.editReply({ content: this.lang.systems.currentlyInDevelopment, ephemeral: true });
         return this.end();
     }
 }
