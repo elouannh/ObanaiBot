@@ -5,9 +5,9 @@ class Quests extends Command {
     constructor() {
         super({
             name: "quests",
-            description: "Commande permettant d'afficher les quêtes d'un joueur.",
+            description: "Permet à l’utilisateur de voir sa quête principale, sa quête quotidienne et sa possible quête secondaire.",
             descriptionLocalizations: {
-                "en-US": "Command to display player quests.",
+                "en-US": "Allows the user to see their main quest, daily quest and possible side quest.",
             },
             options: [],
             type: [1],
