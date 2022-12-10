@@ -11,11 +11,6 @@ function schema(id) {
             sideQuest: {},
             slayerQuest: {},
         },
-        completedQuests: {
-            dailyQuest: {},
-            sideQuest: {},
-            slayerQuest: {},
-        },
         storyProgression: ["0", "0", null],
         notifications: "dm",
     };
@@ -50,13 +45,13 @@ class QuestDb extends SQLiteTable {
     /**
      * Sets the current slayer (main) quest for the user. The branch designs where the quest is located, keep "main" to avoid problems.
      * @param {String} id The user ID
-     * @param {String} tome The tome ID
+     * @param {String} volume The tome ID
      * @param {String} arc The arc ID
-     * @param {String} quest The quest ID to set
+     * @param {String} chapter The quest ID to set
      * @return {void}
      */
-    setSlayerQuest(id, tome, arc, quest) {
-        const slayerQuestId = `slayer.${tome}.${arc}.${quest}`;
+    setSlayerQuest(id, volume, arc, chapter) {
+        const slayerQuestId = `slayer.${volume}.${arc}.${chapter}`;
         const questData = this.client.RPGAssetsManager.getQuest(this.client.playerDb.getLang(id), slayerQuestId);
 
         const questObject = {
@@ -320,6 +315,30 @@ class QuestDb extends SQLiteTable {
             switch (reward.type) {
                 case "exp":
                     void this.client.playerDb.addExp(id, reward.data.amount);
+                    break;
+                case "material":
+                    void this.client.inventoryDb.addMaterial(id, reward.data.material, reward.data.amount);
+                    break;
+                case "questItem":
+                    void this.client.inventoryDb.addQuestItem(id, reward.data.questItem, reward.data.amount);
+                    break;
+                case "money":
+                    void this.client.inventoryDb.addMoney(id, reward.data.amount);
+                    break;
+                case "enchantedGrimoire":
+                    void this.client.inventoryDb.addEnchantedGrimoire(
+                        id, reward.data.enchantedGrimoire, reward.data.amount,
+                    );
+                    break;
+                case "weapon":
+                    void this.client.inventoryDb.addWeapon(
+                        id, reward.data.weapon, reward.data.rarity, reward.data.amount,
+                    );
+                    break;
+                case "theme":
+                    void this.client.additionalDb.unlockTheme(id, reward.data.theme);
+                    break;
+                case "kasugaiCrowExp":
                     break;
                 default:
                     break;

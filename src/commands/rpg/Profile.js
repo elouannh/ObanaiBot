@@ -5,9 +5,9 @@ class Profile extends Command {
     constructor() {
         super({
             name: "profile",
-            description: "Commande permettant d'afficher les informations d'un joueur.",
+            description: "Permet à l’utilisateur de voir son profil, son inventaire, son emplacement sur la carte, ses activités en cours ainsi que certaines statistiques.",
             descriptionLocalizations: {
-                "en-US": "Command to display player informations.",
+                "en-US": "Allows the user to view their profile, inventory, location on the map, current activities and some statistics.",
             },
             options: [
                 {

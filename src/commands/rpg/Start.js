@@ -1,13 +1,13 @@
 const Command = require("../../base/Command");
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, SelectMenuBuilder } = require("discord.js");
 
-class Profile extends Command {
+class Start extends Command {
     constructor() {
         super({
             name: "start",
-            description: "Commande permettant de commencer votre aventure.",
+            description: "Permet à l’utilisateur de commencer son aventure si il ne l’a pas encore fait.",
             descriptionLocalizations: {
-                "en-US": "Command to start your journey on the bot.",
+                "en-US": "Allows the user to start their adventure if they have not already done so.",
             },
             options: [],
             type: [1],
@@ -166,4 +166,4 @@ class Profile extends Command {
     }
 }
 
-module.exports = Profile;
+module.exports = Start;

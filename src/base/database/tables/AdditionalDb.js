@@ -32,6 +32,18 @@ class AdditionalDb extends SQLiteTable {
     }
 
     /**
+     * Unlock a theme for the user
+     * @param {String} id The user ID
+     * @param {String} theme The theme ID
+     * @returns {void}
+     */
+    unlockTheme(id, theme) {
+        const themes = this.get(id).themes.unlocked;
+        if (!themes.includes(theme)) themes.push(theme);
+        this.set(id, themes, "themes.unlocked");
+    }
+
+    /**
      * Increments the count of utilisations of a command.
      * @param {String} id
      * @param {String} commandName

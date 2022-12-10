@@ -373,7 +373,7 @@
         "worm": "Ver"
     },
     "questItems": {
-        "test": "Test"
+        "magicKey": "Clé Magique"
     },
     "characters": {
         "genders": {
@@ -472,14 +472,19 @@
             "name": "Chapitre 1 - Obanai Iguro",
             "label": "Tome 0 - Arc 0 « L'étrange Shukuba »",
             "objectives": {
-                "0": "Atteignez le niveau 4 en force.",
-                "1": "Renforcez votre défense au niveau 7."
+                "0": "Objectif test."
             }
         }
     },
     "rewards": {
         "undefined": "Inconnue",
-        "exp": "Expérience x**%AMOUNT**"
+        "exp": "Expérience x**%AMOUNT**",
+        "material": "%MATERIAL: x**%AMOUNT**",
+        "questItem": "%QUEST_ITEM: x**%AMOUNT**",
+        "money": "Argent ¥ x**%AMOUNT**",
+        "enchantedGrimoire": "Grimoire enchanté: **%ENCHANTED_GRIMOIRE**, x**%AMOUNT**",
+        "weapon": "Arme: **%WEAPON** - **%RARITY**, x**%AMOUNT**",
+        "theme": "Thème: **%THEME**"
     },
     "concepts": {
         "hp": "PV",

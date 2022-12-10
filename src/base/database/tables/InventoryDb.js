@@ -132,6 +132,63 @@ class InventoryDb extends SQLiteTable {
     }
 
     /**
+     * Add a specific material to the inventory of the player
+     * @param {String} id The user ID
+     * @param {String} material The material ID
+     * @param {Number} amount the amount to add
+     * @returns {Number} The new amount of this material
+     */
+    addMaterial(id, material, amount) {
+        const previousAmount = this.get(id).items.materials[material] || 0;
+        const newAmount = previousAmount + amount;
+        this.set(id, newAmount, `items.materials.${material}`);
+        return newAmount;
+    }
+
+    /**
+     * Add a specific quest item to the inventory of the player
+     * @param {String} id The user ID
+     * @param {String} questItem The quest item ID
+     * @param {Number} amount the amount to add
+     * @returns {Number} The new amount of this material
+     */
+    addQuestItem(id, questItem, amount) {
+        const previousAmount = this.get(id).items.questItems[questItem] || 0;
+        const newAmount = previousAmount + amount;
+        this.set(id, newAmount, `items.questItems.${questItem}`);
+        return newAmount;
+    }
+
+    /**
+     * Add a specific enchanted grimoire to the inventory of the player
+     * @param {String} id The user ID
+     * @param {String} enchantedGrimoire The quest item ID
+     * @param {Number} amount the amount to add
+     * @returns {Number} The new amount of this material
+     */
+    addEnchantedGrimoire(id, enchantedGrimoire, amount) {
+        const previousAmount = this.get(id).items.enchantedGrimoires[enchantedGrimoire] || 0;
+        const newAmount = previousAmount + amount;
+        this.set(id, newAmount, `items.enchantedGrimoires.${enchantedGrimoire}`);
+        return newAmount;
+    }
+
+    /**
+     * Add a specific weapon to the inventory of the player
+     * @param {String} id The user ID
+     * @param {String} weapon The weapon ID
+     * @param {String} rarity The weapon rarity
+     * @param {Number} amount the amount to add
+     * @returns {Number} The new amount of this material
+     */
+    addWeapon(id, weapon, rarity, amount) {
+        const previousAmount = this.get(id).items.weapons[weapon][rarity] || 0;
+        const newAmount = previousAmount + amount;
+        this.set(id, newAmount, `items.weapons.${weapon}.${rarity}`);
+        return newAmount;
+    }
+
+    /**
      * Get the embed of the player profile.
      * @param {Object} lang The language object
      * @param {InventoryData} data The inventory data
