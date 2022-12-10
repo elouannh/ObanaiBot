@@ -11,11 +11,6 @@ function schema(id) {
             sideQuest: {},
             slayerQuest: {},
         },
-        completedQuests: {
-            dailyQuest: {},
-            sideQuest: {},
-            slayerQuest: {},
-        },
         storyProgression: ["0", "0", null],
         notifications: "dm",
     };

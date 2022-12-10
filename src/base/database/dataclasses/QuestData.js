@@ -11,13 +11,11 @@ class QuestData extends TableData {
     }
 
     load() {
-        for (const collection of ["currentQuests", "completedQuests"]) {
-            for (const questType in this.data[collection]) {
-                const quest = this.data[collection][questType];
-                if (!quest?.id) continue;
+        for (const questType in this.data.currentQuests) {
+            const quest = this.data.currentQuests[questType];
+            if (!quest?.id) continue;
 
-                this.data[collection][questType] = this.client.RPGAssetsManager.loadQuest(this.lang, quest.id, quest);
-            }
+            this.data.currentQuests[questType] = this.client.RPGAssetsManager.loadQuest(this.lang, quest.id, quest);
         }
     }
 }
