@@ -6,7 +6,7 @@ class Interact extends Command {
             name: "interact",
             description: "Permet d’interagir avec l’environnement; peut déclencher un dialogue, un combat, fouiller la zone...",
             descriptionLocalizations: {
-                "en-US": "Allows you to interact with the environment; can trigger a dialogue, a fight, search the area...",
+                "en-US": "Allows you to interact with the environment; can trigger a dialogue, a fight, explore the area...",
             },
             options: [],
             type: [1],
@@ -34,7 +34,7 @@ class Interact extends Command {
             return this.end();
         }
         await this.interaction.deferReply().catch(this.client.catchError);
-        await this.interaction.editReply({ content: this.lang.systems.currentlyInProgramming, ephemeral: true });
+        await this.interaction.editReply({ content: this.lang.systems.currentlyInDevelopment, ephemeral: true });
         return this.end();
     }
 }

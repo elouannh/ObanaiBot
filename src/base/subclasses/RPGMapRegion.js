@@ -13,16 +13,16 @@ class RPGMapRegion extends RPGAssetBase {
         this.coordinates = { x: this.mapRegionData.x, y: this.mapRegionData.y };
         this.paths = this.mapRegionData.paths;
 
-        this.areas = this.mapRegionData.areas.map(e => new RPGMapRegionArea(this, e, areasLang[e.id]));
+        this.areas = Object.values(this.mapRegionData.areas).map(e => new RPGMapRegionArea(this, e, areasLang[e.id]));
         this.arrivalArea = this.getArrivalArea;
     }
 
     get getArrivalArea() {
-        return this.areas.filter(e => e.id === this.mapRegionData.arrivalArea)?.at(0);
+        return this.areas[this.mapRegionData.arrivalArea];
     }
 
     getArea(id) {
-        return this.areas.filter(e => e.id === id)[0];
+        return this.areas[id];
     }
 
     getDistanceTo(region) {

@@ -264,102 +264,15 @@
     "map": {
         "regions": {
             "0": {
-                "name": "Mont Sagiri",
+                "name": "Région du Nord-Est (Tōhoku)",
                 "areas": {
-                    "0": "Pied du mont",
-                    "1": "Sommet"
-                }
-            },
-            "1": {
-                "name": "Mont Urusai",
-                "areas": {
-                    "0": "Pied du mont",
-                    "1": "Sommet"
-                }
-            },
-            "2": {
-                "name": "Mont Fujikasane",
-                "areas": {
-                    "0": "Pied du mont",
-                    "1": "Sommet"
-                }
-            },
-            "3": {
-                "name": "Mont Natagumo",
-                "areas": {
-                    "0": "Pied du mont",
-                    "1": "Sommet"
-                }
-            },
-            "4": {
-                "name": "Nōka Familial",
-                "areas": {
-                    "0": "Jardin",
-                    "1": "Chambre principale",
-                    "2": "Champs",
-                    "3": "Forêt"
-                }
-            },
-            "5": {
-                "name": "QG des pourfendeurs",
-                "areas": {
-                    "0": "Cour principale"
-                }
-            },
-            "6": {
-                "name": "Domaine des Papillons",
-                "areas": {
-                    "0": "Cour principale"
-                }
-            },
-            "7": {
-                "name": "Village des forgerons",
-                "areas": {
-                    "0": "Place principale"
-                }
-            },
-            "8": {
-                "name": "Ville du train",
-                "areas": {
-                    "0": "Quais de gare"
-                }
-            },
-            "9": {
-                "name": "Quartier Yoshiwara",
-                "areas": {
-                    "0": "Ruelle principale",
-                    "1": "Machiya de Franky",
-                    "2": "Taverne de Makino",
-                    "3": "Ruelle secondaire"
-                }
-            },
-            "10": {
-                "name": "Quartier Asakusa",
-                "areas": {
-                    "0": "Ruelle principale"
-                }
-            },
-            "11": {
-                "name": "Village du marais",
-                "areas": {
-                    "0": "Place principale"
-                }
-            },
-            "12": {
-                "name": "Maison aux tambours",
-                "areas": {
-                    "0": "Extérieur de la maison"
+                    "0": "Shukuba Accueillant (Omukae)",
+                    "1": "Shukuba du Désespoir (Zetsubō)"
                 }
             }
         },
         "biomes": {
-            "meadow": "Prairie",
-            "forest": "Forêt",
-            "darkForest": "Forêt Sombre",
-            "blankArea": "Zone Vide",
-            "dwelling": "Habitation",
-            "developedArea": "Zone Aménagée",
-            "rockyArea": "Zone Rocheuse"
+            "wintryVeil": "Voile Hivernal"
         }
     },
     "materials": {
