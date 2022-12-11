@@ -2,212 +2,26 @@
     "regions": {
         "0": {
             "id": "0",
-            "x": 180,
-            "y": 246,
+            "x": 0,
+            "y": 0,
             "arrivalArea": "0",
-            "areas": [
-                {
+            "areas": {
+                "0": {
                     "id": "0",
-                    "biome": "meadow"
+                    "x": 0,
+                    "y": 0,
+                    "biome": "wintryVeil",
+                    "paths": ["1"]
                 },
-                {
+                "1": {
                     "id": "1",
-                    "biome": "rockyArea"
+                    "x": 0,
+                    "y": 0,
+                    "biome": "wintryVeil",
+                    "paths": ["0"]
                 }
-            ],
-            "paths": ["4"]
-        },
-        "1": {
-            "id": "1",
-            "x": 172,
-            "y": 803,
-            "arrivalArea": "0",
-            "areas": [
-                {
-                    "id": "0",
-                    "biome": "meadow"
-                },
-                {
-                    "id": "1",
-                    "biome": "rockyArea"
-                }
-            ],
-            "paths": ["2", "4", "6", "11"]
-        },
-        "2": {
-            "id": "2",
-            "x": 999,
-            "y": 262,
-            "arrivalArea": "0",
-            "areas": [
-                {
-                    "id": "0",
-                    "biome": "meadow"
-                },
-                {
-                    "id": "1",
-                    "biome": "rockyArea"
-                }
-            ],
-            "paths": ["1", "4", "5"]
-        },
-        "3": {
-            "id": "3",
-            "x": 1023,
-            "y": 673,
-            "arrivalArea": "0",
-            "areas": [
-                {
-                    "id": "0",
-                    "biome": "meadow"
-                },
-                {
-                    "id": "1",
-                    "biome": "rockyArea"
-                }
-            ],
-            "paths": ["6"]
-        },
-        "4": {
-            "id": "4",
-            "x": 295,
-            "y": 505,
-            "arrivalArea": "0",
-            "areas": [
-                {
-                    "id": "0",
-                    "biome": "meadow"
-                },
-                {
-                    "id": "1",
-                    "biome": "dwelling"
-                },
-                {
-                    "id": "2",
-                    "biome": "meadow"
-                },
-                {
-                    "id": "3",
-                    "biome": "forest"
-                }
-            ],
-            "paths": ["0", "1", "2", "6", "11"]
-        },
-        "5": {
-            "id": "5",
-            "x": 1215,
-            "y": 398,
-            "arrivalArea": "0",
-            "areas": [
-                {
-                    "id": "0",
-                    "biome": "developedArea"
-                }
-            ],
-            "paths": ["2", "8", "9"]
-        },
-        "6": {
-            "id": "6",
-            "x": 1019,
-            "y": 1178,
-            "arrivalArea": "0",
-            "areas": [
-                {
-                    "id": "0",
-                    "biome": "developedArea"
-                }
-            ],
-            "paths": ["1", "3", "4", "7", "11", "12"]
-        },
-        "7": {
-            "id": "7",
-            "x": 1430,
-            "y": 865,
-            "arrivalArea": "0",
-            "areas": [
-                {
-                    "id": "0",
-                    "biome": "developedArea"
-                }
-            ],
-            "paths": ["6", "9", "10"]
-        },
-        "8": {
-            "id": "8",
-            "x": 1835,
-            "y": 315,
-            "arrivalArea": "0",
-            "areas": [
-                {
-                    "id": "0",
-                    "biome": "developedArea"
-                }
-            ],
-            "paths": ["5"]
-        },
-        "9": {
-            "id": "9",
-            "x": 1891,
-            "y": 746,
-            "arrivalArea": "0",
-            "areas": [
-                {
-                    "id": "0",
-                    "biome": "developedArea"
-                },
-                {
-                    "id": "1",
-                    "biome": "dwelling"
-                },
-                {
-                    "id": "2",
-                    "biome": "dwelling"
-                },
-                {
-                    "id": "3",
-                    "biome": "developedArea"
-                }
-            ],
-            "paths": ["5", "7"]
-        },
-        "10": {
-            "id": "10",
-            "x": 1833,
-            "y": 1389,
-            "arrivalArea": "0",
-            "areas": [
-                {
-                    "id": "0",
-                    "biome": "developedArea"
-                }
-            ],
-            "paths": [7]
-        },
-        "11": {
-            "id": "11",
-            "x": 372,
-            "y": 1214,
-            "arrivalArea": "0",
-            "areas": [
-                {
-                    "id": "0",
-                    "biome": "developedArea"
-                }
-            ],
-            "paths": ["1", "4", "6"]
-        },
-        "12": {
-            "id": "12",
-            "x": 1123,
-            "y": 1444,
-            "arrivalArea": "0",
-            "areas": [
-                {
-                    "id": "0",
-                    "biome": "developedArea"
-                }
-            ],
-            "paths": ["6"]
+            },
+            "paths": []
         }
     }
 }
