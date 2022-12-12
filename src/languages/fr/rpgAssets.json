@@ -380,12 +380,12 @@
         }
     },
     "quests": {
-        "slayer.0.0.0": {
-            "id": "slayer.0.0.0",
-            "name": "Chapitre 1 - Obanai Iguro",
+        "slayer.0.0.0.0": {
+            "id": "slayer.0.0.0.0",
+            "name": "Chapitre 1 - Obanai Iguro (1)",
             "label": "Tome 0 - Arc 0 « L'étrange Shukuba »",
             "objectives": {
-                "0": "Objectif test."
+                "0": "Rejoindre le Shukuba du Désespoir (Zetsubō)."
             }
         }
     },

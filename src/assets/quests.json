@@ -2,15 +2,15 @@
     "dailyQuest": {},
     "sideQuest": {},
     "slayerQuests": {
-        "slayer.0.0.0": {
-            "id": "slayer.0.0.0",
+        "slayer.0.0.0.0": {
+            "id": "slayer.0.0.0.0",
             "objectives": {
                 "0": {
                     "id": "0",
-                    "type": "reachStatisticLevel",
+                    "type": "reachDestination",
                     "additionalData": {
-                        "statistic": "strength",
-                        "levelToReach": 10
+                        "region": "0",
+                        "area": "1"
                     }
                 }
             },
@@ -22,54 +22,7 @@
                             "id": "0",
                             "type": "exp",
                             "data": {
-                                "amount": 100
-                            }
-                        },
-                        "1": {
-                            "id": "1",
-                            "type": "material",
-                            "data": {
-                                "material": "paper",
-                                "amount": 100
-                            }
-                        },
-                        "2": {
-                            "id": "2",
-                            "type": "questItem",
-                            "data": {
-                                "questItem": "magicKey",
-                                "amount": 1
-                            }
-                        },
-                        "3": {
-                            "id": "3",
-                            "type": "money",
-                            "data": {
-                                "amount": 125000
-                            }
-                        },
-                        "4": {
-                            "id": "4",
-                            "type": "enchantedGrimoire",
-                            "data": {
-                                "enchantedGrimoire": "adventurer",
-                                "amount": 2
-                            }
-                        },
-                        "5": {
-                            "id": "5",
-                            "type": "weapon",
-                            "data": {
-                                "weapon": "katana",
-                                "rarity": "4",
-                                "amount": 1
-                            }
-                        },
-                        "6": {
-                            "id": "6",
-                            "type": "theme",
-                            "data": {
-                                "theme": "Default"
+                                "amount": 50
                             }
                         }
                     }

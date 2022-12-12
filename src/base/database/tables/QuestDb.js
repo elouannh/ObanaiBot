@@ -11,7 +11,7 @@ function schema(id) {
             sideQuest: {},
             slayerQuest: {},
         },
-        storyProgression: ["0", "0", null],
+        storyProgression: ["0", "0", "0", null],
         notifications: "dm",
     };
 }
@@ -48,10 +48,11 @@ class QuestDb extends SQLiteTable {
      * @param {String} volume The tome ID
      * @param {String} arc The arc ID
      * @param {String} chapter The quest ID to set
+     * @param {String} step The step of the quest
      * @return {void}
      */
-    setSlayerQuest(id, volume, arc, chapter) {
-        const slayerQuestId = `slayer.${volume}.${arc}.${chapter}`;
+    setSlayerQuest(id, volume, arc, chapter, step) {
+        const slayerQuestId = `slayer.${volume}.${arc}.${chapter}.${step}`;
         const questData = this.client.RPGAssetsManager.getQuest(this.client.playerDb.getLang(id), slayerQuestId);
 
         const questObject = {
@@ -216,7 +217,7 @@ class QuestDb extends SQLiteTable {
                 case "reachDestination":
                     const { region, area } = localObjective.additionalData;
                     const userRegion = data.region;
-                    const userArea = data.region;
+                    const userArea = data.area;
 
                     if (userRegion.id === region && userArea.id === area) completedInDepth = true;
                     break;
@@ -469,10 +470,11 @@ class QuestDb extends SQLiteTable {
      * @param {String} volume The volume of the story
      * @param {String} arc The arc of the story
      * @param {String} chapter The chapter of the story
+     * @param {String} step The step of the story
      * @returns {void}
      */
-    updateSlayerProgression(id, volume, arc, chapter) {
-        this.set(id, [volume, arc, chapter], "storyProgression");
+    updateSlayerProgression(id, volume, arc, chapter, step) {
+        this.set(id, [volume, arc, chapter, step], "storyProgression");
     }
 
     /**
@@ -655,7 +657,7 @@ class QuestDb extends SQLiteTable {
         const list = this.client.RPGAssetsManager.getSlayerQuestsIds();
         const userQuest = this.get(id).storyProgression;
 
-        const index = list.indexOf(`slayer.${userQuest[0]}.${userQuest[1]}.${userQuest[2]}`);
+        const index = list.indexOf(`slayer.${userQuest[0]}.${userQuest[1]}.${userQuest[2]}.${userQuest[3]}`);
         const last = list[index];
         const next = list[index + 1] || "none";
 

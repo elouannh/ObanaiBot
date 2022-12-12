@@ -178,7 +178,7 @@ class RPGAssetsManager {
     }
 
     getSlayerQuestsIds() {
-        return ["slayer.0.0.null"].concat(Object.keys(this.quests.slayerQuests));
+        return ["slayer.0.0.0.null"].concat(Object.keys(this.quests.slayerQuests));
     }
 }
 
