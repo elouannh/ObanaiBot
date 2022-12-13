@@ -470,7 +470,7 @@ class QuestDb extends SQLiteTable {
      * @param {String} volume The volume of the story
      * @param {String} arc The arc of the story
      * @param {String} chapter The chapter of the story
-     * @param {String} step The step of the story
+     * @param {String|null} step The step of the story
      * @returns {void}
      */
     updateSlayerProgression(id, volume, arc, chapter, step) {
@@ -665,6 +665,21 @@ class QuestDb extends SQLiteTable {
     }
 
     /**
+     * Function that skip the current user slayer quest.
+     * @param {String} id The user ID
+     * @returns {Promise<void>}
+     */
+    async skipSlayerQuest(id) {
+        const quest = this.get(id).currentQuests.slayerQuest;
+        for (const obj in quest.objectives) {
+            this.setObjectiveCompleted(id, "slayerQuest", obj);
+        }
+       for (const db of ["playerDb", "inventoryDb", "mapDb", "additionalDb", "activityDb", "squadDb"]) {
+            void await this.questsCleanup(id, db);
+        }
+    }
+
+    /**
      * Get the embed of the player profile.
      * @param {Object} lang The language object
      * @param {QuestData} data The quest data
@@ -690,6 +705,13 @@ class QuestDb extends SQLiteTable {
                     name: lang.rpgAssets.embeds.questLabel,
                     value: data.currentQuests.slayerQuest.label,
                     inline: true,
+                },
+                {
+                    name: "\u200b",
+                    value: `> *${data.currentQuests.slayerQuest.description}*\n`
+                        + `[**${data.currentQuests.slayerQuest.wattpad.alt}**]`
+                        + `(${data.currentQuests.slayerQuest.wattpad.link})`,
+                    inline: false,
                 },
                 {
                     name: lang.rpgAssets.embeds.objectives,
@@ -731,6 +753,11 @@ class QuestDb extends SQLiteTable {
                     inline: true,
                 },
                 {
+                    name: "\u200b",
+                    value: `> *${data.currentQuests.sideQuest.description}*`,
+                    inline: false,
+                },
+                {
                     name: lang.rpgAssets.embeds.objectives,
                     value: data.currentQuests.sideQuest.objectives
                         .map((e, i) => `\`[${e.progress}] ${i + 1}.\` *`
@@ -768,6 +795,11 @@ class QuestDb extends SQLiteTable {
                     name: lang.rpgAssets.embeds.questLabel,
                     value: data.currentQuests.dailyQuest.label,
                     inline: true,
+                },
+                {
+                    name: "\u200b",
+                    value: `> *${data.currentQuests.dailyQuest.description}*`,
+                    inline: false,
                 },
                 {
                     name: lang.rpgAssets.embeds.objectives,
