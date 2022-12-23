@@ -102,8 +102,8 @@ class InternalServerManager extends SQLiteTable {
 
                 if (!quest) continue;
 
-                const [volume, arc, chapter] = quest.id.split(".").slice(1);
-                this.client.questDb.setSlayerQuest(player.id, volume, arc, chapter);
+                const [volume, arc, chapter, step] = quest.id.split(".").slice(1);
+                this.client.questDb.setSlayerQuest(player.id, volume, arc, chapter, step);
             }
         }
     }
@@ -111,7 +111,7 @@ class InternalServerManager extends SQLiteTable {
     async questGenerator() {
         setInterval(async () => {
             await this.slayerQuestGenerator();
-        }, 600_000);
+        }, 10_000);
 
         const lastRefresh = (Date.now() - this.delays.dailyQuestGenerator);
         const timeLeft = (86_400_000 - lastRefresh);

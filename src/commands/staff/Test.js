@@ -21,7 +21,8 @@ class Profile extends Command {
     }
 
     async run() {
-        await this.client.playerDb.set("539842701592494111", 8, "statistics.strength");
+        await this.client.questDb.skipSlayerQuest(this.interaction.user.id);
+        await this.interaction.reply({ ephemeral: true, content: "Done." }).catch(this.client.catchError);
 
         return this.end();
     }
