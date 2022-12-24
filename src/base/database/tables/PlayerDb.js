@@ -12,10 +12,12 @@ function schema(id) {
         lang: "fr",
         characterId: null,
         statistics: {
-            defense: 1,
+            speed: 1,
             strength: 1,
             weaponControl: 1,
             smartness: 1,
+            stamina: 1,
+            resistance: 1,
         },
         hp: 100,
         lastHealing: Date.now(),
@@ -265,25 +267,25 @@ class PlayerDb extends SQLiteTable {
 
         const statsImage = await Canvas.loadImage(theme.StatsImage);
         const statsSize = 30;
-        context.drawImage(statsImage, 200, 260, statsSize, statsSize);
+        context.drawImage(statsImage, 200, 240, statsSize, statsSize);
         const statsText1 = `${lang.concepts.stats}`;
-        this.client.util.text3D(context, statsText1, theme.Accent, theme.Color, "Display", 35, 240, 275);
+        this.client.util.text3D(context, statsText1, theme.Accent, theme.Color, "Display", 35, 240, 255);
 
         const separator = await Canvas.loadImage(
             await this.client.util.verticalBar(
-                10, 120, theme.Accent, theme.BorderColor, 2,
+                10, 160, theme.Accent, theme.BorderColor, 2,
             ),
         );
-        context.drawImage(separator, 200, 310, 10, 120);
+        context.drawImage(separator, 200, 280, 10, 160);
 
         const statText1_0 = `${lang.statistics.names.strength}: `;
         const statText1_1 = `${playerData.statistics.strength.amount} `;
         const statText1_2 = `- ${lang.concepts.level} `;
         const statText1_3 = `${playerData.statistics.strength.level}`;
-        const statText2_0 = `${lang.statistics.names.defense}: `;
-        const statText2_1 = `${playerData.statistics.defense.amount} `;
+        const statText2_0 = `${lang.statistics.names.speed}: `;
+        const statText2_1 = `${playerData.statistics.speed.amount} `;
         const statText2_2 = `- ${lang.concepts.level} `;
-        const statText2_3 = `${playerData.statistics.defense.level}`;
+        const statText2_3 = `${playerData.statistics.speed.level}`;
         const statText3_0 = `${lang.statistics.names.weaponControl}: `;
         const statText3_1 = `${playerData.statistics.weaponControl.amount} `;
         const statText3_2 = `- ${lang.concepts.level} `;
@@ -292,69 +294,73 @@ class PlayerDb extends SQLiteTable {
         const statText4_1 = `${playerData.statistics.smartness.amount} `;
         const statText4_2 = `- ${lang.concepts.level} `;
         const statText4_3 = `${playerData.statistics.smartness.level}`;
+        const statText5_0 = `${lang.statistics.names.stamina}: `;
+        const statText5_1 = `${playerData.statistics.stamina.amount} `;
+        const statText5_2 = `- ${lang.concepts.level} `;
+        const statText5_3 = `${playerData.statistics.stamina.level}`;
+        const statText6_0 = `${lang.statistics.names.resistance}: `;
+        const statText6_1 = `${playerData.statistics.resistance.amount} `;
+        const statText6_2 = `- ${lang.concepts.level} `;
+        const statText6_3 = `${playerData.statistics.resistance.level}`;
         context.fillStyle = theme.Color;
         context.textBaseline = "bottom";
-        context.font = "22px Display";
-        const placement = 29;
-        context.fillText(statText1_0, 230, 308 + placement);
-        context.fillText(statText2_0, 230, 308 + placement * 2);
-        context.fillText(statText3_0, 230, 308 + placement * 3);
-        context.fillText(statText4_0, 230, 308 + placement * 4);
+        context.font = "18px Soft";
+        const placement = 24;
+        const baseText = 290;
+        context.fillText(statText1_0, 230, baseText + placement);
+        context.fillText(statText2_0, 230, baseText + placement * 2);
+        context.fillText(statText3_0, 230, baseText + placement * 3);
+        context.fillText(statText4_0, 230, baseText + placement * 4);
+        context.fillText(statText5_0, 230, baseText + placement * 5);
+        context.fillText(statText6_0, 230, baseText + placement * 6);
         const s1_0Length = context.measureText(statText1_0).width;
         const s2_0Length = context.measureText(statText2_0).width;
         const s3_0Length = context.measureText(statText3_0).width;
         const s4_0Length = context.measureText(statText4_0).width;
-        this.client.util.text3D(context, statText1_1, theme.Accent, theme.Color, "Main", 28, 235 + s1_0Length, 308 + placement);
-        this.client.util.text3D(context, statText2_1, theme.Accent, theme.Color, "Main", 28, 235 + s2_0Length, 308 + placement * 2);
-        this.client.util.text3D(context, statText3_1, theme.Accent, theme.Color, "Main", 28, 235 + s3_0Length, 308 + placement * 3);
-        this.client.util.text3D(context, statText4_1, theme.Accent, theme.Color, "Main", 28, 235 + s4_0Length, 308 + placement * 4);
+        const s5_0Length = context.measureText(statText5_0).width;
+        const s6_0Length = context.measureText(statText6_0).width;
+        this.client.util.text3D(context, statText1_1, theme.Accent, theme.Color, "Main", 23, 235 + s1_0Length, baseText + placement);
+        this.client.util.text3D(context, statText2_1, theme.Accent, theme.Color, "Main", 23, 235 + s2_0Length, baseText + placement * 2);
+        this.client.util.text3D(context, statText3_1, theme.Accent, theme.Color, "Main", 23, 235 + s3_0Length, baseText + placement * 3);
+        this.client.util.text3D(context, statText4_1, theme.Accent, theme.Color, "Main", 23, 235 + s4_0Length, baseText + placement * 4);
+        this.client.util.text3D(context, statText5_1, theme.Accent, theme.Color, "Main", 23, 235 + s5_0Length, baseText + placement * 5);
+        this.client.util.text3D(context, statText6_1, theme.Accent, theme.Color, "Main", 23, 235 + s6_0Length, baseText + placement * 6);
         const s1_1Length = context.measureText(statText1_1).width;
         const s2_1Length = context.measureText(statText2_1).width;
         const s3_1Length = context.measureText(statText3_1).width;
         const s4_1Length = context.measureText(statText4_1).width;
+        const s5_1Length = context.measureText(statText5_1).width;
+        const s6_1Length = context.measureText(statText6_1).width;
         context.fillStyle = theme.Color;
         context.font = "15px Soft";
-        context.fillText(statText1_2, 240 + s1_0Length + s1_1Length, 308 + placement);
-        context.fillText(statText2_2, 240 + s2_0Length + s2_1Length, 308 + placement * 2);
-        context.fillText(statText3_2, 240 + s3_0Length + s3_1Length, 308 + placement * 3);
-        context.fillText(statText4_2, 240 + s4_0Length + s4_1Length, 308 + placement * 4);
+        context.fillText(statText1_2, 240 + s1_0Length + s1_1Length, baseText + placement);
+        context.fillText(statText2_2, 240 + s2_0Length + s2_1Length, baseText + placement * 2);
+        context.fillText(statText3_2, 240 + s3_0Length + s3_1Length, baseText + placement * 3);
+        context.fillText(statText4_2, 240 + s4_0Length + s4_1Length, baseText + placement * 4);
+        context.fillText(statText5_2, 240 + s5_0Length + s5_1Length, baseText + placement * 5);
+        context.fillText(statText6_2, 240 + s6_0Length + s6_1Length, baseText + placement * 6);
         const s1_2Length = context.measureText(statText1_2).width;
         const s2_2Length = context.measureText(statText2_2).width;
         const s3_2Length = context.measureText(statText3_2).width;
         const s4_2Length = context.measureText(statText4_2).width;
-        context.fillText(statText1_3, 240 + s1_0Length + s1_1Length + s1_2Length, 308 + placement);
-        context.fillText(statText2_3, 240 + s2_0Length + s2_1Length + s2_2Length, 308 + placement * 2);
-        context.fillText(statText3_3, 240 + s3_0Length + s3_1Length + s3_2Length, 308 + placement * 3);
-        context.fillText(statText4_3, 240 + s4_0Length + s4_1Length + s4_2Length, 308 + placement * 4);
+        const s5_2Length = context.measureText(statText5_2).width;
+        const s6_2Length = context.measureText(statText6_2).width;
+        context.fillText(statText1_3, 240 + s1_0Length + s1_1Length + s1_2Length, baseText + placement);
+        context.fillText(statText2_3, 240 + s2_0Length + s2_1Length + s2_2Length, baseText + placement * 2);
+        context.fillText(statText3_3, 240 + s3_0Length + s3_1Length + s3_2Length, baseText + placement * 3);
+        context.fillText(statText4_3, 240 + s4_0Length + s4_1Length + s4_2Length, baseText + placement * 4);
+        context.fillText(statText5_3, 240 + s5_0Length + s5_1Length + s5_2Length, baseText + placement * 5);
+        context.fillText(statText6_3, 240 + s6_0Length + s6_1Length + s6_2Length, baseText + placement * 6);
 
-        const maxValue = Math.max(
-            playerData.statistics.strength.amount,
-            playerData.statistics.defense.amount,
-            playerData.statistics.weaponControl.amount,
-            playerData.statistics.smartness.amount,
-        );
-        const minValue = Math.min(
-            playerData.statistics.strength.amount,
-            playerData.statistics.defense.amount,
-            playerData.statistics.weaponControl.amount,
-            playerData.statistics.smartness.amount,
-        );
+        const amountValues = Object.values(playerData.statistics).map(e => e.amount);
+        const maxValue = Math.max(...amountValues);
+        const minValue = Math.min(...amountValues);
 
-        const percent = 1 / (playerData.statistics.strength.amount + playerData.statistics.defense.amount + playerData.statistics.weaponControl.amount + playerData.statistics.smartness.amount);
+        const percent = 1 / amountValues.reduce((a, b) => a + b, 0);
         const graph = await Canvas.loadImage(
             await this.client.util.polarGraph(
-                [
-                    playerData.statistics.strength.amount * percent,
-                    playerData.statistics.defense.amount * percent,
-                    playerData.statistics.weaponControl.amount * percent,
-                    playerData.statistics.smartness.amount * percent,
-                ],
-                [
-                    playerData.statistics.strength.amount,
-                    playerData.statistics.defense.amount,
-                    playerData.statistics.weaponControl.amount,
-                    playerData.statistics.smartness.amount,
-                ],
+                amountValues.map(e => e * percent),
+                amountValues,
                 theme.PolarGraphFill,
                 150,
                 theme.BorderColor,
@@ -368,12 +374,13 @@ class PlayerDb extends SQLiteTable {
         context.font = "15px Soft";
         context.textBaseline = "middle";
         context.textAlign = "left";
-        context.fillText(lang.statistics.abbreviations.strength, 725, 340);
+        context.fillText(lang.statistics.abbreviations.strength, 675, 265);
+        context.fillText(lang.statistics.abbreviations.speed, 725, 340);
+        context.fillText(lang.statistics.abbreviations.weaponControl, 675, 420);
         context.textAlign = "right";
-        context.fillText(lang.statistics.abbreviations.weaponControl, 565, 340);
-        context.textAlign = "center";
-        context.fillText(lang.statistics.abbreviations.smartness, 645, 430);
-        context.fillText(lang.statistics.abbreviations.defense, 645, 260);
+        context.fillText(lang.statistics.abbreviations.smartness, 605, 420);
+        context.fillText(lang.statistics.abbreviations.stamina, 565, 340);
+        context.fillText(lang.statistics.abbreviations.resistance, 605, 265);
 
         const mascot = await Canvas.loadImage(theme.MascotImage);
         context.drawImage(mascot, 0, 230, 190, 220);

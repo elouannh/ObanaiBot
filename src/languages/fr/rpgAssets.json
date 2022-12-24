@@ -2,15 +2,19 @@
     "statistics": {
         "names": {
             "strength": "Force",
-            "defense": "Défense",
+            "speed": "Vitesse",
             "weaponControl": "Maîtrise d'arme",
-            "smartness": "Intelligence"
+            "smartness": "Intelligence",
+            "stamina": "Endurance",
+            "resistance": "Résistance"
         },
         "abbreviations": {
             "strength": "Fo.",
-            "defense": "Def.",
+            "speed": "Vi.",
             "weaponControl": "M. A.",
-            "smartness": "Int."
+            "smartness": "Int.",
+            "stamina": "En.",
+            "resistance": "Rés."
         },
         "levels": {
             "max": "Niveau max atteint (100)"
