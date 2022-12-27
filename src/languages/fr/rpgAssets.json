@@ -489,9 +489,22 @@
         "totalEarned": "Total obtenu",
         "questName": "Nom de la quête",
         "questLabel": "Étiquette de la quête",
-        "noQuest": "Aucune quête."
+        "noQuest": "Aucune quête.",
+        "dailyLocked": "Les quêtes quotidiennes sont disponibles à partir du rang **Mizunoe**."
     },
     "themes": {
         "Default": "Défaut"
+    },
+    "ranks": {
+        "0": "Mizunoto",
+        "1": "Mizunoe",
+        "2": "Kanoto",
+        "3": "Kanoe",
+        "4": "Tsuchinoto",
+        "5": "Tsuchinoe",
+        "6": "Hinoto",
+        "7": "Hinoe",
+        "8": "Kinoto",
+        "9": "Kinoe"
     }
 }

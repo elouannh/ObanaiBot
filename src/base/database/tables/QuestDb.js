@@ -435,7 +435,6 @@ class QuestDb extends SQLiteTable {
         const quests = await this.get(id);
 
         const dailyQuest = quests.currentQuests.dailyQuest;
-        console.log(dailyQuest);
         const dailyActions = dailyQuest?.id === undefined ? [] : await this.isQuestCompleted(
             id,
             dailyQuest,
@@ -689,7 +688,6 @@ class QuestDb extends SQLiteTable {
      * @returns {Promise<EmbedBuilder[]>}
      */
     async getEmbeds(lang, data, user) {
-        console.log(this.get(user.id).currentQuests);
         const slayerEmbed = new EmbedBuilder()
             .setTitle(
                 `⟪ ${this.client.enums.Rpg.Concepts.SlayerQuest} ⟫ `
@@ -820,8 +818,11 @@ class QuestDb extends SQLiteTable {
                 },
             );
         }
-        else {
+        else if (Number(this.client.playerDb.get(user.id).rank) >= 1) {
             dailyEmbed.setDescription(lang.rpgAssets.embeds.noQuest);
+        }
+        else {
+            dailyEmbed.setDescription(`🔒 ${lang.rpgAssets.embeds.dailyLocked}`);
         }
 
         return [slayerEmbed, sideEmbed, dailyEmbed];

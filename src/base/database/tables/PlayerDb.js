@@ -23,6 +23,7 @@ function schema(id) {
         lastHealing: Date.now(),
         breathingStyle: null,
         exp: 0,
+        rank: "0",
         creationDate: Date.now(),
     };
 }

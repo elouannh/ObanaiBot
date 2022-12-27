@@ -114,7 +114,7 @@ class InternalServerManager extends SQLiteTable {
     }
 
     async dailyQuestGenerator() {
-        const players = this.client.playerDb.db.array();
+        const players = this.client.playerDb.db.array().filter(p => Number(p.rank) >= 1);
         for (const player of players) {
             const randomQuest = this.client.RPGAssetsManager.randomQuest("daily");
             this.client.questDb.setDailyQuest(player.id, randomQuest);
