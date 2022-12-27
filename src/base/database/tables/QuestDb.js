@@ -12,6 +12,7 @@ function schema(id) {
             slayerQuest: {},
         },
         storyProgression: ["0", "0", "0", null],
+        sideProgression: ["0", "0", "0", null],
         notifications: "dm",
     };
 }
@@ -32,7 +33,7 @@ class QuestDb extends SQLiteTable {
      * @return {void}
      */
     setDailyQuest(id, questId) {
-        const dailyQuestId = `daily.${questId}`;
+        const dailyQuestId = `${questId}`;
         const dailyQuest = this.client.RPGAssetsManager.getQuest(this.client.playerDb.getLang(id), dailyQuestId);
 
         this.set(
@@ -434,23 +435,24 @@ class QuestDb extends SQLiteTable {
         const quests = await this.get(id);
 
         const dailyQuest = quests.currentQuests.dailyQuest;
-        const dailyActions = dailyQuest === {} ? [] : await this.isQuestCompleted(
+        console.log(dailyQuest);
+        const dailyActions = dailyQuest?.id === undefined ? [] : await this.isQuestCompleted(
             id,
             dailyQuest,
-            this.client.RPGAssetsManager.quests.dailyQuest[dailyQuest.id],
+            this.client.RPGAssetsManager.quests.dailyQuests[dailyQuest.id],
             tableFocused,
         );
 
         const sideQuest = quests.currentQuests.sideQuest;
-        const sideActions = sideQuest === {} ? [] : await this.isQuestCompleted(
+        const sideActions = sideQuest?.id === undefined ? [] : await this.isQuestCompleted(
             id,
             sideQuest,
-            this.client.RPGAssetsManager.quests[sideQuest.id],
+            this.client.RPGAssetsManager.quests.sideQuests[sideQuest.id],
             tableFocused,
         );
 
         const slayerQuest = quests.currentQuests.slayerQuest;
-        const slayerActions = slayerQuest === {} ? [] : await this.isQuestCompleted(
+        const slayerActions = slayerQuest?.id === undefined ? [] : await this.isQuestCompleted(
             id,
             slayerQuest,
             this.client.RPGAssetsManager.quests.slayerQuests[slayerQuest.id],
@@ -687,6 +689,7 @@ class QuestDb extends SQLiteTable {
      * @returns {Promise<EmbedBuilder[]>}
      */
     async getEmbeds(lang, data, user) {
+        console.log(this.get(user.id).currentQuests);
         const slayerEmbed = new EmbedBuilder()
             .setTitle(
                 `⟪ ${this.client.enums.Rpg.Concepts.SlayerQuest} ⟫ `

@@ -155,6 +155,13 @@ class RPGAssetsManager {
         );
     }
 
+    randomQuest(type) {
+        const questType = `${type}Quests`;
+        if (!(questType in this.quests)) return "Invalid Quest Type";
+        const quests = Object.keys(this.quests[questType]);
+        return quests[Math.floor(Math.random() * quests.length)];
+    }
+
     loadQuest(lang, id, questData) {
         const questType = `${id.split(".")[0]}Quests`;
         if (!(questType in this.quests)) return "Invalid Quest Type";

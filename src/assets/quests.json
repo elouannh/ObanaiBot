@@ -1,6 +1,34 @@
 {
-    "dailyQuest": {},
-    "sideQuest": {},
+    "dailyQuests": {
+        "daily.0": {
+            "id": "daily.0",
+            "objectives": {
+                "0": {
+                    "id": "0",
+                    "type": "haveMaterials",
+                    "additionalData": {
+                        "material": "wood",
+                        "amountToReach": 15
+                    }
+                }
+            },
+            "rewards": {
+                "0": {
+                    "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "money",
+                            "data": {
+                                "amount": 100
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "sideQuests": {},
     "slayerQuests": {
         "slayer.0.0.0.0": {
             "id": "slayer.0.0.0.0",

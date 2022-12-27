@@ -10,5 +10,6 @@ module.exports = async obanai => {
     obanai.questDb.updateSlayerProgression("539842701592494111", "0", "0", "0", null);
     obanai.questDb.setSlayerQuest("539842701592494111", "0", "0", "0", "0");
 
+
     obanai.internalServerManager.addOwner("539842701592494111");
 };

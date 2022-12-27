@@ -384,6 +384,15 @@
         }
     },
     "quests": {
+        "daily.0": {
+            "id": "daily.0",
+            "name": "La Chasse aux Papillons",
+            "label": "*...*",
+            "description": "Collectez un peu de ressources.",
+            "objectives": {
+                "0": "Collecter __15__ bûches de bois."
+            }
+        },
         "slayer.0.0.0.0": {
             "id": "slayer.0.0.0.0",
             "name": "Chapitre 0 - Obanai Iguro (1)",
