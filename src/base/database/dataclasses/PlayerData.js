@@ -34,6 +34,7 @@ class PlayerData extends TableData {
                 this.data.lang, this.data.breathingStyle,
             );
         }
+        this.data.rank = this.client.RPGAssetsManager.getPlayerRank(this.lang, this.data.rank);
 
         delete this.data.characterId;
         delete this.data.exp;

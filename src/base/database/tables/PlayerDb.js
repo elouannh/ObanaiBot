@@ -179,9 +179,15 @@ class PlayerDb extends SQLiteTable {
                     value: `${data.character.fullName} (${data.character.japaneseTranscription.fullName})`,
                     inline: true,
                 },
+                {
+                    name: lang.rpgAssets.embeds.playerRank,
+                    value: `» **${data.rank.name}**`,
+                    inline: false,
+                },
             )
             .setImage("attachment://profile-player.png")
-            .setColor(this.client.enums.Colors.Blurple);
+            .setColor(this.client.enums.Colors.Blurple)
+            .setThumbnail(data.character.id === "0" ? this.client.enums.Images.Character0 : this.client.enums.Images.Character1);
     }
 
     /**

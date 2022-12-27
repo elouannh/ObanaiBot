@@ -490,7 +490,8 @@
         "questName": "Nom de la quête",
         "questLabel": "Étiquette de la quête",
         "noQuest": "Aucune quête.",
-        "dailyLocked": "Les quêtes quotidiennes sont disponibles à partir du rang **Mizunoe**."
+        "dailyLocked": "Les quêtes quotidiennes sont disponibles à partir du rang **Mizunoe**.",
+        "playerRank": "Rang de pourfendeur"
     },
     "themes": {
         "Default": "Défaut"
