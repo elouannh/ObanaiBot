@@ -99,6 +99,19 @@ class PlayerDb extends SQLiteTable {
     }
 
     /**
+     * Delete the adventure of the player.
+     * @param {String} id The player ID
+     */
+    async remove(id) {
+        await this.delete(id);
+        const userSquad = await this.client.squadDb.loadUser(id);
+
+        if (userSquad !== null) {
+            await this.client.squadDb.removeMember(userSquad.id, id);
+        }
+    }
+
+    /**
      * Returns if a player exists in the database.
      * @param {String} id The player ID
      * @returns {Promise<boolean>}

@@ -30,5 +30,16 @@
         "characterMenuPlaceholder": "Choisissez votre personnage.",
         "characterChosen": "Vous avez donc choisi **%CHAR**. Vous pouvez désormais commencer à jouer au bot; essayez de faire la commande `/profile` pour tester !",
         "thereIsTutorial": "Il y a des tutoriels disponibles tout au long de votre aventure qui vous expliqueront comment fonctionne le bot. Bon jeu !"
+    },
+    "delete": {
+        "areYouSure": "Êtes vous sûr de vouloir supprimer votre aventure ?",
+        "firstWarning": "⚠ L'intégralité de votre progression sera supprimée. De plus, si vous possédez une escouade, vous la quitterez ; et un membre vous remplacera si vous en êtes le chef."
+        "deleteButton": "Supprimer",
+        "cancelButton": "Annuler",
+        "deletionCanceled": "Suppression annulée.",
+        "definitiveAction": "Cette décision est irréversible !",
+        "secondWarning": "⚠ Une fois supprimé, vous ne pourrez plus récupérer vos données !\n\n**ÊTES-VOUS SÛR ?**",
+        "bye": "Au revoir...",
+        "adventureDeleted": "Votre aventure a bien été supprimée. Nous espérons vous revoir bientôt."
     }
 }
