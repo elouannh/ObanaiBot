@@ -242,6 +242,16 @@ class Obanai extends Client {
 
         return response;
     }
+
+    async guildsSize() {
+        try {
+            const guilds = (await this.guilds.fetch()).size;
+            return guilds;
+        }
+        catch {
+            return this.guilds.cache.size;
+        }
+    }
 }
 
 module.exports = Obanai;

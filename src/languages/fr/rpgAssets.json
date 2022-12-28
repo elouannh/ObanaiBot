@@ -2,15 +2,19 @@
     "statistics": {
         "names": {
             "strength": "Force",
-            "defense": "Défense",
+            "speed": "Vitesse",
             "weaponControl": "Maîtrise d'arme",
-            "smartness": "Intelligence"
+            "smartness": "Intelligence",
+            "stamina": "Endurance",
+            "resistance": "Résistance"
         },
         "abbreviations": {
             "strength": "Fo.",
-            "defense": "Def.",
+            "speed": "Vi.",
             "weaponControl": "M. A.",
-            "smartness": "Int."
+            "smartness": "Int.",
+            "stamina": "En.",
+            "resistance": "Rés."
         },
         "levels": {
             "max": "Niveau max atteint (100)"
@@ -380,6 +384,15 @@
         }
     },
     "quests": {
+        "daily.0": {
+            "id": "daily.0",
+            "name": "La Chasse aux Papillons",
+            "label": "*...*",
+            "description": "Collectez un peu de ressources.",
+            "objectives": {
+                "0": "Collecter __15__ bûches de bois."
+            }
+        },
         "slayer.0.0.0.0": {
             "id": "slayer.0.0.0.0",
             "name": "Chapitre 0 - Obanai Iguro (1)",
@@ -476,9 +489,23 @@
         "totalEarned": "Total obtenu",
         "questName": "Nom de la quête",
         "questLabel": "Étiquette de la quête",
-        "noQuest": "Aucune quête."
+        "noQuest": "Aucune quête.",
+        "dailyLocked": "Les quêtes quotidiennes sont disponibles à partir du rang **Mizunoe**.",
+        "playerRank": "Rang de pourfendeur"
     },
     "themes": {
         "Default": "Défaut"
+    },
+    "ranks": {
+        "0": "Mizunoto",
+        "1": "Mizunoe",
+        "2": "Kanoto",
+        "3": "Kanoe",
+        "4": "Tsuchinoto",
+        "5": "Tsuchinoe",
+        "6": "Hinoto",
+        "7": "Hinoe",
+        "8": "Kinoto",
+        "9": "Kinoe"
     }
 }

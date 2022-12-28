@@ -79,6 +79,11 @@ class InternalServerManager extends SQLiteTable {
         return this.main.status.mode;
     }
 
+    updateDailyDelay() {
+        this.set("main", Date.now(), "delays.dailyQuestGenerator");
+        return this.main;
+    }
+
     userBitField(userId) {
         let bitfield = "0b";
         for (const grade of ["owners", "administrators", "moderators"]) {
@@ -108,18 +113,27 @@ class InternalServerManager extends SQLiteTable {
         }
     }
 
+    async dailyQuestGenerator() {
+        const players = this.client.playerDb.db.array().filter(p => Number(p.rank) >= 1);
+        for (const player of players) {
+            const randomQuest = this.client.RPGAssetsManager.randomQuest("daily");
+            this.client.questDb.setDailyQuest(player.id, randomQuest);
+        }
+        this.updateDailyDelay();
+    }
+
     async questGenerator() {
         setInterval(async () => {
             await this.slayerQuestGenerator();
-        }, 10_000);
+        }, 300_000);
 
         const lastRefresh = (Date.now() - this.delays.dailyQuestGenerator);
         const timeLeft = (86_400_000 - lastRefresh);
         setTimeout(async () => {
-            void null;
+            await this.dailyQuestGenerator();
 
             setInterval(async () => {
-                void null;
+                await this.dailyQuestGenerator();
             }, 86_400_000);
         }, timeLeft);
     }

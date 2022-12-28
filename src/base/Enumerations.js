@@ -63,9 +63,14 @@ module.exports = {
     Colors: {
         Blurple: 0x5865f2,
         Green: 0x44c767,
+        Red: 0xf04747,
     },
     Units: {
         MinutesPerDistanceUnit: 5,
         MinutesOfForgingPerRarity: 120,
+    },
+    Images: {
+        Character0: "https://cdn.discordapp.com/attachments/980577808243900446/1037877260201504918/MC_ObanaiBot.png",
+        Character1: "https://cdn.discordapp.com/attachments/980577808243900446/1038086907088879666/Female_MC_ObanaiBot.png",
     },
 };

@@ -92,8 +92,9 @@ class SQLiteTableMerger {
                 dbs.a.set(id, player.started, "alreadyPlayed");
                 dbs.a.set(id, player.id, "id");
                 dbs.a.set(id, player.lang, "lang");
-                const stats = { strength: player.stats.strength, defense: player.stats.defense };
-                dbs.a.set(id, stats, "statistics");
+                const stats = { strength: player.stats.strength, speed: player.stats.speed };
+                dbs.a.set(id, stats.strength, "statistics.strength");
+                dbs.a.set(id, stats.speed, "statistics.speed");
                 dbs.a.set(id, player.breath || "water", "breathingStyle");
                 dbs.a.set(id, player.created || Date.now(), "creationDate");
             }

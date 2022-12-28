@@ -13,11 +13,18 @@ class Ready extends Event {
         this.client.commandManager.loadFiles();
         this.client.util.timelog(`Bot connecté en tant que ${this.client.chalk.bold(this.client.user.tag)} !`);
 
+        this.client.user.setPresence({
+            activities: [
+                { name: `🔌 Loading ${(await this.client.guildsSize())} guilds...`, type: ActivityType.Playing },
+            ],
+            status: "dnd",
+        });
+
         try {
             let statusIndex = 0;
             setInterval(() => {
                 const activities = [
-                    { name: "🌐 Multilingue/Multilingual", type: ActivityType.Competing },
+                    { name: "🌐 International", type: ActivityType.Competing },
                     { name: `Version ${this.client.version}`, type: ActivityType.Watching },
                 ];
                 this.client.user.setPresence({

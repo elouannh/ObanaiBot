@@ -10,6 +10,7 @@ const RPGQuestItem = require("./subclasses/RPGQuestItem");
 const RPGStatistic = require("./subclasses/RPGStatistic");
 const RPGQuest = require("./subclasses/RPGQuest");
 const RPGPlayerHealth = require("./subclasses/RPGPlayerHealth");
+const RPGPlayerRank = require("./subclasses/RPGPlayerRank");
 
 class RPGAssetsManager {
     constructor(client, dir) {
@@ -26,6 +27,7 @@ class RPGAssetsManager {
         this.questItems = require(`../${this.dir}/questItems.json`);
         this.statistics = require(`../${this.dir}/statistics.json`);
         this.quests = require(`../${this.dir}/quests.json`);
+        this.ranks = require(`../${this.dir}/ranks.json`);
     }
 
     getLangData(lang, file = null) {
@@ -143,6 +145,11 @@ class RPGAssetsManager {
         );
     }
 
+    getPlayerRank(lang, rankId) {
+        if (!(rankId in this.ranks)) return "Invalid Rank ID";
+        return new RPGPlayerRank(this.getLangData(lang, "ranks"), rankId, this.ranks[rankId]);
+    }
+
     getQuest(lang, id) {
         const questType = `${id.split(".")[0]}Quests`;
         if (!(questType in this.quests)) return "Invalid Quest Type";
@@ -153,6 +160,13 @@ class RPGAssetsManager {
             id,
             this.quests[questType][id],
         );
+    }
+
+    randomQuest(type) {
+        const questType = `${type}Quests`;
+        if (!(questType in this.quests)) return "Invalid Quest Type";
+        const quests = Object.keys(this.quests[questType]);
+        return quests[Math.floor(Math.random() * quests.length)];
     }
 
     loadQuest(lang, id, questData) {
@@ -180,6 +194,7 @@ class RPGAssetsManager {
     getSlayerQuestsIds() {
         return ["slayer.0.0.0.null"].concat(Object.keys(this.quests.slayerQuests));
     }
+
 }
 
 module.exports = RPGAssetsManager;

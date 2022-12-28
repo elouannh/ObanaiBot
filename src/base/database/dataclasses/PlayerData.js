@@ -21,7 +21,7 @@ class PlayerData extends TableData {
 
             for (const grimoireEffect of grimoire.effects) {
                 if (grimoireEffect !== "statisticsBoost") break;
-                for (const stat in this.data.statistics) stat.setGrimoireBoost(grimoire.strength);
+                for (const stat in ["strength", "speed", "weaponControl"]) stat.setGrimoireBoost(grimoire.strength);
             }
         }
 
@@ -34,6 +34,7 @@ class PlayerData extends TableData {
                 this.data.lang, this.data.breathingStyle,
             );
         }
+        this.data.rank = this.client.RPGAssetsManager.getPlayerRank(this.lang, this.data.rank);
 
         delete this.data.characterId;
         delete this.data.exp;

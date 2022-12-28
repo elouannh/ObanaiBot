@@ -61,6 +61,21 @@ class SquadDb extends SQLiteTable {
 
         return squads !== null;
     }
+
+    removeMember(id, member) {
+        const squadData = this.get(id);
+        const members = squadData.members;
+        for (const key in members) {
+            if (members[key] === member) {
+                delete members[key];
+                break;
+            }
+        }
+        this.set(id, members, "members");
+        if (squadData.details.owner === member) {
+            this.set(id, Object.values(members)[0], "details.owner");
+        }
+    }
 }
 
 module.exports = SquadDb;
