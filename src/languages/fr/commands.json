@@ -33,7 +33,7 @@
     },
     "delete": {
         "areYouSure": "Êtes vous sûr de vouloir supprimer votre aventure ?",
-        "firstWarning": "⚠ L'intégralité de votre progression sera supprimée. De plus, si vous possédez une escouade, vous la quitterez ; et un membre vous remplacera si vous en êtes le chef."
+        "firstWarning": "⚠ L'intégralité de votre progression sera supprimée. De plus, si vous possédez une escouade, vous la quitterez ; et un membre vous remplacera si vous en êtes le chef.",
         "deleteButton": "Supprimer",
         "cancelButton": "Annuler",
         "deletionCanceled": "Suppression annulée.",
