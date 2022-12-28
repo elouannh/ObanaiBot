@@ -62,6 +62,13 @@ class InventoryDb extends SQLiteTable {
             }
         }
 
+        for (const material in data.items.materials) {
+            if (data.items.materials[material] <= 0) {
+                delete data.items.materials[material];
+                this.delete(id, `items.materials.${material}`);
+            }
+        }
+
         return data;
     }
 
@@ -106,7 +113,7 @@ class InventoryDb extends SQLiteTable {
     }
 
     /**
-     * Feed the crow to increase its effects bonuses.
+     * Feed the crow to increase its effects bonuses. Decreases the required amount of food.
      * @param {String} id The player ID
      * @param {Number} amount The amount of hunger to decrease
      * @returns {void}
@@ -114,6 +121,8 @@ class InventoryDb extends SQLiteTable {
     feedKasugaiCrow(id, amount) {
         if (amount < 0) amount = 0;
         else if (amount > 100) amount = 100;
+        this.db.math(id, "-", 50, "items.materials.seed");
+        this.db.math(id, "-", 5, "items.materials.worm");
         this.set(id, Math.floor(amount), "kasugaiCrow.hunger");
         this.set(id, Date.now(), "kasugaiCrow.lastFeeding");
     }
@@ -304,7 +313,7 @@ class InventoryDb extends SQLiteTable {
                 value: Object.values(data.items.materials).length > 0 ?
                     Object.values(data.items.materials)
                         .sort((a, b) => b.amount - a.amount)
-                        .map(g => `x\`${g.amount}\` ${g.list[0].name}`)
+                        .map(g => `x\`${g.amount}\` ${g.instance.name}`)
                         .join("\n") :
                     lang.rpgAssets.embeds.noMaterial,
                 inline: true,
@@ -314,7 +323,7 @@ class InventoryDb extends SQLiteTable {
                     value: Object.values(data.items.questItems).length > 0 ?
                 Object.values(data.items.questItems)
                     .sort((a, b) => b.amount - a.amount)
-                    .map(g => `x\`${g.amount}\` ${g.list[0].name}`)
+                    .map(g => `x\`${g.amount}\` ${g.instance.name}`)
                     .join("\n") :
                 lang.rpgAssets.embeds.noQuestItem,
                 inline: true,

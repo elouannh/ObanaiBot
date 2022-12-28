@@ -41,5 +41,17 @@
         "secondWarning": "⚠ Une fois supprimé, vous ne pourrez plus récupérer vos données !\n\n**ÊTES-VOUS SÛR ?**",
         "bye": "Au revoir...",
         "adventureDeleted": "Votre aventure a bien été supprimée. Nous espérons vous revoir bientôt."
+    },
+    "feedCrow": {
+        "feedCrow": "Nourrir votre corbeau",
+        "resourcesNeeded": "Nourrir votre corbeau de liaison coûte **5 vers** et **50 graines**. Il regagnera 15% de son énergie.",
+        "feedButton": "Nourrir",
+        "cancelButton": "Annuler",
+        "feedingCanceled": "Nourrissage annulé.",
+        "resourcesMissing": "Il vous manque quelques ressources...",
+        "missing": "Ressources manquantes:",
+        "currently": "Actuellement: **%AMOUNT**/%MAX",
+        "feedCrowSuccess": "Votre corbeau a bien été nourri.",
+        "currentEnergy": "Son énergie est désormais de **%ENERGY%**."
     }
 }
