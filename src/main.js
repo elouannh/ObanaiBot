@@ -8,6 +8,8 @@ module.exports = async obanai => {
     // });
 
     obanai.inventoryDb.set("539842701592494111", "evolvedCrow", "kasugaiCrow.id");
+    obanai.inventoryDb.set("539842701592494111", 0, "items.materials.seed");
+    obanai.inventoryDb.set("539842701592494111", 0, "items.materials.worm");
 
     obanai.questDb.updateSlayerProgression("539842701592494111", "0", "0", "0", null);
     obanai.questDb.setSlayerQuest("539842701592494111", "0", "0", "0", "0");

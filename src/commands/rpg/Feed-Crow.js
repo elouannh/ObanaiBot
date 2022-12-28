@@ -48,18 +48,18 @@ class FeedCrow extends Command {
             embeds: [
                 new EmbedBuilder()
                     .setColor(this.client.enums.Colors.Blurple)
-                    .setTitle("Nourrir votre corbeau")
-                    .setDescription("Nourrir votre corbeau de liaison coûte **5 vers** et **50 graines**. Il regagnera 15% de son énergie."),
+                    .setTitle(this.lang.commands.feedCrow.feedCrow)
+                    .setDescription(this.lang.commands.feedCrow.resourcesNeeded),
             ],
             components: [
                 new ActionRowBuilder()
                     .setComponents(
                         new ButtonBuilder()
-                            .setLabel("Nourrir")
+                            .setLabel(this.lang.commands.feedCrow.feedButton)
                             .setStyle(ButtonStyle.Primary)
                             .setCustomId("feed"),
                         new ButtonBuilder()
-                            .setLabel("Annuler")
+                            .setLabel(this.lang.commands.feedCrow.cancelButton)
                             .setStyle(ButtonStyle.Secondary)
                             .setCustomId("cancel"),
                     ),
@@ -82,7 +82,7 @@ class FeedCrow extends Command {
 
         if (feedResponse.customId === "cancel") {
             await this.interaction.editReply({
-                content: this.mention + "Vous avez annulé le nourrissage de votre corbeau.",
+                content: this.mention + this.lang.commands.feedCrow.feedingCanceled,
                 embeds: [],
                 components: [],
             }).catch(this.client.catchError);
@@ -97,8 +97,14 @@ class FeedCrow extends Command {
                 return this.end();
             }
 
-            const seedAmount = inventory.items.materials.seed.amount;
-            const wormAmount = inventory.items.materials.worm.amount;
+            const seedAmount = inventory.items.materials?.seed?.amount || 0;
+            const wormAmount = inventory.items.materials?.worm?.amount || 0;
+            const seedInstance = this.client.RPGAssetsManager.getMaterial(
+                this.client.playerDb.getLang(user.id), "seed",
+            );
+            const wormInstance = this.client.RPGAssetsManager.getMaterial(
+                this.client.playerDb.getLang(user.id), "worm",
+            );
 
             if (seedAmount < 50 || wormAmount < 5) {
                 await this.interaction.editReply({
@@ -106,11 +112,23 @@ class FeedCrow extends Command {
                     embeds: [
                         new EmbedBuilder()
                             .setColor(this.client.enums.Colors.Red)
-                            .setTitle("Il vous manque quelques ressources...")
+                            .setTitle(this.lang.commands.feedCrow.resourcesMissing)
                             .setDescription(
-                                "Ressources manquantes:\n"
-                                + (seedAmount < 50 ? `**${50 - seedAmount} graines** (actuellement: **${seedAmount}**/50)\n` : "")
-                                + (wormAmount < 5 ? `**${5 - wormAmount} vers** (actuellement: **${wormAmount}**/5)` : ""),
+                                `${this.lang.commands.feedCrow.missing}\n`
+                                + (seedAmount < 50 ?
+                                    `**${seedInstance.name} x${50 - seedAmount}** `
+                                    + `(${this.lang.commands.feedCrow.currently
+                                            .replace("%AMOUNT", seedAmount)
+                                            .replace("%MAX", "50")})\n`
+                                    : ""
+                                )
+                                + (wormAmount < 5 ?
+                                    `**${wormInstance.name} x${5 - wormAmount}** `
+                                    + `(${this.lang.commands.feedCrow.currently
+                                            .replace("%AMOUNT", wormAmount)
+                                            .replace("%MAX", "5")})`
+                                    : ""
+                                ),
                             ),
                     ],
                     components: [],
@@ -125,8 +143,8 @@ class FeedCrow extends Command {
                 embeds: [
                     new EmbedBuilder()
                         .setColor(this.client.enums.Colors.Green)
-                        .setTitle("Votre corbeau a été nourri.")
-                        .setDescription(`Son énergie est désormais de **${newAmount}%**.`),
+                        .setTitle(this.lang.commands.feedCrow.feedCrowSuccess)
+                        .setDescription(this.lang.commands.feedCrow.currentEnergy.replace("%ENERGY", newAmount)),
                 ],
                 components: [],
             }).catch(this.client.catchError);
