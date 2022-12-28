@@ -9,8 +9,8 @@ class RPGMaterial extends RPGAssetBase {
 
         const data = materialData;
         this.size = data.size;
-        this.biomes = data.biomes.map(e => new RPGMapRegionAreaBiome(this, e, this.lang.json.biomes.json[e]));
-        this.name = this.lang.json.materials.json[this.id];
+        this.biomes = data.biomes.map(e => new RPGMapRegionAreaBiome(this, e, this.lang.biomes.json[e]));
+        this.name = this.lang.materials.json[this.id];
         this.rarity = data.rarity;
     }
 

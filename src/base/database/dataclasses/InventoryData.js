@@ -25,29 +25,26 @@ class InventoryData extends TableData {
 
         for (const enchantedGrimoireKey in this.data.items.enchantedGrimoires) {
             const enchantedGrimoireAmount = newItems.enchantedGrimoires[enchantedGrimoireKey];
-            const enchantedGrimoireList = [];
-            for (let i = 0; i < enchantedGrimoireAmount; i++) {
-                enchantedGrimoireList.push(this.client.RPGAssetsManager.getEnchantedGrimoire(this.lang, enchantedGrimoireKey));
-            }
-            newItems.enchantedGrimoires[enchantedGrimoireKey] = { list: enchantedGrimoireList, amount: enchantedGrimoireAmount };
+            newItems.enchantedGrimoires[enchantedGrimoireKey] = {
+                instance: this.client.RPGAssetsManager.getEnchantedGrimoire(this.lang, enchantedGrimoireKey),
+                amount: enchantedGrimoireAmount,
+            };
         }
 
         for (const materialKey in this.data.items.materials) {
             const materialAmount = newItems.materials[materialKey];
-            const materialList = [];
-            for (let i = 0; i < materialAmount; i++) {
-                materialList.push(this.client.RPGAssetsManager.getMaterial(this.lang, materialKey));
-            }
-            newItems.materials[materialKey] = { list: materialList, amount: materialAmount };
+            newItems.materials[materialKey] = {
+                instance: this.client.RPGAssetsManager.getMaterial(this.lang, materialKey),
+                amount: materialAmount,
+            };
         }
 
         for (const questItemKey in this.data.items.questItems) {
             const questItemAmount = newItems.questItems[questItemKey];
-            const questItemList = [];
-            for (let i = 0; i < questItemAmount; i++) {
-                questItemList.push(this.client.RPGAssetsManager.getQuestItem(this.lang, questItemKey));
-            }
-            newItems.questItems[questItemKey] = { list: questItemList, amount: questItemAmount };
+            newItems.questItems[questItemKey] = {
+                instance: this.client.RPGAssetsManager.getQuestItem(this.lang, questItemKey),
+                amount: questItemAmount,
+            };
         }
 
         for (const weaponKey in this.data.items.weapons) {
