@@ -1,0 +1,47 @@
+{
+    "0": {
+        "id": "0",
+        "requiredForgedWeapon": 0,
+        "resources": {
+            "tamahagane": 100,
+            "wood": 10
+        },
+        "timePerRarity": 120
+    },
+    "1": {
+        "id": "1",
+        "requiredForgedWeapon": 25,
+        "resources": {
+            "tamahagane": 90,
+            "wood": 10
+        },
+        "timePerRarity": 110
+    },
+    "2": {
+        "id": "2",
+        "requiredForgedWeapon": 50,
+        "resources": {
+            "tamahagane": 80,
+            "wood": 10
+        },
+        "timePerRarity": 100
+    },
+    "3": {
+        "id": "3",
+        "requiredForgedWeapon": 100,
+        "resources": {
+            "tamahagane": 70,
+            "wood": 10
+        },
+        "timePerRarity": 80
+    },
+    "4": {
+        "id": "4",
+        "requiredForgedWeapon": 200,
+        "resources": {
+            "tamahagane": 60,
+            "wood": 10
+        },
+        "timePerRarity": 60
+    }
+}

@@ -11,6 +11,8 @@ const RPGStatistic = require("./subclasses/RPGStatistic");
 const RPGQuest = require("./subclasses/RPGQuest");
 const RPGPlayerHealth = require("./subclasses/RPGPlayerHealth");
 const RPGPlayerRank = require("./subclasses/RPGPlayerRank");
+const RPGProbability = require("./subclasses/RPGProbability");
+const RPGBlacksmith = require("./subclasses/RPGBlacksmith");
 
 class RPGAssetsManager {
     constructor(client, dir) {
@@ -28,6 +30,8 @@ class RPGAssetsManager {
         this.statistics = require(`../${this.dir}/statistics.json`);
         this.quests = require(`../${this.dir}/quests.json`);
         this.ranks = require(`../${this.dir}/ranks.json`);
+        this.probabilities = require(`../${this.dir}/probabilities.json`);
+        this.blacksmiths = require(`../${this.dir}/blacksmiths.json`);
     }
 
     getLangData(lang, file = null) {
@@ -150,6 +154,29 @@ class RPGAssetsManager {
         return new RPGPlayerRank(this.getLangData(lang, "ranks"), rankId, this.ranks[rankId]);
     }
 
+    getBlacksmith(lang, blacksmithRankId) {
+        if (!(blacksmithRankId in this.blacksmiths)) return "Invalid Blacksmith ID";
+        const blacksmith = new RPGBlacksmith(
+            this.getLangData(lang, "blacksmiths"), blacksmithRankId, this.blacksmiths[blacksmithRankId],
+        );
+        for (const key in blacksmith.resources) {
+            blacksmith.resources[key] = {
+                instance: this.getMaterial(lang, key),
+                amount: blacksmith.resources[key],
+            };
+        }
+        return blacksmith;
+    }
+
+    loadBlacksmith(lang, blacksmithData) {
+        if (!(blacksmithData.rank in this.blacksmiths)) return "Invalid Blacksmith ID";
+
+        const blacksmith = this.getBlacksmith(lang, blacksmithData.rank);
+        blacksmith["forgedWeapons"] = blacksmithData.forgedWeapons;
+
+        return blacksmith;
+    }
+
     getQuest(lang, id) {
         const questType = `${id.split(".")[0]}Quests`;
         if (!(questType in this.quests)) return "Invalid Quest Type";
@@ -193,6 +220,24 @@ class RPGAssetsManager {
 
     getSlayerQuestsIds() {
         return ["slayer.0.0.0.null"].concat(Object.keys(this.quests.slayerQuests));
+    }
+
+    getProbability(...path) {
+        let objectFocused = this.probabilities;
+        let probability = "Invalid Probability ID";
+        for (const p of path) {
+            if (!(p in objectFocused)) {
+                probability = "Invalid Probability ID";
+                break;
+            }
+            if (objectFocused[p]?.length) {
+                probability = new RPGProbability(objectFocused[p], objectFocused.labels);
+            }
+            else {
+                objectFocused = objectFocused[p];
+            }
+        }
+        return probability;
     }
 
 }

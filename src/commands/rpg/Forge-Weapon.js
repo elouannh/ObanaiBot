@@ -33,8 +33,11 @@ class ForgeWeapon extends Command {
                 .catch(this.client.catchError);
             return this.end();
         }
-        await this.interaction.deferReply().catch(this.client.catchError);
-        await this.interaction.editReply({ content: this.lang.systems.currentlyInDevelopment, ephemeral: true });
+
+        let activity = await this.client.activityDb.load(user.id);
+        console.log(activity.forge.blacksmith);
+        console.log("test");
+
         return this.end();
     }
 }

@@ -24,6 +24,10 @@ function schema(id) {
             },
         },
         forge: {
+            blacksmith: {
+                forgedWeapons: 0,
+                rank: "0",
+            },
             forgingSlots: {
                 "0": {
                     id: "0",

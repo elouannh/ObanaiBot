@@ -70,7 +70,7 @@ class ActivityData extends TableData {
                     startedDate: this.data.forge.forgingSlots[forgeId].startedDate,
                     endedDate: this.data.forge.forgingSlots[forgeId].startedDate
                         + this.client.enums.Units.MinutesOfForgingPerRarity
-                        * Number(this.data.forge.forgingSlots[forgeId].weapon.rarity) * 60 * 1000,
+                        * (Number(this.data.forge.forgingSlots[forgeId].weapon.rarity) + 1) * 60 * 1000,
                     currentlyForging: this.data.forge.forgingSlots[forgeId].currentlyForging,
                     weapon: this.client.RPGAssetsManager.getWeapon(
                         this.lang,
@@ -84,6 +84,7 @@ class ActivityData extends TableData {
             }
         }
         this.data.forge.forgingSlots = forgingSlots;
+        this.data.forge.blacksmith = this.client.RPGAssetsManager.loadBlacksmith(this.lang, this.data.forge.blacksmith);
     }
 }
 

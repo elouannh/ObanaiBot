@@ -31,7 +31,7 @@
         "id": "sparrow",
         "rarity": "3",
         "effects": [
-            { "id": "experienceBoost", "maxStrength": 15 }
+            { "id": "experienceBoost", "maxStrength": 7.5 }
         ]
     }
 }
