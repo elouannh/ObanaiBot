@@ -12,6 +12,7 @@ const RPGQuest = require("./subclasses/RPGQuest");
 const RPGPlayerHealth = require("./subclasses/RPGPlayerHealth");
 const RPGPlayerRank = require("./subclasses/RPGPlayerRank");
 const RPGProbability = require("./subclasses/RPGProbability");
+const RPGBlacksmith = require("./subclasses/RPGBlacksmith");
 
 class RPGAssetsManager {
     constructor(client, dir) {
@@ -30,6 +31,7 @@ class RPGAssetsManager {
         this.quests = require(`../${this.dir}/quests.json`);
         this.ranks = require(`../${this.dir}/ranks.json`);
         this.probabilities = require(`../${this.dir}/probabilities.json`);
+        this.blacksmiths = require(`../${this.dir}/blacksmiths.json`);
     }
 
     getLangData(lang, file = null) {
@@ -150,6 +152,20 @@ class RPGAssetsManager {
     getPlayerRank(lang, rankId) {
         if (!(rankId in this.ranks)) return "Invalid Rank ID";
         return new RPGPlayerRank(this.getLangData(lang, "ranks"), rankId, this.ranks[rankId]);
+    }
+
+    getBlacksmith(lang, blacksmithRankId) {
+        if (!(blacksmithRankId in this.blacksmiths)) return "Invalid Blacksmith ID";
+        return new RPGBlacksmith(this.getLangData(lang, "blacksmiths"), blacksmithRankId, this.blacksmiths[blacksmithRankId]);
+    }
+
+    loadBlacksmith(lang, blacksmithData) {
+        if (!(blacksmithData.rank in this.blacksmiths)) return "Invalid Blacksmith ID";
+
+        const blacksmith = this.getBlacksmith(lang, blacksmithData.rank);
+        blacksmith["forgedWeapons"] = blacksmithData.forgedWeapons;
+
+        return blacksmith;
     }
 
     getQuest(lang, id) {

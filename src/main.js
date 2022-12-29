@@ -1,10 +1,6 @@
 module.exports = async obanai => {
 
-    console.log(obanai.RPGAssetsManager.getProbability("weapons", "0").singleRepeatPull(150));
-    console.log(obanai.RPGAssetsManager.getProbability("weapons", "1").singleRepeatPull(150));
-    console.log(obanai.RPGAssetsManager.getProbability("weapons", "2").singleRepeatPull(150));
-    console.log(obanai.RPGAssetsManager.getProbability("weapons", "3").singleRepeatPull(150));
-    console.log(obanai.RPGAssetsManager.getProbability("weapons", "4").singleRepeatPull(150));
+    // console.log(obanai.RPGAssetsManager.getProbability("weapons", "0").singleRepeatPull(150));
 
 
     // const exists = await obanai.playerDb.exists("539842701592494111");

@@ -84,6 +84,7 @@ class ActivityData extends TableData {
             }
         }
         this.data.forge.forgingSlots = forgingSlots;
+        this.data.forge.blacksmith = this.client.RPGAssetsManager.loadBlacksmith(this.lang, this.data.forge.blacksmith);
     }
 }
 

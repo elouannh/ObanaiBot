@@ -508,5 +508,14 @@
         "8": "Hinoe",
         "9": "Kinoto",
         "10": "Kinoe"
+    },
+    "blacksmiths": {
+        "ranks": {
+            "0": "Novice",
+            "1": "Compagnon",
+            "2": "Expert",
+            "3": "Maître",
+            "4": "Légende"
+        }
     }
 }
