@@ -11,6 +11,7 @@ const RPGStatistic = require("./subclasses/RPGStatistic");
 const RPGQuest = require("./subclasses/RPGQuest");
 const RPGPlayerHealth = require("./subclasses/RPGPlayerHealth");
 const RPGPlayerRank = require("./subclasses/RPGPlayerRank");
+const RPGProbability = require("./subclasses/RPGProbability");
 
 class RPGAssetsManager {
     constructor(client, dir) {
@@ -28,6 +29,7 @@ class RPGAssetsManager {
         this.statistics = require(`../${this.dir}/statistics.json`);
         this.quests = require(`../${this.dir}/quests.json`);
         this.ranks = require(`../${this.dir}/ranks.json`);
+        this.probabilities = require(`../${this.dir}/probabilities.json`);
     }
 
     getLangData(lang, file = null) {
@@ -193,6 +195,24 @@ class RPGAssetsManager {
 
     getSlayerQuestsIds() {
         return ["slayer.0.0.0.null"].concat(Object.keys(this.quests.slayerQuests));
+    }
+
+    getProbability(...path) {
+        let objectFocused = this.probabilities;
+        let probability = "Invalid Probability ID";
+        for (const p of path) {
+            if (!(p in objectFocused)) {
+                probability = "Invalid Probability ID";
+                break;
+            }
+            if (objectFocused[p]?.length) {
+                probability = new RPGProbability(objectFocused[p], objectFocused.labels);
+            }
+            else {
+                objectFocused = objectFocused[p];
+            }
+        }
+        return probability;
     }
 
 }

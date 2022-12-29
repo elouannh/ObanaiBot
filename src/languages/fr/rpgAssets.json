@@ -497,15 +497,16 @@
         "Default": "Défaut"
     },
     "ranks": {
-        "0": "Mizunoto",
-        "1": "Mizunoe",
-        "2": "Kanoto",
-        "3": "Kanoe",
-        "4": "Tsuchinoto",
-        "5": "Tsuchinoe",
-        "6": "Hinoto",
-        "7": "Hinoe",
-        "8": "Kinoto",
-        "9": "Kinoe"
+        "0": "Non pourfendeur",
+        "1": "Mizunoto",
+        "2": "Mizunoe",
+        "3": "Kanoto",
+        "4": "Kanoe",
+        "5": "Tsuchinoto",
+        "6": "Tsuchinoe",
+        "7": "Hinoto",
+        "8": "Hinoe",
+        "9": "Kinoto",
+        "10": "Kinoe"
     }
 }
