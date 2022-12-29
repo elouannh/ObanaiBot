@@ -4,7 +4,7 @@
         "requiredForgedWeapon": 0,
         "resources": {
             "tamahagane": 100,
-            "woord": 10
+            "wood": 10
         },
         "timePerRarity": 120
     },
@@ -13,7 +13,7 @@
         "requiredForgedWeapon": 25,
         "resources": {
             "tamahagane": 90,
-            "woord": 10
+            "wood": 10
         },
         "timePerRarity": 110
     },
@@ -22,7 +22,7 @@
         "requiredForgedWeapon": 50,
         "resources": {
             "tamahagane": 80,
-            "woord": 10
+            "wood": 10
         },
         "timePerRarity": 100
     },
@@ -31,7 +31,7 @@
         "requiredForgedWeapon": 100,
         "resources": {
             "tamahagane": 70,
-            "woord": 10
+            "wood": 10
         },
         "timePerRarity": 80
     },
@@ -40,7 +40,7 @@
         "requiredForgedWeapon": 200,
         "resources": {
             "tamahagane": 60,
-            "woord": 10
+            "wood": 10
         },
         "timePerRarity": 60
     }

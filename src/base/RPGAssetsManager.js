@@ -156,7 +156,16 @@ class RPGAssetsManager {
 
     getBlacksmith(lang, blacksmithRankId) {
         if (!(blacksmithRankId in this.blacksmiths)) return "Invalid Blacksmith ID";
-        return new RPGBlacksmith(this.getLangData(lang, "blacksmiths"), blacksmithRankId, this.blacksmiths[blacksmithRankId]);
+        const blacksmith = new RPGBlacksmith(
+            this.getLangData(lang, "blacksmiths"), blacksmithRankId, this.blacksmiths[blacksmithRankId],
+        );
+        for (const key in blacksmith.resources) {
+            blacksmith.resources[key] = {
+                instance: this.getMaterial(lang, key),
+                amount: blacksmith.resources[key],
+            };
+        }
+        return blacksmith;
     }
 
     loadBlacksmith(lang, blacksmithData) {

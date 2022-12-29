@@ -35,7 +35,7 @@ class ForgeWeapon extends Command {
         }
 
         let activity = await this.client.activityDb.load(user.id);
-        console.log(activity);
+        console.log(activity.forge.blacksmith);
 
         return this.end();
     }
