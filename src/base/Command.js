@@ -1,4 +1,4 @@
-const { PermissionsBitField } = require("discord.js");
+const { PermissionsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 const Language = require("./Language");
 
 class Command {
@@ -184,6 +184,43 @@ class Command {
         if (interactionType === 1) userId = this.interaction.options?.get("joueur")?.user?.id || userId;
         else if (interactionType === 2) userId = this.client.users.cache.get(this.interaction.targetId) || userId;
         return await this.client.getUser(userId, user);
+    }
+
+    async choice(messagePayload, primary, secondary) {
+        const method = { "true": "editReply", "false": "reply" }[String(this.interaction.replied)];
+
+        const message = await this.interaction[method](Object.assign(
+            messagePayload, {
+                components: [
+                    new ActionRowBuilder()
+                        .setComponents(
+                            new ButtonBuilder()
+                                .setLabel(primary)
+                                .setStyle(ButtonStyle.Primary)
+                                .setCustomId("primary"),
+                            new ButtonBuilder()
+                                .setLabel(secondary)
+                                .setStyle(ButtonStyle.Secondary)
+                                .setCustomId("secondary"),
+                        ),
+                ],
+            },
+        )).catch(this.client.catchError);
+
+        const collected = await message.awaitMessageComponent({
+            filter: i => i.user.id === this.interaction.user.id,
+            time: 60_000,
+        }).catch(this.client.catchError);
+
+        if (!collected) {
+            await this.interaction.editReply({
+                content: this.lang.systems.choiceIgnored,
+                components: [],
+            }).catch(this.client.catchError);
+            return null;
+        }
+        await collected.deferUpdate().catch(this.client.catchError);
+        return collected.customId;
     }
 }
 
