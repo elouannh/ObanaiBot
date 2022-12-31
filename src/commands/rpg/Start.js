@@ -1,5 +1,5 @@
 const Command = require("../../base/Command");
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, SelectMenuBuilder } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder } = require("discord.js");
 
 class Start extends Command {
     constructor() {
@@ -38,7 +38,7 @@ class Start extends Command {
             components: [
                 new ActionRowBuilder()
                     .addComponents(
-                        new SelectMenuBuilder()
+                        new StringSelectMenuBuilder()
                             .setCustomId("languageChoice")
                             .setPlaceholder(this.lang.commands.start.languageMenuPlaceholder)
                             .addOptions(languagesOptions),
@@ -68,7 +68,7 @@ class Start extends Command {
             components: [
                 new ActionRowBuilder()
                     .addComponents(
-                        new SelectMenuBuilder()
+                        new StringSelectMenuBuilder()
                             .setCustomId("tosAccept")
                             .setMinValues(1)
                             .setMaxValues(3)
@@ -121,7 +121,7 @@ class Start extends Command {
             components: [
                 new ActionRowBuilder()
                     .addComponents(
-                        new SelectMenuBuilder()
+                        new StringSelectMenuBuilder()
                             .setCustomId("characterChoice")
                             .setMinValues(1)
                             .setMaxValues(1)
