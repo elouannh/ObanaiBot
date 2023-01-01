@@ -1,4 +1,13 @@
 {
+    "delete": {
+        "firstContent": "**Êtes-vous sûr de vouloir supprimer votre aventure ?**\n\nCette action est irréversible. Une fois votre aventure supprimée, vous ne pourrez plus la récupérer. Si vous êtes membre d'une guilde, vous serez automatiquement expulsé de celle-ci. Si vous dirigez une guilde, celle-ci se verra changer de chef par un membre aléatoire.",
+        "deleteButton": "Supprimer",
+        "cancelButton": "Annuler",
+        "deleteDefinitivelyButton": "Supprimer définitivement",
+        "secondContent": "**Êtes-vous vraiment sûr de vouloir supprimer votre aventure ?**\n\nNous serions vraiment tristes de vous voir partir.",
+        "notDeleted": "Votre aventure n'a pas été supprimée.",
+        "deleted": "Votre aventure a bien été supprimée. Nous espérons vous revoir bientôt !"
+    },
     "profile": {
         "activityButton": "Activité",
         "additionalButton": "Informations supplémentaires",
@@ -30,17 +39,6 @@
         "characterMenuPlaceholder": "Choisissez votre personnage.",
         "characterChosen": "Vous avez donc choisi **%CHAR**. Vous pouvez désormais commencer à jouer au bot; essayez de faire la commande `/profile` pour tester !",
         "thereIsTutorial": "Il y a des tutoriels disponibles tout au long de votre aventure qui vous expliqueront comment fonctionne le bot. Bon jeu !"
-    },
-    "delete": {
-        "areYouSure": "Êtes vous sûr de vouloir supprimer votre aventure ?",
-        "firstWarning": "⚠ L'intégralité de votre progression sera supprimée. De plus, si vous possédez une escouade, vous la quitterez ; et un membre vous remplacera si vous en êtes le chef.",
-        "deleteButton": "Supprimer",
-        "cancelButton": "Annuler",
-        "deletionCanceled": "Suppression annulée.",
-        "definitiveAction": "Cette décision est irréversible !",
-        "secondWarning": "⚠ Une fois supprimé, vous ne pourrez plus récupérer vos données !\n\n**ÊTES-VOUS SÛR ?**",
-        "bye": "Au revoir...",
-        "adventureDeleted": "Votre aventure a bien été supprimée. Nous espérons vous revoir bientôt."
     },
     "feedCrow": {
         "feedCrow": "Nourrir votre corbeau",
