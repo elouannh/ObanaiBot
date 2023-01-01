@@ -35,121 +35,77 @@ class FeedCrow extends Command {
             return this.end();
         }
 
-        let inventory = await this.client.inventoryDb.load(user.id);
+        const inventory = await this.client.inventoryDb.load(user.id);
 
         if (inventory.kasugaiCrow.id === null) {
-            await this.interaction.reply({ content: this.lang.rpgAssets.embeds.noCrow, ephemeral: true })
+            await this.interaction.reply({ content: this.mention + this.trad.noCrow })
+                .catch(this.client.catchError);
+            return this.end();
+        }
+        if (inventory.kasugaiCrow.hunger === 100) {
+            await this.interaction.reply({ content: this.mention + this.trad.noHunger })
                 .catch(this.client.catchError);
             return this.end();
         }
 
-        const wantsToFeed = await this.interaction.reply({
-            content: this.mention,
-            embeds: [
-                new EmbedBuilder()
-                    .setColor(this.client.enums.Colors.Blurple)
-                    .setTitle(this.lang.commands.feedCrow.feedCrow)
-                    .setDescription(this.lang.commands.feedCrow.resourcesNeeded),
-            ],
-            components: [
-                new ActionRowBuilder()
-                    .setComponents(
-                        new ButtonBuilder()
-                            .setLabel(this.lang.commands.feedCrow.feedButton)
-                            .setStyle(ButtonStyle.Primary)
-                            .setCustomId("feed"),
-                        new ButtonBuilder()
-                            .setLabel(this.lang.commands.feedCrow.cancelButton)
-                            .setStyle(ButtonStyle.Secondary)
-                            .setCustomId("cancel"),
+        const seedAmount = inventory.items.materials?.seed?.amount || 0;
+        const wormAmount = inventory.items.materials?.worm?.amount || 0;
+        const seedInstance = this.client.RPGAssetsManager.getMaterial(
+            this.client.playerDb.getLang(user.id), "seed",
+        );
+        const wormInstance = this.client.RPGAssetsManager.getMaterial(
+            this.client.playerDb.getLang(user.id), "worm",
+        );
+
+        if (seedAmount < 50 || wormAmount < 5) {
+            await this.interaction.editReply({
+                content: this.mention + this.trad.missingResources + "\n"
+                    + (seedAmount < 50 ?
+                            `**${seedInstance.name} x${50 - seedAmount}** `
+                            + `(${this.trad.currently
+                                .replace("%AMOUNT", seedAmount)
+                                .replace("%MAX", "50")})\n`
+                            : ""
+                    )
+                    + (wormAmount < 5 ?
+                            `**${wormInstance.name} x${5 - wormAmount}** `
+                            + `(${this.trad.currently
+                                .replace("%AMOUNT", wormAmount)
+                                .replace("%MAX", "5")})`
+                            : ""
                     ),
-            ],
+                components: [],
+            }).catch(this.client.catchError);
+            return this.end();
+        }
+
+        const feedResponse = await this.choice(
+            {
+                content: this.mention + `${this.trad.wantsToFeed}\n\n`
+                    + `${this.trad.required}\n`
+                    + "**" + seedInstance.name + " x50**\n"
+                    + "**" + wormInstance.name + " x5**",
+            },
+            this.trad.feedButton,
+            this.trad.cancelButton,
+        );
+        if (feedResponse === null) return this.end();
+
+        if (feedResponse === "secondary") {
+            await this.interaction.editReply({
+                content: this.mention + this.trad.canceled,
+                components: [],
+            }).catch(this.client.catchError);
+            return this.end();
+        }
+
+        const newAmount = Math.min(inventory.kasugaiCrow.hunger + 15, 100);
+        await this.client.inventoryDb.feedKasugaiCrow(this.interaction.user.id, newAmount);
+        await this.interaction.editReply({
+            content: this.mention + this.trad.fed.replace("%AMOUNT", newAmount),
+            components: [],
         }).catch(this.client.catchError);
-
-        const feedResponse = await wantsToFeed.awaitMessageComponent({
-            filter: inter => inter.user.id === user.id,
-            time: 60_000,
-        }).catch(this.client.catchError);
-
-        if (!feedResponse) {
-            await this.interaction.editReply({
-                content: this.mention + this.lang.systems.choiceIgnored,
-                components: [],
-            }).catch(this.client.catchError);
-            return this.end();
-        }
-        await feedResponse.deferUpdate().catch(this.client.catchError);
-
-        if (feedResponse.customId === "cancel") {
-            await this.interaction.editReply({
-                content: this.mention + this.lang.commands.feedCrow.feedingCanceled,
-                embeds: [],
-                components: [],
-            }).catch(this.client.catchError);
-            return this.end();
-        }
-        else {
-            inventory = await this.client.inventoryDb.load(user.id);
-
-            if (inventory.kasugaiCrow.id === null) {
-                await this.interaction.reply({ content: this.lang.rpgAssets.embeds.noCrow, ephemeral: true })
-                    .catch(this.client.catchError);
-                return this.end();
-            }
-
-            const seedAmount = inventory.items.materials?.seed?.amount || 0;
-            const wormAmount = inventory.items.materials?.worm?.amount || 0;
-            const seedInstance = this.client.RPGAssetsManager.getMaterial(
-                this.client.playerDb.getLang(user.id), "seed",
-            );
-            const wormInstance = this.client.RPGAssetsManager.getMaterial(
-                this.client.playerDb.getLang(user.id), "worm",
-            );
-
-            if (seedAmount < 50 || wormAmount < 5) {
-                await this.interaction.editReply({
-                    content: this.mention,
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(this.client.enums.Colors.Red)
-                            .setTitle(this.lang.commands.feedCrow.resourcesMissing)
-                            .setDescription(
-                                `${this.lang.commands.feedCrow.missing}\n`
-                                + (seedAmount < 50 ?
-                                    `**${seedInstance.name} x${50 - seedAmount}** `
-                                    + `(${this.lang.commands.feedCrow.currently
-                                            .replace("%AMOUNT", seedAmount)
-                                            .replace("%MAX", "50")})\n`
-                                    : ""
-                                )
-                                + (wormAmount < 5 ?
-                                    `**${wormInstance.name} x${5 - wormAmount}** `
-                                    + `(${this.lang.commands.feedCrow.currently
-                                            .replace("%AMOUNT", wormAmount)
-                                            .replace("%MAX", "5")})`
-                                    : ""
-                                ),
-                            ),
-                    ],
-                    components: [],
-                }).catch(this.client.catchError);
-                return this.end();
-            }
-
-            const newAmount = Math.min(inventory.kasugaiCrow.hunger + 15, 100);
-            await this.client.inventoryDb.feedKasugaiCrow(this.interaction.user.id, newAmount);
-            await this.interaction.editReply({
-                content: this.mention,
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(this.client.enums.Colors.Green)
-                        .setTitle(this.lang.commands.feedCrow.feedCrowSuccess)
-                        .setDescription(this.lang.commands.feedCrow.currentEnergy.replace("%ENERGY", newAmount)),
-                ],
-                components: [],
-            }).catch(this.client.catchError);
-            return this.end();
-        }
+        return this.end();
     }
 }
 

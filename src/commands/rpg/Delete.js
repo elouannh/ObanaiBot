@@ -36,15 +36,16 @@ class Delete extends Command {
 
         const firstResponse = await this.choice(
             {
-                content: this.mention + this.lang.commands.delete.firstContent,
+                content: this.mention + this.trad.firstContent,
             },
-            this.lang.commands.delete.deleteButton,
-            this.lang.commands.delete.cancelButton,
+            this.trad.deleteButton,
+            this.trad.cancelButton,
         );
+        if (firstResponse === null) return this.end();
 
         if (firstResponse === "secondary") {
             await this.interaction.editReply({
-                content: this.mention + this.lang.commands.delete.notDeleted,
+                content: this.mention + this.trad.notDeleted,
                 components: [],
             }).catch(this.client.catchError);
             return this.end();
@@ -52,15 +53,16 @@ class Delete extends Command {
 
         const secondResponse = await this.choice(
             {
-                content: this.mention + this.lang.commands.delete.secondContent,
+                content: this.mention + this.trad.secondContent,
             },
-            this.lang.commands.delete.deleteDefinitivelyButton,
-            this.lang.commands.delete.cancelButton,
+            this.trad.deleteDefinitivelyButton,
+            this.trad.cancelButton,
         );
+        if (secondResponse === null) return this.end();
 
         if (secondResponse === "secondary") {
             await this.interaction.editReply({
-                content: this.mention + this.lang.commands.delete.notDeleted,
+                content: this.mention + this.trad.notDeleted,
                 components: [],
             }).catch(this.client.catchError);
             return this.end();
@@ -68,7 +70,7 @@ class Delete extends Command {
         else {
             await this.client.playerDb.remove(user.id);
             await this.interaction.editReply({
-                content: this.mention + this.lang.commands.delete.deleted,
+                content: this.mention + this.trad.deleted,
                 components: [],
             }).catch(this.client.catchError);
             return this.end();

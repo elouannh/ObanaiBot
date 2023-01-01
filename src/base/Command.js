@@ -22,7 +22,8 @@ class Command {
         this.interaction = null;
         this.instancedAt = Date.now();
         this.mention = "";
-        this.lang = new Language("fr").json["commands"][this.infos.name];
+        this.lang = new Language("fr").json;
+        this.trad = this.lang["commands"][this.infos.name];
         this.langManager = null;
     }
 
@@ -31,6 +32,7 @@ class Command {
         this.interaction = interaction;
         this.mention = `<@${this.interaction.user.id}>, `;
         this.lang = lang.json;
+        this.trad = this.lang["commands"][this.infos.name];
         this.langManager = this.client.languageManager;
     }
 
