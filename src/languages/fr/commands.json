@@ -20,6 +20,9 @@
         "canceled": "Vous avez annulé le nourrissage.",
         "fed": "Vous avez nourri votre corbeau. Son énergie est maintenant de **%AMOUNT**."
     },
+    "forgeWeapon": {
+        "currently": "Actuellement: **%AMOUNT**/%MAX"
+    },
     "profile": {
         "activityButton": "Activité",
         "additionalButton": "Informations supplémentaires",

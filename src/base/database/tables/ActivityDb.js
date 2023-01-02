@@ -2,6 +2,7 @@ const SQLiteTable = require("../../SQLiteTable");
 const ActivityData = require("../dataclasses/ActivityData");
 const ActivityListener = require("../listeners/ActivityListener");
 const { EmbedBuilder } = require("discord.js");
+const RPGMaterial = require("../../subclasses/RPGMaterial");
 
 function schema(id) {
     return {
@@ -68,6 +69,52 @@ class ActivityDb extends SQLiteTable {
 
     async load(id) {
         return new ActivityData(this.client, this.get(id), this.client.playerDb.getLang(id));
+    }
+
+    /**
+     * @typedef {Object} ForgeResource
+     * @property {RPGMaterial} instance The material instance
+     * @property {Number} amount The amount of the material
+     */
+    /**
+     * Set a forge active. Removes also the material from the inventory.
+     * @param {String} id The user ID
+     * @param {String} weaponType The weapon type
+     * @param {String} rarityId The rarity ID
+     * @param {ForgeResource[]} resources The resources to remove for the forge
+     * @returns {boolean}
+     */
+    forgeWeapon(id, weaponType, rarityId, resources) {
+        const data = this.get(id);
+        let freeSlotId = null;
+
+        for (const key in data.forge.forgingSlots) {
+            if (data.forge.forgingSlots[key].currentlyForging === false) {
+                freeSlotId = key;
+                break;
+            }
+        }
+
+        if (freeSlotId === null) return false;
+
+        for (const resource of resources) {
+            this.client.inventoryDb.removeMaterial(id, resource.instance.id, resource.amount);
+        }
+
+        this.set(
+            id,
+            {
+                id,
+                startedDate: Date.now(),
+                currentlyForging: true,
+                weapon: {
+                    "id": weaponType,
+                    "rarity": rarityId,
+                },
+            },
+            `forge.forgingSlots.${freeSlotId}`,
+        );
+        return true;
     }
 
     /**
