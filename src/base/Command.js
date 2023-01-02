@@ -32,7 +32,6 @@ class Command {
         this.interaction = interaction;
         this.mention = `<@${this.interaction.user.id}>, `;
         this.lang = lang.json;
-        console.log(this.lang);
         this.trad = this.lang["commands"][this.infos.trad || this.infos.name];
         this.langManager = this.client.languageManager;
 

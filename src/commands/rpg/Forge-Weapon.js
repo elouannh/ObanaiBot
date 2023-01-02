@@ -88,7 +88,6 @@ class ForgeWeapon extends Command {
             "Forger",
             "Annuler",
         );
-        console.log(secondRequest);
 
         return this.end();
     }
