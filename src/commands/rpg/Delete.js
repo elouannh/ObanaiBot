@@ -13,7 +13,7 @@ class Delete extends Command {
             dmPermission: true,
             category: "RPG",
             cooldown: 20,
-            completedRequests: ["delete"],
+            completedRequests: ["adventure"],
             authorizationBitField: 0b000,
             permissions: 0n,
         });

@@ -1,4 +1,4 @@
-const { PermissionsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder } = require("discord.js");
+const { PermissionsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, Utils } = require("discord.js");
 const Language = require("./Language");
 
 class Command {
@@ -23,7 +23,7 @@ class Command {
         this.instancedAt = Date.now();
         this.mention = "";
         this.lang = new Language("fr").json;
-        this.trad = this.lang["commands"][this.infos.name];
+        this.trad = this.lang["commands"][this.infos.trad || this.infos.name];
         this.langManager = null;
     }
 
@@ -32,8 +32,17 @@ class Command {
         this.interaction = interaction;
         this.mention = `<@${this.interaction.user.id}>, `;
         this.lang = lang.json;
-        this.trad = this.lang["commands"][this.infos.name];
+        console.log(this.lang);
+        this.trad = this.lang["commands"][this.infos.trad || this.infos.name];
         this.langManager = this.client.languageManager;
+
+        if (this.infos.completedRequests.includes("adventure")) {
+            this.infos.completedRequests = this.infos.completedRequests
+                .filter(e => e !== "adventure")
+                .concat(Array.from(
+                    this.client.commandManager.commands.filter(e => new (e)().infos.category === "RPG").keys(),
+                ));
+        }
     }
 
     end() {

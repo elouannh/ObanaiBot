@@ -9,12 +9,13 @@ class FeedCrow extends Command {
             descriptionLocalizations: {
                 "en-US": "Allows you to feed your kasugai crow.",
             },
+            trad: "feedCrow",
             options: [],
             type: [1],
             dmPermission: true,
             category: "RPG",
             cooldown: 20,
-            completedRequests: ["feed-crow"],
+            completedRequests: ["adventure"],
             authorizationBitField: 0b000,
             permissions: 0n,
         });
