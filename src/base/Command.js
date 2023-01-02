@@ -1,4 +1,4 @@
-const { PermissionsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+const { PermissionsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, Utils } = require("discord.js");
 const Language = require("./Language");
 
 class Command {
@@ -22,7 +22,8 @@ class Command {
         this.interaction = null;
         this.instancedAt = Date.now();
         this.mention = "";
-        this.lang = new Language("fr").json["commands"][this.infos.name];
+        this.lang = new Language("fr").json;
+        this.trad = this.lang["commands"][this.infos.trad || this.infos.name];
         this.langManager = null;
     }
 
@@ -31,7 +32,16 @@ class Command {
         this.interaction = interaction;
         this.mention = `<@${this.interaction.user.id}>, `;
         this.lang = lang.json;
+        this.trad = this.lang["commands"][this.infos.trad || this.infos.name];
         this.langManager = this.client.languageManager;
+
+        if (this.infos.completedRequests.includes("adventure")) {
+            this.infos.completedRequests = this.infos.completedRequests
+                .filter(e => e !== "adventure")
+                .concat(Array.from(
+                    this.client.commandManager.commands.filter(e => new (e)().infos.category === "RPG").keys(),
+                ));
+        }
     }
 
     end() {
@@ -221,6 +231,41 @@ class Command {
         }
         await collected.deferUpdate().catch(this.client.catchError);
         return collected.customId;
+    }
+
+    async menu(messagePayload, options, min = null, max = null) {
+        const method = { "true": "editReply", "false": "reply" }[String(this.interaction.replied)];
+
+        const menu = new StringSelectMenuBuilder()
+            .setCustomId("menu")
+            .setOptions(options);
+
+        if (min !== null) menu.setMinValues(min);
+        if (max !== null) menu.setMaxValues(max);
+
+        const message = await this.interaction[method](Object.assign(
+            messagePayload, {
+                components: [
+                    new ActionRowBuilder()
+                        .setComponents(menu),
+                ],
+            },
+        )).catch(this.client.catchError);
+
+        const collected = await message.awaitMessageComponent({
+            filter: i => i.user.id === this.interaction.user.id,
+            time: 60_000,
+        }).catch(this.client.catchError);
+
+        if (!collected) {
+            await this.interaction.editReply({
+                content: this.lang.systems.choiceIgnored,
+                components: [],
+            }).catch(this.client.catchError);
+            return null;
+        }
+        await collected.deferUpdate().catch(this.client.catchError);
+        return collected.values;
     }
 }
 

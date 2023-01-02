@@ -1,5 +1,4 @@
 const Command = require("../../base/Command");
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
 class Delete extends Command {
     constructor() {
@@ -14,7 +13,7 @@ class Delete extends Command {
             dmPermission: true,
             category: "RPG",
             cooldown: 20,
-            completedRequests: ["delete"],
+            completedRequests: ["adventure"],
             authorizationBitField: 0b000,
             permissions: 0n,
         });
@@ -35,93 +34,35 @@ class Delete extends Command {
             return this.end();
         }
 
-        const firstWarning = await this.interaction.reply({
-            content: this.mention,
-            embeds: [
-                new EmbedBuilder()
-                    .setColor(this.client.enums.Colors.Red)
-                    .setTitle(this.lang.commands.delete.areYouSure)
-                    .setDescription(this.lang.commands.delete.firstWarning),
-            ],
-            components: [
-                new ActionRowBuilder()
-                    .setComponents(
-                        new ButtonBuilder()
-                            .setLabel(this.lang.commands.delete.deleteButton)
-                            .setStyle(ButtonStyle.Danger)
-                            .setCustomId("delete"),
-                        new ButtonBuilder()
-                            .setLabel(this.lang.commands.delete.cancelButton)
-                            .setStyle(ButtonStyle.Secondary)
-                            .setCustomId("cancel"),
-                    ),
-            ],
-        }).catch(this.client.catchError);
+        const firstResponse = await this.choice(
+            {
+                content: this.mention + this.trad.firstContent,
+            },
+            this.trad.deleteButton,
+            this.trad.cancelButton,
+        );
+        if (firstResponse === null) return this.end();
 
-        const firstResponse = await firstWarning.awaitMessageComponent({
-            filter: inter => inter.user.id === user.id,
-            time: 60_000,
-        }).catch(this.client.catchError);
-
-        if (!firstResponse) {
+        if (firstResponse === "secondary") {
             await this.interaction.editReply({
-                content: this.mention + this.lang.systems.choiceIgnored,
-                components: [],
-            }).catch(this.client.catchError);
-            return this.end();
-        }
-        await firstResponse.deferUpdate().catch(this.client.catchError);
-
-        if (firstResponse.customId === "cancel") {
-            await this.interaction.editReply({
-                content: this.mention + this.lang.commands.delete.deletionCanceled,
-                embeds: [],
+                content: this.mention + this.trad.notDeleted,
                 components: [],
             }).catch(this.client.catchError);
             return this.end();
         }
 
-        const secondWarning = await this.interaction.editReply({
-            content: this.mention,
-            embeds: [
-                new EmbedBuilder()
-                    .setColor(this.client.enums.Colors.Red)
-                    .setTitle(this.lang.commands.delete.definitiveAction)
-                    .setDescription(this.lang.commands.delete.secondWarning),
-            ],
-            components: [
-                new ActionRowBuilder()
-                    .setComponents(
-                        new ButtonBuilder()
-                            .setLabel(this.lang.commands.delete.deleteButton)
-                            .setStyle(ButtonStyle.Danger)
-                            .setCustomId("delete"),
-                        new ButtonBuilder()
-                            .setLabel(this.lang.commands.delete.cancelButton)
-                            .setStyle(ButtonStyle.Secondary)
-                            .setCustomId("cancel"),
-                    ),
-            ],
-        }).catch(this.client.catchError);
+        const secondResponse = await this.choice(
+            {
+                content: this.mention + this.trad.secondContent,
+            },
+            this.trad.deleteDefinitivelyButton,
+            this.trad.cancelButton,
+        );
+        if (secondResponse === null) return this.end();
 
-        const secondResponse = await secondWarning.awaitMessageComponent({
-            filter: inter => inter.user.id === user.id,
-            time: 60_000,
-        }).catch(this.client.catchError);
-
-        if (!secondResponse) {
+        if (secondResponse === "secondary") {
             await this.interaction.editReply({
-                content: this.mention + this.lang.systems.choiceIgnored,
-                components: [],
-            }).catch(this.client.catchError);
-            return this.end();
-        }
-        await secondResponse.deferUpdate().catch(this.client.catchError);
-
-        if (secondResponse.customId === "cancel") {
-            await this.interaction.editReply({
-                content: this.mention + this.lang.commands.delete.deletionCanceled,
-                embeds: [],
+                content: this.mention + this.trad.notDeleted,
                 components: [],
             }).catch(this.client.catchError);
             return this.end();
@@ -129,13 +70,7 @@ class Delete extends Command {
         else {
             await this.client.playerDb.remove(user.id);
             await this.interaction.editReply({
-                content: this.mention,
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(this.client.enums.Colors.Red)
-                        .setTitle(this.lang.commands.delete.bye)
-                        .setDescription(this.lang.commands.delete.adventureDeleted),
-                ],
+                content: this.mention + this.trad.deleted,
                 components: [],
             }).catch(this.client.catchError);
             return this.end();
