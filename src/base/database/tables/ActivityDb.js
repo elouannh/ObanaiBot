@@ -156,6 +156,7 @@ class ActivityDb extends SQLiteTable {
             );
 
         for (let i = 0; i < 3; i++) {
+            console.log(data.forge.forgingSlots);
             if (data.forge.forgingSlots.freeSlots.map(e => e.id).includes(String(i))) {
                 embed.addFields(
                     {

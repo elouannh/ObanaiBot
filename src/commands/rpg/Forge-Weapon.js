@@ -112,7 +112,6 @@ class ForgeWeapon extends Command {
                 .singlePull();
             const weaponWithRarity = this.client.RPGAssetsManager.getWeapon(langId, weaponChoice, String(rarity[0]));
 
-            console.log(requiredResources);
             this.client.activityDb.forgeWeapon(
                 user.id, weaponChoice, rarity, Object.values(requiredResources).map(r => r[0]),
             );
