@@ -112,7 +112,10 @@ class ForgeWeapon extends Command {
                 .singlePull();
             const weaponWithRarity = this.client.RPGAssetsManager.getWeapon(langId, weaponChoice, String(rarity[0]));
 
-            this.client.activityDb.forgeWeapon(user.id, weaponChoice, rarity, requiredResources.map(r => r[0]));
+            console.log(requiredResources);
+            this.client.activityDb.forgeWeapon(
+                user.id, weaponChoice, rarity, Object.values(requiredResources).map(r => r[0]),
+            );
             await this.interaction.editReply({
                 content: this.mention + "Le forgeron commence désormais à travailler sur une arme de rareté "
                     + `**${weaponWithRarity.rarity}**. L'arme forgée sera donc `
