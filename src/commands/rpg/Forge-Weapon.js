@@ -111,13 +111,13 @@ class ForgeWeapon extends Command {
             const weaponWithRarity = this.client.RPGAssetsManager.getWeapon(langId, weaponChoice, String(rarity[0]));
 
             this.client.activityDb.forgeWeapon(
-                user.id, weaponChoice, rarity, Object.values(requiredResources).map(r => r[0]),
+                user.id, weaponChoice, String(rarity[0]), Object.values(requiredResources).map(r => r[0]),
             );
             await this.interaction.editReply({
                 content: this.mention + "Le forgeron commence désormais à travailler sur une arme de rareté "
                     + `**${weaponWithRarity.rarity}**. L'arme forgée sera donc `
-                    + `**${weaponWithRarity.name} ${weaponWithRarity.rarityName}**.\nLa forge durera \n`
-                    + `\`${activity.forge.blacksmith.timePerRarity * (rarity[0] + 1)}h\`.`,
+                    + `**${weaponWithRarity.name} ${weaponWithRarity.rarityName}**.\nLa forge durera `
+                    + `\`${activity.forge.blacksmith.timePerRarity * (rarity[0] + 1)}${this.lang.systems.timeUnits.m[3]}\`.`,
                 components: [],
             }).catch(this.client.catchError);
             return this.end();
