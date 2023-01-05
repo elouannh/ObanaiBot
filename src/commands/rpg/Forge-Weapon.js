@@ -15,7 +15,7 @@ class ForgeWeapon extends Command {
             type: [1],
             dmPermission: true,
             category: "RPG",
-            cooldown: 20,
+            cooldown: 0,
             completedRequests: ["forge-weapon"],
             authorizationBitField: 0b000,
             permissions: 0n,
@@ -49,7 +49,6 @@ class ForgeWeapon extends Command {
         }
 
         const requiredResources = {};
-        console.log(activity.forge.blacksmith.resources);
         for (const key in activity.forge.blacksmith.resources) {
             requiredResources[key] = [activity.forge.blacksmith.resources[key], inventory.items.materials?.[key]?.amount || 0];
         }
