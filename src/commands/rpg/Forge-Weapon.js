@@ -1,6 +1,4 @@
 const Command = require("../../base/Command");
-const { ActionRowBuilder, StringSelectMenuBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
-const { black } = require("chalk");
 
 class ForgeWeapon extends Command {
     constructor() {
