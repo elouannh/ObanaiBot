@@ -2,7 +2,6 @@ const SQLiteTable = require("../../SQLiteTable");
 const ActivityData = require("../dataclasses/ActivityData");
 const ActivityListener = require("../listeners/ActivityListener");
 const { EmbedBuilder } = require("discord.js");
-const RPGMaterial = require("../../subclasses/RPGMaterial");
 
 function schema(id) {
     return {
