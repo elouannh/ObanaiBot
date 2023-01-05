@@ -9,7 +9,7 @@
         },
         "timePerRarity": 120
     },
-    1: {
+    "1": {
         "id": 1,
         "requiredForgedWeapon": 25,
         "resources": {
