@@ -6,7 +6,7 @@ class RPGBlacksmith extends RPGAssetBase {
 
         this.rank = this.lang.json.ranks[this.id];
         this.requiredForgedWeapon = rankData.requiredForgedWeapon;
-        this.resources = rankData.resources;
+        this.res = rankData.resources;
         this.timePerRarity = rankData.timePerRarity;
     }
 }

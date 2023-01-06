@@ -8,7 +8,9 @@ function schema(id) {
         id: id,
         regionId: "0",
         areaId: "0",
-        exploration: {},
+        exploration: {
+            excavated: {},
+        },
     };
 }
 
@@ -19,6 +21,20 @@ class MapDb extends SQLiteTable {
 
     async load(id) {
         return new MapData(this.client, this.get(id), this.client.playerDb.getLang(id));
+    }
+
+    /**
+     * Set an area as already excavated.
+     * @param {String} id The user ID
+     * @param {String} regionId The region ID
+     * @param {String} areaId The area ID
+     * @returns {void}
+     */
+    explore(id, regionId, areaId) {
+        const data = this.get(id);
+        const areas = data.exploration.excavated[regionId] || [];
+        if (!areas.includes(areaId)) areas.push(areaId);
+        this.set(id, areas, `exploration.excavated.${regionId}`);
     }
 
     /**

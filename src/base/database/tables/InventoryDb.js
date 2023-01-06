@@ -73,6 +73,20 @@ class InventoryDb extends SQLiteTable {
     }
 
     /**
+     * Removes a defined material amount from the inventory
+     * @param {String} id The user ID
+     * @param {String} material The material ID
+     * @param {Number} amount The amount to remove
+     * @returns {Number} The new material amount
+     */
+    removeMaterial(id, material, amount) {
+        const previousAmount = this.get(id).items.materials[material];
+        const newAmount = previousAmount - amount;
+        this.set(id, newAmount, `items.materials.${material}`);
+        return newAmount;
+    }
+
+    /**
      * @typedef {Object} GrimoireObject
      * @property {String|null} id The grimoire ID
      * @property {Number} activeSince The timestamp when the grimoire was activated

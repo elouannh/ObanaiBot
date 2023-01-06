@@ -27,6 +27,77 @@ class QuestDb extends SQLiteTable {
     }
 
     /**
+     * @typedef {Object} QuestObjectiveObject
+     * @property {Boolean} completed The objective is completed or not
+     * @property {Boolean} rewardsCollected The rewards are collected or not
+     */
+    /**
+     * @typedef {Object} QuestObject
+     * @property {String} id The quest ID
+     * @property {Object} objectives The list of objectives
+     */
+    /**
+     * @typedef {Object} QuestObjectiveLocal
+     * @property {String} id The objective ID
+     * @property {String} type The objective type
+     * @property {Object} additionalData Additional data for the objective
+     */
+    /**
+     * @typedef {Object} QuestLocal
+     * @property {String} id The quest ID
+     * @property {Object} objectives The list of objectives
+     * @property {Object} rewards The list of rewards
+     */
+    /**
+     * Get per objective type.
+     * @param {String} id The user ID
+     * @param {String} objectiveType The objective type
+     * @returns {Object} The quest object that comes from the database
+     */
+    async getPerObjectiveType(id, objectiveType) {
+        const quest = await this.load(id);
+        const questsPerObjectiveType = {};
+
+        for (const [key, value] of Object.entries(quest.currentQuests)) {
+            if (!value?.id) continue;
+
+            const includesObjective = value.objectives.filter((objective) => objective.type === objectiveType);
+            const includedCompleted = includesObjective.some((objective) => objective.completed === false);
+            if (!includedCompleted) continue;
+
+            questsPerObjectiveType[key] = value;
+        }
+
+        return questsPerObjectiveType;
+    }
+
+    /**
+     * Get PNJ of quest data object.
+     * @param {String} id The user ID
+     * @param {String} objectiveType The objective type
+     * @returns {Promise<RPGCharacter[]>} The list of PNJ
+     */
+    async getPNJs(id, objectiveType) {
+        const quest = await this.getPerObjectiveType(id, objectiveType);
+        const localisation = await this.client.mapDb.load(id);
+        const pnjs = [];
+        for (const questInstance of Object.values(quest)) {
+            for (const objective of questInstance.objectives) {
+                const data = objective.additionalData;
+                if (objective.type !== objectiveType || !data.characterId) continue;
+
+                if (data.area === localisation.area.id && data.region === localisation.region.id) {
+                    const pnj = this.client.RPGAssetsManager.getCharacter(
+                        this.client.playerDb.getLang(id), data.characterId,
+                    );
+                    if (!(typeof pnj === "string")) pnjs.push(pnj);
+                }
+            }
+        }
+        return pnjs;
+    }
+
+    /**
      * Sets the current daily quest for the user.
      * @param {String} id The user ID
      * @param {String} questId The quest ID to set
@@ -75,28 +146,6 @@ class QuestDb extends SQLiteTable {
         );
     }
 
-    /**
-     * @typedef {Object} QuestObjectiveObject
-     * @property {Boolean} completed The objective is completed or not
-     * @property {Boolean} rewardsCollected The rewards are collected or not
-     */
-    /**
-     * @typedef {Object} QuestObject
-     * @property {String} id The quest ID
-     * @property {Object} objectives The list of objectives
-     */
-    /**
-     * @typedef {Object} QuestObjectiveLocal
-     * @property {String} id The objective ID
-     * @property {String} type The objective type
-     * @property {Object} additionalData Additional data for the objective
-     */
-    /**
-     * @typedef {Object} QuestLocal
-     * @property {String} id The quest ID
-     * @property {Object} objectives The list of objectives
-     * @property {Object} rewards The list of rewards
-     */
     /**
      * Verify if an objective is completed. Simply returns true or false. Please specify in which table you want to look
      * to avoid infinite <changed> recalls.
