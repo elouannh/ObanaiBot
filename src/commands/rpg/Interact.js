@@ -100,7 +100,7 @@ class Interact extends Command {
             );
             if (pnjChoice === null) return this.end();
 
-
+            // [TODO] il reste à faire le système de dialogue dans les assets ici
         }
         else if (action[0] === "interact") {
 
