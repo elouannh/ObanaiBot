@@ -15,23 +15,15 @@ class MapData extends TableData {
         this.data.area = this.data.region.getArea(this.data.areaId);
         delete this.data.regionId;
         delete this.data.areaId;
-        const exploration = {};
-        for (const regionId in this.data.exploration) {
-            const region = {
-                id: regionId,
-                region: this.client.RPGAssetsManager.getMapRegion(regionId),
-                areas: {},
-            };
-            for (const areaId in this.data.exploration[regionId]) {
-                region.areas[areaId] = {
-                    id: areaId,
-                    area: region.region.getArea(areaId),
-                    alreadyExcavated: this.data.exploration[regionId][areaId].alreadyExcavated,
-                };
+        const excavated = {};
+        for (const regionId in this.data.exploration.excavated) {
+            const region = this.client.RPGAssetsManager.getMapRegion(this.lang, regionId);
+            excavated[regionId] = {};
+            for (const areaId of this.data.exploration.excavated[regionId]) {
+                excavated[regionId][areaId] = region.getArea(areaId);
             }
-            exploration[regionId] = region;
         }
-        this.data.exploration = exploration;
+        this.data.excavated = excavated;
     }
 }
 

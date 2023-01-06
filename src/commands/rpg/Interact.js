@@ -34,8 +34,83 @@ class Interact extends Command {
             return this.end();
         }
 
-        const map = this.client.mapDb.load(user.id);
+        const map = await this.client.mapDb.load(user.id);
+        const quest = await this.client.questDb.load(user.id);
+        const inventory = await this.client.inventoryDb.load(user.id);
 
+        const options = [
+            {
+                label: "Dialoguer",
+                value: "dialogue",
+                description: "Permet de dialoguer avec un PNJ.",
+            },
+            {
+                label: "Interagir",
+                value: "interact",
+                description: "Permet d’interagir avec l'environnement.",
+            },
+            {
+                label: "Don d'objets",
+                value: "giveItems",
+                description: "Permet de donner des objets à un PNJ.",
+            },
+        ];
+
+        const zoneExplored = Object.values(map.excavated?.[map.region.id] || {}).map(area => area.id).includes(map.area.id);
+        if (!zoneExplored) {
+            options.push(
+                {
+                    label: "Fouiller",
+                    value: "excavate",
+                    description: "Permet de fouiller une zone.",
+                },
+            );
+        }
+
+        const action = await this.menu(
+            {
+                content: this.mention + "Choix possibles d'actions:",
+            },
+            options,
+        );
+        if (action === null) return this.end();
+
+        if (action[0] === "dialogue") {
+            const pnjs = await this.client.questDb.getPNJs(user.id, "dialogue");
+
+            if (pnjs.length === 0) {
+                await this.interaction.editReply({
+                    content: this.mention + "Aucun PNJ n'est disponible pour dialoguer.",
+                    components: [],
+                }).catch(this.client.catchError);
+                return this.end();
+            }
+
+            const pnjChoice = await this.menu(
+                {
+                    content: this.mention + "Choix du PNJ:",
+                },
+                pnjs.map(pnj => (
+                    {
+                        label: pnj.fullName,
+                        value: pnj.id,
+                        description: pnj.label,
+                    }
+                )),
+            );
+            if (pnjChoice === null) return this.end();
+
+
+        }
+        else if (action[0] === "interact") {
+
+        }
+        else if (action[0] === "giveItems") {
+
+        }
+        else {
+
+        }
     }
 }
 

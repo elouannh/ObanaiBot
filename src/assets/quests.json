@@ -35,10 +35,12 @@
             "objectives": {
                 "0": {
                     "id": "0",
-                    "type": "reachDestination",
+                    "type": "dialogue",
                     "additionalData": {
+                        "dialogueId": "0",
                         "region": "0",
-                        "area": "1"
+                        "area": "0",
+                        "characterId": "7"
                     }
                 }
             },
