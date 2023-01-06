@@ -33,9 +33,9 @@ class Interact extends Command {
                 .catch(this.client.catchError);
             return this.end();
         }
-        await this.interaction.deferReply().catch(this.client.catchError);
-        await this.interaction.editReply({ content: this.lang.systems.currentlyInDevelopment, ephemeral: true });
-        return this.end();
+
+        const map = this.client.mapDb.load(user.id);
+
     }
 }
 

@@ -1,5 +1,4 @@
 const Command = require("../../base/Command");
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
 class FeedCrow extends Command {
     constructor() {
@@ -101,7 +100,7 @@ class FeedCrow extends Command {
         }
 
         const newAmount = Math.min(inventory.kasugaiCrow.hunger + 15, 100);
-        await this.client.inventoryDb.feedKasugaiCrow(this.interaction.user.id, newAmount);
+        await this.client.inventoryDb.feedKasugaiCrow(user.id, newAmount);
         await this.interaction.editReply({
             content: this.mention + this.trad.fed.replace("%AMOUNT", newAmount),
             components: [],
