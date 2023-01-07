@@ -1,6 +1,8 @@
 /* eslint-disable no-case-declarations */
 const SQLiteTable = require("../../SQLiteTable");
 const QuestData = require("../dataclasses/QuestData");
+// eslint-disable-next-line no-unused-vars
+const RPGDialogue = require("../../subclasses/RPGDialogue");
 const { EmbedBuilder } = require("discord.js");
 
 function schema(id) {
@@ -95,6 +97,28 @@ class QuestDb extends SQLiteTable {
             }
         }
         return pnjs;
+    }
+
+    /**
+     * Get all the dialogs associated with the pnj id.
+     * @param {String} id The user ID
+     * @param {String} pnjId The pnj ID
+     * @returns {Promise<RPGDialogue[]>} The list of dialogs
+     */
+    async getDialoguesByPNJ(id, pnjId) {
+        const quest = (await this.load(id)).currentQuests;
+        for (const questInstance of Object.values(quest)) {
+            if (!questInstance?.id) continue;
+
+            for (const objective of questInstance.objectives) {
+                const data = objective.additionalData;
+                if (!data.characterId) continue;
+
+                if (data.characterId !== pnjId) continue;
+
+                console.log(data);
+            }
+        }
     }
 
     /**
@@ -694,7 +718,7 @@ class QuestDb extends SQLiteTable {
                 );
             }
 
-            if (channel.id !== null) await this.client.notify(channel, { embeds: [embed] });
+            if (channel !== null && channel.id !== null) await this.client.notify(channel, { embeds: [embed] });
         }
     }
 

@@ -196,7 +196,7 @@ class RPGAssetsManager {
 
     getDialogue(lang, id) {
         const dialogue = this.dialogues.filter(e => e.id === id)?.at(0);
-
+        console.log(dialogue);
     }
 
     randomQuest(type) {
