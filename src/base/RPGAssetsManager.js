@@ -13,6 +13,8 @@ const RPGPlayerHealth = require("./subclasses/RPGPlayerHealth");
 const RPGPlayerRank = require("./subclasses/RPGPlayerRank");
 const RPGProbability = require("./subclasses/RPGProbability");
 const RPGBlacksmith = require("./subclasses/RPGBlacksmith");
+const RPGDialogue = require("./subclasses/RPGDialogue");
+const fs = require("fs");
 
 class RPGAssetsManager {
     constructor(client, dir) {
@@ -32,6 +34,8 @@ class RPGAssetsManager {
         this.ranks = require(`../${this.dir}/ranks.json`);
         this.probabilities = require(`../${this.dir}/probabilities.json`);
         this.blacksmiths = require(`../${this.dir}/blacksmiths.json`);
+        this.dialogues = fs.readdirSync(`./src/${this.dir}/dialogues`)
+            .map(file => require(`../${this.dir}/dialogues/${file}`));
     }
 
     getLangData(lang, file = null) {
@@ -188,6 +192,11 @@ class RPGAssetsManager {
             id,
             this.quests[questType][id],
         );
+    }
+
+    getDialogue(lang, id) {
+        const dialogue = this.dialogues.filter(e => e.id === id)?.at(0);
+
     }
 
     randomQuest(type) {

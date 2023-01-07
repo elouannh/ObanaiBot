@@ -1,0 +1,11 @@
+{
+    "d001": {
+        "id": "d001",
+        "name": "Dialogue 1",
+        "replicas": {
+            "r001": "Hello world !",
+            "r002": "Ceci est un test de réplique",
+            "r003": "Ceci est une autre réplique"
+        }
+    }
+}
