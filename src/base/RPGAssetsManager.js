@@ -13,6 +13,8 @@ const RPGPlayerHealth = require("./subclasses/RPGPlayerHealth");
 const RPGPlayerRank = require("./subclasses/RPGPlayerRank");
 const RPGProbability = require("./subclasses/RPGProbability");
 const RPGBlacksmith = require("./subclasses/RPGBlacksmith");
+const RPGDialogue = require("./subclasses/RPGDialogue");
+const fs = require("fs");
 
 class RPGAssetsManager {
     constructor(client, dir) {
@@ -32,6 +34,8 @@ class RPGAssetsManager {
         this.ranks = require(`../${this.dir}/ranks.json`);
         this.probabilities = require(`../${this.dir}/probabilities.json`);
         this.blacksmiths = require(`../${this.dir}/blacksmiths.json`);
+        this.dialogues = fs.readdirSync(`./src/${this.dir}/dialogues`)
+            .map(file => require(`../${this.dir}/dialogues/${file}`));
     }
 
     getLangData(lang, file = null) {
@@ -188,6 +192,23 @@ class RPGAssetsManager {
             id,
             this.quests[questType][id],
         );
+    }
+
+    getDialogue(lang, id, userId) {
+        const dialogue = this.dialogues.filter(e => e.id === id)?.at(0);
+        const dialoguesLang = this.client.languageManager.getLang(lang).json.dialogues;
+        const formattedDialogue = [];
+
+        for (const replicasGroups of dialogue.read(this.client, userId)) {
+            const key = replicasGroups.key;
+            const replicas = replicasGroups.replicas;
+            for (const replica of replicas) {
+                const replicaLang = dialoguesLang.contents[key].replicas[replica];
+                formattedDialogue.push(replicaLang);
+            }
+        }
+
+        return { name: dialoguesLang.names[dialogue.name], id, content: formattedDialogue };
     }
 
     randomQuest(type) {

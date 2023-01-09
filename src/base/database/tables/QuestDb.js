@@ -98,6 +98,40 @@ class QuestDb extends SQLiteTable {
     }
 
     /**
+     * @typedef {Object} DialogueData
+     * @property {String} id The id of the dialogue
+     * @property {String} name The name of the dialogue (translated)
+     * @property {String[]} content The dialogue replicas (translated)
+     */
+    /**
+     * Get all the dialogs associated with the pnj id.
+     * @param {String} id The user ID
+     * @param {String} pnjId The pnj ID
+     * @returns {Promise<DialogueData[]>} The list of dialogues
+     */
+    async getDialoguesByPNJ(id, pnjId) {
+        const quest = (await this.load(id)).currentQuests;
+        const dialogues = [];
+        for (const questInstance of Object.values(quest)) {
+            if (!questInstance?.id) continue;
+
+            for (const objective of questInstance.objectives) {
+                const data = objective.additionalData;
+                if (!data.characterId) continue;
+
+                if (data.characterId !== pnjId) continue;
+
+                const dialogue = this.client.RPGAssetsManager.getDialogue(
+                    this.client.playerDb.getLang(id), data.dialogueId,
+                );
+
+                if (dialogue.content.length) dialogues.push(dialogue);
+            }
+        }
+        return dialogues;
+    }
+
+    /**
      * Sets the current daily quest for the user.
      * @param {String} id The user ID
      * @param {String} questId The quest ID to set
@@ -694,7 +728,7 @@ class QuestDb extends SQLiteTable {
                 );
             }
 
-            if (channel.id !== null) await this.client.notify(channel, { embeds: [embed] });
+            if (channel !== null && channel.id !== null) await this.client.notify(channel, { embeds: [embed] });
         }
     }
 

@@ -20,7 +20,6 @@ const CommandManager = require("./CommandManager");
 const EventManager = require("./EventManager");
 const CollectionManager = require("./CollectionManager");
 const LanguageManager = require("./LanguageManager");
-const { PasteGGManager } = require("./PasteGGManager");
 const RPGAssetsManager = require("./RPGAssetsManager");
 const Util = require("./Util");
 const Enumerations = require("./Enumerations");
@@ -40,8 +39,6 @@ class Obanai extends Client {
         this.util.timelog("Starting bot process...");
 
         this.env = { ...process.env };
-
-        this.pasteGGManager = new PasteGGManager(this);
         this.commandManager = new CommandManager(this);
         this.eventManager = new EventManager(this);
         this.languageManager = new LanguageManager(this);
