@@ -194,9 +194,21 @@ class RPGAssetsManager {
         );
     }
 
-    getDialogue(lang, id) {
+    getDialogue(lang, id, userId) {
         const dialogue = this.dialogues.filter(e => e.id === id)?.at(0);
-        console.log(dialogue);
+        const dialoguesLang = this.client.languageManager.getLang(lang).json.dialogues;
+        const formattedDialogue = [];
+
+        for (const replicasGroups of dialogue.read(this.client, userId)) {
+            const key = replicasGroups.key;
+            const replicas = replicasGroups.replicas;
+            for (const replica of replicas) {
+                const replicaLang = dialoguesLang.contents[key].replicas[replica];
+                formattedDialogue.push(replicaLang);
+            }
+        }
+
+        return { name: dialoguesLang.names[dialogue.name], id, content: formattedDialogue };
     }
 
     randomQuest(type) {

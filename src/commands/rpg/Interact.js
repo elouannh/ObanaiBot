@@ -100,7 +100,44 @@ class Interact extends Command {
             );
             if (pnjChoice === null) return this.end();
 
-            console.log(await this.client.questDb.getDialoguesByPNJ(user.id, pnjChoice[0]));
+            const dialogues = await this.client.questDb.getDialoguesByPNJ(user.id, pnjChoice[0]);
+            let dialChosen = null;
+
+            if (dialogues.length > 1) {
+                const dialogueChoice = await this.menu(
+                    {
+                        content: this.mention + "Choix du dialogue (sujet de conversation):",
+                    },
+                    dialogues.map(dial => (
+                        {
+                            label: dial.name,
+                            value: dial.id,
+                        }
+                    )),
+                );
+                if (dialogueChoice === null) return this.end();
+
+                dialChosen = dialogueChoice[0];
+            }
+            else {
+                const dialConfirmChoice = await this.choice(
+                    {
+                        content: this.mention + `Vous voulez lancer le dialogue **${dialogues[0].name}** ?`,
+                    },
+                    "Dialoguer",
+                    "Annuler",
+                );
+                if (dialConfirmChoice === null) return this.end();
+
+                if (dialConfirmChoice === "secondary") {
+                    await this.interaction.editReply({
+                        content: this.mention + "Dialogue annulé.",
+                    }).catch(this.client.catchError);
+                    return this.end();
+                }
+                dialChosen = dialogues[0];
+            }
+            console.log(dialChosen);
         }
         else if (action[0] === "interact") {
 

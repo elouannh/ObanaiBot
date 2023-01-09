@@ -1,6 +1,7 @@
 module.exports ={
     id: "d001",
-    read: (client, data) => {
+    name: "d001",
+    read: (client, id) => {
         return [
             {
                 "key": "d001",
