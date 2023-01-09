@@ -35,8 +35,8 @@ class Interact extends Command {
         }
 
         const map = await this.client.mapDb.load(user.id);
-        const quest = await this.client.questDb.load(user.id);
-        const inventory = await this.client.inventoryDb.load(user.id);
+        // const quest = await this.client.questDb.load(user.id);
+        // const inventory = await this.client.inventoryDb.load(user.id);
 
         const options = [
             {
@@ -140,13 +140,13 @@ class Interact extends Command {
             console.log(dialChosen);
         }
         else if (action[0] === "interact") {
-
+            console.log("cas 1");
         }
         else if (action[0] === "giveItems") {
-
+            console.log("cas 2");
         }
         else {
-
+            console.log("cas 3");
         }
     }
 }
