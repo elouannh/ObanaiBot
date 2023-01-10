@@ -137,7 +137,7 @@ class Interact extends Command {
                 }
                 dialChosen = dialogues[0];
             }
-            console.log(dialChosen);
+            await this.client.questDb.displayDialogue(this, dialChosen);
         }
         else if (action[0] === "interact") {
             console.log("cas 1");

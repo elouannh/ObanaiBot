@@ -1,7 +1,9 @@
 /* eslint-disable no-case-declarations */
 const SQLiteTable = require("../../SQLiteTable");
 const QuestData = require("../dataclasses/QuestData");
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+// eslint-disable-next-line no-unused-vars
+const Command = require("../../Command");
 
 function schema(id) {
     return {
@@ -129,6 +131,71 @@ class QuestDb extends SQLiteTable {
             }
         }
         return dialogues;
+    }
+
+    /**
+     * Display a dialogue as a menu.
+     * @param {Command} command The command context
+     * @param {DialogueData} dialogue, The dialogue string array
+     * @returns {Promise<void>}
+     */
+    async displayDialogue(command, dialogue) {
+        let method = "reply";
+        if (command.interaction.replied) method = "editReply";
+
+        let pageId = 1;
+        const menu = await command.interaction[method]({
+            content: dialogue.content.slice(0, pageId).join("\n"),
+            components: [
+                 new ActionRowBuilder().setComponents(
+                    new ButtonBuilder()
+                        .setCustomId("next")
+                        .setEmoji(this.client.enums.Systems.Symbols.Next)
+                        .setStyle(ButtonStyle.Primary),
+                ),
+            ],
+        }).catch(this.client.catchError);
+
+        const collector = menu.createMessageComponentCollector({
+            filter: interaction => interaction.user.id === command.interaction.user.id,
+            idle: 60_000,
+        });
+
+        collector.on("collect", async interaction => {
+            await interaction.deferUpdate().catch(this.client.catchError);
+
+            if (interaction.customId === "next") pageId++;
+
+            await command.interaction.editReply({
+                content: dialogue.content.slice(0, pageId).join("\n"),
+                components: [
+                    new ActionRowBuilder().setComponents(
+                        new ButtonBuilder()
+                            .setCustomId(dialogue.content.length > pageId ? "next" : "end")
+                            .setEmoji(
+                                dialogue.content.length > pageId ?
+                                    this.client.enums.Systems.Symbols.Next
+                                    : this.client.enums.Systems.Symbols.Check,
+                            )
+                            .setStyle(dialogue.content.length > pageId ? ButtonStyle.Primary : ButtonStyle.Success),
+                    ),
+                ],
+            }).catch(this.client.catchError);
+
+            if (interaction.customId === "end") {
+                await command.interaction.editReply({
+                    content: dialogue.content.join("\n"),
+                    components: [],
+                }).catch(this.client.catchError);
+
+                collector.stop();
+                return command.end();
+            }
+        });
+        collector.on("end", async () => {
+            await this.interaction.editReply({ components: [] }).catch(this.client.catchError);
+            return command.end();
+        });
     }
 
     /**
