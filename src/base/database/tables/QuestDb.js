@@ -193,7 +193,7 @@ class QuestDb extends SQLiteTable {
             }
         });
         collector.on("end", async () => {
-            await this.interaction.editReply({ components: [] }).catch(this.client.catchError);
+            await command.interaction.editReply({ components: [] }).catch(this.client.catchError);
             return command.end();
         });
     }

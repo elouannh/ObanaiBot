@@ -40,19 +40,19 @@ class Interact extends Command {
 
         const options = [
             {
-                label: "Dialoguer",
+                label: this.trad.optionDialogue,
                 value: "dialogue",
-                description: "Permet de dialoguer avec un PNJ.",
+                description: this.trad.optionDialogueDesc,
             },
             {
-                label: "Interagir",
+                label: this.trad.optionInteract,
                 value: "interact",
-                description: "Permet d’interagir avec l'environnement.",
+                description: this.trad.optionInteractDesc,
             },
             {
-                label: "Don d'objets",
+                label: this.trad.optionGiveItems,
                 value: "giveItems",
-                description: "Permet de donner des objets à un PNJ.",
+                description: this.trad.optionGiveItemsDesc,
             },
         ];
 
@@ -60,16 +60,16 @@ class Interact extends Command {
         if (!zoneExplored) {
             options.push(
                 {
-                    label: "Fouiller",
+                    label: this.trad.optionExcavate,
                     value: "excavate",
-                    description: "Permet de fouiller une zone.",
+                    description: this.trad.optionExcavateDesc,
                 },
             );
         }
 
         const action = await this.menu(
             {
-                content: this.mention + "Choix possibles d'actions:",
+                content: this.mention + this.trad.possiblesChoices,
             },
             options,
         );
@@ -80,7 +80,7 @@ class Interact extends Command {
 
             if (pnjs.length === 0) {
                 await this.interaction.editReply({
-                    content: this.mention + "Aucun PNJ n'est disponible pour dialoguer.",
+                    content: this.mention + this.trad.noPnjForDialogue,
                     components: [],
                 }).catch(this.client.catchError);
                 return this.end();
@@ -88,7 +88,7 @@ class Interact extends Command {
 
             const pnjChoice = await this.menu(
                 {
-                    content: this.mention + "Choix du PNJ:",
+                    content: this.mention + this.trad.pnjChoice,
                 },
                 pnjs.map(pnj => (
                     {
@@ -106,7 +106,7 @@ class Interact extends Command {
             if (dialogues.length > 1) {
                 const dialogueChoice = await this.menu(
                     {
-                        content: this.mention + "Choix du dialogue (sujet de conversation):",
+                        content: this.mention + this.trad.dialogueChoice,
                     },
                     dialogues.map(dial => (
                         {
@@ -122,16 +122,16 @@ class Interact extends Command {
             else {
                 const dialConfirmChoice = await this.choice(
                     {
-                        content: this.mention + `Vous voulez lancer le dialogue **${dialogues[0].name}** ?`,
+                        content: this.mention + this.trad.wantsToDialogue.replace("%DIALOG_NAME", dialogues[0].name),
                     },
-                    "Dialoguer",
-                    "Annuler",
+                    this.trad.optionDialogue,
+                    this.trad.cancel,
                 );
                 if (dialConfirmChoice === null) return this.end();
 
                 if (dialConfirmChoice === "secondary") {
                     await this.interaction.editReply({
-                        content: this.mention + "Dialogue annulé.",
+                        content: this.mention + this.trad.canceledDialogue,
                     }).catch(this.client.catchError);
                     return this.end();
                 }

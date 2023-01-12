@@ -23,6 +23,23 @@
     "forgeWeapon": {
         "currently": "Actuellement: **%AMOUNT**/%MAX"
     },
+    "interact": {
+        "optionDialogue": "Dialoguer",
+        "cancel": "Annuler",
+        "optionDialogueDesc": "Permet de dialoguer avec un PNJ.",
+        "optionInteract": "Interagir",
+        "optionInteractDesc": "Permet d'interagir avec l'environnement.",
+        "optionGiveItems": "Don d'objets",
+        "optionGiveItemsDesc": "Permet de donner des objets à un PNJ.",
+        "optionExcavate": "Fouiller",
+        "optionExcavateDesc": "Permet de fouiller une zone.",
+        "possiblesChoices": "Choix possibles:",
+        "noPnjForDialogue": "Aucun PNJ n'est disponible pour dialoguer.",
+        "pnjChoice": "Choix du PNJ:",
+        "dialogueChoice": "Choix du dialogue (sujet de conversation):",
+        "canceledDialogue": "Dialogue annulé.",
+        "wantsToDialogue": "Voulez-vous lancer le dialogue **%DIALOG_NAME** ?"
+    },
     "profile": {
         "activityButton": "Activité",
         "additionalButton": "Informations supplémentaires",
