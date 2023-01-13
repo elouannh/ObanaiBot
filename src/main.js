@@ -12,7 +12,7 @@ module.exports = async obanai => {
     // obanai.inventoryDb.set("539842701592494111", 100, "items.materials.tamahagane");
 
     // obanai.questDb.updateSlayerProgression("539842701592494111", "0", "0", "0", null);
-    // obanai.questDb.setSlayerQuest("539842701592494111", "0", "0", "0", "0");
+    obanai.questDb.setSlayerQuest("539842701592494111", "0", "0", "0", "0");
 
 
     obanai.internalServerManager.addOwner("539842701592494111");

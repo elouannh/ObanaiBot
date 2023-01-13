@@ -40,6 +40,7 @@ class QuestDb extends SQLiteTable {
      */
     /**
      * @typedef {Object} QuestObjectiveLocal
+     * @property {String} questId The quest ID
      * @property {String} id The objective ID
      * @property {String} type The objective type
      * @property {Object} additionalData Additional data for the objective
@@ -109,12 +110,12 @@ class QuestDb extends SQLiteTable {
      * Get all the dialogs associated with the pnj id.
      * @param {String} id The user ID
      * @param {String} pnjId The pnj ID
-     * @returns {Promise<DialogueData[]>} The list of dialogues
+     * @returns {Promise<{dialogue: DialogueData, objectiveId: String, questKey: String}[]>} The list of dialogues
      */
     async getDialoguesByPNJ(id, pnjId) {
         const quest = (await this.load(id)).currentQuests;
         const dialogues = [];
-        for (const questInstance of Object.values(quest)) {
+        for (const [questKey, questInstance] of Object.entries(quest)) {
             if (!questInstance?.id) continue;
 
             for (const objective of questInstance.objectives) {
@@ -127,7 +128,7 @@ class QuestDb extends SQLiteTable {
                     this.client.playerDb.getLang(id), data.dialogueId,
                 );
 
-                if (dialogue.content.length) dialogues.push(dialogue);
+                if (dialogue.content.length) dialogues.push({ dialogue, objectiveId: objective.id, questKey });
             }
         }
         return dialogues;
@@ -512,25 +513,32 @@ class QuestDb extends SQLiteTable {
         const rewardsToAdd = [];
         for (const objectiveId in quest.objectives) {
             const userObjective = quest.objectives[objectiveId];
-            if (userObjective.completed) continue;
 
             const localObjective = localQuest.objectives[objectiveId];
             const localObjectiveRewards = localQuest.rewards[objectiveId];
 
-            const completed = await this.isObjectiveCompleted(id, localObjective, tableFocused);
-            if (
-                completed &&
-                !this.get(id).currentQuests[`${quest.id.split(".")[0]}Quest`].objectives[objectiveId].completed
-            ) {
-                if (
-                    userObjective.rewardsCollected ||
-                    this.get(id).currentQuests[`${quest.id.split(".")[0]}Quest`].objectives[objectiveId].rewardsCollected
-                ) continue;
+            const completed = await this.isObjectiveCompleted(id, Object.assign(localObjective, { questId: quest.id }), tableFocused);
+            const dbCompleted = this.get(id).currentQuests[`${quest.id.split(".")[0]}Quest`]
+                .objectives[objectiveId].completed;
+            const dbCollected = this.get(id).currentQuests[`${quest.id.split(".")[0]}Quest`]
+                .objectives[objectiveId].rewardsCollected;
 
-                rewardsToAdd.push(localObjectiveRewards.data);
-                this.setObjectiveCompleted(id, quest.id.split(".")[0], objectiveId);
-                this.setObjectiveRewardCollected(id, quest.id.split(".")[0], objectiveId);
-                actionsLogged.push({ event: "objectiveCompleted", objectiveId });
+            if (completed || dbCompleted) {
+                if (dbCompleted) {
+                    if (userObjective.rewardsCollected || dbCollected) continue;
+
+                    rewardsToAdd.push(localObjectiveRewards.data);
+                    this.setObjectiveRewardCollected(id, quest.id.split(".")[0], objectiveId);
+                    actionsLogged.push({ event: "objectiveCompleted", objectiveId });
+                }
+                else if (completed) {
+                    if (userObjective.rewardsCollected || dbCollected) continue;
+
+                    rewardsToAdd.push(localObjectiveRewards.data);
+                    this.setObjectiveCompleted(id, quest.id.split(".")[0], objectiveId);
+                    this.setObjectiveRewardCollected(id, quest.id.split(".")[0], objectiveId);
+                    actionsLogged.push({ event: "objectiveCompleted", objectiveId });
+                }
             }
             else {
                 actionsLogged.push({ event: "objectiveNotCompleted", objectiveId });
@@ -564,6 +572,25 @@ class QuestDb extends SQLiteTable {
      */
     setObjectiveRewardCollected(id, questCategory, objectiveId) {
         this.set(id, true, `currentQuests.${questCategory}Quest.objectives.${objectiveId}.rewardsCollected`);
+    }
+
+    /**
+     * Function that allowss you to set manually an objective as completed.
+     * @param {String} id The user ID
+     * @param {String} questCategory The quest type (daily/side/slayer)
+     * @param {String} objectiveId The ID of the objective to set as completed
+     * @returns {void}
+     */
+    async setObjectiveManuallyCompleted(id, questCategory, objectiveId) {
+        questCategory = questCategory.replace("Quest", "");
+        const quest = this.get(id).currentQuests[`${questCategory}Quest`];
+
+        const dbCompleted = this.get(id).currentQuests[`${quest.id.split(".")[0]}Quest`]
+            .objectives[objectiveId].completed;
+
+        if (!dbCompleted) this.setObjectiveCompleted(id, quest.id.split(".")[0], objectiveId);
+
+        await this.questsCleanup(id, "none");
     }
 
     /**

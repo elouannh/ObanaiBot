@@ -110,8 +110,8 @@ class Interact extends Command {
                     },
                     dialogues.map(dial => (
                         {
-                            label: dial.name,
-                            value: dial.id,
+                            label: dial.dialogue.name,
+                            value: dial.dialogue.id,
                         }
                     )),
                 );
@@ -122,7 +122,7 @@ class Interact extends Command {
             else {
                 const dialConfirmChoice = await this.choice(
                     {
-                        content: this.mention + this.trad.wantsToDialogue.replace("%DIALOG_NAME", dialogues[0].name),
+                        content: this.mention + this.trad.wantsToDialogue.replace("%DIALOG_NAME", dialogues[0].dialogue.name),
                     },
                     this.trad.optionDialogue,
                     this.trad.cancel,
@@ -137,10 +137,11 @@ class Interact extends Command {
                 }
                 dialChosen = dialogues[0];
             }
-            await this.client.questDb.displayDialogue(this, dialChosen);
+            await this.client.questDb.displayDialogue(this, dialChosen.dialogue);
+            await this.client.questDb.setObjectiveManuallyCompleted(user.id, dialChosen.questKey, dialChosen.objectiveId);
         }
         else if (action[0] === "interact") {
-            console.log("cas 1");
+
         }
         else if (action[0] === "giveItems") {
             console.log("cas 2");

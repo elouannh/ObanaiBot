@@ -395,15 +395,15 @@
         },
         "slayer.0.0.0.0": {
             "id": "slayer.0.0.0.0",
-            "name": "Chapitre 0 - Obanai Iguro (1)",
-            "label": "Tome 0 - Arc 0 « L'étrange Shukuba »",
-            "description": "Vous êtes un Matagi, dans la région du Tōhoku. Tout se déroule durant l’ère Taishō. Vous partez donc en exploration jusqu’à rejoindre le prochain Shukuba.",
+            "name": "Quête de développement",
+            "label": "Provisoire",
+            "description": "Il est l'heure de tester !",
             "wattpad": {
                 "alt": "Lire sur Wattpad (__Aller à → Chapitre 0__)",
                 "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
             },
             "objectives": {
-                "0": "Rejoindre le Shukuba du Désespoir (Zetsubō)."
+                "0": "Tester la commande Interact"
             }
         }
     },
@@ -485,7 +485,7 @@
         "sideQuestObjectivesCompleted": "Objectifs de quête secondaire terminés",
         "dailyQuestObjectivesCompleted": "Objectifs de quête quotidienne terminés",
         "objectives": "Objectifs",
-        "questNowCompleted": "Cette quête est maintenant terminée !",
+        "questNowCompleted": "Cette quête est maintenant terminée",
         "totalEarned": "Total obtenu",
         "questName": "Nom de la quête",
         "questLabel": "Étiquette de la quête",
