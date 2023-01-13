@@ -309,7 +309,7 @@ class InventoryDb extends SQLiteTable {
                 value: Object.keys(data.items.enchantedGrimoires).length > 0 ?
                     Object.values(data.items.enchantedGrimoires)
                         .sort((a, b) => b.amount - a.amount)
-                        .map(g => `x\`${g.amount}\` ${g.list[0].name}`)
+                        .map(g => `x\`${g.amount}\` ${g.instance.name}`)
                         .join("\n") :
                     lang.rpgAssets.embeds.noGrimoire,
                 inline: true,

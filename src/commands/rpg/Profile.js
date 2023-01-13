@@ -32,6 +32,7 @@ class Profile extends Command {
 
     async run() {
         const user = await this.getUserFromInteraction(this.interaction.type);
+        console.log(user);
         if (!(await this.client.playerDb.exists(user.id))) {
             if (this.client.playerDb.get(user.id).alreadyPlayed) {
                 await this.interaction.reply({

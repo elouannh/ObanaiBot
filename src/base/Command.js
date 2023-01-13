@@ -191,7 +191,7 @@ class Command {
     async getUserFromInteraction(interactionType) {
         const user = this.interaction.user;
         let userId = user.id;
-        if (interactionType === 1) userId = this.interaction.options?.get("joueur")?.user?.id || userId;
+        if (interactionType === 1) userId = this.interaction.options?.get("user")?.user?.id || userId;
         else if (interactionType === 2) userId = this.client.users.cache.get(this.interaction.targetId) || userId;
         return await this.client.getUser(userId, user);
     }
