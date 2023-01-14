@@ -38,7 +38,10 @@
         "pnjChoice": "Choix du PNJ:",
         "dialogueChoice": "Choix du dialogue (sujet de conversation):",
         "canceledDialogue": "Dialogue annulé.",
-        "wantsToDialogue": "Voulez-vous lancer le dialogue **%DIALOG_NAME** ?"
+        "wantsToDialogue": "Voulez-vous lancer le dialogue **%DIALOG_NAME** ?",
+        "noDialogue": "Aucun dialogue n'est disponible.",
+        "noInteraction": "Aucune interaction n'est disponible.",
+        "interactionChoice": "Choix de l'interaction (action à effectuer):"
     },
     "profile": {
         "activityButton": "Activité",

@@ -119,7 +119,7 @@ class Interact extends Command {
 
                 dialChosen = dialogueChoice[0];
             }
-            else {
+            else if (dialogues.length === 1) {
                 const dialConfirmChoice = await this.choice(
                     {
                         content: this.mention + this.trad.wantsToDialogue.replace("%DIALOG_NAME", dialogues[0].dialogue.name),
@@ -137,11 +137,43 @@ class Interact extends Command {
                 }
                 dialChosen = dialogues[0];
             }
+            else {
+                await this.interaction.editReply({
+                    content: this.mention + this.trad.noDialogue,
+                }).catch(this.client.catchError);
+                return this.end();
+            }
             await this.client.questDb.displayDialogue(this, dialChosen.dialogue);
             await this.client.questDb.setObjectiveManuallyCompleted(user.id, dialChosen.questKey, dialChosen.objectiveId);
         }
         else if (action[0] === "interact") {
+            const interactions = await this.client.questDb.getInteractions(user.id);
 
+            if (interactions.length === 0) {
+                await this.interaction.editReply({
+                    content: this.mention + this.trad.noInteraction,
+                    components: [],
+                }).catch(this.client.catchError);
+                return this.end();
+            }
+
+            const interChoice = await this.menu(
+                {
+                    content: this.mention + this.trad.interactionChoice,
+                },
+                interactions.map(int => (
+                    {
+                        label: int.interaction.name,
+                        value: int.interaction.id,
+                    }
+                )),
+            );
+            if (interChoice === null) return this.end();
+
+            const interChosen = interactions.find(int => int.interaction.id === interChoice[0]);
+
+            await interChosen.interaction.play(this);
+            await this.client.questDb.setObjectiveManuallyCompleted(user.id, interChosen.questKey, interChosen.objectiveId);
         }
         else if (action[0] === "giveItems") {
             console.log("cas 2");

@@ -6,6 +6,7 @@ class RPGInteraction extends RPGAssetBase {
         super(lang, id);
 
         this.play = interactionData.play;
+        this.name = this.lang[this.id].name;
     }
 }
 

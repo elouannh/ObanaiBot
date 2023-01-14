@@ -4,6 +4,7 @@ const QuestData = require("../dataclasses/QuestData");
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 // eslint-disable-next-line no-unused-vars
 const Command = require("../../Command");
+const RPGInteraction = require("../../subclasses/RPGInteraction");
 
 function schema(id) {
     return {
@@ -132,6 +133,29 @@ class QuestDb extends SQLiteTable {
             }
         }
         return dialogues;
+    }
+
+    /**
+     * Function to get all interactions of the quests.
+     * @param {String} id The user ID
+     * @returns {Promise<{interaction: RPGInteraction, objectiveId: String, questKey: String}[]>} The list of interactions
+     */
+    async getInteractions(id) {
+        const quest = await this.load(id);
+        const lang = this.client.playerDb.getLang(id);
+        const interactions = [];
+        for (const [questKey, questInstance] of Object.entries(quest.currentQuests)) {
+            if (!questInstance?.id) continue;
+
+            for (const objective of questInstance.objectives) {
+                const data = objective.additionalData;
+                if (!data.interactionId) continue;
+
+                const interaction = await this.client.RPGAssetsManager.getInteraction(lang, data.interactionId);
+                interactions.push({ interaction, objectiveId: objective.id, questKey });
+            }
+        }
+        return interactions;
     }
 
     /**

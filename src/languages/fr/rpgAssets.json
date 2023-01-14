@@ -403,7 +403,8 @@
                 "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
             },
             "objectives": {
-                "0": "Tester la commande Interact"
+                "0": "Tester le dialogue",
+                "1": "Tester l'interaction"
             }
         }
     },
