@@ -14,6 +14,7 @@ const RPGPlayerRank = require("./subclasses/RPGPlayerRank");
 const RPGProbability = require("./subclasses/RPGProbability");
 const RPGBlacksmith = require("./subclasses/RPGBlacksmith");
 const RPGDialogue = require("./subclasses/RPGDialogue");
+const RPGInteraction = require("./subclasses/RPGInteraction");
 const fs = require("fs");
 
 class RPGAssetsManager {
@@ -36,6 +37,8 @@ class RPGAssetsManager {
         this.blacksmiths = require(`../${this.dir}/blacksmiths.json`);
         this.dialogues = fs.readdirSync(`./src/${this.dir}/dialogues`)
             .map(file => require(`../${this.dir}/dialogues/${file}`));
+        this.interactions = fs.readdirSync(`./src/${this.dir}/interactions`)
+            .map(file => require(`../${this.dir}/interactions/${file}`));
     }
 
     getLangData(lang, file = null) {
@@ -194,21 +197,33 @@ class RPGAssetsManager {
         );
     }
 
-    getDialogue(lang, id, userId) {
-        const dialogue = this.dialogues.filter(e => e.id === id)?.at(0);
-        const dialoguesLang = this.client.languageManager.getLang(lang).json.dialogues;
-        const formattedDialogue = [];
+    async getDialogue(lang, id, userId) {
+        if (!this.dialogues.map(e => e.id).includes(id)) return "Invalid Dialogue ID";
+        const dialogue = new RPGDialogue(
+            this.client.languageManager.getLang(lang).json.dialogues,
+            id,
+            this.dialogues.filter(e => e.id === id)?.at(0),
+        );
 
-        for (const replicasGroups of dialogue.read(this.client, userId)) {
+        for (const replicasGroups of (await dialogue.read(this.client, userId))) {
             const key = replicasGroups.key;
             const replicas = replicasGroups.replicas;
             for (const replica of replicas) {
-                const replicaLang = dialoguesLang.contents[key].replicas[replica];
-                formattedDialogue.push(replicaLang);
+                const replicaLang = dialogue.lang.contents[key].replicas[replica];
+                dialogue.content.push(replicaLang);
             }
         }
 
-        return { name: dialoguesLang.names[dialogue.name], id, content: formattedDialogue };
+        return { name: dialogue.lang.names[dialogue.name], id, content: dialogue.content };
+    }
+
+    async getInteraction(lang, id) {
+        if (!this.interactions.map(e => e.id).includes(id)) return "Invalid Interaction ID";
+        return new RPGInteraction(
+            this.client.languageManager.getLang(lang).json.interactions,
+            id,
+            this.interactions.filter(e => e.id === id)?.at(0),
+        );
     }
 
     randomQuest(type) {
@@ -261,7 +276,6 @@ class RPGAssetsManager {
         }
         return probability;
     }
-
 }
 
 module.exports = RPGAssetsManager;

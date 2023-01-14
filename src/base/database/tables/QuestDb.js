@@ -124,7 +124,7 @@ class QuestDb extends SQLiteTable {
 
                 if (data.characterId !== pnjId) continue;
 
-                const dialogue = this.client.RPGAssetsManager.getDialogue(
+                const dialogue = await this.client.RPGAssetsManager.getDialogue(
                     this.client.playerDb.getLang(id), data.dialogueId,
                 );
 
@@ -145,6 +145,8 @@ class QuestDb extends SQLiteTable {
         if (command.interaction.replied) method = "editReply";
 
         let pageId = 1;
+        let loop = true;
+
         const menu = await command.interaction[method]({
             content: dialogue.content.slice(0, pageId).join("\n"),
             components: [
@@ -157,15 +159,14 @@ class QuestDb extends SQLiteTable {
             ],
         }).catch(this.client.catchError);
 
-        const collector = menu.createMessageComponentCollector({
-            filter: interaction => interaction.user.id === command.interaction.user.id,
-            idle: 60_000,
-        });
+        while (loop) {
+            const inter = await menu.awaitMessageComponent({
+                filter: interaction => interaction.user.id === command.interaction.user.id,
+                time: 60_000,
+            });
+            await inter.deferUpdate().catch(this.client.catchError);
 
-        collector.on("collect", async interaction => {
-            await interaction.deferUpdate().catch(this.client.catchError);
-
-            if (interaction.customId === "next") pageId++;
+            if (inter.customId === "next") pageId++;
 
             await command.interaction.editReply({
                 content: dialogue.content.slice(0, pageId).join("\n"),
@@ -183,20 +184,18 @@ class QuestDb extends SQLiteTable {
                 ],
             }).catch(this.client.catchError);
 
-            if (interaction.customId === "end") {
+            if (inter.customId === "end") {
                 await command.interaction.editReply({
                     content: dialogue.content.join("\n"),
                     components: [],
                 }).catch(this.client.catchError);
 
-                collector.stop();
-                return command.end();
+                loop = false;
             }
-        });
-        collector.on("end", async () => {
-            await command.interaction.editReply({ components: [] }).catch(this.client.catchError);
-            return command.end();
-        });
+        }
+
+        await command.interaction.editReply({ components: [] }).catch(this.client.catchError);
+        return command.end();
     }
 
     /**

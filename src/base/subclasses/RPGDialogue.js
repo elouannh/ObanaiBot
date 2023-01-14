@@ -1,10 +1,13 @@
 const RPGAssetBase = require("./RPGAssetBase");
 
 class RPGDialogue extends RPGAssetBase {
+    // eslint-disable-next-line no-unused-vars
     constructor(lang, id, dialogueData) {
         super(lang, id);
 
-        const data = dialogueData;
+        this.name = dialogueData.name;
+        this.read = dialogueData.read;
+        this.content = [];
     }
 }
 
