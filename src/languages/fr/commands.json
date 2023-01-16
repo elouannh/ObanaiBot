@@ -69,7 +69,7 @@
         "discordTosDescription": "En vous inscrivant sur Discord vous les acceptez.",
         "tosAccepted": "Vous avez accepté de nous rejoindre ! Votre profil de joueur est en création.\nIl est temps de **choisir votre personnage !**",
         "characterChoice": "Choisissez parmi les deux choix ci-dessous. **Attention, ce choix est __définitif__ !**",
-        "joinTheSupport": "Si vous avez toute autre question, n'hésitez pas à rejoindre notre serveur Discord:\nhttps://discord.gg/8GDpnYvRrC",
+        "joinTheSupport": "Si vous avez toute autre question, n'hésitez pas à rejoindre notre serveur Discord:\nhttps://discord.gg/gfVr2UNJqy",
         "tosDeclined": "Vous avez refusé les documents. Veuillez réessayer plus tard.",
         "characterMenuPlaceholder": "Choisissez votre personnage.",
         "characterChosen": "Vous avez donc choisi **%CHAR**. Vous pouvez désormais commencer à jouer au bot; essayez de faire la commande `/profile` pour tester !",
