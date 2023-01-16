@@ -176,7 +176,7 @@ class Interact extends Command {
             await this.client.questDb.setObjectiveManuallyCompleted(user.id, interChosen.questKey, interChosen.objectiveId);
         }
         else if (action[0] === "giveItems") {
-            console.log("cas 2");
+
         }
         else {
             console.log("cas 3");
