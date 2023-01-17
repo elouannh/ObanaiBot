@@ -233,12 +233,22 @@ class Command {
         return collected.customId;
     }
 
-    async menu(messagePayload, options, min = null, max = null) {
+    async menu(messagePayload, options, min = null, max = null, removeCancelOption = false) {
         const method = { "true": "editReply", "false": "reply" }[String(this.interaction.replied)];
 
         const menu = new StringSelectMenuBuilder()
             .setCustomId("menu")
-            .setOptions(options);
+            .setOptions(
+                !removeCancelOption ?
+                    [
+                        {
+                            label: this.lang.systems.menuCancel,
+                            value: "cancel",
+                            emoji: this.client.enums.Systems.Symbols.Cross,
+                        },
+                    ].concat(options)
+                    : options,
+            );
 
         if (min !== null) menu.setMinValues(min);
         if (max !== null) menu.setMaxValues(max);
@@ -260,6 +270,13 @@ class Command {
         if (!collected) {
             await this.interaction.editReply({
                 content: this.lang.systems.choiceIgnored,
+                components: [],
+            }).catch(this.client.catchError);
+            return null;
+        }
+        if (collected.values[0] === "cancel") {
+            await this.interaction.editReply({
+                content: this.lang.systems.choiceCanceled,
                 components: [],
             }).catch(this.client.catchError);
             return null;

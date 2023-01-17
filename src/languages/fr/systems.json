@@ -24,5 +24,7 @@
         "m": ["minute", "minutes", "min", "mins"],
         "s": ["seconde", "secondes", "s", "s"],
         "ms": ["milliseconde", "millisecondes", "ms", "ms"]
-    }
+    },
+    "menuCancel": "Annuler",
+    "choiceCanceled": "Vous avez annulé votre choix."
 }
