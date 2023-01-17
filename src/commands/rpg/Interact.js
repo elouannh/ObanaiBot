@@ -36,7 +36,7 @@ class Interact extends Command {
 
         const map = await this.client.mapDb.load(user.id);
         // const quest = await this.client.questDb.load(user.id);
-        // const inventory = await this.client.inventoryDb.load(user.id);
+        const inventory = await this.client.inventoryDb.load(user.id);
 
         const options = [
             {
@@ -100,42 +100,24 @@ class Interact extends Command {
             );
             if (pnjChoice === null) return this.end();
 
-            const dialogues = await this.client.questDb.getDialoguesByPNJ(user.id, pnjChoice[0]);
-            let dialChosen = null;
+            const choices = await this.client.questDb.getDialoguesByPNJ(user.id, pnjChoice[0]);
+            let temp = null;
 
-            if (dialogues.length > 1) {
-                const dialogueChoice = await this.menu(
+            if (choices.length > 0) {
+                const choice = await this.menu(
                     {
                         content: this.mention + this.trad.dialogueChoice,
                     },
-                    dialogues.map(dial => (
+                    choices.map(e => (
                         {
-                            label: dial.dialogue.name,
-                            value: dial.dialogue.id,
+                            label: e.dialogue.name,
+                            value: e.dialogue.id,
                         }
                     )),
                 );
-                if (dialogueChoice === null) return this.end();
+                if (choice === null) return this.end();
 
-                dialChosen = dialogueChoice[0];
-            }
-            else if (dialogues.length === 1) {
-                const dialConfirmChoice = await this.choice(
-                    {
-                        content: this.mention + this.trad.wantsToDialogue.replace("%DIALOG_NAME", dialogues[0].dialogue.name),
-                    },
-                    this.trad.optionDialogue,
-                    this.trad.cancel,
-                );
-                if (dialConfirmChoice === null) return this.end();
-
-                if (dialConfirmChoice === "secondary") {
-                    await this.interaction.editReply({
-                        content: this.mention + this.trad.canceledDialogue,
-                    }).catch(this.client.catchError);
-                    return this.end();
-                }
-                dialChosen = dialogues[0];
+                temp = choice[0];
             }
             else {
                 await this.interaction.editReply({
@@ -143,13 +125,17 @@ class Interact extends Command {
                 }).catch(this.client.catchError);
                 return this.end();
             }
-            await this.client.questDb.displayDialogue(this, dialChosen.dialogue);
-            await this.client.questDb.setObjectiveManuallyCompleted(user.id, dialChosen.questKey, dialChosen.objectiveId);
+
+            const chosen = choices.find(e => e.dialogue.id === temp);
+
+            await this.client.questDb.displayDialogue(this, chosen.dialogue);
+            await this.client.questDb.setObjectiveManuallyCompleted(user.id, chosen.questKey, chosen.objectiveId);
+            return this.end();
         }
         else if (action[0] === "interact") {
-            const interactions = await this.client.questDb.getInteractions(user.id);
+            const choices = await this.client.questDb.getInteractions(user.id);
 
-            if (interactions.length === 0) {
+            if (choices.length === 0) {
                 await this.interaction.editReply({
                     content: this.mention + this.trad.noInteraction,
                     components: [],
@@ -157,29 +143,121 @@ class Interact extends Command {
                 return this.end();
             }
 
-            const interChoice = await this.menu(
+            const choice = await this.menu(
                 {
                     content: this.mention + this.trad.interactionChoice,
                 },
-                interactions.map(int => (
+                choices.map(e => (
                     {
-                        label: int.interaction.name,
-                        value: int.interaction.id,
+                        label: e.interaction.name,
+                        value: e.interaction.id,
                     }
                 )),
             );
-            if (interChoice === null) return this.end();
+            if (choice === null) return this.end();
 
-            const interChosen = interactions.find(int => int.interaction.id === interChoice[0]);
+            const chosen = choices.find(e => e.interaction.id === choice[0]);
 
-            await interChosen.interaction.play(this);
-            await this.client.questDb.setObjectiveManuallyCompleted(user.id, interChosen.questKey, interChosen.objectiveId);
+            await chosen.interaction.play(this);
+            await this.client.questDb.setObjectiveManuallyCompleted(user.id, chosen.questKey, chosen.objectiveId);
+            return this.end();
         }
         else if (action[0] === "giveItems") {
+            const pnjs = await this.client.questDb.getPNJs(user.id, "giveItems");
 
+            if (pnjs.length === 0) {
+                await this.interaction.editReply({
+                    content: this.mention + this.trad.noPnjForItems,
+                    components: [],
+                }).catch(this.client.catchError);
+                return this.end();
+            }
+
+            const pnjChoice = await this.menu(
+                {
+                    content: this.mention + this.trad.pnjChoice,
+                },
+                pnjs.map(pnj => (
+                    {
+                        label: pnj.fullName,
+                        value: pnj.id,
+                        description: pnj.label,
+                    }
+                )),
+            );
+            if (pnjChoice === null) return this.end();
+
+            const choices = await this.client.questDb.getItemsToGive(user.id, pnjChoice[0]);
+            let temp = null;
+
+            if (choices.length > 0) {
+                const choice = await this.menu(
+                    {
+                        content: this.mention + this.trad.giftChoice,
+                    },
+                    choices.map(e => (
+                        {
+                            label: e.objectiveName,
+                            value: e.objectiveId,
+                            description: e.questName,
+                        }
+                    )),
+                );
+                if (choice === null) return this.end();
+
+                temp = choice[0];
+            }
+            else {
+                await this.interaction.editReply({
+                    content: this.mention + this.trad.canceledGift,
+                }).catch(this.client.catchError);
+                return this.end();
+            }
+            const chosen = choices.find(e => e.objectiveId === temp);
+            const userAmount = inventory.items[chosen.items.type]?.[chosen.items.instance.id]?.amount || 0;
+
+            if (userAmount < chosen.items.amount) {
+                await this.interaction.editReply({
+                    content: this.mention + this.trad.noItems
+                        + `\n\n> **${chosen.items.instance.name} x${chosen.items.amount}**`,
+                    components: [],
+                }).catch(this.client.catchError);
+                return this.end();
+            }
+
+            const pnjInfos = await this.client.RPGAssetsManager.getCharacter(this.client.playerDb.getLang(user.id), pnjChoice[0]);
+
+            const wantsToGive = await this.choice(
+                {
+                    content: this.mention + this.trad.wantsToGive.replace("%PNJ_NAME", pnjInfos.fullName)
+                        + `\n\n> **${chosen.items.instance.name} x${chosen.items.amount}**`,
+                },
+                this.trad.give,
+                this.trad.cancel,
+            );
+            if (wantsToGive === null) return this.end();
+
+            if (wantsToGive === "primary") {
+                this.client.questDb.giveItems(user.id, chosen.items);
+                await this.client.questDb.setObjectiveManuallyCompleted(user.id, chosen.questKey, chosen.objectiveId);
+
+                await this.interaction.editReply({
+                    content: this.mention + this.trad.giftDone,
+                    components: [],
+                }).catch(this.client.catchError);
+                return this.end();
+            }
+            else if (wantsToGive === "secondary") {
+                await this.interaction.editReply({
+                    content: this.mention + this.trad.giftCanceled,
+                    components: [],
+                }).catch(this.client.catchError);
+                return this.end();
+            }
         }
         else {
             console.log("cas 3");
+            return this.end();
         }
     }
 }

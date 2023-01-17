@@ -1,8 +1,8 @@
 /* eslint-disable no-case-declarations */
+/* eslint-disable no-unused-vars */
 const SQLiteTable = require("../../SQLiteTable");
 const QuestData = require("../dataclasses/QuestData");
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
-// eslint-disable-next-line no-unused-vars
 const Command = require("../../Command");
 const RPGInteraction = require("../../subclasses/RPGInteraction");
 
@@ -115,6 +115,7 @@ class QuestDb extends SQLiteTable {
      */
     async getDialoguesByPNJ(id, pnjId) {
         const quest = (await this.load(id)).currentQuests;
+        const lang = this.client.playerDb.getLang(id);
         const dialogues = [];
         for (const [questKey, questInstance] of Object.entries(quest)) {
             if (!questInstance?.id) continue;
@@ -126,7 +127,7 @@ class QuestDb extends SQLiteTable {
                 if (data.characterId !== pnjId) continue;
 
                 const dialogue = await this.client.RPGAssetsManager.getDialogue(
-                    this.client.playerDb.getLang(id), data.dialogueId,
+                    lang, data.dialogueId,
                 );
 
                 if (dialogue.content.length) dialogues.push({ dialogue, objectiveId: objective.id, questKey });
@@ -156,6 +157,66 @@ class QuestDb extends SQLiteTable {
             }
         }
         return interactions;
+    }
+
+    /**
+     * Function to get all necessaries materials of a quest separated in an array.
+     * @param {String} id The user ID
+     * @param {String} pnjId The pnj ID
+     * @returns {Promise<{objectiveName: String, objectiveId: String, questKey: String, questName: String, items: {}}[]>} The list of materials with data
+     */
+    async getItemsToGive(id, pnjId) {
+        const quest = await this.load(id);
+        const lang = this.client.playerDb.getLang(id);
+        const items = [];
+        for (const [questKey, questInstance] of Object.entries(quest.currentQuests)) {
+            if (!questInstance?.id) continue;
+
+            for (const objective of questInstance.objectives) {
+                const data = objective.additionalData;
+                if (!data.characterId) continue;
+
+                if (data.characterId !== pnjId) continue;
+
+                const itemsToGive = {
+                    amount: data.amount,
+                    instance: data.item,
+                    type: data.type,
+                };
+                switch (data.type) {
+                    case "questItems":
+                        itemsToGive.instance = this.client.RPGAssetsManager.getQuestItem(lang, data.item);
+                        break;
+                    default:
+                        itemsToGive.instance = this.client.RPGAssetsManager.getMaterial(lang, data.item);
+                        break;
+                }
+
+                items.push({
+                    objectiveName: objective.name,
+                    objectiveId: objective.id,
+                    questKey,
+                    questName: questInstance.name,
+                    items: itemsToGive,
+                });
+            }
+        }
+        return items;
+    }
+
+    /**
+     * Function to give items to a PNJ.
+     * @param {String} id The user ID
+     * @param {Object} data The data of the item
+     * @returns {void}
+     */
+    giveItems(id, data) {
+        if (data.type === "materials") {
+            this.client.inventoryDb.removeMaterial(id, data.instance.id, data.amount);
+        }
+        else if (data.type === "questItems") {
+            this.client.inventoryDb.removeQuestItem(id, data.instance.id, data.amount);
+        }
     }
 
     /**

@@ -87,6 +87,20 @@ class InventoryDb extends SQLiteTable {
     }
 
     /**
+     * Removes a defined quest item amount from the inventory
+     * @param {String} id The user ID
+     * @param {String} questItem The quest item ID
+     * @param {Number} amount The amount to remove
+     * @returns {Number} The new quest item amount
+     */
+    removeQuestItem(id, questItem, amount) {
+        const previousAmount = this.get(id).items.questItems[questItem];
+        const newAmount = previousAmount - amount;
+        this.set(id, newAmount, `items.questItems.${questItem}`);
+        return newAmount;
+    }
+
+    /**
      * @typedef {Object} GrimoireObject
      * @property {String|null} id The grimoire ID
      * @property {Number} activeSince The timestamp when the grimoire was activated

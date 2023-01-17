@@ -41,7 +41,15 @@
         "wantsToDialogue": "Voulez-vous lancer le dialogue **%DIALOG_NAME** ?",
         "noDialogue": "Aucun dialogue n'est disponible.",
         "noInteraction": "Aucune interaction n'est disponible.",
-        "interactionChoice": "Choix de l'interaction (action à effectuer):"
+        "interactionChoice": "Choix de l'interaction (action à effectuer):",
+        "noPnjForItems": "Aucun PNJ n'est disponible pour le don d'objets.",
+        "giftChoice": "Choix de l'objectif à accomplir (objets à donner):",
+        "canceledGift": "Don d'objets annulé.",
+        "wantsToGive": "Voulez-vous donner suivants à **%PNJ_NAME** ?",
+        "give": "Donner",
+        "noItems": "Vous n'avez pas les ressources nécessaires.",
+        "giftCanceled": "Don d'objets annulé.",
+        "giftDone": "Don d'objets effectué."
     },
     "profile": {
         "activityButton": "Activité",

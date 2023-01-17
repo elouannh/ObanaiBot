@@ -404,7 +404,8 @@
             },
             "objectives": {
                 "0": "Tester le dialogue",
-                "1": "Tester l'interaction"
+                "1": "Tester l'interaction",
+                "2": "Donner 5 de bois"
             }
         }
     },
