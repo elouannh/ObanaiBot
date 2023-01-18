@@ -12,7 +12,7 @@ class Interact extends Command {
             type: [1],
             dmPermission: true,
             category: "RPG",
-            cooldown: 20,
+            cooldown: 10,
             completedRequests: ["interact"],
             authorizationBitField: 0b000,
             permissions: 0n,
@@ -35,7 +35,6 @@ class Interact extends Command {
         }
 
         const map = await this.client.mapDb.load(user.id);
-        // const quest = await this.client.questDb.load(user.id);
         const inventory = await this.client.inventoryDb.load(user.id);
 
         const options = [
@@ -56,7 +55,7 @@ class Interact extends Command {
             },
         ];
 
-        const zoneExplored = Object.values(map.excavated?.[map.region.id] || {}).map(area => area.id).includes(map.area.id);
+        const zoneExplored = Object.values(map.excavated?.[map.region.id] || {}).map(area => area[0].id).includes(map.area.id);
         if (!zoneExplored) {
             options.push(
                 {
@@ -256,7 +255,35 @@ class Interact extends Command {
             }
         }
         else {
-            console.log("cas 3");
+            const bag = [];
+            const availableResources = Object.values(this.client.RPGAssetsManager.materials)
+                .filter(e => e.biomes.includes(map.area.biome.id));
+
+            for (let i = 0; i < 2; i++) {
+                if (i === 0) {
+                    for (const resource of availableResources.sort(() => Math.random() - 0.5)) {
+                        if (bag.reduce((a, b) => a.size + b.size, 0) >= 200) break;
+
+                        bag.push({ resource: resource, amount: 0 });
+                    }
+                }
+                else {
+                    let resourceFocused = 0;
+                    while (resourceFocused < bag.length) {
+                        const res = bag[resourceFocused];
+                        const dropped = [Math.floor(Math.random() * 100), Math.floor(Math.random() * 100)];
+                        if (dropped[0] < res.resource.lootRate || dropped[1] < res.resource.lootRate) {
+                            if (res.resource.size * bag[resourceFocused].amount <= 200) {
+                                bag[resourceFocused].amount++;
+                                continue;
+                            }
+                        }
+                        resourceFocused++;
+                    }
+                }
+            }
+
+            console.log(bag);
             return this.end();
         }
     }

@@ -12,7 +12,7 @@ class Notifications extends Command {
             type: [1],
             dmPermission: true,
             category: "RPG",
-            cooldown: 20,
+            cooldown: 10,
             completedRequests: ["map"],
             authorizationBitField: 0b000,
             permissions: 0n,

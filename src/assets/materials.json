@@ -3,59 +3,46 @@
         "id": "grimoire",
         "lootRate": "1",
         "size": 200,
-        "biomes": [
-            "developedArea"
-        ]
+        "biomes": []
     },
     "leather": {
         "id": "leather",
         "lootRate": "20",
         "size": 20,
-        "biomes": [
-            "meadow",
-            "developedArea"
-        ]
+        "biomes": []
     },
     "paper": {
         "id": "paper",
         "lootRate": "60",
         "size": 10,
-        "biomes": [
-            "dwelling"
-        ]
+        "biomes": []
     },
     "seed": {
         "id": "seed",
         "lootRate": "80",
         "size": 4,
         "biomes": [
-            "meadow"
+            "wintryVeil"
         ]
     },
     "tamahagane": {
         "id": "tamahagane",
         "lootRate": "25",
         "size": 20,
-        "biomes": [
-            "rockyArea"
-        ]
+        "biomes": []
     },
     "weaponBase": {
         "id": "weaponBase",
         "lootRate": "1",
         "size": 200,
-        "biomes": [
-            "developedArea",
-            "dwelling"
-        ]
+        "biomes": []
     },
     "wood": {
         "id": "wood",
         "lootRate": "80",
         "size": 20,
         "biomes": [
-            "forest",
-            "darkForest"
+            "wintryVeil"
         ]
     },
     "worm": {
@@ -63,9 +50,7 @@
         "lootRate": "60",
         "size": 10,
         "biomes": [
-            "forest",
-            "darkForest",
-            "meadow"
+            "wintryVeil"
         ]
     }
 }

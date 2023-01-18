@@ -13,7 +13,7 @@ class Profile extends Command {
             type: [1],
             dmPermission: true,
             category: "Staff",
-            cooldown: 20,
+            cooldown: 10,
             completedRequests: ["test", "adventure"],
             authorizationBitField: 0b000,
             permissions: 0n,

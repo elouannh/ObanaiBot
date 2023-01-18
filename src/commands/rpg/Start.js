@@ -13,7 +13,7 @@ class Start extends Command {
             type: [1],
             dmPermission: true,
             category: "RPG",
-            cooldown: 20,
+            cooldown: 10,
             completedRequests: ["start"],
             authorizationBitField: 0b000,
             permissions: 0n,

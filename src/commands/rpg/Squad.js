@@ -12,7 +12,7 @@ class Squad extends Command {
             type: [1, 2],
             dmPermission: true,
             category: "RPG",
-            cooldown: 20,
+            cooldown: 10,
             completedRequests: ["squad"],
             authorizationBitField: 0b000,
             permissions: 0n,
