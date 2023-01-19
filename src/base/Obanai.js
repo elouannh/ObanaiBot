@@ -1,4 +1,4 @@
-// eslint-disable no-unused-vars
+/* eslint-disable no-unused-vars */
 const {
     Client,
     GatewayIntentBits,
@@ -277,8 +277,7 @@ class Obanai extends Client {
 
     async guildsSize() {
         try {
-            const guilds = (await this.guilds.fetch()).size;
-            return guilds;
+            return (await this.guilds.fetch()).size;
         }
         catch {
             return this.guilds.cache.size;
