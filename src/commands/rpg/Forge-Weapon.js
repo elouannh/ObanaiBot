@@ -2,22 +2,30 @@ const Command = require("../../base/Command");
 
 class ForgeWeapon extends Command {
     constructor() {
-        super({
-            name: "forge-weapon",
-            description: "Permet de forger une arme.",
-            descriptionLocalizations: {
-                "en-US": "Allows you to forge a weapon.",
+        super(
+            {
+                name: "forge-weapon",
+                description: "Permet de forger une arme.",
+                descriptionLocalizations: {
+                    "en-US": "Allows you to forge a weapon.",
+                },
+                options: [],
+                dmPermission: true,
             },
-            trad: "forgeWeapon",
-            options: [],
-            type: [1],
-            dmPermission: true,
-            category: "RPG",
-            cooldown: 0,
-            completedRequests: ["forge-weapon"],
-            authorizationBitField: 0b000,
-            permissions: 0n,
-        });
+            {
+                name: "Forge-Weapon",
+                dmPermission: true,
+            },
+            {
+                trad: "forgeWeapon",
+                type: [1],
+                category: "RPG",
+                cooldown: 10,
+                completedRequests: ["adventureLocal"],
+                authorizationBitField: 0b000,
+                permissions: 0n,
+            },
+        );
     }
 
     async run() {

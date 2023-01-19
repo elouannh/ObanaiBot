@@ -2,21 +2,30 @@ const Command = require("../../base/Command");
 
 class Delete extends Command {
     constructor() {
-        super({
-            name: "delete",
-            description: "Permet à l’utilisateur de supprimer son aventure s' il en possède une.",
-            descriptionLocalizations: {
-                "en-US": "Allows the user to delete their adventure if they have one.",
+        super(
+            {
+                name: "delete",
+                description: "Permet à l’utilisateur de supprimer son aventure s' il en possède une.",
+                descriptionLocalizations: {
+                    "en-US": "Allows the user to delete their adventure if they have one.",
+                },
+                options: [],
+                dmPermission: true,
             },
-            options: [],
-            type: [1],
-            dmPermission: true,
-            category: "RPG",
-            cooldown: 10,
-            completedRequests: ["adventure"],
-            authorizationBitField: 0b000,
-            permissions: 0n,
-        });
+            {
+                name: "Delete",
+                dmPermission: true,
+            },
+            {
+                trad: "delete",
+                type: [1],
+                category: "RPG",
+                cooldown: 10,
+                completedRequests: ["adventure"],
+                authorizationBitField: 0b000,
+                permissions: 0n,
+            },
+        );
     }
 
     async run() {

@@ -3,21 +3,30 @@ const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
 class Quests extends Command {
     constructor() {
-        super({
-            name: "quests",
-            description: "Permet à l’utilisateur de voir sa quête principale, sa quête quotidienne et sa possible quête secondaire.",
-            descriptionLocalizations: {
-                "en-US": "Allows the user to see their main quest, daily quest and possible side quest.",
+        super(
+            {
+                name: "quests",
+                description: "Permet à l’utilisateur de voir sa quête principale, sa quête quotidienne et sa possible quête secondaire.",
+                descriptionLocalizations: {
+                    "en-US": "Allows the user to see their main quest, daily quest and possible side quest.",
+                },
+                options: [],
+                dmPermission: true,
             },
-            options: [],
-            type: [1],
-            dmPermission: true,
-            category: "RPG",
-            cooldown: 15,
-            completedRequests: ["quests"],
-            authorizationBitField: 0b000,
-            permissions: 0n,
-        });
+            {
+                name: "Quests",
+                dmPermission: true,
+            },
+            {
+                trad: "quests",
+                type: [1],
+                category: "RPG",
+                cooldown: 10,
+                completedRequests: ["quests"],
+                authorizationBitField: 0b000,
+                permissions: 0n,
+            },
+        );
     }
 
     async run() {

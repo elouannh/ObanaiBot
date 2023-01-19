@@ -3,31 +3,40 @@ const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
 class Profile extends Command {
     constructor() {
-        super({
-            name: "profile",
-            description: "Permet à l’utilisateur de voir son profil, son inventaire, son emplacement sur la carte, ses activités en cours ainsi que certaines statistiques.",
-            descriptionLocalizations: {
-                "en-US": "Allows the user to view their profile, inventory, location on the map, current activities and some statistics.",
-            },
-            options: [
-                {
-                    type: 6,
-                    name: "user",
-                    description: "Joueur dont vous souhaitez afficher les informations.",
-                    descriptionLocalizations: {
-                        "en-US": "Player whose informations you want to display.",
-                    },
-                    required: false,
+        super(
+            {
+                name: "profile",
+                description: "Permet à l’utilisateur de voir son profil, son inventaire, son emplacement sur la carte, ses activités en cours ainsi que certaines statistiques.",
+                descriptionLocalizations: {
+                    "en-US": "Allows the user to view their profile, inventory, location on the map, current activities and some statistics.",
                 },
-            ],
-            type: [1, 2],
-            dmPermission: true,
-            category: "RPG",
-            cooldown: 15,
-            completedRequests: ["profile"],
-            authorizationBitField: 0b000,
-            permissions: 0n,
-        });
+                options: [
+                    {
+                        type: 6,
+                        name: "user",
+                        description: "Joueur dont vous souhaitez afficher les informations.",
+                        descriptionLocalizations: {
+                            "en-US": "Player whose informations you want to display.",
+                        },
+                        required: false,
+                    },
+                ],
+                dmPermission: true,
+            },
+            {
+                name: "Profile",
+                dmPermission: true,
+            },
+            {
+                trad: "profile",
+                type: [1, 2],
+                category: "RPG",
+                cooldown: 10,
+                completedRequests: ["profile"],
+                authorizationBitField: 0b000,
+                permissions: 0n,
+            },
+        );
     }
 
     async run() {

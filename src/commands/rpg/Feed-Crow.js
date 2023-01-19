@@ -2,22 +2,30 @@ const Command = require("../../base/Command");
 
 class FeedCrow extends Command {
     constructor() {
-        super({
-            name: "feed-crow",
-            description: "Permet de nourrir son corbeau kasugai.",
-            descriptionLocalizations: {
-                "en-US": "Allows you to feed your kasugai crow.",
+        super(
+            {
+                name: "feed-crow",
+                description: "Permet de nourrir son corbeau kasugai.",
+                descriptionLocalizations: {
+                    "en-US": "Allows you to feed your kasugai crow.",
+                },
+                options: [],
+                dmPermission: true,
             },
-            trad: "feedCrow",
-            options: [],
-            type: [1],
-            dmPermission: true,
-            category: "RPG",
-            cooldown: 10,
-            completedRequests: ["adventure"],
-            authorizationBitField: 0b000,
-            permissions: 0n,
-        });
+            {
+                name: "Feed-Crow",
+                dmPermission: true,
+            },
+            {
+                trad: "feedCrow",
+                type: [1],
+                category: "RPG",
+                cooldown: 10,
+                completedRequests: ["adventureLocal"],
+                authorizationBitField: 0b000,
+                permissions: 0n,
+            },
+        );
     }
 
     async run() {

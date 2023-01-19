@@ -2,21 +2,30 @@ const Command = require("../../base/Command");
 
 class Interact extends Command {
     constructor() {
-        super({
-            name: "interact",
-            description: "Permet d’interagir avec l’environnement; peut déclencher un dialogue, un combat, fouiller la zone...",
-            descriptionLocalizations: {
-                "en-US": "Allows you to interact with the environment; can trigger a dialogue, a fight, explore the area...",
+        super(
+            {
+                name: "interact",
+                description: "Permet d’interagir avec l’environnement; peut déclencher un dialogue, un combat, fouiller la zone...",
+                descriptionLocalizations: {
+                    "en-US": "Allows you to interact with the environment; can trigger a dialogue, a fight, explore the area...",
+                },
+                options: [],
+                dmPermission: true,
             },
-            options: [],
-            type: [1],
-            dmPermission: true,
-            category: "RPG",
-            cooldown: 10,
-            completedRequests: ["interact"],
-            authorizationBitField: 0b000,
-            permissions: 0n,
-        });
+            {
+                name: "Interact",
+                dmPermission: true,
+            },
+            {
+                trad: "interact",
+                type: [1],
+                category: "RPG",
+                cooldown: 10,
+                completedRequests: ["adventureLocal"],
+                authorizationBitField: 0b000,
+                permissions: 0n,
+            },
+        );
     }
 
     async run() {

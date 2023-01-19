@@ -1,22 +1,32 @@
 const Command = require("../../base/Command");
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder } = require("discord.js");
+const { ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 
 class Start extends Command {
     constructor() {
-        super({
-            name: "start",
-            description: "Permet à l’utilisateur de commencer son aventure si il ne l’a pas encore fait.",
-            descriptionLocalizations: {
-                "en-US": "Allows the user to start their adventure if they have not already done so.",
+        super(
+            {
+                name: "start",
+                description: "Permet à l’utilisateur de commencer son aventure si il ne l’a pas encore fait.",
+                descriptionLocalizations: {
+                    "en-US": "Allows the user to start their adventure if they have not already done so.",
+                },
+                options: [],
+                dmPermission: true,
             },
-            options: [],
-            type: [1],
-            dmPermission: true,
-            category: "RPG",
-            cooldown: 10,
-            completedRequests: ["start"],
-            authorizationBitField: 0b000,
-            permissions: 0n,
+            {
+                name: "Quests",
+                dmPermission: true,
+            },
+            {
+                trad: "quests",
+                type: [1],
+                category: "RPG",
+                cooldown: 10,
+                completedRequests: ["adventure"],
+                authorizationBitField: 0b000,
+                permissions: 0n,
+            },
+            {
         });
     }
 

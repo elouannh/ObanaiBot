@@ -1,29 +1,39 @@
-const { PermissionsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, Utils } = require("discord.js");
+const { PermissionsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder } = require("discord.js");
 const Language = require("./Language");
 
 class Command {
-    constructor(infos = {
-        name: "command",
-        description: "Description par défaut de la commande.",
-        descriptionLocalizations: {
-            "en-US": "Default command description.",
+    constructor(
+        slashBuilder = {
+            name: "command",
+            description: "Description par défaut de la commande.",
+            descriptionLocalizations: {
+                "en-US": "Default command description.",
+            },
+            options: [],
+            dmPermission: false,
         },
-        options: [],
-        type: [1],
-        dmPermission: true,
-        category: "Staff",
-        cooldown: 5,
-        completedRequests: ["command"],
-        authorizationBitField: 0b000,
-        permissions: 0n,
-    }) {
+        contextBuilder = {
+            name: "Command",
+            dmPermission: false,
+        },
+        infos = {
+            trad: "command",
+            type: [1],
+            category: "Staff",
+            cooldown: 5,
+            completedRequests: ["command"],
+            authorizationBitField: 0b000,
+            permissions: 0n,
+        },
+    ) {
+        this.slashBuilder = slashBuilder;
+        this.contextBuilder = contextBuilder;
         this.infos = infos;
         this.client = null;
         this.interaction = null;
-        this.instancedAt = Date.now();
         this.mention = "";
         this.lang = new Language("fr").json;
-        this.trad = this.lang["commands"][this.infos.trad || this.infos.name];
+        this.trad = this.lang["commands"][this.infos.trad || this.slashBuilder.name];
         this.langManager = null;
     }
 
@@ -32,7 +42,7 @@ class Command {
         this.interaction = interaction;
         this.mention = `<@${this.interaction.user.id}>, `;
         this.lang = lang.json;
-        this.trad = this.lang["commands"][this.infos.trad || this.infos.name];
+        this.trad = this.lang["commands"][this.infos.trad || this.slashBuilder.name];
         this.langManager = this.client.languageManager;
 
         if (this.infos.completedRequests.includes("adventure")) {
@@ -45,7 +55,7 @@ class Command {
     }
 
     end() {
-        this.client.requestsManager.remove(this.interaction.user.id, this.infos.name);
+        this.client.requestsManager.remove(this.interaction.user.id, this.slashBuilder.name);
         return void 0;
     }
 
@@ -56,7 +66,7 @@ class Command {
     async cooldownReady(forExecuting) {
         let ready = true;
 
-        const lastRun = this.client.cooldownsManager.getSub(this.interaction.user.id, this.infos.name);
+        const lastRun = this.client.cooldownsManager.getSub(this.interaction.user.id, this.slashBuilder.name);
         const tStamp = Date.now();
         const readyForRun = lastRun + this.infos.cooldown * 1000;
 
@@ -75,11 +85,11 @@ class Command {
             }).catch(this.client.catchError);
         }
         else {
-            this.client.cooldownsManager.add(this.interaction.user.id, { key: this.infos.name, value: Date.now() });
+            this.client.cooldownsManager.add(this.interaction.user.id, { key: this.slashBuilder.name, value: Date.now() });
 
             if (forExecuting) {
                 setTimeout(() => {
-                    this.client.cooldownsManager.remove(this.interaction.user.id, this.infos.name);
+                    this.client.cooldownsManager.remove(this.interaction.user.id, this.slashBuilder.name);
                 }, this.infos.cooldown * 1000);
             }
         }
