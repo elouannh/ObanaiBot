@@ -6,7 +6,13 @@ class SQLiteTableMerger {
         this.tables = [...tables];
 
         if (this.client.env.MERGE_SQLITE_TABLES === "1") {
+            this.client.util.timelog("Merging SQLite tables...", "yellow");
             this.merge();
+            this.client.util.timelog("SQLite Tables merged, processing is turning off.", "yellow");
+            this.client.envUpdate("MERGE_SQLITE_TABLES", "0");
+            setTimeout(() => {
+                throw new Error("SQLite Tables merged, processing is turning off.");
+            }, 5000);
         }
     }
 

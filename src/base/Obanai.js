@@ -1,3 +1,4 @@
+// eslint-disable no-unused-vars
 const {
     Client,
     GatewayIntentBits,
@@ -27,6 +28,7 @@ const SQLiteTableMerger = require("./SQLiteTableMerger");
 const Duration = require("./Duration");
 const config = require("../config.json");
 const _package = require("../../package.json");
+const fs = require("fs");
 
 class Obanai extends Client {
     constructor() {
@@ -37,6 +39,7 @@ class Obanai extends Client {
         this.chalk = chalk;
         this.util = Util;
         this.util.timelog("Starting bot process...");
+        this.printEnv();
 
         this.env = { ...process.env };
         this.commandManager = new CommandManager(this);
@@ -89,6 +92,36 @@ class Obanai extends Client {
         setInterval(() => {
             this.util.timelog("................", "blackBright");
         }, 900_000);
+    }
+
+    printEnv() {
+        const envFile = fs.readFileSync("./.env", "utf8");
+        const maxLength = envFile.split("\n").map(e => e.length).sort((a, b) => b - a)[0];
+        const envLines = envFile.split("\n")
+            .map(e =>
+                [e.split("=")[0], e.split("=")[1], e.split("=")[0].length],
+            )
+            .map(e =>
+                `  | ${e[0]}${".".repeat(maxLength + 4 - e[2])}${e[1]}`,
+            )
+            .join("\n");
+        this.util.timelog(`Env variables:\n${envLines}`, "yellow");
+    }
+
+    envUpdate(key, newValue) {
+        const envFile = fs.readFileSync("./.env", "utf8");
+        const envFileLines = envFile.split("\n");
+        const newEnvFileLines = [];
+        for (const line of envFileLines) {
+            if (line.startsWith(key)) {
+                newEnvFileLines.push(`${key}=${newValue}`);
+            }
+            else {
+                newEnvFileLines.push(line);
+            }
+        }
+        fs.writeFileSync("./.env", newEnvFileLines.join("\n"));
+        console.log(this.env);
     }
 
     /**
@@ -205,7 +238,9 @@ class Obanai extends Client {
     }
 
     launch() {
-        return this.login(this.token);
+        if (this.env.MERGE_SQLITE_TABLES !== "1") {
+            return this.login(this.token);
+        }
     }
 
     async evalCode(code) {
