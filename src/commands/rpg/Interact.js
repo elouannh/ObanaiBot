@@ -282,17 +282,39 @@ class Interact extends Command {
                         const res = bag[resourceFocused];
                         const dropped = [Math.floor(Math.random() * 100), Math.floor(Math.random() * 100)];
                         if (dropped[0] < res.resource.lootRate || dropped[1] < res.resource.lootRate) {
-                            if (res.resource.size * bag[resourceFocused].amount <= 200) {
+                            if ((res.resource.size + 1) * bag[resourceFocused].amount <= 200) {
                                 bag[resourceFocused].amount++;
                                 continue;
                             }
                         }
+                        if (bag[resourceFocused].amount === 0) bag.splice(resourceFocused, 1);
                         resourceFocused++;
                     }
                 }
             }
 
-            console.log(bag);
+            this.client.mapDb.explore(user.id, map.region.id, map.area.id);
+            if (bag.length > 0) {
+                for (const item of bag) {
+                    console.log(item);
+                    this.client.inventoryDb.addMaterial(user.id, item.resource.id, item.amount);
+                }
+                await this.interaction.editReply({
+                    content: this.mention + this.trad.explored
+                        + "\n\n" + bag.map(e => `> **${
+                            this.client.RPGAssetsManager.getMaterial(
+                                this.client.playerDb.getLang(user.id), e.resource.id,
+                            ).name
+                        } x${e.amount}**`).join("\n"),
+                    components: [],
+                }).catch(this.client.catchError);
+            }
+            else {
+                await this.interaction.editReply({
+                    content: this.mention + this.trad.noResourcesFound,
+                    components: [],
+                }).catch(this.client.catchError);
+            }
             return this.end();
         }
     }

@@ -49,7 +49,9 @@
         "give": "Donner",
         "noItems": "Vous n'avez pas les ressources nécessaires.",
         "giftCanceled": "Don d'objets annulé.",
-        "giftDone": "Don d'objets effectué."
+        "giftDone": "Don d'objets effectué.",
+        "explored": "Vous avez trouvé des ressources !",
+        "noResourcesFound": "Vous n'avez pas de chance, aucune ressource n'a été trouvée."
     },
     "profile": {
         "activityButton": "Activité",

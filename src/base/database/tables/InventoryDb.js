@@ -87,6 +87,17 @@ class InventoryDb extends SQLiteTable {
     }
 
     /**
+     * Removes a defined material amount from the inventory
+     * @param {String} id The user ID
+     * @param {String} material The material ID
+     * @param {Number} amount The amount to remove
+     * @returns {Number} The new material amount
+     */
+    addMaterial(id, material, amount) {
+        return this.removeMaterial(id, material, -amount);
+    }
+
+    /**
      * Removes a defined quest item amount from the inventory
      * @param {String} id The user ID
      * @param {String} questItem The quest item ID
@@ -165,20 +176,6 @@ class InventoryDb extends SQLiteTable {
         const previousAmount = this.get(id).wallet;
         const newAmount = previousAmount + amount;
         this.set(id, newAmount, "wallet");
-        return newAmount;
-    }
-
-    /**
-     * Add a specific material to the inventory of the player
-     * @param {String} id The user ID
-     * @param {String} material The material ID
-     * @param {Number} amount the amount to add
-     * @returns {Number} The new amount of this material
-     */
-    addMaterial(id, material, amount) {
-        const previousAmount = this.get(id).items.materials[material] || 0;
-        const newAmount = previousAmount + amount;
-        this.set(id, newAmount, `items.materials.${material}`);
         return newAmount;
     }
 
