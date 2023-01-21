@@ -35,6 +35,7 @@ class Profile extends Command {
                 completedRequests: ["profile"],
                 authorizationBitField: 0b000,
                 permissions: 0n,
+                targets: ["read"],
             },
         );
     }

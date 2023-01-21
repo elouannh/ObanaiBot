@@ -25,6 +25,7 @@ class Start extends Command {
                 completedRequests: ["adventure"],
                 authorizationBitField: 0b000,
                 permissions: 0n,
+                targets: ["read", "write"],
             },
             {
         });

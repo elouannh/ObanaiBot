@@ -24,6 +24,7 @@ class ForgeWeapon extends Command {
                 completedRequests: ["adventureLocal"],
                 authorizationBitField: 0b000,
                 permissions: 0n,
+                targets: ["read", "write"],
             },
         );
     }

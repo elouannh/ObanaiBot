@@ -24,6 +24,7 @@ class Delete extends Command {
                 completedRequests: ["adventure"],
                 authorizationBitField: 0b000,
                 permissions: 0n,
+                targets: ["read", "write"],
             },
         );
     }

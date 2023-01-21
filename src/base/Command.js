@@ -24,6 +24,7 @@ class Command {
             completedRequests: ["command"],
             authorizationBitField: 0b000,
             permissions: 0n,
+            targets: [],
         },
     ) {
         this.slashBuilder = slashBuilder;
@@ -46,12 +47,20 @@ class Command {
         this.langManager = this.client.languageManager;
 
         if (this.infos.completedRequests.includes("adventure")) {
-            this.infos.completedRequests = this.infos.completedRequests
-                .filter(e => e !== "adventure")
-                .concat(Array.from(
-                    this.client.commandManager.commands.filter(e => new (e)().infos.category === "RPG").keys(),
+            this.infos.completedRequests = this.infos.completedRequests.concat(Array.from(
+                    this.client.commandManager.commands.filter(e =>
+                        new (e)().infos.targets.includes("read") || new (e)().infos.targets.includes("write"),
+                    ).keys(),
                 ));
         }
+        else if (this.infos.completedRequests.includes("adventureLocal")) {
+            this.infos.completedRequests = this.infos.completedRequests.concat(Array.from(
+                this.client.commandManager.commands.filter(e =>
+                    new (e)().infos.targets.includes("write"),
+                ).keys(),
+            ));
+        }
+        this.infos.completedRequests = this.infos.completedRequests.filter(e => e !== "adventure");
     }
 
     end() {

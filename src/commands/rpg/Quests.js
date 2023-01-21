@@ -25,6 +25,7 @@ class Quests extends Command {
                 completedRequests: ["quests"],
                 authorizationBitField: 0b000,
                 permissions: 0n,
+                targets: ["read"],
             },
         );
     }
