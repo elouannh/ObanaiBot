@@ -11,9 +11,9 @@ module.exports = async obanai => {
     // obanai.inventoryDb.set("539842701592494111", 100, "items.materials.wood");
     // obanai.questDb.updateSlayerProgression("539842701592494111", "0", "0", "0", null);
     // obanai.questDb.setSlayerQuest("539842701592494111", "0", "0", "0", "0");
-    obanai.mapDb.set("539842701592494111", {}, "exploration.excavated");
+    // obanai.mapDb.set("539842701592494111", {}, "exploration.excavated");
     // obanai.mapDb.explore("539842701592494111", "0", "0");
-    obanai.mapDb.get("539842701592494111");
+    // obanai.mapDb.get("539842701592494111");
 
 
     obanai.internalServerManager.addOwner("539842701592494111");
