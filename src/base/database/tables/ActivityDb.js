@@ -70,6 +70,53 @@ class ActivityDb extends SQLiteTable {
         return new ActivityData(this.client, this.get(id), this.client.playerDb.getLang(id));
     }
 
+    get(id) {
+        const data = super.get(id);
+
+        if (data.training.currentlyTraining) {
+            const trainingTime = this.client.RPGAssetsManager.statistics.trainingTimes[data.training.statistic];
+            const timeLeft = trainingTime - (Date.now() - data.training.startedDate);
+
+            if (timeLeft <= 0) {
+                this.client.playerDb.upgradeStatistic(id, data.training.statistic);
+                this.set(
+                    id, {
+                        currentlyTraining: false,
+                        startedDate: 0,
+                        statistic: null,
+                    },
+                    "training",
+                );
+                data.training = {
+                    currentlyTraining: false,
+                    startedDate: 0,
+                    statistic: null,
+                };
+            }
+        }
+
+        return data;
+    }
+
+    /**
+     * Function that starts a training.
+     * @param {String} id The user ID
+     * @param {String} statisticId The statistic ID
+     * @param {Number} startedDate The time when the training started
+     * @returns {void}
+     */
+    train(id, statisticId, startedDate) {
+        this.set(
+            id,
+            {
+                currentlyTraining: true,
+                startedDate,
+                statistic: statisticId,
+            },
+            "training",
+        );
+    }
+
     /**
      * @typedef {Object} ForgeResource
      * @property {RPGMaterial} instance The material instance
