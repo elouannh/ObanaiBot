@@ -46,7 +46,7 @@ class ForgeWeapon extends Command {
         const inventory = await this.client.inventoryDb.load(user.id);
 
         if (activity.forge.forgingSlots.freeSlots.length === 0) {
-            return await this.return(this.mention + "Vous n'avez aucun emplacement de forge libre.");
+            return await this.return(this.mention + this.trad.noAvailableSlot);
         }
 
         const requiredResources = {};
@@ -72,14 +72,14 @@ class ForgeWeapon extends Command {
         if (missing) {
             return await this.return(
                 this.mention
-                + "Il vous manque des ressources.\n\n__Ressources manquantes:__\n"
+                + this.trad.missingResources
                 + missingString,
             );
         }
 
         const weaponChoice = await this.menu(
             {
-                content: this.mention + "Choisissez le type de l'arme que vous voulez forger.",
+                content: this.mention + this.trad.weaponTypeChoice,
             },
             Object.keys(this.client.RPGAssetsManager.weapons.types)
                 .map(key => this.client.RPGAssetsManager.getWeapon(langId, key, "0"))
@@ -91,9 +91,9 @@ class ForgeWeapon extends Command {
 
         const confirmChoice = await this.choice(
             {
-                content: this.mention + `Vous êtes sur le point de forger une arme de type **${weapon.name}**. `
-                    + "La rareté de l'arme sera donc déterminée de façon __aléatoire__.\n"
-                    + "Êtes-vous sûr de vouloir continuer ? Les ressources suivantes seront utilisées:\n\n>>> "
+                content: this.mention
+                    + this.trad.wantsToForge.replace("%WEAPON", weapon.name)
+                    + "\n\n>>> "
                     + Object.values(requiredResources)
                         .map(([resource]) => `**${resource.instance.name} x${resource.amount}**`)
                         .join("\n"),
@@ -104,7 +104,7 @@ class ForgeWeapon extends Command {
         if (!confirmChoice) return this.end();
 
         if (confirmChoice === "secondary") {
-            return await this.return(this.mention + "Vous avez annulé le forgeage.");
+            return await this.return(this.mention + this.trad.forgeCanceled);
         }
         else {
             const rarity = this.client.RPGAssetsManager.getProbability("weapons", activity.forge.blacksmith.id)
@@ -116,11 +116,14 @@ class ForgeWeapon extends Command {
             );
             return await this.return(
                 this.mention
-                + "Le forgeron commence désormais à travailler sur une arme de rareté "
-                + `**${weaponWithRarity.rarity}**. L'arme forgée sera donc `
-                + `**${weaponWithRarity.name} ${weaponWithRarity.rarityName}**.\nLa forge durera `
-                + `\`${activity.forge.blacksmith.timePerRarity * (rarity[0] + 1)}${this.lang.systems.timeUnits.m[3]}\``
-                + ".",
+                + this.trad.forgedSuccessInfos
+                    .replace("%WEAPON_RARITY", weaponWithRarity.rarity)
+                    .replace("%WEAPON_NAME", weaponWithRarity.name)
+                    .replace("%WEAPON_RARITY_NAME", weaponWithRarity.rarityName)
+                + this.trad.forgedSuccessTime
+                + activity.forge.blacksmith.timePerRarity * (rarity[0] + 1)
+                + this.lang.systems.timeUnits.m[3]
+                + "`.",
             );
         }
     }
