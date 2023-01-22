@@ -303,6 +303,12 @@ class Command {
         await collected.deferUpdate().catch(this.client.catchError);
         return collected.values;
     }
+
+    async return(content, ephemeral = false) {
+        const method = { "true": "editReply", "false": "reply" }[String(this.interaction.replied)];
+        await this.interaction[method]({ content, ephemeral }).catch(this.client.catchError);
+        return this.end();
+    }
 }
 
 module.exports = Command;

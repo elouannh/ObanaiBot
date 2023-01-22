@@ -32,17 +32,14 @@ class Train extends Command {
     async run() {
         const user = this.interaction.user;
         if (!(await this.client.playerDb.exists(user.id))) {
-            if (this.client.playerDb.get(user.id).alreadyPlayed) {
-                await this.interaction.reply({
-                    content: this.lang.systems.playerNotFoundAlreadyPlayed,
-                    ephemeral: true,
-                }).catch(this.client.catchError);
-                return this.end();
-            }
-            await this.interaction.reply({ content: this.lang.systems.playerNotFound, ephemeral: true })
-                .catch(this.client.catchError);
-            return this.end();
+            return await this.return(
+                this.client.playerDb.get(user.id).alreadyPlayed ?
+                    this.lang.systems.playerNotFoundAlreadyPlayed
+                    : this.lang.systems.playerNotFound,
+                true,
+            );
         }
+        await this.interaction.deferReply().catch(this.client.catchError);
 
         const player = await this.client.playerDb.load(user.id);
         const activity = await this.client.activityDb.load(user.id);
@@ -51,7 +48,8 @@ class Train extends Command {
             await this.interaction.reply({
                 content: `Vous êtes déjà en train d'améliorer votre **${activity.training.statistic.name}** `
                     + `au niveau **${activity.training.statistic.level + 1}**. `
-                    + `Votre entraînement se termine dans <t:${this.client.util.round(activity.training.endedDate / 1000)}:R>.`,
+                    + "Votre entraînement se termine dans "
+                    + `<t:${this.client.util.round(activity.training.endedDate / 1000)}:R>.`,
             }).catch(this.client.catchError);
             return this.end();
         }
@@ -93,7 +91,8 @@ class Train extends Command {
                 startedDate,
             );
             await this.interaction.editReply({
-                content: `Vous avez commencé à entraîner votre **${selected.name}** au niveau **${selected.level + 1}**.`
+                content: `Vous avez commencé à entraîner votre **${selected.name}** `
+                    + `au niveau **${selected.level + 1}**.`
                     + ` L'entraînement se terminera dans <t:${this.client.util.round(endedDate / 1000)}:R>.`,
                 components: [],
             }).catch(this.client.catchError);

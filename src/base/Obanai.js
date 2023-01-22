@@ -121,7 +121,6 @@ class Obanai extends Client {
             }
         }
         fs.writeFileSync("./.env", newEnvFileLines.join("\n"));
-        console.log(this.env);
     }
 
     /**

@@ -42,18 +42,13 @@ class Profile extends Command {
 
     async run() {
         const user = await this.getUserFromInteraction(this.interaction.type);
-        console.log(user);
         if (!(await this.client.playerDb.exists(user.id))) {
-            if (this.client.playerDb.get(user.id).alreadyPlayed) {
-                await this.interaction.reply({
-                    content: this.lang.systems.playerNotFoundAlreadyPlayed,
-                    ephemeral: true,
-                }).catch(this.client.catchError);
-                return this.end();
-            }
-            await this.interaction.reply({ content: this.lang.systems.playerNotFound, ephemeral: true })
-                .catch(this.client.catchError);
-            return this.end();
+            return await this.return(
+                this.client.playerDb.get(user.id).alreadyPlayed ?
+                    this.lang.systems.playerNotFoundAlreadyPlayed
+                    : this.lang.systems.playerNotFound,
+                true,
+            );
         }
         await this.interaction.deferReply().catch(this.client.catchError);
 
@@ -109,7 +104,9 @@ class Profile extends Command {
         let lastPanel = "Player";
 
         if (this.interaction.user.id === user.id) {
-            await this.client.additionalDb.showBeginningTutorial(user.id, "profileCommand", this.interaction);
+            await this.client.additionalDb.showBeginningTutorial(
+                user.id, "profileCommand", this.interaction,
+            );
         }
 
         const profilePanel = await this.interaction.editReply({
@@ -119,7 +116,9 @@ class Profile extends Command {
         }).catch(this.client.catchError);
 
         if (this.interaction.user.id === user.id) {
-            await this.client.additionalDb.showBeginningTutorial(user.id, "profilePlayer", this.interaction);
+            await this.client.additionalDb.showBeginningTutorial(
+                user.id, "profilePlayer", this.interaction,
+            );
         }
         const collector = profilePanel.createMessageComponentCollector({
             filter: interaction => interaction.user.id === this.interaction.user.id,
@@ -129,7 +128,10 @@ class Profile extends Command {
             const embedAttachment = profilePanel.embeds[0]?.data?.image?.url;
             await profilePanel.removeAttachments().catch(this.client.catchError);
             // register the attachment URL in the attachments object
-            if (typeof attachments[lastPanel.toLowerCase()] !== "string" && attachments[lastPanel.toLowerCase()] !== null) {
+            if (
+                typeof attachments[lastPanel.toLowerCase()] !== "string"
+                && attachments[lastPanel.toLowerCase()] !== null
+            ) {
                 attachments[lastPanel.toLowerCase()] = null;
                 embeds[lastPanel.toLowerCase()].setImage(embedAttachment);
             }
@@ -148,7 +150,9 @@ class Profile extends Command {
             // show the tutorial
 
             if (this.interaction.user.id === user.id) {
-                await this.client.additionalDb.showBeginningTutorial(user.id, `profile${interaction.customId}`, this.interaction);
+                await this.client.additionalDb.showBeginningTutorial(
+                    user.id, `profile${interaction.customId}`, this.interaction,
+                );
             }
 
             await interaction.deferUpdate().catch(this.client.catchError);
@@ -157,7 +161,9 @@ class Profile extends Command {
             await this.interaction.editReply({
                 embeds: [embeds[interaction.customId.toLowerCase()]],
                 components: [new ActionRowBuilder().setComponents(buttons)],
-                files: attachments[interaction.customId.toLowerCase()] === null ? [] : [attachments[interaction.customId.toLowerCase()]],
+                files: attachments[interaction.customId.toLowerCase()] === null ?
+                    []
+                    : [attachments[interaction.customId.toLowerCase()]],
             }).catch(this.client.catchError);
 
             lastPanel = interaction.customId;

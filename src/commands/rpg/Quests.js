@@ -33,16 +33,12 @@ class Quests extends Command {
     async run() {
         const user = this.interaction.user;
         if (!(await this.client.playerDb.exists(user.id))) {
-            if (this.client.playerDb.get(user.id).alreadyPlayed) {
-                await this.interaction.reply({
-                    content: this.lang.systems.playerNotFoundAlreadyPlayed,
-                    ephemeral: true,
-                }).catch(this.client.catchError);
-                return this.end();
-            }
-            await this.interaction.reply({ content: this.lang.systems.playerNotFound, ephemeral: true })
-                .catch(this.client.catchError);
-            return this.end();
+            return await this.return(
+                this.client.playerDb.get(user.id).alreadyPlayed ?
+                    this.lang.systems.playerNotFoundAlreadyPlayed
+                    : this.lang.systems.playerNotFound,
+                true,
+            );
         }
         await this.interaction.deferReply().catch(this.client.catchError);
 
@@ -93,7 +89,10 @@ class Quests extends Command {
             const embedAttachment = questsPanel.embeds[0]?.data?.image?.url;
             await questsPanel.removeAttachments().catch(this.client.catchError);
             // register the attachment URL in the attachments object
-            if (typeof attachments[lastPanel.toLowerCase()] !== "string" && attachments[lastPanel.toLowerCase()] !== null) {
+            if (
+                typeof attachments[lastPanel.toLowerCase()] !== "string"
+                && attachments[lastPanel.toLowerCase()] !== null
+            ) {
                 attachments[lastPanel.toLowerCase()] = null;
                 embeds[lastPanel.toLowerCase()].setImage(embedAttachment);
             }
@@ -115,7 +114,9 @@ class Quests extends Command {
             await this.interaction.editReply({
                 embeds: [embeds[interaction.customId.toLowerCase()]],
                 components: [new ActionRowBuilder().setComponents(buttons)],
-                files: attachments[interaction.customId.toLowerCase()] === null ? [] : [attachments[interaction.customId.toLowerCase()]],
+                files: attachments[interaction.customId.toLowerCase()] === null ?
+                    []
+                    : [attachments[interaction.customId.toLowerCase()]],
             }).catch(this.client.catchError);
 
             lastPanel = interaction.customId;

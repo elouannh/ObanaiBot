@@ -53,6 +53,9 @@
         "explored": "Vous avez trouvé des ressources !",
         "noResourcesFound": "Vous n'avez pas de chance, aucune ressource n'a été trouvée."
     },
+    "lureCrow": {
+        "noCrow": "Vous n'avez aucun corbeau.",
+    },
     "profile": {
         "activityButton": "Activité",
         "additionalButton": "Informations supplémentaires",

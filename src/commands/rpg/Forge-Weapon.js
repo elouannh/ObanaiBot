@@ -32,32 +32,28 @@ class ForgeWeapon extends Command {
     async run() {
         const user = this.interaction.user;
         if (!(await this.client.playerDb.exists(user.id))) {
-            if (this.client.playerDb.get(user.id).alreadyPlayed) {
-                await this.interaction.reply({
-                    content: this.lang.systems.playerNotFoundAlreadyPlayed,
-                    ephemeral: true,
-                }).catch(this.client.catchError);
-                return this.end();
-            }
-            await this.interaction.reply({ content: this.lang.systems.playerNotFound, ephemeral: true })
-                .catch(this.client.catchError);
-            return this.end();
+            return await this.return(
+                this.client.playerDb.get(user.id).alreadyPlayed ?
+                    this.lang.systems.playerNotFoundAlreadyPlayed
+                    : this.lang.systems.playerNotFound,
+                true,
+            );
         }
+        await this.interaction.deferReply().catch(this.client.catchError);
 
         const langId = this.client.playerDb.getLang(user.id);
         const activity = await this.client.activityDb.load(user.id);
         const inventory = await this.client.inventoryDb.load(user.id);
 
         if (activity.forge.forgingSlots.freeSlots.length === 0) {
-            await this.interaction.reply({
-                content: this.mention + "Vous n'avez aucun emplacement de forge libre.",
-            }).catch(this.client.catchError);
-            return this.end();
+            return await this.return(this.mention + "Vous n'avez aucun emplacement de forge libre.");
         }
 
         const requiredResources = {};
         for (const key in activity.forge.blacksmith.resources) {
-            requiredResources[key] = [activity.forge.blacksmith.resources[key], inventory.items.materials?.[key]?.amount || 0];
+            requiredResources[key] = [
+                activity.forge.blacksmith.resources[key], inventory.items.materials?.[key]?.amount || 0,
+            ];
         }
 
         let missing = false;
@@ -74,11 +70,11 @@ class ForgeWeapon extends Command {
         }
 
         if (missing) {
-            await this.interaction.reply({
-                content: this.mention + "Il vous manque des ressources.\n\n__Ressources manquantes:__\n"
-                    + missingString,
-            }).catch(this.client.catchError);
-            return this.end();
+            return await this.return(
+                this.mention
+                + "Il vous manque des ressources.\n\n__Ressources manquantes:__\n"
+                + missingString,
+            );
         }
 
         const weaponChoice = await this.menu(
@@ -108,11 +104,7 @@ class ForgeWeapon extends Command {
         if (!confirmChoice) return this.end();
 
         if (confirmChoice === "secondary") {
-            await this.interaction.editReply({
-                content: this.mention + "Vous avez annulé le forgeage.",
-                components: [],
-            }).catch(this.client.catchError);
-            return this.end();
+            return await this.return(this.mention + "Vous avez annulé le forgeage.");
         }
         else {
             const rarity = this.client.RPGAssetsManager.getProbability("weapons", activity.forge.blacksmith.id)
@@ -122,14 +114,14 @@ class ForgeWeapon extends Command {
             this.client.activityDb.forgeWeapon(
                 user.id, weaponChoice, String(rarity[0]), Object.values(requiredResources).map(r => r[0]),
             );
-            await this.interaction.editReply({
-                content: this.mention + "Le forgeron commence désormais à travailler sur une arme de rareté "
-                    + `**${weaponWithRarity.rarity}**. L'arme forgée sera donc `
-                    + `**${weaponWithRarity.name} ${weaponWithRarity.rarityName}**.\nLa forge durera `
-                    + `\`${activity.forge.blacksmith.timePerRarity * (rarity[0] + 1)}${this.lang.systems.timeUnits.m[3]}\`.`,
-                components: [],
-            }).catch(this.client.catchError);
-            return this.end();
+            return await this.return(
+                this.mention
+                + "Le forgeron commence désormais à travailler sur une arme de rareté "
+                + `**${weaponWithRarity.rarity}**. L'arme forgée sera donc `
+                + `**${weaponWithRarity.name} ${weaponWithRarity.rarityName}**.\nLa forge durera `
+                + `\`${activity.forge.blacksmith.timePerRarity * (rarity[0] + 1)}${this.lang.systems.timeUnits.m[3]}\``
+                + ".",
+            );
         }
     }
 }

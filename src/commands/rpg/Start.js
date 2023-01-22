@@ -33,10 +33,9 @@ class Start extends Command {
 
     async run() {
         if (await this.client.playerDb.exists(this.interaction.user.id)) {
-            await this.interaction.reply({ content: this.lang.systems.playerAlreadyExists, ephemeral: true })
-                .catch(this.client.catchError);
-            return this.end();
+            return await this.return(this.lang.systems.playerAlreadyExists, true);
         }
+        await this.interaction.deferReply().catch(this.client.catchError);
 
         const languagesOptions = this.langManager.languages.map(lang => Object.assign(
             {}, { label: lang.langName, value: lang.lang, emoji: lang.getFlag },
@@ -128,7 +127,10 @@ class Start extends Command {
         const secondCharacter = await this.client.RPGAssetsManager.getCharacter(this.lang._id, "1");
 
         const characterChoice = await this.interaction.editReply({
-            content: this.mention + this.lang.commands.start.tosAccepted + "\n\n" + this.lang.commands.start.characterChoice,
+            content: this.mention
+                + this.lang.commands.start.tosAccepted
+                + "\n\n"
+                + this.lang.commands.start.characterChoice,
             components: [
                 new ActionRowBuilder()
                     .addComponents(
@@ -169,7 +171,10 @@ class Start extends Command {
         const chosen = eval(`${choice.values[0]}`);
 
         await this.interaction.editReply({
-            content: this.mention + this.lang.commands.start.characterChosen.replace("%CHAR", chosen.fullName) + "\n\n" + this.lang.commands.start.joinTheSupport,
+            content: this.mention
+                + this.lang.commands.start.characterChosen.replace("%CHAR", chosen.fullName)
+                + "\n\n"
+                + this.lang.commands.start.joinTheSupport,
             components: [],
         }).catch(this.client.catchError);
         await this.client.playerDb.create(this.interaction.user.id, chosen.id, langChoosen);

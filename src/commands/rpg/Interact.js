@@ -32,17 +32,14 @@ class Interact extends Command {
     async run() {
         const user = this.interaction.user;
         if (!(await this.client.playerDb.exists(user.id))) {
-            if (this.client.playerDb.get(user.id).alreadyPlayed) {
-                await this.interaction.reply({
-                    content: this.lang.systems.playerNotFoundAlreadyPlayed,
-                    ephemeral: true,
-                }).catch(this.client.catchError);
-                return this.end();
-            }
-            await this.interaction.reply({ content: this.lang.systems.playerNotFound, ephemeral: true })
-                .catch(this.client.catchError);
-            return this.end();
+            return await this.return(
+                this.client.playerDb.get(user.id).alreadyPlayed ?
+                    this.lang.systems.playerNotFoundAlreadyPlayed
+                    : this.lang.systems.playerNotFound,
+                true,
+            );
         }
+        await this.interaction.deferReply().catch(this.client.catchError);
 
         const map = await this.client.mapDb.load(user.id);
         const inventory = await this.client.inventoryDb.load(user.id);
@@ -65,7 +62,9 @@ class Interact extends Command {
             },
         ];
 
-        const zoneExplored = Object.values(map.excavated?.[map.region.id] || {}).map(area => area[0].id).includes(map.area.id);
+        const zoneExplored = Object.values(map.excavated?.[map.region.id] || {})
+            .map(area => area[0].id).includes(map.area.id);
+
         if (!zoneExplored) {
             options.push(
                 {
@@ -87,13 +86,7 @@ class Interact extends Command {
         if (action[0] === "dialogue") {
             const pnjs = await this.client.questDb.getPNJs(user.id, "dialogue");
 
-            if (pnjs.length === 0) {
-                await this.interaction.editReply({
-                    content: this.mention + this.trad.noPnjForDialogue,
-                    components: [],
-                }).catch(this.client.catchError);
-                return this.end();
-            }
+            if (pnjs.length === 0) return await this.return(this.mention + this.trad.noPnjForDialogue);
 
             const pnjChoice = await this.menu(
                 {
@@ -129,10 +122,7 @@ class Interact extends Command {
                 temp = choice[0];
             }
             else {
-                await this.interaction.editReply({
-                    content: this.mention + this.trad.noDialogue,
-                }).catch(this.client.catchError);
-                return this.end();
+                return await this.return(this.mention + this.trad.noDialogue);
             }
 
             const chosen = choices.find(e => e.dialogue.id === temp);
@@ -144,13 +134,7 @@ class Interact extends Command {
         else if (action[0] === "interact") {
             const choices = await this.client.questDb.getInteractions(user.id);
 
-            if (choices.length === 0) {
-                await this.interaction.editReply({
-                    content: this.mention + this.trad.noInteraction,
-                    components: [],
-                }).catch(this.client.catchError);
-                return this.end();
-            }
+            if (choices.length === 0) return await this.return(this.mention + this.trad.noInteraction);
 
             const choice = await this.menu(
                 {
@@ -174,13 +158,7 @@ class Interact extends Command {
         else if (action[0] === "giveItems") {
             const pnjs = await this.client.questDb.getPNJs(user.id, "giveItems");
 
-            if (pnjs.length === 0) {
-                await this.interaction.editReply({
-                    content: this.mention + this.trad.noPnjForItems,
-                    components: [],
-                }).catch(this.client.catchError);
-                return this.end();
-            }
+            if (pnjs.length === 0) return await this.return(this.mention + this.trad.noPnjForItems);
 
             const pnjChoice = await this.menu(
                 {
@@ -217,24 +195,22 @@ class Interact extends Command {
                 temp = choice[0];
             }
             else {
-                await this.interaction.editReply({
-                    content: this.mention + this.trad.canceledGift,
-                }).catch(this.client.catchError);
-                return this.end();
+                return await this.return(this.mention + this.trad.canceledGift);
             }
             const chosen = choices.find(e => e.objectiveId === temp);
             const userAmount = inventory.items[chosen.items.type]?.[chosen.items.instance.id]?.amount || 0;
 
             if (userAmount < chosen.items.amount) {
-                await this.interaction.editReply({
-                    content: this.mention + this.trad.noItems
-                        + `\n\n> **${chosen.items.instance.name} x${chosen.items.amount}**`,
-                    components: [],
-                }).catch(this.client.catchError);
-                return this.end();
+                return await this.return(
+                    this.mention
+                    + this.trad.noItems
+                    + `\n\n> **${chosen.items.instance.name} x${chosen.items.amount}**`,
+                );
             }
 
-            const pnjInfos = await this.client.RPGAssetsManager.getCharacter(this.client.playerDb.getLang(user.id), pnjChoice[0]);
+            const pnjInfos = await this.client.RPGAssetsManager.getCharacter(
+                this.client.playerDb.getLang(user.id), pnjChoice[0],
+            );
 
             const wantsToGive = await this.choice(
                 {
@@ -250,18 +226,10 @@ class Interact extends Command {
                 this.client.questDb.giveItems(user.id, chosen.items);
                 await this.client.questDb.setObjectiveManuallyCompleted(user.id, chosen.questKey, chosen.objectiveId);
 
-                await this.interaction.editReply({
-                    content: this.mention + this.trad.giftDone,
-                    components: [],
-                }).catch(this.client.catchError);
-                return this.end();
+                return await this.return(this.mention + this.trad.giftDone);
             }
             else if (wantsToGive === "secondary") {
-                await this.interaction.editReply({
-                    content: this.mention + this.trad.giftCanceled,
-                    components: [],
-                }).catch(this.client.catchError);
-                return this.end();
+                return await this.return(this.mention + this.trad.giftCanceled);
             }
         }
         else {
@@ -297,26 +265,21 @@ class Interact extends Command {
             this.client.mapDb.explore(user.id, map.region.id, map.area.id);
             if (bag.length > 0) {
                 for (const item of bag) {
-                    console.log(item);
                     this.client.inventoryDb.addMaterial(user.id, item.resource.id, item.amount);
                 }
-                await this.interaction.editReply({
-                    content: this.mention + this.trad.explored
-                        + "\n\n" + bag.map(e => `> **${
-                            this.client.RPGAssetsManager.getMaterial(
-                                this.client.playerDb.getLang(user.id), e.resource.id,
-                            ).name
-                        } x${e.amount}**`).join("\n"),
-                    components: [],
-                }).catch(this.client.catchError);
+                return await this.return(
+                    this.mention
+                    + this.trad.explored
+                    + "\n\n" + bag.map(e => `> **${
+                        this.client.RPGAssetsManager.getMaterial(
+                            this.client.playerDb.getLang(user.id), e.resource.id,
+                        ).name
+                    } x${e.amount}**`).join("\n"),
+                );
             }
             else {
-                await this.interaction.editReply({
-                    content: this.mention + this.trad.noResourcesFound,
-                    components: [],
-                }).catch(this.client.catchError);
+                return await this.return(this.mention + this.trad.noResourcesFound);
             }
-            return this.end();
         }
     }
 }

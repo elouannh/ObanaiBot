@@ -32,29 +32,22 @@ class FeedCrow extends Command {
     async run() {
         const user = this.interaction.user;
         if (!(await this.client.playerDb.exists(user.id))) {
-            if (this.client.playerDb.get(user.id).alreadyPlayed) {
-                await this.interaction.reply({
-                    content: this.lang.systems.playerNotFoundAlreadyPlayed,
-                    ephemeral: true,
-                }).catch(this.client.catchError);
-                return this.end();
-            }
-            await this.interaction.reply({ content: this.lang.systems.playerNotFound, ephemeral: true })
-                .catch(this.client.catchError);
-            return this.end();
+            return await this.return(
+                this.client.playerDb.get(user.id).alreadyPlayed ?
+                    this.lang.systems.playerNotFoundAlreadyPlayed
+                    : this.lang.systems.playerNotFound,
+                true,
+            );
         }
+        await this.interaction.deferReply().catch(this.client.catchError);
 
         const inventory = await this.client.inventoryDb.load(user.id);
 
         if (inventory.kasugaiCrow.id === null) {
-            await this.interaction.reply({ content: this.mention + this.trad.noCrow })
-                .catch(this.client.catchError);
-            return this.end();
+            return await this.return(this.mention + this.trad.noCrow);
         }
         if (inventory.kasugaiCrow.hunger === 100) {
-            await this.interaction.reply({ content: this.mention + this.trad.noHunger })
-                .catch(this.client.catchError);
-            return this.end();
+            return await this.return(this.mention + this.trad.noHunger);
         }
 
         const seedAmount = inventory.items.materials?.seed?.amount || 0;
@@ -67,8 +60,8 @@ class FeedCrow extends Command {
         );
 
         if (seedAmount < 50 || wormAmount < 5) {
-            await this.interaction.editReply({
-                content: this.mention + this.trad.missingResources + "\n"
+            return await this.return(
+                this.mention + this.trad.missingResources + "\n"
                     + (seedAmount < 50 ?
                             `**${seedInstance.name} x${50 - seedAmount}** `
                             + `(${this.trad.currently
@@ -83,9 +76,7 @@ class FeedCrow extends Command {
                                 .replace("%MAX", "5")})`
                             : ""
                     ),
-                components: [],
-            }).catch(this.client.catchError);
-            return this.end();
+            );
         }
 
         const feedResponse = await this.choice(
@@ -100,21 +91,11 @@ class FeedCrow extends Command {
         );
         if (feedResponse === null) return this.end();
 
-        if (feedResponse === "secondary") {
-            await this.interaction.editReply({
-                content: this.mention + this.trad.canceled,
-                components: [],
-            }).catch(this.client.catchError);
-            return this.end();
-        }
+        if (feedResponse === "secondary") return await this.return(this.mention + this.trad.canceled);
 
         const newAmount = Math.min(inventory.kasugaiCrow.hunger + 15, 100);
         await this.client.inventoryDb.feedKasugaiCrow(user.id, newAmount);
-        await this.interaction.editReply({
-            content: this.mention + this.trad.fed.replace("%AMOUNT", newAmount),
-            components: [],
-        }).catch(this.client.catchError);
-        return this.end();
+        return await this.return(this.mention + this.trad.fed.replace("%AMOUNT", newAmount));
     }
 }
 

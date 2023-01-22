@@ -86,6 +86,8 @@ class CommandManager {
         });
 
         if (this.client.env.REGISTER_SLASH === "1") {
+            this.client.util.timelog("Registering slash commands...", "yellow");
+            this.client.envUpdate("REGISTER_SLASH", "0");
             void this.client.application.commands.set(slashCommands.concat(contextCommands));
             for (const guild of this.client.guilds.cache.values()) {
                 void guild.commands.set([], guild.id);
