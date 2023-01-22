@@ -216,9 +216,7 @@ class Command {
     }
 
     async choice(messagePayload, primary, secondary) {
-        const method = { "true": "editReply", "false": "reply" }[String(this.interaction.replied)];
-
-        const message = await this.interaction[method](Object.assign(
+        const message = await this.interaction.editReply(Object.assign(
             messagePayload, {
                 components: [
                     new ActionRowBuilder()
@@ -253,8 +251,6 @@ class Command {
     }
 
     async menu(messagePayload, options, min = null, max = null, removeCancelOption = false) {
-        const method = { "true": "editReply", "false": "reply" }[String(this.interaction.replied)];
-
         const menu = new StringSelectMenuBuilder()
             .setCustomId("menu")
             .setOptions(
@@ -272,7 +268,7 @@ class Command {
         if (min !== null) menu.setMinValues(min);
         if (max !== null) menu.setMaxValues(max);
 
-        const message = await this.interaction[method](Object.assign(
+        const message = await this.interaction.editReply(Object.assign(
             messagePayload, {
                 components: [
                     new ActionRowBuilder()
@@ -308,6 +304,29 @@ class Command {
         const method = { "true": "editReply", "false": "reply" }[String(this.interaction.replied)];
         await this.interaction[method]({ content, ephemeral }).catch(this.client.catchError);
         return this.end();
+    }
+
+    async message() {
+        try {
+            return await this.interaction.fetchReply().catch(this.client.catchError);
+        }
+        catch {
+            return null;
+        }
+    }
+
+    async clearComponents() {
+        const message = await this.message();
+        if (!message) return;
+        await message.edit({ components: [] }).catch(this.client.catchError);
+        return 0;
+    }
+
+    async editContent(messagePayload) {
+        const message = await this.message();
+        if (!message) return;
+        await message.edit(messagePayload).catch(this.client.catchError);
+        return 0;
     }
 }
 

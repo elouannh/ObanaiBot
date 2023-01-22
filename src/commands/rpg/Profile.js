@@ -1,5 +1,4 @@
 const Command = require("../../base/Command");
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
 class Profile extends Command {
     constructor() {
@@ -77,57 +76,62 @@ class Profile extends Command {
             additional: null,
         };
 
-        const buttons = [
-            new ButtonBuilder()
-                .setStyle(ButtonStyle.Primary)
-                .setEmoji(this.client.enums.Rpg.Databases.Player)
-                .setLabel(this.lang.commands.profile.playerButton)
-                .setCustomId("Player"),
-            new ButtonBuilder()
-                .setStyle(ButtonStyle.Secondary)
-                .setEmoji(this.client.enums.Rpg.Databases.Inventory)
-                .setCustomId("Inventory"),
-            new ButtonBuilder()
-                .setStyle(ButtonStyle.Secondary)
-                .setEmoji(this.client.enums.Rpg.Databases.Activity)
-                .setCustomId("Activity"),
-            new ButtonBuilder()
-                .setStyle(ButtonStyle.Secondary)
-                .setEmoji(this.client.enums.Rpg.Databases.Map)
-                .setCustomId("Map"),
-            new ButtonBuilder()
-                .setStyle(ButtonStyle.Secondary)
-                .setEmoji(this.client.enums.Rpg.Databases.Additional)
-                .setCustomId("Additional"),
+        const options = [
+            {
+                label: this.lang.commands.profile.playerButton,
+                emoji: this.client.enums.Rpg.Databases.Player,
+                value: "Player",
+            },
+            {
+                label: this.lang.commands.profile.inventoryButton,
+                emoji: this.client.enums.Rpg.Databases.Inventory,
+                value: "Inventory",
+            },
+            {
+                label: this.lang.commands.profile.activityButton,
+                emoji: this.client.enums.Rpg.Databases.Activity,
+                value: "Activity",
+            },
+            {
+                label: this.lang.commands.profile.mapButton,
+                emoji: this.client.enums.Rpg.Databases.Map,
+                value: "Map",
+            },
+            {
+                label: this.lang.commands.profile.additionalButton,
+                emoji: this.client.enums.Rpg.Databases.Additional,
+                value: "Additional",
+            },
         ];
-
         let lastPanel = "Player";
-
         if (this.interaction.user.id === user.id) {
             await this.client.additionalDb.showBeginningTutorial(
                 user.id, "profileCommand", this.interaction,
             );
         }
+        let loop = true;
+        while (loop) {
+            if (this.interaction.user.id === user.id) {
+                await this.client.additionalDb.showBeginningTutorial(
+                    user.id, `profile${lastPanel}`, this.interaction,
+                );
+            }
 
-        const profilePanel = await this.interaction.editReply({
-            embeds: [embeds.player],
-            components: [new ActionRowBuilder().setComponents(buttons)],
-            files: attachments.player === null ? [] : [attachments.player],
-        }).catch(this.client.catchError);
-
-        if (this.interaction.user.id === user.id) {
-            await this.client.additionalDb.showBeginningTutorial(
-                user.id, "profilePlayer", this.interaction,
+            const [interaction] = await this.menu(
+                {
+                    embeds: [embeds[lastPanel.toLowerCase()]],
+                    files: attachments[lastPanel.toLowerCase()] === null ?
+                        []
+                        : [attachments[lastPanel.toLowerCase()]],
+                },
+                options,
             );
-        }
-        const collector = profilePanel.createMessageComponentCollector({
-            filter: interaction => interaction.user.id === this.interaction.user.id,
-            idle: 60_000,
-        });
-        collector.on("collect", async interaction => {
-            const embedAttachment = profilePanel.embeds[0]?.data?.image?.url;
-            await profilePanel.removeAttachments().catch(this.client.catchError);
-            // register the attachment URL in the attachments object
+            if (interaction === null || interaction === lastPanel || interaction === "cancel") {
+                if (interaction === null || interaction === "cancel") loop = false;
+                continue;
+            }
+            const embedAttachment = (await this.message())?.embeds[0]?.data?.image?.url;
+            await (await this.message())?.removeAttachments().catch(this.client.catchError);
             if (
                 typeof attachments[lastPanel.toLowerCase()] !== "string"
                 && attachments[lastPanel.toLowerCase()] !== null
@@ -136,42 +140,16 @@ class Profile extends Command {
                 embeds[lastPanel.toLowerCase()].setImage(embedAttachment);
             }
 
-            // update the buttons (blurple animation)
-            buttons[buttons.map(e => e.data.custom_id).indexOf(lastPanel)] = new ButtonBuilder()
-                .setStyle(ButtonStyle.Secondary)
-                .setEmoji(this.client.enums.Rpg.Databases[lastPanel])
-                .setCustomId(lastPanel);
-            buttons[buttons.map(e => e.data.custom_id).indexOf(interaction.customId)] = new ButtonBuilder()
-                .setStyle(ButtonStyle.Primary)
-                .setLabel(this.lang.commands.profile[`${interaction.customId.toLowerCase()}Button`])
-                .setEmoji(this.client.enums.Rpg.Databases[interaction.customId])
-                .setCustomId(interaction.customId);
-
-            // show the tutorial
-
-            if (this.interaction.user.id === user.id) {
-                await this.client.additionalDb.showBeginningTutorial(
-                    user.id, `profile${interaction.customId}`, this.interaction,
-                );
-            }
-
-            await interaction.deferUpdate().catch(this.client.catchError);
-
-            // update the panel
-            await this.interaction.editReply({
-                embeds: [embeds[interaction.customId.toLowerCase()]],
-                components: [new ActionRowBuilder().setComponents(buttons)],
-                files: attachments[interaction.customId.toLowerCase()] === null ?
+            await this.editContent({
+                embeds: [embeds[interaction.toLowerCase()]],
+                files: attachments[interaction.toLowerCase()] === null ?
                     []
-                    : [attachments[interaction.customId.toLowerCase()]],
-            }).catch(this.client.catchError);
-
-            lastPanel = interaction.customId;
-        });
-        collector.on("end", async () => {
-            await this.interaction.editReply({ components: [] }).catch(this.client.catchError);
-            return this.end();
-        });
+                    : [attachments[interaction.toLowerCase()]],
+            });
+            lastPanel = interaction;
+        }
+        await this.clearComponents();
+        return this.end();
     }
 }
 
