@@ -74,7 +74,8 @@ class ActivityDb extends SQLiteTable {
         const data = super.get(id);
 
         if (data.training.currentlyTraining) {
-            const trainingTime = this.client.RPGAssetsManager.statistics.trainingTimes[data.training.statistic];
+            const levelToReach = this.client.playerDb.get(id).statistics[data.training.statistic] + 1;
+            const trainingTime = this.client.RPGAssetsManager.statistics.trainingTimes[String(levelToReach)];
             const timeLeft = trainingTime - (Date.now() - data.training.startedDate);
 
             if (timeLeft <= 0) {
