@@ -315,13 +315,6 @@ class Command {
         }
     }
 
-    async clearComponents() {
-        const message = await this.message();
-        if (!message) return;
-        await message.edit({ components: [] }).catch(this.client.catchError);
-        return 0;
-    }
-
     async editContent(messagePayload) {
         const message = await this.message();
         if (!message) return;

@@ -117,7 +117,7 @@ class Profile extends Command {
                 );
             }
 
-            const [interaction] = await this.menu(
+            let interaction = await this.menu(
                 {
                     embeds: [embeds[lastPanel.toLowerCase()]],
                     files: attachments[lastPanel.toLowerCase()] === null ?
@@ -130,6 +130,7 @@ class Profile extends Command {
                 if (interaction === null || interaction === "cancel") loop = false;
                 continue;
             }
+            interaction = interaction[0];
             const embedAttachment = (await this.message())?.embeds[0]?.data?.image?.url;
             await (await this.message())?.removeAttachments().catch(this.client.catchError);
             if (
@@ -148,7 +149,6 @@ class Profile extends Command {
             });
             lastPanel = interaction;
         }
-        await this.clearComponents();
         return this.end();
     }
 }
