@@ -43,6 +43,26 @@ class InventoryDb extends SQLiteTable {
                 this.delete(id, `items.materials.${material}`);
             }
         }
+        for (const item in data.items.questItems) {
+            if (data.items.questItems[item] <= 0) {
+                delete data.items.questItems[item];
+                this.delete(id, `items.questItems.${item}`);
+            }
+        }
+        for (const weapon in data.items.weapons) {
+            for (const rarity in data.items.weapons[weapon]) {
+                if (data.items.weapons[weapon][rarity] <= 0) {
+                    delete data.items.weapons[weapon][rarity];
+                    this.delete(id, `items.weapons.${weapon}.${rarity}`);
+                }
+            }
+        }
+        for (const grimoire in data.items.enchantedGrimoires) {
+            if (data.items.enchantedGrimoires[grimoire] <= 0) {
+                delete data.items.enchantedGrimoires[grimoire];
+                this.delete(id, `items.enchantedGrimoires.${grimoire}`);
+            }
+        }
 
         return data;
     }
