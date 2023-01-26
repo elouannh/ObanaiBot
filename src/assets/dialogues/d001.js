@@ -1,7 +1,8 @@
 module.exports ={
     id: "d001",
     name: "d001",
-    read: (client, id) => {
+    // eslint-disable-next-line no-unused-vars
+    read: async (client, id) => {
         return [
             {
                 "key": "d001",
@@ -10,5 +11,5 @@ module.exports ={
                 ],
             },
         ];
-    }
+    },
 };

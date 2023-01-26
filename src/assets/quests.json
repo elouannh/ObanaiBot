@@ -42,11 +42,56 @@
                         "area": "0",
                         "characterId": "7"
                     }
+                },
+                "1": {
+                    "id": "1",
+                    "type": "interact",
+                    "additionalData": {
+                        "interactionId": "i001",
+                        "region": "0",
+                        "area": "0"
+                    }
+                },
+                "2": {
+                    "id": "2",
+                    "type": "giveItems",
+                    "additionalData": {
+                        "characterId": "5",
+                        "region": "0",
+                        "area": "0",
+                        "type": "materials",
+                        "item": "wood",
+                        "amount": 5
+                    }
                 }
             },
             "rewards": {
                 "0": {
                     "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        }
+                    }
+                },
+                "1": {
+                    "id": "1",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        }
+                    }
+                },
+                "2": {
+                    "id": "2",
                     "data": {
                         "0": {
                             "id": "0",

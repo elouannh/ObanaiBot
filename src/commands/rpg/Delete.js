@@ -2,37 +2,44 @@ const Command = require("../../base/Command");
 
 class Delete extends Command {
     constructor() {
-        super({
-            name: "delete",
-            description: "Permet à l’utilisateur de supprimer son aventure s' il en possède une.",
-            descriptionLocalizations: {
-                "en-US": "Allows the user to delete their adventure if they have one.",
+        super(
+            {
+                name: "delete",
+                description: "Permet à l’utilisateur de supprimer son aventure s' il en possède une.",
+                descriptionLocalizations: {
+                    "en-US": "Allows the user to delete their adventure if they have one.",
+                },
+                options: [],
+                dmPermission: true,
             },
-            options: [],
-            type: [1],
-            dmPermission: true,
-            category: "RPG",
-            cooldown: 20,
-            completedRequests: ["adventure"],
-            authorizationBitField: 0b000,
-            permissions: 0n,
-        });
+            {
+                name: "Delete",
+                dmPermission: true,
+            },
+            {
+                trad: "delete",
+                type: [1],
+                category: "RPG",
+                cooldown: 10,
+                completedRequests: ["adventure"],
+                authorizationBitField: 0b000,
+                permissions: 0n,
+                targets: ["read", "write"],
+            },
+        );
     }
 
     async run() {
         const user = this.interaction.user;
         if (!(await this.client.playerDb.exists(user.id))) {
-            if (this.client.playerDb.get(user.id).alreadyPlayed) {
-                await this.interaction.reply({
-                    content: this.lang.systems.playerNotFoundAlreadyPlayed,
-                    ephemeral: true,
-                }).catch(this.client.catchError);
-                return this.end();
-            }
-            await this.interaction.reply({ content: this.lang.systems.playerNotFound, ephemeral: true })
-                .catch(this.client.catchError);
-            return this.end();
+            return await this.return(
+                this.client.playerDb.get(user.id).alreadyPlayed ?
+                    this.lang.systems.playerNotFoundAlreadyPlayed
+                    : this.lang.systems.playerNotFound,
+                true,
+            );
         }
+        await this.interaction.deferReply().catch(this.client.catchError);
 
         const firstResponse = await this.choice(
             {
@@ -44,11 +51,7 @@ class Delete extends Command {
         if (firstResponse === null) return this.end();
 
         if (firstResponse === "secondary") {
-            await this.interaction.editReply({
-                content: this.mention + this.trad.notDeleted,
-                components: [],
-            }).catch(this.client.catchError);
-            return this.end();
+            return await this.return(this.mention + this.trad.notDeleted).catch(this.client.catchError);
         }
 
         const secondResponse = await this.choice(
@@ -61,19 +64,11 @@ class Delete extends Command {
         if (secondResponse === null) return this.end();
 
         if (secondResponse === "secondary") {
-            await this.interaction.editReply({
-                content: this.mention + this.trad.notDeleted,
-                components: [],
-            }).catch(this.client.catchError);
-            return this.end();
+            return await this.return(this.mention + this.trad.notDeleted);
         }
         else {
             await this.client.playerDb.remove(user.id);
-            await this.interaction.editReply({
-                content: this.mention + this.trad.deleted,
-                components: [],
-            }).catch(this.client.catchError);
-            return this.end();
+            return await this.return(this.mention + this.trad.deleted);
         }
     }
 }

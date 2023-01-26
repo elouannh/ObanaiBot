@@ -1,8 +1,8 @@
 const {
     Collection,
     SlashCommandBuilder,
-    SlashCommandUserOption,
     ContextMenuCommandBuilder,
+    SlashCommandUserOption,
     ApplicationCommandType,
 } = require("discord.js");
 const fs = require("fs");
@@ -24,7 +24,7 @@ class CommandManager {
             for (const file of files) {
                 const command = require(`../commands/${folder}/${file}`);
                 if (new (command)().infos?.type !== undefined) {
-                    this.commands.set(new (command)().infos.name, command);
+                    this.commands.set(new (command)().slashBuilder.name, command);
                 }
             }
         });
@@ -35,22 +35,32 @@ class CommandManager {
         this.commands.forEach(cmd => {
             cmd = new cmd();
             if (cmd.infos.type.includes(1)) {
-                let description = cmd.infos.description;
-                if (description.length > 100) description = description.slice(0, 97) + "...";
-                let descriptionLocalizations = cmd.infos.descriptionLocalizations;
-                for (const key in descriptionLocalizations) {
-                    if (descriptionLocalizations[key].length > 100) {
-                        descriptionLocalizations[key] = descriptionLocalizations[key].slice(0, 97) + "...";
+                if (cmd.slashBuilder.description.length > 100) {
+                    cmd.slashBuilder.description = cmd.slashBuilder.description.slice(0, 97) + "...";
+                }
+                for (const key in cmd.slashBuilder.descriptionLocalizations) {
+                    if (cmd.slashBuilder.descriptionLocalizations[key].length > 100) {
+                        cmd.slashBuilder.descriptionLocalizations[key] = cmd.slashBuilder.descriptionLocalizations[key]
+                            .slice(0, 97) + "...";
                     }
                 }
 
                 const build = new SlashCommandBuilder()
-                    .setName(cmd.infos.name)
-                    .setDescription(description)
-                    .setDescriptionLocalizations(descriptionLocalizations)
-                    .setDMPermission(cmd.infos.dmPermission);
+                    .setName(cmd.slashBuilder.name)
+                    .setDescription(cmd.slashBuilder.description)
+                    .setDescriptionLocalizations(cmd.slashBuilder.descriptionLocalizations)
+                    .setDMPermission(cmd.slashBuilder.dmPermission);
 
-                for (const option of cmd.infos.options) {
+                for (const option of cmd.slashBuilder.options) {
+                    if (option.description.length > 100) {
+                        option.description = option.description.slice(0, 97) + "...";
+                    }
+                    for (const key in option.descriptionLocalizations) {
+                        if (option.descriptionLocalizations[key].length > 100) {
+                            option.descriptionLocalizations[key] = option.descriptionLocalizations[key]
+                                .slice(0, 97) + "...";
+                        }
+                    }
                     if (option.type === 6) {
                         const userOption = new SlashCommandUserOption()
                             .setName(option.name)
@@ -68,7 +78,7 @@ class CommandManager {
             }
             if (cmd.infos.type.includes(2)) {
                 const build = new ContextMenuCommandBuilder()
-                    .setName(this.client.util.capitalize(cmd.infos.name))
+                    .setName(cmd.contextBuilder.name)
                     .setType(ApplicationCommandType.User);
 
                 contextCommands.push(build.toJSON());
@@ -76,6 +86,8 @@ class CommandManager {
         });
 
         if (this.client.env.REGISTER_SLASH === "1") {
+            this.client.util.timelog("Registering slash commands...", "yellow");
+            this.client.envUpdate("REGISTER_SLASH", "0");
             void this.client.application.commands.set(slashCommands.concat(contextCommands));
             for (const guild of this.client.guilds.cache.values()) {
                 void guild.commands.set([], guild.id);

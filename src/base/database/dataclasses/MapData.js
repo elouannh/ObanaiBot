@@ -19,8 +19,8 @@ class MapData extends TableData {
         for (const regionId in this.data.exploration.excavated) {
             const region = this.client.RPGAssetsManager.getMapRegion(this.lang, regionId);
             excavated[regionId] = {};
-            for (const areaId of this.data.exploration.excavated[regionId]) {
-                excavated[regionId][areaId] = region.getArea(areaId);
+            for (const [areaId, areaDate] of this.data.exploration.excavated[regionId]) {
+                excavated[regionId][areaId] = [region.getArea(areaId), areaDate];
             }
         }
         this.data.excavated = excavated;

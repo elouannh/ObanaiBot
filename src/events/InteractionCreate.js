@@ -64,7 +64,7 @@ class InteractionCreate extends Event {
             this.client.requestsManager.add(
                 this.interaction.user.id,
                 {
-                    key: cmd.infos.name,
+                    key: cmd.slashBuilder.name,
                     value: {
                         ts: Date.now(),
                         link: placeLink,
@@ -73,14 +73,14 @@ class InteractionCreate extends Event {
             );
 
             try {
-                this.client.additionalDb.incrementCommand(String(cmd.interaction.user.id), cmd.infos.name);
-                this.client.util.timelog(`[Command] ${cmd.infos.name} - ${cmd.interaction.user.tag} (${cmd.interaction.user.id})`, "yellowBright");
+                this.client.additionalDb.incrementCommand(String(cmd.interaction.user.id), cmd.slashBuilder.name);
+                this.client.util.timelog(`[Command] ${cmd.slashBuilder.name} - ${cmd.interaction.user.tag} (${cmd.interaction.user.id})`, "yellowBright");
                 await cmd.run();
             }
             catch (err) {
                 await this.interaction.channel.send({ content: ":x: **An error occurred.**" }).catch(this.client.catchError);
                 await this.client.throwError(err, "Origin: @InteractionCreate.Command");
-                this.client.requestsManager.remove(this.interaction.user.id, cmd.infos.name);
+                this.client.requestsManager.remove(this.interaction.user.id, cmd.slashBuilder.name);
             }
         }
         catch (err) {

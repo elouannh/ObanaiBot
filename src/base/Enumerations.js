@@ -53,6 +53,8 @@ module.exports = {
         Symbols: {
             Check: "✅",
             Cross: "❌",
+            Previous: "◀️",
+            Next: "▶️",
         },
         Status: {
             Online: "🟢",

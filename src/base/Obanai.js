@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const {
     Client,
     GatewayIntentBits,
@@ -27,6 +28,7 @@ const SQLiteTableMerger = require("./SQLiteTableMerger");
 const Duration = require("./Duration");
 const config = require("../config.json");
 const _package = require("../../package.json");
+const fs = require("fs");
 
 class Obanai extends Client {
     constructor() {
@@ -37,6 +39,7 @@ class Obanai extends Client {
         this.chalk = chalk;
         this.util = Util;
         this.util.timelog("Starting bot process...");
+        this.printEnv();
 
         this.env = { ...process.env };
         this.commandManager = new CommandManager(this);
@@ -91,6 +94,35 @@ class Obanai extends Client {
         }, 900_000);
     }
 
+    printEnv() {
+        const envFile = fs.readFileSync("./.env", "utf8");
+        const maxLength = envFile.split("\n").map(e => e.length).sort((a, b) => b - a)[0];
+        const envLines = envFile.split("\n")
+            .map(e =>
+                [e.split("=")[0], e.split("=")[1], e.split("=")[0].length],
+            )
+            .map(e =>
+                `  | ${e[0]}${".".repeat(maxLength + 4 - e[2])}${e[1]}`,
+            )
+            .join("\n");
+        this.util.timelog(`Env variables:\n${envLines}`, "yellow");
+    }
+
+    envUpdate(key, newValue) {
+        const envFile = fs.readFileSync("./.env", "utf8");
+        const envFileLines = envFile.split("\n");
+        const newEnvFileLines = [];
+        for (const line of envFileLines) {
+            if (line.startsWith(key)) {
+                newEnvFileLines.push(`${key}=${newValue}`);
+            }
+            else {
+                newEnvFileLines.push(line);
+            }
+        }
+        fs.writeFileSync("./.env", newEnvFileLines.join("\n"));
+    }
+
     /**
      * Catch an error and log it (in a beautiful bright red).
      * @param {Error} error The error instance
@@ -110,7 +142,7 @@ class Obanai extends Client {
         if (data.hour.length < 2) data.hour = "0" + data.hour;
         if (data.min.length < 2) data.min = "0" + data.min;
         if (data.sec.length < 2) data.sec = "0" + data.sec;
-        console.log(chalk.redBright(`[${data.month}/${data.day}] [${data.hour}:${data.hour}:${data.sec}]  |  Error: ${error.stack}`));
+        console.log(chalk.redBright(`[${data.month}/${data.day}] [${data.hour}:${data.hour}:${data.sec}]  |  Error: ${error.message}`));
     }
 
     async throwError(error, origin) {
@@ -205,7 +237,9 @@ class Obanai extends Client {
     }
 
     launch() {
-        return this.login(this.token);
+        if (this.env.MERGE_SQLITE_TABLES !== "1") {
+            return this.login(this.token);
+        }
     }
 
     async evalCode(code) {
@@ -242,8 +276,7 @@ class Obanai extends Client {
 
     async guildsSize() {
         try {
-            const guilds = (await this.guilds.fetch()).size;
-            return guilds;
+            return (await this.guilds.fetch()).size;
         }
         catch {
             return this.guilds.cache.size;

@@ -23,6 +23,27 @@ class MapDb extends SQLiteTable {
         return new MapData(this.client, this.get(id), this.client.playerDb.getLang(id));
     }
 
+    get(key) {
+        const data = super.get(key);
+
+        for (const rKey in data.exploration.excavated) {
+            const regionExcavatedAreas = data.exploration.excavated[rKey];
+            if (regionExcavatedAreas.length === 0) {
+                delete data.exploration.excavated[rKey];
+                this.delete(key, `exploration.excavated.${rKey}`);
+                continue;
+            }
+            for (const [areaKey, areaDate] of regionExcavatedAreas) {
+                if (this.client.util.dateToString(new Date(areaDate)) !== this.client.util.dateToString(new Date())) {
+                    data.exploration.excavated[rKey].splice(regionExcavatedAreas.indexOf([areaKey, areaDate]), 1);
+                    this.resetExcavation(key, rKey, areaKey);
+                }
+            }
+        }
+
+        return data;
+    }
+
     /**
      * Set an area as already excavated.
      * @param {String} id The user ID
@@ -33,7 +54,21 @@ class MapDb extends SQLiteTable {
     explore(id, regionId, areaId) {
         const data = this.get(id);
         const areas = data.exploration.excavated[regionId] || [];
-        if (!areas.includes(areaId)) areas.push(areaId);
+        if (!areas.map(e => e[0]).includes(areaId)) areas.push([areaId, Date.now()]);
+        this.set(id, areas, `exploration.excavated.${regionId}`);
+    }
+
+    /**
+     * Set a region and an area as none excavated.
+     * @param {String} id The user ID
+     * @param {String} regionId The region ID
+     * @param {String} areaId The area ID
+     * @returns {void}
+     */
+    resetExcavation(id, regionId, areaId) {
+        const data = this.get(id);
+        const areas = data.exploration.excavated[regionId] || [];
+        if (areas.includes(areaId)) areas.splice(areas.indexOf(areaId), 1);
         this.set(id, areas, `exploration.excavated.${regionId}`);
     }
 

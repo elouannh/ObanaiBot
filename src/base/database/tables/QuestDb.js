@@ -1,7 +1,10 @@
 /* eslint-disable no-case-declarations */
+/* eslint-disable no-unused-vars */
 const SQLiteTable = require("../../SQLiteTable");
 const QuestData = require("../dataclasses/QuestData");
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+const Command = require("../../Command");
+const RPGInteraction = require("../../subclasses/RPGInteraction");
 
 function schema(id) {
     return {
@@ -38,6 +41,7 @@ class QuestDb extends SQLiteTable {
      */
     /**
      * @typedef {Object} QuestObjectiveLocal
+     * @property {String} questId The quest ID
      * @property {String} id The objective ID
      * @property {String} type The objective type
      * @property {Object} additionalData Additional data for the objective
@@ -107,12 +111,13 @@ class QuestDb extends SQLiteTable {
      * Get all the dialogs associated with the pnj id.
      * @param {String} id The user ID
      * @param {String} pnjId The pnj ID
-     * @returns {Promise<DialogueData[]>} The list of dialogues
+     * @returns {Promise<{dialogue: DialogueData, objectiveId: String, questKey: String}[]>} The list of dialogues
      */
     async getDialoguesByPNJ(id, pnjId) {
         const quest = (await this.load(id)).currentQuests;
+        const lang = this.client.playerDb.getLang(id);
         const dialogues = [];
-        for (const questInstance of Object.values(quest)) {
+        for (const [questKey, questInstance] of Object.entries(quest)) {
             if (!questInstance?.id) continue;
 
             for (const objective of questInstance.objectives) {
@@ -121,14 +126,161 @@ class QuestDb extends SQLiteTable {
 
                 if (data.characterId !== pnjId) continue;
 
-                const dialogue = this.client.RPGAssetsManager.getDialogue(
-                    this.client.playerDb.getLang(id), data.dialogueId,
+                const dialogue = await this.client.RPGAssetsManager.getDialogue(
+                    lang, data.dialogueId,
                 );
 
-                if (dialogue.content.length) dialogues.push(dialogue);
+                if (dialogue.content.length) dialogues.push({ dialogue, objectiveId: objective.id, questKey });
             }
         }
         return dialogues;
+    }
+
+    /**
+     * Function to get all interactions of the quests.
+     * @param {String} id The user ID
+     * @returns {Promise<{interaction: RPGInteraction, objectiveId: String, questKey: String}[]>} The list of interactions
+     */
+    async getInteractions(id) {
+        const quest = await this.load(id);
+        const lang = this.client.playerDb.getLang(id);
+        const interactions = [];
+        for (const [questKey, questInstance] of Object.entries(quest.currentQuests)) {
+            if (!questInstance?.id) continue;
+
+            for (const objective of questInstance.objectives) {
+                const data = objective.additionalData;
+                if (!data.interactionId) continue;
+
+                const interaction = await this.client.RPGAssetsManager.getInteraction(lang, data.interactionId);
+                interactions.push({ interaction, objectiveId: objective.id, questKey });
+            }
+        }
+        return interactions;
+    }
+
+    /**
+     * Function to get all necessaries materials of a quest separated in an array.
+     * @param {String} id The user ID
+     * @param {String} pnjId The pnj ID
+     * @returns {Promise<{objectiveName: String, objectiveId: String, questKey: String, questName: String, items: {}}[]>} The list of materials with data
+     */
+    async getItemsToGive(id, pnjId) {
+        const quest = await this.load(id);
+        const lang = this.client.playerDb.getLang(id);
+        const items = [];
+        for (const [questKey, questInstance] of Object.entries(quest.currentQuests)) {
+            if (!questInstance?.id) continue;
+
+            for (const objective of questInstance.objectives) {
+                const data = objective.additionalData;
+                if (!data.characterId) continue;
+
+                if (data.characterId !== pnjId) continue;
+
+                const itemsToGive = {
+                    amount: data.amount,
+                    instance: data.item,
+                    type: data.type,
+                };
+                switch (data.type) {
+                    case "questItems":
+                        itemsToGive.instance = this.client.RPGAssetsManager.getQuestItem(lang, data.item);
+                        break;
+                    default:
+                        itemsToGive.instance = this.client.RPGAssetsManager.getMaterial(lang, data.item);
+                        break;
+                }
+
+                items.push({
+                    objectiveName: objective.name,
+                    objectiveId: objective.id,
+                    questKey,
+                    questName: questInstance.name,
+                    items: itemsToGive,
+                });
+            }
+        }
+        return items;
+    }
+
+    /**
+     * Function to give items to a PNJ.
+     * @param {String} id The user ID
+     * @param {Object} data The data of the item
+     * @returns {void}
+     */
+    giveItems(id, data) {
+        if (data.type === "materials") {
+            this.client.inventoryDb.removeMaterial(id, data.instance.id, data.amount);
+        }
+        else if (data.type === "questItems") {
+            this.client.inventoryDb.removeQuestItem(id, data.instance.id, data.amount);
+        }
+    }
+
+    /**
+     * Display a dialogue as a menu.
+     * @param {Command} command The command context
+     * @param {DialogueData} dialogue, The dialogue string array
+     * @returns {Promise<void>}
+     */
+    async displayDialogue(command, dialogue) {
+        let method = "reply";
+        if (command.interaction.replied) method = "editReply";
+
+        let pageId = 1;
+        let loop = true;
+
+        const menu = await command.interaction[method]({
+            content: dialogue.content.slice(0, pageId).join("\n"),
+            components: [
+                 new ActionRowBuilder().setComponents(
+                    new ButtonBuilder()
+                        .setCustomId("next")
+                        .setEmoji(this.client.enums.Systems.Symbols.Next)
+                        .setStyle(ButtonStyle.Primary),
+                ),
+            ],
+        }).catch(this.client.catchError);
+
+        while (loop) {
+            const inter = await menu.awaitMessageComponent({
+                filter: interaction => interaction.user.id === command.interaction.user.id,
+                time: 60_000,
+            });
+            await inter.deferUpdate().catch(this.client.catchError);
+
+            if (inter.customId === "next") pageId++;
+
+            await command.interaction.editReply({
+                content: dialogue.content.slice(0, pageId).join("\n"),
+                components: [
+                    new ActionRowBuilder().setComponents(
+                        new ButtonBuilder()
+                            .setCustomId(dialogue.content.length > pageId ? "next" : "end")
+                            .setEmoji(
+                                dialogue.content.length > pageId ?
+                                    this.client.enums.Systems.Symbols.Next
+                                    : this.client.enums.Systems.Symbols.Check,
+                            )
+                            .setStyle(dialogue.content.length > pageId ? ButtonStyle.Primary : ButtonStyle.Success),
+                    ),
+                ],
+            }).catch(this.client.catchError);
+
+            if (inter.customId === "end") {
+                await command.interaction.editReply({
+                    content: dialogue.content.join("\n"),
+                    components: [],
+                }).catch(this.client.catchError);
+
+                loop = false;
+            }
+        }
+
+        await command.interaction.editReply({ components: [] }).catch(this.client.catchError);
+        return command.end();
     }
 
     /**
@@ -241,22 +393,6 @@ class QuestDb extends SQLiteTable {
                     const userMoney = data.wallet;
 
                     if (userMoney >= localObjective.additionalData.amountToReach) completedInDepth = true;
-                    break;
-                case "haveKasugaiCrowExperience":
-                    const userKasugaiCrowExperience = data.kasugaiCrow.exp;
-
-                    if (userKasugaiCrowExperience >= localObjective.additionalData.amountToReach) completedInDepth = true;
-                    break;
-                case "haveKasugaiCrow":
-                    if ("kasugaiCrow" in localObjective.additionalData) {
-                        completedInDepth = data.kasugaiCrow.id === localObjective.additionalData.kasugaiCrow;
-                    }
-                    else {
-                        completedInDepth = data.kasugaiCrow.id !== null;
-                    }
-                    break;
-                case "beWithoutKasugaiCrow":
-                    completedInDepth = data.kasugaiCrow.id === null;
                     break;
                 case "haveEquippedEnchantedGrimoire":
                     if ("enchantedGrimoire" in localObjective.additionalData) {
@@ -423,8 +559,6 @@ class QuestDb extends SQLiteTable {
                 case "theme":
                     void this.client.additionalDb.unlockTheme(id, reward.data.theme);
                     break;
-                case "kasugaiCrowExp":
-                    break;
                 default:
                     break;
             }
@@ -445,25 +579,32 @@ class QuestDb extends SQLiteTable {
         const rewardsToAdd = [];
         for (const objectiveId in quest.objectives) {
             const userObjective = quest.objectives[objectiveId];
-            if (userObjective.completed) continue;
 
             const localObjective = localQuest.objectives[objectiveId];
             const localObjectiveRewards = localQuest.rewards[objectiveId];
 
-            const completed = await this.isObjectiveCompleted(id, localObjective, tableFocused);
-            if (
-                completed &&
-                !this.get(id).currentQuests[`${quest.id.split(".")[0]}Quest`].objectives[objectiveId].completed
-            ) {
-                if (
-                    userObjective.rewardsCollected ||
-                    this.get(id).currentQuests[`${quest.id.split(".")[0]}Quest`].objectives[objectiveId].rewardsCollected
-                ) continue;
+            const completed = await this.isObjectiveCompleted(id, Object.assign(localObjective, { questId: quest.id }), tableFocused);
+            const dbCompleted = this.get(id).currentQuests[`${quest.id.split(".")[0]}Quest`]
+                .objectives[objectiveId].completed;
+            const dbCollected = this.get(id).currentQuests[`${quest.id.split(".")[0]}Quest`]
+                .objectives[objectiveId].rewardsCollected;
 
-                rewardsToAdd.push(localObjectiveRewards.data);
-                this.setObjectiveCompleted(id, quest.id.split(".")[0], objectiveId);
-                this.setObjectiveRewardCollected(id, quest.id.split(".")[0], objectiveId);
-                actionsLogged.push({ event: "objectiveCompleted", objectiveId });
+            if (completed || dbCompleted) {
+                if (dbCompleted) {
+                    if (userObjective.rewardsCollected || dbCollected) continue;
+
+                    rewardsToAdd.push(localObjectiveRewards.data);
+                    this.setObjectiveRewardCollected(id, quest.id.split(".")[0], objectiveId);
+                    actionsLogged.push({ event: "objectiveCompleted", objectiveId });
+                }
+                else if (completed) {
+                    if (userObjective.rewardsCollected || dbCollected) continue;
+
+                    rewardsToAdd.push(localObjectiveRewards.data);
+                    this.setObjectiveCompleted(id, quest.id.split(".")[0], objectiveId);
+                    this.setObjectiveRewardCollected(id, quest.id.split(".")[0], objectiveId);
+                    actionsLogged.push({ event: "objectiveCompleted", objectiveId });
+                }
             }
             else {
                 actionsLogged.push({ event: "objectiveNotCompleted", objectiveId });
@@ -497,6 +638,25 @@ class QuestDb extends SQLiteTable {
      */
     setObjectiveRewardCollected(id, questCategory, objectiveId) {
         this.set(id, true, `currentQuests.${questCategory}Quest.objectives.${objectiveId}.rewardsCollected`);
+    }
+
+    /**
+     * Function that allowss you to set manually an objective as completed.
+     * @param {String} id The user ID
+     * @param {String} questCategory The quest type (daily/side/slayer)
+     * @param {String} objectiveId The ID of the objective to set as completed
+     * @returns {void}
+     */
+    async setObjectiveManuallyCompleted(id, questCategory, objectiveId) {
+        questCategory = questCategory.replace("Quest", "");
+        const quest = this.get(id).currentQuests[`${questCategory}Quest`];
+
+        const dbCompleted = this.get(id).currentQuests[`${quest.id.split(".")[0]}Quest`]
+            .objectives[objectiveId].completed;
+
+        if (!dbCompleted) this.setObjectiveCompleted(id, quest.id.split(".")[0], objectiveId);
+
+        await this.questsCleanup(id, "none");
     }
 
     /**

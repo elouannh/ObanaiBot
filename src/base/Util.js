@@ -5,6 +5,14 @@ const CollectionManager = require("./CollectionManager");
 
 module.exports = {
     /**
+     * Function that returns a string based on the date (not readable).
+     * @param {Date} date
+     * @returns {String}
+     */
+    dateToString(date) {
+        return `${date.getDate()}${date.getMonth()}${date.getFullYear()}`;
+    },
+    /**
      * @typedef {Object} Request
      * @property {String} name The request name
      * @property {Number} ts The timestamp of the request

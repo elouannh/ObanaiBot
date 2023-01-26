@@ -55,6 +55,18 @@ class PlayerDb extends SQLiteTable {
     }
 
     /**
+     * Upgrade a statistic of the player
+     * @param {String} id The user ID
+     * @param {String<"speed" | "strength" | "weaponControl" | "smartness" | "stamina" | "resistance">} statistic The statistic to upgrade
+     * @returns {void}
+     */
+    upgradeStatistic(id, statistic) {
+        const data = this.get(id);
+        data.statistics[statistic]++;
+        this.set(id, data.statistics, "statistics");
+    }
+
+    /**
      * Heal a player directly in the database
      * @param {String} id The player ID
      * @param {Number} amount The amount of HP to heal

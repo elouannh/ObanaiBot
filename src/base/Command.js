@@ -1,29 +1,40 @@
-const { PermissionsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, Utils } = require("discord.js");
+const { PermissionsBitField, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder } = require("discord.js");
 const Language = require("./Language");
 
 class Command {
-    constructor(infos = {
-        name: "command",
-        description: "Description par défaut de la commande.",
-        descriptionLocalizations: {
-            "en-US": "Default command description.",
+    constructor(
+        slashBuilder = {
+            name: "command",
+            description: "Description par défaut de la commande.",
+            descriptionLocalizations: {
+                "en-US": "Default command description.",
+            },
+            options: [],
+            dmPermission: false,
         },
-        options: [],
-        type: [1],
-        dmPermission: true,
-        category: "Staff",
-        cooldown: 5,
-        completedRequests: ["command"],
-        authorizationBitField: 0b000,
-        permissions: 0n,
-    }) {
+        contextBuilder = {
+            name: "Command",
+            dmPermission: false,
+        },
+        infos = {
+            trad: "command",
+            type: [1],
+            category: "Staff",
+            cooldown: 5,
+            completedRequests: ["command"],
+            authorizationBitField: 0b000,
+            permissions: 0n,
+            targets: [],
+        },
+    ) {
+        this.slashBuilder = slashBuilder;
+        this.contextBuilder = contextBuilder;
         this.infos = infos;
         this.client = null;
         this.interaction = null;
-        this.instancedAt = Date.now();
         this.mention = "";
         this.lang = new Language("fr").json;
-        this.trad = this.lang["commands"][this.infos.trad || this.infos.name];
+        this.trad = this.lang["commands"][this.infos.trad || this.slashBuilder.name];
         this.langManager = null;
     }
 
@@ -32,20 +43,28 @@ class Command {
         this.interaction = interaction;
         this.mention = `<@${this.interaction.user.id}>, `;
         this.lang = lang.json;
-        this.trad = this.lang["commands"][this.infos.trad || this.infos.name];
+        this.trad = this.lang["commands"][this.infos.trad || this.slashBuilder.name];
         this.langManager = this.client.languageManager;
 
         if (this.infos.completedRequests.includes("adventure")) {
-            this.infos.completedRequests = this.infos.completedRequests
-                .filter(e => e !== "adventure")
-                .concat(Array.from(
-                    this.client.commandManager.commands.filter(e => new (e)().infos.category === "RPG").keys(),
+            this.infos.completedRequests = this.infos.completedRequests.concat(Array.from(
+                    this.client.commandManager.commands.filter(e =>
+                        new (e)().infos.targets.includes("read") || new (e)().infos.targets.includes("write"),
+                    ).keys(),
                 ));
         }
+        else if (this.infos.completedRequests.includes("adventureLocal")) {
+            this.infos.completedRequests = this.infos.completedRequests.concat(Array.from(
+                this.client.commandManager.commands.filter(e =>
+                    new (e)().infos.targets.includes("write"),
+                ).keys(),
+            ));
+        }
+        this.infos.completedRequests = this.infos.completedRequests.filter(e => e !== "adventure");
     }
 
     end() {
-        this.client.requestsManager.remove(this.interaction.user.id, this.infos.name);
+        this.client.requestsManager.remove(this.interaction.user.id, this.slashBuilder.name);
         return void 0;
     }
 
@@ -56,7 +75,7 @@ class Command {
     async cooldownReady(forExecuting) {
         let ready = true;
 
-        const lastRun = this.client.cooldownsManager.getSub(this.interaction.user.id, this.infos.name);
+        const lastRun = this.client.cooldownsManager.getSub(this.interaction.user.id, this.slashBuilder.name);
         const tStamp = Date.now();
         const readyForRun = lastRun + this.infos.cooldown * 1000;
 
@@ -75,11 +94,11 @@ class Command {
             }).catch(this.client.catchError);
         }
         else {
-            this.client.cooldownsManager.add(this.interaction.user.id, { key: this.infos.name, value: Date.now() });
+            this.client.cooldownsManager.add(this.interaction.user.id, { key: this.slashBuilder.name, value: Date.now() });
 
             if (forExecuting) {
                 setTimeout(() => {
-                    this.client.cooldownsManager.remove(this.interaction.user.id, this.infos.name);
+                    this.client.cooldownsManager.remove(this.interaction.user.id, this.slashBuilder.name);
                 }, this.infos.cooldown * 1000);
             }
         }
@@ -191,15 +210,13 @@ class Command {
     async getUserFromInteraction(interactionType) {
         const user = this.interaction.user;
         let userId = user.id;
-        if (interactionType === 1) userId = this.interaction.options?.get("joueur")?.user?.id || userId;
+        if (interactionType === 1) userId = this.interaction.options?.get("user")?.user?.id || userId;
         else if (interactionType === 2) userId = this.client.users.cache.get(this.interaction.targetId) || userId;
         return await this.client.getUser(userId, user);
     }
 
     async choice(messagePayload, primary, secondary) {
-        const method = { "true": "editReply", "false": "reply" }[String(this.interaction.replied)];
-
-        const message = await this.interaction[method](Object.assign(
+        const message = await this.interaction.editReply(Object.assign(
             messagePayload, {
                 components: [
                     new ActionRowBuilder()
@@ -233,17 +250,25 @@ class Command {
         return collected.customId;
     }
 
-    async menu(messagePayload, options, min = null, max = null) {
-        const method = { "true": "editReply", "false": "reply" }[String(this.interaction.replied)];
-
+    async menu(messagePayload, options, min = null, max = null, removeCancelOption = false) {
         const menu = new StringSelectMenuBuilder()
             .setCustomId("menu")
-            .setOptions(options);
+            .setOptions(
+                !removeCancelOption ?
+                    [
+                        {
+                            label: this.lang.systems.menuCancel,
+                            value: "cancel",
+                            emoji: this.client.enums.Systems.Symbols.Cross,
+                        },
+                    ].concat(options)
+                    : options,
+            );
 
         if (min !== null) menu.setMinValues(min);
         if (max !== null) menu.setMaxValues(max);
 
-        const message = await this.interaction[method](Object.assign(
+        const message = await this.interaction.editReply(Object.assign(
             messagePayload, {
                 components: [
                     new ActionRowBuilder()
@@ -264,8 +289,37 @@ class Command {
             }).catch(this.client.catchError);
             return null;
         }
+        if (collected.values[0] === "cancel") {
+            await this.interaction.editReply({
+                content: this.lang.systems.choiceCanceled,
+                components: [],
+            }).catch(this.client.catchError);
+            return null;
+        }
         await collected.deferUpdate().catch(this.client.catchError);
         return collected.values;
+    }
+
+    async return(content, ephemeral = false) {
+        const method = { "true": "editReply", "false": "reply" }[String(this.interaction.replied)];
+        await this.interaction[method]({ content, ephemeral }).catch(this.client.catchError);
+        return this.end();
+    }
+
+    async message() {
+        try {
+            return await this.interaction.fetchReply().catch(this.client.catchError);
+        }
+        catch {
+            return null;
+        }
+    }
+
+    async editContent(messagePayload) {
+        const message = await this.message();
+        if (!message) return;
+        await message.edit(messagePayload).catch(this.client.catchError);
+        return 0;
     }
 }
 

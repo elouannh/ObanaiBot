@@ -7,12 +7,6 @@ function schema(id) {
     return {
         id: id,
         wallet: 0,
-        kasugaiCrow: {
-            id: null,
-            hunger: 100,
-            lastFeeding: Date.now(),
-            lastHungerGenerated: Date.now(),
-        },
         enchantedGrimoire: {
             id: null,
             activeSince: 0,
@@ -41,31 +35,32 @@ class InventoryDb extends SQLiteTable {
 
     get(id) {
         const data = super.get(id, schema);
-
         data.enchantedGrimoire = this.updateEnchantedGrimoire(id, data.enchantedGrimoire);
-
-        if (data.kasugaiCrow.id !== null) {
-            const lastHungerGenerated = data.kasugaiCrow.lastHungerGenerated;
-            const elapsedTime = Math.floor((Date.now() - lastHungerGenerated) / 1000 / 900);
-
-
-            if (elapsedTime > 0) {
-                let hungerGenerated = data.kasugaiCrow.hunger - elapsedTime;
-                if (hungerGenerated < 0) hungerGenerated = 0;
-                else if (hungerGenerated > 100) hungerGenerated = 100;
-
-                if (hungerGenerated > 0 && data.kasugaiCrow.hunger !== hungerGenerated) {
-                    this.generateKasugaiCrowHunger(id, hungerGenerated);
-                }
-                data.kasugaiCrow.hunger = hungerGenerated;
-                data.kasugaiCrow.lastHungerGenerated = Date.now();
-            }
-        }
 
         for (const material in data.items.materials) {
             if (data.items.materials[material] <= 0) {
                 delete data.items.materials[material];
                 this.delete(id, `items.materials.${material}`);
+            }
+        }
+        for (const item in data.items.questItems) {
+            if (data.items.questItems[item] <= 0) {
+                delete data.items.questItems[item];
+                this.delete(id, `items.questItems.${item}`);
+            }
+        }
+        for (const weapon in data.items.weapons) {
+            for (const rarity in data.items.weapons[weapon]) {
+                if (data.items.weapons[weapon][rarity] <= 0) {
+                    delete data.items.weapons[weapon][rarity];
+                    this.delete(id, `items.weapons.${weapon}.${rarity}`);
+                }
+            }
+        }
+        for (const grimoire in data.items.enchantedGrimoires) {
+            if (data.items.enchantedGrimoires[grimoire] <= 0) {
+                delete data.items.enchantedGrimoires[grimoire];
+                this.delete(id, `items.enchantedGrimoires.${grimoire}`);
             }
         }
 
@@ -83,6 +78,31 @@ class InventoryDb extends SQLiteTable {
         const previousAmount = this.get(id).items.materials[material];
         const newAmount = previousAmount - amount;
         this.set(id, newAmount, `items.materials.${material}`);
+        return newAmount;
+    }
+
+    /**
+     * Removes a defined material amount from the inventory
+     * @param {String} id The user ID
+     * @param {String} material The material ID
+     * @param {Number} amount The amount to remove
+     * @returns {Number} The new material amount
+     */
+    addMaterial(id, material, amount) {
+        return this.removeMaterial(id, material, -amount);
+    }
+
+    /**
+     * Removes a defined quest item amount from the inventory
+     * @param {String} id The user ID
+     * @param {String} questItem The quest item ID
+     * @param {Number} amount The amount to remove
+     * @returns {Number} The new quest item amount
+     */
+    removeQuestItem(id, questItem, amount) {
+        const previousAmount = this.get(id).items.questItems[questItem];
+        const newAmount = previousAmount - amount;
+        this.set(id, newAmount, `items.questItems.${questItem}`);
         return newAmount;
     }
 
@@ -114,34 +134,6 @@ class InventoryDb extends SQLiteTable {
     }
 
     /**
-     * Generate hunger for the Kasugai Crow.
-     * @param {String} id The player ID
-     * @param {Number} amount The amount of hunger to generate
-     * @returns {void}
-     */
-    generateKasugaiCrowHunger(id, amount) {
-        if (amount < 0) amount = 0;
-        else if (amount > 100) amount = 100;
-        this.set(id, Math.floor(amount), "kasugaiCrow.hunger");
-        this.set(id, Date.now(), "kasugaiCrow.lastHungerGenerated");
-    }
-
-    /**
-     * Feed the crow to increase its effects bonuses. Decreases the required amount of food.
-     * @param {String} id The player ID
-     * @param {Number} amount The amount of hunger to decrease
-     * @returns {void}
-     */
-    feedKasugaiCrow(id, amount) {
-        if (amount < 0) amount = 0;
-        else if (amount > 100) amount = 100;
-        this.db.math(id, "-", 50, "items.materials.seed");
-        this.db.math(id, "-", 5, "items.materials.worm");
-        this.set(id, Math.floor(amount), "kasugaiCrow.hunger");
-        this.set(id, Date.now(), "kasugaiCrow.lastFeeding");
-    }
-
-    /**
      * Add money to the wallet of the player
      * @param {String} id The user ID
      * @param {Number} amount The amount to add
@@ -151,20 +143,6 @@ class InventoryDb extends SQLiteTable {
         const previousAmount = this.get(id).wallet;
         const newAmount = previousAmount + amount;
         this.set(id, newAmount, "wallet");
-        return newAmount;
-    }
-
-    /**
-     * Add a specific material to the inventory of the player
-     * @param {String} id The user ID
-     * @param {String} material The material ID
-     * @param {Number} amount the amount to add
-     * @returns {Number} The new amount of this material
-     */
-    addMaterial(id, material, amount) {
-        const previousAmount = this.get(id).items.materials[material] || 0;
-        const newAmount = previousAmount + amount;
-        this.set(id, newAmount, `items.materials.${material}`);
         return newAmount;
     }
 
@@ -239,39 +217,6 @@ class InventoryDb extends SQLiteTable {
             )
             .setColor(this.client.enums.Colors.Blurple);
 
-        if (data.kasugaiCrow.id !== null) {
-            embed.addFields(
-                {
-                    name: lang.rpgAssets.concepts.kasugaiCrow,
-                    value: data.kasugaiCrow.name,
-                    inline: true,
-                },
-                {
-                    name: lang.rpgAssets.concepts.kasugaiCrowHunger,
-                    value: `\`${data.kasugaiCrow.hunger}\`% - `
-                        + `${lang.rpgAssets.concepts.kasugaiCrowLastFeeding}: <t:${data.kasugaiCrow.lastFeeding}:R>`,
-                    inline: true,
-                },
-                {
-                    name: lang.rpgAssets.concepts.kasugaiCrowEffects,
-                    value: data.kasugaiCrow.effects
-                        .map(e => `${e.name} - \`${e.maxStrength * data.kasugaiCrow.hunger / 100}\`% `
-                            + `(${lang.rpgAssets.embeds.maxPercent}: \`${e.maxStrength}\`%)`)
-                        .join("\n"),
-                    inline: true,
-                },
-            );
-        }
-        else {
-            embed.addFields(
-                {
-                    name: lang.rpgAssets.concepts.kasugaiCrow,
-                    value: lang.rpgAssets.embeds.noCrow,
-                    inline: true,
-                },
-            );
-        }
-
         if (data.enchantedGrimoire.id !== null) {
             embed.addFields(
                 {
@@ -309,7 +254,7 @@ class InventoryDb extends SQLiteTable {
                 value: Object.keys(data.items.enchantedGrimoires).length > 0 ?
                     Object.values(data.items.enchantedGrimoires)
                         .sort((a, b) => b.amount - a.amount)
-                        .map(g => `x\`${g.amount}\` ${g.list[0].name}`)
+                        .map(g => `x\`${g.amount}\` ${g.instance.name}`)
                         .join("\n") :
                     lang.rpgAssets.embeds.noGrimoire,
                 inline: true,
