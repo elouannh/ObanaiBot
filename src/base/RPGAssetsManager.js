@@ -1,6 +1,5 @@
 const RPGBreathingStyle = require("./subclasses/RPGBreathingStyle");
 const RPGEnchantedGrimoire = require("./subclasses/RPGEnchantedGrimoire");
-const RPGKasugaiCrow = require("./subclasses/RPGKasugaiCrow");
 const RPGMapRegion = require("./subclasses/RPGMapRegion");
 const RPGMaterial = require("./subclasses/RPGMaterial");
 const RPGCharacter = require("./subclasses/RPGCharacter");
@@ -24,7 +23,6 @@ class RPGAssetsManager {
 
         this.breathingStyles = require(`../${this.dir}/breathingStyles.json`);
         this.enchantedGrimoires = require(`../${this.dir}/enchantedGrimoires.json`);
-        this.kasugaiCrows = require(`../${this.dir}/kasugaiCrows.json`);
         this.map = require(`../${this.dir}/map.json`);
         this.materials = require(`../${this.dir}/materials.json`);
         this.characters = require(`../${this.dir}/characters.json`);
@@ -81,22 +79,6 @@ class RPGAssetsManager {
         }
 
         return grimoire;
-    }
-
-    getKasugaiCrow(lang, id) {
-        if (!(id in this.kasugaiCrows)) return "Invalid Kasugai Crow ID";
-        return new RPGKasugaiCrow(this.getLangData(lang, "kasugaiCrows"), id, this.kasugaiCrows[id]);
-    }
-
-    loadKasugaiCrow(lang, kasugaiCrowData) {
-        if (!(kasugaiCrowData.id in this.kasugaiCrows)) return "Invalid Kasugai Crow ID";
-
-        const crowData = this.kasugaiCrows[kasugaiCrowData.id];
-        const crow = this.getKasugaiCrow(lang, crowData.id);
-        crow["hunger"] = kasugaiCrowData.hunger;
-        crow["lastFeeding"] = (kasugaiCrowData.lastFeeding / 1000).toFixed(0);
-
-        return crow;
     }
 
     getMapRegion(lang, id) {

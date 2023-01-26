@@ -7,12 +7,6 @@ function schema(id) {
     return {
         id: id,
         wallet: 0,
-        kasugaiCrow: {
-            id: null,
-            hunger: 100,
-            lastFeeding: Date.now(),
-            lastHungerGenerated: Date.now(),
-        },
         enchantedGrimoire: {
             id: null,
             activeSince: 0,
@@ -41,26 +35,7 @@ class InventoryDb extends SQLiteTable {
 
     get(id) {
         const data = super.get(id, schema);
-
         data.enchantedGrimoire = this.updateEnchantedGrimoire(id, data.enchantedGrimoire);
-
-        if (data.kasugaiCrow.id !== null) {
-            const lastHungerGenerated = data.kasugaiCrow.lastHungerGenerated;
-            const elapsedTime = Math.floor((Date.now() - lastHungerGenerated) / 1000 / 900);
-
-
-            if (elapsedTime > 0) {
-                let hungerGenerated = data.kasugaiCrow.hunger - elapsedTime;
-                if (hungerGenerated < 0) hungerGenerated = 0;
-                else if (hungerGenerated > 100) hungerGenerated = 100;
-
-                if (hungerGenerated > 0 && data.kasugaiCrow.hunger !== hungerGenerated) {
-                    this.generateKasugaiCrowHunger(id, hungerGenerated);
-                }
-                data.kasugaiCrow.hunger = hungerGenerated;
-                data.kasugaiCrow.lastHungerGenerated = Date.now();
-            }
-        }
 
         for (const material in data.items.materials) {
             if (data.items.materials[material] <= 0) {
@@ -136,34 +111,6 @@ class InventoryDb extends SQLiteTable {
             }
         }
         return grimoireObject;
-    }
-
-    /**
-     * Generate hunger for the Kasugai Crow.
-     * @param {String} id The player ID
-     * @param {Number} amount The amount of hunger to generate
-     * @returns {void}
-     */
-    generateKasugaiCrowHunger(id, amount) {
-        if (amount < 0) amount = 0;
-        else if (amount > 100) amount = 100;
-        this.set(id, Math.floor(amount), "kasugaiCrow.hunger");
-        this.set(id, Date.now(), "kasugaiCrow.lastHungerGenerated");
-    }
-
-    /**
-     * Feed the crow to increase its effects bonuses. Decreases the required amount of food.
-     * @param {String} id The player ID
-     * @param {Number} amount The amount of hunger to decrease
-     * @returns {void}
-     */
-    feedKasugaiCrow(id, amount) {
-        if (amount < 0) amount = 0;
-        else if (amount > 100) amount = 100;
-        this.db.math(id, "-", 50, "items.materials.seed");
-        this.db.math(id, "-", 5, "items.materials.worm");
-        this.set(id, Math.floor(amount), "kasugaiCrow.hunger");
-        this.set(id, Date.now(), "kasugaiCrow.lastFeeding");
     }
 
     /**
@@ -249,39 +196,6 @@ class InventoryDb extends SQLiteTable {
                 { name: "\u200b", value: "\u200b", inline: false },
             )
             .setColor(this.client.enums.Colors.Blurple);
-
-        if (data.kasugaiCrow.id !== null) {
-            embed.addFields(
-                {
-                    name: lang.rpgAssets.concepts.kasugaiCrow,
-                    value: data.kasugaiCrow.name,
-                    inline: true,
-                },
-                {
-                    name: lang.rpgAssets.concepts.kasugaiCrowHunger,
-                    value: `\`${data.kasugaiCrow.hunger}\`% - `
-                        + `${lang.rpgAssets.concepts.kasugaiCrowLastFeeding}: <t:${data.kasugaiCrow.lastFeeding}:R>`,
-                    inline: true,
-                },
-                {
-                    name: lang.rpgAssets.concepts.kasugaiCrowEffects,
-                    value: data.kasugaiCrow.effects
-                        .map(e => `${e.name} - \`${e.maxStrength * data.kasugaiCrow.hunger / 100}\`% `
-                            + `(${lang.rpgAssets.embeds.maxPercent}: \`${e.maxStrength}\`%)`)
-                        .join("\n"),
-                    inline: true,
-                },
-            );
-        }
-        else {
-            embed.addFields(
-                {
-                    name: lang.rpgAssets.concepts.kasugaiCrow,
-                    value: lang.rpgAssets.embeds.noCrow,
-                    inline: true,
-                },
-            );
-        }
 
         if (data.enchantedGrimoire.id !== null) {
             embed.addFields(

@@ -249,22 +249,6 @@
             "infinite": "Infini"
         }
     },
-    "kasugaiCrows": {
-        "effects": {
-            "experienceBoost": "Bonus d'expérience",
-            "moneyBoost": "Bonus d'argent",
-            "statisticsBoost": "Bonus de statistiques",
-            "travelTimeBoost": "Bonus de temps de voyage",
-            "trainTimeBoost": "Bonus de temps d'entraînement"
-        },
-        "names": {
-            "dove": "Colombe",
-            "evolvedCrow": "Corbeau Évolué",
-            "proudCrow": "Corbeau Orgueilleux",
-            "basicCrow": "Corbeau Basique",
-            "sparrow": "Moineau"
-        }
-    },
     "map": {
         "regions": {
             "0": {
@@ -423,10 +407,6 @@
         "hp": "PV",
         "level": "Niv.",
         "stats": "Statistiques",
-        "kasugaiCrow": "Corbeau Kasugai",
-        "kasugaiCrowHunger": "Faim du corbeau",
-        "kasugaiCrowLastFeeding": "Dernier nourrissage",
-        "kasugaiCrowEffects": "Effets du corbeau",
         "enchantedGrimoire": "Grimoire Enchanté",
         "enchantedGrimoireEffects": "Effets du grimoire",
         "weapon": "Arme",
@@ -462,7 +442,6 @@
         "remaining": "En cours, se termine dans: ",
         "character": "Personnage",
         "wallet": "Porte-monnaie",
-        "noCrow": "Aucun corbeau de liaison.",
         "maxPercent": "Max",
         "noGrimoire": "Aucun grimoire enchanté.",
         "lifespan": "Durée de vie",

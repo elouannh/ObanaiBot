@@ -394,22 +394,6 @@ class QuestDb extends SQLiteTable {
 
                     if (userMoney >= localObjective.additionalData.amountToReach) completedInDepth = true;
                     break;
-                case "haveKasugaiCrowExperience":
-                    const userKasugaiCrowExperience = data.kasugaiCrow.exp;
-
-                    if (userKasugaiCrowExperience >= localObjective.additionalData.amountToReach) completedInDepth = true;
-                    break;
-                case "haveKasugaiCrow":
-                    if ("kasugaiCrow" in localObjective.additionalData) {
-                        completedInDepth = data.kasugaiCrow.id === localObjective.additionalData.kasugaiCrow;
-                    }
-                    else {
-                        completedInDepth = data.kasugaiCrow.id !== null;
-                    }
-                    break;
-                case "beWithoutKasugaiCrow":
-                    completedInDepth = data.kasugaiCrow.id === null;
-                    break;
                 case "haveEquippedEnchantedGrimoire":
                     if ("enchantedGrimoire" in localObjective.additionalData) {
                         completedInDepth = data.equippedGrimoire.id === localObjective.additionalData.enchantedGrimoire;
@@ -574,8 +558,6 @@ class QuestDb extends SQLiteTable {
                     break;
                 case "theme":
                     void this.client.additionalDb.unlockTheme(id, reward.data.theme);
-                    break;
-                case "kasugaiCrowExp":
                     break;
                 default:
                     break;

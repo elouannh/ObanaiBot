@@ -8,18 +8,6 @@
         "notDeleted": "Votre aventure n'a pas été supprimée.",
         "deleted": "Votre aventure a bien été supprimée. Nous espérons vous revoir bientôt !"
     },
-    "feedCrow": {
-        "noCrow": "Vous n'avez aucun corbeau.",
-        "noHunger": "Votre corbeau n'a pas faim.",
-        "missingResources": "Certains ressources sont manquantes.",
-        "currently": "Actuellement: **%AMOUNT**/%MAX",
-        "wantsToFeed": "**Voulez-vous nourrir votre corbeau ?**",
-        "required": "__Cela coûte les ressources suivantes:__",
-        "feedButton": "Nourrir",
-        "cancelButton": "Annuler",
-        "canceled": "Vous avez annulé le nourrissage.",
-        "fed": "Vous avez nourri votre corbeau. Son énergie est maintenant de **%AMOUNT**."
-    },
     "forgeWeapon": {
         "currently": "Actuellement: **%AMOUNT**/%MAX",
         "noAvailableSlot": "Aucun emplacement de forge disponible.",
@@ -59,9 +47,6 @@
         "giftDone": "Don d'objets effectué.",
         "explored": "Vous avez trouvé des ressources !",
         "noResourcesFound": "Vous n'avez pas de chance, aucune ressource n'a été trouvée."
-    },
-    "lureCrow": {
-        "noCrow": "Vous n'avez aucun corbeau."
     },
     "profile": {
         "activityButton": "Activité",

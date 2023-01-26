@@ -36,15 +36,6 @@ class SQLiteTableMerger {
                 const id = player.id;
                 this.client.inventoryDb.ensureInDeep(id);
                 dbs.a.set(id, player.yens, "wallet");
-                const newCrow = {
-                    id: player.kasugai_crow || player.kasugaiCrow?.id || "basicCrow",
-                    exp: player.kasugai_crow_exp || player.kasugaiCrow?.exp || 0,
-                    hunger: player.kasugaiCrow?.hunger || 100,
-                };
-                if (newCrow.id === "kasugai_evolved") newCrow.id = "evolvedCrow";
-                if (newCrow.id === "kasugai_proud") newCrow.id = "proudCrow";
-                if (newCrow.id === "kasugai_simple") newCrow.id = "basicCrow";
-                dbs.a.set(id, newCrow, "kasugaiCrow");
                 const newGrimoire = {
                     id: player.active_grimoire || player.enchantedGrimoire?.id || null,
                     activeSince: player.active_grimoire_since || player.enchantedGrimoire?.activeSince || 0,
