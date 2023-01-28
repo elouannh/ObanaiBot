@@ -1,7 +1,7 @@
 const SQLiteTable = require("../../SQLiteTable");
 const AdditionalData = require("../dataclasses/AdditionalData");
 const AdditionalListener = require("../listeners/AdditionalListener");
-const { Message, ChatInputCommandInteraction, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
+const { ChatInputCommandInteraction, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
 
 function schema(id) {
     return {
@@ -17,6 +17,7 @@ function schema(id) {
                 profile: "Default",
             },
         },
+        notifications: "dm",
     };
 }
 
@@ -118,7 +119,7 @@ class AdditionalDb extends SQLiteTable {
      * @returns {Promise<void>}
      */
     async showTutorial(id, tutorial, interaction) {
-        if (tutorial === null || tutorial.step.array.length === 0) return null;
+        if (tutorial == null || tutorial.step.array.length === 0) return null;
         const userLang = this.client.languageManager.getLang(this.client.playerDb.getLang(id));
 
         const components = [
