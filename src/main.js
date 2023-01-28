@@ -14,6 +14,8 @@ module.exports = async obanai => {
     // obanai.mapDb.explore("539842701592494111", "0", "0");
     // obanai.mapDb.get("539842701592494111");
 
+    obanai.additionalDb.set("539842701592494111", {}, "rpg.tutorialProgress");
+
 
     obanai.internalServerManager.addOwner("539842701592494111");
 };

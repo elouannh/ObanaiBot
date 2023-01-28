@@ -119,7 +119,7 @@ class AdditionalDb extends SQLiteTable {
      * @returns {Promise<void>}
      */
     async showTutorial(id, tutorial, interaction) {
-        if (tutorial == null || tutorial.step.array.length === 0) return null;
+        if (tutorial === null || tutorial.step.array.length === 0) return null;
         const userLang = this.client.languageManager.getLang(this.client.playerDb.getLang(id));
 
         const components = [
@@ -129,12 +129,19 @@ class AdditionalDb extends SQLiteTable {
                         .setCustomId("tutorial_next")
                         .setLabel(userLang.json.systems.tutorialNext)
                         .setStyle(ButtonStyle.Secondary),
+                    new ButtonBuilder()
+                        .setCustomId("tutorial_skip")
+                        .setStyle(ButtonStyle.Secondary)
+                        .setEmoji(this.client.enums.Systems.Symbols.Cross),
                 ),
         ];
 
         let i = 0;
         const message = await interaction.channel.send({
-            content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**\n\n\`${i + 1}/${tutorial.step.array.length}\`| ${tutorial.step.array[i]}`,
+            content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**`
+                + `\n\n\`${i + 1}/${tutorial.step.array.length}\`| ${tutorial.step.array[i]}`
+                + (i >= tutorial.step.array.length - 1
+                    ? `\n\n🎊 *${userLang.json.systems.tutorialEnd}*` : ""),
             components,
         }).catch(this.client.catchError);
         const collector = message.createMessageComponentCollector({
@@ -145,19 +152,21 @@ class AdditionalDb extends SQLiteTable {
             if (inter.customId === "tutorial_next") {
                 i++;
                 if (i >= tutorial.step.array.length) {
-                    await inter.reply({
-                        content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**\n\n*${userLang.json.systems.tutorialEnd}*`,
-                        ephemeral: true,
-                    }).catch(this.client.catchError);
                     collector.stop();
                 }
                 else {
                     await inter.deferUpdate().catch(this.client.catchError);
                     await message.edit({
-                        content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**\n\n\`${i + 1}/${tutorial.step.array.length}\`| ${tutorial.step.array[i]}`,
+                        content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**\n\n`
+                            + `\`${i + 1}/${tutorial.step.array.length}\`| ${tutorial.step.array[i]}`
+                            + (i >= tutorial.step.array.length - 1
+                                ? `\n\n🎊 *${userLang.json.systems.tutorialEnd}*` : ""),
                         components,
                     }).catch(this.client.catchError);
                 }
+            }
+            else if (inter.customId === "tutorial_skip") {
+                collector.stop();
             }
         });
         collector.on("end", async () => {
