@@ -584,9 +584,9 @@ class QuestDb extends SQLiteTable {
 
             const completed = await this.isObjectiveCompleted(id, Object.assign(localObjective, { questId: quest.id }), tableFocused);
             const dbCompleted = this.get(id).currentQuests[`${quest.id.split(".")[0]}Quest`]
-                .objectives[objectiveId].completed;
+                .objectives?.[objectiveId]?.completed;
             const dbCollected = this.get(id).currentQuests[`${quest.id.split(".")[0]}Quest`]
-                .objectives[objectiveId].rewardsCollected;
+                .objectives?.[objectiveId]?.rewardsCollected;
 
             if (completed || dbCompleted) {
                 if (dbCompleted) {
