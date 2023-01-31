@@ -2,8 +2,6 @@ module.exports = async obanai => {
     // const exists = await obanai.playerDb.exists("539842701592494111");
     // if (!exists) void await obanai.playerDb.create("539842701592494111", "0", "fr");
 
-    obanai.playerDb.delete("539842701592494111");
-
     // const fs = require("fs");
     // obanai.playerDb.load("539842701592494111").then((player) => {
     //     obanai.playerDb.getImage(player).then((image) => fs.writeFileSync("./image.png", image.buffer));
@@ -17,7 +15,6 @@ module.exports = async obanai => {
     // obanai.mapDb.get("539842701592494111");
 
     // obanai.additionalDb.set("539842701592494111", {}, "rpg.tutorialProgress");
-
 
     obanai.internalServerManager.addOwner("539842701592494111");
 };
