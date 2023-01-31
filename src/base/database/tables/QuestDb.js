@@ -16,7 +16,6 @@ function schema(id) {
         },
         storyProgression: ["0", "0", "0", null],
         sideProgression: ["0", "0", "0", null],
-        notifications: "dm",
     };
 }
 
@@ -585,9 +584,9 @@ class QuestDb extends SQLiteTable {
 
             const completed = await this.isObjectiveCompleted(id, Object.assign(localObjective, { questId: quest.id }), tableFocused);
             const dbCompleted = this.get(id).currentQuests[`${quest.id.split(".")[0]}Quest`]
-                .objectives[objectiveId].completed;
+                .objectives?.[objectiveId]?.completed;
             const dbCollected = this.get(id).currentQuests[`${quest.id.split(".")[0]}Quest`]
-                .objectives[objectiveId].rewardsCollected;
+                .objectives?.[objectiveId]?.rewardsCollected;
 
             if (completed || dbCompleted) {
                 if (dbCompleted) {
@@ -877,19 +876,7 @@ class QuestDb extends SQLiteTable {
             embed.addFields({ name: `${name}`, value, inline: false });
         }
 
-        if (toSend) {
-            let channel = null;
-            if (userQuests.notifications === "dm") {
-                channel = await this.client.getUser(id, { id: null });
-            }
-            else if (userQuests.notifications === "last") {
-                channel = await this.client.getChannel(
-                    this.client.lastChannelsManager.getSub(id, "main")?.id || "0", { id: null },
-                );
-            }
-
-            if (channel !== null && channel.id !== null) await this.client.notify(channel, { embeds: [embed] });
-        }
+        if (toSend) await this.client.notify(id, { embeds: [embed] });
     }
 
     /**

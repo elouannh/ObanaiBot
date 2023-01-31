@@ -46,9 +46,10 @@ class Train extends Command {
 
         if (activity.training !== null) {
             await this.interaction.reply({
-                content: `Vous êtes déjà en train d'améliorer votre **${activity.training.statistic.name}** `
-                    + `au niveau **${activity.training.statistic.level + 1}**. `
-                    + "Votre entraînement se termine dans "
+                content: this.trad.currentlyTraining
+                        .replace("%STATISTIC_NAME", activity.training.statistic.name)
+                        .replace("%STATISTIC_LEVEL", activity.training.statistic.level + 1)
+                    + this.trad.endsIn
                     + `<t:${this.client.util.round(activity.training.endedDate / 1000)}:R>.`,
             }).catch(this.client.catchError);
             return this.end();
@@ -62,10 +63,10 @@ class Train extends Command {
         };
         const choice = await this.menu(
             {
-                content: "Choisissez une statistique à améliorer:",
+                content: this.trad.choice,
             },
             Object.values(upgradable).map(e =>
-                ({ label: e.name, description: `Passage au niveau ${e.level + 1}`, value: e.id }),
+                ({ label: e.name, description: this.trad.levelUpTo.replace("%LEVEL", e.level + 1), value: e.id }),
             ),
         );
         if (choice === null) return this.end();
@@ -75,12 +76,13 @@ class Train extends Command {
         const endedDate = startedDate + selected.statisticTrainingTimeForNextLevel;
         const wantsToTrain = await this.choice(
             {
-                content: `Voulez-vous vraiment entraîner votre **${selected.name}** `
-                    + `au niveau **${selected.level + 1}** ?`
-                    + `\nVotre entraînement se terminerait <t:${this.client.util.round(endedDate / 1000)}:R>.`,
+                content: this.trad.wantsToTrain
+                        .replace("%STATISTIC_NAME", selected.name)
+                        .replace("%STATISTIC_LEVEL", selected.level + 1)
+                    + this.trad.endsInProbably.replace("%DATE", `<t:${this.client.util.round(endedDate / 1000)}:R>`),
             },
-            "Entraîner",
-            "Annuler",
+            this.trad.train,
+            this.trad.cancel,
         );
         if (wantsToTrain === null) return this.end();
 
@@ -90,20 +92,15 @@ class Train extends Command {
                 selected.id,
                 startedDate,
             );
-            await this.interaction.editReply({
-                content: `Vous avez commencé à entraîner votre **${selected.name}** `
-                    + `au niveau **${selected.level + 1}**.`
-                    + ` L'entraînement se terminera dans <t:${this.client.util.round(endedDate / 1000)}:R>.`,
-                components: [],
-            }).catch(this.client.catchError);
-            return this.end();
+            return await this.return(
+                this.trad.wantsToTrain
+                        .replace("%STATISTIC_NAME", selected.name)
+                        .replace("%STATISTIC_LEVEL", selected.level + 1)
+                    + this.trad.endsInConfirmed.replace("%DATE", `<t:${this.client.util.round(endedDate / 1000)}:R>`),
+            );
         }
         else {
-            await this.interaction.editReply({
-                content: "L'entraînement a été annulé.",
-                components: [],
-            }).catch(this.client.catchError);
-            return this.end();
+            return await this.return(this.trad.trainingCanceled);
         }
     }
 }

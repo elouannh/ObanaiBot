@@ -86,7 +86,7 @@ class Obanai extends Client {
         this.version = _package.version;
         this.maxRequests = 30;
 
-        this.token = require("../../token.json").token;
+        this.token = require("../token.json").token;
         this.eventManager.loadFiles();
 
         setInterval(() => {
@@ -228,12 +228,23 @@ class Obanai extends Client {
 
     /**
      * Notify the user in a specific channel.
-     * @param {TextChannel} channel The channel instance
+     * @param {String} id The user ID
      * @param {MessagePayload|MessageCreateOptions} payload The payload to send
      * @returns {Promise<string>}
      */
-    async notify(channel, payload) {
-        await channel.send(payload).catch(this.catchError);
+    async notify(id, payload) {
+        const data = this.questDb.get(id);
+        let channel = null;
+        if (data.notifications === "dm") {
+            channel = await this.client.getUser(id, { id: null });
+        }
+        else if (data.notifications === "last") {
+            channel = await this.client.getChannel(
+                this.client.lastChannelsManager.getSub(id, "main")?.id || "0", { id: null },
+            );
+        }
+
+        if (channel !== null && channel.id !== null) await channel.send(payload).catch(this.catchError);
     }
 
     launch() {

@@ -1,7 +1,7 @@
 const SQLiteTable = require("../../SQLiteTable");
 const AdditionalData = require("../dataclasses/AdditionalData");
 const AdditionalListener = require("../listeners/AdditionalListener");
-const { Message, ChatInputCommandInteraction, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
+const { ChatInputCommandInteraction, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
 
 function schema(id) {
     return {
@@ -17,6 +17,7 @@ function schema(id) {
                 profile: "Default",
             },
         },
+        notifications: "dm",
     };
 }
 
@@ -128,12 +129,19 @@ class AdditionalDb extends SQLiteTable {
                         .setCustomId("tutorial_next")
                         .setLabel(userLang.json.systems.tutorialNext)
                         .setStyle(ButtonStyle.Secondary),
+                    new ButtonBuilder()
+                        .setCustomId("tutorial_skip")
+                        .setStyle(ButtonStyle.Secondary)
+                        .setEmoji(this.client.enums.Systems.Symbols.Cross),
                 ),
         ];
 
         let i = 0;
         const message = await interaction.channel.send({
-            content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**\n\n\`${i + 1}/${tutorial.step.array.length}\`| ${tutorial.step.array[i]}`,
+            content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**`
+                + `\n\n\`${i + 1}/${tutorial.step.array.length}\`| ${tutorial.step.array[i]}`
+                + (i >= tutorial.step.array.length - 1
+                    ? `\n\n🎊 *${userLang.json.systems.tutorialEnd}*` : ""),
             components,
         }).catch(this.client.catchError);
         const collector = message.createMessageComponentCollector({
@@ -144,19 +152,21 @@ class AdditionalDb extends SQLiteTable {
             if (inter.customId === "tutorial_next") {
                 i++;
                 if (i >= tutorial.step.array.length) {
-                    await inter.reply({
-                        content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**\n\n*${userLang.json.systems.tutorialEnd}*`,
-                        ephemeral: true,
-                    }).catch(this.client.catchError);
                     collector.stop();
                 }
                 else {
                     await inter.deferUpdate().catch(this.client.catchError);
                     await message.edit({
-                        content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**\n\n\`${i + 1}/${tutorial.step.array.length}\`| ${tutorial.step.array[i]}`,
+                        content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**\n\n`
+                            + `\`${i + 1}/${tutorial.step.array.length}\`| ${tutorial.step.array[i]}`
+                            + (i >= tutorial.step.array.length - 1
+                                ? `\n\n🎊 *${userLang.json.systems.tutorialEnd}*` : ""),
                         components,
                     }).catch(this.client.catchError);
                 }
+            }
+            else if (inter.customId === "tutorial_skip") {
+                collector.stop();
             }
         });
         collector.on("end", async () => {
