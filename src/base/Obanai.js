@@ -86,7 +86,7 @@ class Obanai extends Client {
         this.version = _package.version;
         this.maxRequests = 30;
 
-        this.token = require("../../token.json").token;
+        this.token = require("../token.json").token;
         this.eventManager.loadFiles();
 
         setInterval(() => {
