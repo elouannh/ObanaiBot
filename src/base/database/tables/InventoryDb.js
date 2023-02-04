@@ -139,9 +139,10 @@ class InventoryDb extends SQLiteTable {
      * @param {Number} amount The amount to add
      * @returns {Number} The new wallet amount
      */
-    addMoney(id, amount) {
-        const previousAmount = this.get(id).wallet;
-        const newAmount = previousAmount + amount;
+    async addMoney(id, amount) {
+        const data = await this.load(id);
+        const previousAmount = data.wallet;
+        const newAmount = this.client.util.round((previousAmount + amount) * data.moneyBoost, 0);
         this.set(id, newAmount, "wallet");
         return newAmount;
     }

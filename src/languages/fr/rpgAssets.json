@@ -472,7 +472,9 @@
         "questLabel": "Étiquette de la quête",
         "noQuest": "Aucune quête.",
         "dailyLocked": "Les quêtes quotidiennes sont disponibles à partir du rang **Mizunoe**.",
-        "playerRank": "Rang de pourfendeur"
+        "playerRank": "Rang de pourfendeur",
+        "trainingCompletedTitle": "Entraînement terminé !",
+        "trainingCompleted": "Entraînement terminé ! Votre **%STAT** passe au niveau **%LEVEL**.\n\n→ Vous avez gagné **%EXP**"
     },
     "themes": {
         "Default": "Défaut"

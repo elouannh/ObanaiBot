@@ -88,11 +88,22 @@ class ActivityDb extends SQLiteTable {
                     },
                     "training",
                 );
+                const lang = this.client.languageManager.getLang(this.client.playerDb.getLang(id)).json;
+                const exp = this.client.playerDb.addExp(id, Number(levelToReach));
+                const embed = new EmbedBuilder()
+                    .setTitle(lang.rpgAssets.trainingCompletedTitle)
+                    .setDescription(lang.rpgAssets.trainingCompleted
+                        .replace("%STAT", data.training.statistic.name)
+                        .replace("%LEVEL", levelToReach)
+                        .replace("%EXP", exp),
+                    )
+                    .setColor(this.client.enums.Colors.Green);
                 data.training = {
                     currentlyTraining: false,
                     startedDate: 0,
                     statistic: null,
                 };
+                this.client.notify(id, { embeds: [embed] });
             }
         }
 

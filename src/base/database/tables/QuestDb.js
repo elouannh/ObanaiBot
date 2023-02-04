@@ -534,7 +534,7 @@ class QuestDb extends SQLiteTable {
         for (const [key, reward = objectiveRewards[key]] in objectiveRewards) {
             switch (reward.type) {
                 case "exp":
-                    void this.client.playerDb.addExp(id, reward.data.amount);
+                    void await this.client.playerDb.addExp(id, reward.data.amount);
                     break;
                 case "material":
                     void this.client.inventoryDb.addMaterial(id, reward.data.material, reward.data.amount);
@@ -543,7 +543,7 @@ class QuestDb extends SQLiteTable {
                     void this.client.inventoryDb.addQuestItem(id, reward.data.questItem, reward.data.amount);
                     break;
                 case "money":
-                    void this.client.inventoryDb.addMoney(id, reward.data.amount);
+                    void await this.client.inventoryDb.addMoney(id, reward.data.amount);
                     break;
                 case "enchantedGrimoire":
                     void this.client.inventoryDb.addEnchantedGrimoire(

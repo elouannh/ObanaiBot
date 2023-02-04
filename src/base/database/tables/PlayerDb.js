@@ -157,9 +157,10 @@ class PlayerDb extends SQLiteTable {
      * @param {Number} amount The amount to add
      * @returns {Number} The new xp amount
      */
-    addExp(id, amount) {
-        const previousAmount = this.get(id).exp;
-        const newAmount = previousAmount + amount;
+    async addExp(id, amount) {
+        const data = await this.load(id);
+        const previousAmount = data.exp;
+        const newAmount = this.client.util.round((previousAmount + amount) * data.expBoost, 0);
         this.set(id, newAmount, "exp");
         return newAmount;
     }
