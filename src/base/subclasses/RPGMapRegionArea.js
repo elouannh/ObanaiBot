@@ -8,6 +8,7 @@ class RPGMapRegionArea extends RPGAssetBase {
         this.name = name;
         this.x = mapRegionAreaData.x;
         this.y = mapRegionAreaData.y;
+        this.z = mapRegionAreaData.z;
         this.paths = mapRegionAreaData.paths;
         this.biome = new RPGMapRegionAreaBiome(this, mapRegionAreaData.biome, this.lang.json.biomes[mapRegionAreaData.biome]);
     }

@@ -100,7 +100,8 @@ class RPGAssetsManager {
         // distance between the regions
         const distanceBetweenRegions = Math.sqrt(
             (departure.region.x - destination.region.x) ** 2
-            + (departure.region.y - destination.region.y) ** 2,
+            + (departure.region.y - destination.region.y) ** 2
+            + (departure.region.z - destination.region.z) ** 2,
         );
 
         // return the sum of the distances
@@ -108,7 +109,9 @@ class RPGAssetsManager {
     }
 
     getAreasDistance(departure, arrival) {
-        return Math.sqrt((departure.x - arrival.x) ** 2 + (departure.y - arrival.y) ** 2);
+        return Math.sqrt(
+            (departure.x - arrival.x) ** 2 + (departure.y - arrival.y) ** 2 + (departure.z - arrival.z) ** 2,
+        );
     }
 
     getMaterial(lang, id) {
