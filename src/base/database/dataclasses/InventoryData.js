@@ -18,8 +18,9 @@ class InventoryData extends TableData {
             );
 
             for (const grimoireEffect of this.data.enchantedGrimoire.effects) {
-                if (grimoireEffect !== "moneyBoost") continue;
-                this.data.moneyBoost = this.client.util.round((grimoireEffect.strength / 10) + 1, 2);
+                if (grimoireEffect.id === "moneyBoost") {
+                    this.data.moneyBoost = this.client.util.round((grimoireEffect.strength / 10) + 1, 2);
+                }
             }
         }
         this.data.weapon = this.client.RPGAssetsManager.getWeapon(this.lang, this.data.weapon.id, this.data.weapon.rarity);

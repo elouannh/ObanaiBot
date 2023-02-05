@@ -481,7 +481,9 @@
         "dailyLocked": "Les quêtes quotidiennes sont disponibles à partir du rang **Mizunoe**.",
         "playerRank": "Rang de pourfendeur",
         "trainingCompletedTitle": "Entraînement terminé !",
-        "trainingCompleted": "Entraînement terminé ! Votre **%STAT** passe au niveau **%LEVEL**.\n\n→ Vous avez gagné **%EXP**"
+        "trainingCompleted": "Entraînement terminé ! Votre **%STAT** passe au niveau **%LEVEL**.\n\n→ Vous avez gagné **%EXP**",
+        "travelCompletedTitle": "Voyage terminé !",
+        "travelCompleted": "Départ de →\n> **%OLD**\nArrivé à →\n> **%NEW**\n\n→ Vous avez gagné **%EXP**."
     },
     "themes": {
         "Default": "Défaut"

@@ -139,8 +139,18 @@ class InventoryDb extends SQLiteTable {
      * @param {Number} amount The amount to add
      * @returns {Number} The new wallet amount
      */
-    async addMoney(id, amount) {
-        const data = await this.load(id);
+    addMoney(id, amount) {
+        const data = this.get(id);
+        if (data.enchantedGrimoire.id !== null) {
+            const grimoire = this.client.RPGAssetsManager.getEnchantedGrimoire(
+                this.client.playerDb.getLang(id), data.enchantedGrimoire.id,
+            );
+            for (const grimoireEffect of grimoire) {
+                if (grimoireEffect.id === "moneyBoost") {
+                    data.moneyBoost = this.client.util.round((grimoireEffect.strength / 10) + 1, 2);
+                }
+            }
+        }
         const previousAmount = data.wallet;
         const newAmount = this.client.util.round((previousAmount + amount) * data.moneyBoost, 0);
         this.set(id, newAmount, "wallet");

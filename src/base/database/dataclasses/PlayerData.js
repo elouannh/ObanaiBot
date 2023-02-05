@@ -21,10 +21,10 @@ class PlayerData extends TableData {
             const grimoire = this.client.RPGAssetsManager.getEnchantedGrimoire(this.lang, this.inventoryData.enchantedGrimoire.id);
 
             for (const grimoireEffect of grimoire.effects) {
-                if (grimoireEffect === "statisticsBoost") {
+                if (grimoireEffect.id === "statisticsBoost") {
                     for (const stat in ["strength", "speed", "weaponControl"]) stat.setGrimoireBoost(grimoire.strength);
                 }
-                else if (grimoireEffect === "experienceBoost") {
+                else if (grimoireEffect.id === "experienceBoost") {
                     this.data.expBoost = this.client.util.round((grimoire.strength / 10) + 1, 2);
                 }
             }

@@ -235,16 +235,16 @@ class Obanai extends Client {
     async notify(id, payload) {
         const data = this.questDb.get(id);
         let channel = null;
-        if (data.notifications === "dm") {
-            channel = await this.client.getUser(id, { id: null });
-        }
-        else if (data.notifications === "last") {
+        if (data.notifications === "last") {
             channel = await this.client.getChannel(
                 this.client.lastChannelsManager.getSub(id, "main")?.id || "0", { id: null },
             );
         }
+        if (data.notifications === "dm" || channel === null || channel.id === null) {
+            channel = await this.getUser(id, { id: null });
+        }
 
-        if (channel !== null && channel.id !== null) await channel.send(payload).catch(this.catchError);
+        if (channel?.id !== null) await channel.send(payload).catch(this.catchError);
     }
 
     launch() {
