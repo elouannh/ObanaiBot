@@ -15,7 +15,7 @@ module.exports = async obanai => {
     // obanai.mapDb.get("539842701592494111");
 
     // obanai.additionalDb.set("539842701592494111", {}, "rpg.tutorialProgress");
-    obanai.mapDb.move("539842701592494111", "0", "0");
+    // obanai.mapDb.move("539842701592494111", "0", "0");
     // await obanai.activityDb.travel("539842701592494111", "0", "0", "1", "1");
     // await obanai.activityDb.get("539842701592494111");
 
