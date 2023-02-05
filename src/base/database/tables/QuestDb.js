@@ -543,7 +543,7 @@ class QuestDb extends SQLiteTable {
                     void this.client.inventoryDb.addQuestItem(id, reward.data.questItem, reward.data.amount);
                     break;
                 case "money":
-                    void await this.client.inventoryDb.addMoney(id, reward.data.amount);
+                    void this.client.inventoryDb.addMoney(id, reward.data.amount);
                     break;
                 case "enchantedGrimoire":
                     void this.client.inventoryDb.addEnchantedGrimoire(

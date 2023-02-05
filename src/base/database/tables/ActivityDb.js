@@ -159,7 +159,6 @@ class ActivityDb extends SQLiteTable {
                         .replace("%EXP", exp),
                     )
                     .setColor(this.client.enums.Colors.Green);
-                console.log("Travel completed");
                 this.client.notify(id, { embeds: [embed] });
                 data.travel = {
                     currentlyTraveling: false,
