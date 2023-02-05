@@ -159,6 +159,7 @@ class PlayerDb extends SQLiteTable {
      */
     addExp(id, amount) {
         const data = this.get(id);
+        let expBoost = 1;
         const inventoryData = this.client.inventoryDb.get(id);
         if (inventoryData.enchantedGrimoire.id !== null) {
             const grimoire = this.client.RPGAssetsManager.getEnchantedGrimoire(
@@ -166,12 +167,12 @@ class PlayerDb extends SQLiteTable {
             );
             for (const grimoireEffect of grimoire.effects) {
                 if (grimoireEffect.id === "experienceBoost") {
-                    data.expBoost = this.client.util.round((grimoire.strength / 10) + 1, 2);
+                    expBoost = this.client.util.round((grimoire.strength / 10) + 1, 2);
                 }
             }
         }
         const previousAmount = data.exp;
-        const newAmount = this.client.util.round((previousAmount + amount) * data.expBoost, 0);
+        const newAmount = this.client.util.round((previousAmount + amount) * expBoost, 0);
         this.set(id, newAmount, "exp");
         return newAmount;
     }
