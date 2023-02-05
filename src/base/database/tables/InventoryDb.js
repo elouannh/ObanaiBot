@@ -153,9 +153,10 @@ class InventoryDb extends SQLiteTable {
             }
         }
         const previousAmount = data.wallet;
-        const newAmount = this.client.util.round((previousAmount + amount) * moneyBoost, 0);
+        const toAdd = this.client.util.round(amount * moneyBoost);
+        const newAmount = this.client.util.round(previousAmount + toAdd, 0);
         this.set(id, newAmount, "wallet");
-        return newAmount;
+        return toAdd;
     }
 
     /**

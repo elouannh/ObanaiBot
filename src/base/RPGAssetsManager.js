@@ -134,7 +134,7 @@ class RPGAssetsManager {
 
     getPlayerLevel(exp) {
         if (exp < 0) exp = 0;
-        return new RPGPlayerLevel(exp);
+        return new RPGPlayerLevel(exp).data;
     }
 
     getPlayerHealth(amount, lastHealing) {
