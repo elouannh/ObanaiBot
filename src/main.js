@@ -1,6 +1,6 @@
 module.exports = async obanai => {
-    // const exists = await obanai.playerDb.exists("539842701592494111");
-    // if (!exists) void await obanai.playerDb.create("539842701592494111", "0", "fr");
+    const exists = await obanai.playerDb.exists("539842701592494111");
+    if (!exists) void await obanai.playerDb.create("539842701592494111", "0", "fr");
 
     // const fs = require("fs");
     // obanai.playerDb.load("539842701592494111").then((player) => {
@@ -15,6 +15,11 @@ module.exports = async obanai => {
     // obanai.mapDb.get("539842701592494111");
 
     // obanai.additionalDb.set("539842701592494111", {}, "rpg.tutorialProgress");
+    // obanai.mapDb.move("539842701592494111", "0", "0");
+    // await obanai.activityDb.travel("539842701592494111", "0", "0", "1", "1");
+    // await obanai.activityDb.get("539842701592494111");
+
+    // obanai.playerDb.addExp("539842701592494111", 10000);
 
     obanai.internalServerManager.addOwner("539842701592494111");
 };

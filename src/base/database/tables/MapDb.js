@@ -45,6 +45,17 @@ class MapDb extends SQLiteTable {
     }
 
     /**
+     * Function that moves a player on an area/region.
+     * @param {String} id The user ID
+     * @param {String} regionId The region ID
+     * @param {String} areaId The area ID
+     */
+    move(id, regionId, areaId) {
+        this.set(id, regionId, "regionId");
+        this.set(id, areaId, "areaId");
+    }
+
+    /**
      * Set an area as already excavated.
      * @param {String} id The user ID
      * @param {String} regionId The region ID

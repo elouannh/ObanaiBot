@@ -88,6 +88,17 @@ class ActivityDb extends SQLiteTable {
                     },
                     "training",
                 );
+                const lang = this.client.languageManager.getLang(this.client.playerDb.getLang(id)).json;
+                const exp = this.client.playerDb.addExp(id, Number(levelToReach));
+                const embed = new EmbedBuilder()
+                    .setTitle(lang.rpgAssets.trainingCompletedTitle)
+                    .setDescription(lang.rpgAssets.trainingCompleted
+                        .replace("%STAT", data.training.statistic.name)
+                        .replace("%LEVEL", levelToReach)
+                        .replace("%EXP", exp),
+                    )
+                    .setColor(this.client.enums.Colors.Green);
+                this.client.notify(id, { embeds: [embed] });
                 data.training = {
                     currentlyTraining: false,
                     startedDate: 0,
@@ -95,8 +106,103 @@ class ActivityDb extends SQLiteTable {
                 };
             }
         }
+        if (data.travel.currentlyTraveling) {
+            const departure = this.client.RPGAssetsManager.getMapRegion(
+                this.client.playerDb.getLang(id), data.travel.departurePoint.regionId,
+            );
+            const departureArea = departure.getArea(data.travel.departurePoint.areaId);
+            const destination = this.client.RPGAssetsManager.getMapRegion(
+                this.client.playerDb.getLang(id), data.travel.destination.regionId,
+            );
+            const destinationArea = destination.getArea(data.travel.destination.areaId);
+            let distance = 0;
+            if (departure.id === destination.id) {
+                distance = this.client.RPGAssetsManager.getAreasDistance(departureArea, destinationArea);
+            }
+            else {
+                distance = this.client.RPGAssetsManager.getRegionsDistance(
+                    { region: departure, area: departureArea },
+                    { region: destination, area: destinationArea },
+                );
+            }
+            const endedDate = this.client.util.round(data.travel.startedDate
+                + (distance * this.client.enums.Units.MinutesPerDistanceUnit * 60 * 1000),
+            );
+            // const timeLeft = endedDate - Date.now();
+            const timeLeft = -1;
+
+            if (timeLeft <= 0) {
+                this.client.mapDb.move(id, destination.id, destinationArea.id);
+                this.set(
+                    id,
+                    {
+                        currentlyTraveling: false,
+                        startedDate: 0,
+                        departurePoint: {
+                            regionId: null,
+                            areaId: null,
+                        },
+                        destination: {
+                            regionId: null,
+                            areaId: null,
+                        },
+                    },
+                    "travel",
+                );
+                const lang = this.client.languageManager.getLang(this.client.playerDb.getLang(id)).json;
+                const exp = this.client.playerDb.addExp(id, distance);
+                const embed = new EmbedBuilder()
+                    .setTitle(lang.rpgAssets.embeds.travelCompletedTitle)
+                    .setDescription(lang.rpgAssets.embeds.travelCompleted
+                        .replace("%OLD", `${departure.name} - ${departureArea.name}`)
+                        .replace("%NEW", `${destination.name} - ${destinationArea.name}`)
+                        .replace("%EXP", exp),
+                    )
+                    .setColor(this.client.enums.Colors.Green);
+                this.client.notify(id, { embeds: [embed] });
+                data.travel = {
+                    currentlyTraveling: false,
+                    startedDate: 0,
+                    departurePoint: {
+                        regionId: null,
+                        areaId: null,
+                    },
+                    destination: {
+                        regionId: null,
+                        areaId: null,
+                    },
+                };
+            }
+        }
 
         return data;
+    }
+
+    /**
+     * Function that starts travel to the specified destination.
+     * @param {String} id The user ID
+     * @param {String} departureRegionId The departure region ID
+     * @param {String} departureAreaId The departure area ID
+     * @param {String} destinationRegionId The destination region ID
+     * @param {String} destinationAreaId The destination area ID
+     */
+    async travel(id, departureRegionId, departureAreaId, destinationRegionId, destinationAreaId) {
+        this.set(
+            id,
+            {
+                currentlyTraveling: true,
+                startedDate: 1675601351385,
+                departurePoint: {
+                    regionId: departureRegionId,
+                    areaId: departureAreaId,
+                },
+                destination: {
+                    regionId: destinationRegionId,
+                    areaId: destinationAreaId,
+                },
+            },
+            "travel",
+        );
     }
 
     /**

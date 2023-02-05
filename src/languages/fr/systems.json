@@ -14,7 +14,6 @@
     "tutorialEnd": "Ce tutoriel est terminé. Amusez-vous bien ! :D",
     "playerAlreadyExists": "Vous avez déjà commencé votre aventure.",
     "choiceIgnored": "Vous avez oublié de répondre. Veuillez réessayer cette commande.",
-    "currentlyInDevelopment": "Cette commande est actuellement en cours de développement.",
     "timeUnits": {
         "y": ["an", "ans", "a", "a"],
         "mo": ["mois", "mois", "mo", "mo"],

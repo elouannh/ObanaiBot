@@ -472,7 +472,13 @@
         "questLabel": "Étiquette de la quête",
         "noQuest": "Aucune quête.",
         "dailyLocked": "Les quêtes quotidiennes sont disponibles à partir du rang **Mizunoe**.",
-        "playerRank": "Rang de pourfendeur"
+        "playerRank": "Rang de pourfendeur",
+        "trainingCompletedTitle": "Entraînement terminé !",
+        "trainingCompleted": "Entraînement terminé ! Votre **%STAT** passe au niveau **%LEVEL**.\n\n→ Vous avez gagné **%EXP** exp.",
+        "travelCompletedTitle": "Voyage terminé !",
+        "travelCompleted": "Départ de →\n> **%OLD**\nArrivé à →\n> **%NEW**\n\n→ Vous avez gagné **%EXP** exp.",
+        "levelUpTitle": "Niveau supérieur !",
+        "levelUp": "Vous avez atteint le niveau supérieur !\n**Niveau %OLD → Niveau %NEW**"
     },
     "themes": {
         "Default": "Défaut"

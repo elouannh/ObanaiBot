@@ -15,8 +15,6 @@ class RPGPlayerLevel {
 
         this.data.required = ((this.data.level + 2) * 50);
         this.data.toReach = this.data.required - this.data.reached;
-
-        return this.data;
     }
 }
 

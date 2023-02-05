@@ -155,13 +155,27 @@ class PlayerDb extends SQLiteTable {
      * Add xp to the player
      * @param {String} id The user ID
      * @param {Number} amount The amount to add
-     * @returns {Number} The new xp amount
+     * @returns {Number} The new xp amount given
      */
     addExp(id, amount) {
-        const previousAmount = this.get(id).exp;
-        const newAmount = previousAmount + amount;
+        const data = this.get(id);
+        let expBoost = 1;
+        const inventoryData = this.client.inventoryDb.get(id);
+        if (inventoryData.enchantedGrimoire.id !== null) {
+            const grimoire = this.client.RPGAssetsManager.getEnchantedGrimoire(
+                this.getLang(id), inventoryData.enchantedGrimoire.id,
+            );
+            for (const grimoireEffect of grimoire.effects) {
+                if (grimoireEffect.id === "experienceBoost") {
+                    expBoost = this.client.util.round((grimoire.strength / 10) + 1, 2);
+                }
+            }
+        }
+        const previousAmount = data.exp;
+        const toAdd = this.client.util.round(amount * expBoost);
+        const newAmount = this.client.util.round(previousAmount + toAdd, 0);
         this.set(id, newAmount, "exp");
-        return newAmount;
+        return toAdd;
     }
 
     /**

@@ -301,8 +301,7 @@ class Command {
     }
 
     async return(content, ephemeral = false) {
-        const method = { "true": "editReply", "false": "reply" }[String(this.interaction.replied)];
-        await this.interaction[method]({ content, ephemeral, components: [] }).catch(this.client.catchError);
+        await this.interaction.editReply({ content, ephemeral, components: [] }).catch(this.client.catchError);
         return this.end();
     }
 
