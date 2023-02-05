@@ -86,6 +86,31 @@ class RPGAssetsManager {
         return new RPGMapRegion(this.getLangData(lang, "map"), id, this.map.regions[id]);
     }
 
+    getRegionsDistance(departure, destination) {
+        // distance between the area departure and the region gate (the arrival area where the player must go)
+        const departureArea = departure.region.getArea(departure.area.id);
+        const departureRegionGate = departure.region.getArea(departure.region.arrivalArea.id);
+        const distanceToLeave = this.getAreasDistance(departureArea, departureRegionGate);
+
+        // distance between the area destination and the region gate (the arrival area where the player must go)
+        const destinationArea = destination.region.getArea(destination.area.id);
+        const destinationRegionGate = destination.region.getArea(departure.region.arrivalArea.id);
+        const distanceToArrive = this.getAreasDistance(destinationArea, destinationRegionGate);
+
+        // distance between the regions
+        const distanceBetweenRegions = Math.sqrt(
+            (departure.region.x - destination.region.x) ** 2
+            + (departure.region.y - destination.region.y) ** 2,
+        );
+
+        // return the sum of the distances
+        return distanceToLeave + distanceBetweenRegions + distanceToArrive;
+    }
+
+    getAreasDistance(departure, arrival) {
+        return Math.sqrt((departure.x - arrival.x) ** 2 + (departure.y - arrival.y) ** 2);
+    }
+
     getMaterial(lang, id) {
         if (!(id in this.materials)) return "Invalid Material ID";
         return new RPGMaterial(

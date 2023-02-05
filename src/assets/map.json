@@ -15,8 +15,31 @@
                 },
                 "1": {
                     "id": "1",
+                    "x": 14,
+                    "y": 15,
+                    "biome": "wintryVeil",
+                    "paths": ["0"]
+                }
+            },
+            "paths": []
+        },
+        "1": {
+            "id": "0",
+            "x": 50,
+            "y": 50,
+            "arrivalArea": "0",
+            "areas": {
+                "0": {
+                    "id": "0",
                     "x": 0,
                     "y": 0,
+                    "biome": "wintryVeil",
+                    "paths": ["1"]
+                },
+                "1": {
+                    "id": "1",
+                    "x": 14,
+                    "y": 15,
                     "biome": "wintryVeil",
                     "paths": ["0"]
                 }

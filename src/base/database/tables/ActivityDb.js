@@ -106,8 +106,64 @@ class ActivityDb extends SQLiteTable {
                 this.client.notify(id, { embeds: [embed] });
             }
         }
+        if (data.travel.currentlyTraveling) {
+            const departure = this.client.RPGAssetsManager.getMapRegion(
+                this.client.playerDb.getLang(id), data.travel.departurePoint.regionId,
+            );
+            const destination = this.client.RPGAssetsManager.getMapRegion(
+                this.client.playerDb.getLang(id), data.travel.destination.regionId,
+            );
+            let distance = 0;
+            if (departure.id === destination.id) {
+                distance = this.client.RPGAssetsManager.getAreasDistance(
+                    departure.getArea(data.travel.departurePoint.areaId),
+                    destination.getArea(data.travel.destination.areaId),
+                );
+            }
+            else {
+                distance = this.client.RPGAssetsManager.getRegionsDistance(
+                    { region: departure, area: departure.getArea(data.travel.departurePoint.areaId) },
+                    { region: destination, area: destination.getArea(data.travel.destination.areaId) },
+                );
+            }
+            const endedDate = this.client.util.round(data.travel.startedDate
+                + (distance * this.client.enums.Units.MinutesPerDistanceUnit * 60 * 1000),
+            );
+            const timeLeft = endedDate - Date.now();
+
+            if (timeLeft <= 0) {
+
+            }
+        }
 
         return data;
+    }
+
+    /**
+     * Function that starts travel to the specified destination.
+     * @param {String} id The user ID
+     * @param {String} departureRegionId The departure region ID
+     * @param {String} departureAreaId The departure area ID
+     * @param {String} destinationRegionId The destination region ID
+     * @param {String} destinationAreaId The destination area ID
+     */
+    async travel(id, departureRegionId, departureAreaId, destinationRegionId, destinationAreaId) {
+        this.set(
+            id,
+            {
+                currentlyTraveling: true,
+                startedDate: 1675601351385,
+                departurePoint: {
+                    regionId: departureRegionId,
+                    areaId: departureAreaId,
+                },
+                destination: {
+                    regionId: destinationRegionId,
+                    areaId: destinationAreaId,
+                },
+            },
+            "travel",
+        );
     }
 
     /**

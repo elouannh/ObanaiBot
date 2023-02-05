@@ -69,7 +69,6 @@ module.exports = {
     },
     Units: {
         MinutesPerDistanceUnit: 5,
-        MinutesOfForgingPerRarity: 120,
     },
     Images: {
         Character0: "https://cdn.discordapp.com/attachments/980577808243900446/1037877260201504918/MC_ObanaiBot.png",
