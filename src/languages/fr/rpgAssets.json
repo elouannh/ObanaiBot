@@ -257,6 +257,13 @@
                     "0": "Shukuba Accueillant (Omukae)",
                     "1": "Shukuba du Désespoir (Zetsubō)"
                 }
+            },
+            "1": {
+                "name": "Région test",
+                "areas": {
+                    "0": "Test 1",
+                    "1": "Test 2"
+                }
             }
         },
         "biomes": {
