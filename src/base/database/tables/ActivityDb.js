@@ -115,16 +115,7 @@ class ActivityDb extends SQLiteTable {
                 this.client.playerDb.getLang(id), data.travel.destination.regionId,
             );
             const destinationArea = destination.getArea(data.travel.destination.areaId);
-            let distance = 0;
-            if (departure.id === destination.id) {
-                distance = this.client.RPGAssetsManager.getAreasDistance(departureArea, destinationArea);
-            }
-            else {
-                distance = this.client.RPGAssetsManager.getRegionsDistance(
-                    { region: departure, area: departureArea },
-                    { region: destination, area: destinationArea },
-                );
-            }
+            const distance = this.distance(departure, departureArea, destination, destinationArea);
             const endedDate = this.client.util.round(data.travel.startedDate
                 + (distance * this.client.enums.Units.MinutesPerDistanceUnit * 60 * 1000),
             );
@@ -178,19 +169,42 @@ class ActivityDb extends SQLiteTable {
     }
 
     /**
+     * Functions that calculate the distance between a departure and a destination and returns the units.
+     * @param {Object} departure The departure region
+     * @param {Object} destination The destination region
+     * @param {Object} departureArea The departure area
+     * @param {Object} destinationArea The destination area
+     * @returns {Number} The distance between the departure and the destination
+     */
+    distance(departure, destination, departureArea, destinationArea) {
+        let distance = 0;
+        if (departure.id === destination.id) {
+            distance = this.client.RPGAssetsManager.getAreasDistance(departureArea, destinationArea);
+        }
+        else {
+            distance = this.client.RPGAssetsManager.getRegionsDistance(
+                { region: departure, area: departureArea },
+                { region: destination, area: destinationArea },
+            );
+        }
+        return distance;
+    }
+
+    /**
      * Function that starts travel to the specified destination.
      * @param {String} id The user ID
+     * @param {Number} startedDate The time when the travel started
      * @param {String} departureRegionId The departure region ID
      * @param {String} departureAreaId The departure area ID
      * @param {String} destinationRegionId The destination region ID
      * @param {String} destinationAreaId The destination area ID
      */
-    async travel(id, departureRegionId, departureAreaId, destinationRegionId, destinationAreaId) {
+    async travel(id, startedDate, departureRegionId, departureAreaId, destinationRegionId, destinationAreaId) {
         this.set(
             id,
             {
                 currentlyTraveling: true,
-                startedDate: Date.now(),
+                startedDate,
                 departurePoint: {
                     regionId: departureRegionId,
                     areaId: departureAreaId,

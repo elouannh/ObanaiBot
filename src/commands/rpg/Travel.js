@@ -116,7 +116,24 @@ class Travel extends Command {
         if (areaChoice === null) return this.end();
         area = region.getArea(`${areaChoice[0]}`);
 
-        console.log(region.name, " || ", area.name);
+        const distance = this.client.activityDb.distance(map.region, region, map.area, area);
+        const startedDate = Date.now();
+        const time = distance * 5 * 60 * 1000;
+
+        const wantsToTravel = await this.choice(
+            {
+                content: this.trad.wantsToTravel.replace("%LOCATION_NAME", `${region.name}, ${area.name}`)
+                    + this.trad.endsInProbably
+                        .replace("%DATE", `<t:${this.client.util.round((startedDate + time) / 1000)}:R>`),
+            },
+            this.trad.travel,
+            this.trad.cancel,
+        );
+        if (wantsToTravel === null) return this.end();
+
+        if (wantsToTravel === "primary") {
+
+        }
 
         return this.end();
     }

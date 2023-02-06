@@ -19,7 +19,7 @@ module.exports = async obanai => {
     // obanai.mapDb.get("539842701592494111");
     // obanai.mapDb.move("539842701592494111", "0", "0");
 
-    // await obanai.activityDb.travel("539842701592494111", "0", "0", "1", "0");
+    // await obanai.activityDb.travel("539842701592494111", Date.now(), "0", "0", "1", "0");
     obanai.activityDb.set(
         "539842701592494111",
         {

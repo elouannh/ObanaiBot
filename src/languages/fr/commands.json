@@ -100,6 +100,10 @@
         "chooseArea": "Choisissez une zone:",
         "chooseRegion": "Choisissez une région:",
         "chooseRegionArea": "Choisissez une zone de **%REGION_NAME**:",
-        "availableAreas": "Zones disponibles: %AREAS"
+        "availableAreas": "Zones disponibles: %AREAS",
+        "wantsToTravel": "Voulez-vous vraiment voyager vers **%LOCATION_NAME** ?",
+        "endsInProbably": "\nVotre voyage se terminerait: %DATE.",
+        "travel": "Voyager",
+        "cancel": "Annuler"
     }
 }
