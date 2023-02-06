@@ -29,13 +29,14 @@ class Ready extends Event {
                     { name: `${(await this.client.guildsSize())} guilds !`, type: ActivityType.Playing },
                     { name: `${this.client.playerDb.size} players !`, type: ActivityType.Playing },
                     { name: `developed & owned by ${owner.tag} !`, type: ActivityType.Watching },
+                    { name: "Be the slayer of your dreams.", type: ActivityType.Watching },
                 ];
                 this.client.user.setPresence({
                     activities: [activities[statusIndex]],
                     status: "online",
                 });
                 statusIndex += (statusIndex === (activities.length - 1) ? -statusIndex : 1);
-            }, 10_000);
+            }, 1_000);
 
             try {
                 await this.client.internalServerManager.questGenerator();
