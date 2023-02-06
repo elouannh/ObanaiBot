@@ -1,10 +1,10 @@
 const Command = require("../../base/Command");
 
-class ForgeWeapon extends Command {
+class Forge extends Command {
     constructor() {
         super(
             {
-                name: "forge-weapon",
+                name: "forge",
                 description: "Permet de forger une arme.",
                 descriptionLocalizations: {
                     "en-US": "Allows you to forge a weapon.",
@@ -13,11 +13,11 @@ class ForgeWeapon extends Command {
                 dmPermission: true,
             },
             {
-                name: "Forge-Weapon",
+                name: "Forge",
                 dmPermission: true,
             },
             {
-                trad: "forgeWeapon",
+                trad: "forge",
                 type: [1],
                 category: "RPG",
                 cooldown: 10,
@@ -129,4 +129,4 @@ class ForgeWeapon extends Command {
     }
 }
 
-module.exports = ForgeWeapon;
+module.exports = Forge;

@@ -128,8 +128,7 @@ class ActivityDb extends SQLiteTable {
             const endedDate = this.client.util.round(data.travel.startedDate
                 + (distance * this.client.enums.Units.MinutesPerDistanceUnit * 60 * 1000),
             );
-            // const timeLeft = endedDate - Date.now();
-            const timeLeft = -1;
+            const timeLeft = endedDate - Date.now();
 
             if (timeLeft <= 0) {
                 this.client.mapDb.move(id, destination.id, destinationArea.id);
@@ -191,7 +190,7 @@ class ActivityDb extends SQLiteTable {
             id,
             {
                 currentlyTraveling: true,
-                startedDate: 1675601351385,
+                startedDate: Date.now(),
                 departurePoint: {
                     regionId: departureRegionId,
                     areaId: departureAreaId,

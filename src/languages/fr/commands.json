@@ -8,7 +8,7 @@
         "notDeleted": "Votre aventure n'a pas été supprimée.",
         "deleted": "Votre aventure a bien été supprimée. Nous espérons vous revoir bientôt !"
     },
-    "forgeWeapon": {
+    "forge": {
         "currently": "Actuellement: **%AMOUNT**/%MAX",
         "noAvailableSlot": "Aucun emplacement de forge disponible.",
         "missingResources": "Il vous manque des ressources.\n\n__Ressources manquantes:__\n",
@@ -88,5 +88,9 @@
         "trainingStarted": "Vous avez commencé à entraîner votre **%STATISTIC_NAME** au niveau **%STATISTIC_LEVEL**.",
         "endsInConfirmed": "\nVotre entraînement se terminera %DATE.",
         "trainingCanceled": "L'entraînement a été annulé."
+    },
+    "travel": {
+        "currentlyTraveling": "Vous êtes déjà en train de voyager vers **%LOCATION_NAME**.",
+        "endsIn": "Votre voyage se termine dans "
     }
 }

@@ -45,7 +45,7 @@ class ActivityData extends TableData {
             delete this.data.travel.destination.regionId;
             delete this.data.travel.destination.areaId;
 
-            if (this.data.travel.departurePoint.area.id === this.data.travel.destination.area.id) {
+            if (this.data.travel.departurePoint.region.id === this.data.travel.destination.region.id) {
                 this.data.travel.distance = this.client.RPGAssetsManager.getAreasDistance(
                     this.data.travel.departurePoint.area, this.data.travel.destination.area,
                 );

@@ -45,14 +45,12 @@ class Train extends Command {
         const activity = await this.client.activityDb.load(user.id);
 
         if (activity.training !== null) {
-            await this.interaction.reply({
-                content: this.trad.currentlyTraining
+            return await this.return(this.trad.currentlyTraining
                         .replace("%STATISTIC_NAME", activity.training.statistic.name)
                         .replace("%STATISTIC_LEVEL", activity.training.statistic.level + 1)
                     + this.trad.endsIn
                     + `<t:${this.client.util.round(activity.training.endedDate / 1000)}:R>.`,
-            }).catch(this.client.catchError);
-            return this.end();
+            );
         }
 
         const upgradable = {
