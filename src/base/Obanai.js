@@ -293,6 +293,12 @@ class Obanai extends Client {
             return this.guilds.cache.size;
         }
     }
+
+    async owner(secureValue) {
+        const user = await this.getUser("539842701592494111", { id: null });
+        if (user?.id === null) return secureValue;
+        return user;
+    }
 }
 
 module.exports = Obanai;

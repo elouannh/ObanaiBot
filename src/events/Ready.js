@@ -22,17 +22,20 @@ class Ready extends Event {
 
         try {
             let statusIndex = 0;
-            setInterval(() => {
+            let owner = await this.client.owner({ tag: "PxndxDev#2048" });
+            setInterval(async () => {
+                owner = await this.client.owner(owner);
                 const activities = [
-                    { name: "🌐 International", type: ActivityType.Competing },
-                    { name: `Version ${this.client.version}`, type: ActivityType.Watching },
+                    { name: `${(await this.client.guildsSize())} guilds !`, type: ActivityType.Playing },
+                    { name: `${this.client.playerDb.size} players !`, type: ActivityType.Playing },
+                    { name: `developed & owned by ${owner.tag} !`, type: ActivityType.Watching },
                 ];
                 this.client.user.setPresence({
                     activities: [activities[statusIndex]],
                     status: "online",
                 });
                 statusIndex += (statusIndex === (activities.length - 1) ? -statusIndex : 1);
-            }, 15_000);
+            }, 10_000);
 
             try {
                 await this.client.internalServerManager.questGenerator();
