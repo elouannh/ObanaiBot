@@ -78,7 +78,7 @@
     },
     "train": {
         "currentlyTraining": "Vous êtes déjà en train d'améliorer votre **%STATISTIC_NAME** au niveau **%STATISTIC_LEVEL**. ",
-        "endsIn": "Votre entraînement se termine dans ",
+        "endsIn": "Votre entraînement se termine ",
         "choice": "Choisissez une statistique à améliorer:",
         "levelUpTo": "Passage au niveau %LEVEL",
         "wantsToTrain": "Voulez-vous vraiment entraîner votre **%STATISTIC_NAME** au niveau **%STATISTIC_LEVEL** ?",
@@ -91,6 +91,15 @@
     },
     "travel": {
         "currentlyTraveling": "Vous êtes déjà en train de voyager vers **%LOCATION_NAME**.",
-        "endsIn": "Votre voyage se termine dans "
+        "endsIn": "Votre voyage se termine ",
+        "chooseMode": "Quel type de voyage ?",
+        "shortTravel": "Voyage court",
+        "longTravel": "Voyage long",
+        "shortTravelDescription": "Changer de zone dans %REGION_NAME.",
+        "longTravelDescription": "Changer de région.",
+        "chooseArea": "Choisissez une zone:",
+        "chooseRegion": "Choisissez une région:",
+        "chooseRegionArea": "Choisissez une zone de **%REGION_NAME**:",
+        "availableAreas": "Zones disponibles: %AREAS"
     }
 }

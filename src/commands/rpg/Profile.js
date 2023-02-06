@@ -125,6 +125,10 @@ class Profile extends Command {
                         : [attachments[lastPanel.toLowerCase()]],
                 },
                 options,
+                null,
+                null,
+                false,
+                true,
             );
             if (interaction === null || interaction === lastPanel || interaction === "cancel") {
                 if (interaction === null || interaction === "cancel") loop = false;
