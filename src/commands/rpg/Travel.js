@@ -132,9 +132,14 @@ class Travel extends Command {
         if (wantsToTravel === null) return this.end();
 
         if (wantsToTravel === "primary") {
-
+            this.client.activityDb.travel(user.id, startedDate, map.region.id, map.area.id, region.id, area.id);
+            return await this.return(
+                this.trad.startedTraveling.replace("%LOCATION_NAME", `${region.name}, ${area.name}`),
+            );
         }
-
+        else if (wantsToTravel === "secondary") {
+            return await this.return(this.trad.canceledTraveling);
+        }
         return this.end();
     }
 }

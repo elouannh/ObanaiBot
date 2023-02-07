@@ -102,7 +102,7 @@ class RPGAssetsManager {
             (departure.region.x - destination.region.x) ** 2
             + (departure.region.y - destination.region.y) ** 2
             + (departure.region.z - destination.region.z) ** 2,
-        );
+        ) * 10;
 
         // return the sum of the distances
         return distanceToLeave + distanceBetweenRegions + distanceToArrive;

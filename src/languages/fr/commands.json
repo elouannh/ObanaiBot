@@ -104,6 +104,8 @@
         "wantsToTravel": "Voulez-vous vraiment voyager vers **%LOCATION_NAME** ?",
         "endsInProbably": "\nVotre voyage se terminerait: %DATE.",
         "travel": "Voyager",
-        "cancel": "Annuler"
+        "cancel": "Annuler",
+        "startedTraveling": "Vous avez commencé à voyager vers **%LOCATION_NAME**.",
+        "canceledTraveling": "Le voyage a été annulé."
     }
 }
