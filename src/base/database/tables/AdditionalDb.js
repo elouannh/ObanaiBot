@@ -126,15 +126,20 @@ class AdditionalDb extends SQLiteTable {
             new ActionRowBuilder()
                 .setComponents(
                     new ButtonBuilder()
-                        .setCustomId("tutorial_next")
-                        .setLabel(userLang.json.systems.tutorialNext)
-                        .setStyle(ButtonStyle.Secondary),
-                    new ButtonBuilder()
                         .setCustomId("tutorial_skip")
                         .setStyle(ButtonStyle.Secondary)
                         .setEmoji(this.client.enums.Systems.Symbols.Cross),
                 ),
         ];
+        if (tutorial.step.array.length > 1) {
+            components[0].setComponents(
+                new ButtonBuilder()
+                    .setCustomId("tutorial_next")
+                    .setLabel(userLang.json.systems.tutorialNext)
+                    .setStyle(ButtonStyle.Secondary),
+                components[0].components[0],
+            );
+        }
 
         let i = 0;
         const message = await interaction.channel.send({
