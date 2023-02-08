@@ -40,6 +40,7 @@ class Profile extends Command {
     }
 
     async run() {
+        await this.interaction.deferReply().catch(this.client.catchError);
         const user = await this.getUserFromInteraction(this.interaction.type);
         if (!(await this.client.playerDb.exists(user.id))) {
             return await this.return(
@@ -49,7 +50,6 @@ class Profile extends Command {
                 true,
             );
         }
-        await this.interaction.deferReply().catch(this.client.catchError);
 
         const player = await this.client.playerDb.load(user.id);
         const inventory = await this.client.inventoryDb.load(user.id);
@@ -125,6 +125,10 @@ class Profile extends Command {
                         : [attachments[lastPanel.toLowerCase()]],
                 },
                 options,
+                null,
+                null,
+                false,
+                true,
             );
             if (interaction === null || interaction === lastPanel || interaction === "cancel") {
                 if (interaction === null || interaction === "cancel") loop = false;

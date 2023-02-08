@@ -45,16 +45,12 @@ class ActivityData extends TableData {
             delete this.data.travel.destination.regionId;
             delete this.data.travel.destination.areaId;
 
-            if (this.data.travel.departurePoint.area.id === this.data.travel.destination.area.id) {
-                this.data.travel.distance = this.client.RPGAssetsManager.getAreasDistance(
-                    this.data.travel.departurePoint.area, this.data.travel.destination.area,
-                );
-            }
-            else {
-                this.data.travel.distance = this.client.RPGAssetsManager.getRegionsDistance(
-                    this.data.travel.departurePoint, this.data.travel.destination,
-                );
-            }
+            this.data.travel.distance = this.client.activityDb.distance(
+                this.data.travel.departurePoint.region,
+                this.data.travel.destination.region,
+                this.data.travel.departurePoint.area,
+                this.data.travel.destination.area,
+            );
 
             this.data.travel.endedDate = this.client.util.round(this.data.travel.startedDate
                 + (this.data.travel.distance * this.client.enums.Units.MinutesPerDistanceUnit * 60 * 1000),

@@ -48,6 +48,10 @@ class SQLiteTable {
         if (!this.db.has(key)) return;
         return this.db.delete(key, ...args);
     }
+
+    get size() {
+        return this.db.size;
+    }
 }
 
 module.exports = SQLiteTable;

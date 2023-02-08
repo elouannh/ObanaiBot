@@ -1,6 +1,7 @@
 {
     "delete": {
-        "firstContent": "**Êtes-vous sûr de vouloir supprimer votre aventure ?**\n\nCette action est irréversible. Une fois votre aventure supprimée, vous ne pourrez plus la récupérer. Si vous êtes membre d'une guilde, vous serez automatiquement expulsé de celle-ci. Si vous dirigez une guilde, celle-ci se verra changer de chef par un membre aléatoire.",
+        "firstContent": "**Êtes-vous sûr de vouloir supprimer votre aventure ?**\n\nCette action est irréversible.",
+        "deleteInfos": "\n\n>>> • Une fois votre aventure supprimée, vous ne pourrez plus la récupérer.\n• Si vous êtes membre d'une guilde, vous serez automatiquement expulsé de celle-ci.\n• Si vous dirigez une guilde, celle-ci se verra changer de chef par un membre aléatoire.",
         "deleteButton": "Supprimer",
         "cancelButton": "Annuler",
         "deleteDefinitivelyButton": "Supprimer définitivement",
@@ -8,15 +9,15 @@
         "notDeleted": "Votre aventure n'a pas été supprimée.",
         "deleted": "Votre aventure a bien été supprimée. Nous espérons vous revoir bientôt !"
     },
-    "forgeWeapon": {
-        "currently": "Actuellement: **%AMOUNT**/%MAX",
+    "forge": {
+        "currently": "Actuellement: %AMOUNT/%MAX",
         "noAvailableSlot": "Aucun emplacement de forge disponible.",
-        "missingResources": "Il vous manque des ressources.\n\n__Ressources manquantes:__\n",
+        "missingResources": "**Oups ! Ressources manquantes:**\n",
         "weaponTypeChoice": "Choisissez le type de l'arme que vous voulez forger.",
         "wantsToForge": "Vous êtes sur le point de forger une arme de type **%WEAPON**.\nLa rareté de l'arme sera donc déterminée de façon __aléatoire__.\n\nÊtes-vous sûr de vouloir continuer ? Les ressources suivantes seront utilisées:",
         "forgeCanceled": "Vous avez annulé le forgeage.",
         "forgedSuccessInfos": "Le forgeron commence désormais à travailler sur une arme de rareté **%WEAPON_RARITY**. L'arme forgée sera donc **%WEAPON_NAME %WEAPON_RARITY_NAME**.",
-        "forgedSuccessTime": "\nLa forge durera `"
+        "forgedSuccessTime": "\nLa forge durera `%TIME`. (%DATE)"
     },
     "interact": {
         "optionDialogue": "Dialoguer",
@@ -28,6 +29,7 @@
         "optionGiveItemsDesc": "Permet de donner des objets à un PNJ.",
         "optionExcavate": "Fouiller",
         "optionExcavateDesc": "Permet de fouiller une zone.",
+        "alreadyExcavated": "*Vous avez déjà fouillé cette zone. Elle sera disponible à nouveau %DATE.*\n\n",
         "possiblesChoices": "Choix possibles:",
         "noPnjForDialogue": "Aucun PNJ n'est disponible pour dialoguer.",
         "pnjChoice": "Choix du PNJ:",
@@ -66,19 +68,20 @@
         "startIntroduction": "**ObanaiBot - Démarrez votre aventure**",
         "storyIntroduction": "Vous êtes un Matagi; un chasseur traditionnel des montagnes du nord du pays, dans la région du Tōhoku. Tout se déroule durant l'ère Taishō (1912-1926). Depuis quelques temps, sortir dehors est devenu dangereux. Des créatures étranges ont commencé à apparaître et les gens les appellent « Démons ». Cependant, votre âme guerrière et déterminée refuse de croire à des histoires nées de légendes urbaines. Vous décidez donc de partir à la recherche de ces créatures et de les chasser ; persuadé(e) qu'elles n'existent pas...",
         "tosAccept": "Pour **commencer votre aventure**, vous devez accepter les __Conditions Générales d'Utilisation d'ObanaiBot__, le __Code de conduite (Règlement) du serveur support__, et les __Terms of Service de Discord__.",
+        "links": "[CGU](<https://cutt.ly/cgufr>) • [Pol. de Conf.](<https://cutt.ly/privacyfr>) • [CdC](<https://cutt.ly/rulesfr>)",
         "botTosAccept": "Accepter les ToS d'ObanaiBot",
-        "botCofAccept": "Accepter le Code de Conduite d'ObanaiBit",
+        "botCofAccept": "Accepter le Code de Conduite d'ObanaiBot",
         "discordTosAccept": "Accepter les ToS Discord",
         "discordTosDescription": "En vous inscrivant sur Discord vous les acceptez.",
         "tosAccepted": "Vous avez accepté de nous rejoindre ! Votre profil de joueur est en création.\nIl est temps de **choisir votre personnage !**",
         "characterChoice": "Choisissez parmi les deux choix ci-dessous. **Attention, ce choix est __définitif__ !**",
         "joinTheSupport": "Si vous avez toute autre question, n'hésitez pas à rejoindre notre serveur Discord:\nhttps://discord.gg/gfVr2UNJqy",
         "tosDeclined": "Vous avez refusé les documents. Veuillez réessayer plus tard.",
-        "characterChosen": "Vous avez donc choisi **%CHAR**. Vous pouvez désormais commencer à jouer au bot; essayez de faire la commande `/profile` pour tester !"
+        "characterChosen": "Vous avez donc choisi **%CHAR**. Vous pouvez désormais commencer à jouer au bot; essayez de faire la commande </profile:1042903015155310664> pour tester !"
     },
     "train": {
         "currentlyTraining": "Vous êtes déjà en train d'améliorer votre **%STATISTIC_NAME** au niveau **%STATISTIC_LEVEL**. ",
-        "endsIn": "Votre entraînement se termine dans ",
+        "endsIn": "Votre entraînement se termine ",
         "choice": "Choisissez une statistique à améliorer:",
         "levelUpTo": "Passage au niveau %LEVEL",
         "wantsToTrain": "Voulez-vous vraiment entraîner votre **%STATISTIC_NAME** au niveau **%STATISTIC_LEVEL** ?",
@@ -88,5 +91,24 @@
         "trainingStarted": "Vous avez commencé à entraîner votre **%STATISTIC_NAME** au niveau **%STATISTIC_LEVEL**.",
         "endsInConfirmed": "\nVotre entraînement se terminera %DATE.",
         "trainingCanceled": "L'entraînement a été annulé."
+    },
+    "travel": {
+        "currentlyTraveling": "Vous êtes déjà en train de voyager vers **%LOCATION_NAME**.",
+        "endsIn": "Votre voyage se termine ",
+        "chooseMode": "Quel type de voyage ?",
+        "shortTravel": "Voyage court",
+        "longTravel": "Voyage long",
+        "shortTravelDescription": "Changer de zone dans %REGION_NAME.",
+        "longTravelDescription": "Changer de région.",
+        "chooseArea": "Choisissez une zone:",
+        "chooseRegion": "Choisissez une région:",
+        "chooseRegionArea": "Choisissez une zone de **%REGION_NAME**:",
+        "availableAreas": "Zones disponibles: %AREAS",
+        "wantsToTravel": "Voulez-vous vraiment voyager vers **%LOCATION_NAME** ?",
+        "endsInProbably": "\nVotre voyage se terminerait: %DATE.",
+        "travel": "Voyager",
+        "cancel": "Annuler",
+        "startedTraveling": "Vous avez commencé à voyager vers **%LOCATION_NAME**.",
+        "canceledTraveling": "Le voyage a été annulé."
     }
 }

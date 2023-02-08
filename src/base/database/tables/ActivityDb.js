@@ -72,6 +72,8 @@ class ActivityDb extends SQLiteTable {
 
     get(id) {
         const data = super.get(id);
+        const langId = this.client.playerDb.getLang(id);
+        const lang = this.client.languageManager.getLang(langId).json;
 
         if (data.training.currentlyTraining) {
             const levelToReach = this.client.playerDb.get(id).statistics[data.training.statistic] + 1;
@@ -88,7 +90,6 @@ class ActivityDb extends SQLiteTable {
                     },
                     "training",
                 );
-                const lang = this.client.languageManager.getLang(this.client.playerDb.getLang(id)).json;
                 const exp = this.client.playerDb.addExp(id, Number(levelToReach));
                 const embed = new EmbedBuilder()
                     .setTitle(lang.rpgAssets.trainingCompletedTitle)
@@ -108,28 +109,18 @@ class ActivityDb extends SQLiteTable {
         }
         if (data.travel.currentlyTraveling) {
             const departure = this.client.RPGAssetsManager.getMapRegion(
-                this.client.playerDb.getLang(id), data.travel.departurePoint.regionId,
+                langId, data.travel.departurePoint.regionId,
             );
             const departureArea = departure.getArea(data.travel.departurePoint.areaId);
             const destination = this.client.RPGAssetsManager.getMapRegion(
-                this.client.playerDb.getLang(id), data.travel.destination.regionId,
+                langId, data.travel.destination.regionId,
             );
             const destinationArea = destination.getArea(data.travel.destination.areaId);
-            let distance = 0;
-            if (departure.id === destination.id) {
-                distance = this.client.RPGAssetsManager.getAreasDistance(departureArea, destinationArea);
-            }
-            else {
-                distance = this.client.RPGAssetsManager.getRegionsDistance(
-                    { region: departure, area: departureArea },
-                    { region: destination, area: destinationArea },
-                );
-            }
+            const distance = this.distance(departure, departureArea, destination, destinationArea);
             const endedDate = this.client.util.round(data.travel.startedDate
                 + (distance * this.client.enums.Units.MinutesPerDistanceUnit * 60 * 1000),
             );
-            // const timeLeft = endedDate - Date.now();
-            const timeLeft = -1;
+            const timeLeft = endedDate - Date.now();
 
             if (timeLeft <= 0) {
                 this.client.mapDb.move(id, destination.id, destinationArea.id);
@@ -149,7 +140,6 @@ class ActivityDb extends SQLiteTable {
                     },
                     "travel",
                 );
-                const lang = this.client.languageManager.getLang(this.client.playerDb.getLang(id)).json;
                 const exp = this.client.playerDb.addExp(id, distance);
                 const embed = new EmbedBuilder()
                     .setTitle(lang.rpgAssets.embeds.travelCompletedTitle)
@@ -175,23 +165,92 @@ class ActivityDb extends SQLiteTable {
             }
         }
 
+        const blacksmith = this.client.RPGAssetsManager.loadBlacksmith(
+            langId, data.forge.blacksmith,
+        );
+        const finishedWeapons = [];
+        for (const forgingSlot in data.forge.forgingSlots) {
+            const slotData = data.forge.forgingSlots[forgingSlot];
+            if (!slotData.currentlyForging) continue;
+
+            const endedDate = slotData.startedDate
+                + blacksmith.timePerRarity * (Number(slotData.weapon.rarity) + 1) * 60 * 1000;
+            const timeLeft = endedDate - Date.now();
+
+            if (timeLeft <= 0) {
+                const weaponData = slotData.weapon;
+                const weapon = this.client.RPGAssetsManager.getWeapon(langId, weaponData.id, weaponData.rarity);
+                finishedWeapons.push(weapon);
+                this.client.inventoryDb.addWeapon(id, weapon.id, weapon.rarity, 1);
+                data.forge.forgingSlots[forgingSlot] = {
+                    id: "0",
+                    startedDate: 0,
+                    currentlyForging: false,
+                    weapon: {
+                        "id": null,
+                        "rarity": null,
+                    },
+                };
+                this.set(id, data.forge.forgingSlots, "forge", "forgingSlots");
+            }
+        }
+        if (finishedWeapons.length > 0) {
+            const form = lang.rpgAssets.embeds.forgeCompleted.split("\n\n")[1];
+            const embed = new EmbedBuilder()
+                .setTitle(lang.rpgAssets.embeds.forgeCompletedTitle)
+                .setDescription(
+                    lang.rpgAssets.embeds.forgeCompleted.split("\n\n")[0]
+                    + "\n\n"
+                    + finishedWeapons.map(w =>
+                        form
+                            .replace("%WEAPONS_NAME", w.name)
+                            .replace("%WEAPONS_RARITY_NAME", w.rarityName),
+                    ).join("\n"),
+                )
+                .setColor(this.client.enums.Colors.Green);
+            this.client.notify(id, { embeds: [embed] });
+        }
+
         return data;
+    }
+
+    /**
+     * Functions that calculate the distance between a departure and a destination and returns the units.
+     * @param {Object} departure The departure region
+     * @param {Object} destination The destination region
+     * @param {Object} departureArea The departure area
+     * @param {Object} destinationArea The destination area
+     * @returns {Number} The distance between the departure and the destination
+     */
+    distance(departure, destination, departureArea, destinationArea) {
+        let distance = 0;
+        if (departure.id === destination.id) {
+            distance = this.client.RPGAssetsManager.getAreasDistance(departureArea, destinationArea);
+        }
+        else {
+            distance = this.client.RPGAssetsManager.getRegionsDistance(
+                { region: departure, area: departureArea },
+                { region: destination, area: destinationArea },
+            );
+        }
+        return distance;
     }
 
     /**
      * Function that starts travel to the specified destination.
      * @param {String} id The user ID
+     * @param {Number} startedDate The time when the travel started
      * @param {String} departureRegionId The departure region ID
      * @param {String} departureAreaId The departure area ID
      * @param {String} destinationRegionId The destination region ID
      * @param {String} destinationAreaId The destination area ID
      */
-    async travel(id, departureRegionId, departureAreaId, destinationRegionId, destinationAreaId) {
+    async travel(id, startedDate, departureRegionId, departureAreaId, destinationRegionId, destinationAreaId) {
         this.set(
             id,
             {
                 currentlyTraveling: true,
-                startedDate: 1675601351385,
+                startedDate,
                 departurePoint: {
                     regionId: departureRegionId,
                     areaId: departureAreaId,
@@ -226,7 +285,7 @@ class ActivityDb extends SQLiteTable {
 
     /**
      * @typedef {Object} ForgeResource
-     * @property {RPGMaterial} instance The material instance
+     * @property {String} id The material id
      * @property {Number} amount The amount of the material
      */
     /**
@@ -251,7 +310,7 @@ class ActivityDb extends SQLiteTable {
         if (freeSlotId === null) return false;
 
         for (const resource of resources) {
-            this.client.inventoryDb.removeMaterial(id, resource.instance.id, resource.amount);
+            this.client.inventoryDb.removeMaterial(id, resource.id, resource.amount);
         }
 
         this.set(

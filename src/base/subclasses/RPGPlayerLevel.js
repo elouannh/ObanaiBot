@@ -2,10 +2,9 @@ class RPGPlayerLevel {
     constructor(exp) {
         this.data = {
             level: 0,
-            exp: exp,
+            exp,
             reached: exp,
-            required: 1000,
-            toReach: 1000,
+            required: 100,
         };
 
         while (this.data.reached >= ((this.data.level + 2) * 50)) {
@@ -14,7 +13,6 @@ class RPGPlayerLevel {
         }
 
         this.data.required = ((this.data.level + 2) * 50);
-        this.data.toReach = this.data.required - this.data.reached;
     }
 }
 

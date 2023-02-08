@@ -210,12 +210,16 @@ class Command {
     async getUserFromInteraction(interactionType) {
         const user = this.interaction.user;
         let userId = user.id;
-        if (interactionType === 1) userId = this.interaction.options?.get("user")?.user?.id || userId;
-        else if (interactionType === 2) userId = this.client.users.cache.get(this.interaction.targetId) || userId;
+        if (interactionType === 1) {
+            userId = this.interaction.options?.get("user")?.user?.id || userId;
+        }
+        else if (interactionType === 2) {
+            userId = this.client.users.cache.get(this.interaction.options.getUser("user")?.id)?.id || userId;
+        }
         return await this.client.getUser(userId, user);
     }
 
-    async choice(messagePayload, primary, secondary) {
+    async choice(messagePayload, primary, secondary, removeWarn = false) {
         const message = await this.interaction.editReply(Object.assign(
             messagePayload, {
                 components: [
@@ -239,18 +243,22 @@ class Command {
             time: 60_000,
         }).catch(this.client.catchError);
 
-        if (!collected) {
-            await this.interaction.editReply({
-                content: this.lang.systems.choiceIgnored,
-                components: [],
-            }).catch(this.client.catchError);
+        if (removeWarn) {
+            if (!collected) {
+                await this.interaction.editReply({ components: [] }).catch(this.client.catchError);
+                return null;
+            }
+        }
+        else if (!collected) {
+            await this.interaction.editReply({ content: this.lang.systems.choiceIgnored, components: [] })
+                .catch(this.client.catchError);
             return null;
         }
         await collected.deferUpdate().catch(this.client.catchError);
         return collected.customId;
     }
 
-    async menu(messagePayload, options, min = null, max = null, removeCancelOption = false) {
+    async menu(messagePayload, options, min = null, max = null, removeCancelOption = false, removeWarn = false) {
         const menu = new StringSelectMenuBuilder()
             .setCustomId("menu")
             .setOptions(
@@ -282,19 +290,23 @@ class Command {
             time: 60_000,
         }).catch(this.client.catchError);
 
-        if (!collected) {
-            await this.interaction.editReply({
-                content: this.lang.systems.choiceIgnored,
-                components: [],
-            }).catch(this.client.catchError);
-            return null;
+        if (removeWarn) {
+            if (!collected || collected.values[0] === "cancel") {
+                await this.interaction.editReply({ components: [] }).catch(this.client.catchError);
+                return null;
+            }
         }
-        if (collected.values[0] === "cancel") {
-            await this.interaction.editReply({
-                content: this.lang.systems.choiceCanceled,
-                components: [],
-            }).catch(this.client.catchError);
-            return null;
+        else {
+            if (!collected) {
+                await this.interaction.editReply({ content: this.lang.systems.choiceIgnored, components: [] })
+                    .catch(this.client.catchError);
+                return null;
+            }
+            if (collected.values[0] === "cancel") {
+                await this.interaction.editReply({ content: this.lang.systems.choiceCanceled, components: [] })
+                    .catch(this.client.catchError);
+                return null;
+            }
         }
         await collected.deferUpdate().catch(this.client.catchError);
         return collected.values;

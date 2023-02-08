@@ -13,11 +13,11 @@ class Start extends Command {
                 dmPermission: true,
             },
             {
-                name: "Quests",
+                name: "Start",
                 dmPermission: true,
             },
             {
-                trad: "quests",
+                trad: "start",
                 type: [1],
                 category: "RPG",
                 cooldown: 10,
@@ -31,10 +31,10 @@ class Start extends Command {
     }
 
     async run() {
+        await this.interaction.deferReply().catch(this.client.catchError);
         if (await this.client.playerDb.exists(this.interaction.user.id)) {
             return await this.return(this.lang.systems.playerAlreadyExists, true);
         }
-        await this.interaction.deferReply().catch(this.client.catchError);
 
         const languagesOptions = this.langManager.languages.map(lang => Object.assign(
             {}, { label: lang.langName, value: lang.lang, emoji: lang.getFlag },
@@ -42,7 +42,7 @@ class Start extends Command {
 
         const lang = await this.menu(
             {
-                content: this.mention + this.lang.commands.start.languageChoice
+                content: this.trad.languageChoice
                     + "\n\n"
                     + this.langManager.multilang("commands", "start", "languageDemonstration"),
             },
@@ -53,41 +53,40 @@ class Start extends Command {
 
         const tos = await this.menu(
             {
-                content: this.mention + `${this.lang.commands.start.startIntroduction}\n\n`
-                    + `\`\`\`${this.lang.commands.start.storyIntroduction}\`\`\`\n`
-                    + `\n> ${this.lang.commands.start.tosAccept}\n`,
+                content: `${this.trad.startIntroduction}\n\n`
+                    + `\`\`\`${this.trad.storyIntroduction}\`\`\`\n`
+                    + `\n> ${this.trad.tosAccept}\n\n**${this.trad.links}**`,
             },
             [
                 {
-                    label: this.lang.commands.start.discordTosAccept,
-                    description: this.lang.commands.start.discordTosDescription,
+                    label: this.trad.discordTosAccept,
+                    description: this.trad.discordTosDescription,
                     value: "discordTos",
                     default: true,
                 },
                 {
-                    label: this.lang.commands.start.botTosAccept,
+                    label: this.trad.botTosAccept,
                     value: "botTosAccept",
                 },
                 {
-                    label: this.lang.commands.start.botCofAccept,
+                    label: this.trad.botCofAccept,
                     value: "botCofAccept",
                 },
             ],
-            3, 3,
+            3, 3, true,
         );
         if (tos === null) return this.end();
 
-        if (tos?.length < 3) return await this.return(this.lang.commands.start.tosDeclined);
+        if (tos?.length < 3) return await this.return(this.trad.tosDeclined);
 
         const firstCharacter = await this.client.RPGAssetsManager.getCharacter(this.lang._id, "0");
         const secondCharacter = await this.client.RPGAssetsManager.getCharacter(this.lang._id, "1");
 
         const choice = await this.menu(
             {
-                content: this.mention
-                    + this.lang.commands.start.tosAccepted
+                content: this.trad.tosAccepted
                     + "\n\n"
-                    + this.lang.commands.start.characterChoice,
+                    + this.trad.characterChoice,
             },
             [
                 {
@@ -108,10 +107,9 @@ class Start extends Command {
         await this.client.playerDb.create(this.interaction.user.id, chosen.id, langChosen);
 
         return await this.return(
-            this.mention
-            + this.lang.commands.start.characterChosen.replace("%CHAR", chosen.fullName)
+            this.trad.characterChosen.replace("%CHAR", chosen.fullName)
             + "\n\n"
-            + this.lang.commands.start.joinTheSupport,
+            + this.trad.joinTheSupport,
         );
     }
 }

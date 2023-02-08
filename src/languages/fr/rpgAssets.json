@@ -257,6 +257,13 @@
                     "0": "Shukuba Accueillant (Omukae)",
                     "1": "Shukuba du Désespoir (Zetsubō)"
                 }
+            },
+            "1": {
+                "name": "Région test",
+                "areas": {
+                    "0": "Test 1",
+                    "1": "Test 2"
+                }
             }
         },
         "biomes": {
@@ -478,7 +485,9 @@
         "travelCompletedTitle": "Voyage terminé !",
         "travelCompleted": "Départ de →\n> **%OLD**\nArrivé à →\n> **%NEW**\n\n→ Vous avez gagné **%EXP** exp.",
         "levelUpTitle": "Niveau supérieur !",
-        "levelUp": "Vous avez atteint le niveau supérieur !\n**Niveau %OLD → Niveau %NEW**"
+        "levelUp": "Vous avez atteint le niveau supérieur !\n**Niveau %OLD → Niveau %NEW**",
+        "forgeCompletedTitle": "Forge terminée !",
+        "forgeCompleted": "Vous récupérez les armes suivantes:\n\n**%WEAPONS_NAME %WEAPONS_RARITY_NAME**"
     },
     "themes": {
         "Default": "Défaut"

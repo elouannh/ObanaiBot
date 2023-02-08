@@ -30,6 +30,7 @@ class Delete extends Command {
     }
 
     async run() {
+        await this.interaction.deferReply().catch(this.client.catchError);
         const user = this.interaction.user;
         if (!(await this.client.playerDb.exists(user.id))) {
             return await this.return(
@@ -39,11 +40,10 @@ class Delete extends Command {
                 true,
             );
         }
-        await this.interaction.deferReply().catch(this.client.catchError);
 
         const firstResponse = await this.choice(
             {
-                content: this.mention + this.trad.firstContent,
+                content: this.trad.firstContent + this.trad.deleteInfos,
             },
             this.trad.deleteButton,
             this.trad.cancelButton,
@@ -51,12 +51,12 @@ class Delete extends Command {
         if (firstResponse === null) return this.end();
 
         if (firstResponse === "secondary") {
-            return await this.return(this.mention + this.trad.notDeleted).catch(this.client.catchError);
+            return await this.return(this.trad.notDeleted).catch(this.client.catchError);
         }
 
         const secondResponse = await this.choice(
             {
-                content: this.mention + this.trad.secondContent,
+                content: this.trad.secondContent,
             },
             this.trad.deleteDefinitivelyButton,
             this.trad.cancelButton,
@@ -64,11 +64,11 @@ class Delete extends Command {
         if (secondResponse === null) return this.end();
 
         if (secondResponse === "secondary") {
-            return await this.return(this.mention + this.trad.notDeleted);
+            return await this.return(this.trad.notDeleted);
         }
         else {
             await this.client.playerDb.remove(user.id);
-            return await this.return(this.mention + this.trad.deleted);
+            return await this.return(this.trad.deleted);
         }
     }
 }

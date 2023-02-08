@@ -30,6 +30,7 @@ class Train extends Command {
     }
 
     async run() {
+        await this.interaction.deferReply().catch(this.client.catchError);
         const user = this.interaction.user;
         if (!(await this.client.playerDb.exists(user.id))) {
             return await this.return(
@@ -39,20 +40,17 @@ class Train extends Command {
                 true,
             );
         }
-        await this.interaction.deferReply().catch(this.client.catchError);
 
         const player = await this.client.playerDb.load(user.id);
         const activity = await this.client.activityDb.load(user.id);
 
         if (activity.training !== null) {
-            await this.interaction.reply({
-                content: this.trad.currentlyTraining
+            return await this.return(this.trad.currentlyTraining
                         .replace("%STATISTIC_NAME", activity.training.statistic.name)
                         .replace("%STATISTIC_LEVEL", activity.training.statistic.level + 1)
                     + this.trad.endsIn
                     + `<t:${this.client.util.round(activity.training.endedDate / 1000)}:R>.`,
-            }).catch(this.client.catchError);
-            return this.end();
+            );
         }
 
         const upgradable = {

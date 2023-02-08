@@ -89,12 +89,12 @@ class RPGAssetsManager {
     getRegionsDistance(departure, destination) {
         // distance between the area departure and the region gate (the arrival area where the player must go)
         const departureArea = departure.region.getArea(departure.area.id);
-        const departureRegionGate = departure.region.getArea(departure.region.arrivalArea.id);
+        const departureRegionGate = departure.region.arrivalArea;
         const distanceToLeave = this.getAreasDistance(departureArea, departureRegionGate);
 
         // distance between the area destination and the region gate (the arrival area where the player must go)
         const destinationArea = destination.region.getArea(destination.area.id);
-        const destinationRegionGate = destination.region.getArea(departure.region.arrivalArea.id);
+        const destinationRegionGate = destination.region.arrivalArea;
         const distanceToArrive = this.getAreasDistance(destinationArea, destinationRegionGate);
 
         // distance between the regions
@@ -102,7 +102,7 @@ class RPGAssetsManager {
             (departure.region.x - destination.region.x) ** 2
             + (departure.region.y - destination.region.y) ** 2
             + (departure.region.z - destination.region.z) ** 2,
-        );
+        ) * 10;
 
         // return the sum of the distances
         return distanceToLeave + distanceBetweenRegions + distanceToArrive;
