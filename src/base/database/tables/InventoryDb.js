@@ -68,6 +68,32 @@ class InventoryDb extends SQLiteTable {
     }
 
     /**
+     * Add money to the wallet of the player
+     * @param {String} id The user ID
+     * @param {Number} amount The amount to add
+     * @returns {Number} The new wallet amount
+     */
+    addMoney(id, amount) {
+        const data = this.get(id);
+        let moneyBoost = 1;
+        if (data.enchantedGrimoire.id !== null) {
+            const grimoire = this.client.RPGAssetsManager.getEnchantedGrimoire(
+                this.client.playerDb.getLang(id), data.enchantedGrimoire.id,
+            );
+            for (const grimoireEffect of grimoire) {
+                if (grimoireEffect.id === "moneyBoost") {
+                    moneyBoost = this.client.util.round((grimoireEffect.strength / 10) + 1, 2);
+                }
+            }
+        }
+        const previousAmount = data.wallet;
+        const toAdd = this.client.util.round(amount * moneyBoost);
+        const newAmount = this.client.util.round(previousAmount + toAdd, 0);
+        this.set(id, newAmount, "wallet");
+        return toAdd;
+    }
+
+    /**
      * Removes a defined material amount from the inventory
      * @param {String} id The user ID
      * @param {String} material The material ID
@@ -75,7 +101,7 @@ class InventoryDb extends SQLiteTable {
      * @returns {Number} The new material amount
      */
     removeMaterial(id, material, amount) {
-        const previousAmount = this.get(id).items.materials[material];
+        const previousAmount = this.get(id).items.materials[material] || 0;
         const newAmount = previousAmount - amount;
         this.set(id, newAmount, `items.materials.${material}`);
         return newAmount;
@@ -100,10 +126,21 @@ class InventoryDb extends SQLiteTable {
      * @returns {Number} The new quest item amount
      */
     removeQuestItem(id, questItem, amount) {
-        const previousAmount = this.get(id).items.questItems[questItem];
+        const previousAmount = this.get(id).items.questItems[questItem] || 0;
         const newAmount = previousAmount - amount;
         this.set(id, newAmount, `items.questItems.${questItem}`);
         return newAmount;
+    }
+
+    /**
+     * Add a specific quest item to the inventory of the player
+     * @param {String} id The user ID
+     * @param {String} questItem The quest item ID
+     * @param {Number} amount the amount to add
+     * @returns {Number} The new amount of this material
+     */
+    addQuestItem(id, questItem, amount) {
+        return this.removeQuestItem(id, questItem, -amount);
     }
 
     /**
@@ -131,46 +168,6 @@ class InventoryDb extends SQLiteTable {
             }
         }
         return grimoireObject;
-    }
-
-    /**
-     * Add money to the wallet of the player
-     * @param {String} id The user ID
-     * @param {Number} amount The amount to add
-     * @returns {Number} The new wallet amount
-     */
-    addMoney(id, amount) {
-        const data = this.get(id);
-        let moneyBoost = 1;
-        if (data.enchantedGrimoire.id !== null) {
-            const grimoire = this.client.RPGAssetsManager.getEnchantedGrimoire(
-                this.client.playerDb.getLang(id), data.enchantedGrimoire.id,
-            );
-            for (const grimoireEffect of grimoire) {
-                if (grimoireEffect.id === "moneyBoost") {
-                    moneyBoost = this.client.util.round((grimoireEffect.strength / 10) + 1, 2);
-                }
-            }
-        }
-        const previousAmount = data.wallet;
-        const toAdd = this.client.util.round(amount * moneyBoost);
-        const newAmount = this.client.util.round(previousAmount + toAdd, 0);
-        this.set(id, newAmount, "wallet");
-        return toAdd;
-    }
-
-    /**
-     * Add a specific quest item to the inventory of the player
-     * @param {String} id The user ID
-     * @param {String} questItem The quest item ID
-     * @param {Number} amount the amount to add
-     * @returns {Number} The new amount of this material
-     */
-    addQuestItem(id, questItem, amount) {
-        const previousAmount = this.get(id).items.questItems[questItem] || 0;
-        const newAmount = previousAmount + amount;
-        this.set(id, newAmount, `items.questItems.${questItem}`);
-        return newAmount;
     }
 
     /**
