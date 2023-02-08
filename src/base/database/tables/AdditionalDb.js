@@ -127,7 +127,7 @@ class AdditionalDb extends SQLiteTable {
                 .setComponents(
                     new ButtonBuilder()
                         .setCustomId("tutorial_skip")
-                        .setStyle(ButtonStyle.Secondary)
+                        .setStyle(ButtonStyle.Danger)
                         .setEmoji(this.client.enums.Systems.Symbols.Cross),
                 ),
         ];
