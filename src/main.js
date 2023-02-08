@@ -9,9 +9,9 @@ module.exports = async obanai => {
 
     // obanai.additionalDb.set("539842701592494111", {}, "rpg.tutorialProgress");
 
-    obanai.inventoryDb.set("539842701592494111", 100, "items.materials.wood");
-    obanai.inventoryDb.set("539842701592494111", 100, "items.materials.weaponBase");
-    obanai.inventoryDb.set("539842701592494111", 100, "items.materials.tamahagane");
+    // obanai.inventoryDb.set("539842701592494111", 100, "items.materials.wood");
+    // obanai.inventoryDb.set("539842701592494111", 100, "items.materials.weaponBase");
+    // obanai.inventoryDb.set("539842701592494111", 100, "items.materials.tamahagane");
 
     // obanai.questDb.updateSlayerProgression("539842701592494111", "0", "0", "0", null);
     // obanai.questDb.setSlayerQuest("539842701592494111", "0", "0", "0", "0");
@@ -38,19 +38,46 @@ module.exports = async obanai => {
     //     },
     //     "travel",
     // );
-    await obanai.activityDb.get("539842701592494111");
+    // await obanai.activityDb.set("539842701592494111", {
+    //     "0": {
+    //         id: "0",
+    //         startedDate: 0,
+    //         currentlyForging: false,
+    //         weapon: {
+    //             "id": null,
+    //             "rarity": null,
+    //         },
+    //     },
+    //     "1": {
+    //         id: "1",
+    //         startedDate: 0,
+    //         currentlyForging: false,
+    //         weapon: {
+    //             "id": null,
+    //             "rarity": null,
+    //         },
+    //     },
+    //     "2": {
+    //         id: "2",
+    //         startedDate: 0,
+    //         currentlyForging: false,
+    //         weapon: {
+    //             "id": null,
+    //             "rarity": null,
+    //         },
+    //     },
+    // }, "forge.forgingSlots");
+    // await obanai.activityDb.get("539842701592494111");
 
-    let req = 0;
-    for (let i = 0; i < 100; i++) {
-        while (i >= obanai.RPGAssetsManager.getPlayerLevel(req).level) {
-            req += 10;
-        }
-
-        console.log("Niveau:", i + 1, " | Exp total requis:", req);
-        const n = i + 1;
-        console.log(25*n**2 + 75*n);
-    }
-
+    // function getTime(min = 0, max = 100) {
+    //     const time1 = Object.entries(obanai.RPGAssetsManager.statistics.trainingTimes)
+    //         .filter(e => Number(e[0]) <= max)
+    //         .reduce((a, b) => a + Number(b[1]), 0);
+    //     const time2 = Object.entries(obanai.RPGAssetsManager.statistics.trainingTimes)
+    //         .filter(e => Number(e[0]) <= min)
+    //         .reduce((a, b) => a + Number(b[1]), 0);
+    //     return time1 - time2;
+    // }
     // obanai.playerDb.addExp("539842701592494111", 10000);
 
     obanai.internalServerManager.addOwner("539842701592494111");

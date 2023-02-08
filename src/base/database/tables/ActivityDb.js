@@ -179,15 +179,34 @@ class ActivityDb extends SQLiteTable {
 
             if (timeLeft <= 0) {
                 const weaponData = slotData.weapon;
+                console.log(weaponData);
                 const weapon = this.client.RPGAssetsManager.getWeapon(langId, weaponData.id, weaponData.rarity);
                 finishedWeapons.push(weapon);
+                this.client.inventoryDb.addWeapon(id, weapon.id, weapon.rarity, 1);
+                data.forge.forgingSlots[forgingSlot] = {
+                    id: "0",
+                    startedDate: 0,
+                    currentlyForging: false,
+                    weapon: {
+                        "id": null,
+                        "rarity": null,
+                    },
+                };
+                this.set(id, data.forge.forgingSlots, "forge", "forgingSlots");
             }
         }
         if (finishedWeapons.length > 0) {
+            const form = lang.rpgAssets.embeds.forgeCompleted.split("\n\n")[1];
             const embed = new EmbedBuilder()
                 .setTitle(lang.rpgAssets.embeds.forgeCompletedTitle)
-                .setDescription(lang.rpgAssets.embeds.forgeCompleted
-                    .replace("%WEAPONS", finishedWeapons.map(w => w.name).join(", ")),
+                .setDescription(
+                    lang.rpgAssets.embeds.forgeCompleted.split("\n\n")[0]
+                    + "\n\n"
+                    + finishedWeapons.map(w =>
+                        form
+                            .replace("%WEAPONS_NAME", w.name)
+                            .replace("%WEAPONS_RARITY_NAME", w.rarityName),
+                    ).join("\n"),
                 )
                 .setColor(this.client.enums.Colors.Green);
             this.client.notify(id, { embeds: [embed] });

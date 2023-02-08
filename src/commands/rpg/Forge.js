@@ -87,7 +87,7 @@ class Forge extends Command {
         );
         if (!weaponChoice) return this.end();
 
-        const weapon = this.client.RPGAssetsManager.getWeapon(langId, weaponChoice, "0");
+        const weapon = this.client.RPGAssetsManager.getWeapon(langId, weaponChoice[0], "0");
 
         const confirmChoice = await this.choice(
             {
