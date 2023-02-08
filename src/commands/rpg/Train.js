@@ -30,6 +30,7 @@ class Train extends Command {
     }
 
     async run() {
+        await this.interaction.deferReply().catch(this.client.catchError);
         const user = this.interaction.user;
         if (!(await this.client.playerDb.exists(user.id))) {
             return await this.return(
@@ -39,7 +40,6 @@ class Train extends Command {
                 true,
             );
         }
-        await this.interaction.deferReply().catch(this.client.catchError);
 
         const player = await this.client.playerDb.load(user.id);
         const activity = await this.client.activityDb.load(user.id);

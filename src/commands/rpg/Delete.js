@@ -30,6 +30,7 @@ class Delete extends Command {
     }
 
     async run() {
+        await this.interaction.deferReply().catch(this.client.catchError);
         const user = this.interaction.user;
         if (!(await this.client.playerDb.exists(user.id))) {
             return await this.return(
@@ -39,7 +40,6 @@ class Delete extends Command {
                 true,
             );
         }
-        await this.interaction.deferReply().catch(this.client.catchError);
 
         const firstResponse = await this.choice(
             {

@@ -31,10 +31,10 @@ class Start extends Command {
     }
 
     async run() {
+        await this.interaction.deferReply().catch(this.client.catchError);
         if (await this.client.playerDb.exists(this.interaction.user.id)) {
             return await this.return(this.lang.systems.playerAlreadyExists, true);
         }
-        await this.interaction.deferReply().catch(this.client.catchError);
 
         const languagesOptions = this.langManager.languages.map(lang => Object.assign(
             {}, { label: lang.langName, value: lang.lang, emoji: lang.getFlag },

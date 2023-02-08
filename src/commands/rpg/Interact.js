@@ -30,6 +30,7 @@ class Interact extends Command {
     }
 
     async run() {
+        await this.interaction.deferReply().catch(this.client.catchError);
         const user = this.interaction.user;
         if (!(await this.client.playerDb.exists(user.id))) {
             return await this.return(
@@ -39,7 +40,6 @@ class Interact extends Command {
                 true,
             );
         }
-        await this.interaction.deferReply().catch(this.client.catchError);
 
         const map = await this.client.mapDb.load(user.id);
         const inventory = await this.client.inventoryDb.load(user.id);
