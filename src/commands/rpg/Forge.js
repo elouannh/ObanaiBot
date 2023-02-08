@@ -100,11 +100,11 @@ class Forge extends Command {
         else {
             const rarity = this.client.RPGAssetsManager.getProbability("weapons", activity.forge.blacksmith.id)
                 .singlePull();
-            const weaponWithRarity = this.client.RPGAssetsManager.getWeapon(langId, weaponChoice, String(rarity[0]));
+            const weaponWithRarity = this.client.RPGAssetsManager.getWeapon(langId, weaponChoice[0], String(rarity[0]));
 
             this.client.activityDb.forgeWeapon(
                 user.id,
-                weaponChoice,
+                weaponChoice[0],
                 String(rarity[0]),
                 Object.values(requiredResources).map(r => ({ id: r[0].instance.id, amount: r[0].amount })),
             );

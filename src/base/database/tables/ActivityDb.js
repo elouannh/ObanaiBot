@@ -182,6 +182,7 @@ class ActivityDb extends SQLiteTable {
                 console.log(weaponData);
                 const weapon = this.client.RPGAssetsManager.getWeapon(langId, weaponData.id, weaponData.rarity);
                 finishedWeapons.push(weapon);
+                console.log(id, weapon.id, weapon.rarity, 1);
                 this.client.inventoryDb.addWeapon(id, weapon.id, weapon.rarity, 1);
                 data.forge.forgingSlots[forgingSlot] = {
                     id: "0",
