@@ -143,9 +143,6 @@ class Obanai extends Client {
         if (data.min.length < 2) data.min = "0" + data.min;
         if (data.sec.length < 2) data.sec = "0" + data.sec;
         console.log(chalk.redBright(`[${data.month}/${data.day}] [${data.hour}:${data.hour}:${data.sec}]  |  Error: ${error.message}`));
-        if (process.env.TEST_MODE === "1") {
-            console.log(error);
-        }
     }
 
     async throwError(error, origin) {

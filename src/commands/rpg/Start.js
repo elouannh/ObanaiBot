@@ -73,7 +73,7 @@ class Start extends Command {
                     value: "botCofAccept",
                 },
             ],
-            3, 3,
+            3, 3, true,
         );
         if (tos === null) return this.end();
 

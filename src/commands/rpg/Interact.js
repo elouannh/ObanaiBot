@@ -199,8 +199,6 @@ class Interact extends Command {
             }
             const chosen = choices.find(e => e.objectiveId === temp);
             const userAmount = inventory.items[chosen.items.type]?.[chosen.items.instance.id]?.amount || 0;
-            console.log(chosen.items);
-            console.log(inventory.items[chosen.items.type], inventory.items[chosen.items.type]?.[chosen.items.instance.id], userAmount);
 
             if (userAmount < chosen.items.amount) {
                 return await this.return(
