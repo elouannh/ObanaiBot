@@ -72,6 +72,8 @@ class ActivityDb extends SQLiteTable {
 
     get(id) {
         const data = super.get(id);
+        const langId = this.client.playerDb.getLang(id);
+        const lang = this.client.languageManager.getLang(langId).json;
 
         if (data.training.currentlyTraining) {
             const levelToReach = this.client.playerDb.get(id).statistics[data.training.statistic] + 1;
@@ -88,7 +90,6 @@ class ActivityDb extends SQLiteTable {
                     },
                     "training",
                 );
-                const lang = this.client.languageManager.getLang(this.client.playerDb.getLang(id)).json;
                 const exp = this.client.playerDb.addExp(id, Number(levelToReach));
                 const embed = new EmbedBuilder()
                     .setTitle(lang.rpgAssets.trainingCompletedTitle)
@@ -108,11 +109,11 @@ class ActivityDb extends SQLiteTable {
         }
         if (data.travel.currentlyTraveling) {
             const departure = this.client.RPGAssetsManager.getMapRegion(
-                this.client.playerDb.getLang(id), data.travel.departurePoint.regionId,
+                langId, data.travel.departurePoint.regionId,
             );
             const departureArea = departure.getArea(data.travel.departurePoint.areaId);
             const destination = this.client.RPGAssetsManager.getMapRegion(
-                this.client.playerDb.getLang(id), data.travel.destination.regionId,
+                langId, data.travel.destination.regionId,
             );
             const destinationArea = destination.getArea(data.travel.destination.areaId);
             const distance = this.distance(departure, departureArea, destination, destinationArea);
@@ -139,7 +140,6 @@ class ActivityDb extends SQLiteTable {
                     },
                     "travel",
                 );
-                const lang = this.client.languageManager.getLang(this.client.playerDb.getLang(id)).json;
                 const exp = this.client.playerDb.addExp(id, distance);
                 const embed = new EmbedBuilder()
                     .setTitle(lang.rpgAssets.embeds.travelCompletedTitle)
@@ -163,6 +163,34 @@ class ActivityDb extends SQLiteTable {
                     },
                 };
             }
+        }
+
+        const blacksmith = this.client.RPGAssetsManager.loadBlacksmith(
+            langId, data.forge.blacksmith,
+        );
+        const finishedWeapons = [];
+        for (const forgingSlot in data.forge.forgingSlots) {
+            const slotData = data.forge.forgingSlots[forgingSlot];
+            if (!slotData.currentlyForging) continue;
+
+            const endedDate = slotData.startedDate
+                + blacksmith.timePerRarity * (Number(slotData.weapon.rarity) + 1) * 60 * 1000;
+            const timeLeft = endedDate - Date.now();
+
+            if (timeLeft <= 0) {
+                const weaponData = slotData.weapon;
+                const weapon = this.client.RPGAssetsManager.getWeapon(langId, weaponData.id, weaponData.rarity);
+                finishedWeapons.push(weapon);
+            }
+        }
+        if (finishedWeapons.length > 0) {
+            const embed = new EmbedBuilder()
+                .setTitle(lang.rpgAssets.embeds.forgeCompletedTitle)
+                .setDescription(lang.rpgAssets.embeds.forgeCompleted
+                    .replace("%WEAPONS", finishedWeapons.map(w => w.name).join(", ")),
+                )
+                .setColor(this.client.enums.Colors.Green);
+            this.client.notify(id, { embeds: [embed] });
         }
 
         return data;
@@ -239,7 +267,7 @@ class ActivityDb extends SQLiteTable {
 
     /**
      * @typedef {Object} ForgeResource
-     * @property {RPGMaterial} instance The material instance
+     * @property {String} id The material id
      * @property {Number} amount The amount of the material
      */
     /**
@@ -264,7 +292,7 @@ class ActivityDb extends SQLiteTable {
         if (freeSlotId === null) return false;
 
         for (const resource of resources) {
-            this.client.inventoryDb.removeMaterial(id, resource.instance.id, resource.amount);
+            this.client.inventoryDb.removeMaterial(id, resource.id, resource.amount);
         }
 
         this.set(

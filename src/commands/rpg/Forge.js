@@ -112,7 +112,10 @@ class Forge extends Command {
             const weaponWithRarity = this.client.RPGAssetsManager.getWeapon(langId, weaponChoice, String(rarity[0]));
 
             this.client.activityDb.forgeWeapon(
-                user.id, weaponChoice, String(rarity[0]), Object.values(requiredResources).map(r => r[0]),
+                user.id,
+                weaponChoice,
+                String(rarity[0]),
+                Object.values(requiredResources).map(r => ({ id: r[0].instance.id, amount: r[0].amount })),
             );
             return await this.return(
                 this.mention

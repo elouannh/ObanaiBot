@@ -485,7 +485,9 @@
         "travelCompletedTitle": "Voyage terminé !",
         "travelCompleted": "Départ de →\n> **%OLD**\nArrivé à →\n> **%NEW**\n\n→ Vous avez gagné **%EXP** exp.",
         "levelUpTitle": "Niveau supérieur !",
-        "levelUp": "Vous avez atteint le niveau supérieur !\n**Niveau %OLD → Niveau %NEW**"
+        "levelUp": "Vous avez atteint le niveau supérieur !\n**Niveau %OLD → Niveau %NEW**",
+        "forgeCompletedTitle": "Forge terminée !",
+        "forgeCompleted": "Vous récupérez"
     },
     "themes": {
         "Default": "Défaut"
