@@ -45,9 +45,7 @@ class Forge extends Command {
         const activity = await this.client.activityDb.load(user.id);
         const inventory = await this.client.inventoryDb.load(user.id);
 
-        if (activity.forge.forgingSlots.freeSlots.length === 0) {
-            return await this.return(this.mention + this.trad.noAvailableSlot);
-        }
+        if (activity.forge.forgingSlots.freeSlots.length === 0) return await this.return(this.trad.noAvailableSlot);
 
         const requiredResources = {};
         for (const key in activity.forge.blacksmith.resources) {
@@ -69,17 +67,11 @@ class Forge extends Command {
             }
         }
 
-        if (missing) {
-            return await this.return(
-                this.mention
-                + this.trad.missingResources
-                + missingString,
-            );
-        }
+        if (missing) return await this.return(this.trad.missingResources + missingString);
 
         const weaponChoice = await this.menu(
             {
-                content: this.mention + this.trad.weaponTypeChoice,
+                content: this.trad.weaponTypeChoice,
             },
             Object.keys(this.client.RPGAssetsManager.weapons.types)
                 .map(key => this.client.RPGAssetsManager.getWeapon(langId, key, "0"))
@@ -91,8 +83,7 @@ class Forge extends Command {
 
         const confirmChoice = await this.choice(
             {
-                content: this.mention
-                    + this.trad.wantsToForge.replace("%WEAPON", weapon.name)
+                content: this.trad.wantsToForge.replace("%WEAPON", weapon.name)
                     + "\n\n>>> "
                     + Object.values(requiredResources)
                         .map(([resource]) => `**${resource.instance.name} x${resource.amount}**`)
@@ -104,7 +95,7 @@ class Forge extends Command {
         if (!confirmChoice) return this.end();
 
         if (confirmChoice === "secondary") {
-            return await this.return(this.mention + this.trad.forgeCanceled);
+            return await this.return(this.trad.forgeCanceled);
         }
         else {
             const rarity = this.client.RPGAssetsManager.getProbability("weapons", activity.forge.blacksmith.id)
@@ -118,8 +109,7 @@ class Forge extends Command {
                 Object.values(requiredResources).map(r => ({ id: r[0].instance.id, amount: r[0].amount })),
             );
             return await this.return(
-                this.mention
-                + this.trad.forgedSuccessInfos
+                this.trad.forgedSuccessInfos
                     .replace("%WEAPON_RARITY", weaponWithRarity.rarity)
                     .replace("%WEAPON_NAME", weaponWithRarity.name)
                     .replace("%WEAPON_RARITY_NAME", weaponWithRarity.rarityName)
