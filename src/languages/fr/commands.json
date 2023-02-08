@@ -10,9 +10,9 @@
         "deleted": "Votre aventure a bien été supprimée. Nous espérons vous revoir bientôt !"
     },
     "forge": {
-        "currently": "Actuellement: **%AMOUNT**/%MAX",
+        "currently": "Actuellement: %AMOUNT/%MAX",
         "noAvailableSlot": "Aucun emplacement de forge disponible.",
-        "missingResources": "Il vous manque des ressources.\n\n__Ressources manquantes:__\n",
+        "missingResources": "**Oups ! Ressources manquantes:**\n",
         "weaponTypeChoice": "Choisissez le type de l'arme que vous voulez forger.",
         "wantsToForge": "Vous êtes sur le point de forger une arme de type **%WEAPON**.\nLa rareté de l'arme sera donc déterminée de façon __aléatoire__.\n\nÊtes-vous sûr de vouloir continuer ? Les ressources suivantes seront utilisées:",
         "forgeCanceled": "Vous avez annulé le forgeage.",

@@ -55,12 +55,12 @@ class Forge extends Command {
         }
 
         let missing = false;
-        let missingString = "";
+        let missingString = ">>> ";
         for (const key in requiredResources) {
             const [resource, amount] = requiredResources[key];
             if (amount < resource.amount) {
                 missing = true;
-                missingString += `**${resource.instance.name} x${resource.amount - amount}** `
+                missingString += `• **${resource.instance.name} x${resource.amount - amount}** `
                     + `(${this.trad.currently
                         .replace("%AMOUNT", amount)
                         .replace("%MAX", String(resource.amount))})\n`;
