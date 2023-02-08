@@ -13,11 +13,11 @@ class Start extends Command {
                 dmPermission: true,
             },
             {
-                name: "Quests",
+                name: "Start",
                 dmPermission: true,
             },
             {
-                trad: "quests",
+                trad: "start",
                 type: [1],
                 category: "RPG",
                 cooldown: 10,
