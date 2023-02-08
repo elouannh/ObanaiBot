@@ -21,7 +21,7 @@ class Profile extends Command {
     }
 
     async run() {
-        // this.client.inventoryDb.set(this.interaction.user.id, 5, "items.materials.wood");
+        this.client.inventoryDb.set(this.interaction.user.id, 15, "items.materials.wood");
         // this.client.questDb.updateSlayerProgression(this.interaction.user.id, "0", "0", "0", null);
         // this.client.questDb.setSlayerQuest(this.interaction.user.id, "0", "0", "0", "0");
         // await this.interaction.reply({ ephemeral: true, content: "Done." }).catch(this.client.catchError);
