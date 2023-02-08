@@ -1,6 +1,7 @@
 {
     "delete": {
-        "firstContent": "**Êtes-vous sûr de vouloir supprimer votre aventure ?**\n\nCette action est irréversible. Une fois votre aventure supprimée, vous ne pourrez plus la récupérer. Si vous êtes membre d'une guilde, vous serez automatiquement expulsé de celle-ci. Si vous dirigez une guilde, celle-ci se verra changer de chef par un membre aléatoire.",
+        "firstContent": "**Êtes-vous sûr de vouloir supprimer votre aventure ?**\n\nCette action est irréversible.",
+        "deleteInfos": "\n\n>>> • Une fois votre aventure supprimée, vous ne pourrez plus la récupérer.\n• Si vous êtes membre d'une guilde, vous serez automatiquement expulsé de celle-ci.\n• Si vous dirigez une guilde, celle-ci se verra changer de chef par un membre aléatoire.",
         "deleteButton": "Supprimer",
         "cancelButton": "Annuler",
         "deleteDefinitivelyButton": "Supprimer définitivement",
