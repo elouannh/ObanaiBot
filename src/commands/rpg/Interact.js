@@ -77,7 +77,7 @@ class Interact extends Command {
 
         const action = await this.menu(
             {
-                content: this.mention + this.trad.possiblesChoices,
+                content: this.trad.possiblesChoices,
             },
             options,
         );
@@ -86,11 +86,11 @@ class Interact extends Command {
         if (action[0] === "dialogue") {
             const pnjs = await this.client.questDb.getPNJs(user.id, "dialogue");
 
-            if (pnjs.length === 0) return await this.return(this.mention + this.trad.noPnjForDialogue);
+            if (pnjs.length === 0) return await this.return(this.trad.noPnjForDialogue);
 
             const pnjChoice = await this.menu(
                 {
-                    content: this.mention + this.trad.pnjChoice,
+                    content: this.trad.pnjChoice,
                 },
                 pnjs.map(pnj => (
                     {
@@ -108,7 +108,7 @@ class Interact extends Command {
             if (choices.length > 0) {
                 const choice = await this.menu(
                     {
-                        content: this.mention + this.trad.dialogueChoice,
+                        content: this.trad.dialogueChoice,
                     },
                     choices.map(e => (
                         {
@@ -122,7 +122,7 @@ class Interact extends Command {
                 temp = choice[0];
             }
             else {
-                return await this.return(this.mention + this.trad.noDialogue);
+                return await this.return(this.trad.noDialogue);
             }
 
             const chosen = choices.find(e => e.dialogue.id === temp);
@@ -134,11 +134,11 @@ class Interact extends Command {
         else if (action[0] === "interact") {
             const choices = await this.client.questDb.getInteractions(user.id);
 
-            if (choices.length === 0) return await this.return(this.mention + this.trad.noInteraction);
+            if (choices.length === 0) return await this.return(this.trad.noInteraction);
 
             const choice = await this.menu(
                 {
-                    content: this.mention + this.trad.interactionChoice,
+                    content: this.trad.interactionChoice,
                 },
                 choices.map(e => (
                     {
@@ -158,11 +158,11 @@ class Interact extends Command {
         else if (action[0] === "giveItems") {
             const pnjs = await this.client.questDb.getPNJs(user.id, "giveItems");
 
-            if (pnjs.length === 0) return await this.return(this.mention + this.trad.noPnjForItems);
+            if (pnjs.length === 0) return await this.return(this.trad.noPnjForItems);
 
             const pnjChoice = await this.menu(
                 {
-                    content: this.mention + this.trad.pnjChoice,
+                    content: this.trad.pnjChoice,
                 },
                 pnjs.map(pnj => (
                     {
@@ -180,7 +180,7 @@ class Interact extends Command {
             if (choices.length > 0) {
                 const choice = await this.menu(
                     {
-                        content: this.mention + this.trad.giftChoice,
+                        content: this.trad.giftChoice,
                     },
                     choices.map(e => (
                         {
@@ -195,7 +195,7 @@ class Interact extends Command {
                 temp = choice[0];
             }
             else {
-                return await this.return(this.mention + this.trad.canceledGift);
+                return await this.return(this.trad.canceledGift);
             }
             const chosen = choices.find(e => e.objectiveId === temp);
             const userAmount = inventory.items[chosen.items.type]?.[chosen.items.instance.id]?.amount || 0;
@@ -204,8 +204,7 @@ class Interact extends Command {
 
             if (userAmount < chosen.items.amount) {
                 return await this.return(
-                    this.mention
-                    + this.trad.noItems
+                    this.trad.noItems
                     + `\n\n> **${chosen.items.instance.name} x${chosen.items.amount}**`,
                 );
             }
@@ -216,7 +215,7 @@ class Interact extends Command {
 
             const wantsToGive = await this.choice(
                 {
-                    content: this.mention + this.trad.wantsToGive.replace("%PNJ_NAME", pnjInfos.fullName)
+                    content: this.trad.wantsToGive.replace("%PNJ_NAME", pnjInfos.fullName)
                         + `\n\n> **${chosen.items.instance.name} x${chosen.items.amount}**`,
                 },
                 this.trad.give,
@@ -228,10 +227,10 @@ class Interact extends Command {
                 this.client.questDb.giveItems(user.id, chosen.items);
                 await this.client.questDb.setObjectiveManuallyCompleted(user.id, chosen.questKey, chosen.objectiveId);
 
-                return await this.return(this.mention + this.trad.giftDone);
+                return await this.return(this.trad.giftDone);
             }
             else if (wantsToGive === "secondary") {
-                return await this.return(this.mention + this.trad.giftCanceled);
+                return await this.return(this.trad.giftCanceled);
             }
         }
         else {
@@ -270,8 +269,7 @@ class Interact extends Command {
                     this.client.inventoryDb.addMaterial(user.id, item.resource.id, item.amount);
                 }
                 return await this.return(
-                    this.mention
-                    + this.trad.explored
+                    this.trad.explored
                     + "\n\n" + bag.map(e => `> **${
                         this.client.RPGAssetsManager.getMaterial(
                             this.client.playerDb.getLang(user.id), e.resource.id,
@@ -280,7 +278,7 @@ class Interact extends Command {
                 );
             }
             else {
-                return await this.return(this.mention + this.trad.noResourcesFound);
+                return await this.return(this.trad.noResourcesFound);
             }
         }
     }

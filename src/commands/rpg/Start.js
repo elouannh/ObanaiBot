@@ -42,7 +42,7 @@ class Start extends Command {
 
         const lang = await this.menu(
             {
-                content: this.mention + this.trad.languageChoice
+                content: this.trad.languageChoice
                     + "\n\n"
                     + this.langManager.multilang("commands", "start", "languageDemonstration"),
             },
@@ -53,7 +53,7 @@ class Start extends Command {
 
         const tos = await this.menu(
             {
-                content: this.mention + `${this.trad.startIntroduction}\n\n`
+                content: `${this.trad.startIntroduction}\n\n`
                     + `\`\`\`${this.trad.storyIntroduction}\`\`\`\n`
                     + `\n> ${this.trad.tosAccept}\n\n**${this.trad.links}**`,
             },
@@ -84,8 +84,7 @@ class Start extends Command {
 
         const choice = await this.menu(
             {
-                content: this.mention
-                    + this.trad.tosAccepted
+                content: this.trad.tosAccepted
                     + "\n\n"
                     + this.trad.characterChoice,
             },
@@ -108,8 +107,7 @@ class Start extends Command {
         await this.client.playerDb.create(this.interaction.user.id, chosen.id, langChosen);
 
         return await this.return(
-            this.mention
-            + this.trad.characterChosen.replace("%CHAR", chosen.fullName)
+            this.trad.characterChosen.replace("%CHAR", chosen.fullName)
             + "\n\n"
             + this.trad.joinTheSupport,
         );
