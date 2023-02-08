@@ -62,8 +62,9 @@ class Interact extends Command {
             },
         ];
 
-        const zoneExplored = Object.values(map.excavated?.[map.region.id] || {})
-            .map(area => area[0].id).includes(map.area.id);
+        const zone = Object.values(map.excavated?.[map.region.id] || {})
+            .filter(area => area[0].id === map.area.id)?.at(0);
+        const zoneExplored = zone || false;
 
         if (!zoneExplored) {
             options.push(
@@ -77,7 +78,12 @@ class Interact extends Command {
 
         const action = await this.menu(
             {
-                content: this.trad.possiblesChoices,
+                content: (zoneExplored ?
+                        this.trad.alreadyExcavated
+                            .replace("%DATE", `<t:${this.client.util.round((zone[1] + 86400000) / 1000)}:R>`)
+                        : ""
+                    )
+                    + this.trad.possiblesChoices,
             },
             options,
         );
