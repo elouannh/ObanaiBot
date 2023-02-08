@@ -9,6 +9,14 @@ class RPGBlacksmith extends RPGAssetBase {
         this.res = rankData.resources;
         this.timePerRarity = rankData.timePerRarity;
     }
+
+    getTimeInMinutes(rarity) {
+        return this.timePerRarity * (rarity + 1);
+    }
+
+    getDate(rarity) {
+        return Date.now() + this.getTimeInMinutes(rarity) * 60000;
+    }
 }
 
 module.exports = RPGBlacksmith;

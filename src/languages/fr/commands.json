@@ -17,7 +17,7 @@
         "wantsToForge": "Vous êtes sur le point de forger une arme de type **%WEAPON**.\nLa rareté de l'arme sera donc déterminée de façon __aléatoire__.\n\nÊtes-vous sûr de vouloir continuer ? Les ressources suivantes seront utilisées:",
         "forgeCanceled": "Vous avez annulé le forgeage.",
         "forgedSuccessInfos": "Le forgeron commence désormais à travailler sur une arme de rareté **%WEAPON_RARITY**. L'arme forgée sera donc **%WEAPON_NAME %WEAPON_RARITY_NAME**.",
-        "forgedSuccessTime": "\nLa forge durera `"
+        "forgedSuccessTime": "\nLa forge durera `%TIME`. (%DATE)"
     },
     "interact": {
         "optionDialogue": "Dialoguer",

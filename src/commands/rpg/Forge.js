@@ -114,9 +114,15 @@ class Forge extends Command {
                     .replace("%WEAPON_NAME", weaponWithRarity.name)
                     .replace("%WEAPON_RARITY_NAME", weaponWithRarity.rarityName)
                 + this.trad.forgedSuccessTime
-                + activity.forge.blacksmith.timePerRarity * (rarity[0] + 1)
-                + this.lang.systems.timeUnits.m[3]
-                + "`.",
+                    .replace(
+                        "%TIME",
+                        `${activity.forge.blacksmith.getTimeInMinutes(rarity[0])}`
+                        + `${this.lang.systems.timeUnits.m[3]}`,
+                    )
+                    .replace(
+                        "%DATE",
+                        `<t:${this.client.util.round(activity.forge.blacksmith.getDate(rarity[0]) / 1000)}:R>`,
+                    ),
             );
         }
     }
