@@ -1,17 +1,17 @@
 const RPGAssetBase = require("./RPGAssetBase");
-const RPGMapRegionAreaBiome = require("./RPGMapRegionAreaBiome");
+const RPGMapDistrictSectorBiome = require("./RPGMapDistrictSectorBiome");
 
-class RPGMapRegionArea extends RPGAssetBase {
-    constructor(mapRegion, mapRegionAreaData, name) {
-        super(mapRegion.lang, mapRegionAreaData.id);
+class RPGMapDistrictSector extends RPGAssetBase {
+    constructor(mapDistrict, mapDistrictSectorData, name) {
+        super(mapDistrict.lang, mapDistrictSectorData.id);
 
         this.name = name;
-        this.x = mapRegionAreaData.x;
-        this.y = mapRegionAreaData.y;
-        this.z = mapRegionAreaData.z;
-        this.paths = mapRegionAreaData.paths;
-        this.biome = new RPGMapRegionAreaBiome(this, mapRegionAreaData.biome, this.lang.json.biomes[mapRegionAreaData.biome]);
+        this.x = mapDistrictSectorData.x;
+        this.y = mapDistrictSectorData.y;
+        this.z = mapDistrictSectorData.z;
+        this.paths = mapDistrictSectorData.paths;
+        this.biome = new RPGMapDistrictSectorBiome(this, mapDistrictSectorData.biome, this.lang.json.biomes[mapDistrictSectorData.biome]);
     }
 }
 
-module.exports = RPGMapRegionArea;
+module.exports = RPGMapDistrictSector;

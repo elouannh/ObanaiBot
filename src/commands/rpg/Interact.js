@@ -5,9 +5,9 @@ class Interact extends Command {
         super(
             {
                 name: "interact",
-                description: "Permet d’interagir avec l’environnement; peut déclencher un dialogue, un combat, fouiller la zone...",
+                description: "Permet d’interagir avec l’environnement; peut déclencher un dialogue, un combat, fouiller le secteur...",
                 descriptionLocalizations: {
-                    "en-US": "Allows you to interact with the environment; can trigger a dialogue, a fight, explore the area...",
+                    "en-US": "Allows you to interact with the environment; can trigger a dialogue, a fight, explore the sector...",
                 },
                 options: [],
                 dmPermission: true,
@@ -62,11 +62,11 @@ class Interact extends Command {
             },
         ];
 
-        const zone = Object.values(map.excavated?.[map.region.id] || {})
-            .filter(area => area[0].id === map.area.id)?.at(0);
-        const zoneExplored = zone || false;
+        const sector = Object.values(map.excavated?.[map.district.id] || {})
+            .filter(sector => sector[0].id === map.sector.id)?.at(0);
+        const sectorExplored = sector || false;
 
-        if (!zoneExplored) {
+        if (!sectorExplored) {
             options.push(
                 {
                     label: this.trad.optionExcavate,
@@ -78,9 +78,9 @@ class Interact extends Command {
 
         const action = await this.menu(
             {
-                content: (zoneExplored ?
+                content: (sectorExplored ?
                         this.trad.alreadyExcavated
-                            .replace("%DATE", `<t:${this.client.util.round((zone[1] + 86400000) / 1000)}:R>`)
+                            .replace("%DATE", `<t:${this.client.util.round((sector[1] + 86400000) / 1000)}:R>`)
                         : ""
                     )
                     + this.trad.possiblesChoices,
@@ -240,7 +240,7 @@ class Interact extends Command {
         else {
             const bag = [];
             const availableResources = Object.values(this.client.RPGAssetsManager.materials)
-                .filter(e => e.biomes.includes(map.area.biome.id));
+                .filter(e => e.biomes.includes(map.sector.biome.id));
 
             for (let i = 0; i < 2; i++) {
                 if (i === 0) {
@@ -267,7 +267,7 @@ class Interact extends Command {
                 }
             }
 
-            this.client.mapDb.explore(user.id, map.region.id, map.area.id);
+            this.client.mapDb.explore(user.id, map.district.id, map.sector.id);
             if (bag.length > 0) {
                 for (const item of bag) {
                     this.client.inventoryDb.addMaterial(user.id, item.resource.id, item.amount);

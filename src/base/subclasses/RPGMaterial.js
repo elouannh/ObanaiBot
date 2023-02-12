@@ -1,5 +1,5 @@
 const RPGAssetBase = require("./RPGAssetBase");
-const RPGMapRegionAreaBiome = require("./RPGMapRegionAreaBiome");
+const RPGMapDistrictSectorBiome = require("./RPGMapDistrictSectorBiome");
 
 class RPGMaterial extends RPGAssetBase {
     constructor(assetsManager, lang, id, materialData) {
@@ -9,24 +9,24 @@ class RPGMaterial extends RPGAssetBase {
 
         const data = materialData;
         this.size = data.size;
-        this.biomes = data.biomes.map(e => new RPGMapRegionAreaBiome(this, e, this.lang.biomes.json[e]));
+        this.biomes = data.biomes.map(e => new RPGMapDistrictSectorBiome(this, e, this.lang.biomes.json[e]));
         this.name = this.lang.materials.json[this.id];
     }
 
-    get getAreas() {
-        const areas = [];
+    get getSectors() {
+        const sectors = [];
         for (const biome of this.biomes) {
-            for (let region of this.assetsManager.map.regions) {
-                region = this.assetsManager.getMapRegion(this.lang.id, region.id);
-                const validAreas = region.areas.filter(e => e.biome.id === biome.id);
+            for (let district of this.assetsManager.map.districts) {
+                district = this.assetsManager.getMapDistrict(this.lang.id, district.id);
+                const validSectors = district.sectors.filter(e => e.biome.id === biome.id);
 
-                if (validAreas.length > 0) {
-                    areas.push({ region: region, areas: validAreas });
+                if (validSectors.length > 0) {
+                    sectors.push({ district: district, sectors: validSectors });
                 }
             }
         }
 
-        return areas;
+        return sectors;
     }
 }
 

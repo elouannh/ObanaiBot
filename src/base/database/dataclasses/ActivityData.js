@@ -24,32 +24,32 @@ class ActivityData extends TableData {
             this.data.training = null;
         }
         if (this.data.travel.currentlyTraveling) {
-            const departurePointRegion = this.client.RPGAssetsManager.getMapRegion(
-                this.lang, this.data.travel.departurePoint.regionId,
+            const departurePointDistrict = this.client.RPGAssetsManager.getMapDistrict(
+                this.lang, this.data.travel.departurePoint.districtId,
             );
             this.data.travel.departurePoint = {
-                region: departurePointRegion,
-                area: departurePointRegion.getArea(this.data.travel.departurePoint.areaId),
+                district: departurePointDistrict,
+                sector: departurePointDistrict.getSector(this.data.travel.departurePoint.sectorId),
             };
 
-            const destinationRegion = this.client.RPGAssetsManager.getMapRegion(
-                this.lang, this.data.travel.destination.regionId,
+            const destinationDistrict = this.client.RPGAssetsManager.getMapDistrict(
+                this.lang, this.data.travel.destination.districtId,
             );
             this.data.travel.destination = {
-                region: destinationRegion,
-                area: destinationRegion.getArea(this.data.travel.destination.areaId),
+                district: destinationDistrict,
+                sector: destinationDistrict.getSector(this.data.travel.destination.sectorId),
             };
 
-            delete this.data.travel.departurePoint.regionId;
-            delete this.data.travel.departurePoint.areaId;
-            delete this.data.travel.destination.regionId;
-            delete this.data.travel.destination.areaId;
+            delete this.data.travel.departurePoint.districtId;
+            delete this.data.travel.departurePoint.sectorId;
+            delete this.data.travel.destination.districtId;
+            delete this.data.travel.destination.sectorId;
 
             this.data.travel.distance = this.client.activityDb.distance(
-                this.data.travel.departurePoint.region,
-                this.data.travel.destination.region,
-                this.data.travel.departurePoint.area,
-                this.data.travel.destination.area,
+                this.data.travel.departurePoint.district,
+                this.data.travel.destination.district,
+                this.data.travel.departurePoint.sector,
+                this.data.travel.destination.sector,
             );
 
             this.data.travel.endedDate = this.client.util.round(this.data.travel.startedDate

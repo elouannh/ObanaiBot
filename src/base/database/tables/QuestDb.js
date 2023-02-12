@@ -89,7 +89,7 @@ class QuestDb extends SQLiteTable {
                 const data = objective.additionalData;
                 if (objective.type !== objectiveType || !data.characterId) continue;
 
-                if (data.area === localisation.area.id && data.region === localisation.region.id) {
+                if (data.sector === localisation.sector.id && data.district === localisation.district.id) {
                     const pnj = this.client.RPGAssetsManager.getCharacter(
                         this.client.playerDb.getLang(id), data.characterId,
                     );
@@ -434,11 +434,11 @@ class QuestDb extends SQLiteTable {
             const data = await this.client.mapDb.load(id);
             switch (localObjective.type) {
                 case "reachDestination":
-                    const { region, area } = localObjective.additionalData;
-                    const userRegion = data.region;
-                    const userArea = data.area;
+                    const { district, sector } = localObjective.additionalData;
+                    const userDistrict = data.district;
+                    const userSector = data.sector;
 
-                    if (userRegion.id === region && userArea.id === area) completedInDepth = true;
+                    if (userDistrict.id === district && userSector.id === sector) completedInDepth = true;
                     break;
                 default:
                     break;

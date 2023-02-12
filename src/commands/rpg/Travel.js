@@ -46,7 +46,7 @@ class Travel extends Command {
         const activity = await this.client.activityDb.load(user.id);
 
         if (activity.travel !== null) {
-            const destination = `${activity.travel.destination.region.name}, ${activity.travel.destination.area.name}`;
+            const destination = `${activity.travel.destination.district.name}, ${activity.travel.destination.sector.name}`;
             return await this.return(this.trad.currentlyTraveling
                         .replace("%LOCATION_NAME", destination)
                     + this.trad.endsIn
@@ -61,7 +61,7 @@ class Travel extends Command {
             [
                 {
                     label: this.trad.shortTravel,
-                    description: this.trad.shortTravelDescription.replace("%REGION_NAME", map.region.name),
+                    description: this.trad.shortTravelDescription.replace("%DISTRICT_NAME", map.district.name),
                     value: "short",
                 },
                 {
@@ -73,39 +73,39 @@ class Travel extends Command {
         );
         if (mode === null) return this.end();
         mode = mode[0];
-        let [region, area] = [map.region, map.area];
+        let [district, sector] = [map.district, map.sector];
 
         if (mode === "long") {
-            const availableRegions = Object.values(this.client.RPGAssetsManager.map.regions)
-                .map(e => this.client.RPGAssetsManager.getMapRegion(lang, e.id))
-                .filter(e => e.id !== map.region.id) || [];
-            const regionChoice = await this.menu(
+            const availableDistricts = Object.values(this.client.RPGAssetsManager.map.districts)
+                .map(e => this.client.RPGAssetsManager.getMapDistrict(lang, e.id))
+                .filter(e => e.id !== map.district.id) || [];
+            const districtChoice = await this.menu(
                 {
-                    content: `[${this.trad.longTravel}] ${this.trad.chooseRegion}`,
+                    content: `[${this.trad.longTravel}] ${this.trad.chooseDistrict}`,
                 },
-                availableRegions.map(e => (
+                availableDistricts.map(e => (
                     {
                         label: e.name,
                         value: e.id,
-                        description: this.trad.availableAreas.replace("%AREAS", e.areas.length),
+                        description: this.trad.availableSectors.replace("%SECTORS", e.sectors.length),
                     }
                 )),
             );
-            if (regionChoice === null) return this.end();
-            region = this.client.RPGAssetsManager.getMapRegion(lang, `${regionChoice[0]}`);
+            if (districtChoice === null) return this.end();
+            district = this.client.RPGAssetsManager.getMapDistrict(lang, `${districtChoice[0]}`);
         }
-        const availableAreas = mode === "short" ?
-            (map.region.areas.filter(e => e.id !== map.area.id) || [])
-            : region.areas;
-        const areaChoice = await this.menu(
+        const availableSectors = mode === "short" ?
+            (map.district.sectors.filter(e => e.id !== map.sector.id) || [])
+            : district.sectors;
+        const sectorChoice = await this.menu(
             {
                 content: `[${mode === "short" ? this.trad.shortTravel : this.trad.longTravel}] `
                     + `${mode === "short" ? 
-                        this.trad.chooseArea
-                        : this.trad.chooseRegionArea.replace("%REGION_NAME", map.region.name)
+                        this.trad.chooseSector
+                        : this.trad.chooseDistrictSector.replace("%DISTRICT_NAME", map.district.name)
                 }`,
             },
-            availableAreas.map(e => (
+            availableSectors.map(e => (
                 {
                     label: e.name,
                     value: e.id,
@@ -113,16 +113,16 @@ class Travel extends Command {
                 }
             )),
         );
-        if (areaChoice === null) return this.end();
-        area = region.getArea(`${areaChoice[0]}`);
+        if (sectorChoice === null) return this.end();
+        sector = district.getSector(`${sectorChoice[0]}`);
 
-        const distance = this.client.activityDb.distance(map.region, region, map.area, area);
+        const distance = this.client.activityDb.distance(map.district, district, map.sector, sector);
         const startedDate = Date.now();
         const time = distance * 5 * 60 * 1000;
 
         const wantsToTravel = await this.choice(
             {
-                content: this.trad.wantsToTravel.replace("%LOCATION_NAME", `${region.name}, ${area.name}`)
+                content: this.trad.wantsToTravel.replace("%LOCATION_NAME", `${district.name}, ${sector.name}`)
                     + this.trad.endsInProbably
                         .replace("%DATE", `<t:${this.client.util.round((startedDate + time) / 1000)}:R>`),
             },
@@ -132,9 +132,9 @@ class Travel extends Command {
         if (wantsToTravel === null) return this.end();
 
         if (wantsToTravel === "primary") {
-            this.client.activityDb.travel(user.id, startedDate, map.region.id, map.area.id, region.id, area.id);
+            this.client.activityDb.travel(user.id, startedDate, map.district.id, map.sector.id, district.id, sector.id);
             return await this.return(
-                this.trad.startedTraveling.replace("%LOCATION_NAME", `${region.name}, ${area.name}`),
+                this.trad.startedTraveling.replace("%LOCATION_NAME", `${district.name}, ${sector.name}`),
             );
         }
         else if (wantsToTravel === "secondary") {

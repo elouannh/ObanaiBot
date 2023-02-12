@@ -1,30 +1,30 @@
 const RPGAssetBase = require("./RPGAssetBase");
-const RPGMapRegionArea = require("./RPGMapRegionArea");
+const RPGMapDistrictSector = require("./RPGMapDistrictSector");
 
-class RPGMapRegion extends RPGAssetBase {
-    constructor(lang, id, mapRegionData) {
+class RPGMapDistrict extends RPGAssetBase {
+    constructor(lang, id, mapDistrictData) {
         super(lang, id);
 
-        const areasLang = this.lang.json.regions[this.id].areas;
+        const sectorsLang = this.lang.json.districts[this.id].sectors;
 
-        this.name = this.lang.json.regions[this.id].name;
+        this.name = this.lang.json.districts[this.id].name;
 
-        this.x = mapRegionData.x;
-        this.y = mapRegionData.y;
-        this.z = mapRegionData.z;
-        this.paths = mapRegionData.paths;
+        this.x = mapDistrictData.x;
+        this.y = mapDistrictData.y;
+        this.z = mapDistrictData.z;
+        this.paths = mapDistrictData.paths;
 
-        this.areas = Object.values(mapRegionData.areas).map(e => new RPGMapRegionArea(this, e, areasLang[e.id]));
-        this.arrivalArea = this.getArrivalArea(mapRegionData);
+        this.sectors = Object.values(mapDistrictData.sectors).map(e => new RPGMapDistrictSector(this, e, sectorsLang[e.id]));
+        this.referenceSector = this.getReferenceSector(mapDistrictData);
     }
 
-    getArrivalArea(mapRegionData) {
-        return this.areas[mapRegionData.arrivalArea];
+    getReferenceSector(mapDistrictData) {
+        return this.sectors[mapDistrictData.referenceSector];
     }
 
-    getArea(id) {
-        return this.areas[id];
+    getSector(id) {
+        return this.sectors[id];
     }
 }
 
-module.exports = RPGMapRegion;
+module.exports = RPGMapDistrict;

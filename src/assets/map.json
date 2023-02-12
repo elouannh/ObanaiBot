@@ -1,12 +1,12 @@
 {
-    "regions": {
+    "districts": {
         "0": {
             "id": "0",
             "x": 0,
             "y": 0,
             "z": 0,
-            "arrivalArea": "0",
-            "areas": {
+            "referenceSector": "0",
+            "sectors": {
                 "0": {
                     "id": "0",
                     "x": 0,
@@ -31,8 +31,8 @@
             "x": 10,
             "y": 10,
             "z": 10,
-            "arrivalArea": "1",
-            "areas": {
+            "referenceSector": "1",
+            "sectors": {
                 "0": {
                     "id": "0",
                     "x": 0,

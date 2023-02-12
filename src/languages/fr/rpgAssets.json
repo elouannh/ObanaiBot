@@ -250,17 +250,17 @@
         }
     },
     "map": {
-        "regions": {
+        "districts": {
             "0": {
                 "name": "Région du Nord-Est (Tōhoku)",
-                "areas": {
+                "sectors": {
                     "0": "Shukuba Accueillant (Omukae)",
                     "1": "Shukuba du Désespoir (Zetsubō)"
                 }
             },
             "1": {
                 "name": "Région test",
-                "areas": {
+                "sectors": {
                     "0": "Test 1",
                     "1": "Test 2"
                 }
@@ -425,8 +425,8 @@
         "demonBlood": "Sang de démon",
         "themes": "Thèmes",
         "tutorialProgress": "Progression du tutoriel",
-        "region": "Région",
-        "area": "Zone de région",
+        "district": "Région",
+        "sector": "Secteur de région",
         "biome": "Biome",
         "exploration": "Exploration",
         "slayerQuest": "Quête de pourfendeur",

@@ -1,6 +1,6 @@
 const RPGBreathingStyle = require("./subclasses/RPGBreathingStyle");
 const RPGEnchantedGrimoire = require("./subclasses/RPGEnchantedGrimoire");
-const RPGMapRegion = require("./subclasses/RPGMapRegion");
+const RPGMapDistrict = require("./subclasses/RPGMapDistrict");
 const RPGMaterial = require("./subclasses/RPGMaterial");
 const RPGCharacter = require("./subclasses/RPGCharacter");
 const RPGWeapon = require("./subclasses/RPGWeapon");
@@ -81,36 +81,36 @@ class RPGAssetsManager {
         return grimoire;
     }
 
-    getMapRegion(lang, id) {
-        if (!(id in this.map.regions)) return "Invalid Map Region ID";
-        return new RPGMapRegion(this.getLangData(lang, "map"), id, this.map.regions[id]);
+    getMapDistrict(lang, id) {
+        if (!(id in this.map.districts)) return "Invalid Map District ID";
+        return new RPGMapDistrict(this.getLangData(lang, "map"), id, this.map.districts[id]);
     }
 
-    getRegionsDistance(departure, destination) {
-        // distance between the area departure and the region gate (the arrival area where the player must go)
-        const departureArea = departure.region.getArea(departure.area.id);
-        const departureRegionGate = departure.region.arrivalArea;
-        const distanceToLeave = this.getAreasDistance(departureArea, departureRegionGate);
+    getDistrictsDistance(departure, destination) {
+        // distance between the sector departure and the district gate (the reference sector where the player must go)
+        const departureSector = departure.district.getSector(departure.sector.id);
+        const departureDistrictGate = departure.district.referenceSector;
+        const distanceToLeave = this.getSectorsDistance(departureSector, departureDistrictGate);
 
-        // distance between the area destination and the region gate (the arrival area where the player must go)
-        const destinationArea = destination.region.getArea(destination.area.id);
-        const destinationRegionGate = destination.region.arrivalArea;
-        const distanceToArrive = this.getAreasDistance(destinationArea, destinationRegionGate);
+        // distance between the sector destination and the district gate (the reference sector where the player must go)
+        const destinationSector = destination.district.getSector(destination.sector.id);
+        const destinationDistrictGate = destination.district.referenceSector;
+        const distanceToArrive = this.getSectorsDistance(destinationSector, destinationDistrictGate);
 
-        // distance between the regions
-        const distanceBetweenRegions = Math.sqrt(
-            (departure.region.x - destination.region.x) ** 2
-            + (departure.region.y - destination.region.y) ** 2
-            + (departure.region.z - destination.region.z) ** 2,
+        // distance between the districts
+        const distanceBetweenDistricts = Math.sqrt(
+            (departure.district.x - destination.district.x) ** 2
+            + (departure.district.y - destination.district.y) ** 2
+            + (departure.district.z - destination.district.z) ** 2,
         ) * 10;
 
         // return the sum of the distances
-        return distanceToLeave + distanceBetweenRegions + distanceToArrive;
+        return distanceToLeave + distanceBetweenDistricts + distanceToArrive;
     }
 
-    getAreasDistance(departure, arrival) {
+    getSectorsDistance(departure, reference) {
         return Math.sqrt(
-            (departure.x - arrival.x) ** 2 + (departure.y - arrival.y) ** 2 + (departure.z - arrival.z) ** 2,
+            (departure.x - reference.x) ** 2 + (departure.y - reference.y) ** 2 + (departure.z - reference.z) ** 2,
         );
     }
 
