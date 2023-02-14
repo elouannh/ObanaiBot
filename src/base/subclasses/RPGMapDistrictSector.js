@@ -9,7 +9,6 @@ class RPGMapDistrictSector extends RPGAssetBase {
         this.x = mapDistrictSectorData.x;
         this.y = mapDistrictSectorData.y;
         this.z = mapDistrictSectorData.z;
-        this.paths = mapDistrictSectorData.paths;
         this.biome = new RPGMapDistrictSectorBiome(this, mapDistrictSectorData.biome, this.lang.json.biomes[mapDistrictSectorData.biome]);
     }
 }

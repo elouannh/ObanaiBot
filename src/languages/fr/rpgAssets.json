@@ -251,23 +251,98 @@
     },
     "map": {
         "districts": {
-            "0": {
-                "name": "Région du Nord-Est (Tōhoku)",
+            "5": {
+                "name": "Shukuba Accueillant",
                 "sectors": {
-                    "0": "Shukuba Accueillant (Omukae)",
-                    "1": "Shukuba du Désespoir (Zetsubō)"
+                    "0": "Bâtiment principal",
+                    "1": "Espace extérieur"
                 }
             },
-            "1": {
-                "name": "Région test",
+            "2": {
+                "name": "Shukuba du Désespoir",
                 "sectors": {
-                    "0": "Test 1",
-                    "1": "Test 2"
+                    "0": "Bâtiment principal",
+                    "1": "Terrain enneigé"
+                }
+            },
+            "20": {
+                "name": "Domaine des Papillons",
+                "sectors": {
+                    "0": "Cour avant",
+                    "1": "Chambre de repos"
+                }
+            },
+            "18": {
+                "name": "Colline Brise-Légère",
+                "sectors": {
+                    "0": "Pied de la colline",
+                    "1": "Sommet de la colline",
+                    "2": "Refuge",
+                    "3": "Cour d'entraînement"
+                }
+            },
+            "19": {
+                "name": "Mont Fujikasane",
+                "sectors": {
+                    "0": "Pied du mont",
+                    "1": "Sommet du mont",
+                    "2": "Sentier principal",
+                    "3": "Sentier alternatif",
+                    "4": "Sentier abîmé",
+                    "5": "Grande clairière",
+                    "6": "Petite clairière"
+                }
+            },
+            "9": {
+                "name": "Village de Hon",
+                "sectors": {
+                    "0": "Place principale",
+                    "1": "Arrière-cour de la ferme"
+                }
+            },
+            "8": {
+                "name": "Village de Kumaneko",
+                "sectors": {
+                    "0": "Place principale",
+                    "1": "Vieille grange",
+                    "2": "Petit parc"
+                }
+            },
+            "28": {
+                "name": "Temple de Himajima Gyōmei",
+                "sectors": {
+                    "0": "Cour principale",
+                    "1": "Bâtiment principal",
+                    "2": "Terrain d'entraînement"
+                }
+            },
+            "24": {
+                "name": "Village des forgerons",
+                "sectors": {
+                    "0": "Entrée du village",
+                    "1": "Route principale",
+                    "2": "Bains d'eau chaude",
+                    "3": "Forge"
+                }
+            },
+            "34": {
+                "name": "Quartier Général de l'Armée des pourfendeurs de démons",
+                "sectors": {
+                    "0": "Cour principale",
+                    "1": "Devanture d'estrade",
+                    "2": "Estrade"
                 }
             }
         },
         "biomes": {
-            "wintryVeil": "Voile Hivernal"
+            "wintryVeil": "Voile Hivernal",
+            "civilizedSector": "Secteur Civilisé",
+            "interior": "Intérieur",
+            "rockyPeak": "Sommet Rocheux",
+            "leafyPeak": "Sommet Verdoyant",
+            "meadow": "Prairie",
+            "forest": "Forêt",
+            "rockyDesert": "Désert Rocheux"
         }
     },
     "materials": {

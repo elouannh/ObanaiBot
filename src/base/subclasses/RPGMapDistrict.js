@@ -12,14 +12,9 @@ class RPGMapDistrict extends RPGAssetBase {
         this.x = mapDistrictData.x;
         this.y = mapDistrictData.y;
         this.z = mapDistrictData.z;
-        this.paths = mapDistrictData.paths;
 
         this.sectors = Object.values(mapDistrictData.sectors).map(e => new RPGMapDistrictSector(this, e, sectorsLang[e.id]));
-        this.referenceSector = this.getReferenceSector(mapDistrictData);
-    }
-
-    getReferenceSector(mapDistrictData) {
-        return this.sectors[mapDistrictData.referenceSector];
+        this.referenceSector = this.sectors[0];
     }
 
     getSector(id) {

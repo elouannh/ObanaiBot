@@ -6,7 +6,7 @@ const { EmbedBuilder } = require("discord.js");
 function schema(id) {
     return {
         id: id,
-        districtId: "0",
+        districtId: "5",
         sectorId: "0",
         exploration: {
             excavated: {},
