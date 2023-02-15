@@ -117,11 +117,6 @@ class PlayerDb extends SQLiteTable {
      */
     async remove(id) {
         await this.delete(id);
-        const userSquad = await this.client.squadDb.loadUser(id);
-
-        if (userSquad !== null) {
-            await this.client.squadDb.removeMember(userSquad.id, id);
-        }
     }
 
     /**

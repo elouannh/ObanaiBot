@@ -11,7 +11,6 @@ const {
 const chalk = require("chalk");
 const PlayerDb = require("./database/tables/PlayerDb");
 const InventoryDb = require("./database/tables/InventoryDb");
-const SquadDb = require("./database/tables/SquadDb");
 const ActivityDb = require("./database/tables/ActivityDb");
 const MapDb = require("./database/tables/MapDb");
 const QuestDb = require("./database/tables/QuestDb");
@@ -61,7 +60,6 @@ class Obanai extends Client {
         this.playerDb = new PlayerDb(this);
         this.activityDb = new ActivityDb(this);
         this.inventoryDb = new InventoryDb(this);
-        this.squadDb = new SquadDb(this);
         this.mapDb = new MapDb(this);
         this.questDb = new QuestDb(this);
         this.additionalDb = new AdditionalDb(this);

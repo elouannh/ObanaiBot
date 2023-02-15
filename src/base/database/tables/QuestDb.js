@@ -472,54 +472,6 @@ class QuestDb extends SQLiteTable {
                     break;
             }
         }
-        else if (tableFocused === "squadDb") {
-            const data = await this.client.squadDb.load(id);
-            switch (localObjective.type) {
-                case "beSquadMember":
-                    if ("squad" in localObjective.additionalData) {
-                        const squad = localObjective.additionalData.squad;
-
-                        completedInDepth = data !== null
-                            ? (data.id === squad) : false;
-                    }
-                    else {
-                        completedInDepth = data !== null;
-                    }
-                    break;
-                case "haveFoundSquad":
-                    const squadsFound = await this.client.squadDb.foundByUser(id);
-                    let squadsIncluded = true;
-                    let squadsAmountReached = true;
-                    if ("squads" in localObjective.additionalData) {
-                        for (const squad in localObjective.additionalData.squads) {
-                            if (squadsIncluded && !squadsFound.includes(squad)) squadsIncluded = false;
-                        }
-
-                        completedInDepth = squadsIncluded && squadsAmountReached;
-                    }
-                    if ("amount" in localObjective.additionalData) {
-                        squadsAmountReached = squadsFound.length >= localObjective.additionalData.amount;
-                    }
-                    else {
-                        squadsAmountReached = squadsFound.length > 0;
-                    }
-                    completedInDepth = squadsIncluded && squadsAmountReached;
-                    break;
-                case "leadSquad":
-                    if ("squad" in localObjective.additionalData) {
-                        const squad = localObjective.additionalData.squad;
-
-                        completedInDepth = data !== null
-                            ? (data.id === squad && data.details.owner.id === id) : false;
-                    }
-                    else {
-                        completedInDepth = data !== null ? (data.details.owner.id === id) : false;
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
 
         return completedInDepth;
     }
@@ -905,7 +857,7 @@ class QuestDb extends SQLiteTable {
         for (const obj in quest.objectives) {
             this.setObjectiveCompleted(id, "slayerQuest", obj);
         }
-       for (const db of ["playerDb", "inventoryDb", "mapDb", "additionalDb", "activityDb", "squadDb"]) {
+       for (const db of ["playerDb", "inventoryDb", "mapDb", "additionalDb", "activityDb"]) {
             void await this.questsCleanup(id, db);
         }
     }

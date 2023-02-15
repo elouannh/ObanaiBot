@@ -34,7 +34,6 @@ module.exports = {
             Map: "🌍",
             Player: "👺",
             Quest: "📜",
-            Squad: "🥋",
         },
         Concepts: {
             DemonBlood: "🩸",
