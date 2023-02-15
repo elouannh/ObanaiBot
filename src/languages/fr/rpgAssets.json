@@ -343,6 +343,16 @@
             "meadow": "Prairie",
             "forest": "Forêt",
             "rockyDesert": "Désert Rocheux"
+        },
+        "regions": {
+            "0": "Région du Chemin de la Mer du Nord (Hokkaidō北海道)",
+            "1": "Région du Nord-Est (Tōhoku-chihō東北地方)",
+            "2": "Région Centrale (Chūbu-chihō中部地方)",
+            "3": "Région de l’Est  (Kantō-chihō関東地方)",
+            "4": "Région de l’Ouest (Kansai-chihō関西地方)",
+            "5": "Région Pays du Milieu (Chūgoku-chihō中国地方)",
+            "6": "Région des Quatres Provinces (Shikoku四国)",
+            "7": "Région des Neuf Provinces (Kyūshū九州)"
         }
     },
     "materials": {

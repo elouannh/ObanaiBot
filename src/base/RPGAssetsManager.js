@@ -1,6 +1,7 @@
 const RPGBreathingStyle = require("./subclasses/RPGBreathingStyle");
 const RPGEnchantedGrimoire = require("./subclasses/RPGEnchantedGrimoire");
 const RPGMapDistrict = require("./subclasses/RPGMapDistrict");
+const RPGMapRegion = require("./subclasses/RPGMapRegion");
 const RPGMaterial = require("./subclasses/RPGMaterial");
 const RPGCharacter = require("./subclasses/RPGCharacter");
 const RPGWeapon = require("./subclasses/RPGWeapon");
@@ -81,9 +82,19 @@ class RPGAssetsManager {
         return grimoire;
     }
 
+    getMapRegion(lang, id) {
+        if (!(id in this.map.regions)) return "Invalid Map District ID";
+        return new RPGMapRegion(this.getLangData(lang, "map"), id, this.map.regions[id]);
+    }
+
     getMapDistrict(lang, id) {
         if (!(id in this.map.districts)) return "Invalid Map District ID";
-        return new RPGMapDistrict(this.getLangData(lang, "map"), id, this.map.districts[id]);
+
+        const langData = this.getLangData(lang, "map");
+        const district = new RPGMapDistrict(langData, id, this.map.districts[id]);
+        district.region = this.getMapRegion(langData, this.map.districts[id].region);
+
+        return district;
     }
 
     getDistrictsDistance(departure, destination) {
