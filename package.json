@@ -1,19 +1,18 @@
 {
   "name": "obanai",
   "version": "1.1.0",
-  "description": "",
+  "description": "A Discord bot for playing a RPG game with your friends. Embody a slayer and travel the world.",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "bot": "node ."
   },
-  "author": "PxndxDev",
+  "author": "elouann-h",
   "license": "MIT",
   "dependencies": {
     "better-sqlite3": "^8.0.1",
     "canvas": "^2.11.0",
     "chalk": "^4.1.2",
-    "discord-api-types": "^0.37.26",
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3",
     "enmap": "^5.9.5",
