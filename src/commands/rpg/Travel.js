@@ -37,9 +37,9 @@ class Travel extends Command {
         const exists = await this.hasAdventure();
         if (!exists) return;
 
-        const lang = this.client.playerDb.getLang(user.id);
-        const map = await this.client.mapDb.load(user.id);
-        const activity = await this.client.activityDb.load(user.id);
+        const lang = this.client.playerDb.getLang(this.user.id);
+        const map = await this.client.mapDb.load(this.user.id);
+        const activity = await this.client.activityDb.load(this.user.id);
 
         if (activity.travel !== null) {
             const destination = `${activity.travel.destination.district.region.name}\n`
@@ -132,7 +132,7 @@ class Travel extends Command {
         if (wantsToTravel === null) return this.end();
 
         if (wantsToTravel === "primary") {
-            this.client.activityDb.travel(user.id, startedDate, map.district.id, map.sector.id, district.id, sector.id);
+            this.client.activityDb.travel(this.user.id, startedDate, map.district.id, map.sector.id, district.id, sector.id);
             return await this.return(
                 this.trad.startedTraveling.replace("%LOCATION_NAME", `${district.name}, ${sector.name}`),
             );

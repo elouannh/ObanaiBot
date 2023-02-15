@@ -48,22 +48,22 @@ class Profile extends Command {
         const exists = await this.hasAdventure();
         if (!exists) return;
 
-        const player = await this.client.playerDb.load(user.id);
-        const inventory = await this.client.inventoryDb.load(user.id);
-        const activity = await this.client.activityDb.load(user.id);
-        const map = await this.client.mapDb.load(user.id);
-        const additional = await this.client.additionalDb.load(user.id);
+        const player = await this.client.playerDb.load(this.user.id);
+        const inventory = await this.client.inventoryDb.load(this.user.id);
+        const activity = await this.client.activityDb.load(this.user.id);
+        const map = await this.client.mapDb.load(this.user.id);
+        const additional = await this.client.additionalDb.load(this.user.id);
 
         const playerImage = await this.client.playerDb.getImage(player);
 
         const embeds = {
             player: await this.client.playerDb.getEmbed(
-                this.lang, player, user, this.client.additionalDb.getThemeName(this.lang, playerImage.name),
+                this.lang, player, this.user, this.client.additionalDb.getThemeName(this.lang, playerImage.name),
             ),
-            inventory: await this.client.inventoryDb.getEmbed(this.lang, inventory, user),
-            activity: await this.client.activityDb.getEmbed(this.lang, activity, user),
-            map: await this.client.mapDb.getEmbed(this.lang, map, user),
-            additional: await this.client.additionalDb.getEmbed(this.lang, additional, user),
+            inventory: await this.client.inventoryDb.getEmbed(this.lang, inventory, this.user),
+            activity: await this.client.activityDb.getEmbed(this.lang, activity, this.user),
+            map: await this.client.mapDb.getEmbed(this.lang, map, this.user),
+            additional: await this.client.additionalDb.getEmbed(this.lang, additional, this.user),
         };
         const attachments = {
             player: playerImage.attachment,
@@ -101,16 +101,16 @@ class Profile extends Command {
             },
         ];
         let lastPanel = "Player";
-        if (this.interaction.user.id === user.id) {
+        if (this.interaction.user.id === this.user.id) {
             await this.client.additionalDb.showBeginningTutorial(
-                user.id, "profileCommand", this.interaction,
+                this.user.id, "profileCommand", this.interaction,
             );
         }
         let loop = true;
         while (loop) {
-            if (this.interaction.user.id === user.id) {
+            if (this.interaction.user.id === this.user.id) {
                 await this.client.additionalDb.showBeginningTutorial(
-                    user.id, `profile${lastPanel}`, this.interaction,
+                    this.user.id, `profile${lastPanel}`, this.interaction,
                 );
             }
 

@@ -37,8 +37,8 @@ class Interact extends Command {
         const exists = await this.hasAdventure();
         if (!exists) return;
 
-        const map = await this.client.mapDb.load(user.id);
-        const inventory = await this.client.inventoryDb.load(user.id);
+        const map = await this.client.mapDb.load(this.user.id);
+        const inventory = await this.client.inventoryDb.load(this.user.id);
 
         const options = [
             {
@@ -59,7 +59,7 @@ class Interact extends Command {
         ];
 
         const sector = Object.values(map.excavated?.[map.district.id] || {})
-            .filter(sector => sector[0].id === map.sector.id)?.at(0);
+            .filter(sect => sect[0].id === map.sector.id)?.at(0);
         const sectorExplored = sector || false;
 
         if (!sectorExplored) {
@@ -86,7 +86,7 @@ class Interact extends Command {
         if (action === null) return this.end();
 
         if (action[0] === "dialogue") {
-            const pnjs = await this.client.questDb.getPNJs(user.id, "dialogue");
+            const pnjs = await this.client.questDb.getPNJs(this.user.id, "dialogue");
 
             if (pnjs.length === 0) return await this.return(this.trad.noPnjForDialogue);
 
@@ -104,7 +104,7 @@ class Interact extends Command {
             );
             if (pnjChoice === null) return this.end();
 
-            const choices = await this.client.questDb.getDialoguesByPNJ(user.id, pnjChoice[0]);
+            const choices = await this.client.questDb.getDialoguesByPNJ(this.user.id, pnjChoice[0]);
             let temp = null;
 
             if (choices.length > 0) {
@@ -130,11 +130,11 @@ class Interact extends Command {
             const chosen = choices.find(e => e.dialogue.id === temp);
 
             await this.client.questDb.displayDialogue(this, chosen.dialogue);
-            await this.client.questDb.setObjectiveManuallyCompleted(user.id, chosen.questKey, chosen.objectiveId);
+            await this.client.questDb.setObjectiveManuallyCompleted(this.user.id, chosen.questKey, chosen.objectiveId);
             return this.end();
         }
         else if (action[0] === "interact") {
-            const choices = await this.client.questDb.getInteractions(user.id);
+            const choices = await this.client.questDb.getInteractions(this.user.id);
 
             if (choices.length === 0) return await this.return(this.trad.noInteraction);
 
@@ -154,11 +154,11 @@ class Interact extends Command {
             const chosen = choices.find(e => e.interaction.id === choice[0]);
 
             await chosen.interaction.play(this);
-            await this.client.questDb.setObjectiveManuallyCompleted(user.id, chosen.questKey, chosen.objectiveId);
+            await this.client.questDb.setObjectiveManuallyCompleted(this.user.id, chosen.questKey, chosen.objectiveId);
             return this.end();
         }
         else if (action[0] === "giveItems") {
-            const pnjs = await this.client.questDb.getPNJs(user.id, "giveItems");
+            const pnjs = await this.client.questDb.getPNJs(this.user.id, "giveItems");
 
             if (pnjs.length === 0) return await this.return(this.trad.noPnjForItems);
 
@@ -176,7 +176,7 @@ class Interact extends Command {
             );
             if (pnjChoice === null) return this.end();
 
-            const choices = await this.client.questDb.getItemsToGive(user.id, pnjChoice[0]);
+            const choices = await this.client.questDb.getItemsToGive(this.user.id, pnjChoice[0]);
             let temp = null;
 
             if (choices.length > 0) {
@@ -210,7 +210,7 @@ class Interact extends Command {
             }
 
             const pnjInfos = await this.client.RPGAssetsManager.getCharacter(
-                this.client.playerDb.getLang(user.id), pnjChoice[0],
+                this.client.playerDb.getLang(this.user.id), pnjChoice[0],
             );
 
             const wantsToGive = await this.choice(
@@ -224,8 +224,8 @@ class Interact extends Command {
             if (wantsToGive === null) return this.end();
 
             if (wantsToGive === "primary") {
-                this.client.questDb.giveItems(user.id, chosen.items);
-                await this.client.questDb.setObjectiveManuallyCompleted(user.id, chosen.questKey, chosen.objectiveId);
+                this.client.questDb.giveItems(this.user.id, chosen.items);
+                await this.client.questDb.setObjectiveManuallyCompleted(this.user.id, chosen.questKey, chosen.objectiveId);
 
                 return await this.return(this.trad.giftDone);
             }
@@ -263,16 +263,16 @@ class Interact extends Command {
                 }
             }
 
-            this.client.mapDb.explore(user.id, map.district.id, map.sector.id);
+            this.client.mapDb.explore(this.user.id, map.district.id, map.sector.id);
             if (bag.length > 0) {
                 for (const item of bag) {
-                    this.client.inventoryDb.addMaterial(user.id, item.resource.id, item.amount);
+                    this.client.inventoryDb.addMaterial(this.user.id, item.resource.id, item.amount);
                 }
                 return await this.return(
                     this.trad.explored
                     + "\n\n" + bag.map(e => `> **${
                         this.client.RPGAssetsManager.getMaterial(
-                            this.client.playerDb.getLang(user.id), e.resource.id,
+                            this.client.playerDb.getLang(this.user.id), e.resource.id,
                         ).name
                     } x${e.amount}**`).join("\n"),
                 );

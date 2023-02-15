@@ -37,8 +37,8 @@ class Train extends Command {
         const exists = await this.hasAdventure();
         if (!exists) return;
 
-        const player = await this.client.playerDb.load(user.id);
-        const activity = await this.client.activityDb.load(user.id);
+        const player = await this.client.playerDb.load(this.user.id);
+        const activity = await this.client.activityDb.load(this.user.id);
 
         if (activity.training !== null) {
             return await this.return(this.trad.currentlyTraining
@@ -82,7 +82,7 @@ class Train extends Command {
 
         if (wantsToTrain === "primary") {
             this.client.activityDb.train(
-                user.id,
+                this.user.id,
                 selected.id,
                 startedDate,
             );

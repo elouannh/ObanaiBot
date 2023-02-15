@@ -1,5 +1,4 @@
 const Command = require("../../base/Command");
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
 class Quests extends Command {
     constructor() {
@@ -38,8 +37,8 @@ class Quests extends Command {
         const exists = await this.hasAdventure();
         if (!exists) return;
 
-        const quests = await this.client.questDb.load(user.id);
-        const embedsArray = await this.client.questDb.getEmbeds(this.lang, quests, user);
+        const quests = await this.client.questDb.load(this.user.id);
+        const embedsArray = await this.client.questDb.getEmbeds(this.lang, quests, this.user);
 
         const embeds = {
             slayer: embedsArray[0],

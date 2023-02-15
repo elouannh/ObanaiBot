@@ -63,7 +63,7 @@ class Delete extends Command {
             return await this.return(this.trad.notDeleted);
         }
         else {
-            await this.client.playerDb.remove(user.id);
+            await this.client.playerDb.remove(this.user.id);
             return await this.return(this.trad.deleted);
         }
     }
