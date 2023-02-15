@@ -224,7 +224,7 @@ class ActivityDb extends SQLiteTable {
      * @returns {Number} The distance between the departure and the destination
      */
     distance(departure, destination, departureSector, destinationSector) {
-        let distance = 0;
+        let distance;
         if (departure.id === destination.id) {
             distance = this.client.RPGAssetsManager.getSectorsDistance(departureSector, destinationSector);
         }

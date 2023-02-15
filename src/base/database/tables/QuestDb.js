@@ -640,7 +640,7 @@ class QuestDb extends SQLiteTable {
     }
 
     /**
-     * Function that allowss you to set manually an objective as completed.
+     * Function that allows you to set manually an objective as completed.
      * @param {String} id The user ID
      * @param {String} questCategory The quest type (daily/side/slayer)
      * @param {String} objectiveId The ID of the objective to set as completed

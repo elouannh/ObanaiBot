@@ -2,6 +2,7 @@ const SQLiteTable = require("../../SQLiteTable");
 const PlayerData = require("../dataclasses/PlayerData");
 const PlayerListener = require("../listeners/PlayerListener");
 const Canvas = require("canvas");
+// eslint-disable-next-line no-unused-vars
 const { AttachmentBuilder, EmbedBuilder, User } = require("discord.js");
 const StackBlur = require("stackblur-canvas");
 

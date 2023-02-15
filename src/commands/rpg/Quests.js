@@ -71,7 +71,7 @@ class Quests extends Command {
         let lastPanel = "Slayer";
         let loop = true;
         while (loop) {
-            let interaction = await this.menu(
+            let questInteraction = await this.menu(
                 {
                     embeds: [embeds[lastPanel.toLowerCase()]],
                     files: attachments[lastPanel.toLowerCase()] === null ?
@@ -84,11 +84,11 @@ class Quests extends Command {
                 false,
                 true,
             );
-            if (interaction === null || interaction === lastPanel || interaction === "cancel") {
-                if (interaction === null || interaction === "cancel") loop = false;
+            if (questInteraction === null || questInteraction === lastPanel || questInteraction === "cancel") {
+                if (questInteraction === null || questInteraction === "cancel") loop = false;
                 continue;
             }
-            interaction = interaction[0];
+            questInteraction = questInteraction[0];
             const embedAttachment = (await this.message())?.embeds[0]?.data?.image?.url;
             await (await this.message())?.removeAttachments().catch(this.client.catchError);
             if (
@@ -100,12 +100,12 @@ class Quests extends Command {
             }
 
             await this.editContent({
-                embeds: [embeds[interaction.toLowerCase()]],
-                files: attachments[interaction.toLowerCase()] === null ?
+                embeds: [embeds[questInteraction.toLowerCase()]],
+                files: attachments[questInteraction.toLowerCase()] === null ?
                     []
-                    : [attachments[interaction.toLowerCase()]],
+                    : [attachments[questInteraction.toLowerCase()]],
             });
-            lastPanel = interaction;
+            lastPanel = questInteraction;
         }
         return this.end();
     }

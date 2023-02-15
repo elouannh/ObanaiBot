@@ -114,7 +114,7 @@ class Profile extends Command {
                 );
             }
 
-            let interaction = await this.menu(
+            let profileInteraction = await this.menu(
                 {
                     embeds: [embeds[lastPanel.toLowerCase()]],
                     files: attachments[lastPanel.toLowerCase()] === null ?
@@ -127,11 +127,11 @@ class Profile extends Command {
                 false,
                 true,
             );
-            if (interaction === null || interaction === lastPanel || interaction === "cancel") {
-                if (interaction === null || interaction === "cancel") loop = false;
+            if (profileInteraction === null || profileInteraction === lastPanel || profileInteraction === "cancel") {
+                if (profileInteraction === null || profileInteraction === "cancel") loop = false;
                 continue;
             }
-            interaction = interaction[0];
+            profileInteraction = profileInteraction[0];
             const embedAttachment = (await this.message())?.embeds[0]?.data?.image?.url;
             await (await this.message())?.removeAttachments().catch(this.client.catchError);
             if (
@@ -143,12 +143,12 @@ class Profile extends Command {
             }
 
             await this.editContent({
-                embeds: [embeds[interaction.toLowerCase()]],
-                files: attachments[interaction.toLowerCase()] === null ?
+                embeds: [embeds[profileInteraction.toLowerCase()]],
+                files: attachments[profileInteraction.toLowerCase()] === null ?
                     []
-                    : [attachments[interaction.toLowerCase()]],
+                    : [attachments[profileInteraction.toLowerCase()]],
             });
-            lastPanel = interaction;
+            lastPanel = profileInteraction;
         }
         return this.end();
     }

@@ -45,7 +45,7 @@ class MapDb extends SQLiteTable {
     }
 
     /**
-     * Function that moves a player on an sector/district.
+     * Function that moves a player on a sector/district.
      * @param {String} id The user ID
      * @param {String} districtId The district ID
      * @param {String} sectorId The sector ID
@@ -56,7 +56,7 @@ class MapDb extends SQLiteTable {
     }
 
     /**
-     * Set an sector as already excavated.
+     * Set a sector as already excavated.
      * @param {String} id The user ID
      * @param {String} districtId The district ID
      * @param {String} sectorId The sector ID
@@ -70,7 +70,7 @@ class MapDb extends SQLiteTable {
     }
 
     /**
-     * Set a district and an sector as none excavated.
+     * Set a district and a sector as none excavated.
      * @param {String} id The user ID
      * @param {String} districtId The district ID
      * @param {String} sectorId The sector ID

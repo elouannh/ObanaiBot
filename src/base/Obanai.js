@@ -266,15 +266,15 @@ class Obanai extends Client {
         };
         let response = `📥 **Input**\n\`\`\`js\n${clean(code)}\n\`\`\`\n📤 **Output**\n`;
         try {
-            let evaled = await eval(code);
-            if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
+            let evaluated = await eval(code);
+            if (typeof evaluated !== "string") evaluated = require("util").inspect(evaluated);
 
-            const cleanEvaled = clean(evaled);
-            if (cleanEvaled === "undefined") {
+            const cleanEvaluated = clean(evaluated);
+            if (cleanEvaluated === "undefined") {
                 response += "```cs\n# Voided processus```";
             }
             else {
-                response += `\`\`\`xl\n${cleanEvaled.substring(0, 2000 - response.length - 20)}\`\`\``;
+                response += `\`\`\`xl\n${cleanEvaluated.substring(0, 2000 - response.length - 20)}\`\`\``;
             }
         }
         catch (err) {
