@@ -253,6 +253,7 @@
         "districts": {
             "5": {
                 "name": "Shukuba Accueillant",
+                "fullName": "Shukuba Accueillant (Omukaeお迎え)",
                 "sectors": {
                     "0": "Bâtiment principal",
                     "1": "Espace extérieur"
@@ -260,6 +261,7 @@
             },
             "2": {
                 "name": "Shukuba du Désespoir",
+                "fullName": "Shukuba du Désespoir (Zetsubō絶望)",
                 "sectors": {
                     "0": "Bâtiment principal",
                     "1": "Terrain enneigé"
@@ -267,6 +269,7 @@
             },
             "20": {
                 "name": "Domaine des Papillons",
+                "fullName": "Domaine des Papillons",
                 "sectors": {
                     "0": "Cour avant",
                     "1": "Chambre de repos"
@@ -274,6 +277,7 @@
             },
             "18": {
                 "name": "Colline Brise-Légère",
+                "fullName": "Colline Brise-Légère (Keifū no Oka軽風の丘)",
                 "sectors": {
                     "0": "Pied de la colline",
                     "1": "Sommet de la colline",
@@ -283,6 +287,7 @@
             },
             "19": {
                 "name": "Mont Fujikasane",
+                "fullName": "Mont Fujikasane (Fujikasane Yama藤襲山)",
                 "sectors": {
                     "0": "Pied du mont",
                     "1": "Sommet du mont",
@@ -295,6 +300,7 @@
             },
             "9": {
                 "name": "Village de Hon",
+                "fullName": "Village de Hon (Hon no Mura本の村)",
                 "sectors": {
                     "0": "Place principale",
                     "1": "Arrière-cour de la ferme"
@@ -302,6 +308,7 @@
             },
             "8": {
                 "name": "Village de Kumaneko",
+                "fullName": "Village de Kumaneko (Kumaneko no Mura熊猫の村)",
                 "sectors": {
                     "0": "Place principale",
                     "1": "Vieille grange",
@@ -310,6 +317,7 @@
             },
             "28": {
                 "name": "Temple de Himajima Gyōmei",
+                "fullName": "Temple de Himejima Gyōmei",
                 "sectors": {
                     "0": "Cour principale",
                     "1": "Bâtiment principal",
@@ -318,6 +326,7 @@
             },
             "24": {
                 "name": "Village des forgerons",
+                "fullName": "Village des forgerons",
                 "sectors": {
                     "0": "Entrée du village",
                     "1": "Route principale",
@@ -326,7 +335,8 @@
                 }
             },
             "34": {
-                "name": "Quartier Général de l'Armée des pourfendeurs de démons",
+                "name": "QG de l'Armée des pourfendeurs de démons",
+                "fullName": "Quartier Général de l’Armée des pourfendeurs de démons",
                 "sectors": {
                     "0": "Cour principale",
                     "1": "Devanture d'estrade",
@@ -510,8 +520,9 @@
         "demonBlood": "Sang de démon",
         "themes": "Thèmes",
         "tutorialProgress": "Progression du tutoriel",
-        "district": "Région",
-        "sector": "Secteur de région",
+        "region": "Région",
+        "district": "District",
+        "sector": "Secteur de district",
         "biome": "Biome",
         "exploration": "Exploration",
         "slayerQuest": "Quête de pourfendeur",

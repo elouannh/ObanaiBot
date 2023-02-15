@@ -53,7 +53,7 @@ class ActivityData extends TableData {
             );
 
             this.data.travel.endedDate = this.client.util.round(this.data.travel.startedDate
-                + (this.data.travel.distance * this.client.enums.Units.MinutesPerDistanceUnit * 60 * 1000),
+                + this.client.activityDb.distanceToTime(this.data.travel.distance),
             );
         }
         else {

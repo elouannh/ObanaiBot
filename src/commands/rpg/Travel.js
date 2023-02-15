@@ -46,7 +46,8 @@ class Travel extends Command {
         const activity = await this.client.activityDb.load(user.id);
 
         if (activity.travel !== null) {
-            const destination = `${activity.travel.destination.district.name}, ${activity.travel.destination.sector.name}`;
+            const destination = `${activity.travel.destination.district.region.name}\n`
+                + `${activity.travel.destination.district.name}, ${activity.travel.destination.sector.name}`;
             return await this.return(this.trad.currentlyTraveling
                         .replace("%LOCATION_NAME", destination)
                     + this.trad.endsIn
@@ -78,7 +79,9 @@ class Travel extends Command {
         if (mode === "long") {
             const availableDistricts = Object.values(this.client.RPGAssetsManager.map.districts)
                 .map(e => this.client.RPGAssetsManager.getMapDistrict(lang, e.id))
-                .filter(e => e.id !== map.district.id) || [];
+                .filter(e => e.id !== map.district.id)
+                .filter(e => Math.abs(Number(e.region.id) - Number(map.district.region.id)) <= 1) || [];
+
             const districtChoice = await this.menu(
                 {
                     content: `[${this.trad.longTravel}] ${this.trad.chooseDistrict}`,
@@ -87,7 +90,7 @@ class Travel extends Command {
                     {
                         label: e.name,
                         value: e.id,
-                        description: this.trad.availableSectors.replace("%SECTORS", e.sectors.length),
+                        description: e.region.name,
                     }
                 )),
             );
@@ -118,7 +121,7 @@ class Travel extends Command {
 
         const distance = this.client.activityDb.distance(map.district, district, map.sector, sector);
         const startedDate = Date.now();
-        const time = distance * 5 * 60 * 1000;
+        const time = this.client.activityDb.distanceToTime(distance);
 
         const wantsToTravel = await this.choice(
             {

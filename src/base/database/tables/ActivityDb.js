@@ -118,7 +118,7 @@ class ActivityDb extends SQLiteTable {
             const destinationSector = destination.getSector(data.travel.destination.sectorId);
             const distance = this.distance(departure, departureSector, destination, destinationSector);
             const endedDate = this.client.util.round(data.travel.startedDate
-                + (distance * this.client.enums.Units.MinutesPerDistanceUnit * 60 * 1000),
+                + this.client.activityDb.distanceToTime(distance),
             );
             const timeLeft = endedDate - Date.now();
 
@@ -234,6 +234,15 @@ class ActivityDb extends SQLiteTable {
             );
         }
         return distance;
+    }
+
+    /**
+     * Function that convert the distance to time in milliseconds.
+     * @param {Number} distance The distance
+     * @returns {Number} The time in milliseconds
+     */
+    distanceToTime(distance) {
+        return distance * this.client.enums.Units.MinutesPerDistanceUnit * 60 * 1000;
     }
 
     /**
