@@ -26,25 +26,32 @@ class Command {
             permissions: 0n,
             targets: [],
         },
+        rpgInfos = {
+            needToBeStatic: false,
+            needToBeInRpg: false,
+        },
     ) {
         this.slashBuilder = slashBuilder;
         this.contextBuilder = contextBuilder;
         this.infos = infos;
+        this.rpgInfos = rpgInfos;
         this.client = null;
         this.interaction = null;
-        this.mention = "";
         this.lang = new Language("fr").json;
         this.trad = this.lang["commands"][this.infos.trad || this.slashBuilder.name];
         this.langManager = null;
+        this.focusedPlayer = null;
+        this.user = null;
     }
 
     init(client, interaction, lang) {
         this.client = client;
         this.interaction = interaction;
-        this.mention = `<@${this.interaction.user.id}>, `;
         this.lang = lang.json;
         this.trad = this.lang["commands"][this.infos.trad || this.slashBuilder.name];
         this.langManager = this.client.languageManager;
+        this.focusedPlayer = this.interaction.user.id;
+        this.user = this.interaction.user;
 
         if (this.infos.completedRequests.includes("adventure")) {
             this.infos.completedRequests = this.infos.completedRequests.concat(Array.from(
@@ -66,6 +73,16 @@ class Command {
     end() {
         this.client.requestsManager.remove(this.interaction.user.id, this.slashBuilder.name);
         return void 0;
+    }
+
+    async focus(type) {
+        if (type === "option") {
+            const user = await this.getUserFromInteraction(this.interaction.type);
+            this.focusedPlayer = user.id;
+            this.user = this.client.getUser(this.focusedPlayer, this.interaction.user);
+            return user;
+        }
+        return this.interaction.user;
     }
 
     async exe() {
@@ -217,6 +234,29 @@ class Command {
             userId = this.client.users.cache.get(this.interaction.options.getUser("user")?.id)?.id || userId;
         }
         return await this.client.getUser(userId, user);
+    }
+
+    async isUserStatic() {
+        const activity = this.client.activityDb.get(this.focusedPlayer);
+        if (this.rpgInfos.needToBeStatic && activity.travel.currentlyTraveling) {
+            await this.return(this.lang.systems.mustBeStatic);
+            return false;
+        }
+        return true;
+    }
+
+    async hasAdventure() {
+        const exists = await this.client.playerDb.exists(this.focusedPlayer);
+        if (this.rpgInfos.needToBeInRpg && !exists) {
+            await this.return(
+                this.client.playerDb.get(this.focusedPlayer).alreadyPlayed ?
+                    this.lang.systems.playerNotFoundAlreadyPlayed
+                    : this.lang.systems.playerNotFound,
+                true,
+            );
+            return false;
+        }
+        return true;
     }
 
     async choice(messagePayload, primary, secondary, removeWarn = false) {

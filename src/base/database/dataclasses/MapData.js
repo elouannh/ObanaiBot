@@ -11,16 +11,16 @@ class MapData extends TableData {
     }
 
     load() {
-        this.data.region = this.client.RPGAssetsManager.getMapRegion(this.lang, this.data.regionId);
-        this.data.area = this.data.region.getArea(this.data.areaId);
-        delete this.data.regionId;
-        delete this.data.areaId;
+        this.data.district = this.client.RPGAssetsManager.getMapDistrict(this.lang, this.data.districtId);
+        this.data.sector = this.data.district.getSector(this.data.sectorId);
+        delete this.data.districtId;
+        delete this.data.sectorId;
         const excavated = {};
-        for (const regionId in this.data.exploration.excavated) {
-            const region = this.client.RPGAssetsManager.getMapRegion(this.lang, regionId);
-            excavated[regionId] = {};
-            for (const [areaId, areaDate] of this.data.exploration.excavated[regionId]) {
-                excavated[regionId][areaId] = [region.getArea(areaId), areaDate];
+        for (const districtId in this.data.exploration.excavated) {
+            const district = this.client.RPGAssetsManager.getMapDistrict(this.lang, districtId);
+            excavated[districtId] = {};
+            for (const [sectorId, sectorDate] of this.data.exploration.excavated[districtId]) {
+                excavated[districtId][sectorId] = [district.getSector(sectorId), sectorDate];
             }
         }
         this.data.excavated = excavated;

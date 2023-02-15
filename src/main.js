@@ -28,12 +28,12 @@ module.exports = async obanai => {
     //         currentlyTraveling: false,
     //         startedDate: 0,
     //         departurePoint: {
-    //             regionId: null,
-    //             areaId: null,
+    //             districtId: null,
+    //             sectorId: null,
     //         },
     //         destination: {
-    //             regionId: null,
-    //             areaId: null,
+    //             districtId: null,
+    //             sectorId: null,
     //         },
     //     },
     //     "travel",

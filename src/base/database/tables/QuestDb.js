@@ -89,7 +89,7 @@ class QuestDb extends SQLiteTable {
                 const data = objective.additionalData;
                 if (objective.type !== objectiveType || !data.characterId) continue;
 
-                if (data.area === localisation.area.id && data.region === localisation.region.id) {
+                if (data.sector === localisation.sector.id && data.district === localisation.district.id) {
                     const pnj = this.client.RPGAssetsManager.getCharacter(
                         this.client.playerDb.getLang(id), data.characterId,
                     );
@@ -434,11 +434,11 @@ class QuestDb extends SQLiteTable {
             const data = await this.client.mapDb.load(id);
             switch (localObjective.type) {
                 case "reachDestination":
-                    const { region, area } = localObjective.additionalData;
-                    const userRegion = data.region;
-                    const userArea = data.area;
+                    const { district, sector } = localObjective.additionalData;
+                    const userDistrict = data.district;
+                    const userSector = data.sector;
 
-                    if (userRegion.id === region && userArea.id === area) completedInDepth = true;
+                    if (userDistrict.id === district && userSector.id === sector) completedInDepth = true;
                     break;
                 default:
                     break;
@@ -466,54 +466,6 @@ class QuestDb extends SQLiteTable {
                     }
                     else {
                         completedInDepth = data.breathingStyle !== null;
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-        else if (tableFocused === "squadDb") {
-            const data = await this.client.squadDb.load(id);
-            switch (localObjective.type) {
-                case "beSquadMember":
-                    if ("squad" in localObjective.additionalData) {
-                        const squad = localObjective.additionalData.squad;
-
-                        completedInDepth = data !== null
-                            ? (data.id === squad) : false;
-                    }
-                    else {
-                        completedInDepth = data !== null;
-                    }
-                    break;
-                case "haveFoundSquad":
-                    const squadsFound = await this.client.squadDb.foundByUser(id);
-                    let squadsIncluded = true;
-                    let squadsAmountReached = true;
-                    if ("squads" in localObjective.additionalData) {
-                        for (const squad in localObjective.additionalData.squads) {
-                            if (squadsIncluded && !squadsFound.includes(squad)) squadsIncluded = false;
-                        }
-
-                        completedInDepth = squadsIncluded && squadsAmountReached;
-                    }
-                    if ("amount" in localObjective.additionalData) {
-                        squadsAmountReached = squadsFound.length >= localObjective.additionalData.amount;
-                    }
-                    else {
-                        squadsAmountReached = squadsFound.length > 0;
-                    }
-                    completedInDepth = squadsIncluded && squadsAmountReached;
-                    break;
-                case "leadSquad":
-                    if ("squad" in localObjective.additionalData) {
-                        const squad = localObjective.additionalData.squad;
-
-                        completedInDepth = data !== null
-                            ? (data.id === squad && data.details.owner.id === id) : false;
-                    }
-                    else {
-                        completedInDepth = data !== null ? (data.details.owner.id === id) : false;
                     }
                     break;
                 default:
@@ -640,7 +592,7 @@ class QuestDb extends SQLiteTable {
     }
 
     /**
-     * Function that allowss you to set manually an objective as completed.
+     * Function that allows you to set manually an objective as completed.
      * @param {String} id The user ID
      * @param {String} questCategory The quest type (daily/side/slayer)
      * @param {String} objectiveId The ID of the objective to set as completed
@@ -905,7 +857,7 @@ class QuestDb extends SQLiteTable {
         for (const obj in quest.objectives) {
             this.setObjectiveCompleted(id, "slayerQuest", obj);
         }
-       for (const db of ["playerDb", "inventoryDb", "mapDb", "additionalDb", "activityDb", "squadDb"]) {
+       for (const db of ["playerDb", "inventoryDb", "mapDb", "additionalDb", "activityDb"]) {
             void await this.questsCleanup(id, db);
         }
     }

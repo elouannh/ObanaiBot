@@ -1,6 +1,6 @@
 const RPGAssetBase = require("./RPGAssetBase");
 
-class RPGMapRegionAreaBiome extends RPGAssetBase {
+class RPGMapDistrictSectorBiome extends RPGAssetBase {
     constructor(parentClass, id, name) {
         super(parentClass.lang, id);
 
@@ -8,4 +8,4 @@ class RPGMapRegionAreaBiome extends RPGAssetBase {
     }
 }
 
-module.exports = RPGMapRegionAreaBiome;
+module.exports = RPGMapDistrictSectorBiome;

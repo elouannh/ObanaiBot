@@ -103,8 +103,7 @@ class SQLiteTableMerger {
             dbs.b.destroy();
         }
         if (this.tables.includes("squadDb")) {
-            const dbs = { a: new Enmap({ name: "squad" }), b: new Enmap({ name: "squadDb" }) };
-            dbs.b.destroy();
+            new Enmap({ name: "squadDb" }).destroy();
         }
         if (this.tables.includes("internalServerManager")) {
             new Enmap({ name: "internalServerManager" }).destroy();

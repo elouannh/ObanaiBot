@@ -26,24 +26,20 @@ class Forge extends Command {
                 permissions: 0n,
                 targets: ["read", "write"],
             },
+            {
+                needToBeStatic: true,
+                needToBeInRpg: true,
+            },
         );
     }
 
     async run() {
-        await this.interaction.deferReply().catch(this.client.catchError);
-        const user = this.interaction.user;
-        if (!(await this.client.playerDb.exists(user.id))) {
-            return await this.return(
-                this.client.playerDb.get(user.id).alreadyPlayed ?
-                    this.lang.systems.playerNotFoundAlreadyPlayed
-                    : this.lang.systems.playerNotFound,
-                true,
-            );
-        }
+        const exists = await this.hasAdventure();
+        if (!exists) return;
 
-        const langId = this.client.playerDb.getLang(user.id);
-        const activity = await this.client.activityDb.load(user.id);
-        const inventory = await this.client.inventoryDb.load(user.id);
+        const langId = this.client.playerDb.getLang(this.user.id);
+        const activity = await this.client.activityDb.load(this.user.id);
+        const inventory = await this.client.inventoryDb.load(this.user.id);
 
         if (activity.forge.forgingSlots.freeSlots.length === 0) return await this.return(this.trad.noAvailableSlot);
 
@@ -103,7 +99,7 @@ class Forge extends Command {
             const weaponWithRarity = this.client.RPGAssetsManager.getWeapon(langId, weaponChoice[0], String(rarity[0]));
 
             this.client.activityDb.forgeWeapon(
-                user.id,
+                this.user.id,
                 weaponChoice[0],
                 String(rarity[0]),
                 Object.values(requiredResources).map(r => ({ id: r[0].instance.id, amount: r[0].amount })),

@@ -135,7 +135,7 @@ module.exports = {
         return int.toString().replace(/\B(?=(\d{3})+(?!\d))/g, sep);
     },
     /**
-     * Wait a given amount of miliseconds.
+     * Wait a given amount of milliseconds.
      * @param {Number} ms The amount in ms to wait
      * @returns {Promise<unknown>}
      */

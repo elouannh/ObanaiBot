@@ -1,6 +1,7 @@
 const SQLiteTable = require("../../SQLiteTable");
 const AdditionalData = require("../dataclasses/AdditionalData");
 const AdditionalListener = require("../listeners/AdditionalListener");
+// eslint-disable-next-line no-unused-vars
 const { ChatInputCommandInteraction, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
 
 function schema(id) {

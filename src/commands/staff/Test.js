@@ -1,5 +1,4 @@
 const Command = require("../../base/Command");
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder } = require("discord.js");
 
 class Profile extends Command {
     constructor() {

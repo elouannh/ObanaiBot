@@ -1,5 +1,4 @@
 const Command = require("../../base/Command");
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
 class Quests extends Command {
     constructor() {
@@ -27,23 +26,19 @@ class Quests extends Command {
                 permissions: 0n,
                 targets: ["read"],
             },
+            {
+                needToBeStatic: false,
+                needToBeInRpg: true,
+            },
         );
     }
 
     async run() {
-        await this.interaction.deferReply().catch(this.client.catchError);
-        const user = this.interaction.user;
-        if (!(await this.client.playerDb.exists(user.id))) {
-            return await this.return(
-                this.client.playerDb.get(user.id).alreadyPlayed ?
-                    this.lang.systems.playerNotFoundAlreadyPlayed
-                    : this.lang.systems.playerNotFound,
-                true,
-            );
-        }
+        const exists = await this.hasAdventure();
+        if (!exists) return;
 
-        const quests = await this.client.questDb.load(user.id);
-        const embedsArray = await this.client.questDb.getEmbeds(this.lang, quests, user);
+        const quests = await this.client.questDb.load(this.user.id);
+        const embedsArray = await this.client.questDb.getEmbeds(this.lang, quests, this.user);
 
         const embeds = {
             slayer: embedsArray[0],
@@ -76,7 +71,7 @@ class Quests extends Command {
         let lastPanel = "Slayer";
         let loop = true;
         while (loop) {
-            let interaction = await this.menu(
+            let questInteraction = await this.menu(
                 {
                     embeds: [embeds[lastPanel.toLowerCase()]],
                     files: attachments[lastPanel.toLowerCase()] === null ?
@@ -89,11 +84,11 @@ class Quests extends Command {
                 false,
                 true,
             );
-            if (interaction === null || interaction === lastPanel || interaction === "cancel") {
-                if (interaction === null || interaction === "cancel") loop = false;
+            if (questInteraction === null || questInteraction === lastPanel || questInteraction === "cancel") {
+                if (questInteraction === null || questInteraction === "cancel") loop = false;
                 continue;
             }
-            interaction = interaction[0];
+            questInteraction = questInteraction[0];
             const embedAttachment = (await this.message())?.embeds[0]?.data?.image?.url;
             await (await this.message())?.removeAttachments().catch(this.client.catchError);
             if (
@@ -105,12 +100,12 @@ class Quests extends Command {
             }
 
             await this.editContent({
-                embeds: [embeds[interaction.toLowerCase()]],
-                files: attachments[interaction.toLowerCase()] === null ?
+                embeds: [embeds[questInteraction.toLowerCase()]],
+                files: attachments[questInteraction.toLowerCase()] === null ?
                     []
-                    : [attachments[interaction.toLowerCase()]],
+                    : [attachments[questInteraction.toLowerCase()]],
             });
-            lastPanel = interaction;
+            lastPanel = questInteraction;
         }
         return this.end();
     }

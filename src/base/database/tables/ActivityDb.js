@@ -15,12 +15,12 @@ function schema(id) {
             currentlyTraveling: false,
             startedDate: 0,
             departurePoint: {
-                regionId: null,
-                areaId: null,
+                districtId: null,
+                sectorId: null,
             },
             destination: {
-                regionId: null,
-                areaId: null,
+                districtId: null,
+                sectorId: null,
             },
         },
         forge: {
@@ -108,34 +108,35 @@ class ActivityDb extends SQLiteTable {
             }
         }
         if (data.travel.currentlyTraveling) {
-            const departure = this.client.RPGAssetsManager.getMapRegion(
-                langId, data.travel.departurePoint.regionId,
+            const departure = this.client.RPGAssetsManager.getMapDistrict(
+                langId, data.travel.departurePoint.districtId,
             );
-            const departureArea = departure.getArea(data.travel.departurePoint.areaId);
-            const destination = this.client.RPGAssetsManager.getMapRegion(
-                langId, data.travel.destination.regionId,
+            const departureSector = departure.getSector(data.travel.departurePoint.sectorId);
+            const destination = this.client.RPGAssetsManager.getMapDistrict(
+                langId, data.travel.destination.districtId,
             );
-            const destinationArea = destination.getArea(data.travel.destination.areaId);
-            const distance = this.distance(departure, departureArea, destination, destinationArea);
+            const destinationSector = destination.getSector(data.travel.destination.sectorId);
+
+            const distance = this.distance(departure, destination, departureSector, destinationSector);
             const endedDate = this.client.util.round(data.travel.startedDate
-                + (distance * this.client.enums.Units.MinutesPerDistanceUnit * 60 * 1000),
+                + this.client.activityDb.distanceToTime(distance),
             );
             const timeLeft = endedDate - Date.now();
 
             if (timeLeft <= 0) {
-                this.client.mapDb.move(id, destination.id, destinationArea.id);
+                this.client.mapDb.move(id, destination.id, destinationSector.id);
                 this.set(
                     id,
                     {
                         currentlyTraveling: false,
                         startedDate: 0,
                         departurePoint: {
-                            regionId: null,
-                            areaId: null,
+                            districtId: null,
+                            sectorId: null,
                         },
                         destination: {
-                            regionId: null,
-                            areaId: null,
+                            districtId: null,
+                            sectorId: null,
                         },
                     },
                     "travel",
@@ -144,8 +145,8 @@ class ActivityDb extends SQLiteTable {
                 const embed = new EmbedBuilder()
                     .setTitle(lang.rpgAssets.embeds.travelCompletedTitle)
                     .setDescription(lang.rpgAssets.embeds.travelCompleted
-                        .replace("%OLD", `${departure.name} - ${departureArea.name}`)
-                        .replace("%NEW", `${destination.name} - ${destinationArea.name}`)
+                        .replace("%OLD", `${departure.name} - ${departureSector.name}`)
+                        .replace("%NEW", `${destination.name} - ${destinationSector.name}`)
                         .replace("%EXP", exp),
                     )
                     .setColor(this.client.enums.Colors.Green);
@@ -154,12 +155,12 @@ class ActivityDb extends SQLiteTable {
                     currentlyTraveling: false,
                     startedDate: 0,
                     departurePoint: {
-                        regionId: null,
-                        areaId: null,
+                        districtId: null,
+                        sectorId: null,
                     },
                     destination: {
-                        regionId: null,
-                        areaId: null,
+                        districtId: null,
+                        sectorId: null,
                     },
                 };
             }
@@ -216,48 +217,57 @@ class ActivityDb extends SQLiteTable {
 
     /**
      * Functions that calculate the distance between a departure and a destination and returns the units.
-     * @param {Object} departure The departure region
-     * @param {Object} destination The destination region
-     * @param {Object} departureArea The departure area
-     * @param {Object} destinationArea The destination area
+     * @param {Object} departure The departure district
+     * @param {Object} destination The destination district
+     * @param {Object} departureSector The departure sector
+     * @param {Object} destinationSector The destination sector
      * @returns {Number} The distance between the departure and the destination
      */
-    distance(departure, destination, departureArea, destinationArea) {
-        let distance = 0;
+    distance(departure, destination, departureSector, destinationSector) {
+        let distance;
         if (departure.id === destination.id) {
-            distance = this.client.RPGAssetsManager.getAreasDistance(departureArea, destinationArea);
+            distance = this.client.RPGAssetsManager.getSectorsDistance(departureSector, destinationSector);
         }
         else {
-            distance = this.client.RPGAssetsManager.getRegionsDistance(
-                { region: departure, area: departureArea },
-                { region: destination, area: destinationArea },
+            distance = this.client.RPGAssetsManager.getDistrictsDistance(
+                { district: departure, sector: departureSector },
+                { district: destination, sector: destinationSector },
             );
         }
         return distance;
     }
 
     /**
+     * Function that convert the distance to time in milliseconds.
+     * @param {Number} distance The distance
+     * @returns {Number} The time in milliseconds
+     */
+    distanceToTime(distance) {
+        return distance * this.client.enums.Units.MinutesPerDistanceUnit * 60 * 1000;
+    }
+
+    /**
      * Function that starts travel to the specified destination.
      * @param {String} id The user ID
      * @param {Number} startedDate The time when the travel started
-     * @param {String} departureRegionId The departure region ID
-     * @param {String} departureAreaId The departure area ID
-     * @param {String} destinationRegionId The destination region ID
-     * @param {String} destinationAreaId The destination area ID
+     * @param {String} departureDistrictId The departure district ID
+     * @param {String} departureSectorId The departure sector ID
+     * @param {String} destinationDistrictId The destination district ID
+     * @param {String} destinationSectorId The destination sector ID
      */
-    async travel(id, startedDate, departureRegionId, departureAreaId, destinationRegionId, destinationAreaId) {
+    async travel(id, startedDate, departureDistrictId, departureSectorId, destinationDistrictId, destinationSectorId) {
         this.set(
             id,
             {
                 currentlyTraveling: true,
                 startedDate,
                 departurePoint: {
-                    regionId: departureRegionId,
-                    areaId: departureAreaId,
+                    districtId: departureDistrictId,
+                    sectorId: departureSectorId,
                 },
                 destination: {
-                    regionId: destinationRegionId,
-                    areaId: destinationAreaId,
+                    districtId: destinationDistrictId,
+                    sectorId: destinationSectorId,
                 },
             },
             "travel",
@@ -358,8 +368,8 @@ class ActivityDb extends SQLiteTable {
                     name: lang.rpgAssets.concepts.travel,
                     value: data.travel === null ? lang.rpgAssets.embeds.noTravel
                         : `__${lang.rpgAssets.embeds.circuit}__: `
-                        + `[**${data.travel.departurePoint.region.name}**, ${data.travel.departurePoint.area.name}] `
-                        + `\`>\` [**${data.travel.destination.region.name}**, ${data.travel.destination.area.name}]`
+                        + `[**${data.travel.departurePoint.district.name}**, ${data.travel.departurePoint.sector.name}] `
+                        + `\`>\` [**${data.travel.destination.district.name}**, ${data.travel.destination.sector.name}]`
                         + `\n__${lang.rpgAssets.embeds.ending}:__ `
                         + `<t:${(data.travel.endedDate / 1000).toFixed(0)}:R>`,
                     inline: true,

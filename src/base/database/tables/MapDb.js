@@ -6,8 +6,8 @@ const { EmbedBuilder } = require("discord.js");
 function schema(id) {
     return {
         id: id,
-        regionId: "0",
-        areaId: "0",
+        districtId: "5",
+        sectorId: "0",
         exploration: {
             excavated: {},
         },
@@ -27,16 +27,16 @@ class MapDb extends SQLiteTable {
         const data = super.get(key);
 
         for (const rKey in data.exploration.excavated) {
-            const regionExcavatedAreas = data.exploration.excavated[rKey];
-            if (regionExcavatedAreas.length === 0) {
+            const districtExcavatedSectors = data.exploration.excavated[rKey];
+            if (districtExcavatedSectors.length === 0) {
                 delete data.exploration.excavated[rKey];
                 this.delete(key, `exploration.excavated.${rKey}`);
                 continue;
             }
-            for (const [areaKey, areaDate] of regionExcavatedAreas) {
-                if (this.client.util.dateToString(new Date(areaDate)) !== this.client.util.dateToString(new Date())) {
-                    data.exploration.excavated[rKey].splice(regionExcavatedAreas.indexOf([areaKey, areaDate]), 1);
-                    this.resetExcavation(key, rKey, areaKey);
+            for (const [sectorKey, sectorDate] of districtExcavatedSectors) {
+                if (this.client.util.dateToString(new Date(sectorDate)) !== this.client.util.dateToString(new Date())) {
+                    data.exploration.excavated[rKey].splice(districtExcavatedSectors.indexOf([sectorKey, sectorDate]), 1);
+                    this.resetExcavation(key, rKey, sectorKey);
                 }
             }
         }
@@ -45,42 +45,42 @@ class MapDb extends SQLiteTable {
     }
 
     /**
-     * Function that moves a player on an area/region.
+     * Function that moves a player on a sector/district.
      * @param {String} id The user ID
-     * @param {String} regionId The region ID
-     * @param {String} areaId The area ID
+     * @param {String} districtId The district ID
+     * @param {String} sectorId The sector ID
      */
-    move(id, regionId, areaId) {
-        this.set(id, regionId, "regionId");
-        this.set(id, areaId, "areaId");
+    move(id, districtId, sectorId) {
+        this.set(id, districtId, "districtId");
+        this.set(id, sectorId, "sectorId");
     }
 
     /**
-     * Set an area as already excavated.
+     * Set a sector as already excavated.
      * @param {String} id The user ID
-     * @param {String} regionId The region ID
-     * @param {String} areaId The area ID
+     * @param {String} districtId The district ID
+     * @param {String} sectorId The sector ID
      * @returns {void}
      */
-    explore(id, regionId, areaId) {
+    explore(id, districtId, sectorId) {
         const data = this.get(id);
-        const areas = data.exploration.excavated[regionId] || [];
-        if (!areas.map(e => e[0]).includes(areaId)) areas.push([areaId, Date.now()]);
-        this.set(id, areas, `exploration.excavated.${regionId}`);
+        const sectors = data.exploration.excavated[districtId] || [];
+        if (!sectors.map(e => e[0]).includes(sectorId)) sectors.push([sectorId, Date.now()]);
+        this.set(id, sectors, `exploration.excavated.${districtId}`);
     }
 
     /**
-     * Set a region and an area as none excavated.
+     * Set a district and a sector as none excavated.
      * @param {String} id The user ID
-     * @param {String} regionId The region ID
-     * @param {String} areaId The area ID
+     * @param {String} districtId The district ID
+     * @param {String} sectorId The sector ID
      * @returns {void}
      */
-    resetExcavation(id, regionId, areaId) {
+    resetExcavation(id, districtId, sectorId) {
         const data = this.get(id);
-        const areas = data.exploration.excavated[regionId] || [];
-        if (areas.includes(areaId)) areas.splice(areas.indexOf(areaId), 1);
-        this.set(id, areas, `exploration.excavated.${regionId}`);
+        const sectors = data.exploration.excavated[districtId] || [];
+        if (sectors.includes(sectorId)) sectors.splice(sectors.indexOf(sectorId), 1);
+        this.set(id, sectors, `exploration.excavated.${districtId}`);
     }
 
     /**
@@ -99,13 +99,13 @@ class MapDb extends SQLiteTable {
             .setColor(this.client.enums.Colors.Blurple)
             .addFields(
                 {
-                    name: lang.rpgAssets.concepts.region,
-                    value: `${data.region.name}`,
+                    name: lang.rpgAssets.concepts.district,
+                    value: `${data.district.name}`,
                     inline: true,
                 },
                 {
-                    name: lang.rpgAssets.concepts.area,
-                    value: `${data.area.name}\n__${lang.rpgAssets.concepts.biome}:__ **${data.area.biome.name}**`,
+                    name: lang.rpgAssets.concepts.sector,
+                    value: `${data.sector.name}\n__${lang.rpgAssets.concepts.biome}:__ **${data.sector.biome.name}**`,
                     inline: true,
                 },
                 { name: "\u200b", value: "\u200b", inline: false },

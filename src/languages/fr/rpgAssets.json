@@ -250,24 +250,119 @@
         }
     },
     "map": {
-        "regions": {
-            "0": {
-                "name": "Région du Nord-Est (Tōhoku)",
-                "areas": {
-                    "0": "Shukuba Accueillant (Omukae)",
-                    "1": "Shukuba du Désespoir (Zetsubō)"
+        "districts": {
+            "5": {
+                "name": "Shukuba Accueillant",
+                "fullName": "Shukuba Accueillant (Omukaeお迎え)",
+                "sectors": {
+                    "0": "Bâtiment principal",
+                    "1": "Espace extérieur"
                 }
             },
-            "1": {
-                "name": "Région test",
-                "areas": {
-                    "0": "Test 1",
-                    "1": "Test 2"
+            "2": {
+                "name": "Shukuba du Désespoir",
+                "fullName": "Shukuba du Désespoir (Zetsubō絶望)",
+                "sectors": {
+                    "0": "Bâtiment principal",
+                    "1": "Terrain enneigé"
+                }
+            },
+            "20": {
+                "name": "Domaine des Papillons",
+                "fullName": "Domaine des Papillons",
+                "sectors": {
+                    "0": "Cour avant",
+                    "1": "Chambre de repos"
+                }
+            },
+            "18": {
+                "name": "Colline Brise-Légère",
+                "fullName": "Colline Brise-Légère (Keifū no Oka軽風の丘)",
+                "sectors": {
+                    "0": "Pied de la colline",
+                    "1": "Sommet de la colline",
+                    "2": "Refuge",
+                    "3": "Cour d'entraînement"
+                }
+            },
+            "19": {
+                "name": "Mont Fujikasane",
+                "fullName": "Mont Fujikasane (Fujikasane Yama藤襲山)",
+                "sectors": {
+                    "0": "Pied du mont",
+                    "1": "Sommet du mont",
+                    "2": "Sentier principal",
+                    "3": "Sentier alternatif",
+                    "4": "Sentier abîmé",
+                    "5": "Grande clairière",
+                    "6": "Petite clairière"
+                }
+            },
+            "9": {
+                "name": "Village de Hon",
+                "fullName": "Village de Hon (Hon no Mura本の村)",
+                "sectors": {
+                    "0": "Place principale",
+                    "1": "Arrière-cour de la ferme"
+                }
+            },
+            "8": {
+                "name": "Village de Kumaneko",
+                "fullName": "Village de Kumaneko (Kumaneko no Mura熊猫の村)",
+                "sectors": {
+                    "0": "Place principale",
+                    "1": "Vieille grange",
+                    "2": "Petit parc"
+                }
+            },
+            "28": {
+                "name": "Temple de Himajima Gyōmei",
+                "fullName": "Temple de Himejima Gyōmei",
+                "sectors": {
+                    "0": "Cour principale",
+                    "1": "Bâtiment principal",
+                    "2": "Terrain d'entraînement"
+                }
+            },
+            "24": {
+                "name": "Village des forgerons",
+                "fullName": "Village des forgerons",
+                "sectors": {
+                    "0": "Entrée du village",
+                    "1": "Route principale",
+                    "2": "Bains d'eau chaude",
+                    "3": "Forge"
+                }
+            },
+            "34": {
+                "name": "QG de l'Armée des pourfendeurs de démons",
+                "fullName": "Quartier Général de l’Armée des pourfendeurs de démons",
+                "sectors": {
+                    "0": "Cour principale",
+                    "1": "Devanture d'estrade",
+                    "2": "Estrade"
                 }
             }
         },
         "biomes": {
-            "wintryVeil": "Voile Hivernal"
+            "wintryVeil": "Voile Hivernal",
+            "civilizedSector": "Secteur Civilisé",
+            "interior": "Intérieur",
+            "rockyPeak": "Sommet Rocheux",
+            "leafyPeak": "Sommet Verdoyant",
+            "meadow": "Prairie",
+            "forest": "Forêt",
+            "rockyDesert": "Désert Rocheux"
+        },
+        "regions": {
+            "0": "Région du Chemin de la Mer du Nord (Hokkaidō北海道)",
+            "1": "Région du Nord-Est (Tōhoku-chihō東北地方)",
+            "2": "Région Centrale (Chūbu-chihō中部地方)",
+            "3": "Région de l’Est  (Kantō-chihō関東地方)",
+            "4": "Région de l’Ouest (Kansai-chihō関西地方)",
+            "5": "Région Pays du Milieu (Chūgoku-chihō中国地方)",
+            "6": "Région des Quatres Provinces (Shikoku四国)",
+            "7": "Région des Neuf Provinces (Kyūshū九州)"
         }
     },
     "materials": {
@@ -426,7 +521,8 @@
         "themes": "Thèmes",
         "tutorialProgress": "Progression du tutoriel",
         "region": "Région",
-        "area": "Zone de région",
+        "district": "District",
+        "sector": "Secteur de district",
         "biome": "Biome",
         "exploration": "Exploration",
         "slayerQuest": "Quête de pourfendeur",

@@ -26,23 +26,19 @@ class Train extends Command {
                 permissions: 0n,
                 targets: ["read", "write"],
             },
+            {
+                needToBeStatic: false,
+                needToBeInRpg: true,
+            },
         );
     }
 
     async run() {
-        await this.interaction.deferReply().catch(this.client.catchError);
-        const user = this.interaction.user;
-        if (!(await this.client.playerDb.exists(user.id))) {
-            return await this.return(
-                this.client.playerDb.get(user.id).alreadyPlayed ?
-                    this.lang.systems.playerNotFoundAlreadyPlayed
-                    : this.lang.systems.playerNotFound,
-                true,
-            );
-        }
+        const exists = await this.hasAdventure();
+        if (!exists) return;
 
-        const player = await this.client.playerDb.load(user.id);
-        const activity = await this.client.activityDb.load(user.id);
+        const player = await this.client.playerDb.load(this.user.id);
+        const activity = await this.client.activityDb.load(this.user.id);
 
         if (activity.training !== null) {
             return await this.return(this.trad.currentlyTraining
@@ -86,7 +82,7 @@ class Train extends Command {
 
         if (wantsToTrain === "primary") {
             this.client.activityDb.train(
-                user.id,
+                this.user.id,
                 selected.id,
                 startedDate,
             );

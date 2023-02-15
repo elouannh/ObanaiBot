@@ -11,7 +11,6 @@ const {
 const chalk = require("chalk");
 const PlayerDb = require("./database/tables/PlayerDb");
 const InventoryDb = require("./database/tables/InventoryDb");
-const SquadDb = require("./database/tables/SquadDb");
 const ActivityDb = require("./database/tables/ActivityDb");
 const MapDb = require("./database/tables/MapDb");
 const QuestDb = require("./database/tables/QuestDb");
@@ -61,7 +60,6 @@ class Obanai extends Client {
         this.playerDb = new PlayerDb(this);
         this.activityDb = new ActivityDb(this);
         this.inventoryDb = new InventoryDb(this);
-        this.squadDb = new SquadDb(this);
         this.mapDb = new MapDb(this);
         this.questDb = new QuestDb(this);
         this.additionalDb = new AdditionalDb(this);
@@ -266,15 +264,15 @@ class Obanai extends Client {
         };
         let response = `📥 **Input**\n\`\`\`js\n${clean(code)}\n\`\`\`\n📤 **Output**\n`;
         try {
-            let evaled = await eval(code);
-            if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
+            let evaluated = await eval(code);
+            if (typeof evaluated !== "string") evaluated = require("util").inspect(evaluated);
 
-            const cleanEvaled = clean(evaled);
-            if (cleanEvaled === "undefined") {
+            const cleanEvaluated = clean(evaluated);
+            if (cleanEvaluated === "undefined") {
                 response += "```cs\n# Voided processus```";
             }
             else {
-                response += `\`\`\`xl\n${cleanEvaled.substring(0, 2000 - response.length - 20)}\`\`\``;
+                response += `\`\`\`xl\n${cleanEvaluated.substring(0, 2000 - response.length - 20)}\`\`\``;
             }
         }
         catch (err) {

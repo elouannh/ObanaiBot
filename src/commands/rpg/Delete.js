@@ -26,20 +26,16 @@ class Delete extends Command {
                 permissions: 0n,
                 targets: ["read", "write"],
             },
+             {
+                needToBeStatic: false,
+                needToBeInRpg: true,
+            },
         );
     }
 
     async run() {
-        await this.interaction.deferReply().catch(this.client.catchError);
-        const user = this.interaction.user;
-        if (!(await this.client.playerDb.exists(user.id))) {
-            return await this.return(
-                this.client.playerDb.get(user.id).alreadyPlayed ?
-                    this.lang.systems.playerNotFoundAlreadyPlayed
-                    : this.lang.systems.playerNotFound,
-                true,
-            );
-        }
+        const exists = await this.hasAdventure();
+        if (!exists) return;
 
         const firstResponse = await this.choice(
             {
@@ -67,7 +63,7 @@ class Delete extends Command {
             return await this.return(this.trad.notDeleted);
         }
         else {
-            await this.client.playerDb.remove(user.id);
+            await this.client.playerDb.remove(this.user.id);
             return await this.return(this.trad.deleted);
         }
     }

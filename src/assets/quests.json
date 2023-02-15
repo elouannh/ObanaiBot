@@ -38,8 +38,8 @@
                     "type": "dialogue",
                     "additionalData": {
                         "dialogueId": "d001",
-                        "region": "0",
-                        "area": "0",
+                        "district": "0",
+                        "sector": "0",
                         "characterId": "7"
                     }
                 },
@@ -48,8 +48,8 @@
                     "type": "interact",
                     "additionalData": {
                         "interactionId": "i001",
-                        "region": "0",
-                        "area": "0"
+                        "district": "0",
+                        "sector": "0"
                     }
                 },
                 "2": {
@@ -57,8 +57,8 @@
                     "type": "giveItems",
                     "additionalData": {
                         "characterId": "5",
-                        "region": "0",
-                        "area": "0",
+                        "district": "0",
+                        "sector": "0",
                         "type": "materials",
                         "item": "wood",
                         "amount": 5
