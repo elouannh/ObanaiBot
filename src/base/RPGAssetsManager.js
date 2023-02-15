@@ -99,14 +99,12 @@ class RPGAssetsManager {
 
     getDistrictsDistance(departure, destination) {
         // distance between the sector departure and the district gate (the reference sector where the player must go)
-        const departureSector = departure.district.getSector(departure.sector.id);
         const departureDistrictGate = departure.district.referenceSector;
-        const distanceToLeave = this.getSectorsDistance(departureSector, departureDistrictGate);
+        const distanceToLeave = this.getSectorsDistance(departure.sector, departureDistrictGate);
 
         // distance between the sector destination and the district gate (the reference sector where the player must go)
-        const destinationSector = destination.district.getSector(destination.sector.id);
         const destinationDistrictGate = destination.district.referenceSector;
-        const distanceToArrive = this.getSectorsDistance(destinationSector, destinationDistrictGate);
+        const distanceToArrive = this.getSectorsDistance(destination.sector, destinationDistrictGate);
 
         // distance between the districts
         const distanceBetweenDistricts = Math.sqrt(

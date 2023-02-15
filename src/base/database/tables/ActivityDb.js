@@ -116,7 +116,8 @@ class ActivityDb extends SQLiteTable {
                 langId, data.travel.destination.districtId,
             );
             const destinationSector = destination.getSector(data.travel.destination.sectorId);
-            const distance = this.distance(departure, departureSector, destination, destinationSector);
+
+            const distance = this.distance(departure, destination, departureSector, destinationSector);
             const endedDate = this.client.util.round(data.travel.startedDate
                 + this.client.activityDb.distanceToTime(distance),
             );

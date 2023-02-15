@@ -48,10 +48,11 @@ class Travel extends Command {
         if (activity.travel !== null) {
             const destination = `${activity.travel.destination.district.region.name}\n`
                 + `${activity.travel.destination.district.name}, ${activity.travel.destination.sector.name}`;
-            return await this.return(this.trad.currentlyTraveling
-                        .replace("%LOCATION_NAME", destination)
-                    + this.trad.endsIn
-                    + `<t:${this.client.util.round(activity.travel.endedDate / 1000)}:R>.`,
+            return await this.return(
+                this.trad.currentlyTraveling
+                    .replace("%LOCATION_NAME", destination)
+                + this.trad.endsIn
+                + `<t:${this.client.util.round(activity.travel.endedDate / 1000)}:R>.`,
             );
         }
 
