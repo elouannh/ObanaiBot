@@ -25,5 +25,6 @@
         "ms": ["milliseconde", "millisecondes", "ms", "ms"]
     },
     "menuCancel": "Annuler",
-    "choiceCanceled": "Vous avez annulé votre choix."
+    "choiceCanceled": "Vous avez annulé votre choix.",
+    "mustBeStatic": "Le joueur est en train de voyager, cette action n'est pas possible pendant un voyage."
 }

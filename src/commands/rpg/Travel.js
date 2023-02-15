@@ -26,20 +26,16 @@ class Travel extends Command {
                 permissions: 0n,
                 targets: ["read", "write"],
             },
+            {
+                needToBeStatic: true,
+                needToBeInRpg: true,
+            },
         );
     }
 
     async run() {
-        await this.interaction.deferReply().catch(this.client.catchError);
-        const user = this.interaction.user;
-        if (!(await this.client.playerDb.exists(user.id))) {
-            return await this.return(
-                this.client.playerDb.get(user.id).alreadyPlayed ?
-                    this.lang.systems.playerNotFoundAlreadyPlayed
-                    : this.lang.systems.playerNotFound,
-                true,
-            );
-        }
+        const exists = await this.hasAdventure();
+        if (!exists) return;
 
         const lang = this.client.playerDb.getLang(user.id);
         const map = await this.client.mapDb.load(user.id);

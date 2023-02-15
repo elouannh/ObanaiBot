@@ -26,20 +26,16 @@ class Train extends Command {
                 permissions: 0n,
                 targets: ["read", "write"],
             },
+            {
+                needToBeStatic: false,
+                needToBeInRpg: true,
+            },
         );
     }
 
     async run() {
-        await this.interaction.deferReply().catch(this.client.catchError);
-        const user = this.interaction.user;
-        if (!(await this.client.playerDb.exists(user.id))) {
-            return await this.return(
-                this.client.playerDb.get(user.id).alreadyPlayed ?
-                    this.lang.systems.playerNotFoundAlreadyPlayed
-                    : this.lang.systems.playerNotFound,
-                true,
-            );
-        }
+        const exists = await this.hasAdventure();
+        if (!exists) return;
 
         const player = await this.client.playerDb.load(user.id);
         const activity = await this.client.activityDb.load(user.id);

@@ -27,20 +27,16 @@ class Quests extends Command {
                 permissions: 0n,
                 targets: ["read"],
             },
+            {
+                needToBeStatic: false,
+                needToBeInRpg: true,
+            },
         );
     }
 
     async run() {
-        await this.interaction.deferReply().catch(this.client.catchError);
-        const user = this.interaction.user;
-        if (!(await this.client.playerDb.exists(user.id))) {
-            return await this.return(
-                this.client.playerDb.get(user.id).alreadyPlayed ?
-                    this.lang.systems.playerNotFoundAlreadyPlayed
-                    : this.lang.systems.playerNotFound,
-                true,
-            );
-        }
+        const exists = await this.hasAdventure();
+        if (!exists) return;
 
         const quests = await this.client.questDb.load(user.id);
         const embedsArray = await this.client.questDb.getEmbeds(this.lang, quests, user);

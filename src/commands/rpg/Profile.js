@@ -36,20 +36,17 @@ class Profile extends Command {
                 permissions: 0n,
                 targets: ["read"],
             },
+            {
+                needToBeStatic: false,
+                needToBeInRpg: true,
+            },
         );
     }
 
     async run() {
-        await this.interaction.deferReply().catch(this.client.catchError);
-        const user = await this.getUserFromInteraction(this.interaction.type);
-        if (!(await this.client.playerDb.exists(user.id))) {
-            return await this.return(
-                this.client.playerDb.get(user.id).alreadyPlayed ?
-                    this.lang.systems.playerNotFoundAlreadyPlayed
-                    : this.lang.systems.playerNotFound,
-                true,
-            );
-        }
+        await this.focus("option");
+        const exists = await this.hasAdventure();
+        if (!exists) return;
 
         const player = await this.client.playerDb.load(user.id);
         const inventory = await this.client.inventoryDb.load(user.id);
