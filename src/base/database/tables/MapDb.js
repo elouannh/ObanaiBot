@@ -36,7 +36,7 @@ class MapDb extends SQLiteTable {
             for (const [sectorKey, sectorDate] of districtExcavatedSectors) {
                 if (this.client.util.dateToString(new Date(sectorDate)) !== this.client.util.dateToString(new Date())) {
                     data.exploration.excavated[rKey].splice(districtExcavatedSectors.indexOf([sectorKey, sectorDate]), 1);
-                    this.resetExcavation(key, rKey, sectorKey);
+                    this.resetExcavation(key, rKey, sectorKey, data);
                 }
             }
         }
@@ -76,8 +76,7 @@ class MapDb extends SQLiteTable {
      * @param {String} sectorId The sector ID
      * @returns {void}
      */
-    resetExcavation(id, districtId, sectorId) {
-        const data = this.get(id);
+    resetExcavation(id, districtId, sectorId, data) {
         const sectors = data.exploration.excavated[districtId] || [];
         if (sectors.includes(sectorId)) sectors.splice(sectors.indexOf(sectorId), 1);
         this.set(id, sectors, `exploration.excavated.${districtId}`);

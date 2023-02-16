@@ -68,6 +68,7 @@ class Command {
             ));
         }
         this.infos.completedRequests = this.infos.completedRequests.filter(e => e !== "adventure");
+        this.infos.completedRequests = this.infos.completedRequests.filter(e => e !== "adventureLocal");
     }
 
     end() {

@@ -133,7 +133,8 @@ class PlayerDb extends SQLiteTable {
             this.client.mapDb,
             this.client.questDb,
         ]) {
-            if ((await db.get(id))?.schemaInstance) return false;
+            console.log(db.get(id));
+            if ((db.get(id))?.schemaInstance) return false;
         }
         return true;
     }
