@@ -36,7 +36,7 @@ class Ready extends Event {
                     status: "online",
                 });
                 statusIndex += (statusIndex === (activities.length - 1) ? -statusIndex : 1);
-            }, 1_000);
+            }, 15_000);
 
             try {
                 await this.client.internalServerManager.questGenerator();
