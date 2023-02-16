@@ -79,7 +79,7 @@ class Command {
         if (type === "option") {
             const user = await this.getUserFromInteraction(this.interaction.type);
             this.focusedPlayer = user.id;
-            this.user = this.client.getUser(this.focusedPlayer, this.interaction.user);
+            this.user = await this.client.getUser(this.focusedPlayer, this.interaction.user);
             return user;
         }
         return this.interaction.user;

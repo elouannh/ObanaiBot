@@ -77,7 +77,7 @@ class ActivityDb extends SQLiteTable {
 
         if (data.training.currentlyTraining) {
             const levelToReach = this.client.playerDb.get(id).statistics[data.training.statistic] + 1;
-            const trainingTime = this.client.RPGAssetsManager.statistics.trainingTimes[String(levelToReach)];
+            const trainingTime = this.client.RPGAssetsManager.statistics.trainingTimes[String(levelToReach)] * 60000;
             const timeLeft = trainingTime - (Date.now() - data.training.startedDate);
 
             if (timeLeft <= 0) {
@@ -90,11 +90,15 @@ class ActivityDb extends SQLiteTable {
                     },
                     "training",
                 );
-                const exp = this.client.playerDb.addExp(id, Number(levelToReach));
+                const exp = this.client.playerDb.addExp(id, Number(levelToReach) * 10);
                 const embed = new EmbedBuilder()
-                    .setTitle(lang.rpgAssets.trainingCompletedTitle)
-                    .setDescription(lang.rpgAssets.trainingCompleted
-                        .replace("%STAT", data.training.statistic.name)
+                    .setTitle(lang.rpgAssets.embeds.trainingCompletedTitle)
+                    .setDescription(lang.rpgAssets.embeds.trainingCompleted
+                        .replace(
+                            "%STAT",
+                            this.client.RPGAssetsManager
+                                .getStatistic(langId, data.training.statistic, 0).name,
+                        )
                         .replace("%LEVEL", levelToReach)
                         .replace("%EXP", exp),
                     )
