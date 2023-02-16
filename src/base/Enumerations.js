@@ -62,6 +62,8 @@ module.exports = {
         Symbols: {
             Check: "✅",
             Cross: "❌",
+            DarkCross: "✖",
+            GreenCross: "❎",
             Previous: "◀️",
             Next: "▶️",
         },
