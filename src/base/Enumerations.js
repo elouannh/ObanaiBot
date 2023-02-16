@@ -46,6 +46,12 @@ module.exports = {
             YamamotoKenta: "<:YamamotoKenta:1075747106813386802>",
             YamamotoMinori: "<:YamamotoMinori:1075747068603281499>",
         },
+        Interactions: {
+            Dialogue: "💬",
+            Interact: "❔",
+            GiveItems: "🫴",
+            Excavate: "🔎",
+        },
     },
     Systems: {
         Grades: {
@@ -71,7 +77,7 @@ module.exports = {
         Red: 0xf04747,
     },
     Units: {
-        MinutesPerDistanceUnit: 1,
+        MinutesPerDistanceUnit: 2.5,
     },
     Images: {
         Character0: "https://cdn.discordapp.com/attachments/980577808243900446/1037877260201504918/MC_ObanaiBot.png",

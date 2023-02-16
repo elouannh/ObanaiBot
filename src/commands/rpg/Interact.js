@@ -44,16 +44,19 @@ class Interact extends Command {
             {
                 label: this.trad.optionDialogue,
                 value: "dialogue",
+                emoji: this.client.enums.Rpg.Interactions.Dialogue,
                 description: this.trad.optionDialogueDesc,
             },
             {
                 label: this.trad.optionInteract,
                 value: "interact",
+                emoji: this.client.enums.Rpg.Interactions.Interact,
                 description: this.trad.optionInteractDesc,
             },
             {
                 label: this.trad.optionGiveItems,
                 value: "giveItems",
+                emoji: this.client.enums.Rpg.Interactions.GiveItems,
                 description: this.trad.optionGiveItemsDesc,
             },
         ];
@@ -67,6 +70,7 @@ class Interact extends Command {
                 {
                     label: this.trad.optionExcavate,
                     value: "excavate",
+                    emoji: this.client.enums.Rpg.Interactions.Excavate,
                     description: this.trad.optionExcavateDesc,
                 },
             );
@@ -76,7 +80,7 @@ class Interact extends Command {
             {
                 content: (sectorExplored ?
                         this.trad.alreadyExcavated
-                            .replace("%DATE", `<t:${this.client.util.round((sector[1] + 86400000) / 1000)}:R>`)
+                            .replace("%DATE", this.client.util.toTimestamp(sector[1] + 86400000))
                         : ""
                     )
                     + this.trad.possiblesChoices,
@@ -271,7 +275,10 @@ class Interact extends Command {
                 return await this.return(this.trad.noResourcesFound);
             }
             else {
-                const scale = Math.floor(totalAmount / 200);
+                for (const item of bag) {
+                    this.client.inventoryDb.addMaterial(this.user.id, item.resource.id, item.amount);
+                }
+                const scale = Math.floor(totalAmount / 50);
                 return await this.return(
                     this.trad.sentences[scale]
                     + "\n\n" + bag.map(e => `> **${

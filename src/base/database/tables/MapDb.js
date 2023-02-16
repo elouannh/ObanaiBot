@@ -98,13 +98,11 @@ class MapDb extends SQLiteTable {
             .setColor(this.client.enums.Colors.Blurple)
             .addFields(
                 {
-                    name: lang.rpgAssets.concepts.district,
-                    value: `${data.district.name}`,
-                    inline: true,
-                },
-                {
-                    name: lang.rpgAssets.concepts.sector,
-                    value: `${data.sector.name}\n__${lang.rpgAssets.concepts.biome}:__ **${data.sector.biome.name}**`,
+                    name: lang.rpgAssets.concepts.mapLocalisation,
+                    value: `__${lang.rpgAssets.concepts.region}:__ **${data.district.region.name}**\n`
+                        + `__${lang.rpgAssets.concepts.district}:__ **${data.district.fullName}**\n`
+                        + `__${lang.rpgAssets.concepts.sector}:__ **${data.sector.fullName}**\n`
+                        + ` ➥ __${lang.rpgAssets.concepts.biome}:__ « **${data.sector.biome.name}** »`,
                     inline: true,
                 },
                 { name: "\u200b", value: "\u200b", inline: false },

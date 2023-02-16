@@ -365,7 +365,7 @@ class ActivityDb extends SQLiteTable {
                         + `${lang.rpgAssets.concepts.level} **${data.training.statistic.level}** \`>\` `
                         + `${lang.rpgAssets.concepts.level} **${data.training.statistic.level + 1}**`
                         + `\n__${lang.rpgAssets.embeds.ending}:__ `
-                        + `<t:${(data.training.endedDate / 1000).toFixed(0)}:R>`,
+                        + `${this.client.util.toTimestamp(data.training.endedDate)}`,
                     inline: true,
                 },
                 {
@@ -375,7 +375,7 @@ class ActivityDb extends SQLiteTable {
                         + `[**${data.travel.departurePoint.district.name}**, ${data.travel.departurePoint.sector.name}] `
                         + `\`>\` [**${data.travel.destination.district.name}**, ${data.travel.destination.sector.name}]`
                         + `\n__${lang.rpgAssets.embeds.ending}:__ `
-                        + `<t:${(data.travel.endedDate / 1000).toFixed(0)}:R>`,
+                        + `${this.client.util.toTimestamp(data.travel.endedDate)}`,
                     inline: true,
                 },
                 { name: "\u200b", value: "\u200b", inline: false },
@@ -396,7 +396,7 @@ class ActivityDb extends SQLiteTable {
                 embed.addFields(
                     {
                         name: `${lang.rpgAssets.concepts.forge} - ${lang.rpgAssets.embeds.place} ${i + 1}`,
-                        value: `__${lang.rpgAssets.embeds.ending}:__ <t:${(slot.endedDate / 1000).toFixed(0)}:R>`
+                        value: `__${lang.rpgAssets.embeds.ending}:__ ${this.client.util.toTimestamp(slot.endedDate)}`
                             + `\n__${lang.rpgAssets.concepts.weapon}:__ \`${slot.weapon.name}\` - **${slot.weapon.rarityName}**`,
                         inline: true,
                     },

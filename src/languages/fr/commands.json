@@ -17,7 +17,7 @@
         "wantsToForge": "Vous êtes sur le point de forger une arme de type **%WEAPON**.\nLa rareté de l'arme sera donc déterminée de façon __aléatoire__.\n\nÊtes-vous sûr de vouloir continuer ? Les ressources suivantes seront utilisées:",
         "forgeCanceled": "Vous avez annulé le forgeage.",
         "forgedSuccessInfos": "Le forgeron commence désormais à travailler sur une arme de rareté **%WEAPON_RARITY**. L'arme forgée sera donc **%WEAPON_NAME %WEAPON_RARITY_NAME**.",
-        "forgedSuccessTime": "\nLa forge durera `%TIME`. (%DATE)"
+        "forgedSuccessTime": "\nLa forge durera `%TIME`. Date de fin: %DATE."
     },
     "interact": {
         "optionDialogue": "Dialoguer",
@@ -68,7 +68,7 @@
     "eval": {
         "modalTitle": "Code à exécuter",
         "modalLabel": "JavaScript ES6, automatiquement asynchrone",
-        "modalPlaceholder": "return \"Arnaud le gay\";"
+        "modalPlaceholder": "return \"I'm a panda\";"
     },
     "start": {
         "languageChoice": "Commencez par sélectionner votre langage.",
@@ -89,20 +89,17 @@
     },
     "train": {
         "currentlyTraining": "Vous êtes déjà en train d'améliorer votre **%STATISTIC_NAME** au niveau **%STATISTIC_LEVEL**. ",
-        "endsIn": "Votre entraînement se termine ",
         "choice": "Choisissez une statistique à améliorer:",
         "levelUpTo": "Passage au niveau %LEVEL",
         "wantsToTrain": "Voulez-vous vraiment entraîner votre **%STATISTIC_NAME** au niveau **%STATISTIC_LEVEL** ?",
-        "endsInProbably": "\nVotre entraînement se terminerait %DATE.",
+        "endsIn": "\nDate de fin d'entraînement: %DATE.",
         "train": "Entraîner",
         "cancel": "Annuler",
         "trainingStarted": "Vous avez commencé à entraîner votre **%STATISTIC_NAME** au niveau **%STATISTIC_LEVEL**.",
-        "endsInConfirmed": "\nVotre entraînement se terminera %DATE.",
         "trainingCanceled": "L'entraînement a été annulé."
     },
     "travel": {
         "currentlyTraveling": "Vous êtes déjà en train de voyager. Vous êtes en route pour:\n**%LOCATION_NAME**.",
-        "endsIn": "Votre voyage se termine ",
         "chooseMode": "Quel type de voyage ?",
         "shortTravel": "Voyage court",
         "longTravel": "Voyage long",
@@ -112,7 +109,7 @@
         "chooseDistrict": "Choisissez un district:",
         "chooseDistrictSector": "Choisissez un secteur de **%DISTRICT_NAME**:",
         "wantsToTravel": "Voulez-vous vraiment voyager vers **%LOCATION_NAME** ?",
-        "endsInProbably": "\nVotre voyage se terminerait: %DATE.",
+        "endsIn": "\nDate de fin de voyage: %DATE.",
         "travel": "Voyager",
         "cancel": "Annuler",
         "startedTraveling": "Vous avez commencé à voyager vers **%LOCATION_NAME**.",

@@ -117,7 +117,7 @@ class Forge extends Command {
                     )
                     .replace(
                         "%DATE",
-                        `<t:${this.client.util.round(activity.forge.blacksmith.getDate(rarity[0]) / 1000)}:R>`,
+                        this.client.util.toTimestamp(activity.forge.blacksmith.getDate(rarity[0])),
                     ),
             );
         }

@@ -206,7 +206,7 @@ class PlayerDb extends SQLiteTable {
                     name: lang.rpgAssets.embeds.lifeRegeneration,
                     value: (data.health.lastRegen === data.health.fullRegen ?
                             lang.rpgAssets.embeds.finishedAt : lang.rpgAssets.embeds.remaining)
-                        + `<t:${data.health.fullRegenString}:R>`,
+                        + this.client.util.toTimestamp(data.health.fullRegenString),
                     inline: true,
                 },
                 {

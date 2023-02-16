@@ -529,7 +529,8 @@
         "sideQuest": "Quête annexe",
         "dailyQuest": "Quête journalière",
         "quest": "Quête",
-        "notificationsAlert": "DRING DRING !!"
+        "notificationsAlert": "DRING DRING !!",
+        "mapLocalisation": "Localisation"
     },
     "embeds": {
         "activityTitle": "Activité - %PLAYER",

@@ -44,8 +44,7 @@ class Train extends Command {
             return await this.return(this.trad.currentlyTraining
                         .replace("%STATISTIC_NAME", activity.training.statistic.name)
                         .replace("%STATISTIC_LEVEL", activity.training.statistic.level + 1)
-                    + this.trad.endsIn
-                    + `<t:${this.client.util.round(activity.training.endedDate / 1000)}:R>.`,
+                    + this.trad.endsIn.replace("%DATE", this.client.util.toTimestamp(activity.training.endedDate)),
             );
         }
 
@@ -68,12 +67,13 @@ class Train extends Command {
         const selected = upgradable[choice[0]];
         const startedDate = Date.now();
         const endedDate = startedDate + selected.statisticTrainingTimeForNextLevel;
+
         const wantsToTrain = await this.choice(
             {
                 content: this.trad.wantsToTrain
                         .replace("%STATISTIC_NAME", selected.name)
                         .replace("%STATISTIC_LEVEL", selected.level + 1)
-                    + this.trad.endsInProbably.replace("%DATE", `<t:${this.client.util.round(endedDate / 1000)}:R>`),
+                    + this.trad.endsIn.replace("%DATE", this.client.util.toTimestamp(endedDate)),
             },
             this.trad.train,
             this.trad.cancel,
@@ -90,7 +90,7 @@ class Train extends Command {
                 this.trad.wantsToTrain
                         .replace("%STATISTIC_NAME", selected.name)
                         .replace("%STATISTIC_LEVEL", selected.level + 1)
-                    + this.trad.endsInConfirmed.replace("%DATE", `<t:${this.client.util.round(endedDate / 1000)}:R>`),
+                    + this.trad.endsIn.replace("%DATE", this.client.util.toTimestamp(endedDate)),
             );
         }
         else {

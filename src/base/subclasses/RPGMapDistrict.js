@@ -8,7 +8,8 @@ class RPGMapDistrict extends RPGAssetBase {
         const sectorsLang = this.lang.json.districts[this.id].sectors;
 
         this.name = this.lang.json.districts[this.id].name;
-
+        this.emoji = mapDistrictData.emoji;
+        this.fullName = `${this.name} ${this.emoji}`;
         this.x = mapDistrictData.x;
         this.y = mapDistrictData.y;
         this.z = mapDistrictData.z;
