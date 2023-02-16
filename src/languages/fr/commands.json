@@ -100,19 +100,19 @@
     },
     "travel": {
         "currentlyTraveling": "Vous êtes déjà en train de voyager. Vous êtes en route pour:\n**%LOCATION_NAME**.",
-        "chooseMode": "Quel type de voyage ?",
+        "chooseMode": "**Vous vous apprêtez à faire vos valises !**\n\nQuel type de voyage souhaitez-vous faire ?",
         "shortTravel": "Voyage court",
         "longTravel": "Voyage long",
         "shortTravelDescription": "Changer de secteur dans %DISTRICT_NAME.",
         "longTravelDescription": "Changer de district.",
         "chooseSector": "Choisissez un secteur:",
         "chooseDistrict": "Choisissez un district:",
-        "chooseDistrictSector": "Choisissez un secteur de **%DISTRICT_NAME**:",
+        "chooseDistrictSector": "Choisissez un secteur dans **%DISTRICT_NAME**:",
         "wantsToTravel": "Voulez-vous vraiment voyager vers **%LOCATION_NAME** ?",
         "endsIn": "\nDate de fin de voyage: %DATE.",
         "travel": "Voyager",
         "cancel": "Annuler",
-        "startedTraveling": "Vous avez commencé à voyager vers **%LOCATION_NAME**.",
+        "startedTraveling": "Vous avez commencé à voyager vers:\n\n**%LOCATION_NAME**\n\n",
         "canceledTraveling": "Le voyage a été annulé."
     }
 }

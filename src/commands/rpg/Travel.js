@@ -42,8 +42,10 @@ class Travel extends Command {
         const activity = await this.client.activityDb.load(this.user.id);
 
         if (activity.travel !== null) {
-            const destination = `${activity.travel.destination.district.region.name}\n`
-                + `${activity.travel.destination.district.fullName}, ${activity.travel.destination.sector.fullName}`;
+            const destination = `> __${this.lang.rpgAssets.concepts.region} :__ `
+                + `${activity.travel.destination.district.region.name}`
+                + `\n> __${this.lang.rpgAssets.concepts.district} :__ ${activity.travel.destination.district.fullName}`
+                + `\n> __${this.lang.rpgAssets.concepts.sector} :__ ${activity.travel.destination.sector.fullName}`;
 
             return await this.return(
                 this.trad.currentlyTraveling
