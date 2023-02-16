@@ -131,7 +131,7 @@ class Interact extends Command {
 
             await this.client.questDb.displayDialogue(this, chosen.dialogue);
             await this.client.questDb.setObjectiveManuallyCompleted(this.user.id, chosen.questKey, chosen.objectiveId);
-            return this.end();
+            return await this.return(this.trad.dialogueDone);
         }
         else if (action[0] === "interact") {
             const choices = await this.client.questDb.getInteractions(this.user.id);
@@ -155,7 +155,7 @@ class Interact extends Command {
 
             await chosen.interaction.play(this);
             await this.client.questDb.setObjectiveManuallyCompleted(this.user.id, chosen.questKey, chosen.objectiveId);
-            return this.end();
+            return await this.return(this.trad.interactionDone);
         }
         else if (action[0] === "giveItems") {
             const pnjs = await this.client.questDb.getPNJs(this.user.id, "giveItems");
@@ -229,7 +229,7 @@ class Interact extends Command {
 
                 return await this.return(this.trad.giftDone);
             }
-            else if (wantsToGive === "secondary") {
+            else {
                 return await this.return(this.trad.giftCanceled);
             }
         }
@@ -243,7 +243,7 @@ class Interact extends Command {
                     for (const resource of availableResources.sort(() => Math.random() - 0.5)) {
                         if (bag.reduce((a, b) => a.size + b.size, 0) >= 200) break;
 
-                        bag.push({ resource: resource, amount: 0 });
+                        bag.push({ resource: resource, amount: 1 });
                     }
                 }
                 else {

@@ -48,7 +48,9 @@
         "giftCanceled": "Don d'objets annulé.",
         "giftDone": "Don d'objets effectué.",
         "explored": "Vous avez trouvé des ressources !",
-        "noResourcesFound": "Vous n'avez pas de chance, aucune ressource n'a été trouvée."
+        "noResourcesFound": "Vous n'avez pas de chance, aucune ressource n'a été trouvée.",
+        "dialogueDone": "*Dialogue effectué.*",
+        "interactionDone": "*Interaction effectuée.*"
     },
     "profile": {
         "activityButton": "Activité",

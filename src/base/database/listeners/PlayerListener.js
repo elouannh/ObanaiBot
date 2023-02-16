@@ -14,7 +14,7 @@ class PlayerListener extends SQLiteTableChangeListener {
                 const oldLevel = this.client.RPGAssetsManager.getPlayerLevel(before?.exp);
                 const newLevel = this.client.RPGAssetsManager.getPlayerLevel(after?.exp);
 
-                if (oldLevel.level !== newLevel.level) {
+                if (oldLevel.level < newLevel.level) {
                     const lang = await this.client.languageManager.getLang(this.client.playerDb.getLang(key)).json;
                     const embed = new EmbedBuilder()
                         .setColor(this.client.enums.Colors.Green)

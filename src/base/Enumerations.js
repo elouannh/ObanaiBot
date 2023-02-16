@@ -42,6 +42,10 @@ module.exports = {
             DailyQuest: "📆",
             Notifications: "🔔",
         },
+        Characters: {
+            YamamotoKenta: "<:YamamotoKenta:1075747106813386802>",
+            YamamotoMinori: "<:YamamotoMinori:1075747068603281499>",
+        },
     },
     Systems: {
         Grades: {

@@ -94,11 +94,13 @@ class Start extends Command {
                 {
                     label: `(${firstCharacter.gender}) ${firstCharacter.fullName}`,
                     description: firstCharacter.label,
+                    emoji: this.client.enums.Rpg.Characters.YamamotoKenta,
                     value: "firstCharacter",
                 },
                 {
                     label: `(${secondCharacter.gender}) ${secondCharacter.fullName}`,
                     description: secondCharacter.label,
+                    emoji: this.client.enums.Rpg.Characters.YamamotoMinori,
                     value: "secondCharacter",
                 },
             ],
