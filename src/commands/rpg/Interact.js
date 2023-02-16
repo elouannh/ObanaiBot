@@ -14,7 +14,6 @@ class Interact extends Command {
             },
             {
                 name: "Interact",
-                dmPermission: true,
             },
             {
                 trad: "interact",

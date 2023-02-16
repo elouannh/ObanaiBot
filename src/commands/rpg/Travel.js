@@ -14,7 +14,6 @@ class Travel extends Command {
             },
             {
                 name: "Travel",
-                dmPermission: true,
             },
             {
                 trad: "travel",

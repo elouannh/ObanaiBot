@@ -24,7 +24,6 @@ class Profile extends Command {
             },
             {
                 name: "Profile",
-                dmPermission: true,
             },
             {
                 trad: "profile",

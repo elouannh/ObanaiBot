@@ -14,7 +14,6 @@ class Delete extends Command {
             },
             {
                 name: "Delete",
-                dmPermission: true,
             },
             {
                 trad: "delete",

@@ -14,7 +14,6 @@ class Train extends Command {
             },
             {
                 name: "Train",
-                dmPermission: true,
             },
             {
                 trad: "train",

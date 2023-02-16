@@ -14,7 +14,6 @@ class Command {
         },
         contextBuilder = {
             name: "Command",
-            dmPermission: false,
         },
         infos = {
             trad: "command",

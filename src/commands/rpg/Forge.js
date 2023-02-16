@@ -14,7 +14,6 @@ class Forge extends Command {
             },
             {
                 name: "Forge",
-                dmPermission: true,
             },
             {
                 trad: "forge",

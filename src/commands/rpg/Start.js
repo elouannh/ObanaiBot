@@ -14,7 +14,6 @@ class Start extends Command {
             },
             {
                 name: "Start",
-                dmPermission: true,
             },
             {
                 trad: "start",
