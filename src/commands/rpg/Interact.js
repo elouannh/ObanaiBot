@@ -77,11 +77,7 @@ class Interact extends Command {
 
         const action = await this.menu(
             {
-                content: (sectorExplored ?
-                        this.trad.alreadyExcavated
-                            .replace("%DATE", this.client.util.toTimestamp(sector[1] + 86400000))
-                        : ""
-                    )
+                content: (sectorExplored ? this.trad.alreadyExcavated : "")
                     + this.trad.possiblesChoices,
             },
             options,
@@ -277,7 +273,7 @@ class Interact extends Command {
                 for (const item of bag) {
                     this.client.inventoryDb.addMaterial(this.user.id, item.resource.id, item.amount);
                 }
-                const scale = Math.floor(totalAmount / 50);
+                const scale = Math.min(Math.floor(totalAmount / 50), 3);
                 return await this.return(
                     this.trad.sentences[scale]
                     + "\n\n" + bag.map(e => `> **${
