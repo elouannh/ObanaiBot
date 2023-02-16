@@ -34,6 +34,15 @@ class AdditionalDb extends SQLiteTable {
     }
 
     /**
+     * Set notification settings of the user
+     * @param {String} id The user ID
+     * @param {String} value The value to set
+     */
+    setNotification(id, value) {
+        this.set(id, value, "notifications");
+    }
+
+    /**
      * Unlock a theme for the user
      * @param {String} id The user ID
      * @param {String} theme The theme ID

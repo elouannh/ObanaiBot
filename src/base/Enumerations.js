@@ -52,6 +52,12 @@ module.exports = {
             GiveItems: "🫴",
             Excavate: "🔎",
         },
+        Notifications: {
+            Dm: "📨",
+            Last: "📃",
+            LastOnly: "🔒",
+            Custom: "💎",
+        },
     },
     Systems: {
         Grades: {

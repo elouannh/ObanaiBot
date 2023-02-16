@@ -58,6 +58,19 @@
             "Incroyable ! C'est tout bonnement extraordinaire, votre fouille fut très rentable, vous avez trouvé les ressources suivantes :"
         ]
     },
+    "notifications": {
+        "mainChoice": "**Choix des paramètres de notifications:**",
+        "dmChoice": "DM (dernier salon si échec)",
+        "dmDesc": "Recevoir les notifications en message privé. En cas d'échec, envoi dans le dernier salon.",
+        "lastChoice": "Dernier salon (DM si échec)",
+        "lastDesc": "Recevoir les notifications dans le dernier salon joué. En cas d'échec, envoi en DM.",
+        "lastOnlyChoice": "Dernier salon uniquement",
+        "lastOnlyDesc": "Recevoir les notifications dans le dernier salon joué. En cas d'échec, aucune notification.",
+        "customChoice": "Salon personnalisé (premium uniquement)",
+        "customDesc": "Recevoir les notifications dans un salon personnalisé.",
+        "chosen": "Vos paramètres de notifications sont désormais:\n\n> %SETTINGS",
+        "premiumOnly": "Cette option est réservée aux membres premium."
+    },
     "profile": {
         "activityButton": "Activité",
         "additionalButton": "Informations supplémentaires",
