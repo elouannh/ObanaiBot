@@ -67,7 +67,7 @@ class Duration {
             i++;
         }
 
-        if (Object.values(data).length === 0) return String(`1${this.units.s}`);
+        if (Object.values(data).length === 0) return String(`1${this.units.s[render === "short" ? 2 : 0]}`);
 
         return this.format
             .filter(e => ignoreZero ? data[e] > 0 : true)
