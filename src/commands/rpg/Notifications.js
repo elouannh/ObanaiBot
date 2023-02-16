@@ -36,8 +36,6 @@ class Profile extends Command {
         const exists = await this.hasAdventure();
         if (!exists) return;
 
-        const additional = await this.client.additionalDb.load(this.user.id);
-
         const notificationConfig = await this.menu(
             {
                 content: this.trad.mainChoice
