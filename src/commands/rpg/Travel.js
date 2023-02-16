@@ -49,7 +49,7 @@ class Travel extends Command {
                 this.trad.currentlyTraveling
                     .replace("%LOCATION_NAME", destination)
                 + this.trad.endsIn
-                    .replace("%DATE", `<t:${this.client.util.round(activity.travel.endedDate / 1000)}:R>.`),
+                    .replace("%DATE", this.client.util.toTimestamp(activity.travel.endedDate)),
             );
         }
 
