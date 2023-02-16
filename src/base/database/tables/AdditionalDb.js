@@ -34,6 +34,15 @@ class AdditionalDb extends SQLiteTable {
     }
 
     /**
+     * Set notification settings of the user
+     * @param {String} id The user ID
+     * @param {String} value The value to set
+     */
+    setNotification(id, value) {
+        this.set(id, value, "notifications");
+    }
+
+    /**
      * Unlock a theme for the user
      * @param {String} id The user ID
      * @param {String} theme The theme ID
@@ -128,8 +137,8 @@ class AdditionalDb extends SQLiteTable {
                 .setComponents(
                     new ButtonBuilder()
                         .setCustomId("tutorial_skip")
-                        .setStyle(ButtonStyle.Danger)
-                        .setEmoji(this.client.enums.Systems.Symbols.Cross),
+                        .setStyle(ButtonStyle.Success)
+                        .setEmoji(this.client.enums.Systems.Symbols.GreenCross),
                 ),
         ];
         if (tutorial.step.array.length > 1) {
@@ -145,9 +154,7 @@ class AdditionalDb extends SQLiteTable {
         let i = 0;
         const message = await interaction.channel.send({
             content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**`
-                + `\n\n\`${i + 1}/${tutorial.step.array.length}\`| ${tutorial.step.array[i]}`
-                + (i >= tutorial.step.array.length - 1
-                    ? `\n\n🎊 *${userLang.json.systems.tutorialEnd}*` : ""),
+                + `\n\n\`${i + 1}/${tutorial.step.array.length}\`| ${tutorial.step.array[i]}`,
             components,
         }).catch(this.client.catchError);
         const collector = message.createMessageComponentCollector({
@@ -164,9 +171,7 @@ class AdditionalDb extends SQLiteTable {
                     await inter.deferUpdate().catch(this.client.catchError);
                     await message.edit({
                         content: `> <@${id}>, **${tutorial.name} - ${tutorial.step.name}**\n\n`
-                            + `\`${i + 1}/${tutorial.step.array.length}\`| ${tutorial.step.array[i]}`
-                            + (i >= tutorial.step.array.length - 1
-                                ? `\n\n🎊 *${userLang.json.systems.tutorialEnd}*` : ""),
+                            + `\`${i + 1}/${tutorial.step.array.length}\`| ${tutorial.step.array[i]}`,
                         components,
                     }).catch(this.client.catchError);
                 }

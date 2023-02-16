@@ -42,6 +42,22 @@ module.exports = {
             DailyQuest: "📆",
             Notifications: "🔔",
         },
+        Characters: {
+            YamamotoKenta: "<:YamamotoKenta:1075747106813386802>",
+            YamamotoMinori: "<:YamamotoMinori:1075747068603281499>",
+        },
+        Interactions: {
+            Dialogue: "💬",
+            Interact: "❔",
+            GiveItems: "🫴",
+            Excavate: "🔎",
+        },
+        Notifications: {
+            Dm: "📨",
+            Last: "📃",
+            LastOnly: "🔒",
+            Custom: "💎",
+        },
     },
     Systems: {
         Grades: {
@@ -52,6 +68,8 @@ module.exports = {
         Symbols: {
             Check: "✅",
             Cross: "❌",
+            DarkCross: "✖",
+            GreenCross: "❎",
             Previous: "◀️",
             Next: "▶️",
         },
@@ -67,7 +85,7 @@ module.exports = {
         Red: 0xf04747,
     },
     Units: {
-        MinutesPerDistanceUnit: 1,
+        MinutesPerDistanceUnit: 2.5,
     },
     Images: {
         Character0: "https://cdn.discordapp.com/attachments/980577808243900446/1037877260201504918/MC_ObanaiBot.png",

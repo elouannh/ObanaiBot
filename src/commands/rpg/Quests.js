@@ -14,7 +14,6 @@ class Quests extends Command {
             },
             {
                 name: "Quests",
-                dmPermission: true,
             },
             {
                 trad: "quests",

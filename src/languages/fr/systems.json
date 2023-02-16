@@ -11,7 +11,6 @@
     "playerNotFound": "Ce joueur est introuvable. Si il s'agit de vous, vous pouvez commencer votre aventure avec `/start`.",
     "playerNotFoundAlreadyPlayed": "Ce joueur est introuvable, mais il semblerait qu'il ait déjà joué à une version antérieure. Si il s'agit de vous, faites la commande `/start`.",
     "tutorialNext": "Suivant",
-    "tutorialEnd": "Ce tutoriel est terminé. Amusez-vous bien ! :D",
     "playerAlreadyExists": "Vous avez déjà commencé votre aventure.",
     "choiceIgnored": "Vous avez oublié de répondre. Veuillez réessayer cette commande.",
     "timeUnits": {

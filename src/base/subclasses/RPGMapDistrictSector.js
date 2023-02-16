@@ -6,6 +6,8 @@ class RPGMapDistrictSector extends RPGAssetBase {
         super(mapDistrict.lang, mapDistrictSectorData.id);
 
         this.name = name;
+        this.emoji = mapDistrictSectorData.emoji;
+        this.fullName = `${this.name} ${this.emoji}`;
         this.x = mapDistrictSectorData.x;
         this.y = mapDistrictSectorData.y;
         this.z = mapDistrictSectorData.z;

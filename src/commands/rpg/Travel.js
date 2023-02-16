@@ -14,7 +14,6 @@ class Travel extends Command {
             },
             {
                 name: "Travel",
-                dmPermission: true,
             },
             {
                 trad: "travel",
@@ -42,13 +41,16 @@ class Travel extends Command {
         const activity = await this.client.activityDb.load(this.user.id);
 
         if (activity.travel !== null) {
-            const destination = `${activity.travel.destination.district.region.name}\n`
-                + `${activity.travel.destination.district.name}, ${activity.travel.destination.sector.name}`;
+            const destination = `> __${this.lang.rpgAssets.concepts.region} :__ `
+                + `${activity.travel.destination.district.region.name}`
+                + `\n> __${this.lang.rpgAssets.concepts.district} :__ ${activity.travel.destination.district.fullName}`
+                + `\n> __${this.lang.rpgAssets.concepts.sector} :__ ${activity.travel.destination.sector.fullName}`;
+
             return await this.return(
                 this.trad.currentlyTraveling
                     .replace("%LOCATION_NAME", destination)
                 + this.trad.endsIn
-                + `<t:${this.client.util.round(activity.travel.endedDate / 1000)}:R>.`,
+                    .replace("%DATE", this.client.util.toTimestamp(activity.travel.endedDate)),
             );
         }
 
@@ -59,7 +61,7 @@ class Travel extends Command {
             [
                 {
                     label: this.trad.shortTravel,
-                    description: this.trad.shortTravelDescription.replace("%DISTRICT_NAME", map.district.name),
+                    description: this.trad.shortTravelDescription.replace("%DISTRICT_NAME", `${map.district.fullName}`),
                     value: "short",
                 },
                 {
@@ -88,6 +90,7 @@ class Travel extends Command {
                         label: e.name,
                         value: e.id,
                         description: e.region.name,
+                        emoji: e.emoji,
                     }
                 )),
             );
@@ -102,7 +105,7 @@ class Travel extends Command {
                 content: `[${mode === "short" ? this.trad.shortTravel : this.trad.longTravel}] `
                     + `${mode === "short" ? 
                         this.trad.chooseSector
-                        : this.trad.chooseDistrictSector.replace("%DISTRICT_NAME", map.district.name)
+                        : this.trad.chooseDistrictSector.replace("%DISTRICT_NAME", district.fullName)
                 }`,
             },
             availableSectors.map(e => (
@@ -110,6 +113,7 @@ class Travel extends Command {
                     label: e.name,
                     value: e.id,
                     description: e.biome.name,
+                    emoji: e.emoji,
                 }
             )),
         );
@@ -122,9 +126,8 @@ class Travel extends Command {
 
         const wantsToTravel = await this.choice(
             {
-                content: this.trad.wantsToTravel.replace("%LOCATION_NAME", `${district.name}, ${sector.name}`)
-                    + this.trad.endsInProbably
-                        .replace("%DATE", `<t:${this.client.util.round((startedDate + time) / 1000)}:R>`),
+                content: this.trad.wantsToTravel.replace("%LOCATION_NAME", `${district.fullName}, ${sector.fullName}`)
+                    + this.trad.endsIn.replace("%DATE", this.client.util.toTimestamp(startedDate + time)),
             },
             this.trad.travel,
             this.trad.cancel,
@@ -132,9 +135,9 @@ class Travel extends Command {
         if (wantsToTravel === null) return this.end();
 
         if (wantsToTravel === "primary") {
-            this.client.activityDb.travel(this.user.id, startedDate, map.district.id, map.sector.id, district.id, sector.id);
+            await this.client.activityDb.travel(this.user.id, startedDate, map.district.id, map.sector.id, district.id, sector.id);
             return await this.return(
-                this.trad.startedTraveling.replace("%LOCATION_NAME", `${district.name}, ${sector.name}`),
+                this.trad.startedTraveling.replace("%LOCATION_NAME", `${district.fullName}, ${sector.fullName}`),
             );
         }
         else if (wantsToTravel === "secondary") {

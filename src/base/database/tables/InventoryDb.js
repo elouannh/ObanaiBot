@@ -237,7 +237,8 @@ class InventoryDb extends SQLiteTable {
                 {
                     name: lang.rpgAssets.embeds.lifespan,
                     value: `${data.enchantedGrimoire.lifespan} |`
-                        + ` ${lang.rpgAssets.embeds.expirationDate}: <t:${data.enchantedGrimoire.expirationDate}:D>`,
+                        + ` ${lang.rpgAssets.embeds.expirationDate}: `
+                        + `${this.client.util.toTimestamp(data.enchantedGrimoire.expirationDate)}`,
                     inline: true,
                 },
                 {

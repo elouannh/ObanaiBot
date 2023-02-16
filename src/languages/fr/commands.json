@@ -17,7 +17,7 @@
         "wantsToForge": "Vous êtes sur le point de forger une arme de type **%WEAPON**.\nLa rareté de l'arme sera donc déterminée de façon __aléatoire__.\n\nÊtes-vous sûr de vouloir continuer ? Les ressources suivantes seront utilisées:",
         "forgeCanceled": "Vous avez annulé le forgeage.",
         "forgedSuccessInfos": "Le forgeron commence désormais à travailler sur une arme de rareté **%WEAPON_RARITY**. L'arme forgée sera donc **%WEAPON_NAME %WEAPON_RARITY_NAME**.",
-        "forgedSuccessTime": "\nLa forge durera `%TIME`. (%DATE)"
+        "forgedSuccessTime": "\nLa forge durera `%TIME`. Date de fin: %DATE."
     },
     "interact": {
         "optionDialogue": "Dialoguer",
@@ -47,8 +47,29 @@
         "noItems": "Vous n'avez pas les ressources nécessaires.",
         "giftCanceled": "Don d'objets annulé.",
         "giftDone": "Don d'objets effectué.",
-        "explored": "Vous avez trouvé des ressources !",
-        "noResourcesFound": "Vous n'avez pas de chance, aucune ressource n'a été trouvée."
+        "explored": "Revenez fouiller ce secteur demain.",
+        "noResourcesFound": "Malheureusement votre fouille n'a pas été fructueuse, revenez fouiller ce secteur demain.",
+        "dialogueDone": "*Dialogue effectué.*",
+        "interactionDone": "*Interaction effectuée.*",
+        "sentences": [
+            "Votre fouille n'a pas été un grand succès, vous avez tout de même trouvé les ressources suivantes :",
+            "Votre fouille est plutôt bonne, vous avez trouvé les ressources suivantes :",
+            "Votre fouille fut excellente, vous avez trouvé les ressources suivantes :",
+            "Incroyable ! C'est tout bonnement extraordinaire, votre fouille fut très rentable, vous avez trouvé les ressources suivantes :"
+        ]
+    },
+    "notifications": {
+        "mainChoice": "**Choix des paramètres de notifications:**",
+        "dmChoice": "DM (dernier salon si échec)",
+        "dmDesc": "Recevoir les notifications en message privé. En cas d'échec, envoi dans le dernier salon.",
+        "lastChoice": "Dernier salon (DM si échec)",
+        "lastDesc": "Recevoir les notifications dans le dernier salon joué. En cas d'échec, envoi en DM.",
+        "lastOnlyChoice": "Dernier salon uniquement",
+        "lastOnlyDesc": "Recevoir les notifications dans le dernier salon joué. En cas d'échec, aucune notification.",
+        "customChoice": "Salon personnalisé (premium uniquement)",
+        "customDesc": "Recevoir les notifications dans un salon personnalisé.",
+        "chosen": "Vos paramètres de notifications sont désormais:\n\n> %SETTINGS",
+        "premiumOnly": "Cette option est réservée aux membres premium."
     },
     "profile": {
         "activityButton": "Activité",
@@ -60,7 +81,7 @@
     "eval": {
         "modalTitle": "Code à exécuter",
         "modalLabel": "JavaScript ES6, automatiquement asynchrone",
-        "modalPlaceholder": "return \"Arnaud le gay\";"
+        "modalPlaceholder": "return \"I'm a panda\";"
     },
     "start": {
         "languageChoice": "Commencez par sélectionner votre langage.",
@@ -81,33 +102,30 @@
     },
     "train": {
         "currentlyTraining": "Vous êtes déjà en train d'améliorer votre **%STATISTIC_NAME** au niveau **%STATISTIC_LEVEL**. ",
-        "endsIn": "Votre entraînement se termine ",
         "choice": "Choisissez une statistique à améliorer:",
         "levelUpTo": "Passage au niveau %LEVEL",
         "wantsToTrain": "Voulez-vous vraiment entraîner votre **%STATISTIC_NAME** au niveau **%STATISTIC_LEVEL** ?",
-        "endsInProbably": "\nVotre entraînement se terminerait %DATE.",
+        "endsIn": "\nDate de fin d'entraînement: %DATE.",
         "train": "Entraîner",
         "cancel": "Annuler",
         "trainingStarted": "Vous avez commencé à entraîner votre **%STATISTIC_NAME** au niveau **%STATISTIC_LEVEL**.",
-        "endsInConfirmed": "\nVotre entraînement se terminera %DATE.",
         "trainingCanceled": "L'entraînement a été annulé."
     },
     "travel": {
         "currentlyTraveling": "Vous êtes déjà en train de voyager. Vous êtes en route pour:\n**%LOCATION_NAME**.",
-        "endsIn": "Votre voyage se termine ",
-        "chooseMode": "Quel type de voyage ?",
+        "chooseMode": "**Vous vous apprêtez à faire vos valises !**\n\nQuel type de voyage souhaitez-vous faire ?",
         "shortTravel": "Voyage court",
         "longTravel": "Voyage long",
         "shortTravelDescription": "Changer de secteur dans %DISTRICT_NAME.",
         "longTravelDescription": "Changer de district.",
         "chooseSector": "Choisissez un secteur:",
         "chooseDistrict": "Choisissez un district:",
-        "chooseDistrictSector": "Choisissez un secteur de **%DISTRICT_NAME**:",
+        "chooseDistrictSector": "Choisissez un secteur dans **%DISTRICT_NAME**:",
         "wantsToTravel": "Voulez-vous vraiment voyager vers **%LOCATION_NAME** ?",
-        "endsInProbably": "\nVotre voyage se terminerait: %DATE.",
+        "endsIn": "\nDate de fin de voyage: %DATE.",
         "travel": "Voyager",
         "cancel": "Annuler",
-        "startedTraveling": "Vous avez commencé à voyager vers **%LOCATION_NAME**.",
+        "startedTraveling": "Vous avez commencé à voyager vers:\n\n**%LOCATION_NAME**\n\n",
         "canceledTraveling": "Le voyage a été annulé."
     }
 }

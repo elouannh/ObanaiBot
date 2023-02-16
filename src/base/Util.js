@@ -5,6 +5,15 @@ const CollectionManager = require("./CollectionManager");
 
 module.exports = {
     /**
+     * Convert a number to a discord timestamps
+     * @param {Number} date The date to convert
+     * @returns {String} The converted date
+     */
+    toTimestamp(date) {
+        const timestamp = this.round(date / 1000);
+        return `<t:${timestamp}> (<t:${timestamp}:R>)`;
+    },
+    /**
      * Function that returns a string based on the date (not readable).
      * @param {Date} date
      * @returns {String}

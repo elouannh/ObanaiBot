@@ -133,7 +133,6 @@ class PlayerDb extends SQLiteTable {
             this.client.mapDb,
             this.client.questDb,
         ]) {
-            console.log(db.get(id));
             if ((db.get(id))?.schemaInstance) return false;
         }
         return true;
@@ -207,7 +206,7 @@ class PlayerDb extends SQLiteTable {
                     name: lang.rpgAssets.embeds.lifeRegeneration,
                     value: (data.health.lastRegen === data.health.fullRegen ?
                             lang.rpgAssets.embeds.finishedAt : lang.rpgAssets.embeds.remaining)
-                        + `<t:${data.health.fullRegenString}:R>`,
+                        + this.client.util.toTimestamp(data.health.fullRegen),
                     inline: true,
                 },
                 {

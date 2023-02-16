@@ -14,7 +14,6 @@ class Command {
         },
         contextBuilder = {
             name: "Command",
-            dmPermission: false,
         },
         infos = {
             trad: "command",
@@ -136,7 +135,7 @@ class Command {
             await this.interaction.reply({
                 content: `🛠️ ${this.lang.systems.requestsReply}\n\n${
                     notFinished.map(
-                        e => `» [**\`${e.name}\`**](${e.link}) - <t:${(e.ts / 1000).toFixed(0)}:F>`,
+                        e => `» [**\`${e.name}\`**](${e.link}) - ${this.client.util.toTimestamp(e.ts)}`,
                     ).join("\n")
                 }`,
                 ephemeral: true,
