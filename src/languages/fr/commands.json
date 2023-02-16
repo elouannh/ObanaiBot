@@ -47,10 +47,16 @@
         "noItems": "Vous n'avez pas les ressources nécessaires.",
         "giftCanceled": "Don d'objets annulé.",
         "giftDone": "Don d'objets effectué.",
-        "explored": "Vous avez trouvé des ressources !",
-        "noResourcesFound": "Vous n'avez pas de chance, aucune ressource n'a été trouvée.",
+        "explored": "Revenez fouiller ce secteur demain.",
+        "noResourcesFound": "Malheureusement votre fouille n'a pas été fructueuse, revenez fouiller ce secteur demain.",
         "dialogueDone": "*Dialogue effectué.*",
-        "interactionDone": "*Interaction effectuée.*"
+        "interactionDone": "*Interaction effectuée.*",
+        "sentences": [
+            "Votre fouille n'a pas été un grand succès, vous avez tout de même trouvé les ressources suivantes :",
+            "Votre fouille est plutôt bonne, vous avez trouvé les ressources suivantes :",
+            "Votre fouille fut excellente, vous avez trouvé les ressources suivantes :",
+            "Incroyable ! C'est tout bonnement extraordinaire, votre fouille fut très rentable, vous avez trouvé les ressources suivantes :"
+        ]
     },
     "profile": {
         "activityButton": "Activité",

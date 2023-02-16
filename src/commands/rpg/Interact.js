@@ -234,7 +234,7 @@ class Interact extends Command {
             }
         }
         else {
-            const bag = [];
+            let bag = [];
             const availableResources = Object.values(this.client.RPGAssetsManager.materials)
                 .filter(e => e.biomes.includes(map.sector.biome.id));
 
@@ -243,7 +243,8 @@ class Interact extends Command {
                     for (const resource of availableResources.sort(() => Math.random() - 0.5)) {
                         if (bag.reduce((a, b) => a.size + b.size, 0) >= 200) break;
 
-                        bag.push({ resource: resource, amount: 1 });
+                        const itemAmount = Math.floor(Math.random * 100) < resource.lootRate ? 1 : 0;
+                        bag.push({ resource: resource, amount: itemAmount });
                     }
                 }
                 else {
@@ -257,28 +258,30 @@ class Interact extends Command {
                                 continue;
                             }
                         }
-                        if (bag[resourceFocused].amount === 0) bag.splice(resourceFocused, 1);
                         resourceFocused++;
                     }
                 }
             }
 
+            bag = bag.filter(e => e.amount > 0);
+
             this.client.mapDb.explore(this.user.id, map.district.id, map.sector.id);
-            if (bag.length > 0) {
-                for (const item of bag) {
-                    this.client.inventoryDb.addMaterial(this.user.id, item.resource.id, item.amount);
-                }
+            const totalAmount = bag.reduce((a, b) => a + b.amount * b.resource.size, 0);
+            if (bag.length === 0 || totalAmount === 0) {
+                return await this.return(this.trad.noResourcesFound);
+            }
+            else {
+                const scale = Math.floor(totalAmount / 200);
                 return await this.return(
-                    this.trad.explored
+                    this.trad.sentences[scale]
                     + "\n\n" + bag.map(e => `> **${
                         this.client.RPGAssetsManager.getMaterial(
                             this.client.playerDb.getLang(this.user.id), e.resource.id,
                         ).name
-                    } x${e.amount}**`).join("\n"),
+                    }** x${e.amount}`).join("\n")
+                    + "\n\n"
+                    + this.trad.explored,
                 );
-            }
-            else {
-                return await this.return(this.trad.noResourcesFound);
             }
         }
     }
