@@ -137,8 +137,8 @@ class AdditionalDb extends SQLiteTable {
                 .setComponents(
                     new ButtonBuilder()
                         .setCustomId("tutorial_skip")
-                        .setStyle(ButtonStyle.Success)
-                        .setEmoji(this.client.enums.Systems.Symbols.GreenCross),
+                        .setStyle(ButtonStyle.Primary)
+                        .setEmoji(this.client.enums.Systems.Symbols.BlueCheck),
                 ),
         ];
         if (tutorial.step.array.length > 1) {

@@ -67,6 +67,7 @@ module.exports = {
         },
         Symbols: {
             Check: "✅",
+            BlueCheck: "☑️",
             Cross: "❌",
             DarkCross: "✖",
             GreenCross: "❎",
