@@ -131,7 +131,7 @@ class Interact extends Command {
 
             await this.client.questDb.displayDialogue(this, chosen.dialogue);
             await this.client.questDb.setObjectiveManuallyCompleted(this.user.id, chosen.questKey, chosen.objectiveId);
-            return await this.return(this.trad.dialogueDone);
+            return this.end();
         }
         else if (action[0] === "interact") {
             const choices = await this.client.questDb.getInteractions(this.user.id);

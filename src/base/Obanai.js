@@ -308,22 +308,26 @@ class Obanai extends Client {
         return user;
     }
 
+    classicEmbed(content, author) {
+        const embed = new EmbedBuilder();
+        if (author) {
+            embed.setAuthor({
+                name: author.tag,
+                iconURL: author.displayAvatarURL({ format: "png", size: 256, dynamic: true }),
+            });
+        }
+
+        embed.setDescription(content);
+        embed.setColor(this.enums.Colors.DarkGrey);
+
+        return embed;
+    }
+
     async fooSend(channel, content, author) {
         if (content instanceof String) content = [content];
         for (const message of content) {
-            const embed = new EmbedBuilder();
-            if (author) {
-                embed.setAuthor({
-                    name: author.tag,
-                    iconURL: author.displayAvatarURL({ format: "png", size: 256, dynamic: true }),
-                });
-            }
-
-            embed.setDescription(message);
-            embed.setColor(this.enums.Colors.DarkGrey);
-
             await channel.send({
-                embeds: [embed],
+                embeds: [this.classicEmbed(message, author)],
             }).catch(this.catchError);
         }
     }

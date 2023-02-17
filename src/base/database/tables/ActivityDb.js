@@ -80,7 +80,7 @@ class ActivityDb extends SQLiteTable {
             const trainingTime = this.client.RPGAssetsManager.statistics.trainingTimes[String(levelToReach)] * 60000;
             const timeLeft = trainingTime - (Date.now() - data.training.startedDate);
 
-            if (timeLeft <= 10000000000000) {
+            if (timeLeft <= 0) {
                 this.client.playerDb.upgradeStatistic(id, data.training.statistic);
                 this.set(
                     id, {
@@ -127,7 +127,7 @@ class ActivityDb extends SQLiteTable {
             );
             const timeLeft = endedDate - Date.now();
 
-            if (timeLeft <= 10000000000000) {
+            if (timeLeft <= 0) {
                 this.client.mapDb.move(id, destination.id, destinationSector.id);
                 this.set(
                     id,

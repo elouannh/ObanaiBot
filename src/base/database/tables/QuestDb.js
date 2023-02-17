@@ -225,14 +225,11 @@ class QuestDb extends SQLiteTable {
      * @returns {Promise<void>}
      */
     async displayDialogue(command, dialogue) {
-        let method = "reply";
-        if (command.interaction.replied) method = "editReply";
-
         let pageId = 1;
         let loop = true;
 
-        const menu = await command.interaction[method]({
-            content: dialogue.content.slice(0, pageId).join("\n"),
+        const menu = await command.interaction.editReply({
+            embeds: [this.client.classicEmbed(dialogue.content.slice(0, pageId).join("\n"), command.user)],
             components: [
                  new ActionRowBuilder().setComponents(
                     new ButtonBuilder()
@@ -242,6 +239,10 @@ class QuestDb extends SQLiteTable {
                 ),
             ],
         }).catch(this.client.catchError);
+        if (!menu) {
+            await command.interaction.editReply({ components: [] }).catch(this.client.catchError);
+            return command.end();
+        }
 
         while (loop) {
             const inter = await menu.awaitMessageComponent({
@@ -253,7 +254,7 @@ class QuestDb extends SQLiteTable {
             if (inter.customId === "next") pageId++;
 
             await command.interaction.editReply({
-                content: dialogue.content.slice(0, pageId).join("\n"),
+                embeds: [this.client.classicEmbed(dialogue.content.slice(0, pageId).join("\n"), command.user)],
                 components: [
                     new ActionRowBuilder().setComponents(
                         new ButtonBuilder()
@@ -421,7 +422,6 @@ class QuestDb extends SQLiteTable {
                     break;
                 case "haveMaterials":
                     const amountToReach = localObjective.additionalData.amountToReach;
-                    console.log(data.items.materials[localObjective.additionalData.material].amount);
                     completedInDepth = localObjective.additionalData.material in data.items.materials
                         ? (data.items.materials[localObjective.additionalData.material].amount >= amountToReach)
                         : false;

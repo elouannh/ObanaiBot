@@ -190,5 +190,17 @@
             "firstName": "イネス",
             "lastName": "杉山"
         }
+    },
+    "16": {
+        "id": "16",
+        "fullName": "Iguro Obanai",
+        "firstName": "Obanai",
+        "lastName": "Iguro",
+        "gender": "male",
+        "japaneseTranscription": {
+            "fullName": "伊黒・小芭内",
+            "firstName": "小芭内",
+            "lastName": "伊黒"
+        }
     }
 }

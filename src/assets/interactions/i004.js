@@ -6,7 +6,7 @@ module.exports = {
         await command.client.fooSend(
             command.interaction.channel,
             [lang.content.main, lang.content.sub],
-            command.interaction.user,
+            command.user,
         );
     },
 };
