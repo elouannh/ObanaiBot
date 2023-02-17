@@ -325,11 +325,9 @@ class Obanai extends Client {
 
     async fooSend(channel, content, author) {
         if (content instanceof String) content = [content];
-        for (const message of content) {
-            await channel.send({
-                embeds: [this.classicEmbed(message, author)],
-            }).catch(this.catchError);
-        }
+        await channel.send({
+            embeds: [content.map(message => this.classicEmbed(message, author))],
+        }).catch(this.catchError);
     }
 }
 

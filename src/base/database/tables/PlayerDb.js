@@ -125,17 +125,15 @@ class PlayerDb extends SQLiteTable {
      * @returns {Promise<void>}
      */
     async refresh(id) {
-        if (this.infos.category === "RPG") {
-            for (const db of [
-                "playerDb",
-                "activityDb",
-                "additionalDb",
-                "inventoryDb",
-                "mapDb",
-                "questDb",
-            ]) {
-                await this.client.questDb.questsCleanup(id, db);
-            }
+        for (const db of [
+            "playerDb",
+            "activityDb",
+            "additionalDb",
+            "inventoryDb",
+            "mapDb",
+            "questDb",
+        ]) {
+            await this.client.questDb.questsCleanup(id, db);
         }
     }
 

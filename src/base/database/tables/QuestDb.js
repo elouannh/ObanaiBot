@@ -229,6 +229,7 @@ class QuestDb extends SQLiteTable {
         let loop = true;
 
         const menu = await command.interaction.editReply({
+            content: "",
             embeds: [this.client.classicEmbed(dialogue.content.slice(0, pageId).join("\n"), command.user)],
             components: [
                  new ActionRowBuilder().setComponents(
@@ -254,6 +255,7 @@ class QuestDb extends SQLiteTable {
             if (inter.customId === "next") pageId++;
 
             await command.interaction.editReply({
+                content: "",
                 embeds: [this.client.classicEmbed(dialogue.content.slice(0, pageId).join("\n"), command.user)],
                 components: [
                     new ActionRowBuilder().setComponents(
@@ -271,7 +273,8 @@ class QuestDb extends SQLiteTable {
 
             if (inter.customId === "end") {
                 await command.interaction.editReply({
-                    content: dialogue.content.join("\n"),
+                    content: "",
+                    embeds: [this.client.classicEmbed(dialogue.content.join("\n"), command.user)],
                     components: [],
                 }).catch(this.client.catchError);
 

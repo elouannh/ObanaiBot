@@ -1,7 +1,7 @@
 module.exports = {
     id: "i005",
     play: async command => {
-        const lang = command.lang.interactions[this.id];
+        const lang = command.lang.interactions["i005"];
 
         await command.client.fooSend(
             command.interaction.channel,

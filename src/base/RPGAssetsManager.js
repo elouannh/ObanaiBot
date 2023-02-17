@@ -228,7 +228,7 @@ class RPGAssetsManager {
             dialogue.content.push(dialogue.lang.contents[id].replicas[replica]);
         }
 
-        return { name: dialogue.lang.names[dialogue.name], id, content: dialogue.content };
+        return { name: dialogue.lang.names[dialogue.id], id, content: dialogue.content };
     }
 
     async getInteraction(lang, id) {

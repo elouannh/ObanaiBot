@@ -6,9 +6,15 @@
         "d001": {
             "id": "d001",
             "replicas": {
-                "r001": "Hello world !",
-                "r002": "Ceci est un test de réplique !",
-                "r003": "Ceci est une autre réplique !"
+                "r001": "**Obanai** – Où est-il ?",
+                "r002": "**Vous** – Je... je ne sais pas de quoi vous parlez.",
+                "r003": "**Obanai** – Laissez tomber. Tu ne comprendrais rien si je t'expliquais. Tu es un matagi, n'est-ce pas ?",
+                "r004": "**Vous** – Oui, je suis un matagi.",
+                "r005": "**Obanai** – D'accord, je vois. Je suis venu faire le ménage ici, car mon camarade a attrapé une sacrée maladie qui l'empêche d'assurer la sécurité de la région (en fait, il parle bien de Tomioka Giyû qui a attrapé un petit rhume).",
+                "r006": "**Vous** – La sécurité ? Vous voulez dire que vous êtes un chasseur ? Je ne pense pas que ça soit l'œuvre d'un ours...",
+                "r007": "**Obanai** – Rien ne m'oblige à répondre à tes questions futiles. Va enterrer ces gens, je m'en vais, j'ai du travail.",
+                "r008": "**Vous** – Attendez, qui êtes-vous ?",
+                "r009": "**Obanai** – Je suis Obanai Iguro. Salut."
             }
         }
     }
