@@ -75,7 +75,7 @@ class InteractionCreate extends Event {
             try {
                 this.client.additionalDb.incrementCommand(String(cmd.interaction.user.id), cmd.slashBuilder.name);
                 this.client.util.timelog(`[Command] ${cmd.slashBuilder.name} - ${cmd.interaction.user.tag} (${cmd.interaction.user.id})`, "yellowBright");
-                await this.interaction.deferReply().catch(this.client.catchError);
+                if (!cmd.infos.cancelDefer) await this.interaction.deferReply().catch(this.client.catchError);
                 await cmd.run();
             }
             catch (err) {

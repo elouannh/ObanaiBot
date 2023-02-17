@@ -8,21 +8,35 @@ const {
 
 class Base extends Command {
     constructor() {
-        super({
-            name: "eval",
-            description: "Commande permettant d'effectuer du code JavaScript ES6 Asynchrone.",
-            descriptionLocalizations: {
-                "en-US": "Command allowing to perform JavaScript ES6 Asynchronous code.",
+        super(
+            {
+                name: "eval",
+                description: "Commande permettant de tester un script.",
+                descriptionLocalizations: {
+                    "en-US": "Command to test a script.",
+                },
+                options: [],
+                dmPermission: true,
             },
-            options: [],
-            type: [1],
-            dmPermission: true,
-            category: "Staff",
-            cooldown: 3,
-            completedRequests: [],
-            authorizationBitField: 0b100,
-            permissions: 0n,
-        });
+            {
+                name: "Eval",
+            },
+            {
+                trad: "eval",
+                type: [1],
+                category: "Staff",
+                cooldown: 10,
+                completedRequests: [],
+                authorizationBitField: 0b100,
+                permissions: 0n,
+                targets: [],
+                cancelDefer: true,
+            },
+            {
+                needToBeStatic: false,
+                needToBeInRpg: false,
+            },
+        );
     }
 
     async run() {

@@ -34,6 +34,7 @@ class Profile extends Command {
                 authorizationBitField: 0b000,
                 permissions: 0n,
                 targets: ["read"],
+                cancelDefer: false,
             },
             {
                 needToBeStatic: false,

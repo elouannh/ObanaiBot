@@ -231,7 +231,7 @@ class Obanai extends Client {
      * @returns {Promise<string>}
      */
     async notify(id, payload) {
-        const data = this.questDb.get(id);
+        const data = this.additionalDb.get(id);
         let channel = null;
         if (data.notifications.startsWith("last")) {
             channel = await this.client.getChannel(

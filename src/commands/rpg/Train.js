@@ -24,6 +24,7 @@ class Train extends Command {
                 authorizationBitField: 0b000,
                 permissions: 0n,
                 targets: ["read", "write"],
+                cancelDefer: false,
             },
             {
                 needToBeStatic: false,

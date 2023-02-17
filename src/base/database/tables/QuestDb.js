@@ -390,7 +390,6 @@ class QuestDb extends SQLiteTable {
             switch (localObjective.type) {
                 case "haveMoney":
                     const userMoney = data.wallet;
-
                     if (userMoney >= localObjective.additionalData.amountToReach) completedInDepth = true;
                     break;
                 case "haveEquippedEnchantedGrimoire":
@@ -422,8 +421,9 @@ class QuestDb extends SQLiteTable {
                     break;
                 case "haveMaterials":
                     const amountToReach = localObjective.additionalData.amountToReach;
+                    console.log(data.items.materials[localObjective.additionalData.material].amount);
                     completedInDepth = localObjective.additionalData.material in data.items.materials
-                        ? (data.items.materials[localObjective.additionalData.material] >= amountToReach)
+                        ? (data.items.materials[localObjective.additionalData.material].amount >= amountToReach)
                         : false;
                     break;
                 default:

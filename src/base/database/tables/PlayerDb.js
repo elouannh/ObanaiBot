@@ -120,6 +120,26 @@ class PlayerDb extends SQLiteTable {
     }
 
     /**
+     * Function that refresh user quests
+     * @param {String} id The user ID
+     * @returns {Promise<void>}
+     */
+    async refresh(id) {
+        if (this.infos.category === "RPG") {
+            for (const db of [
+                "playerDb",
+                "activityDb",
+                "additionalDb",
+                "inventoryDb",
+                "mapDb",
+                "questDb",
+            ]) {
+                await this.client.questDb.questsCleanup(id, db);
+            }
+        }
+    }
+
+    /**
      * Returns if a player exists in the database.
      * @param {String} id The player ID
      * @returns {Promise<boolean>}

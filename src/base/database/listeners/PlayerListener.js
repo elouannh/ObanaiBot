@@ -7,9 +7,8 @@ class PlayerListener extends SQLiteTableChangeListener {
     }
 
     async overListener(key, before, after) {
+        await this.client.questDb.questsCleanup(key, "playerDb");
         if (before !== after) {
-            await this.client.questDb.questsCleanup(key, "playerDb");
-
             if (before?.exp !== after?.exp) {
                 const oldLevel = this.client.RPGAssetsManager.getPlayerLevel(before?.exp);
                 const newLevel = this.client.RPGAssetsManager.getPlayerLevel(after?.exp);
