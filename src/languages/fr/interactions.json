@@ -16,7 +16,7 @@
     "i003": {
         "name": "Un démon ?",
         "content": {
-            "main": "Vous trouvez un étrange éventail métallique par terre. Soudain, Un démon enragé surgit et vous attaque. Il est enragé.",
+            "main": "Vous trouvez un étrange éventail métallique par terre. Soudain, Un démon enragé surgit et vous attaque.",
             "sub": "Après une longue lutte, vous commencez à faiblir. Vous arrivez cependant à le tuer avec un coup bien placé avec l'avantage."
         }
     },

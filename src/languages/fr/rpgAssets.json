@@ -450,6 +450,10 @@
         "16": {
             "label": "Pilier du Serpent",
             "description": ""
+        },
+        "17": {
+            "label": "Pilier de l'Insecte",
+            "description": ""
         }
     },
     "weapons": {
@@ -545,19 +549,6 @@
         },
         "slayer.0.0.1.0": {
             "id": "slayer.0.0.1.0",
-            "name": "Chapitre 1 - Les premières hostilités",
-            "label": "Volume 0: Arc 0 - L'étrange shukuba",
-            "description": "Vous êtes un matagi, et il est l'heure de vous aventurer en dehors de votre campement.",
-            "wattpad": {
-                "alt": "Lire sur Wattpad (__Aller à → Chapitre 1__)",
-                "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
-            },
-            "objectives": {
-                "0": "Rendez-vous au terrain enneigé du shukuba du Désespoir."
-            }
-        },
-        "slayer.0.0.1.1": {
-            "id": "slayer.0.0.1.1",
             "name": "Chapitre 1 - Les premières hostilités",
             "label": "Volume 0: Arc 0 - L'étrange shukuba",
             "description": "Vous êtes un matagi, et il est l'heure de vous aventurer en dehors de votre campement.",

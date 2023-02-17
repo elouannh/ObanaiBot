@@ -141,6 +141,10 @@ class Obanai extends Client {
         if (data.min.length < 2) data.min = "0" + data.min;
         if (data.sec.length < 2) data.sec = "0" + data.sec;
         console.log(chalk.redBright(`[${data.month}/${data.day}] [${data.hour}:${data.hour}:${data.sec}]  |  Error: ${error.message}`));
+
+        if (this?.env?.TEST_MODE === "1") {
+            console.log(error);
+        }
     }
 
     async throwError(error, origin) {
@@ -326,7 +330,7 @@ class Obanai extends Client {
     async fooSend(channel, content, author) {
         if (content instanceof String) content = [content];
         await channel.send({
-            embeds: [content.map(message => this.classicEmbed(message, author))],
+            embeds: content.map(message => this.classicEmbed(message, author)),
         }).catch(this.catchError);
     }
 }

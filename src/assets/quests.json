@@ -149,7 +149,7 @@
                     "additionalData": {
                         "dialogueId": "d001",
                         "district": "2",
-                        "sector": "0",
+                        "sector": "1",
                         "characterId": "16"
                     }
                 }
@@ -179,40 +179,6 @@
 
         "slayer.0.0.1.0": {
             "id": "slayer.0.0.1.0",
-            "objectives": {
-                "0": {
-                    "id": "0",
-                    "type": "reachDestination",
-                    "additionalData": {
-                        "district": "2",
-                        "sector": "1"
-                    }
-                }
-            },
-            "rewards": {
-                "0": {
-                    "id": "0",
-                    "data": {
-                        "0": {
-                            "id": "0",
-                            "type": "exp",
-                            "data": {
-                                "amount": 50
-                            }
-                        },
-                        "1": {
-                            "id": "1",
-                            "type": "money",
-                            "data": {
-                                "amount": 150
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "slayer.0.0.1.1": {
-            "id": "slayer.0.0.1.1",
             "objectives": {
                 "0": {
                     "id": "0",
@@ -325,7 +291,8 @@
                     "additionalData": {
                         "dialogueId": "d002",
                         "district": "20",
-                        "sector": "1"
+                        "sector": "1",
+                        "characterId": "17"
                     }
                 }
             },
@@ -383,7 +350,7 @@
                     "type": "reachStatisticLevel",
                     "additionalData": {
                         "levelToReach": "3",
-                        "statistic": "weaponMastery"
+                        "statistic": "weaponControl"
                     }
                 }
             },
@@ -631,7 +598,7 @@
                     "id": "2",
                     "type": "interact",
                     "additionalData": {
-                        "interactionId": "i004",
+                        "interactionId": "i005",
                         "district": "18",
                         "sector": "3"
                     }
