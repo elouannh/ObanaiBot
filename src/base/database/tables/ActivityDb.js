@@ -362,7 +362,7 @@ class ActivityDb extends SQLiteTable {
                     name: lang.rpgAssets.concepts.training,
                     value: data.training === null ? lang.rpgAssets.embeds.noTraining
                         : `${data.training.statistic.name}, `
-                        + `${lang.rpgAssets.concepts.level} **${data.training.statistic.level}** \`>\` `
+                        + `${lang.rpgAssets.concepts.level} **${data.training.statistic.level}** \`→\` `
                         + `${lang.rpgAssets.concepts.level} **${data.training.statistic.level + 1}**`
                         + `\n__${lang.rpgAssets.embeds.ending}:__ `
                         + `${this.client.util.toTimestamp(data.training.endedDate)}`,
@@ -372,8 +372,8 @@ class ActivityDb extends SQLiteTable {
                     name: lang.rpgAssets.concepts.travel,
                     value: data.travel === null ? lang.rpgAssets.embeds.noTravel
                         : `__${lang.rpgAssets.embeds.circuit}__: `
-                        + `[**${data.travel.departurePoint.district.name}**, ${data.travel.departurePoint.sector.name}] `
-                        + `\`>\` [**${data.travel.destination.district.name}**, ${data.travel.destination.sector.name}]`
+                        + `[**${data.travel.departurePoint.district.fullName}**, ${data.travel.departurePoint.sector.fullName}] `
+                        + `\`→\` [**${data.travel.destination.district.fullName}**, ${data.travel.destination.sector.fullName}]`
                         + `\n__${lang.rpgAssets.embeds.ending}:__ `
                         + `${this.client.util.toTimestamp(data.travel.endedDate)}`,
                     inline: true,

@@ -113,7 +113,7 @@
         "trainingCanceled": "L'entraînement a été annulé."
     },
     "travel": {
-        "currentlyTraveling": "Vous êtes déjà en train de voyager. Vous êtes en route pour:\n**%LOCATION_NAME**",
+        "currentlyTraveling": "Vous êtes déjà en train de voyager. Vous êtes en route pour:\n%LOCATION_NAME",
         "chooseMode": "**Vous vous apprêtez à faire vos valises !**\n\nQuel type de voyage souhaitez-vous faire ?",
         "shortTravel": "Voyage court",
         "longTravel": "Voyage long",

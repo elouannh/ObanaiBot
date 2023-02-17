@@ -33,11 +33,11 @@ class InteractionCreate extends Event {
             cmd = new cmd();
             cmd.init(this.client, this.interaction, this.client.languageManager.getLang(userLang));
 
-            const cooldownReady = await cmd.cooldownReady(true);
-            if (!cooldownReady) return;
-
             const requestReady = await cmd.requestReady();
             if (!requestReady) return;
+
+            const cooldownReady = await cmd.cooldownReady(true);
+            if (!cooldownReady) return;
 
             const permissionsReady = await cmd.permissionsReady();
             if (!permissionsReady) return;
