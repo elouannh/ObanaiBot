@@ -307,6 +307,26 @@ class Obanai extends Client {
         if (user?.id === null) return secureValue;
         return user;
     }
+
+    async fooSend(channel, content, author) {
+        if (content instanceof String) content = [content];
+        for (const message of content) {
+            const embed = new EmbedBuilder();
+            if (author) {
+                embed.setAuthor({
+                    name: author.tag,
+                    iconURL: author.displayAvatarURL({ format: "png", size: 256, dynamic: true }),
+                });
+            }
+
+            embed.setDescription(message);
+            embed.setColor(this.enums.Colors.DarkGrey);
+
+            await channel.send({
+                embeds: [embed],
+            }).catch(this.catchError);
+        }
+    }
 }
 
 module.exports = Obanai;

@@ -83,6 +83,7 @@ module.exports = {
         Blurple: 0x5865f2,
         Green: 0x44c767,
         Red: 0xf04747,
+        DarkGrey: 0x2b2d31,
     },
     Units: {
         MinutesPerDistanceUnit: 2.5,

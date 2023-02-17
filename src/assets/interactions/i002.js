@@ -1,5 +1,5 @@
 module.exports = {
-    id: "i001",
+    id: "i002",
     play: async command => {
         const lang = command.lang.interactions[this.id];
 
