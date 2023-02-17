@@ -202,5 +202,16 @@
             "firstName": "小芭内",
             "lastName": "伊黒"
         }
+    },
+    "17": {
+        "id": "17",
+        "fullName": "Kochō Shinobu",
+        "firstName": "Shinobu",
+        "lastName": "Kochō",
+        "japaneseTranscription": {
+            "fullName": "胡蝶・しのぶ",
+            "firstName": "しのぶ",
+            "lastName": "胡蝶"
+        }
     }
 }

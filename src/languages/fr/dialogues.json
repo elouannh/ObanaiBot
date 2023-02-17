@@ -1,6 +1,8 @@
 {
     "names": {
-        "d001": "Dialogue de test"
+        "d001": "Où est le démon ?",
+        "d002": "J'ai rencontré un homme...",
+        "d003": "Je suis envoyé par Shinobu."
     },
     "contents": {
         "d001": {
@@ -15,6 +17,21 @@
                 "r007": "**Obanai** – Rien ne m'oblige à répondre à tes questions futiles. Va enterrer ces gens, je m'en vais, j'ai du travail.",
                 "r008": "**Vous** – Attendez, qui êtes-vous ?",
                 "r009": "**Obanai** – Je suis Obanai Iguro. Salut."
+            }
+        },
+        "d002": {
+            "id": "d002",
+            "replicas": {
+                "r001": "**Vous** – Je suis arrivé, et j'ai vu un corps. Une petite fille était là. Elle était jeune, tellement jeune qu'on ne pense pas à mourir à cet âge-là. Tout le camp avait été décimé... C'était un ours, hein ?",
+                "r002": "**Shinobu** – Oh, comme c'est triste, répondit Shinobu avec un petit sourire amical. Il y a des créatures plus puissantes qu'un ours tu sais ? Raconte-moi la suite.",
+                "r003": "**Vous** – Ensuite, un homme est arrivé. Il était grand, blond, et sa présence était écrasante. Il avait un haori foncé qui cachait un... habit... avec un col roulé, rouge et noir."
+            }
+        },
+        "d003": {
+            "id": "d003",
+            "replicas": {
+                "r001": "**Vous** – Bonjour, je suis envoyé par Shinobu.",
+                "r002": "**Miruri* – Cela faisant longtemps que je n'avais pas eu de nouveau disciple. Suis-moi. Répondit le vieil homme rabougri par l'âge, avec une voix à en faire fuir les oiseaux."
             }
         }
     }
