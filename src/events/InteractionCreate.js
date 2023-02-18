@@ -32,6 +32,7 @@ class InteractionCreate extends Event {
 
             cmd = new cmd();
             cmd.init(this.client, this.interaction, this.client.languageManager.getLang(userLang));
+            console.log("test 1");
 
             const requestReady = await cmd.requestReady();
             if (!requestReady) return;

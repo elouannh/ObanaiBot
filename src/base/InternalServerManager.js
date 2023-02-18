@@ -125,7 +125,7 @@ class InternalServerManager extends SQLiteTable {
     async questGenerator() {
         setInterval(async () => {
             await this.slayerQuestGenerator();
-        }, 300_000);
+        }, 3_000);
 
         const lastRefresh = (Date.now() - this.delays.dailyQuestGenerator);
         const timeLeft = (86_400_000 - lastRefresh);

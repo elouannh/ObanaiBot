@@ -239,7 +239,7 @@ class Obanai extends Client {
         let channel = null;
         if (data.notifications.startsWith("last")) {
             channel = await this.getChannel(
-                this.client.lastChannelsManager.getSub(id, "main")?.id || "0", { id: null },
+                this.lastChannelsManager.getSub(id, "main")?.id || "0", { id: null },
             );
 
             if ((!channel || channel.id === null) && data.notifications === "last") {
@@ -251,7 +251,7 @@ class Obanai extends Client {
 
             if (!channel || channel.id === null) {
                 channel = await this.getChannel(
-                    this.client.lastChannelsManager.getSub(id, "main")?.id || "0", { id: null },
+                    this.lastChannelsManager.getSub(id, "main")?.id || "0", { id: null },
                 );
             }
         }

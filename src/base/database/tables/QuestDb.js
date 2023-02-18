@@ -693,7 +693,12 @@ class QuestDb extends SQLiteTable {
      */
     async questsCleanup(id, tableFocused) {
         const verified = await this.verifyAllQuests(id, tableFocused);
-        await this.notifyQuests(id, verified);
+
+        try {
+            await this.notifyQuests(id, verified);
+        } catch {
+            void null;
+        }
 
         if (verified.dailyFinished) this.deleteQuest(id, "daily");
         if (verified.sideFinished) this.deleteQuest(id, "side");
