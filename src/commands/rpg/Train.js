@@ -40,6 +40,10 @@ class Train extends Command {
         const player = await this.client.playerDb.load(this.user.id);
         const activity = await this.client.activityDb.load(this.user.id);
 
+        await this.client.additionalDb.showTutorial(
+            this.user.id, "train", "howItWorks", this.interaction,
+        );
+
         if (activity.training !== null) {
             return await this.return(this.trad.currentlyTraining
                         .replace("%STATISTIC_NAME", activity.training.statistic.name)

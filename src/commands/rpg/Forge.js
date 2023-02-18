@@ -41,6 +41,10 @@ class Forge extends Command {
         const activity = await this.client.activityDb.load(this.user.id);
         const inventory = await this.client.inventoryDb.load(this.user.id);
 
+        await this.client.additionalDb.showTutorial(
+            this.user.id, "forge", "howItWorks", this.interaction,
+        );
+
         if (activity.forge.forgingSlots.freeSlots.length === 0) return await this.return(this.trad.noAvailableSlot);
 
         const requiredResources = {};

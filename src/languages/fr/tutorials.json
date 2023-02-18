@@ -1,43 +1,70 @@
 {
-    "beginning": {
-        "name": "Tutoriel de départ",
-        "profileCommand": {
-            "name": "Commande `profile`",
+    "profile": {
+        "name": "Le profil",
+        "main": {
+            "name": "La page principale",
             "array": [
-                "Vous faites pour la première fois la commande `/profile`. Ici, vous pourrez voir différentes informations sur le profil d'un joueur, où le votre.",
-                "Cette commande est exécutable depuis le chat, ou en faisant clic droit sur un utilisateur.\nhttps://i.imgur.com/TK15nr0.png\nhttps://i.imgur.com/EiIRviN.png",
-                "Cette commande affiche diverses informations:\n**Votre profil de pourfendeur, votre inventaire, la carte, vos activités, et quelques données supplémentaires.**"
+                "Bienvenue sur votre profile ! Laissez-moi vous présenter rapidement ce que vous pourrez y trouver.\n\nVous possédez des statistiques (comme chaque joueur), certaines que vous pouvez améliorer et d'autres non. Vous avez une barre de vie, d'expérience et vous pouvez apprendre un style de souffle.",
+                "L'inventaire se décompenses en plusieurs parties. Il y a le grimoire, qui vous apporte des effets passifs pendant une certaine durée.\n\nLes armes servent quant à elles à être collectionnées.\n\nVous possédez également des ressources : des matériaux que vous trouverez en explorant, et des objets de quête qui ne s'obtiennent que lorsque la quête que vous effectuez en donne.",
+                "Les activités sont les différentes actions que vous entreprenez : la forge d'une arme (jusqu'à 3 simultanément), l'entraînement d'une statistique, ou bien un voyage.\n",
+                "La carte se décompense en 8 grandes régions qui sont les régions du Japon. Chaque région se décompose en districts, et ces districts se divisent eux-mêmes en secteurs. À chaque secteur est associé un biome. Les biomes permettent de savoir quels ressources vous pourriez trouver dans le secteur.",
+                "Vous pouvez également acquérir des thèmes lorsque ceux-ci seront mis en avant en dépensant des gouttes de sang (devise). Durant votre aventure, vous croisera beaucoup de tutoriels qui vous expliqueront de façon très simple les différents aspects du jeu."
             ]
-        },
-        "profilePlayer": {
-            "name": "Page `profil`",
+        }
+    },
+    "forge": {
+        "name": "La forge",
+        "howItWorks": {
+            "name": "Comment ça marche ?",
             "array": [
-                "Vous voilà sur la page du profil. Ici apparaissent vos statistiques, le personnage que vous avez choisit, votre niveau d'expérience, et votre souffle."
+                "La forge permet de concevoir des armes de différentes raretés. Pour cela, il suffit de réunir les ressources nécessaires et de les utiliser pour lancer la forge.",
+                "Les armes se trouvent en 11 raretés différentes. Vous pouvez lancer jusqu'à 3 forges simultanément. De plus, les ressources requises, le temps de forge, et les probabilités varient en fonction du niveau de votre forgeron, qui restera caché au joueur."
             ]
-        },
-        "profileInventory": {
-            "name": "Page `inventaire`",
+        }
+    },
+    "interact": {
+        "name": "L'interaction",
+        "howItWorks": {
+            "name": "Comment ça marche ?",
             "array": [
-                "Ici, votre inventaire s'affiche. Vous pouvez y voir votre arme, votre corbeau de liaison, votre porte-monnaie, votre grimoire enchanté, et vos différents matériaux."
+                "La commande d'interaction permet de dialoguer avec un PNJ se trouvant au même emplacement, de lui donner des objets, de fouiller le secteur où vous êtes ou bien d'interagir avec votre environnement pour déclencher des événements.",
+                "Cette commande est la principale utilisée pour les quêtes ; si vous ne trouvez pas comment avancer, essayez toujours de vous déplacer aux endroits les plus probables et essayez d'interagir !"
             ]
-        },
-        "profileActivity": {
-            "name": "Page `activité`",
+        }
+    },
+    "quests": {
+        "name": "Les quêtes",
+        "howItWorks": {
+            "name": "Comment ça marche ?",
             "array": [
-                "À cet endroit vous trouverez les informations relatives à votre activité: les armes que vous forgez, vos entrainements en cours, etc."
+                "Les quêtes sont le principal chemin à suivre pour le joueur. Les quêtes ont des objectifs qui peuvent être accomplis simultanément, et ces derniers font progresser le joueur tout en lui donnant des récompenses.",
+                "Il y a 3 types de quête.\n\nLes quêtes de pourfendeur sont les quêtes principales. Elles possèdent une histoire originale. Toutefois, veillez à lire le WattPad afin de mieux comprendre le déroulement des événements.",
+                "Les quêtes de monde sont des quêtes secondaires ou des quêtes temporaires, qui seront disponibles pendant les différents événements spéciaux.",
+                "Les quêtes quotidiennes, ou journalières, sont des quêtes qui sont renouvelées tous les jours. Cependant, elles ne sont disponibles qu'à partir d'un certain rang de pourfendeur.",
+                "Si vous ne voyez pas vos quêtes, ne paniquez pas. Elles n'apparaissent pas tout de suite et sont rafraîchies toutes les 10 minutes."
             ]
-        },
-        "profileMap": {
-            "name": "Page `carte`",
+        }
+    },
+    "train": {
+        "name": "L'entraînement",
+        "howItWorks": {
+            "name": "Comment ça marche ?",
             "array": [
-                "Sur cette page vous trouverez la carte du monde de la région où vous vous situez. Vous pouvez utiliser la commande `/map` afin d'en savoir plus sur la carte."
+                "Pour devenir plus fort, le joueur doit entraîner ses différentes statistiques. 4 d'entre elles peuvent être améliorées : la force, la résistance, la vitesse et la maîtrise d'arme. L'intelligence et l'endurance ne s'améliorent qu'avec le rang de pourfendeur.",
+                "Un entraînement dure au minimum 30 minutes, et la durée augmente de 15 minutes tous les 3 niveaux. Par exemple, les niveau 2, 3, et 4 nécessiteront 30 minutes, puis les niveau 5, 6 et 7 nécessiteront 45 minutes, et ainsi de suite.",
+                "Les entraînements n'empêchent pas de voyager ou de forger, et vous ne pouvez améliorer qu'une seule statistique à la fois."
             ]
-        },
-        "profileAdditional": {
-            "name": "Page `infos supplémentaires`",
+        }
+    },
+    "travel": {
+        "name": "Le voyage",
+        "howItWorks": {
+            "name": "Comment ça marche ?",
             "array": [
-                "Ici, certaines données supplémentaires seront affichées. Vous pourrez voir les commandes que vous avez exécutées, votre progression dans le tutoriel..."
-            ]
+                "Les voyages permettent au joueur de se déplacer sur la carte. Il y a deux types de voyage: les voyages courts et les voyages longs.",
+                "Les voyages courts permettent de changer de secteur, tout en restant dans le même district.",
+                "Les voyages longs permettent de changer de district, mais aussi parfois de région. Vous ne pouvez vous rendre dans un district que si la région à laquelle il appartient est voisine à votre région actuelle."
+             ]
         }
     }
 }

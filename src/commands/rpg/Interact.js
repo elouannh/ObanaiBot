@@ -40,6 +40,10 @@ class Interact extends Command {
         const map = await this.client.mapDb.load(this.user.id);
         const inventory = await this.client.inventoryDb.load(this.user.id);
 
+        await this.client.additionalDb.showTutorial(
+            this.user.id, "interact", "howItWorks", this.interaction,
+        );
+
         const options = [
             {
                 label: this.trad.optionDialogue,

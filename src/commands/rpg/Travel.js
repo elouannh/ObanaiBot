@@ -41,6 +41,10 @@ class Travel extends Command {
         const map = await this.client.mapDb.load(this.user.id);
         const activity = await this.client.activityDb.load(this.user.id);
 
+        await this.client.additionalDb.showTutorial(
+            this.user.id, "travel", "howItWorks", this.interaction,
+        );
+
         if (activity.travel !== null) {
             const destination = `> **__${this.lang.rpgAssets.concepts.region} :__ `
                 + `${activity.travel.destination.district.region.name}`

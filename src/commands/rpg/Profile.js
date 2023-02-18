@@ -102,18 +102,12 @@ class Profile extends Command {
         ];
         let lastPanel = "Player";
         if (this.interaction.user.id === this.user.id) {
-            await this.client.additionalDb.showBeginningTutorial(
-                this.user.id, "profileCommand", this.interaction,
+            await this.client.additionalDb.showTutorial(
+                this.user.id, "profile", "main", this.interaction,
             );
         }
         let loop = true;
         while (loop) {
-            if (this.interaction.user.id === this.user.id) {
-                await this.client.additionalDb.showBeginningTutorial(
-                    this.user.id, `profile${lastPanel}`, this.interaction,
-                );
-            }
-
             let profileInteraction = await this.menu(
                 {
                     embeds: [embeds[lastPanel.toLowerCase()]],
