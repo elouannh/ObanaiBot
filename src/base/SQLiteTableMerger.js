@@ -81,26 +81,10 @@ class SQLiteTableMerger {
             dbs.b.destroy();
         }
         if (this.tables.includes("playerDb")) {
-            const dbs = { a: new Enmap({ name: "player" }), b: new Enmap({ name: "playerDb" }) };
-
-            for (const player of dbs.b.array()) {
-                const id = player.id;
-                this.client.playerDb.ensureInDeep(id);
-                dbs.a.set(id, player.started, "alreadyPlayed");
-                dbs.a.set(id, player.id, "id");
-                dbs.a.set(id, player.lang, "lang");
-                dbs.a.set(id, player.exp, "exp");
-                const stats = { strength: player.stats.strength, speed: player.stats.speed };
-                dbs.a.set(id, stats.strength, "statistics.strength");
-                dbs.a.set(id, stats.speed, "statistics.speed");
-                dbs.a.set(id, player.created || Date.now(), "creationDate");
-            }
-
-            dbs.b.destroy();
+            new Enmap({ name: "playerDb" }).destroy();
         }
         if (this.tables.includes("questDb")) {
-            const dbs = { a: new Enmap({ name: "quest" }), b: new Enmap({ name: "questDb" }) };
-            dbs.b.destroy();
+            new Enmap({ name: "questDb" }).destroy();
         }
         if (this.tables.includes("squadDb")) {
             new Enmap({ name: "squadDb" }).destroy();
