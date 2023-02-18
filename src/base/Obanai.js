@@ -238,7 +238,7 @@ class Obanai extends Client {
         const data = this.additionalDb.get(id);
         let channel = null;
         if (data.notifications.startsWith("last")) {
-            channel = await this.client.getChannel(
+            channel = await this.getChannel(
                 this.client.lastChannelsManager.getSub(id, "main")?.id || "0", { id: null },
             );
 
@@ -250,7 +250,7 @@ class Obanai extends Client {
             channel = await this.getUser(id, { id: null });
 
             if (!channel || channel.id === null) {
-                channel = await this.client.getChannel(
+                channel = await this.getChannel(
                     this.client.lastChannelsManager.getSub(id, "main")?.id || "0", { id: null },
                 );
             }
