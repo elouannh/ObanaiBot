@@ -696,7 +696,8 @@ class QuestDb extends SQLiteTable {
 
         try {
             await this.notifyQuests(id, verified);
-        } catch {
+        }
+        catch {
             void null;
         }
 
