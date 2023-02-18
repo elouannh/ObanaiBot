@@ -33,11 +33,11 @@ class InteractionCreate extends Event {
             cmd = new cmd();
             cmd.init(this.client, this.interaction, this.client.languageManager.getLang(userLang));
 
-            const cooldownReady = await cmd.cooldownReady(true);
-            if (!cooldownReady) return;
-
             const requestReady = await cmd.requestReady();
             if (!requestReady) return;
+
+            const cooldownReady = await cmd.cooldownReady(true);
+            if (!cooldownReady) return;
 
             const permissionsReady = await cmd.permissionsReady();
             if (!permissionsReady) return;
@@ -75,7 +75,7 @@ class InteractionCreate extends Event {
             try {
                 this.client.additionalDb.incrementCommand(String(cmd.interaction.user.id), cmd.slashBuilder.name);
                 this.client.util.timelog(`[Command] ${cmd.slashBuilder.name} - ${cmd.interaction.user.tag} (${cmd.interaction.user.id})`, "yellowBright");
-                await this.interaction.deferReply().catch(this.client.catchError);
+                if (!cmd.infos.cancelDefer) await this.interaction.deferReply().catch(this.client.catchError);
                 await cmd.run();
             }
             catch (err) {

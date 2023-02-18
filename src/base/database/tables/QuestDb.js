@@ -178,7 +178,7 @@ class QuestDb extends SQLiteTable {
                 if (data.characterId !== pnjId) continue;
 
                 const itemsToGive = {
-                    amount: data.amount,
+                    amount: data.amountToGive,
                     instance: data.item,
                     type: data.type,
                 };
@@ -225,14 +225,12 @@ class QuestDb extends SQLiteTable {
      * @returns {Promise<void>}
      */
     async displayDialogue(command, dialogue) {
-        let method = "reply";
-        if (command.interaction.replied) method = "editReply";
-
         let pageId = 1;
         let loop = true;
 
-        const menu = await command.interaction[method]({
-            content: dialogue.content.slice(0, pageId).join("\n"),
+        const menu = await command.interaction.editReply({
+            content: "",
+            embeds: [this.client.classicEmbed(dialogue.content.slice(0, pageId).join("\n"), command.user)],
             components: [
                  new ActionRowBuilder().setComponents(
                     new ButtonBuilder()
@@ -242,6 +240,10 @@ class QuestDb extends SQLiteTable {
                 ),
             ],
         }).catch(this.client.catchError);
+        if (!menu) {
+            await command.interaction.editReply({ components: [] }).catch(this.client.catchError);
+            return command.end();
+        }
 
         while (loop) {
             const inter = await menu.awaitMessageComponent({
@@ -253,7 +255,8 @@ class QuestDb extends SQLiteTable {
             if (inter.customId === "next") pageId++;
 
             await command.interaction.editReply({
-                content: dialogue.content.slice(0, pageId).join("\n"),
+                content: "",
+                embeds: [this.client.classicEmbed(dialogue.content.slice(0, pageId).join("\n"), command.user)],
                 components: [
                     new ActionRowBuilder().setComponents(
                         new ButtonBuilder()
@@ -270,7 +273,8 @@ class QuestDb extends SQLiteTable {
 
             if (inter.customId === "end") {
                 await command.interaction.editReply({
-                    content: dialogue.content.join("\n"),
+                    content: "",
+                    embeds: [this.client.classicEmbed(dialogue.content.join("\n"), command.user)],
                     components: [],
                 }).catch(this.client.catchError);
 
@@ -390,7 +394,6 @@ class QuestDb extends SQLiteTable {
             switch (localObjective.type) {
                 case "haveMoney":
                     const userMoney = data.wallet;
-
                     if (userMoney >= localObjective.additionalData.amountToReach) completedInDepth = true;
                     break;
                 case "haveEquippedEnchantedGrimoire":
@@ -423,7 +426,7 @@ class QuestDb extends SQLiteTable {
                 case "haveMaterials":
                     const amountToReach = localObjective.additionalData.amountToReach;
                     completedInDepth = localObjective.additionalData.material in data.items.materials
-                        ? (data.items.materials[localObjective.additionalData.material] >= amountToReach)
+                        ? (data.items.materials[localObjective.additionalData.material].amount >= amountToReach)
                         : false;
                     break;
                 default:
@@ -690,7 +693,13 @@ class QuestDb extends SQLiteTable {
      */
     async questsCleanup(id, tableFocused) {
         const verified = await this.verifyAllQuests(id, tableFocused);
-        await this.notifyQuests(id, verified);
+
+        try {
+            await this.notifyQuests(id, verified);
+        }
+        catch {
+            void null;
+        }
 
         if (verified.dailyFinished) this.deleteQuest(id, "daily");
         if (verified.sideFinished) this.deleteQuest(id, "side");

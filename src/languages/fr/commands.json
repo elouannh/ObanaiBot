@@ -29,7 +29,7 @@
         "optionGiveItemsDesc": "Permet de donner des objets à un PNJ.",
         "optionExcavate": "Fouiller",
         "optionExcavateDesc": "Permet de fouiller un secteur.",
-        "alreadyExcavated": "*Vous avez déjà fouillé ce secteur. Il sera disponible à nouveau %DATE.*\n\n",
+        "alreadyExcavated": "*Vous avez déjà fouillé ce secteur. Il sera disponible à nouveau demain.*\n\n",
         "possiblesChoices": "Choix possibles:",
         "noPnjForDialogue": "Aucun PNJ n'est disponible pour dialoguer.",
         "pnjChoice": "Choix du PNJ:",
@@ -54,6 +54,7 @@
         "sentences": [
             "Votre fouille n'a pas été un grand succès, vous avez tout de même trouvé les ressources suivantes :",
             "Votre fouille est plutôt bonne, vous avez trouvé les ressources suivantes :",
+            "Votre fouille est rentable, vous avez trouvé les ressources suivantes :",
             "Votre fouille fut excellente, vous avez trouvé les ressources suivantes :",
             "Incroyable ! C'est tout bonnement extraordinaire, votre fouille fut très rentable, vous avez trouvé les ressources suivantes :"
         ]
@@ -112,7 +113,7 @@
         "trainingCanceled": "L'entraînement a été annulé."
     },
     "travel": {
-        "currentlyTraveling": "Vous êtes déjà en train de voyager. Vous êtes en route pour:\n**%LOCATION_NAME**.",
+        "currentlyTraveling": "Vous êtes déjà en train de voyager. Vous êtes en route pour:\n%LOCATION_NAME",
         "chooseMode": "**Vous vous apprêtez à faire vos valises !**\n\nQuel type de voyage souhaitez-vous faire ?",
         "shortTravel": "Voyage court",
         "longTravel": "Voyage long",

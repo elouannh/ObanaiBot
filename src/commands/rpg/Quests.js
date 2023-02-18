@@ -24,6 +24,7 @@ class Quests extends Command {
                 authorizationBitField: 0b000,
                 permissions: 0n,
                 targets: ["read"],
+                cancelDefer: false,
             },
             {
                 needToBeStatic: false,
@@ -38,6 +39,10 @@ class Quests extends Command {
 
         const quests = await this.client.questDb.load(this.user.id);
         const embedsArray = await this.client.questDb.getEmbeds(this.lang, quests, this.user);
+
+        await this.client.additionalDb.showTutorial(
+            this.user.id, "quests", "howItWorks", this.interaction,
+        );
 
         const embeds = {
             slayer: embedsArray[0],

@@ -76,9 +76,11 @@ class Command {
     }
 
     async focus(type) {
+        await this.client.playerDb.refresh(this.focusedPlayer);
         if (type === "option") {
             const user = await this.getUserFromInteraction(this.interaction.type);
             this.focusedPlayer = user.id;
+            await this.client.playerDb.refresh(this.focusedPlayer);
             this.user = await this.client.getUser(this.focusedPlayer, this.interaction.user);
             return user;
         }

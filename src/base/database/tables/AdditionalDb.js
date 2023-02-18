@@ -124,11 +124,13 @@ class AdditionalDb extends SQLiteTable {
     /**
      * Show the chosen tutorial.
      * @param {String} id The user ID
-     * @param {Tutorial|null} tutorial The tutorial array
+     * @param {String} tutorialName The tutorial name
+     * @param {String} tutorialStepName The tutorial step name
      * @param {ChatInputCommandInteraction} interaction The command interaction
      * @returns {Promise<void>}
      */
-    async showTutorial(id, tutorial, interaction) {
+    async showTutorial(id, tutorialName, tutorialStepName, interaction) {
+        const tutorial = this.getUserTutorial(id, tutorialName, tutorialStepName);
         if (tutorial === null || tutorial.step.array.length === 0) return null;
         const userLang = this.client.languageManager.getLang(this.client.playerDb.getLang(id));
 
@@ -137,8 +139,8 @@ class AdditionalDb extends SQLiteTable {
                 .setComponents(
                     new ButtonBuilder()
                         .setCustomId("tutorial_skip")
-                        .setStyle(ButtonStyle.Success)
-                        .setEmoji(this.client.enums.Systems.Symbols.GreenCross),
+                        .setStyle(ButtonStyle.Primary)
+                        .setEmoji(this.client.enums.Systems.Symbols.BlueCheck),
                 ),
         ];
         if (tutorial.step.array.length > 1) {
@@ -183,17 +185,6 @@ class AdditionalDb extends SQLiteTable {
         collector.on("end", async () => {
             await message.delete().catch(this.client.catchError);
         });
-    }
-
-    /**
-     * Show a step of the beginning tutorial.
-     * @param {String} id The user ID
-     * @param {String} tutorialStepName The tutorial step name
-     * @param {ChatInputCommandInteraction} interaction The command interaction
-     * @returns {Promise<void>}
-     */
-    async showBeginningTutorial(id, tutorialStepName, interaction) {
-        await this.showTutorial(id, this.getUserTutorial(id, "beginning", tutorialStepName), interaction);
     }
 
     /**

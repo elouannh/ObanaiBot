@@ -24,6 +24,7 @@ class Travel extends Command {
                 authorizationBitField: 0b000,
                 permissions: 0n,
                 targets: ["read", "write"],
+                cancelDefer: false,
             },
             {
                 needToBeStatic: true,
@@ -40,11 +41,15 @@ class Travel extends Command {
         const map = await this.client.mapDb.load(this.user.id);
         const activity = await this.client.activityDb.load(this.user.id);
 
+        await this.client.additionalDb.showTutorial(
+            this.user.id, "travel", "howItWorks", this.interaction,
+        );
+
         if (activity.travel !== null) {
-            const destination = `> __${this.lang.rpgAssets.concepts.region} :__ `
+            const destination = `> **__${this.lang.rpgAssets.concepts.region} :__ `
                 + `${activity.travel.destination.district.region.name}`
                 + `\n> __${this.lang.rpgAssets.concepts.district} :__ ${activity.travel.destination.district.fullName}`
-                + `\n> __${this.lang.rpgAssets.concepts.sector} :__ ${activity.travel.destination.sector.fullName}`;
+                + `\n> __${this.lang.rpgAssets.concepts.sector} :__ ${activity.travel.destination.sector.fullName}**`;
 
             return await this.return(
                 this.trad.currentlyTraveling

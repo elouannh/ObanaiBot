@@ -24,6 +24,7 @@ class Forge extends Command {
                 authorizationBitField: 0b000,
                 permissions: 0n,
                 targets: ["read", "write"],
+                cancelDefer: false,
             },
             {
                 needToBeStatic: true,
@@ -39,6 +40,10 @@ class Forge extends Command {
         const langId = this.client.playerDb.getLang(this.user.id);
         const activity = await this.client.activityDb.load(this.user.id);
         const inventory = await this.client.inventoryDb.load(this.user.id);
+
+        await this.client.additionalDb.showTutorial(
+            this.user.id, "forge", "howItWorks", this.interaction,
+        );
 
         if (activity.forge.forgingSlots.freeSlots.length === 0) return await this.return(this.trad.noAvailableSlot);
 

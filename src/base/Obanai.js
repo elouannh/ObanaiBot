@@ -141,6 +141,10 @@ class Obanai extends Client {
         if (data.min.length < 2) data.min = "0" + data.min;
         if (data.sec.length < 2) data.sec = "0" + data.sec;
         console.log(chalk.redBright(`[${data.month}/${data.day}] [${data.hour}:${data.hour}:${data.sec}]  |  Error: ${error.message}`));
+
+        if (this?.env?.TEST_MODE === "1") {
+            console.log(error);
+        }
     }
 
     async throwError(error, origin) {
@@ -231,11 +235,11 @@ class Obanai extends Client {
      * @returns {Promise<string>}
      */
     async notify(id, payload) {
-        const data = this.questDb.get(id);
+        const data = this.additionalDb.get(id);
         let channel = null;
         if (data.notifications.startsWith("last")) {
-            channel = await this.client.getChannel(
-                this.client.lastChannelsManager.getSub(id, "main")?.id || "0", { id: null },
+            channel = await this.getChannel(
+                this.lastChannelsManager.getSub(id, "main")?.id || "0", { id: null },
             );
 
             if ((!channel || channel.id === null) && data.notifications === "last") {
@@ -246,8 +250,8 @@ class Obanai extends Client {
             channel = await this.getUser(id, { id: null });
 
             if (!channel || channel.id === null) {
-                channel = await this.client.getChannel(
-                    this.client.lastChannelsManager.getSub(id, "main")?.id || "0", { id: null },
+                channel = await this.getChannel(
+                    this.lastChannelsManager.getSub(id, "main")?.id || "0", { id: null },
                 );
             }
         }
@@ -306,6 +310,28 @@ class Obanai extends Client {
         const user = await this.getUser("539842701592494111", { id: null });
         if (user?.id === null) return secureValue;
         return user;
+    }
+
+    classicEmbed(content, author) {
+        const embed = new EmbedBuilder();
+        if (author) {
+            embed.setAuthor({
+                name: author.tag,
+                iconURL: author.displayAvatarURL({ format: "png", size: 256, dynamic: true }),
+            });
+        }
+
+        embed.setDescription(content);
+        embed.setColor(this.enums.Colors.DarkGrey);
+
+        return embed;
+    }
+
+    async fooSend(channel, content, author) {
+        if (content instanceof String) content = [content];
+        await channel.send({
+            embeds: content.map(message => this.classicEmbed(message, author)),
+        }).catch(this.catchError);
     }
 }
 

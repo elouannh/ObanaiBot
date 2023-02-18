@@ -67,9 +67,7 @@ class Duration {
             i++;
         }
 
-        if (Object.values(data).length === 0) return String(`1${this.units.s[render === "short" ? 2 : 0]}`);
-
-        return this.format
+        const string = this.format
             .filter(e => ignoreZero ? data[e] > 0 : true)
             .map(e =>
                 `${data[e]}${render === "short" ? "" : " "}`
@@ -77,6 +75,12 @@ class Duration {
                 `${this.units[e][Number(data[e] > 1) + (render === "short" ? 2 : 0)]}`,
             )
             .join(" ");
+
+        if (Object.values(data).length === 0 || string.length <= 1) {
+            return String(`1${this.units.s[render === "short" ? 2 : 0]}`);
+        }
+
+        return string;
     }
 }
 

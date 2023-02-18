@@ -1,33 +1,5 @@
 {
-    "dailyQuests": {
-        "daily.0": {
-            "id": "daily.0",
-            "objectives": {
-                "0": {
-                    "id": "0",
-                    "type": "haveMaterials",
-                    "additionalData": {
-                        "material": "wood",
-                        "amountToReach": 15
-                    }
-                }
-            },
-            "rewards": {
-                "0": {
-                    "id": "0",
-                    "data": {
-                        "0": {
-                            "id": "0",
-                            "type": "money",
-                            "data": {
-                                "amount": 100
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
+    "dailyQuests": {},
     "sideQuests": {},
     "slayerQuests": {
         "slayer.0.0.0.0": {
@@ -35,33 +7,10 @@
             "objectives": {
                 "0": {
                     "id": "0",
-                    "type": "dialogue",
+                    "type": "reachDestination",
                     "additionalData": {
-                        "dialogueId": "d001",
-                        "district": "0",
-                        "sector": "0",
-                        "characterId": "7"
-                    }
-                },
-                "1": {
-                    "id": "1",
-                    "type": "interact",
-                    "additionalData": {
-                        "interactionId": "i001",
-                        "district": "0",
+                        "district": "2",
                         "sector": "0"
-                    }
-                },
-                "2": {
-                    "id": "2",
-                    "type": "giveItems",
-                    "additionalData": {
-                        "characterId": "5",
-                        "district": "0",
-                        "sector": "0",
-                        "type": "materials",
-                        "item": "wood",
-                        "amount": 5
                     }
                 }
             },
@@ -75,6 +24,353 @@
                             "data": {
                                 "amount": 50
                             }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slayer.0.0.0.1": {
+            "id": "slayer.0.0.0.1",
+            "objectives": {
+                "0": {
+                    "id": "0",
+                    "type": "haveMaterials",
+                    "additionalData": {
+                        "material": "wood",
+                        "amountToReach": 25
+                    }
+                }
+            },
+            "rewards": {
+                "0": {
+                    "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slayer.0.0.0.2": {
+            "id": "slayer.0.0.0.2",
+            "objectives": {
+                "0": {
+                    "id": "0",
+                    "type": "interact",
+                    "additionalData": {
+                        "interactionId": "i001",
+                        "district": "2",
+                        "sector": "0"
+                    }
+                }
+            },
+            "rewards": {
+                "0": {
+                    "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slayer.0.0.0.3": {
+            "id": "slayer.0.0.0.3",
+            "objectives": {
+                "0": {
+                    "id": "0",
+                    "type": "interact",
+                    "additionalData": {
+                        "interactionId": "i002",
+                        "district": "2",
+                        "sector": "0"
+                    }
+                }
+            },
+            "rewards": {
+                "0": {
+                    "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slayer.0.0.0.4": {
+            "id": "slayer.0.0.0.4",
+            "objectives": {
+                "0": {
+                    "id": "0",
+                    "type": "dialogue",
+                    "additionalData": {
+                        "dialogueId": "d001",
+                        "district": "2",
+                        "sector": "1",
+                        "characterId": "16"
+                    }
+                }
+            },
+            "rewards": {
+                "0": {
+                    "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "slayer.0.0.1.0": {
+            "id": "slayer.0.0.1.0",
+            "objectives": {
+                "0": {
+                    "id": "0",
+                    "type": "interact",
+                    "additionalData": {
+                        "interactionId": "i003",
+                        "district": "2",
+                        "sector": "1"
+                    }
+                }
+            },
+            "rewards": {
+                "0": {
+                    "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "slayer.0.0.2.0": {
+            "id": "slayer.0.0.2.0",
+            "objectives": {
+                "0": {
+                    "id": "0",
+                    "type": "interact",
+                    "additionalData": {
+                        "interactionId": "i004",
+                        "district": "2",
+                        "sector": "1"
+                    }
+                }
+            },
+            "rewards": {
+                "0": {
+                    "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slayer.0.0.2.1": {
+            "id": "slayer.0.0.2.1",
+            "objectives": {
+                "0": {
+                    "id": "0",
+                    "type": "reachDestination",
+                    "additionalData": {
+                        "district": "20",
+                        "sector": "1"
+                    }
+                }
+            },
+            "rewards": {
+                "0": {
+                    "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slayer.0.0.2.2": {
+            "id": "slayer.0.0.2.2",
+            "objectives": {
+                "0": {
+                    "id": "0",
+                    "type": "dialogue",
+                    "additionalData": {
+                        "dialogueId": "d002",
+                        "district": "20",
+                        "sector": "1",
+                        "characterId": "17"
+                    }
+                }
+            },
+            "rewards": {
+                "0": {
+                    "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slayer.0.0.2.3": {
+            "id": "slayer.0.0.2.3",
+            "objectives": {
+                "0": {
+                    "id": "0",
+                    "type": "reachStatisticLevel",
+                    "additionalData": {
+                        "levelToReach": "3",
+                        "statistic": "strength"
+                    }
+                },
+                "1": {
+                    "id": "1",
+                    "type": "reachStatisticLevel",
+                    "additionalData": {
+                        "levelToReach": "3",
+                        "statistic": "speed"
+                    }
+                },
+                "2": {
+                    "id": "2",
+                    "type": "reachStatisticLevel",
+                    "additionalData": {
+                        "levelToReach": "3",
+                        "statistic": "resistance"
+                    }
+                },
+                "3": {
+                    "id": "3",
+                    "type": "reachStatisticLevel",
+                    "additionalData": {
+                        "levelToReach": "3",
+                        "statistic": "weaponControl"
+                    }
+                }
+            },
+            "rewards": {
+                "0": {
+                    "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
                         }
                     }
                 },
@@ -87,6 +383,13 @@
                             "data": {
                                 "amount": 50
                             }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
                         }
                     }
                 },
@@ -98,6 +401,263 @@
                             "type": "exp",
                             "data": {
                                 "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
+                        }
+                    }
+                },
+                "3": {
+                    "id": "3",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slayer.0.0.2.4": {
+            "id": "slayer.0.0.2.4",
+            "objectives": {
+                "0": {
+                    "id": "0",
+                    "type": "reachDestination",
+                    "additionalData": {
+                        "district": "18",
+                        "sector": "1"
+                    }
+                }
+            },
+            "rewards": {
+                "0": {
+                    "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slayer.0.0.2.5": {
+            "id": "slayer.0.0.2.5",
+            "objectives": {
+                "0": {
+                    "id": "0",
+                    "type": "dialogue",
+                    "additionalData": {
+                        "dialogueId": "d003",
+                        "district": "18",
+                        "sector": "1",
+                        "characterId": "11"
+                    }
+                }
+            },
+            "rewards": {
+                "0": {
+                    "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "slayer.0.0.3.0": {
+            "id": "slayer.0.0.3.0",
+            "objectives": {
+                "0": {
+                    "id": "0",
+                    "type": "reachDestination",
+                    "additionalData": {
+                        "district": "18",
+                        "sector": "2"
+                    }
+                }
+            },
+            "rewards": {
+                "0": {
+                    "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slayer.0.0.3.1": {
+            "id": "slayer.0.0.3.1",
+            "objectives": {
+                "0": {
+                    "id": "0",
+                    "type": "giveItems",
+                    "additionalData": {
+                        "district": "18",
+                        "sector": "2",
+                        "characterId": "11",
+                        "type": "materials",
+                        "item": "seed",
+                        "amountToGive": 100
+                    }
+                }
+            },
+            "rewards": {
+                "0": {
+                    "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "slayer.0.0.3.2": {
+            "id": "slayer.0.0.3.2",
+            "objectives": {
+                "0": {
+                    "id": "0",
+                    "type": "haveExperience",
+                    "additionalData": {
+                        "amountToReach": 250
+                    }
+                },
+                "1": {
+                    "id": "1",
+                    "type": "reachDestination",
+                    "additionalData": {
+                        "district": "18",
+                        "sector": "3"
+                    }
+                },
+                "2": {
+                    "id": "2",
+                    "type": "interact",
+                    "additionalData": {
+                        "interactionId": "i005",
+                        "district": "18",
+                        "sector": "3"
+                    }
+                }
+            },
+            "rewards": {
+                "0": {
+                    "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
+                        }
+                    }
+                },
+                "1": {
+                    "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
+                            }
+                        }
+                    }
+                },
+                "2": {
+                    "id": "0",
+                    "data": {
+                        "0": {
+                            "id": "0",
+                            "type": "exp",
+                            "data": {
+                                "amount": 50
+                            }
+                        },
+                        "1": {
+                            "id": "1",
+                            "type": "money",
+                            "data": {
+                                "amount": 150
                             }
                         }
                     }

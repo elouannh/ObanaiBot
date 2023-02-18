@@ -6,9 +6,7 @@ class MapListener extends SQLiteTableChangeListener {
     }
 
     async overListener(key, before, after) {
-        if (before !== after) {
-            await this.client.questDb.questsCleanup(key, "mapDb");
-        }
+        await this.client.questDb.questsCleanup(key, "mapDb");
     }
 }
 

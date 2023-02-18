@@ -224,16 +224,11 @@ class RPGAssetsManager {
             this.dialogues.filter(e => e.id === id)?.at(0),
         );
 
-        for (const replicasGroups of (await dialogue.read(this.client, userId))) {
-            const key = replicasGroups.key;
-            const replicas = replicasGroups.replicas;
-            for (const replica of replicas) {
-                const replicaLang = dialogue.lang.contents[key].replicas[replica];
-                dialogue.content.push(replicaLang);
-            }
+        for (const replica of (await dialogue.read(this.client, userId))) {
+            dialogue.content.push(dialogue.lang.contents[id].replicas[replica]);
         }
 
-        return { name: dialogue.lang.names[dialogue.name], id, content: dialogue.content };
+        return { name: dialogue.lang.names[dialogue.id], id, content: dialogue.content };
     }
 
     async getInteraction(lang, id) {

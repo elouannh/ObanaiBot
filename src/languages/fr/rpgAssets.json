@@ -392,7 +392,7 @@
             "description": ""
         },
         "2": {
-            "label": "Formateur",
+            "label": "Partenaire",
             "description": ""
         },
         "3": {
@@ -442,6 +442,18 @@
         "14": {
             "label": "Oiran",
             "description": ""
+        },
+        "15": {
+            "label": "Marchande",
+            "description": ""
+        },
+        "16": {
+            "label": "Pilier du Serpent",
+            "description": ""
+        },
+        "17": {
+            "label": "Pilier de l'Insecte",
+            "description": ""
         }
     },
     "weapons": {
@@ -470,28 +482,204 @@
         }
     },
     "quests": {
-        "daily.0": {
-            "id": "daily.0",
-            "name": "La Chasse aux Papillons",
-            "label": "*...*",
-            "description": "Collectez un peu de ressources.",
-            "objectives": {
-                "0": "Collecter __15__ bûches de bois."
-            }
-        },
         "slayer.0.0.0.0": {
             "id": "slayer.0.0.0.0",
-            "name": "Quête de développement",
-            "label": "Provisoire",
-            "description": "Il est l'heure de tester !",
+            "name": "Chapitre 0 - En route pour le Nord.",
+            "label": "Volume 0: Arc 0 - L'étrange shukuba",
+            "description": "Vous êtes un matagi, et il est l'heure de vous aventurer en dehors de votre campement.",
             "wattpad": {
                 "alt": "Lire sur Wattpad (__Aller à → Chapitre 0__)",
                 "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
             },
             "objectives": {
-                "0": "Tester le dialogue",
-                "1": "Tester l'interaction",
-                "2": "Donner 5 de bois"
+                "0": "Rendez-vous au shukuba du Désespoir."
+            }
+        },
+        "slayer.0.0.0.1": {
+            "id": "slayer.0.0.0.1",
+            "name": "Chapitre 0 - En route pour le Nord.",
+            "label": "Volume 0: Arc 0 - L'étrange shukuba",
+            "description": "Vous êtes un matagi, et il est l'heure de vous aventurer en dehors de votre campement.",
+            "wattpad": {
+                "alt": "Lire sur Wattpad (__Aller à → Chapitre 0__)",
+                "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
+            },
+            "objectives": {
+                "0": "Récoltez 25 morceaux de bois."
+            }
+        },
+        "slayer.0.0.0.2": {
+            "id": "slayer.0.0.0.2",
+            "name": "Chapitre 0 - En route pour le Nord.",
+            "label": "Volume 0: Arc 0 - L'étrange shukuba",
+            "description": "Vous êtes un matagi, et il est l'heure de vous aventurer en dehors de votre campement.",
+            "wattpad": {
+                "alt": "Lire sur Wattpad (__Aller à → Chapitre 0__)",
+                "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
+            },
+            "objectives": {
+                "0": "Interagissez avec votre environnement."
+            }
+        },
+        "slayer.0.0.0.3": {
+            "id": "slayer.0.0.0.3",
+            "name": "Chapitre 0 - En route pour le Nord.",
+            "label": "Volume: Arc 0 - L'étrange shukuba",
+            "description": "Vous êtes un matagi, et il est l'heure de vous aventurer en dehors de votre campement.",
+            "wattpad": {
+                "alt": "Lire sur Wattpad (__Aller à → Chapitre 0__)",
+                "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
+            },
+            "objectives": {
+                "0": "Interagissez pour suivre l'action."
+            }
+        },
+        "slayer.0.0.0.4": {
+            "id": "slayer.0.0.0.4",
+            "name": "Chapitre 0 - En route pour le Nord.",
+            "label": "Volume 0: Arc 0 - L'étrange shukuba",
+            "description": "Vous êtes un matagi, et il est l'heure de vous aventurer en dehors de votre campement.",
+            "wattpad": {
+                "alt": "Lire sur Wattpad (__Aller à → Chapitre 0__)",
+                "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
+            },
+            "objectives": {
+                "0": "Dialoguez avec Iguro Obanai."
+            }
+        },
+        "slayer.0.0.1.0": {
+            "id": "slayer.0.0.1.0",
+            "name": "Chapitre 1 - Les premières hostilités",
+            "label": "Volume 0: Arc 0 - L'étrange shukuba",
+            "description": "Vous êtes un matagi, et il est l'heure de vous aventurer en dehors de votre campement.",
+            "wattpad": {
+                "alt": "Lire sur Wattpad (__Aller à → Chapitre 1__)",
+                "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
+            },
+            "objectives": {
+                "0": "Un démon arrive, préparez-vous ! (Interaction)"
+            }
+        },
+        "slayer.0.0.2.0": {
+            "id": "slayer.0.0.2.0",
+            "name": "Chapitre 2 - Les premiers soins.",
+            "label": "Volume 0: Arc 0 - L'étrange shukuba",
+            "description": "Vous êtes un matagi, et il est l'heure de vous aventurer en dehors de votre campement.",
+            "wattpad": {
+                "alt": "Lire sur Wattpad (__Aller à → Chapitre 2__)",
+                "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
+            },
+            "objectives": {
+                "0": "Réveillez-vous. (Interaction)"
+            }
+        },
+        "slayer.0.0.2.1": {
+            "id": "slayer.0.0.2.1",
+            "name": "Chapitre 2 - Les premiers soins.",
+            "label": "Volume 0: Arc 0 - L'étrange shukuba",
+            "description": "Vous êtes un matagi, et il est l'heure de vous aventurer en dehors de votre campement.",
+            "wattpad": {
+                "alt": "Lire sur Wattpad (__Aller à → Chapitre 2__)",
+                "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
+            },
+            "objectives": {
+                "0": "Allez avec les kakushi au Domaine des Papillons, dans la chambre de repos."
+            }
+        },
+        "slayer.0.0.2.2": {
+            "id": "slayer.0.0.2.2",
+            "name": "Chapitre 2 - Les premiers soins.",
+            "label": "Volume 0: Arc 0 - L'étrange shukuba",
+            "description": "Vous êtes un matagi, et il est l'heure de vous aventurer en dehors de votre campement.",
+            "wattpad": {
+                "alt": "Lire sur Wattpad (__Aller à → Chapitre 2__)",
+                "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
+            },
+            "objectives": {
+                "0": "Dialoguez avec Kocho Shinobu."
+            }
+        },
+        "slayer.0.0.2.3": {
+            "id": "slayer.0.0.2.3",
+            "name": "Chapitre 2 - Les premiers soins.",
+            "label": "Volume 0: Arc 0 - L'étrange shukuba",
+            "description": "Vous êtes un matagi, et il est l'heure de vous aventurer en dehors de votre campement.",
+            "wattpad": {
+                "alt": "Lire sur Wattpad (__Aller à → Chapitre 2__)",
+                "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
+            },
+            "objectives": {
+                "0": "Entraînez votre force jusqu'au niveau 3.",
+                "1": "Entraînez votre vitesse jusqu'au niveau 3.",
+                "2": "Entraînez votre résistance jusqu'au niveau 3.",
+                "3": "Entraînez votre maîtrise d'arme jusqu'au niveau 3."
+            }
+        },
+        "slayer.0.0.2.4": {
+            "id": "slayer.0.0.2.4",
+            "name": "Chapitre 2 - Les premiers soins.",
+            "label": "Volume 0: Arc 0 - L'étrange shukuba",
+            "description": "Vous êtes un matagi, et il est l'heure de vous aventurer en dehors de votre campement.",
+            "wattpad": {
+                "alt": "Lire sur Wattpad (__Aller à → Chapitre 2__)",
+                "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
+            },
+            "objectives": {
+                "0": "Gravissez le sommet de la Colline Brise-Légère."
+            }
+        },
+        "slayer.0.0.2.5": {
+            "id": "slayer.0.0.2.5",
+            "name": "Chapitre 2 - Les premiers soins.",
+            "label": "Volume 0: Arc 0 - L'étrange shukuba",
+            "description": "Vous êtes un matagi, et il est l'heure de vous aventurer en dehors de votre campement.",
+            "wattpad": {
+                "alt": "Lire sur Wattpad (__Aller à → Chapitre 2__)",
+                "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
+            },
+            "objectives": {
+                "0": "Dialoguez avec Harada Miruri."
+            }
+        },
+        "slayer.0.0.3.0": {
+            "id": "slayer.0.0.3.0",
+            "name": "Chapitre 3 - Préparation au devenir de pourfendeur !",
+            "label": "Volume 0: Arc 0 - L'étrange shukuba",
+            "description": "Vous êtes un matagi, et il est l'heure de vous aventurer en dehors de votre campement.",
+            "wattpad": {
+                "alt": "Lire sur Wattpad (__Aller à → Chapitre 3__)",
+                "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
+            },
+            "objectives": {
+                "0": "Rendez-vous dans le refuge de la colline."
+            }
+        },
+        "slayer.0.0.3.1": {
+            "id": "slayer.0.0.3.1",
+            "name": "Chapitre 3 - Préparation au devenir de pourfendeur !",
+            "label": "Volume 0: Arc 0 - L'étrange shukuba",
+            "description": "Vous êtes un matagi, et il est l'heure de vous aventurer en dehors de votre campement.",
+            "wattpad": {
+                "alt": "Lire sur Wattpad (__Aller à → Chapitre 3__)",
+                "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
+            },
+            "objectives": {
+                "0": "Donnez 100 graines à Harada Miruri."
+            }
+        },
+        "slayer.0.0.3.2": {
+            "id": "slayer.0.0.3.2",
+            "name": "Chapitre 3 - Préparation au devenir de pourfendeur !",
+            "label": "Volume 0: Arc 0 - L'étrange shukuba",
+            "description": "Vous êtes un matagi, et il est l'heure de vous aventurer en dehors de votre campement.",
+            "wattpad": {
+                "alt": "Lire sur Wattpad (__Aller à → Chapitre 3__)",
+                "link": "https://www.wattpad.com/myworks/322530891-obanaibot-tome-0-fr"
+            },
+            "objectives": {
+                "0": "Atteignez le niveau 10.",
+                "1": "Rendez-vous au terrain d'entraînement de la colline.",
+                "2": "Interagissez avec Ono Yoshinori."
             }
         }
     },
@@ -556,7 +744,7 @@
         "noMaterial": "Aucun matériau.",
         "noQuestItem": "Aucun objet de quête.",
         "noTraining": "Aucun entraînement.",
-        "ending": "Fin dans",
+        "ending": "Fin",
         "noTravel": "Aucun voyage.",
         "circuit": "Trajet",
         "place": "Emplacement",

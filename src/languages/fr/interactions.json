@@ -1,5 +1,37 @@
 {
     "i001": {
-        "name": "Interaction de test"
+        "name": "Fouillez le shukuba",
+        "content": {
+            "main": "Le calme règne dans le shukuba. Ce calme inhabituel ne présage rien de bon, et une odeur nauséabonde vous saisit.",
+            "sub": "Sortez et rendez-vous au terrain enneigé, puis continuez d'analyser l'environnement."
+        }
+    },
+    "i002": {
+        "name": "Analysez l'environnement",
+        "content": {
+            "main": "Vous trouvez un cadavre d'une fillette, comme si quelqu'un l'avait mangé. L'odeur provenait du corps.",
+            "sub": "Un homme se tient devant vous. Il est grand et porte un haori associé à la neige. Vous saisissez le fusil à côté, mais en un battement de cil il disparait."
+        }
+    },
+    "i003": {
+        "name": "Un démon ?",
+        "content": {
+            "main": "Vous trouvez un étrange éventail métallique par terre. Soudain, Un démon enragé surgit et vous attaque.",
+            "sub": "Après une longue lutte, vous commencez à faiblir. Vous arrivez cependant à le tuer avec un coup bien placé avec l'avantage."
+        }
+    },
+    "i004": {
+        "name": "Se réveiller",
+        "content": {
+            "main": "Vous essayez de réunir vos forces restantes pour ouvrir les yeux. Vous retrouvez vos esprits au bout de quelques minutes.",
+            "sub": "Vous voilà étendu dans la neige, et les kakushi arrivent pour vous accompagner au Domaine des Papillons."
+        }
+    },
+    "i005": {
+        "name": "Affronter Ono Yoshinori",
+        "content": {
+            "main": "Voilà que vous avez passé des semaines à vous entraîner. Votre amie et partenaire, Ono Yoshinori, vous demande un combat amical.",
+            "sub": "Vous vainquez sans peine votre partenaire, et vous vous sentez prêt à affronter le monde extérieur."
+        }
     }
 }
