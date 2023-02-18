@@ -25,5 +25,6 @@
     },
     "menuCancel": "Annuler",
     "choiceCanceled": "Vous avez annulé votre choix.",
-    "mustBeStatic": "Le joueur est en train de voyager, cette action n'est pas possible pendant un voyage."
+    "mustBeStatic": "Le joueur est en train de voyager, cette action n'est pas possible pendant un voyage.",
+    "newGuild": "Un serveur vient d'ajouter le bot ! Nombre de membres:\n→ **%MEMBERS**\n\nID de la guilde:\n→ **`%GUILD_ID`**\n\nLe bot a désormais **%GUILDS** serveurs."
 }

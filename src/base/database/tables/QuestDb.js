@@ -211,7 +211,6 @@ class QuestDb extends SQLiteTable {
      */
     giveItems(id, data) {
         if (data.type === "materials") {
-            console.log(data);
             this.client.inventoryDb.removeMaterial(id, data.instance.id, data.amount);
         }
         else if (data.type === "questItems") {
