@@ -76,7 +76,7 @@ class Profile extends Command {
                 },
             ],
         );
-        if (notificationConfig === null) return;
+        if (notificationConfig === null) return this.end();
 
         if (notificationConfig[0] === "custom") return await this.return(this.trad.premiumOnly);
 

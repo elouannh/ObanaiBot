@@ -193,7 +193,7 @@ class InventoryDb extends SQLiteTable {
      * @returns {Number} The new amount of this material
      */
     addWeapon(id, weapon, rarity, amount) {
-        const previousAmount = this.get(id).items.weapons[weapon][rarity] || 0;
+        const previousAmount = this.get(id).items.weapons?.[weapon]?.[rarity] || 0;
         const newAmount = previousAmount + amount;
         this.set(id, newAmount, `items.weapons.${weapon}.${rarity}`);
         return newAmount;
